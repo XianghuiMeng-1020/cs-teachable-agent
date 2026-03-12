@@ -1,0 +1,166 @@
+{
+  "version": "stage1",
+  "scope_note": "Stage One: variables, basic data types, input/output, operators, conditionals, loops, lists only. No functions, classes, files, recursion, dictionaries, tuples, or external libraries.",
+  "knowledge_units": [
+    {
+      "id": "variable_assignment",
+      "name": "Variables and Assignment",
+      "description": "Storing a value in a named variable using the assignment operator =.",
+      "topic_group": "variables_and_assignment",
+      "prerequisites": [],
+      "example_correct_code": "x = 5\nname = \"Alice\""
+    },
+    {
+      "id": "print_function",
+      "name": "Print Output",
+      "description": "Using print() to display values to the user.",
+      "topic_group": "input_output",
+      "prerequisites": [],
+      "example_correct_code": "print(\"Hello\")\nprint(42)"
+    },
+    {
+      "id": "user_input",
+      "name": "User Input",
+      "description": "Using input() to read a line of text from the user.",
+      "topic_group": "input_output",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "name = input()\nage = input(\"Enter age: \")"
+    },
+    {
+      "id": "data_types_int_float",
+      "name": "Integer and Float Types",
+      "description": "Whole numbers (int) and decimal numbers (float) and their literals.",
+      "topic_group": "basic_data_types",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "a = 10\nb = 3.14"
+    },
+    {
+      "id": "data_types_string",
+      "name": "String Type",
+      "description": "Text as string literals in single or double quotes.",
+      "topic_group": "basic_data_types",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "s = \"hello\"\nt = 'world'"
+    },
+    {
+      "id": "data_types_bool",
+      "name": "Boolean Type",
+      "description": "True and False values for conditions.",
+      "topic_group": "basic_data_types",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "flag = True\nok = False"
+    },
+    {
+      "id": "arithmetic_operators",
+      "name": "Arithmetic Operators",
+      "description": "+, -, *, /, //, %, ** for numeric computation.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_int_float"],
+      "example_correct_code": "a = 10 + 3\nb = 7 // 2\nc = 2 ** 3"
+    },
+    {
+      "id": "comparison_operators",
+      "name": "Comparison Operators",
+      "description": "==, !=, <, >, <=, >= for comparing values.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_int_float", "data_types_string"],
+      "example_correct_code": "x == 5\nage >= 18"
+    },
+    {
+      "id": "logical_operators",
+      "name": "Logical Operators",
+      "description": "and, or, not for combining boolean expressions.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_bool", "comparison_operators"],
+      "example_correct_code": "x > 0 and x < 10\nnot done"
+    },
+    {
+      "id": "string_concatenation",
+      "name": "String Concatenation",
+      "description": "Joining strings with + and repeating with *.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_string"],
+      "example_correct_code": "\"Hello \" + \"world\"\n\"ab\" * 3"
+    },
+    {
+      "id": "if_statement",
+      "name": "Simple If",
+      "description": "Executing code only when a condition is true, using if and indentation.",
+      "topic_group": "conditionals",
+      "prerequisites": ["comparison_operators"],
+      "example_correct_code": "if x > 0:\n    print(\"positive\")"
+    },
+    {
+      "id": "if_else",
+      "name": "If-Else",
+      "description": "Choosing between two branches with if and else.",
+      "topic_group": "conditionals",
+      "prerequisites": ["if_statement"],
+      "example_correct_code": "if n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")"
+    },
+    {
+      "id": "if_elif_else",
+      "name": "If-Elif-Else",
+      "description": "Multiple branches using if, elif, and else.",
+      "topic_group": "conditionals",
+      "prerequisites": ["if_else"],
+      "example_correct_code": "if x < 0:\n    print(\"negative\")\nelif x == 0:\n    print(\"zero\")\nelse:\n    print(\"positive\")"
+    },
+    {
+      "id": "while_loop",
+      "name": "While Loop",
+      "description": "Repeating code while a condition is true.",
+      "topic_group": "loops",
+      "prerequisites": ["comparison_operators", "if_statement"],
+      "example_correct_code": "i = 0\nwhile i < 5:\n    print(i)\n    i = i + 1"
+    },
+    {
+      "id": "for_loop_range",
+      "name": "For Loop with range()",
+      "description": "Repeating a fixed number of times using for and range().",
+      "topic_group": "loops",
+      "prerequisites": ["if_statement"],
+      "example_correct_code": "for i in range(5):\n    print(i)"
+    },
+    {
+      "id": "for_loop_iterable",
+      "name": "For Loop Over Sequence",
+      "description": "Iterating over each element of a string or list with for.",
+      "topic_group": "loops",
+      "prerequisites": ["for_loop_range", "list_creation"],
+      "example_correct_code": "for c in \"hello\":\n    print(c)\nfor x in nums:\n    print(x)"
+    },
+    {
+      "id": "list_creation",
+      "name": "List Creation",
+      "description": "Creating a list with square brackets and comma-separated values.",
+      "topic_group": "lists",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "nums = [1, 2, 3]\nitems = [\"a\", \"b\", \"c\"]"
+    },
+    {
+      "id": "list_indexing",
+      "name": "List Indexing",
+      "description": "Accessing list elements by index (0-based); negative indices from the end.",
+      "topic_group": "lists",
+      "prerequisites": ["list_creation"],
+      "example_correct_code": "first = nums[0]\nlast = nums[-1]"
+    },
+    {
+      "id": "list_basics",
+      "name": "List Basics (len, append)",
+      "description": "Getting length with len(); adding an element with append().",
+      "topic_group": "lists",
+      "prerequisites": ["list_creation"],
+      "example_correct_code": "n = len(nums)\nnums.append(4)"
+    },
+    {
+      "id": "list_iteration",
+      "name": "List Iteration",
+      "description": "Looping over list elements with for.",
+      "topic_group": "lists",
+      "prerequisites": ["list_creation", "for_loop_iterable"],
+      "example_correct_code": "for x in nums:\n    print(x)"
+    }
+  ]
+}

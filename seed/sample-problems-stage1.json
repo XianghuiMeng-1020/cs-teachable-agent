@@ -1,0 +1,191 @@
+{
+  "version": "stage1",
+  "scope_note": "All problems use only Stage One topics. Curated bank; no generator.",
+  "problems": [
+    {
+      "problem_id": "prob_var_001",
+      "problem_statement": "Write a program that creates a variable named age, assigns it the value 20, and prints that value.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "20\n" }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_var_002",
+      "problem_statement": "Write a program that assigns the string \"Hello\" to a variable called greeting and then prints it.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "Hello\n" }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "print_function", "data_types_string"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_io_001",
+      "problem_statement": "Write a program that reads one line of input and then prints that line exactly.",
+      "input_spec": "One line of text.",
+      "test_cases": [
+        { "input": "Alice\n", "expected_output": "Alice\n" },
+        { "input": "42\n", "expected_output": "42\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_io_002",
+      "problem_statement": "Write a program that reads one line of input, stores it in a variable, and prints that same line.",
+      "input_spec": "One line of text.",
+      "test_cases": [
+        { "input": "7\n", "expected_output": "7\n" },
+        { "input": "0\n", "expected_output": "0\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "variable_assignment", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_arith_001",
+      "problem_statement": "Write a program that computes 10 + 20 and prints the result.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "30\n" }
+      ],
+      "knowledge_units_tested": ["arithmetic_operators", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_arith_002",
+      "problem_statement": "Write a program that reads two integers (one per line), adds them, and prints the sum.",
+      "input_spec": "Two lines, each containing an integer.",
+      "test_cases": [
+        { "input": "3\n5\n", "expected_output": "8\n" },
+        { "input": "0\n0\n", "expected_output": "0\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "arithmetic_operators", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_cond_001",
+      "problem_statement": "Write a program that reads one integer. If it is positive, print \"positive\". If it is zero or negative, print \"not positive\".",
+      "input_spec": "One line containing an integer.",
+      "test_cases": [
+        { "input": "5\n", "expected_output": "positive\n" },
+        { "input": "0\n", "expected_output": "not positive\n" },
+        { "input": "-1\n", "expected_output": "not positive\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": ["assign_vs_equal"]
+    },
+    {
+      "problem_id": "prob_cond_002",
+      "problem_statement": "Write a program that reads one integer. If it is even, print \"even\". If it is odd, print \"odd\". (Hint: use remainder % 2.)",
+      "input_spec": "One line containing an integer.",
+      "test_cases": [
+        { "input": "4\n", "expected_output": "even\n" },
+        { "input": "7\n", "expected_output": "odd\n" },
+        { "input": "0\n", "expected_output": "even\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "arithmetic_operators", "comparison_operators", "if_else", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": ["assign_vs_equal"]
+    },
+    {
+      "problem_id": "prob_loop_001",
+      "problem_statement": "Write a program that prints the numbers 0, 1, 2, 3, 4, each on its own line, using a for loop and range(5).",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "0\n1\n2\n3\n4\n" }
+      ],
+      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": ["off_by_one_range"]
+    },
+    {
+      "problem_id": "prob_loop_002",
+      "problem_statement": "Write a program that uses a for loop and range(3) to print the numbers 0, 1, 2, each on its own line.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "0\n1\n2\n" }
+      ],
+      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": ["off_by_one_range"]
+    },
+    {
+      "problem_id": "prob_loop_003",
+      "problem_statement": "Write a program that uses a while loop to print the numbers 1, 2, 3, 4, 5, each on its own line.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "1\n2\n3\n4\n5\n" }
+      ],
+      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "comparison_operators", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_list_001",
+      "problem_statement": "Write a program that creates a list containing the numbers 1, 2, 3, then prints the first element (index 0).",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "1\n" }
+      ],
+      "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_list_002",
+      "problem_statement": "Write a program that creates a list [10, 20, 30], then prints the length of the list.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "3\n" }
+      ],
+      "knowledge_units_tested": ["list_creation", "list_basics", "print_function"],
+      "difficulty": "remember",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_list_003",
+      "problem_statement": "Write a program that creates a list with the three strings \"a\", \"b\", \"c\", then prints each element on its own line using a for loop.",
+      "input_spec": null,
+      "test_cases": [
+        { "input": "", "expected_output": "a\nb\nc\n" }
+      ],
+      "knowledge_units_tested": ["list_creation", "list_iteration", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": []
+    },
+    {
+      "problem_id": "prob_apply_001",
+      "problem_statement": "Write a program that reads one integer. If it is greater than or equal to 10, print \"big\". Otherwise print \"small\".",
+      "input_spec": "One line containing an integer.",
+      "test_cases": [
+        { "input": "10\n", "expected_output": "big\n" },
+        { "input": "9\n", "expected_output": "small\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": ["assign_vs_equal"]
+    },
+    {
+      "problem_id": "prob_apply_002",
+      "problem_statement": "Write a program that reads two integers (one per line). Print \"same\" if they are equal, otherwise print \"different\".",
+      "input_spec": "Two lines, each containing an integer.",
+      "test_cases": [
+        { "input": "5\n5\n", "expected_output": "same\n" },
+        { "input": "3\n7\n", "expected_output": "different\n" }
+      ],
+      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "difficulty": "apply",
+      "targeted_misconceptions": ["assign_vs_equal"]
+    }
+  ]
+}

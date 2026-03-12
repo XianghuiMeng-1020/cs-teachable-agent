@@ -1,0 +1,54 @@
+{
+  "version": "stage1",
+  "scope_note": "Stage One topics only. Used so the TA can exhibit plausible beginner errors.",
+  "misconceptions": [
+    {
+      "id": "assign_vs_equal",
+      "description": "Confuses = (assignment) with == (comparison). Uses = in conditions instead of ==.",
+      "affected_knowledge_units": ["variable_assignment", "comparison_operators", "if_statement", "if_else", "if_elif_else"],
+      "example_incorrect_code": "if x = 5:\n    print(\"five\")",
+      "example_correct_code": "if x == 5:\n    print(\"five\")",
+      "remediation_hint": "Teach: = assigns a value; == checks if two values are equal. In an if, we need == to compare."
+    },
+    {
+      "id": "off_by_one_range",
+      "description": "Thinks range(5) produces 1 through 5, or that the end value is included.",
+      "affected_knowledge_units": ["for_loop_range"],
+      "example_incorrect_code": "for i in range(5):\n    print(i + 1)  # expects 1,2,3,4,5 but task was 0..4",
+      "example_correct_code": "for i in range(5):\n    print(i)",
+      "remediation_hint": "Teach: range(n) gives 0, 1, 2, ..., n-1. The top bound is not included."
+    },
+    {
+      "id": "string_int_concat",
+      "description": "Tries to concatenate a string and an int with + without converting (e.g., \"Age: \" + 20).",
+      "affected_knowledge_units": ["string_concatenation", "data_types_string", "data_types_int_float"],
+      "example_incorrect_code": "print(\"Age: \" + 20)",
+      "example_correct_code": "print(\"Age: \" + str(20))",
+      "remediation_hint": "Teach: + for strings only joins two strings. In Stage One, avoid mixing a string and a number with +. Use separate print() calls for text and numbers, or teach type conversion in a later stage."
+    },
+    {
+      "id": "indent_error",
+      "description": "Omits or uses wrong indentation after if/else/for/while, or uses inconsistent spaces.",
+      "affected_knowledge_units": ["if_statement", "if_else", "if_elif_else", "for_loop_range", "for_loop_iterable", "while_loop"],
+      "example_incorrect_code": "if x > 0:\nprint(\"positive\")",
+      "example_correct_code": "if x > 0:\n    print(\"positive\")",
+      "remediation_hint": "Teach: After a colon, the next block must be indented (e.g., 4 spaces). All lines in that block must have the same indent."
+    },
+    {
+      "id": "comparison_in_if",
+      "description": "Uses a single = in a condition or writes something like 'if x' when meaning 'if x != 0' without understanding truthiness.",
+      "affected_knowledge_units": ["if_statement", "if_else", "comparison_operators"],
+      "example_incorrect_code": "if x = 5:\n    print(\"five\")",
+      "example_correct_code": "if x == 5:\n    print(\"five\")",
+      "remediation_hint": "Teach: In an if we need a condition that is True or False. Use == for equality, not =."
+    },
+    {
+      "id": "list_index_one_based",
+      "description": "Thinks the first element is at index 1 instead of 0.",
+      "affected_knowledge_units": ["list_indexing", "list_creation"],
+      "example_incorrect_code": "nums = [10, 20, 30]\nprint(nums[1])  # expects 10",
+      "example_correct_code": "nums = [10, 20, 30]\nprint(nums[0])",
+      "remediation_hint": "Teach: List indices start at 0. The first element is nums[0], the second is nums[1], and so on."
+    }
+  ]
+}
