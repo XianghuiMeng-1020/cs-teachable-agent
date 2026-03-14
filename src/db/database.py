@@ -1,17 +1,22 @@
 """Database connection and session management."""
 
 import os
+from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import StaticPool
 
 from src.db.models import Base
 
-# Default: SQLite for development. Set DATABASE_URL for PostgreSQL.
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
-    "sqlite:///./teachable_agent.db",
+    "sqlite:///./data/app.db",
 )
+
+if DATABASE_URL.startswith("sqlite"):
+    raw = DATABASE_URL.split("///", 1)[-1] if "///" in DATABASE_URL else ""
+    if raw:
+        Path(raw).parent.mkdir(parents=True, exist_ok=True)
 
 if DATABASE_URL.startswith("sqlite"):
     engine = create_engine(
