@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
-import { getProblems, runTest, runTestComprehensive } from "@/api/client";
+import { getProblems, getTA, runTest, runTestComprehensive } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ProblemSelector } from "@/components/workspace/ProblemSelector";
@@ -18,7 +18,8 @@ export function TestPage() {
     problem_statement: string;
     ta_code: string;
     passed: boolean;
-    details: { input: string; expected: string; got: string; passed: boolean }[];
+    details: { input?: string; expected?: string; got?: string; passed?: boolean }[];
+    reflection_prompt?: string | null;
   } | null>(null);
   const [comprehensiveResult, setComprehensiveResult] = useState<{
     total_run: number;
@@ -29,6 +30,13 @@ export function TestPage() {
 
   const queryClient = useQueryClient();
 
+  const { data: taData } = useQuery({
+    queryKey: ["ta", currentTaId],
+    queryFn: () => getTA(currentTaId!),
+    enabled: currentTaId != null,
+  });
+  const domainId = (taData?.domain_id as "python" | "database" | "ai_literacy") ?? "python";
+
   const { data: problemsData } = useQuery({
     queryKey: ["ta", currentTaId, "problems"],
     queryFn: () => getProblems(currentTaId!),
@@ -36,6 +44,7 @@ export function TestPage() {
   });
 
   const problems = problemsData?.problems ?? [];
+  const outputLabel = domainId === "database" ? "TA's SQL" : domainId === "ai_literacy" ? "TA's answer" : "TA's code";
   const selectedProblem = selectedProblemId
     ? problems.find((p: { problem_id: string }) => p.problem_id === selectedProblemId)
     : null;
@@ -50,6 +59,7 @@ export function TestPage() {
         ta_code: data.ta_code,
         passed: data.passed,
         details: data.details ?? [],
+        reflection_prompt: data.reflection_prompt ?? null,
       });
       setComprehensiveResult(null);
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "state"] });
@@ -119,6 +129,8 @@ export function TestPage() {
               passed={singleResult.passed}
               details={singleResult.details}
               defaultExpanded
+              outputLabel={outputLabel}
+              reflectionPrompt={singleResult.reflection_prompt}
             />
           )}
           {comprehensiveResult && (

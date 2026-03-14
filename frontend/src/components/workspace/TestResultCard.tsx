@@ -11,9 +11,11 @@ export interface TestResultCardProps {
   problemStatement: string;
   taCode: string;
   passed: boolean;
-  details: { input: string; expected: string; got: string; passed: boolean }[];
+  details: { input?: string; expected?: string; got?: string; passed?: boolean }[];
   masteryReport?: Record<string, unknown>;
   defaultExpanded?: boolean;
+  outputLabel?: string;
+  reflectionPrompt?: string | null;
 }
 
 export function TestResultCard({
@@ -23,6 +25,8 @@ export function TestResultCard({
   passed,
   details,
   defaultExpanded = false,
+  outputLabel = "TA's code",
+  reflectionPrompt,
 }: TestResultCardProps) {
   const [open, setOpen] = useState(defaultExpanded);
 
@@ -51,7 +55,10 @@ export function TestResultCard({
         </button>
         <Collapsible.Content>
           <div className="space-y-4 border-t border-slate-100 px-5 pb-5 pt-2">
-            <CodeEditor code={taCode} copyButton maxHeight="200px" />
+            <div>
+              <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">{outputLabel}</h4>
+              <CodeEditor code={taCode} copyButton maxHeight="200px" />
+            </div>
             <div>
               <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">
                 Test cases
@@ -67,15 +74,20 @@ export function TestResultCard({
                         : "border-red-200 bg-red-50/50"
                     )}
                   >
-                    <span className="font-mono text-xs text-slate-500">input: {d.input}</span>
-                    <br />
-                    <span>expected: {d.expected}</span>
-                    <br />
-                    <span>got: {d.got}</span>
+                    {d.input != null && <span className="font-mono text-xs text-slate-500">input: {d.input}</span>}
+                    {d.input != null && <br />}
+                    {d.expected != null && <span>expected: {d.expected}</span>}
+                    {d.expected != null && <br />}
+                    {d.got != null && <span>got: {d.got}</span>}
                   </li>
                 ))}
               </ul>
             </div>
+            {reflectionPrompt && (
+              <div className="rounded-lg border border-amber-200 bg-amber-50/50 px-3 py-2 text-sm text-amber-900">
+                <strong>Reflect:</strong> {reflectionPrompt}
+              </div>
+            )}
           </div>
         </Collapsible.Content>
       </Collapsible.Root>

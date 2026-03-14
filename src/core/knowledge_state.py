@@ -1,14 +1,28 @@
 """
 TA knowledge state tracker.
 Source of truth: knowledge units from domain seed.
-All units start unknown; updates come only from teaching events.
-Per-unit: status, confidence, active_misconceptions, evidence, mastery_history.
+Per-unit: status, confidence (from BKT), BKT params, active_misconceptions, evidence, mastery_history.
+Supports Bayesian Knowledge Tracing (BKT), knowledge decay, and prerequisite-aware updates.
 """
 
 import json
+import math
 import time
 import uuid
 from pathlib import Path
+
+# BKT default parameters (research-typical values)
+DEFAULT_P_SLIP = 0.1
+DEFAULT_P_GUESS = 0.25
+DEFAULT_P_TRANSIT = 0.1
+DEFAULT_P_KNOW_INIT = 0.01
+# Decay: p_know_decayed = p_know * exp(-DECAY_LAMBDA * days_since_practice)
+DECAY_LAMBDA = 0.1
+# Thresholds for status derivation from p_know
+THRESHOLD_LEARNED = 0.85
+THRESHOLD_PARTIALLY_LEARNED = 0.5
+# Prerequisite: if any prereq has p_know below this, cap p_transit for this unit
+PREREQ_MIN_P_KNOW = 0.5
 
 
 def load_knowledge_units_from_path(path: Path) -> list[dict]:
@@ -18,8 +32,12 @@ def load_knowledge_units_from_path(path: Path) -> list[dict]:
     return data.get("knowledge_units", [])
 
 
+def _timestamp() -> str:
+    return f"{time.time():.6f}"
+
+
 def _make_unit_record(unit_def: dict, domain: str, status: str) -> dict:
-    """Build one per-unit state record per schema."""
+    """Build one per-unit state record with BKT fields."""
     uid = unit_def.get("id", "")
     return {
         "knowledge_unit_id": uid,
@@ -34,11 +52,12 @@ def _make_unit_record(unit_def: dict, domain: str, status: str) -> dict:
         "relearning_evidence": [],
         "mastery_history": [],
         "last_updated": _timestamp(),
+        "bkt_p_know": DEFAULT_P_KNOW_INIT,
+        "bkt_p_slip": DEFAULT_P_SLIP,
+        "bkt_p_guess": DEFAULT_P_GUESS,
+        "bkt_p_transit": DEFAULT_P_TRANSIT,
+        "last_practiced_at": _timestamp(),
     }
-
-
-def _timestamp() -> str:
-    return f"{time.time():.6f}"
 
 
 class StateTracker:
@@ -76,6 +95,128 @@ class StateTracker:
         for uid, u in self._units.items():
             self._state[uid] = _make_unit_record(u, self._domain, self.STATUS_UNKNOWN)
 
+    def merge_persisted_state(self, units_state: dict[str, dict]) -> None:
+        """Merge persisted units (e.g. from DB) into tracker; ensure BKT fields exist."""
+        for uid, rec in units_state.items():
+            if uid not in self._state:
+                continue
+            self._state[uid] = dict(self._state[uid])
+            self._state[uid].update(rec)
+            r = self._state[uid]
+            if "bkt_p_know" not in r:
+                r["bkt_p_know"] = DEFAULT_P_KNOW_INIT
+            if "bkt_p_slip" not in r:
+                r["bkt_p_slip"] = DEFAULT_P_SLIP
+            if "bkt_p_guess" not in r:
+                r["bkt_p_guess"] = DEFAULT_P_GUESS
+            if "bkt_p_transit" not in r:
+                r["bkt_p_transit"] = DEFAULT_P_TRANSIT
+            if "last_practiced_at" not in r:
+                r["last_practiced_at"] = _timestamp()
+            r["confidence"] = round(float(r.get("bkt_p_know", 0)), 4)
+
+    def _get_prerequisites(self, unit_id: str) -> list[str]:
+        """Return list of prerequisite unit IDs for this unit."""
+        u = self._units.get(unit_id, {})
+        return list(u.get("prerequisites", []) or [])
+
+    def _parse_timestamp(self, ts: str) -> float:
+        """Parse timestamp string to float seconds for decay calculation."""
+        try:
+            return float(ts)
+        except (TypeError, ValueError):
+            return time.time()
+
+    def _days_since(self, ts: str) -> float:
+        """Days since given timestamp (string)."""
+        t = self._parse_timestamp(ts)
+        return (time.time() - t) / 86400.0
+
+    def _get_p_know_raw(self, unit_id: str) -> float:
+        """Get raw p_know (no decay)."""
+        rec = self._state.get(unit_id, {})
+        return float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
+
+    def get_p_know_decayed(self, unit_id: str) -> float:
+        """Get p_know after applying Ebbinghaus-style decay."""
+        rec = self._state.get(unit_id, {})
+        p = float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
+        last = rec.get("last_practiced_at", _timestamp())
+        days = self._days_since(last)
+        if days <= 0:
+            return p
+        decay = math.exp(-DECAY_LAMBDA * days)
+        return p * decay
+
+    def _prerequisites_satisfied(self, unit_id: str) -> bool:
+        """True if all prerequisites have decayed p_know >= PREREQ_MIN_P_KNOW."""
+        for prereq_id in self._get_prerequisites(unit_id):
+            if self.get_p_know_decayed(prereq_id) < PREREQ_MIN_P_KNOW:
+                return False
+        return True
+
+    def _effective_p_transit(self, unit_id: str) -> float:
+        """p_transit reduced to 0 if prerequisites not satisfied."""
+        if not self._prerequisites_satisfied(unit_id):
+            return 0.0
+        rec = self._state.get(unit_id, {})
+        return float(rec.get("bkt_p_transit", DEFAULT_P_TRANSIT))
+
+    def update_bkt_after_observation(
+        self,
+        unit_ids: list[str],
+        correct: bool,
+        timestamp: str | None = None,
+    ) -> None:
+        """
+        Update BKT parameters after a test observation (correct/incorrect).
+        For each unit in unit_ids: apply Bayes update on p_know, then if correct apply transit.
+        """
+        now = timestamp or _timestamp()
+        for uid in unit_ids:
+            if uid not in self._state:
+                continue
+            rec = self._state[uid]
+            p_know = float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
+            p_slip = float(rec.get("bkt_p_slip", DEFAULT_P_SLIP))
+            p_guess = float(rec.get("bkt_p_guess", DEFAULT_P_GUESS))
+            p_transit = self._effective_p_transit(uid)
+
+            if correct:
+                p_correct = p_know * (1 - p_slip) + (1 - p_know) * p_guess
+                if p_correct <= 0:
+                    p_correct = 1e-6
+                p_know_given_correct = (p_know * (1 - p_slip)) / p_correct
+                p_know = p_know_given_correct + (1 - p_know_given_correct) * p_transit
+            else:
+                p_incorrect = p_know * p_slip + (1 - p_know) * (1 - p_guess)
+                if p_incorrect <= 0:
+                    p_incorrect = 1e-6
+                p_know = (p_know * p_slip) / p_incorrect
+
+            p_know = max(0.01, min(0.99, p_know))
+            rec["bkt_p_know"] = p_know
+            rec["last_practiced_at"] = now
+            rec["last_updated"] = now
+            rec["confidence"] = round(p_know, 4)
+            self._sync_status_from_bkt(uid)
+        self._last_updated = now
+
+    def _sync_status_from_bkt(self, unit_id: str) -> None:
+        """Set status from BKT p_know and active_misconceptions (do not override misconception/corrected)."""
+        if unit_id not in self._state:
+            return
+        rec = self._state[unit_id]
+        if rec.get("status") == self.STATUS_MISCONCEPTION or rec.get("status") == self.STATUS_CORRECTED:
+            return
+        p = float(rec.get("bkt_p_know", 0))
+        if p >= THRESHOLD_LEARNED:
+            rec["status"] = self.STATUS_LEARNED
+        elif p >= THRESHOLD_PARTIALLY_LEARNED:
+            rec["status"] = self.STATUS_PARTIALLY_LEARNED
+        else:
+            rec["status"] = self.STATUS_UNKNOWN
+
     def get_domain(self) -> str:
         return self._domain
 
@@ -83,7 +224,7 @@ class StateTracker:
         return self._schema_version
 
     def get_state(self) -> dict[str, str]:
-        """Legacy view: unit_id -> status."""
+        """Legacy view: unit_id -> status (status kept in sync with BKT)."""
         return {uid: rec["status"] for uid, rec in self._state.items()}
 
     def get_full_state(self) -> dict:
@@ -139,12 +280,17 @@ class StateTracker:
         trigger_reference: str | None = None,
         *,
         set_status_to_misconception: bool = False,
+        affected_units: list[str] | None = None,
     ) -> bool:
         if unit_id not in self._state:
             return False
         rec = self._state[unit_id]
         for m in rec.get("active_misconceptions", []):
             if m.get("misconception_id") == misconception_id:
+                m["trigger_count"] = m.get("trigger_count", 1) + 1
+                m["severity_score"] = min(1.0, 0.3 + 0.1 * m["trigger_count"])
+                rec["last_updated"] = _timestamp()
+                self._last_updated = rec["last_updated"]
                 return False
         now = _timestamp()
         rec["active_misconceptions"].append({
@@ -153,11 +299,21 @@ class StateTracker:
             "trigger": trigger,
             "trigger_reference": trigger_reference,
             "flagged_for_correction": False,
+            "trigger_count": 1,
+            "severity_score": 0.4,
         })
         rec["last_updated"] = now
         self._last_updated = now
         if set_status_to_misconception:
             rec["status"] = self.STATUS_MISCONCEPTION
+        if affected_units:
+            for uid in affected_units:
+                if uid in self._state and uid != unit_id:
+                    r = self._state[uid]
+                    p = float(r.get("bkt_p_know", 0.5))
+                    r["bkt_p_know"] = max(0.01, p - 0.2)
+                    r["last_updated"] = now
+                    self._sync_status_from_bkt(uid)
         return True
 
     def update_after_teaching(
@@ -181,10 +337,16 @@ class StateTracker:
                 continue
             rec = self._state[uid]
             state_before = rec["status"]
-            rec["status"] = new_status
+            if not self._prerequisites_satisfied(uid):
+                new_status_here = self.STATUS_PARTIALLY_LEARNED
+                rec["bkt_p_know"] = min(0.6, float(rec.get("bkt_p_know", 0)) + 0.2)
+            else:
+                new_status_here = new_status
+                rec["bkt_p_know"] = max(float(rec.get("bkt_p_know", 0)), 0.7)
+            rec["status"] = new_status_here
+            rec["last_practiced_at"] = now
             rec["last_updated"] = now
-            if new_status == self.STATUS_LEARNED and rec["confidence"] < 0.8:
-                rec["confidence"] = 0.8
+            rec["confidence"] = round(rec["bkt_p_know"], 4)
             if event_id is not None:
                 rec["teaching_evidence"].append({
                     "teaching_event_id": event_id,
@@ -192,7 +354,7 @@ class StateTracker:
                     "topic_taught": topic,
                     "knowledge_units_taught": list(units_taught),
                     "state_before": state_before,
-                    "state_after": new_status,
+                    "state_after": new_status_here,
                     "misconception_activated": None,
                     "note": note,
                 })
@@ -421,3 +583,7 @@ class StateTracker:
 
     def get_unit_record(self, unit_id: str) -> dict | None:
         return dict(self._state[unit_id]) if unit_id in self._state else None
+
+    def get_bkt_state(self) -> dict[str, float]:
+        """Return decayed p_know per unit (for API / analytics)."""
+        return {uid: round(self.get_p_know_decayed(uid), 4) for uid in self._state}

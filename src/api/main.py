@@ -39,6 +39,10 @@ app.add_middleware(
 @app.on_event("startup")
 def startup():
     init_db()
+    if os.getenv("ENVIRONMENT") == "production":
+        sk = os.getenv("SECRET_KEY", "")
+        if not sk or sk == "dev-secret-change-in-production":
+            raise RuntimeError("SECRET_KEY must be set in production (and must not be the default dev value)")
 
 
 app.include_router(auth.router)

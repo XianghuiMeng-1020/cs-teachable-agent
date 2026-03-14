@@ -22,11 +22,12 @@ export function TeachPage() {
     enabled: currentTaId != null,
   });
 
+  const defs = (state as { knowledge_unit_definitions?: { id: string; topic_group?: string }[] })?.knowledge_unit_definitions;
   const units: UnitNode[] = state?.units
     ? Object.entries(state.units).map(([unit_id, rec]) => ({
         unit_id,
         status: (rec as { status?: string }).status as UnitNode["status"] ?? "unknown",
-        topic_group: (rec as { topic_group?: string }).topic_group,
+        topic_group: (rec as { topic_group?: string }).topic_group ?? defs?.find((d) => d.id === unit_id)?.topic_group,
       }))
     : [];
 
@@ -43,7 +44,11 @@ export function TeachPage() {
         <ChatPanel taId={currentTaId} />
       </div>
       <div className="flex min-h-0 flex-col gap-4 overflow-y-auto">
-        <KnowledgeGraph units={units} className="min-h-[200px] flex-shrink-0" />
+        <KnowledgeGraph
+          units={units}
+          knowledgeUnitDefinitions={(state as { knowledge_unit_definitions?: unknown })?.knowledge_unit_definitions ?? undefined}
+          className="min-h-[200px] flex-shrink-0"
+        />
         <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
         {misconceptions.length > 0 ? (
           misconceptions.map((m) => (

@@ -43,3 +43,40 @@ def test_get_full_state_has_domain(unit_definitions):
     full = tracker.get_full_state()
     assert full["domain"] == "python"
     assert len(full["units"]) == 3
+
+
+def test_bkt_update_after_observation(unit_definitions):
+    tracker = StateTracker(unit_definitions=unit_definitions, domain="python")
+    tracker.update_after_teaching(["var"], tracker.STATUS_LEARNED)
+    initial_p = tracker._get_p_know_raw("var")
+    tracker.update_bkt_after_observation(["var"], correct=True)
+    assert tracker._get_p_know_raw("var") >= initial_p
+    tracker.update_bkt_after_observation(["var"], correct=False)
+    assert tracker._get_p_know_raw("var") < 1.0
+
+
+def test_bkt_state_and_decay(unit_definitions):
+    tracker = StateTracker(unit_definitions=unit_definitions, domain="python")
+    tracker.update_after_teaching(["var"], tracker.STATUS_LEARNED)
+    bkt = tracker.get_bkt_state()
+    assert "var" in bkt
+    assert 0 <= bkt["var"] <= 1
+    decayed = tracker.get_p_know_decayed("var")
+    assert 0 <= decayed <= 1
+
+
+def test_prerequisites_block_transit(unit_definitions):
+    tracker = StateTracker(unit_definitions=unit_definitions, domain="python")
+    assert tracker._prerequisites_satisfied("var") is True
+    assert tracker._prerequisites_satisfied("loop") is False
+    tracker.update_after_teaching(["var"], tracker.STATUS_LEARNED)
+    assert tracker._prerequisites_satisfied("loop") is True
+
+
+def test_merge_persisted_state(unit_definitions):
+    tracker = StateTracker(unit_definitions=unit_definitions, domain="python")
+    tracker.merge_persisted_state({
+        "var": {"status": "learned", "bkt_p_know": 0.9},
+    })
+    assert tracker.get_state().get("var") == "learned"
+    assert tracker._get_p_know_raw("var") == 0.9

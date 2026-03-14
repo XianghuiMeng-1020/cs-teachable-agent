@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/lib/utils";
 
 export interface MessageBubbleProps {
@@ -7,6 +9,40 @@ export interface MessageBubbleProps {
   content: string;
   timestamp?: string;
   metadata?: { interpreted_units?: string[]; quality_score?: number };
+}
+
+function MessageContent({ content, isStudent }: { content: string; isStudent: boolean }) {
+  const parts = content.split(/(```[\s\S]*?```)/g);
+  if (parts.length === 1) {
+    return <p className="whitespace-pre-wrap text-sm">{content}</p>;
+  }
+  return (
+    <div className="space-y-2 text-sm">
+      {parts.map((part, i) => {
+        if (part.startsWith("```") && part.endsWith("```")) {
+          const code = part.slice(3, -3).replace(/^\w+\n?/, "").trim();
+          const lang = part.slice(3, 20).split("\n")[0].trim() || "text";
+          return (
+            <SyntaxHighlighter
+              key={i}
+              language={lang}
+              style={oneDark}
+              customStyle={{ margin: 0, borderRadius: 8, fontSize: "0.8rem" }}
+              codeTagProps={{ style: { fontFamily: "inherit" } }}
+              PreTag="div"
+            >
+              {code}
+            </SyntaxHighlighter>
+          );
+        }
+        return (
+          <p key={i} className="whitespace-pre-wrap">
+            {part}
+          </p>
+        );
+      })}
+    </div>
+  );
 }
 
 export function MessageBubble({ role, content, timestamp, metadata }: MessageBubbleProps) {
@@ -27,13 +63,13 @@ export function MessageBubble({ role, content, timestamp, metadata }: MessageBub
       <div className={cn("flex max-w-[80%] flex-col", isStudent && "items-end")}>
         <div
           className={cn(
-            "rounded-2xl px-4 py-2.5",
+            "rounded-2xl px-4 py-2.5 overflow-hidden",
             isStudent
               ? "rounded-br-md bg-brand-500 text-white"
               : "rounded-bl-md bg-slate-100 text-slate-800"
           )}
         >
-          <p className="whitespace-pre-wrap text-sm">{content}</p>
+          <MessageContent content={content} isStudent={isStudent} />
         </div>
         {timestamp && (
           <p className={cn("mt-1 text-[11px] text-slate-400", isStudent && "text-right")}>

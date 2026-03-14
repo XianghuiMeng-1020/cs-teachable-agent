@@ -15,8 +15,14 @@ from src.db.models import User
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
+def _validate_password(password: str) -> None:
+    if len(password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+
+
 @router.post("/register", response_model=UserResponse)
 def register(data: UserCreate, db=Depends(get_db)):
+    _validate_password(data.password)
     if db.query(User).filter(User.username == data.username).first():
         raise HTTPException(status_code=400, detail="Username already registered")
     user = User(

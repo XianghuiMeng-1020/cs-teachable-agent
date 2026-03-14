@@ -167,7 +167,7 @@ def record_attempt_to_state(
     misconception_active_per_unit: dict[str, str] | None = None,
     period: str | None = None,
 ) -> None:
-    """Write testing_evidence and mastery_history for each affected unit."""
+    """Write testing_evidence and mastery_history for each affected unit; update BKT if supported."""
     if not problem or not attempt_result:
         return
     passed = attempt_result.get("passed", False)
@@ -175,6 +175,8 @@ def record_attempt_to_state(
     units_tested = problem.get("knowledge_units_tested", [])
     mis_per_unit = misconception_active_per_unit or {}
     level_this = "proficient" if passed else "failing"
+    if hasattr(tracker, "update_bkt_after_observation"):
+        tracker.update_bkt_after_observation(units_tested, passed)
     for uid in units_tested:
         if hasattr(tracker, "append_testing_evidence"):
             tracker.append_testing_evidence(

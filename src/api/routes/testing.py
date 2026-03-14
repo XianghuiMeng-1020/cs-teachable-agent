@@ -1,7 +1,5 @@
 """Testing: GET problems, POST test."""
 
-from pathlib import Path
-
 from fastapi import APIRouter, Depends, HTTPException
 
 from src.api.schemas import (
@@ -12,28 +10,19 @@ from src.api.schemas import (
 )
 from src.api.deps import DbSession, CurrentUser
 from src.api.session_helpers import get_or_create_teaching_session
+from src.api.domain_helpers import get_domain_adapter, get_tracker_for_ta, save_tracker_to_ta
 from src.db.models import TAInstance, TestAttempt
-from src.core.knowledge_state import StateTracker
-from src.core.task_engine import (
-    load_problems,
-    select_problem,
-    get_eligible_problem_ids,
+from src.core.task_engine import select_problem, get_eligible_problem_ids
+from src.core.evaluator import build_mastery_report
+from src.core.orchestrator import run_test_only
+from src.core.dialogue_engine import get_reflection_prompt_after_test
+from src.core.trace import set_trace_db_session
+from src.core.misconception_engine import (
+    activate_misconception_for_unit,
+    try_auto_activate_misconception_after_fail,
 )
-from src.core.attempt_engine import get_ta_code_attempt
-from src.core.evaluator import evaluate_attempt, mastery_summary, build_mastery_report, record_attempt_to_state
-from src.core.trace import (
-    set_trace_db_session,
-    record_task_selection,
-    record_ta_attempt,
-    record_evaluation_result,
-    record_mastery_update,
-)
-from src.core.misconception_engine import activate_misconception_for_unit
-from src.domains.python_domain import PythonDomainAdapter
 
 router = APIRouter(tags=["testing"])
-
-_SEED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "seed"
 
 
 def _get_ta(ta_id: int, user_id: int, db: DbSession) -> TAInstance:
@@ -46,28 +35,11 @@ def _get_ta(ta_id: int, user_id: int, db: DbSession) -> TAInstance:
     return ta
 
 
-def _tracker_from_ta(ta: TAInstance) -> StateTracker:
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
-    units = adapter.load_knowledge_units()
-    tracker = StateTracker(unit_definitions=units, domain=ta.domain_id)
-    if ta.knowledge_state and "units" in ta.knowledge_state:
-        for uid, rec in ta.knowledge_state["units"].items():
-            if uid in tracker._state:
-                tracker._state[uid] = dict(rec)
-    return tracker
-
-
-def _save_tracker_to_ta(ta: TAInstance, tracker: StateTracker, db: DbSession):
-    ta.knowledge_state = tracker.get_full_state()
-    db.add(ta)
-    db.commit()
-
-
 @router.get("/api/ta/{ta_id}/problems")
 def list_problems(ta_id: int, current_user: CurrentUser, db: DbSession):
     ta = _get_ta(ta_id, current_user.id, db)
-    tracker = _tracker_from_ta(ta)
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
     problems = adapter.load_problems()
     learned = tracker.get_learned_units()
     eligible_ids = get_eligible_problem_ids(problems, learned)
@@ -83,12 +55,11 @@ def _run_single_test(
     problem_id: str | None = None,
 ) -> TestResponse:
     """Run one test (auto-select or use problem_id). Persists state to DB."""
-    import uuid as _uuid
     ta = _get_ta(ta_id, user_id, db)
     session = get_or_create_teaching_session(db, ta.id)
     set_trace_db_session(db, session.id)
-    tracker = _tracker_from_ta(ta)
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
     problems = adapter.load_problems()
     learned = tracker.get_learned_units()
 
@@ -101,7 +72,7 @@ def _run_single_test(
                     selected = p
                     break
     if not selected:
-        selected = select_problem(problems, learned)
+        selected = select_problem(problems, learned, tracker=tracker)
 
     if not selected:
         return TestResponse(
@@ -115,7 +86,6 @@ def _run_single_test(
 
     units_tested = set(selected.get("knowledge_units_tested", []))
     active_mis = list(tracker.get_active_misconception_ids(units_tested))
-    # If problem targets a misconception and TA doesn't have it active yet, activate it so TA exhibits the bug.
     targeted = selected.get("targeted_misconceptions", [])
     if targeted and not active_mis:
         misconceptions_catalog = adapter.load_misconceptions()
@@ -125,95 +95,63 @@ def _run_single_test(
             for uid in units_tested:
                 if uid in affected:
                     activate_misconception_for_unit(
-                        tracker, uid, mis_id, trigger="task_attempt", trigger_reference=selected.get("problem_id")
+                        tracker,
+                        uid,
+                        mis_id,
+                        trigger="task_attempt",
+                        trigger_reference=selected.get("problem_id"),
+                        affected_units_from_catalog=affected,
                     )
-                    active_mis = list(tracker.get_active_misconception_ids(units_tested))
                     break
-            if active_mis:
-                break
+            else:
+                continue
+            break
 
-    record_task_selection(
-        domain=tracker.get_domain(),
-        eligible_unit_ids=sorted(learned),
-        selected_task_id=selected.get("problem_id"),
-        eligible_task_ids=get_eligible_problem_ids(problems, learned),
+    result = run_test_only(
+        tracker,
+        problems,
+        domain_adapter=adapter,
+        problem_id=selected.get("problem_id", ""),
     )
+    ta_code = result.get("ta_code", "")
+    attempt_result = result.get("attempt_result")
+    report = result.get("mastery_report", build_mastery_report(None, learned, None, None))
+    active_mis_after = list(tracker.get_active_misconception_ids(units_tested))
 
-    active_mis = list(tracker.get_active_misconception_ids(units_tested))
-    filled = adapter.get_code_generation_prompt(
-        tracker.get_full_state(), selected, active_mis
-    )
-    ta_code = get_ta_code_attempt(
-        selected,
-        learned,
-        active_misconceptions=active_mis or None,
-        force_fail_problem_ids=None,
-        filled_prompt=filled,
-        use_llm_code=bool(filled),
-    )
-    attempt_id = str(_uuid.uuid4())
-    record_ta_attempt(
-        domain=tracker.get_domain(),
-        task_id=selected.get("problem_id", ""),
-        attempt_id=attempt_id,
-        learned_unit_ids=sorted(learned),
-        output_summary=(ta_code[:200] + "..." if len(ta_code) > 200 else ta_code),
-        guard_passed=True,
-        fallback_used=not bool(filled),
-        active_misconception_ids=active_mis,
-    )
-
-    result = evaluate_attempt(selected, ta_code) if ta_code else None
-    summary = mastery_summary(selected, result, []) if result else None
-    if result:
-        mis_per_unit = {uid: active_mis[0] for uid in selected.get("knowledge_units_tested", [])} if active_mis else {}
-        record_attempt_to_state(
-            tracker, selected, result, attempt_id,
-            misconception_active_per_unit=mis_per_unit or None,
-            period="during_misconception" if active_mis else "before_misconception",
+    if not result.get("pass_fail") and ta_code and ta.domain_id == "python":
+        misconceptions_catalog = adapter.load_misconceptions()
+        try_auto_activate_misconception_after_fail(
+            tracker, selected, ta_code, misconceptions_catalog
         )
-        record_evaluation_result(
-            domain=tracker.get_domain(),
-            task_id=selected.get("problem_id", ""),
-            attempt_id=attempt_id,
-            pass_fail=result.get("passed", False),
-            unit_ids_tested=selected.get("knowledge_units_tested", []),
-            mastery_level_after=summary.get("overall_level") if summary else None,
-            misconception_active_during_attempt=active_mis[0] if active_mis else None,
-        )
-        for uid in selected.get("knowledge_units_tested", []):
-            record_mastery_update(
-                domain=tracker.get_domain(),
-                unit_id=uid,
-                mastery_level=summary.get("level_per_unit", {}).get(uid, "not_assessed") if summary else "not_assessed",
-                pass_rate=summary.get("per_unit_pass_rate", {}).get(uid) if summary else None,
-                attempt_count=1,
-                trigger=attempt_id,
-            )
 
-    report = build_mastery_report(selected, learned, result, summary, ta_code)
-    _save_tracker_to_ta(ta, tracker, db)
+    save_tracker_to_ta(ta, tracker, db)
 
     session = get_or_create_teaching_session(db, ta.id)
     test_attempt = TestAttempt(
         session_id=session.id,
         problem_id=selected.get("problem_id", ""),
         ta_code=ta_code or None,
-        passed=result.get("passed", False) if result else False,
-        execution_output=result.get("stdout") if result else None,
-        score=(1.0 if result.get("passed") else 0.0) if result else None,
-        misconceptions_active=active_mis or None,
+        passed=attempt_result.get("passed", False) if attempt_result else False,
+        execution_output=attempt_result.get("stdout") if attempt_result else None,
+        score=(1.0 if (attempt_result and attempt_result.get("passed")) else 0.0) if attempt_result else None,
+        misconceptions_active=active_mis_after or None,
     )
     db.add(test_attempt)
     db.commit()
 
+    reflection = get_reflection_prompt_after_test(
+        selected.get("problem_statement", ""),
+        attempt_result.get("passed", False) if attempt_result else False,
+        ta_code,
+    )
     return TestResponse(
         problem_id=selected.get("problem_id", ""),
         problem_statement=selected.get("problem_statement", ""),
         ta_code=ta_code or "",
-        passed=result.get("passed", False) if result else False,
-        details=result.get("details", []) if result else [],
+        passed=attempt_result.get("passed", False) if attempt_result else False,
+        details=attempt_result.get("details", []) if attempt_result else [],
         mastery_report=report,
+        reflection_prompt=reflection,
     )
 
 
@@ -238,8 +176,8 @@ def run_comprehensive_test(
 ):
     """Run tests for all eligible problems (up to _MAX_COMPREHENSIVE)."""
     ta = _get_ta(ta_id, current_user.id, db)
-    tracker = _tracker_from_ta(ta)
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
     problems = adapter.load_problems()
     learned = tracker.get_learned_units()
     eligible_ids = get_eligible_problem_ids(problems, learned)

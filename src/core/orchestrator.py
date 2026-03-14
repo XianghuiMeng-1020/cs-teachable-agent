@@ -20,7 +20,7 @@ from src.core.task_engine import (
 from src.core.dialogue_engine import get_ta_learner_response
 from src.core.attempt_engine import get_ta_code_attempt
 from src.core.evaluator import (
-    evaluate_attempt,
+    evaluate_attempt as _evaluate_attempt_python,
     mastery_summary,
     build_mastery_report,
     record_attempt_to_state,
@@ -36,6 +36,7 @@ from src.core.trace import (
 )
 from src.core.misconception_engine import activate_misconception_for_unit
 from src.core.correction_events import make_correction_event
+from src.core.misconception_diagnosis import diagnose_from_teaching
 
 
 def _use_llm_code() -> bool:
@@ -52,6 +53,7 @@ def run_teaching_and_test(
     activate_misconception: dict[str, Any] | None = None,
     use_llm_code: bool | None = None,
     domain_adapter: Any = None,
+    conversation_history: list[dict] | None = None,
 ) -> dict[str, Any]:
     """
     One full teaching–testing cycle. If domain_adapter is provided, use it to get
@@ -91,6 +93,34 @@ def run_teaching_and_test(
             or teaching_event.get("teaching_event_id"),
         )
 
+    if domain_adapter and teaching_event.get("note"):
+        try:
+            catalog = domain_adapter.load_misconceptions()
+            unit_ids = list(tracker.get_unit_ids())
+            diag = diagnose_from_teaching(
+                teaching_event.get("note", ""),
+                unit_ids,
+                catalog,
+                use_llm=True,
+            )
+            if (
+                diag.get("interpretation") == "incorrect"
+                and diag.get("misconception_id")
+                and diag.get("confidence", 0) >= 0.6
+            ):
+                for uid in (diag.get("affected_unit_ids") or [])[:3]:
+                    if uid in tracker.get_unit_ids():
+                        activate_misconception_for_unit(
+                            tracker,
+                            uid,
+                            diag["misconception_id"],
+                            trigger="llm_diagnosis_from_teaching",
+                            trigger_reference=teaching_event.get("teaching_event_id"),
+                        )
+                        break
+        except Exception:
+            pass
+
     learned = tracker.get_learned_units()
     active_mis_ids = tracker.get_active_misconception_ids(learned)
     filled_dialogue_prompt = None
@@ -104,6 +134,7 @@ def run_teaching_and_test(
         active_misconceptions=active_mis_ids or None,
         filled_prompt=filled_dialogue_prompt,
         use_llm=True if filled_dialogue_prompt else None,
+        conversation_history=conversation_history,
     )
     record_learner_dialogue(
         domain=domain,
@@ -115,7 +146,7 @@ def run_teaching_and_test(
 
     eligible_ids = get_eligible_problem_ids(problems, learned)
     ineligible = get_ineligible_reasons(problems, learned)
-    selected = select_problem(problems, learned)
+    selected = select_problem(problems, learned, tracker=tracker)
     record_task_selection(
         domain=domain,
         eligible_unit_ids=sorted(learned),
@@ -158,7 +189,12 @@ def run_teaching_and_test(
                 fallback_used=not (use_llm and filled_code_prompt),
                 active_misconception_ids=active_mis_for_attempt,
             )
-        result = evaluate_attempt(selected, ta_code) if ta_code else None
+        if ta_code and domain_adapter is not None:
+            result = domain_adapter.evaluate_attempt(selected, ta_code)
+        elif ta_code:
+            result = _evaluate_attempt_python(selected, ta_code)
+        else:
+            result = None
         summary = mastery_summary(selected, result, []) if result else None
         if result:
             mis_per_unit = {}
@@ -311,6 +347,7 @@ def run_test_only(
     *,
     use_llm_code: bool | None = None,
     domain_adapter: Any = None,
+    problem_id: str | None = None,
 ) -> dict[str, Any]:
     """Run only task selection -> attempt -> evaluation (no teaching)."""
     domain = tracker.get_domain()
@@ -318,7 +355,14 @@ def run_test_only(
     learned = tracker.get_learned_units()
     eligible_ids = get_eligible_problem_ids(problems, learned)
     ineligible = get_ineligible_reasons(problems, learned)
-    selected = select_problem(problems, learned)
+    selected = None
+    if problem_id:
+        for p in problems:
+            if p.get("problem_id") == problem_id and set(p.get("knowledge_units_tested", [])) <= learned:
+                selected = p
+                break
+    if not selected:
+        selected = select_problem(problems, learned, tracker=tracker)
     record_task_selection(
         domain=domain,
         eligible_unit_ids=sorted(learned),
@@ -356,7 +400,12 @@ def run_test_only(
                 fallback_used=not (use_llm and filled_code_prompt),
                 active_misconception_ids=[],
             )
-        result = evaluate_attempt(selected, ta_code) if ta_code else None
+        if ta_code and domain_adapter is not None:
+            result = domain_adapter.evaluate_attempt(selected, ta_code)
+        elif ta_code:
+            result = _evaluate_attempt_python(selected, ta_code)
+        else:
+            result = None
         summary = mastery_summary(selected, result, []) if result else None
         if result:
             record_attempt_to_state(

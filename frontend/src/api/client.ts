@@ -197,6 +197,22 @@ export async function getHistory(
   return r.json();
 }
 
+export interface ChatMessageDto {
+  role: "student" | "ta";
+  content: string;
+  timestamp?: string;
+}
+
+export interface GetMessagesResponse {
+  messages: ChatMessageDto[];
+}
+
+export async function getMessages(taId: number): Promise<GetMessagesResponse> {
+  const r = await fetch(`${API_BASE}/ta/${taId}/messages`, { headers: headers() });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
 export async function teacherStudents() {
   const r = await fetch(`${API_BASE}/teacher/students`, { headers: headers() });
   if (!r.ok) throw new Error(await r.text());

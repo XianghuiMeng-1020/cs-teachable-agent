@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { Send, MessageCircle } from "lucide-react";
-import { teach } from "@/api/client";
+import { teach, getMessages } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -20,10 +21,34 @@ interface ChatPanelProps {
 }
 
 export function ChatPanel({ taId }: ChatPanelProps) {
+  const queryClient = useQueryClient();
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  const { data: messagesData } = useQuery({
+    queryKey: ["ta", taId, "messages"],
+    queryFn: () => getMessages(taId!),
+    enabled: !!taId,
+  });
+
+  const persistedMessages: ChatMessage[] =
+    messagesData?.messages?.map((m) => ({
+      role: m.role,
+      content: m.content,
+      timestamp: m.timestamp,
+    })) ?? [];
+  const messages =
+    loading && localMessages.length > 0
+      ? localMessages
+      : persistedMessages.length > 0
+        ? persistedMessages
+        : localMessages;
+
+  useEffect(() => {
+    if (messagesData?.messages?.length && !loading) setLocalMessages([]);
+  }, [messagesData?.messages?.length, loading]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -34,14 +59,14 @@ export function ChatPanel({ taId }: ChatPanelProps) {
     const text = input.trim();
     setInput("");
     const now = new Date().toISOString();
-    setMessages((m) => [
+    setLocalMessages((m) => [
       ...m,
       { role: "student", content: text, timestamp: formatRelative(now) },
     ]);
     setLoading(true);
     try {
       const res = await teach(taId, text);
-      setMessages((m) => [
+      setLocalMessages((m) => [
         ...m,
         {
           role: "ta",
@@ -53,8 +78,14 @@ export function ChatPanel({ taId }: ChatPanelProps) {
           },
         },
       ]);
+      if (taId != null) {
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "state"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "misconceptions"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "history"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "messages"] });
+      }
     } catch (err) {
-      setMessages((m) => [
+      setLocalMessages((m) => [
         ...m,
         {
           role: "ta",

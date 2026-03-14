@@ -83,6 +83,15 @@ def analytics(current_user: CurrentUser, db: DbSession):
         for uid, sids in sorted(unit_students.items())
     ]
 
+    # Per (student, unit) status for heatmap: user_id, unit_id, status
+    student_unit_status = []
+    for ta in instances:
+        state = ta.knowledge_state or {}
+        units = state.get("units", {}) or {}
+        for uid, rec in units.items():
+            status = (rec or {}).get("status", "unknown")
+            student_unit_status.append({"user_id": ta.user_id, "unit_id": uid, "status": status})
+
     # Mastery trend: last 7 days from TestAttempt pass rate per day
     session_ids = [s.id for s in db.query(TeachingSession.id).filter(TeachingSession.ta_instance_id.in_([t.id for t in instances])).all()]
     trend = []
@@ -141,6 +150,7 @@ def analytics(current_user: CurrentUser, db: DbSession):
         knowledge_coverage=knowledge_coverage,
         mastery_trend=trend,
         recent_activity=recent,
+        student_unit_status=student_unit_status,
     )
 
 
@@ -167,37 +177,57 @@ def list_transcripts(
         q = q.filter(TeachingSession.started_at >= date_from)
     if date_to:
         q = q.filter(TeachingSession.started_at <= date_to)
-    sessions = q.order_by(TeachingSession.started_at.desc()).all()
+    q = q.order_by(TeachingSession.started_at.desc())
     if ku and ku.strip():
         ku_ids = [k.strip() for k in ku.split(",") if k.strip()]
         if ku_ids:
+            sessions_all = q.all()
             session_ids_with_ku = set()
             for ev in db.query(TeachingEvent).filter(TeachingEvent.interpreted_units.isnot(None)).all():
                 units = ev.interpreted_units or []
                 if any(u in ku_ids for u in units):
                     session_ids_with_ku.add(ev.session_id)
-            sessions = [s for s in sessions if s.id in session_ids_with_ku]
-    total = len(sessions)
-    start = (page - 1) * per_page
-    page_sessions = sessions[start : start + per_page]
+            sessions = [s for s in sessions_all if s.id in session_ids_with_ku]
+            total = len(sessions)
+            start = (page - 1) * per_page
+            page_sessions = sessions[start : start + per_page]
+        else:
+            total = q.count()
+            start = (page - 1) * per_page
+            page_sessions = q.offset(start).limit(per_page).all()
+    else:
+        total = q.count()
+        start = (page - 1) * per_page
+        page_sessions = q.offset(start).limit(per_page).all()
+    if not page_sessions:
+        return TranscriptListResponse(items=[], total=total, page=page, per_page=per_page)
+    session_ids = [s.id for s in page_sessions]
+    ta_ids = [s.ta_instance_id for s in page_sessions]
+    tas = {t.id: t for t in db.query(TAInstance).filter(TAInstance.id.in_(ta_ids)).all()}
+    user_ids = list({t.user_id for t in tas.values()})
+    users = {u.id: u for u in db.query(User).filter(User.id.in_(user_ids)).all()}
+    from sqlalchemy import func
+    te_counts = {row[0]: row[1] for row in db.query(TeachingEvent.session_id, func.count(TeachingEvent.id)).filter(TeachingEvent.session_id.in_(session_ids)).group_by(TeachingEvent.session_id).all()}
+    ta_counts = {row[0]: row[1] for row in db.query(TestAttempt.session_id, func.count(TestAttempt.id)).filter(TestAttempt.session_id.in_(session_ids)).group_by(TestAttempt.session_id).all()}
+    all_tes = db.query(TeachingEvent).filter(TeachingEvent.session_id.in_(session_ids)).all()
+    kus_by_session = defaultdict(set)
+    for te in all_tes:
+        for u in (te.interpreted_units or []) or []:
+            kus_by_session[te.session_id].add(u)
     items = []
     for sess in page_sessions:
-        ta = db.query(TAInstance).filter(TAInstance.id == sess.ta_instance_id).first()
-        user = db.query(User).filter(User.id == ta.user_id).first() if ta else None
-        te_count = db.query(TeachingEvent).filter(TeachingEvent.session_id == sess.id).count()
-        ta_count = db.query(TestAttempt).filter(TestAttempt.session_id == sess.id).count()
-        msg_count = te_count * 2 + ta_count  # teach has 2 messages per event
-        kus = set()
-        for te in db.query(TeachingEvent).filter(TeachingEvent.session_id == sess.id):
-            for u in (te.interpreted_units or []) or []:
-                kus.add(u)
+        ta = tas.get(sess.ta_instance_id)
+        user = users.get(ta.user_id) if ta else None
+        te_count = te_counts.get(sess.id, 0)
+        ta_count = ta_counts.get(sess.id, 0)
+        msg_count = te_count * 2 + ta_count
         items.append(TranscriptSessionSummary(
             session_id=sess.id,
             student={"id": user.id, "username": user.username} if user else {"id": 0, "username": "?"},
             ta_id=sess.ta_instance_id,
             domain_id=ta.domain_id if ta else "?",
             message_count=msg_count,
-            kus_covered=sorted(kus),
+            kus_covered=sorted(kus_by_session.get(sess.id, set())),
             started_at=sess.started_at.isoformat() if sess.started_at else "",
             ended_at=sess.ended_at.isoformat() if sess.ended_at else None,
         ))
@@ -237,6 +267,7 @@ def get_student_detail(user_id: int, current_user: CurrentUser, db: DbSession):
             test_count=test_count,
             pass_rate=round(pass_rate, 2),
             last_active=last_active,
+            units=state.get("units"),
         ))
     return StudentDetailResponse(
         user={"id": user.id, "username": user.username, "role": user.role, "created_at": user.created_at.isoformat() if user.created_at else None},

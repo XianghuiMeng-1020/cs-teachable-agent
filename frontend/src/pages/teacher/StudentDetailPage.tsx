@@ -29,7 +29,13 @@ export function StudentDetailPage() {
   }
 
   const primary = data.ta_instances[0];
-  const units: UnitNode[] = [];
+  const units: UnitNode[] = primary?.units
+    ? Object.entries(primary.units).map(([unit_id, rec]) => ({
+        unit_id,
+        status: (rec?.status as UnitNode["status"]) ?? "unknown",
+        topic_group: (rec as { topic_group?: string })?.topic_group,
+      }))
+    : [];
 
   return (
     <div className="space-y-6">

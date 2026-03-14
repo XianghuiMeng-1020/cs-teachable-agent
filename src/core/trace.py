@@ -6,9 +6,12 @@ task_selection, ta_attempt, evaluation_result, mastery_update,
 misconception_activation, correction_event, relearning_event.
 """
 
+import logging
 import time
 import uuid
 from typing import Any
+
+logger = logging.getLogger(__name__)
 
 _trace_events: list[dict] = []
 _sequence_counter: int = 0
@@ -36,8 +39,8 @@ def _write_trace_to_db(event_type: str, payload: dict) -> None:
         )
         _db_session.add(row)
         _db_session.commit()
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("Trace write failed: %s", e, exc_info=False)
 
 
 def _next_id() -> str:
@@ -267,6 +270,8 @@ def record_misconception_activation(
     trigger_reference: str | None = None,
     state_before: Any = None,
     state_after: Any = None,
+    severity_score: float | None = None,
+    trigger_count: int | None = None,
 ) -> str:
     event_id = _next_id()
     _, ts = _sequence_and_ts()
@@ -283,6 +288,10 @@ def record_misconception_activation(
         "state_before": state_before,
         "state_after": state_after,
     }
+    if severity_score is not None:
+        payload["severity_score"] = severity_score
+    if trigger_count is not None:
+        payload["trigger_count"] = trigger_count
     _trace_events.append(payload)
     _write_trace_to_db("misconception_activation", payload)
     return event_id

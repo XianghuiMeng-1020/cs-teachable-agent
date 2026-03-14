@@ -10,14 +10,34 @@ export interface UnitNode {
   topic_group?: string;
 }
 
+export interface KnowledgeUnitDefinition {
+  id: string;
+  name?: string;
+  prerequisites?: string[];
+  topic_group?: string;
+}
+
 const TOPIC_ORDER = [
-  "variables",
-  "io",
-  "types",
+  "variables_and_assignment",
+  "input_output",
+  "basic_data_types",
   "operators",
   "conditionals",
   "loops",
   "lists",
+  "functions",
+  "variables",
+  "io",
+  "types",
+  "conditionals",
+  "lists",
+  "dml",
+  "aggregation",
+  "joins",
+  "basics",
+  "ml",
+  "ethics",
+  "other",
 ];
 
 const statusRectStyles: Record<UnitStatus, string> = {
@@ -38,10 +58,19 @@ const statusTextStyles: Record<UnitStatus, string> = {
 
 interface KnowledgeGraphProps {
   units: UnitNode[];
+  knowledgeUnitDefinitions?: KnowledgeUnitDefinition[] | null;
   className?: string;
 }
 
-export function KnowledgeGraph({ units, className }: KnowledgeGraphProps) {
+export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: KnowledgeGraphProps) {
+  const defsById = useMemo(() => {
+    const m: Record<string, KnowledgeUnitDefinition> = {};
+    for (const d of knowledgeUnitDefinitions ?? []) {
+      m[d.id] = d;
+    }
+    return m;
+  }, [knowledgeUnitDefinitions]);
+
   const byGroup = useMemo(() => {
     const map: Record<string, UnitNode[]> = {};
     for (const u of units) {
@@ -55,9 +84,37 @@ export function KnowledgeGraph({ units, className }: KnowledgeGraphProps) {
     return ordered.map((g) => ({ group: g, nodes: map[g] ?? [] }));
   }, [units]);
 
-  const colWidth = 90;
+  const nodePos = useMemo(() => {
+    const pos: Record<string, { x: number; y: number }> = {};
+    const colWidth = 100;
+    const rowHeight = 44;
+    const nodeWidth = 72;
+    const nodeHeight = 32;
+    byGroup.forEach((col, ci) => {
+      col.nodes.forEach((node, ni) => {
+        pos[node.unit_id] = {
+          x: ci * colWidth + (colWidth - nodeWidth) / 2 + nodeWidth / 2,
+          y: ni * rowHeight + (rowHeight - nodeHeight) / 2 + nodeHeight / 2,
+        };
+      });
+    });
+    return { pos, colWidth: 100, rowHeight: 44, nodeWidth: 72, nodeHeight: 32 };
+  }, [byGroup]);
+
+  const edges = useMemo(() => {
+    if (!knowledgeUnitDefinitions?.length) return [];
+    const out: { from: string; to: string }[] = [];
+    for (const d of knowledgeUnitDefinitions) {
+      for (const p of d.prerequisites ?? []) {
+        if (nodePos.pos[d.id] && nodePos.pos[p]) out.push({ from: p, to: d.id });
+      }
+    }
+    return out;
+  }, [knowledgeUnitDefinitions, nodePos.pos]);
+
+  const colWidth = 100;
   const rowHeight = 44;
-  const nodeWidth = 64;
+  const nodeWidth = 72;
   const nodeHeight = 32;
 
   return (
@@ -67,11 +124,30 @@ export function KnowledgeGraph({ units, className }: KnowledgeGraphProps) {
         className="w-full min-h-[200px]"
         style={{ maxHeight: "400px" }}
       >
+        {edges.map((e, i) => {
+          const from = nodePos.pos[e.from];
+          const to = nodePos.pos[e.to];
+          if (!from || !to) return null;
+          return (
+            <line
+              key={`${e.from}-${e.to}-${i}`}
+              x1={from.x}
+              y1={from.y}
+              x2={to.x}
+              y2={to.y}
+              stroke="currentColor"
+              strokeOpacity={0.2}
+              strokeWidth={1}
+              className="text-slate-300"
+            />
+          );
+        })}
         {byGroup.map((col, ci) =>
           col.nodes.map((node, ni) => {
             const x = ci * colWidth + (colWidth - nodeWidth) / 2;
             const y = ni * rowHeight + (rowHeight - nodeHeight) / 2;
-            const label = KU_DISPLAY_NAMES[node.unit_id] ?? node.unit_id;
+            const label =
+              defsById[node.unit_id]?.name ?? KU_DISPLAY_NAMES[node.unit_id] ?? node.unit_id;
             return (
               <g key={node.unit_id}>
                 <rect

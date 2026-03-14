@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "scope_note": "AI Literacy: concepts, ML basics, ethics, applications.",
+  "knowledge_units": [
+    {"id": "ai_what", "name": "What is AI", "description": "Definition of artificial intelligence.", "topic_group": "basics", "prerequisites": [], "example_correct_code": ""},
+    {"id": "ml_vs_rule", "name": "ML vs Rule-based", "description": "Machine learning vs rule-based systems.", "topic_group": "basics", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "supervised", "name": "Supervised Learning", "description": "Learning from labeled examples.", "topic_group": "ml", "prerequisites": ["ml_vs_rule"], "example_correct_code": ""},
+    {"id": "unsupervised", "name": "Unsupervised Learning", "description": "Learning patterns without labels.", "topic_group": "ml", "prerequisites": ["ml_vs_rule"], "example_correct_code": ""},
+    {"id": "reinforcement", "name": "Reinforcement Learning", "description": "Learning from rewards and penalties.", "topic_group": "ml", "prerequisites": ["ml_vs_rule"], "example_correct_code": ""},
+    {"id": "training_data", "name": "Training Data", "description": "Role of data in training models.", "topic_group": "data", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "bias_data", "name": "Bias in Data", "description": "How bias in data affects models.", "topic_group": "data", "prerequisites": ["training_data"], "example_correct_code": ""},
+    {"id": "overfitting", "name": "Overfitting", "description": "Model memorizing training data.", "topic_group": "ml", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "underfitting", "name": "Underfitting", "description": "Model too simple to capture patterns.", "topic_group": "ml", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "neural_networks", "name": "Neural Networks", "description": "Basic idea of layers and weights.", "topic_group": "ml", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "accuracy_metric", "name": "Accuracy", "description": "Correct predictions / total.", "topic_group": "metrics", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "precision_recall", "name": "Precision and Recall", "description": "Precision and recall for classification.", "topic_group": "metrics", "prerequisites": ["accuracy_metric"], "example_correct_code": ""},
+    {"id": "fairness", "name": "Fairness", "description": "Fairness in AI systems.", "topic_group": "ethics", "prerequisites": ["bias_data"], "example_correct_code": ""},
+    {"id": "transparency", "name": "Transparency", "description": "Explainability and interpretability.", "topic_group": "ethics", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "privacy", "name": "Privacy", "description": "Data privacy and AI.", "topic_group": "ethics", "prerequisites": ["training_data"], "example_correct_code": ""},
+    {"id": "nlp_intro", "name": "NLP", "description": "Natural language processing overview.", "topic_group": "applications", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "vision_intro", "name": "Computer Vision", "description": "Image and video understanding.", "topic_group": "applications", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "recommendation", "name": "Recommendation Systems", "description": "How recommendation systems work.", "topic_group": "applications", "prerequisites": ["supervised"], "example_correct_code": ""},
+    {"id": "ai_limits", "name": "Limits of AI", "description": "What AI cannot do; narrow vs general.", "topic_group": "basics", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "human_ai", "name": "Human-AI Collaboration", "description": "Humans and AI working together.", "topic_group": "ethics", "prerequisites": ["ai_limits"], "example_correct_code": ""}
+  ]
+}

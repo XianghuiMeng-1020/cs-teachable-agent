@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "problems": [
+    {"problem_id": "ai_001", "problem_statement": "What is artificial intelligence? Give a one-sentence definition.", "knowledge_units_tested": ["ai_what"], "rubric": "Must mention machines performing tasks that typically require human intelligence."},
+    {"problem_id": "ai_002", "problem_statement": "How does machine learning differ from a rule-based system?", "knowledge_units_tested": ["ml_vs_rule"], "rubric": "ML learns from data; rule-based uses hand-coded rules."},
+    {"problem_id": "ai_003", "problem_statement": "What is supervised learning? Give an example.", "knowledge_units_tested": ["supervised"], "rubric": "Learning from labeled examples; e.g. spam classification."},
+    {"problem_id": "ai_004", "problem_statement": "What is unsupervised learning? Give an example.", "knowledge_units_tested": ["unsupervised"], "rubric": "Finding patterns without labels; e.g. clustering."},
+    {"problem_id": "ai_005", "problem_statement": "What role does training data play in ML?", "knowledge_units_tested": ["training_data"], "rubric": "Model learns patterns from this data."},
+    {"problem_id": "ai_006", "problem_statement": "What is overfitting? Why is it a problem?", "knowledge_units_tested": ["overfitting"], "rubric": "Model fits training data too closely and fails to generalize."},
+    {"problem_id": "ai_007", "problem_statement": "What is underfitting?", "knowledge_units_tested": ["underfitting"], "rubric": "Model too simple; high bias, poor performance."},
+    {"problem_id": "ai_008", "problem_statement": "How can bias in data affect an AI system?", "knowledge_units_tested": ["bias_data"], "rubric": "Model can perpetuate or amplify bias in data."},
+    {"problem_id": "ai_009", "problem_statement": "What is accuracy as a metric? When might it be misleading?", "knowledge_units_tested": ["accuracy_metric"], "rubric": "Correct/total; misleading with imbalanced classes."},
+    {"problem_id": "ai_010", "problem_statement": "When would you care more about precision than recall?", "knowledge_units_tested": ["precision_recall"], "rubric": "When false positives are costly (e.g. spam)."},
+    {"problem_id": "ai_011", "problem_statement": "What is fairness in AI? Give one example of unfairness.", "knowledge_units_tested": ["fairness"], "rubric": "Treating groups equitably; e.g. biased hiring tool."},
+    {"problem_id": "ai_012", "problem_statement": "Why is transparency important in AI?", "knowledge_units_tested": ["transparency"], "rubric": "Accountability, trust, debugging, regulation."},
+    {"problem_id": "ai_013", "problem_statement": "How can AI systems affect privacy?", "knowledge_units_tested": ["privacy"], "rubric": "Data collection, inference, re-identification."},
+    {"problem_id": "ai_014", "problem_statement": "What is reinforcement learning in one sentence?", "knowledge_units_tested": ["reinforcement"], "rubric": "Learning via rewards/penalties from environment."},
+    {"problem_id": "ai_015", "problem_statement": "What are neural networks (high level)?", "knowledge_units_tested": ["neural_networks"], "rubric": "Layers of units with weights; learn from data."},
+    {"problem_id": "ai_016", "problem_statement": "What is NLP? Give one application.", "knowledge_units_tested": ["nlp_intro"], "rubric": "Processing human language; e.g. translation, chatbots."},
+    {"problem_id": "ai_017", "problem_statement": "What is computer vision? Give one application.", "knowledge_units_tested": ["vision_intro"], "rubric": "Understanding images/video; e.g. face recognition."},
+    {"problem_id": "ai_018", "problem_statement": "How do recommendation systems work (in brief)?", "knowledge_units_tested": ["recommendation"], "rubric": "Use past behavior or similarity to suggest items."},
+    {"problem_id": "ai_019", "problem_statement": "What are limits of current AI?", "knowledge_units_tested": ["ai_limits"], "rubric": "Narrow tasks, no common sense, no consciousness."},
+    {"problem_id": "ai_020", "problem_statement": "Give an example of human-AI collaboration.", "knowledge_units_tested": ["human_ai"], "rubric": "e.g. doctor + diagnostic AI, driver + assist."},
+    {"problem_id": "ai_021", "problem_statement": "Explain: why is 'AI has feelings' a misconception?", "knowledge_units_tested": ["ai_what", "ai_limits"], "rubric": "Current AI has no subjective experience."},
+    {"problem_id": "ai_022", "problem_statement": "When is more data not better?", "knowledge_units_tested": ["training_data", "bias_data"], "rubric": "Biased data, noisy data, wrong distribution."},
+    {"problem_id": "ai_023", "problem_statement": "Name one way to improve fairness in an AI system.", "knowledge_units_tested": ["fairness"], "rubric": "Diverse data, fairness metrics, auditing."},
+    {"problem_id": "ai_024", "problem_statement": "What is explainable AI and why might we need it?", "knowledge_units_tested": ["transparency"], "rubric": "Understanding why model made a decision; trust, law."},
+    {"problem_id": "ai_025", "problem_statement": "Distinguish narrow AI from general AI.", "knowledge_units_tested": ["ai_limits"], "rubric": "Narrow: specific tasks. General: human-like breadth (not yet)."}
+  ]
+}

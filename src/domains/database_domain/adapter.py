@@ -1,18 +1,34 @@
 """Database domain adapter: SQL problems, execute and compare result sets. Paper 2 extension."""
 
+import json
 from pathlib import Path
 
 from src.domains.base import DomainAdapter
 
 
+def _default_seed_dir() -> Path:
+    return Path(__file__).resolve().parent.parent.parent.parent / "seed" / "database"
+
+
+def _default_prompts_dir() -> Path:
+    return Path(__file__).resolve().parent / "prompts"
+
+
 class DatabaseDomainAdapter(DomainAdapter):
     domain_id = "database"
 
-    def __init__(self, seed_dir: Path | None = None):
-        self._seed_dir = seed_dir or Path(__file__).resolve().parent / "seed"
+    def __init__(self, seed_dir: Path | None = None, prompts_dir: Path | None = None):
+        self._seed_dir = seed_dir or _default_seed_dir()
+        self._prompts_dir = prompts_dir or _default_prompts_dir()
         self._knowledge_units: list[dict] | None = None
         self._problems: list[dict] | None = None
         self._misconceptions: list[dict] | None = None
+
+    def _load_template(self, name: str) -> str:
+        path = self._prompts_dir / f"{name}.md"
+        if path.exists():
+            return path.read_text(encoding="utf-8")
+        return ""
 
     def load_knowledge_units(self) -> list[dict]:
         if self._knowledge_units is not None:
@@ -21,7 +37,6 @@ class DatabaseDomainAdapter(DomainAdapter):
         if not path.exists():
             self._knowledge_units = []
             return self._knowledge_units
-        import json
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
         self._knowledge_units = data.get("knowledge_units", [])
@@ -34,7 +49,6 @@ class DatabaseDomainAdapter(DomainAdapter):
         if not path.exists():
             self._problems = []
             return self._problems
-        import json
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
         self._problems = data.get("problems", [])
@@ -47,15 +61,19 @@ class DatabaseDomainAdapter(DomainAdapter):
         if not path.exists():
             self._misconceptions = []
             return self._misconceptions
-        import json
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
         self._misconceptions = data.get("misconceptions", [])
         return self._misconceptions
 
+    def get_schema_path(self) -> Path:
+        """Path to schema.sql for evaluation."""
+        return self._seed_dir / "schema.sql"
+
     def evaluate_attempt(self, problem: dict, code_or_answer: str) -> dict:
-        """Execute SQL against test DB and compare result set. Stub: not implemented."""
-        return {"passed": False, "details": [], "score": 0.0}
+        """Execute SQL against test DB and compare result set. Delegates to evaluator when implemented."""
+        from src.domains.database_domain.evaluator import evaluate_sql_attempt
+        return evaluate_sql_attempt(problem, code_or_answer, self.get_schema_path())
 
     def get_code_generation_prompt(
         self,
@@ -63,7 +81,23 @@ class DatabaseDomainAdapter(DomainAdapter):
         problem: dict,
         active_misconceptions: list[str],
     ) -> str:
-        return ""
+        template = self._load_template("query_generation")
+        if not template:
+            return ""
+        units = []
+        if isinstance(knowledge_state, dict) and "units" in knowledge_state:
+            units = [
+                uid for uid, rec in knowledge_state["units"].items()
+                if rec.get("status") in ("learned", "partially_learned")
+            ]
+        units_str = ", ".join(sorted(units))
+        mis_str = ", ".join(active_misconceptions) if active_misconceptions else "None"
+        return (
+            template.replace("{{PROBLEM_ID}}", problem.get("problem_id", ""))
+            .replace("{{PROBLEM_STATEMENT}}", problem.get("problem_statement", ""))
+            .replace("{{LEARNED_UNITS}}", units_str)
+            .replace("{{ACTIVE_MISCONCEPTIONS}}", mis_str)
+        )
 
     def get_conversation_prompt(
         self,
@@ -71,7 +105,34 @@ class DatabaseDomainAdapter(DomainAdapter):
         teaching_input: dict,
         learned_units: list[str],
     ) -> str:
-        return ""
+        template = self._load_template("conversation")
+        if not template:
+            return ""
+        topic = teaching_input.get("topic_taught", "")
+        note = teaching_input.get("note", "")
+        mis_ids = []
+        if isinstance(knowledge_state, dict) and "units" in knowledge_state:
+            for rec in knowledge_state["units"].values():
+                for m in rec.get("active_misconceptions", []):
+                    mid = m.get("misconception_id")
+                    if mid:
+                        mis_ids.append(mid)
+        mis_str = ", ".join(mis_ids) if mis_ids else "None"
+        units_str = ", ".join(sorted(learned_units))
+        return (
+            template.replace("{{LEARNED_UNITS}}", units_str)
+            .replace("{{TEACHING_TOPIC}}", topic)
+            .replace("{{TEACHING_NOTE}}", note)
+            .replace("{{ACTIVE_MISCONCEPTIONS}}", mis_str)
+        )
 
     def get_teaching_interpreter_prompt(self, student_input: str) -> str:
-        return ""
+        template = self._load_template("teaching_interpreter")
+        if not template:
+            return ""
+        units = self.load_knowledge_units()
+        unit_ids = [u["id"] for u in units]
+        units_list = ", ".join(unit_ids)
+        return template.replace("{{STUDENT_INPUT}}", student_input).replace(
+            "{{KNOWN_UNIT_IDS}}", units_list
+        )

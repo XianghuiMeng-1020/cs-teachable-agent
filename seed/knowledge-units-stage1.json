@@ -161,6 +161,126 @@
       "topic_group": "lists",
       "prerequisites": ["list_creation", "for_loop_iterable"],
       "example_correct_code": "for x in nums:\n    print(x)"
+    },
+    {
+      "id": "type_conversion",
+      "name": "Type Conversion",
+      "description": "Converting between types with int(), str(), float().",
+      "topic_group": "basic_data_types",
+      "prerequisites": ["data_types_int_float", "data_types_string"],
+      "example_correct_code": "n = int(\"42\")\ns = str(100)"
+    },
+    {
+      "id": "comments",
+      "name": "Comments",
+      "description": "Writing comments with #.",
+      "topic_group": "fundamentals",
+      "prerequisites": [],
+      "example_correct_code": "# this is a comment\nx = 5"
+    },
+    {
+      "id": "assignment_operators",
+      "name": "Compound Assignment",
+      "description": "+=, -=, *=, /=, etc.",
+      "topic_group": "operators",
+      "prerequisites": ["variable_assignment", "arithmetic_operators"],
+      "example_correct_code": "x += 1\nn *= 2"
+    },
+    {
+      "id": "string_methods",
+      "name": "String Methods",
+      "description": ".upper(), .lower(), .strip(), .split().",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_string"],
+      "example_correct_code": "\"hello\".upper()\n\"a b c\".split()"
+    },
+    {
+      "id": "string_formatting",
+      "name": "String Formatting",
+      "description": "f-strings or .format() for embedding values.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_string"],
+      "example_correct_code": "f\"x is {x}\"\n\"{} and {}\".format(a, b)"
+    },
+    {
+      "id": "function_definition",
+      "name": "Function Definition",
+      "description": "Defining functions with def.",
+      "topic_group": "functions",
+      "prerequisites": ["if_statement"],
+      "example_correct_code": "def greet():\n    print(\"Hi\")"
+    },
+    {
+      "id": "function_parameters",
+      "name": "Function Parameters",
+      "description": "Parameters and arguments.",
+      "topic_group": "functions",
+      "prerequisites": ["function_definition"],
+      "example_correct_code": "def add(a, b):\n    return a + b"
+    },
+    {
+      "id": "return_statement",
+      "name": "Return Statement",
+      "description": "Returning values from functions.",
+      "topic_group": "functions",
+      "prerequisites": ["function_definition"],
+      "example_correct_code": "def double(x):\n    return x * 2"
+    },
+    {
+      "id": "function_calls",
+      "name": "Function Calls",
+      "description": "Calling functions.",
+      "topic_group": "functions",
+      "prerequisites": ["function_definition"],
+      "example_correct_code": "add(2, 3)\nprint(double(5))"
+    },
+    {
+      "id": "scope_basics",
+      "name": "Variable Scope",
+      "description": "Local vs global variables (simplified).",
+      "topic_group": "functions",
+      "prerequisites": ["function_definition", "variable_assignment"],
+      "example_correct_code": "x = 1\ndef f():\n    y = 2\n    return y"
+    },
+    {
+      "id": "tuple_basics",
+      "name": "Tuples",
+      "description": "Tuples and immutability.",
+      "topic_group": "lists",
+      "prerequisites": ["list_creation"],
+      "example_correct_code": "t = (1, 2)\na, b = t"
+    },
+    {
+      "id": "dictionary_creation",
+      "name": "Dictionary Creation",
+      "description": "Creating dicts with {} or dict().",
+      "topic_group": "lists",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "d = {\"a\": 1, \"b\": 2}"
+    },
+    {
+      "id": "dictionary_access",
+      "name": "Dictionary Access",
+      "description": "Accessing and modifying dict values.",
+      "topic_group": "lists",
+      "prerequisites": ["dictionary_creation"],
+      "example_correct_code": "d[\"a\"]\nd[\"c\"] = 3"
+    },
+    {
+      "id": "error_types",
+      "name": "Error Types",
+      "description": "SyntaxError, TypeError, NameError (recognition).",
+      "topic_group": "miscellaneous",
+      "prerequisites": ["print_function"],
+      "example_correct_code": "# recognizing errors"
+    },
+    {
+      "id": "basic_debugging",
+      "name": "Basic Debugging",
+      "description": "Reading error messages, common bugs.",
+      "topic_group": "miscellaneous",
+      "prerequisites": ["error_types"],
+      "example_correct_code": "# debugging"
     }
   ]
 }

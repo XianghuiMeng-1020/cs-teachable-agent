@@ -1,7 +1,5 @@
 """State: GET state, mastery, trace, misconceptions, history."""
 
-from pathlib import Path
-
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from src.api.schemas import (
@@ -13,14 +11,11 @@ from src.api.schemas import (
     MisconceptionDetail,
 )
 from src.api.deps import DbSession, CurrentUser
-from src.db.models import TAInstance, TeachingSession, TeachingEvent, TestAttempt
-from src.core.knowledge_state import StateTracker
-from src.core.trace import get_trace_events
-from src.domains.python_domain import PythonDomainAdapter
+from src.api.domain_helpers import get_domain_adapter, get_tracker_for_ta
+from src.core.misconception_engine import get_adaptive_remediation_hint
+from src.db.models import TAInstance, TeachingSession, TeachingEvent, TestAttempt, TraceEvent
 
 router = APIRouter(tags=["state"])
-
-_SEED_DIR = Path(__file__).resolve().parent.parent.parent.parent / "seed"
 
 
 def _get_ta(ta_id: int, user_id: int, db: DbSession) -> TAInstance:
@@ -33,37 +28,33 @@ def _get_ta(ta_id: int, user_id: int, db: DbSession) -> TAInstance:
     return ta
 
 
-def _tracker_from_ta(ta: TAInstance) -> StateTracker:
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
-    units = adapter.load_knowledge_units()
-    tracker = StateTracker(unit_definitions=units, domain=ta.domain_id)
-    if ta.knowledge_state and "units" in ta.knowledge_state:
-        for uid, rec in ta.knowledge_state["units"].items():
-            if uid in tracker._state:
-                tracker._state[uid] = dict(rec)
-    return tracker
-
-
 @router.get("/api/ta/{ta_id}/state", response_model=StateResponse)
 def get_state(ta_id: int, current_user: CurrentUser, db: DbSession):
     ta = _get_ta(ta_id, current_user.id, db)
-    tracker = _tracker_from_ta(ta)
+    tracker = get_tracker_for_ta(ta)
     full = tracker.get_full_state()
     units = full.get("units", {})
     learned = list(tracker.get_learned_units())
     active_mis = tracker.get_active_misconception_ids()
+    adapter = get_domain_adapter(ta.domain_id)
+    kus = adapter.load_knowledge_units()
+    definitions = [
+        {"id": u["id"], "name": u.get("name", u["id"]), "prerequisites": u.get("prerequisites", []), "topic_group": u.get("topic_group")}
+        for u in kus
+    ]
     return StateResponse(
         domain=tracker.get_domain(),
         units=units,
         learned_unit_ids=learned,
         active_misconception_ids=active_mis,
+        knowledge_unit_definitions=definitions,
     )
 
 
 @router.get("/api/ta/{ta_id}/mastery", response_model=MasteryResponse)
 def get_mastery(ta_id: int, current_user: CurrentUser, db: DbSession):
     ta = _get_ta(ta_id, current_user.id, db)
-    tracker = _tracker_from_ta(ta)
+    tracker = get_tracker_for_ta(ta)
     learned = list(tracker.get_learned_units())
     session_ids = [s.id for s in db.query(TeachingSession.id).filter(TeachingSession.ta_instance_id == ta.id)]
     attempts = db.query(TestAttempt).filter(TestAttempt.session_id.in_(session_ids)).all() if session_ids else []
@@ -90,33 +81,88 @@ def get_mastery(ta_id: int, current_user: CurrentUser, db: DbSession):
     return MasteryResponse(**report)
 
 
+@router.get("/api/ta/{ta_id}/bkt")
+def get_bkt(ta_id: int, current_user: CurrentUser, db: DbSession):
+    """Return decayed p_know per knowledge unit (BKT state) for analytics."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    tracker = get_tracker_for_ta(ta)
+    return {"p_know": tracker.get_bkt_state()}
+
+
 @router.get("/api/ta/{ta_id}/trace")
-def get_trace(ta_id: int, current_user: CurrentUser, db: DbSession):
-    _get_ta(ta_id, current_user.id, db)
-    events = get_trace_events()
+def get_trace(
+    ta_id: int,
+    current_user: CurrentUser,
+    db: DbSession,
+    event_type: str | None = Query(None, description="Filter by event_type"),
+    date_from: str | None = Query(None, description="ISO date from (inclusive)"),
+    date_to: str | None = Query(None, description="ISO date to (inclusive)"),
+):
+    ta = _get_ta(ta_id, current_user.id, db)
+    session_ids = [s.id for s in db.query(TeachingSession.id).filter(TeachingSession.ta_instance_id == ta.id)]
+    if not session_ids:
+        return {"events": []}
+    q = db.query(TraceEvent).filter(TraceEvent.session_id.in_(session_ids))
+    if event_type:
+        q = q.filter(TraceEvent.event_type == event_type)
+    if date_from:
+        try:
+            from datetime import datetime
+            q = q.filter(TraceEvent.created_at >= datetime.fromisoformat(date_from.replace("Z", "+00:00")))
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            from datetime import datetime
+            q = q.filter(TraceEvent.created_at <= datetime.fromisoformat(date_to.replace("Z", "+00:00")))
+        except ValueError:
+            pass
+    rows = q.order_by(TraceEvent.created_at.asc()).all()
+    events = []
+    for row in rows:
+        payload = dict(row.payload or {})
+        payload["event_type"] = row.event_type
+        payload["timestamp"] = row.created_at.isoformat() if row.created_at else ""
+        events.append(payload)
     return {"events": events}
 
 
 @router.get("/api/ta/{ta_id}/misconceptions", response_model=MisconceptionsResponse)
 def get_misconceptions(ta_id: int, current_user: CurrentUser, db: DbSession):
     ta = _get_ta(ta_id, current_user.id, db)
-    tracker = _tracker_from_ta(ta)
+    tracker = get_tracker_for_ta(ta)
     active_ids = tracker.get_active_misconception_ids()
-    adapter = PythonDomainAdapter(seed_dir=_SEED_DIR)
+    adapter = get_domain_adapter(ta.domain_id)
     raw_mis = adapter.load_misconceptions()
     by_id = {m["id"]: m for m in raw_mis}
+    full_state = tracker.get_full_state()
+    units = full_state.get("units", {})
+    severity_by_mid: dict[str, tuple[float, int, str]] = {}
+    for uid, rec in units.items():
+        for am in rec.get("active_misconceptions", []):
+            mid = am.get("misconception_id")
+            if mid and mid not in severity_by_mid:
+                severity_by_mid[mid] = (
+                    float(am.get("severity_score", 0)),
+                    int(am.get("trigger_count", 1)),
+                    am.get("activated_at") or "",
+                )
     misconceptions = []
     for mid in active_ids:
         m = by_id.get(mid)
         if m:
+            sev, count, activated_at = severity_by_mid.get(mid, (0.0, 1, ""))
+            remediation = get_adaptive_remediation_hint(m, severity_score=sev, trigger_count=count)
             misconceptions.append(
                 MisconceptionDetail(
                     id=m["id"],
                     description=m.get("description", ""),
                     affected_units=m.get("affected_knowledge_units", []),
-                    remediation_hint=m.get("remediation_hint", ""),
+                    remediation_hint=remediation,
                     status="active",
-                    activated_at=None,
+                    activated_at=activated_at or None,
+                    severity_score=sev if sev else None,
+                    trigger_count=count if count else None,
                 )
             )
     return MisconceptionsResponse(
@@ -190,3 +236,25 @@ def get_history(
         page=page,
         per_page=per_page,
     )
+
+
+@router.get("/api/ta/{ta_id}/messages")
+def get_messages(ta_id: int, current_user: CurrentUser, db: DbSession):
+    """Return conversation history (student + TA messages) for this TA's sessions."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    session_ids = [s.id for s in db.query(TeachingSession.id).filter(TeachingSession.ta_instance_id == ta.id)]
+    if not session_ids:
+        return {"messages": []}
+    events = (
+        db.query(TeachingEvent)
+        .filter(TeachingEvent.session_id.in_(session_ids))
+        .order_by(TeachingEvent.created_at.asc())
+        .all()
+    )
+    messages = []
+    for te in events:
+        if te.student_input:
+            messages.append({"role": "student", "content": te.student_input, "timestamp": te.created_at.isoformat() if te.created_at else ""})
+        if te.ta_response:
+            messages.append({"role": "ta", "content": te.ta_response, "timestamp": te.created_at.isoformat() if te.created_at else ""})
+    return {"messages": messages}

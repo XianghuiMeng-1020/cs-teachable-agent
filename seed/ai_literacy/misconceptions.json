@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "misconceptions": [
+    {"id": "ai_is_sentient", "description": "Believes AI has consciousness or emotions.", "affected_knowledge_units": ["ai_what", "ai_limits"], "remediation_hint": "Clarify that current AI has no consciousness; it processes patterns."},
+    {"id": "more_data_always_better", "description": "Thinks more data always improves models.", "affected_knowledge_units": ["training_data", "bias_data"], "remediation_hint": "Discuss quality, bias, and diminishing returns of data."},
+    {"id": "ai_replaces_all_jobs", "description": "Believes AI will replace all human jobs.", "affected_knowledge_units": ["human_ai", "ai_limits"], "remediation_hint": "Discuss augmentation vs replacement and new roles."},
+    {"id": "accuracy_is_everything", "description": "Ignores precision/recall and context.", "affected_knowledge_units": ["accuracy_metric", "precision_recall"], "remediation_hint": "Explain when precision or recall matters more."},
+    {"id": "ai_is_magic", "description": "Treats AI as black box with no explainable process.", "affected_knowledge_units": ["transparency", "ml_vs_rule"], "remediation_hint": "Introduce how models learn from data."},
+    {"id": "no_bias_if_fair", "description": "Assumes removing bias is straightforward.", "affected_knowledge_units": ["fairness", "bias_data"], "remediation_hint": "Discuss structural and historical bias."},
+    {"id": "deep_means_better", "description": "Thinks deeper networks are always better.", "affected_knowledge_units": ["neural_networks", "overfitting"], "remediation_hint": "Discuss overfitting and model complexity."},
+    {"id": "ai_understands", "description": "Confuses pattern matching with understanding.", "affected_knowledge_units": ["ai_what", "nlp_intro"], "remediation_hint": "Distinguish statistical patterns from semantic understanding."},
+    {"id": "one_model_fits_all", "description": "One model or approach for every problem.", "affected_knowledge_units": ["supervised", "unsupervised", "reinforcement"], "remediation_hint": "Match problem type to learning paradigm."},
+    {"id": "privacy_vs_utility", "description": "Assumes privacy and utility are always in conflict.", "affected_knowledge_units": ["privacy", "training_data"], "remediation_hint": "Introduce federated learning and anonymization."}
+  ]
+}

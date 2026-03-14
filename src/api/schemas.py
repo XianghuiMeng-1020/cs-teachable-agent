@@ -83,6 +83,7 @@ class TestResponse(BaseModel):
     passed: bool
     details: list[dict]
     mastery_report: dict
+    reflection_prompt: str | None = None
 
 
 class ComprehensiveTestResultItem(BaseModel):
@@ -104,6 +105,7 @@ class StateResponse(BaseModel):
     units: dict[str, Any]
     learned_unit_ids: list[str]
     active_misconception_ids: list[str]
+    knowledge_unit_definitions: list[dict] | None = None  # id, name, prerequisites for graph
 
 
 class MasteryResponse(BaseModel):
@@ -126,6 +128,8 @@ class MisconceptionDetail(BaseModel):
     remediation_hint: str
     status: str  # active | correcting | resolved
     activated_at: str | None = None
+    severity_score: float | None = None
+    trigger_count: int | None = None
 
 
 class MisconceptionsResponse(BaseModel):
@@ -214,6 +218,7 @@ class StudentTADetail(BaseModel):
     test_count: int
     pass_rate: float
     last_active: str | None
+    units: dict[str, dict] | None = None  # unit_id -> { status, ... } for KnowledgeGraph
 
 
 class StudentDetailResponse(BaseModel):
@@ -228,3 +233,4 @@ class AnalyticsResponse(BaseModel):
     knowledge_coverage: list[dict]
     mastery_trend: list[dict] | None = None  # [{ "date": "YYYY-MM-DD", "avg_mastery": 0.0-1.0 }]
     recent_activity: list[dict] | None = None  # [{ "student": str, "action": str, "result": str | None, "timestamp": str }]
+    student_unit_status: list[dict] | None = None  # [{ "user_id": int, "unit_id": str, "status": str }] for heatmap

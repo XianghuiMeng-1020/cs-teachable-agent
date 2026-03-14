@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMastery, getMisconceptions } from "@/api/client";
+import { getState, getMastery, getMisconceptions, getHistory } from "@/api/client";
 import { BookOpen, CheckCircle, AlertTriangle, MessageCircle } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
@@ -32,10 +32,23 @@ export function DashboardPage() {
     enabled: currentTaId != null,
   });
 
+  const { data: historyData } = useQuery({
+    queryKey: ["ta", currentTaId, "history", 1, 5],
+    queryFn: () => getHistory(currentTaId!, { page: 1, per_page: 5 }),
+    enabled: currentTaId != null,
+  });
+
   const learnedCount = state?.learned_unit_ids?.length ?? 0;
   const totalKus = state?.units ? Object.keys(state.units).length : 20;
   const misconceptions = misconceptionsData?.misconceptions ?? [];
-  const recentEvents: TimelineEvent[] = []; // TODO: from history API in Round 5/6
+  const recentEvents: TimelineEvent[] = (historyData?.items ?? []).map((i) => ({
+    id: i.id,
+    type: (i.type as TimelineEvent["type"]) ?? "teach",
+    title: i.title,
+    description: i.description,
+    timestamp: i.timestamp,
+    metadata: i.metadata,
+  }));
 
   return (
     <div className="space-y-6">
@@ -64,8 +77,8 @@ export function DashboardPage() {
           iconColor="bg-amber-50 text-warning"
         />
         <StatCard
-          label="Teaching Sessions"
-          value="—"
+          label="Tests Run"
+          value={mastery?.test_count != null ? String(mastery.test_count) : "—"}
           icon={MessageCircle}
           iconColor="bg-accent-50 text-accent-500"
         />

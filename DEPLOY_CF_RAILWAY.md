@@ -34,6 +34,7 @@
 | `DEEPSEEK_API_KEY` | `sk-...` | （可选）DeepSeek API 密钥 |
 | `DATABASE_URL` | `sqlite:///app/data/app.db` | 数据库路径（默认 SQLite） |
 | `SECRET_KEY` | 随机字符串 | JWT 密钥，用于认证 |
+| `FRONTEND_URL` | `https://your-pages.pages.dev` | 前端域名（Cloudflare Pages），用于 CORS |
 
 > 💡 **生成 SECRET_KEY**：在终端运行 `openssl rand -hex 32`
 

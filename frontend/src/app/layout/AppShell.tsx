@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { listTA } from "@/api/client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
@@ -24,10 +24,18 @@ export function AppShell() {
   const pageName =
     PAGE_NAMES[path] ??
     (path.startsWith("/teacher/students/") ? "Student detail" : "CS Teachable Agent");
+  const queryClient = useQueryClient();
 
-  const { data: taList = [] } = useQuery({
+  const { data: taList = [], isSuccess: taListLoaded } = useQuery({
     queryKey: ["ta", "list"],
     queryFn: listTA,
+  });
+
+  const createTAMutation = useMutation({
+    mutationFn: () => createTA("python"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
+    },
   });
 
   const { currentTaId, setCurrentTaId, mobileMenuOpen, setMobileMenuOpen } = useAppStore();
@@ -36,6 +44,12 @@ export function AppShell() {
       setCurrentTaId(taList[0].id);
     }
   }, [taList, currentTaId, setCurrentTaId]);
+
+  useEffect(() => {
+    if (taListLoaded && taList.length === 0 && !createTAMutation.isPending) {
+      createTAMutation.mutate();
+    }
+  }, [taListLoaded, taList.length, createTAMutation.isPending]);
 
   return (
     <div className="flex h-screen overflow-hidden bg-surface">

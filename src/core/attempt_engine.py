@@ -137,7 +137,8 @@ def get_ta_code_attempt(
 
     raw = llm_completion(filled_prompt, max_tokens=256, temperature=0.3)
     code = _extract_code(raw) if raw else ""
-    if code and output_guard(code):
+    allowed_kus = set(learned_unit_ids) if learned_unit_ids else None
+    if code and output_guard(code, allowed_ku_ids=allowed_kus):
         return code
     return _get_stub_attempt(
         problem, learned_unit_ids, force_fail, active_mis_list

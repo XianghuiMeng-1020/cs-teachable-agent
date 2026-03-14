@@ -16,16 +16,19 @@ export function MasteryPage() {
     enabled: currentTaId != null,
   });
 
+  const defs = (state as { knowledge_unit_definitions?: { id: string; name?: string }[] })?.knowledge_unit_definitions;
+  const nameById = defs ? Object.fromEntries(defs.map((d) => [d.id, d.name ?? d.id])) : {};
+
   const units: UnitNode[] = state?.units
     ? Object.entries(state.units).map(([unit_id, rec]) => ({
         unit_id,
         status: (rec as { status?: string }).status as UnitNode["status"] ?? "unknown",
-        topic_group: (rec as { topic_group?: string }).topic_group,
+        topic_group: (rec as { topic_group?: string }).topic_group ?? defs?.find((d: { id: string; topic_group?: string }) => d.id === unit_id)?.topic_group,
       }))
     : [];
 
   const barData = units.map((u) => ({
-    name: KU_DISPLAY_NAMES[u.unit_id] ?? u.unit_id,
+    name: nameById[u.unit_id] ?? KU_DISPLAY_NAMES[u.unit_id] ?? u.unit_id,
     mastery: u.status === "learned" ? 100 : u.status === "partially_learned" ? 50 : u.status === "misconception" ? 0 : 0,
     fill: u.status === "learned" ? "#10B981" : u.status === "partially_learned" ? "#F59E0B" : "#F1F5F9",
   }));
@@ -44,7 +47,11 @@ export function MasteryPage() {
 
       <Card padding="md">
         <h2 className="mb-4 text-lg font-semibold text-slate-800">Knowledge state</h2>
-        <KnowledgeGraph units={units} className="min-h-[400px]" />
+        <KnowledgeGraph
+          units={units}
+          knowledgeUnitDefinitions={defs ?? undefined}
+          className="min-h-[400px]"
+        />
       </Card>
 
       <div className="grid gap-6 lg:grid-cols-2">

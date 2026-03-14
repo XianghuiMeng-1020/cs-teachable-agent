@@ -49,6 +49,118 @@
       "example_incorrect_code": "nums = [10, 20, 30]\nprint(nums[1])  # expects 10",
       "example_correct_code": "nums = [10, 20, 30]\nprint(nums[0])",
       "remediation_hint": "Teach: List indices start at 0. The first element is nums[0], the second is nums[1], and so on."
+    },
+    {
+      "id": "print_vs_return",
+      "description": "Uses print() in a function and expects the caller to get the value.",
+      "affected_knowledge_units": ["print_function", "return_statement", "function_definition"],
+      "example_incorrect_code": "def double(x):\n    print(x * 2)",
+      "example_correct_code": "def double(x):\n    return x * 2",
+      "remediation_hint": "Teach: return sends a value back to the caller; print only displays it."
+    },
+    {
+      "id": "mutable_default",
+      "description": "Uses mutable default argument (e.g. list) in function.",
+      "affected_knowledge_units": ["function_parameters", "list_creation"],
+      "example_incorrect_code": "def f(x, lst=[]):\n    lst.append(x)\n    return lst",
+      "example_correct_code": "def f(x, lst=None):\n    if lst is None:\n        lst = []\n    lst.append(x)\n    return lst",
+      "remediation_hint": "Teach: Default arguments are evaluated once; use None for mutable defaults."
+    },
+    {
+      "id": "loop_variable_scope",
+      "description": "Thinks loop variable disappears after the loop.",
+      "affected_knowledge_units": ["for_loop_range", "scope_basics"],
+      "example_incorrect_code": "for i in range(3):\n    pass\nprint(i)  # thinks i is undefined",
+      "example_correct_code": "for i in range(3):\n    pass\nprint(i)  # i is 2",
+      "remediation_hint": "Teach: The loop variable exists after the loop and holds the last value."
+    },
+    {
+      "id": "name_error_undefined",
+      "description": "Uses a variable before assigning it or misspells name.",
+      "affected_knowledge_units": ["variable_assignment"],
+      "example_incorrect_code": "print(x)\nx = 5",
+      "example_correct_code": "x = 5\nprint(x)",
+      "remediation_hint": "Teach: Assign a value before using a variable; check spelling."
+    },
+    {
+      "id": "integer_division_float",
+      "description": "Expects / to give integer or confuses / and //.",
+      "affected_knowledge_units": ["arithmetic_operators", "data_types_int_float"],
+      "example_incorrect_code": "print(5 / 2)  # expects 2",
+      "example_correct_code": "print(5 // 2)  # 2",
+      "remediation_hint": "Teach: / is float division; // is integer (floor) division."
+    },
+    {
+      "id": "range_two_args",
+      "description": "Confuses range(start, end) with range(end); thinks end is inclusive.",
+      "affected_knowledge_units": ["for_loop_range"],
+      "example_incorrect_code": "for i in range(1, 5):\n    print(i)  # expects 1,2,3,4,5",
+      "example_correct_code": "for i in range(1, 6):\n    print(i)",
+      "remediation_hint": "Teach: range(a, b) goes from a to b-1; end is exclusive."
+    },
+    {
+      "id": "elif_else_if",
+      "description": "Uses else if instead of elif or wrong indentation in elif chain.",
+      "affected_knowledge_units": ["if_elif_else"],
+      "example_incorrect_code": "if x < 0:\n    print('neg')\nelse if x == 0:\n    print('zero')",
+      "example_correct_code": "if x < 0:\n    print('neg')\nelif x == 0:\n    print('zero')",
+      "remediation_hint": "Teach: Python uses elif, not else if; same indent as if."
+    },
+    {
+      "id": "loop_infinite",
+      "description": "Forgets to update loop variable in while, causing infinite loop.",
+      "affected_knowledge_units": ["while_loop"],
+      "example_incorrect_code": "i = 0\nwhile i < 5:\n    print(i)",
+      "example_correct_code": "i = 0\nwhile i < 5:\n    print(i)\n    i += 1",
+      "remediation_hint": "Teach: Update the condition variable inside the loop so it eventually becomes false."
+    },
+    {
+      "id": "input_returns_string",
+      "description": "Treats input() as returning int/float without converting.",
+      "affected_knowledge_units": ["user_input", "type_conversion"],
+      "example_incorrect_code": "n = input()\nprint(n + 1)",
+      "example_correct_code": "n = int(input())\nprint(n + 1)",
+      "remediation_hint": "Teach: input() returns a string; use int() or float() for numbers."
+    },
+    {
+      "id": "string_immutable",
+      "description": "Tries to assign to string index or slice.",
+      "affected_knowledge_units": ["data_types_string"],
+      "example_incorrect_code": "s = \"hi\"\ns[0] = \"H\"",
+      "example_correct_code": "s = \"hi\"\ns = \"H\" + s[1:]",
+      "remediation_hint": "Teach: Strings are immutable; create a new string instead of modifying."
+    },
+    {
+      "id": "dict_key_error",
+      "description": "Accesses missing key with [] instead of .get().",
+      "affected_knowledge_units": ["dictionary_access"],
+      "example_incorrect_code": "d = {\"a\": 1}\nprint(d[\"b\"])",
+      "example_correct_code": "d = {\"a\": 1}\nprint(d.get(\"b\", 0))",
+      "remediation_hint": "Teach: Use .get(key, default) when key might be missing."
+    },
+    {
+      "id": "return_none",
+      "description": "Function without return returns None; expects something else.",
+      "affected_knowledge_units": ["return_statement", "function_definition"],
+      "example_incorrect_code": "def add(a, b):\n    a + b\nprint(add(1, 2))  # None",
+      "example_correct_code": "def add(a, b):\n    return a + b",
+      "remediation_hint": "Teach: A function without return gives None; use return to send a value."
+    },
+    {
+      "id": "and_or_short_circuit",
+      "description": "Expects both sides of and/or to always be evaluated.",
+      "affected_knowledge_units": ["logical_operators"],
+      "example_incorrect_code": "x = 0 and f()  # expects f() to run",
+      "example_correct_code": "x = 0 and f()  # f() not called",
+      "remediation_hint": "Teach: and/or short-circuit; right side may not run."
+    },
+    {
+      "id": "modulo_negative",
+      "description": "Expects negative % positive to be negative.",
+      "affected_knowledge_units": ["arithmetic_operators"],
+      "example_incorrect_code": "print(-5 % 2)  # expects -1",
+      "example_correct_code": "print(-5 % 2)  # 1 in Python",
+      "remediation_hint": "Teach: In Python, result of % has the sign of the divisor."
     }
   ]
 }
