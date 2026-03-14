@@ -21,10 +21,15 @@ allowed_origins = [
     "http://localhost:5173",  # Vite 默认端口
 ]
 
-# 从环境变量读取前端域名（Cloudflare Pages 等）
+# 从环境变量读取前端域名（Cloudflare Pages/Workers 等）
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
     allowed_origins.append(frontend_url)
+
+# 支持 Cloudflare Workers 域名 (*.workers.dev)
+workers_url = os.getenv("WORKERS_URL")
+if workers_url:
+    allowed_origins.append(workers_url)
 
 # 支持所有 *.pages.dev（Cloudflare Pages）
 app.add_middleware(
