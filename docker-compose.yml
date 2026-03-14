@@ -1,0 +1,17 @@
+# CS Teachable Agent — local dev stack
+# Backend (FastAPI) + SQLite; frontend run separately: cd frontend && npm run dev
+# For production, set DATABASE_URL to PostgreSQL and build frontend.
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./teachable_agent.db
+      - SECRET_KEY=${SECRET_KEY:-dev-secret}
+    volumes:
+      - .:/app
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000

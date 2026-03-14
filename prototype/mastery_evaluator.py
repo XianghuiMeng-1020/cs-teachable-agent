@@ -87,20 +87,147 @@ def mastery_summary(problem: dict, attempt_result: dict, attempted_problems: lis
     }
 
 
+# Rubric thresholds (mastery-rubric-stage1.md)
+PASS_RATE_FAILING = 0.5
+PASS_RATE_DEVELOPING = 0.8
+
+
+def _pass_rate_to_level(pass_rate: float) -> str:
+    """Map pass_rate to mastery level: failing / developing / proficient."""
+    if pass_rate >= PASS_RATE_DEVELOPING:
+        return "proficient"
+    if pass_rate >= PASS_RATE_FAILING:
+        return "developing"
+    return "failing"
+
+
+def aggregate_mastery(
+    history_entries: list[dict],
+    *,
+    include_during_misconception: bool = True,
+) -> dict:
+    """
+    Aggregate mastery from a list of mastery_history entries (Stage E).
+    Returns attempt_count, pass_count, pass_rate, aggregated_level.
+    If include_during_misconception is False, only entries without misconception_active_during_attempt
+    (or period != during_misconception) are counted, so "current" mastery can reflect post-correction only.
+    """
+    if not history_entries:
+        return {
+            "attempt_count": 0,
+            "pass_count": 0,
+            "pass_rate": 0.0,
+            "aggregated_level": "not_assessed",
+            "count_during_misconception": 0,
+            "count_after_correction": 0,
+        }
+    filtered = []
+    count_during = 0
+    count_after = 0
+    for e in history_entries:
+        mis = e.get("misconception_active_during_attempt")
+        period = e.get("period")
+        if period == "during_misconception" or mis:
+            count_during += 1
+        if period == "after_correction":
+            count_after += 1
+        if include_during_misconception or not (period == "during_misconception" or mis):
+            filtered.append(e)
+    if not filtered:
+        return {
+            "attempt_count": 0,
+            "pass_count": 0,
+            "pass_rate": 0.0,
+            "aggregated_level": "not_assessed",
+            "attempt_count_total": len(history_entries),
+            "count_during_misconception": count_during,
+            "count_after_correction": count_after,
+        }
+    pass_count = sum(1 for e in filtered if e.get("pass_fail"))
+    attempt_count = len(filtered)
+    pass_rate = pass_count / attempt_count if attempt_count else 0.0
+    return {
+        "attempt_count": attempt_count,
+        "pass_count": pass_count,
+        "pass_rate": pass_rate,
+        "aggregated_level": _pass_rate_to_level(pass_rate),
+        "attempt_count_total": len(history_entries),
+        "count_during_misconception": count_during,
+        "count_after_correction": count_after,
+    }
+
+
+def get_aggregated_mastery_for_unit(
+    tracker,
+    unit_id: str,
+    *,
+    include_during_misconception: bool = True,
+) -> dict:
+    """Read unit's mastery_history from state and return aggregated mastery (Stage E)."""
+    history = tracker.get_mastery_history(unit_id) if hasattr(tracker, "get_mastery_history") else []
+    return aggregate_mastery(history, include_during_misconception=include_during_misconception)
+
+
+def record_attempt_to_state(
+    tracker,
+    problem: dict,
+    attempt_result: dict,
+    attempt_id: str,
+    *,
+    misconception_active_per_unit: dict[str, str] | None = None,
+    period: str | None = None,
+) -> None:
+    """
+    After an evaluated attempt, write testing_evidence and mastery_history entry for each
+    affected unit (Stage E). misconception_active_per_unit: unit_id -> misconception_id or None.
+    period: one of before_misconception, during_misconception, after_correction.
+    """
+    if not problem or not attempt_result:
+        return
+    passed = attempt_result.get("passed", False)
+    problem_id = problem.get("problem_id", "")
+    units_tested = problem.get("knowledge_units_tested", [])
+    mis_per_unit = misconception_active_per_unit or {}
+    level_this = "proficient" if passed else "failing"
+    for uid in units_tested:
+        if not hasattr(tracker, "append_testing_evidence"):
+            continue
+        tracker.append_testing_evidence(
+            uid,
+            task_id=problem_id,
+            attempt_id=attempt_id,
+            pass_fail=passed,
+            mastery_level_at_attempt=level_this,
+            misconception_active_during_attempt=mis_per_unit.get(uid),
+        )
+        if hasattr(tracker, "append_mastery_history_entry"):
+            tracker.append_mastery_history_entry(
+                uid,
+                attempt_id=attempt_id,
+                problem_id=problem_id,
+                pass_fail=passed,
+                mastery_level=level_this,
+                misconception_active_during_attempt=mis_per_unit.get(uid),
+                period=period,
+            )
+
+
 def build_mastery_report(
     problem: dict | None,
     learned_unit_ids: set[str],
     attempt_result: dict | None,
     summary: dict | None,
     ta_code: str = "",
+    unit_status_for_display: dict[str, str] | None = None,
 ) -> dict:
     """
     Build an informative mastery report for a scenario.
     - selected_problem_id, required_kus, learned_kus_at_attempt, pass_fail,
     - per_problem_interpretation, overall_summary.
+    - unit_status_for_display: optional map unit_id -> status (e.g. corrected, learned) for Stage D.
     """
     if problem is None:
-        return {
+        out = {
             "selected_problem_id": None,
             "required_kus": [],
             "learned_kus_at_attempt": sorted(learned_unit_ids),
@@ -108,11 +235,14 @@ def build_mastery_report(
             "per_problem_interpretation": "No problem attempted.",
             "overall_summary": "No problem selected or attempted.",
         }
+        if unit_status_for_display:
+            out["unit_status"] = unit_status_for_display
+        return out
     required = sorted(problem.get("knowledge_units_tested", []))
     passed = attempt_result.get("passed", False) if attempt_result else False
     level_per_unit = summary.get("level_per_unit", {}) if summary else {}
     overall_level = summary.get("overall_level", "not_assessed") if summary else "not_assessed"
-    return {
+    out = {
         "selected_problem_id": problem.get("problem_id"),
         "required_kus": required,
         "learned_kus_at_attempt": sorted(learned_unit_ids),
@@ -124,6 +254,9 @@ def build_mastery_report(
         "overall_summary": f"Overall: {overall_level} (one problem, {'passed' if passed else 'failed'}).",
         "ta_code_preview": ta_code[:200] + ("..." if len(ta_code) > 200 else "") if ta_code else "",
     }
+    if unit_status_for_display:
+        out["unit_status"] = unit_status_for_display
+    return out
 
 
 def format_mastery_report_line(report: dict) -> list[str]:
@@ -136,6 +269,8 @@ def format_mastery_report_line(report: dict) -> list[str]:
         f"  Per-problem: {report.get('per_problem_interpretation', '')}",
         f"  Overall: {report.get('overall_summary', '')}",
     ]
+    if report.get("unit_status"):
+        lines.append(f"  Unit status (for display): {report['unit_status']}")
     if report.get("ta_code_preview"):
         lines.append(f"  TA code (preview): {report['ta_code_preview']}")
     return lines

@@ -49,13 +49,22 @@ def _fill_prompt(
     )
 
 
-def _fallback_stub_response(teaching_event: dict, learned_unit_ids: set[str]) -> str:
+def _fallback_stub_response(
+    teaching_event: dict,
+    learned_unit_ids: set[str],
+    active_misconceptions: list[str] | None = None,
+) -> str:
     """
     Return a short learner-style response without calling an LLM.
     Only mentions concepts in learned_unit_ids; stays within Stage One scope.
+    When active_misconceptions is non-empty, may reflect slight confusion (Stage C).
     """
     topic = (teaching_event.get("topic_taught") or "").lower()
     units = learned_unit_ids & _STAGE_ONE_SCOPE_IDS
+    mis = active_misconceptions or []
+
+    if mis and ("variable" in topic or "print" in topic or "variable_assignment" in units or "print_function" in units):
+        return "I think I get it, but I might still mix up what to print sometimes."
 
     if "print" in topic or "print_function" in units:
         if "variable" in topic or "variable_assignment" in units:
@@ -122,18 +131,19 @@ def get_ta_learner_response(
     # Enforce: only Stage One units are passed through to the prompt
     allowed = learned_unit_ids & _STAGE_ONE_SCOPE_IDS
     prompt = _fill_prompt(allowed, teaching_event, active_misconceptions)
+    mis_list = list(active_misconceptions) if active_misconceptions else None
 
     if use_llm is False:
-        return _fallback_stub_response(teaching_event, allowed)
+        return _fallback_stub_response(teaching_event, allowed, mis_list)
 
     if use_llm is True:
         out = _call_openai(prompt)
         if out:
             return out
-        return _fallback_stub_response(teaching_event, allowed)
+        return _fallback_stub_response(teaching_event, allowed, mis_list)
 
     # use_llm is None: try LLM first, then fallback
     out = _call_openai(prompt)
     if out:
         return out
-    return _fallback_stub_response(teaching_event, allowed)
+    return _fallback_stub_response(teaching_event, allowed, mis_list)

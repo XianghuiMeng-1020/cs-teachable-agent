@@ -1,0 +1,84 @@
+import { useQuery } from "@tanstack/react-query";
+import { useAppStore } from "@/stores/appStore";
+import { getState } from "@/api/client";
+import { Card } from "@/components/ui/Card";
+import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
+import type { UnitNode } from "@/components/state/KnowledgeGraph";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Cell } from "recharts";
+import { KU_DISPLAY_NAMES } from "@/lib/constants";
+
+export function MasteryPage() {
+  const currentTaId = useAppStore((s) => s.currentTaId);
+
+  const { data: state } = useQuery({
+    queryKey: ["ta", currentTaId, "state"],
+    queryFn: () => getState(currentTaId!),
+    enabled: currentTaId != null,
+  });
+
+  const units: UnitNode[] = state?.units
+    ? Object.entries(state.units).map(([unit_id, rec]) => ({
+        unit_id,
+        status: (rec as { status?: string }).status as UnitNode["status"] ?? "unknown",
+        topic_group: (rec as { topic_group?: string }).topic_group,
+      }))
+    : [];
+
+  const barData = units.map((u) => ({
+    name: KU_DISPLAY_NAMES[u.unit_id] ?? u.unit_id,
+    mastery: u.status === "learned" ? 100 : u.status === "partially_learned" ? 50 : u.status === "misconception" ? 0 : 0,
+    fill: u.status === "learned" ? "#10B981" : u.status === "partially_learned" ? "#F59E0B" : "#F1F5F9",
+  }));
+
+  const radarData = [
+    { subject: "Variables", value: barData.filter((b) => b.name.toLowerCase().includes("variable")).length ? 80 : 0, fullMark: 100 },
+    { subject: "I/O", value: barData.filter((b) => b.name.toLowerCase().includes("print") || b.name.toLowerCase().includes("input")).length ? 70 : 0, fullMark: 100 },
+    { subject: "Conditionals", value: barData.filter((b) => b.name.toLowerCase().includes("if") || b.name.toLowerCase().includes("comparison")).length ? 60 : 0, fullMark: 100 },
+    { subject: "Loops", value: barData.filter((b) => b.name.toLowerCase().includes("loop") || b.name.toLowerCase().includes("range")).length ? 50 : 0, fullMark: 100 },
+    { subject: "Lists", value: barData.filter((b) => b.name.toLowerCase().includes("list")).length ? 40 : 0, fullMark: 100 },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold text-slate-900">Mastery</h1>
+
+      <Card padding="md">
+        <h2 className="mb-4 text-lg font-semibold text-slate-800">Knowledge state</h2>
+        <KnowledgeGraph units={units} className="min-h-[400px]" />
+      </Card>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card padding="md">
+          <h2 className="mb-4 text-lg font-semibold text-slate-800">Per concept</h2>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={barData} layout="vertical" margin={{ left: 100 }}>
+                <XAxis type="number" domain={[0, 100]} />
+                <YAxis type="category" dataKey="name" width={96} tick={{ fontSize: 11 }} />
+                <Tooltip />
+                <Bar dataKey="mastery" radius={[0, 2, 2, 0]}>
+                  {barData.map((_, i) => (
+                    <Cell key={i} fill={barData[i].fill} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
+        <Card padding="md">
+          <h2 className="mb-4 text-lg font-semibold text-slate-800">Topic coverage</h2>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart data={radarData}>
+                <PolarGrid />
+                <PolarAngleAxis dataKey="subject" />
+                <PolarRadiusAxis angle={90} domain={[0, 100]} />
+                <Radar name="Mastery" dataKey="value" stroke="#6366F1" fill="#6366F1" fillOpacity={0.4} />
+              </RadarChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+}

@@ -3,6 +3,7 @@ Stage One: Demo runner for all scenarios (hardening pass).
   Scenario A: Minimal learned state – only print_function; verify selection is constrained.
   Scenario B: Success path – teach variable_assignment + print_function → problem → PASS.
   Scenario C: Failure path – same teaching, TA produces wrong code → FAIL.
+  Scenario D (Stage D): Correction and relearning – misconception → fail → correct → relearn → recovery.
 
 Run from repository root:  python prototype/demo_stage1.py
 """
@@ -26,9 +27,11 @@ def main() -> None:
         run_scenario_a,
         run_scenario_b,
         run_scenario_c,
+        run_scenario_d,
         print_scenario_a_output,
         print_scenario_b_output,
         print_scenario_c_output,
+        print_scenario_d_output,
     )
 
     print("=" * 60)
@@ -64,8 +67,18 @@ def main() -> None:
     if data_c["pass_fail"]:
         print("  WARNING: Scenario C expected FAIL.", file=sys.stderr)
 
+    # ---------- Scenario D (Stage D: correction and relearning) ----------
     print("\n" + "=" * 60)
-    print("End of demo: A (selection constraint), B (success), C (failure) completed.")
+    print("Scenario D: Correction and relearning (misconception → correct → relearn → recovery)")
+    print("Goal: Show full lifecycle: misconception → fail → correction → relearning → TA passes again.")
+    print("=" * 60)
+    data_d = run_scenario_d(ku_path, problems_path)
+    print_scenario_d_output(data_d)
+    if not data_d.get("recovered"):
+        print("  WARNING: Scenario D expected recovery (second attempt PASS).", file=sys.stderr)
+
+    print("\n" + "=" * 60)
+    print("End of demo: A, B, C, D completed.")
     print("=" * 60)
 
 

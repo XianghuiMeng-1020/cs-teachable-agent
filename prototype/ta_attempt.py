@@ -32,20 +32,27 @@ def get_ta_attempt(
     problem: dict,
     learned_unit_ids: set[str],
     force_fail_problem_ids: set[str] | None = None,
+    active_misconception_ids: list[str] | None = None,
 ) -> str:
     """
     Return TA's code attempt for the given problem.
-    - If any required KU is not in learned_unit_ids, return a no-attempt placeholder
-      (TA must not use concepts outside state).
-    - If force_fail_problem_ids contains this problem_id, return wrong code (failure path).
+    - If any required KU is not in learned_unit_ids, return a no-attempt placeholder.
+    - If active_misconception_ids is non-empty (state-driven misconception for a tested unit)
+      and we have wrong code for this problem, return that wrong code (Stage C path).
+    - If force_fail_problem_ids contains this problem_id, return wrong code (fallback).
     - Otherwise return correct stub code when available.
     """
     pid = problem.get("problem_id", "")
     required = set(problem.get("knowledge_units_tested", []))
     force_fail = force_fail_problem_ids or set()
+    mis = active_misconception_ids or []
 
     if not required <= learned_unit_ids:
         return "# TA has not learned required units; no attempt.\nprint()"
+
+    # State-driven misconception: any active misconception on tested units → wrong code if we have it
+    if mis and pid in TA_WRONG_CODE_BY_PROBLEM:
+        return TA_WRONG_CODE_BY_PROBLEM[pid]
 
     if pid in force_fail and pid in TA_WRONG_CODE_BY_PROBLEM:
         return TA_WRONG_CODE_BY_PROBLEM[pid]

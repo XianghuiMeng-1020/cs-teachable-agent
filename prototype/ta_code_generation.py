@@ -131,16 +131,17 @@ def get_ta_code_attempt(
     force_fail = force_fail_problem_ids or set()
     pid = problem.get("problem_id", "")
 
+    active_mis_list = list(active_misconceptions) if active_misconceptions else None
     if not required <= learned_unit_ids:
-        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids)
+        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids, active_mis_list)
 
     if pid in force_fail:
-        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids)
+        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids, active_mis_list)
 
     if use_llm_code is not True:
-        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids)
+        return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids, active_mis_list)
 
     code = _generate_via_llm(problem, learned_unit_ids, active_misconceptions)
     if code and output_guard(code):
         return code
-    return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids)
+    return get_ta_attempt(problem, learned_unit_ids, force_fail_problem_ids, active_mis_list)
