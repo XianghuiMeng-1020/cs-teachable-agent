@@ -1,0 +1,122 @@
+﻿[
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Access Landing Page"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Register New Student"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Login Student"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Current User Info"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Create Python TA"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Create Database TA"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Create AI Literacy TA"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "List All TAs"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Teach Concept: Variables"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Teach Concept: Loops"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Teach Concept: Functions"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Chat History"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Knowledge State"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Problem List"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Run Comprehensive Test"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Knowledge Graph Data"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Mastery Data"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get History Records"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Trace Data"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /dashboard"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /teach"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /test"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /mastery"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /history"
+    }
+]

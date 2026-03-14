@@ -135,7 +135,19 @@ export async function getMastery(taId: number): Promise<MasteryResponse> {
   return r.json();
 }
 
-export async function getProblems(taId: number) {
+export interface ProblemsResponse {
+  problems: Array<{
+    problem_id: string;
+    problem_statement: string;
+    difficulty?: string;
+    knowledge_units_required?: string[];
+  }>;
+  eligible_ids: string[];
+  learned_unit_ids: string[];
+  required_kus: string[];
+}
+
+export async function getProblems(taId: number): Promise<ProblemsResponse> {
   const r = await fetch(`${API_BASE}/ta/${taId}/problems`, { headers: headers() });
   if (!r.ok) throw new Error(await r.text());
   return r.json();
@@ -316,6 +328,18 @@ export interface StudentDetailResponse {
 
 export async function teacherStudentDetail(userId: number): Promise<StudentDetailResponse> {
   const r = await fetch(`${API_BASE}/teacher/student/${userId}/detail`, { headers: headers() });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+export interface ConfigResponse {
+  llm_configured: boolean;
+  llm_provider: string | null;
+  environment: string;
+}
+
+export async function getConfig(): Promise<ConfigResponse> {
+  const r = await fetch(`${API_BASE}/config`, { headers: headers() });
   if (!r.ok) throw new Error(await r.text());
   return r.json();
 }

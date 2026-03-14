@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMastery, getMisconceptions, getHistory } from "@/api/client";
-import { BookOpen, CheckCircle, AlertTriangle, MessageCircle } from "lucide-react";
+import { getState, getMastery, getMisconceptions, getHistory, getConfig } from "@/api/client";
+import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
 import { MasteryRadial } from "@/components/state/MasteryRadial";
@@ -38,6 +38,11 @@ export function DashboardPage() {
     enabled: currentTaId != null,
   });
 
+  const { data: config } = useQuery({
+    queryKey: ["config"],
+    queryFn: getConfig,
+  });
+
   const learnedCount = state?.learned_unit_ids?.length ?? 0;
   const totalKus = state?.units ? Object.keys(state.units).length : 20;
   const misconceptions = misconceptionsData?.misconceptions ?? [];
@@ -50,8 +55,33 @@ export function DashboardPage() {
     metadata: i.metadata,
   }));
 
+  const isStubMode = !config?.llm_configured;
+
   return (
     <div className="space-y-6">
+      {/* Stub mode notification banner */}
+      {isStubMode && (
+        <Card padding="md" className="bg-gradient-to-r from-slate-50 to-zinc-50 border-slate-200">
+          <div className="flex items-start gap-3">
+            <div className="p-2 bg-slate-100 rounded-lg">
+              <BrainCircuit className="w-5 h-5 text-slate-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-slate-900">Demo Mode Active</h3>
+              <p className="mt-1 text-sm text-slate-600">
+                The TA is running in demo mode with pre-defined responses. 
+                To enable intelligent AI conversations, configure an LLM API key (OpenAI or DeepSeek) 
+                in the backend environment variables.
+              </p>
+              <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+                <Sparkles className="w-4 h-4" />
+                <span>System is fully functional for testing and research without LLM.</span>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
         <p className="mt-1 text-slate-500">Welcome back, {user?.username}</p>

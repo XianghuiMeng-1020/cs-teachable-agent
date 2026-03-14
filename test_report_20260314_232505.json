@@ -1,0 +1,42 @@
+﻿[
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Access Landing Page"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "无法连接到远程服务器",
+        "Test":  "Register New Student"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "无法连接到远程服务器",
+        "Test":  "Login Student"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /dashboard"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /teach"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /test"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /mastery"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /history"
+    }
+]

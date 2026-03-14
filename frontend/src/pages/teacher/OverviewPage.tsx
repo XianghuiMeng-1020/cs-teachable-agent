@@ -46,9 +46,10 @@ export function OverviewPage() {
         />
         <StatCard
           label="Sessions Today"
-          value="—"
+          value={analytics?.sessions_today ?? 0}
           icon={MessageSquare}
           iconColor="bg-accent-50 text-accent-500"
+          loading={isLoading}
         />
       </div>
 

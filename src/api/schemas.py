@@ -234,3 +234,4 @@ class AnalyticsResponse(BaseModel):
     mastery_trend: list[dict] | None = None  # [{ "date": "YYYY-MM-DD", "avg_mastery": 0.0-1.0 }]
     recent_activity: list[dict] | None = None  # [{ "student": str, "action": str, "result": str | None, "timestamp": str }]
     student_unit_status: list[dict] | None = None  # [{ "user_id": int, "unit_id": str, "status": str }] for heatmap
+    sessions_today: int = 0  # Number of teaching sessions today

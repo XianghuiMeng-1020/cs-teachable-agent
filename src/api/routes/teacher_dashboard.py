@@ -70,6 +70,20 @@ def analytics(current_user: CurrentUser, db: DbSession):
 
     avg_mastery = total_learned / total_units_count if total_units_count else None
 
+    # Sessions today: count teaching sessions created today
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today_end = today_start + timedelta(days=1)
+    sessions_today = (
+        db.query(TeachingSession)
+        .join(TAInstance)
+        .filter(
+            TAInstance.user_id.in_(student_ids),
+            TeachingSession.created_at >= today_start,
+            TeachingSession.created_at < today_end,
+        )
+        .count()
+    )
+
     # Knowledge coverage: per unit_id, how many students have it learned
     unit_students = defaultdict(set)
     for ta in instances:
@@ -151,6 +165,7 @@ def analytics(current_user: CurrentUser, db: DbSession):
         mastery_trend=trend,
         recent_activity=recent,
         student_unit_status=student_unit_status,
+        sessions_today=sessions_today,
     )
 
 

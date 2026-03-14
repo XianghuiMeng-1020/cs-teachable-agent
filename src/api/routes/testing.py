@@ -44,7 +44,20 @@ def list_problems(ta_id: int, current_user: CurrentUser, db: DbSession):
     learned = tracker.get_learned_units()
     eligible_ids = get_eligible_problem_ids(problems, learned)
     eligible = [p for p in problems if p.get("problem_id") in eligible_ids]
-    return {"problems": eligible, "eligible_ids": eligible_ids}
+    # Calculate which KUs are required for next unlock
+    required_kus = set()
+    for p in problems:
+        if p.get("problem_id") not in eligible_ids:
+            ku_reqs = p.get("knowledge_units_required", [])
+            for ku in ku_reqs:
+                if ku not in learned:
+                    required_kus.add(ku)
+    return {
+        "problems": eligible,
+        "eligible_ids": eligible_ids,
+        "learned_unit_ids": list(learned),
+        "required_kus": list(required_kus)[:5],  # Show first 5 required KUs
+    }
 
 
 def _run_single_test(

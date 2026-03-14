@@ -61,3 +61,13 @@ app.include_router(teacher_dashboard.router)
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "1.0.0"}
+
+
+@app.get("/api/config")
+def get_config():
+    """Return public configuration (non-sensitive)."""
+    return {
+        "llm_configured": bool(os.getenv("OPENAI_API_KEY") or os.getenv("DEEPSEEK_API_KEY")),
+        "llm_provider": "openai" if os.getenv("OPENAI_API_KEY") else ("deepseek" if os.getenv("DEEPSEEK_API_KEY") else None),
+        "environment": os.getenv("ENVIRONMENT", "development"),
+    }

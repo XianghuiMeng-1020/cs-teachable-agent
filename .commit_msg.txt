@@ -1,0 +1,13 @@
+fix: UX improvements - sessions today, stub mode banner, problem unlock hints
+
+Frontend:
+- DashboardPage: Add demo mode banner when LLM not configured
+- TestPage: Add educational hint when no problems available
+- OverviewPage: Fix Sessions Today placeholder to show real data
+- client.ts: Add getConfig() and ProblemsResponse types
+
+Backend:
+- teacher_dashboard.py: Add sessions_today calculation
+- testing.py: Return learned_unit_ids and required_kus
+- main.py: Add /api/config endpoint
+- schemas.py: Add sessions_today to AnalyticsResponse

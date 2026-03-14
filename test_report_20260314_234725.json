@@ -1,0 +1,72 @@
+﻿[
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Access Landing Page"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Register New Student"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Login Student"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Get Current User Info"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "远程服务器返回错误: (404) 未找到。",
+        "Test":  "Get Available Domains"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "远程服务器返回错误: (404) 未找到。",
+        "Test":  "Create Python TA"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "远程服务器返回错误: (404) 未找到。",
+        "Test":  "Create Database TA"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "远程服务器返回错误: (404) 未找到。",
+        "Test":  "Create AI Literacy TA"
+    },
+    {
+        "Status":  "FAIL",
+        "Error":  "远程服务器返回错误: (404) 未找到。",
+        "Test":  "List All TAs"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /dashboard"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /teach"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /test"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /mastery"
+    },
+    {
+        "Status":  "PASS",
+        "StatusCode":  200,
+        "Test":  "Route: /history"
+    }
+]
