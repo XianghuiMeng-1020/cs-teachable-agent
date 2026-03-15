@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
 import { NetworkStatus } from "@/components/ui/NetworkStatus";
+import { UserGuide } from "@/components/onboarding/UserGuide";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 
@@ -57,9 +58,12 @@ export function AppShell() {
     }
   }, [taListLoaded, taList.length, createTAMutation.isPending]);
 
+  const isStudentRoute = !path.startsWith("/teacher") && path !== "/login" && path !== "/";
+
   return (
     <div className="flex h-screen overflow-hidden bg-surface">
       <NetworkStatus />
+      {isStudentRoute && <UserGuide />}
       {mobileMenuOpen && (
         <button
           type="button"

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
 import { 
   Box, 
   RotateCw, 
@@ -10,7 +11,8 @@ import {
   ZoomOut,
   Layers,
   Info,
-  Sparkles
+  Sparkles,
+  Grid3X3
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -69,12 +71,19 @@ const mockEdges: Edge3D[] = [
   { source: "dicts", target: "json", strength: 0.8, type: "dependent" },
 ];
 
-export function KnowledgeGraph3D({ className }: { className?: string }) {
+interface KnowledgeGraph3DProps {
+  className?: string;
+  units?: Array<{ unit_id: string; status: string; topic_group?: string }>;
+  knowledgeUnitDefinitions?: unknown;
+}
+
+export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }: KnowledgeGraph3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedNode, setSelectedNode] = useState<Node3D | null>(null);
   const [autoRotate, setAutoRotate] = useState(true);
   const [zoom, setZoom] = useState(1);
+  const [viewMode, setViewMode] = useState<"3d" | "2d">("3d");
   const [rotation, setRotation] = useState({ x: 0.3, y: 0.5 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastMouse, setLastMouse] = useState({ x: 0, y: 0 });
@@ -306,6 +315,15 @@ export function KnowledgeGraph3D({ className }: { className?: string }) {
           <Button
             variant="ghost"
             size="sm"
+            onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
+            className="text-slate-300 hover:text-white hover:bg-white/10 hidden sm:flex"
+            title={viewMode === "3d" ? "Switch to 2D View" : "Switch to 3D View"}
+          >
+            {viewMode === "3d" ? <Grid3X3 className="w-4 h-4" /> : <Box className="w-4 h-4" />}
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-slate-300 hover:text-white hover:bg-white/10"
           >
@@ -314,18 +332,29 @@ export function KnowledgeGraph3D({ className }: { className?: string }) {
         </div>
       </div>
 
-      {/* Canvas */}
-      <canvas
-        ref={canvasRef}
-        width={isExpanded ? window.innerWidth - 32 : 800}
-        height={isExpanded ? window.innerHeight - 32 : 500}
-        className="cursor-grab active:cursor-grabbing"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onClick={handleNodeClick}
-      />
+      {/* Content Area */}
+      {viewMode === "2d" && units ? (
+        <div className="h-full bg-slate-50 p-4 overflow-auto">
+          <KnowledgeGraph 
+            units={units} 
+            knowledgeUnitDefinitions={knowledgeUnitDefinitions}
+            className="h-full"
+          />
+        </div>
+      ) : (
+        /* Canvas */
+        <canvas
+          ref={canvasRef}
+          width={isExpanded ? window.innerWidth - 32 : 800}
+          height={isExpanded ? window.innerHeight - 32 : 500}
+          className="cursor-grab active:cursor-grabbing"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onClick={handleNodeClick}
+        />
+      )}
 
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur rounded-lg p-3">

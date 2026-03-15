@@ -7,6 +7,8 @@ import { CognitiveLoadPanel } from "@/components/analytics/CognitiveLoadPanel";
 import { ConceptRelationGraph } from "@/components/analytics/ConceptRelationGraph";
 import { LearningBehaviorDashboard } from "@/components/analytics/LearningBehaviorDashboard";
 import { CrossDomainTransfer } from "@/components/analytics/CrossDomainTransfer";
+import { WebVitalsPanel } from "@/components/analytics/WebVitalsPanel";
+import { ExperimentPanel } from "@/components/analytics/ExperimentPanel";
 import { StreakTracker } from "@/components/gamification/StreakTracker";
 import { AchievementShowcase } from "@/components/gamification/AchievementShowcase";
 import { KnowledgeGraph3D } from "@/components/learning/KnowledgeGraph3D";
@@ -21,7 +23,9 @@ import {
   Sparkles,
   Trophy,
   ArrowRightLeft,
-  Box
+  Box,
+  FlaskConical,
+  Gauge
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -95,6 +99,14 @@ export function LearningAnalyticsPage() {
             <TabsTrigger value="transfer" className="rounded-lg">
               <ArrowRightLeft className="w-4 h-4 mr-2" />
               迁移
+            </TabsTrigger>
+            <TabsTrigger value="performance" className="rounded-lg">
+              <Gauge className="w-4 h-4 mr-2" />
+              性能
+            </TabsTrigger>
+            <TabsTrigger value="experiments" className="rounded-lg hidden md:flex">
+              <FlaskConical className="w-4 h-4 mr-2" />
+              实验
             </TabsTrigger>
           </TabsList>
 
@@ -294,6 +306,39 @@ export function LearningAnalyticsPage() {
           {/* Transfer Tab */}
           <TabsContent value="transfer" className="space-y-6">
             <CrossDomainTransfer />
+          </TabsContent>
+
+          {/* Performance Tab */}
+          <TabsContent value="performance" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <WebVitalsPanel />
+              <Card padding="lg">
+                <h3 className="font-semibold text-slate-900 mb-4">Performance Tips</h3>
+                <ul className="space-y-3 text-sm text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    Use 3D knowledge graph sparingly on mobile devices
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    Enable service worker for offline access
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    Close unused tabs to free up memory
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    Use latest Chrome or Firefox for best experience
+                  </li>
+                </ul>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Experiments Tab */}
+          <TabsContent value="experiments" className="space-y-6">
+            <ExperimentPanel />
           </TabsContent>
         </Tabs>
       </div>
