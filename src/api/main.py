@@ -38,6 +38,8 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 # CORS 配置：生产环境使用特定域名，开发环境允许本地
+import re
+
 allowed_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -45,6 +47,7 @@ allowed_origins = [
     "http://127.0.0.1:3001",
     "http://localhost:5173",
     "https://cs-teachable-agent.pages.dev",
+    "https://*.cs-teachable-agent.pages.dev",  # Allow all preview deployments
     "https://cs-teachable-agent.xmeng19.workers.dev",
 ]
 
@@ -56,9 +59,40 @@ workers_url = os.getenv("WORKERS_URL")
 if workers_url:
     allowed_origins.append(workers_url)
 
+# Custom CORS middleware to support wildcard origins
+def get_allowed_origins():
+    origins = allowed_origins.copy()
+    frontend_url = os.getenv("FRONTEND_URL")
+    if frontend_url:
+        origins.append(frontend_url)
+    workers_url = os.getenv("WORKERS_URL")
+    if workers_url:
+        origins.append(workers_url)
+    return origins
+
+# Pattern for wildcard matching
+cs_ta_pattern = re.compile(r"https://[a-z0-9-]+\.cs-teachable-agent\.pages\.dev")
+
+class CustomCORSMiddleware(CORSMiddleware):
+    def is_origin_allowed(self, origin: str) -> bool:
+        # Check exact match
+        if origin in allowed_origins:
+            return True
+        # Check wildcard pattern for cs-teachable-agent.pages.dev
+        if cs_ta_pattern.match(origin):
+            return True
+        # Check environment variables
+        frontend_url = os.getenv("FRONTEND_URL")
+        if frontend_url and origin == frontend_url:
+            return True
+        workers_url = os.getenv("WORKERS_URL")
+        if workers_url and origin == workers_url:
+            return True
+        return False
+
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins,
+    CustomCORSMiddleware,
+    allow_origins=get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
