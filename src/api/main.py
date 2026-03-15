@@ -27,13 +27,29 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 @app.middleware("http")
-async def add_cors_headers(request: Request, call_next):
-    """Add CORS headers to all responses including errors."""
+async def cors_middleware(request: Request, call_next):
+    """Handle CORS for all requests including OPTIONS preflight."""
+    # Handle preflight OPTIONS request
+    if request.method == "OPTIONS":
+        origin = request.headers.get("origin", "*")
+        return JSONResponse(
+            content={"detail": "OK"},
+            status_code=200,
+            headers={
+                "Access-Control-Allow-Origin": origin,
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With, Accept, Origin",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Max-Age": "86400",
+            }
+        )
+    
+    # For non-OPTIONS requests, add CORS headers to response
     response = await call_next(request)
     origin = request.headers.get("origin", "*")
     response.headers["Access-Control-Allow-Origin"] = origin
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, Accept, Origin"
     response.headers["Access-Control-Allow-Credentials"] = "true"
     return response
 
@@ -47,17 +63,6 @@ async def global_exception_handler(request: Request, exc: Exception):
         status_code=500,
         content={"detail": "An internal error occurred. Please try again later."},
     )
-
-# CORS - Allow all origins for API compatibility
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-)
-
 
 @app.on_event("startup")
 def startup():
