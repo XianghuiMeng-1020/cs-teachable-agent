@@ -1,17 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    visualizer({
-      open: false,
-      gzipSize: true,
-      brotliSize: true,
-    }),
   ],
   resolve: {
     alias: {
@@ -83,9 +77,6 @@ export default defineConfig({
   // CSS optimization
   css: {
     devSourcemap: true,
-    postcss: {
-      plugins: [],
-    },
   },
   // Dependency optimization
   optimizeDeps: {
@@ -99,6 +90,5 @@ export default defineConfig({
       "lucide-react",
       "framer-motion",
     ],
-    exclude: [],
   },
 });
