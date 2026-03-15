@@ -1,6 +1,5 @@
-// API Base URL: 开发环境用相对路径（Vite 代理），生产环境用 Railway 后端
-const PROD_API_URL = "https://cs-teachable-agent-production.up.railway.app/api";
-const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? PROD_API_URL : "/api");
+// API Base URL: 使用 Railway 后端（支持本地开发和生产环境）
+const API_BASE = "https://cs-teachable-agent-production.up.railway.app/api";
 
 const DEFAULT_TIMEOUT_MS = 30_000;
 const MAX_RETRIES = 2;
