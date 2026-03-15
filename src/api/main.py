@@ -75,6 +75,19 @@ app.include_router(learning_analytics.router)
 app.include_router(advanced_features.router)
 
 
+@app.options("/{full_path:path}")
+async def preflight_handler(full_path: str):
+    """Handle CORS preflight requests."""
+    return JSONResponse(
+        content={"detail": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Credentials": "true",
+        }
+    )
+
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "1.0.0"}
