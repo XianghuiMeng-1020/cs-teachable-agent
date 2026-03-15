@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
 import { Sidebar } from "./Sidebar";
@@ -35,6 +36,9 @@ export function AppShell() {
     mutationFn: () => createTA("python"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
+    },
+    onError: (err: Error) => {
+      toast.error(err?.message ?? "Failed to create TA. Please try again.");
     },
   });
 

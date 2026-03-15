@@ -2,13 +2,14 @@
 # 构建命令: cd frontend && npm ci && npm run build
 # 输出目录: frontend/dist
 # 部署后访问: https://your-project.pages.dev
+#
+# Pages Dashboard 设置:
+# - Build command: cd frontend && npm ci && npm run build
+# - Build output directory: frontend/dist
+# - Root directory: (leave empty)
+# - Environment variables:
+#   VITE_API_URL=https://cs-teachable-agent-production.up.railway.app/api
+#   NODE_VERSION=20
 
 name = "cs-teachable-agent-frontend"
 compatibility_date = "2024-01-01"
-
-[build]
-command = "npm ci && npm run build"
-cwd = "frontend"
-
-[site]
-bucket = "./dist"

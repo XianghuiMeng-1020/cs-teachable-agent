@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
 import { getState, getMastery, getMisconceptions, getHistory, getConfig } from "@/api/client";
-import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit } from "lucide-react";
+import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit, Bot } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
 import { MasteryRadial } from "@/components/state/MasteryRadial";
 import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
 import { TimelineView } from "@/components/state/TimelineView";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { useAuthStore } from "@/stores/authStore";
 import type { TimelineEvent } from "@/components/state/TimelineView";
 
@@ -56,6 +57,22 @@ export function DashboardPage() {
   }));
 
   const isStubMode = !config?.llm_configured;
+
+  if (currentTaId == null) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
+        <p className="mt-1 text-slate-500">Welcome back, {user?.username}</p>
+        <Card padding="lg" className="border-dashed border-slate-200">
+          <EmptyState
+            icon={Bot}
+            title="No Teachable Agent selected"
+            description="A new TA is usually created automatically. If you don't see one, use the dropdown above to create one, then return here."
+          />
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

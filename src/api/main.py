@@ -18,20 +18,21 @@ import os
 allowed_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:5173",  # Vite 默认端口
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "http://localhost:5173",
+    "https://cs-teachable-agent.pages.dev",
+    "https://cs-teachable-agent.xmeng19.workers.dev",
 ]
 
-# 从环境变量读取前端域名（Cloudflare Pages/Workers 等）
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
     allowed_origins.append(frontend_url)
 
-# 支持 Cloudflare Workers 域名 (*.workers.dev)
 workers_url = os.getenv("WORKERS_URL")
 if workers_url:
     allowed_origins.append(workers_url)
 
-# 支持所有 *.pages.dev（Cloudflare Pages）
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,

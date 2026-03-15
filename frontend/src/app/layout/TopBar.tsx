@@ -3,6 +3,7 @@ import * as Select from "@radix-ui/react-select";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { ChevronDown, Bell, User, LogOut, Menu, Plus } from "lucide-react";
 import { useAuthStore } from "@/stores/authStore";
 import { useAppStore } from "@/stores/appStore";
@@ -38,6 +39,9 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
       queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
       setCurrentTaId(created.id);
       setNewTADialogOpen(false);
+    },
+    onError: (err: Error) => {
+      toast.error(err?.message ?? "Failed to create TA.");
     },
   });
 
