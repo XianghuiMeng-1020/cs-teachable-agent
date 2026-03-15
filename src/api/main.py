@@ -14,7 +14,7 @@ from src.db.database import init_db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification, experiment, collaboration, ai_experiments, reports
+from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification, experiment, collaboration, ai_experiments, reports, adaptive_test
 from src.api.limiter import limiter
 
 app = FastAPI(
@@ -86,6 +86,7 @@ app.include_router(experiment.router)
 app.include_router(collaboration.router)
 app.include_router(ai_experiments.router)
 app.include_router(reports.router)
+app.include_router(adaptive_test.router)
 
 
 @app.get("/api/health")
