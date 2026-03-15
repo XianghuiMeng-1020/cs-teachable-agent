@@ -26,6 +26,17 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    """Add CORS headers to all responses including errors."""
+    response = await call_next(request)
+    origin = request.headers.get("origin", "*")
+    response.headers["Access-Control-Allow-Origin"] = origin
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Log unhandled exceptions and return 500 with a safe message. Skip HTTPException."""
@@ -74,19 +85,6 @@ app.include_router(spaced_repetition.router)
 app.include_router(learning_analytics.router)
 app.include_router(advanced_features.router)
 
-
-@app.options("/{full_path:path}")
-async def preflight_handler(full_path: str):
-    """Handle CORS preflight requests."""
-    return JSONResponse(
-        content={"detail": "OK"},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "*",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Credentials": "true",
-        }
-    )
 
 @app.get("/api/health")
 def health():
