@@ -40,28 +40,17 @@ async def global_exception_handler(request: Request, exc: Exception):
 # CORS 配置：生产环境使用特定域名，开发环境允许本地
 import re
 
-allowed_origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "http://localhost:5173",
-    "https://cs-teachable-agent.pages.dev",
-    "https://*.cs-teachable-agent.pages.dev",  # Allow all preview deployments
-    "https://cs-teachable-agent.xmeng19.workers.dev",
-]
-
-frontend_url = os.getenv("FRONTEND_URL")
-if frontend_url:
-    allowed_origins.append(frontend_url)
-
-workers_url = os.getenv("WORKERS_URL")
-if workers_url:
-    allowed_origins.append(workers_url)
-
-# Custom CORS middleware to support wildcard origins
+# Build dynamic origin checking for wildcard support
 def get_allowed_origins():
-    origins = allowed_origins.copy()
+    origins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:5173",
+        "https://cs-teachable-agent.pages.dev",
+        "https://cs-teachable-agent.xmeng19.workers.dev",
+    ]
     frontend_url = os.getenv("FRONTEND_URL")
     if frontend_url:
         origins.append(frontend_url)
@@ -70,32 +59,45 @@ def get_allowed_origins():
         origins.append(workers_url)
     return origins
 
-# Pattern for wildcard matching
-cs_ta_pattern = re.compile(r"https://[a-z0-9-]+\.cs-teachable-agent\.pages\.dev")
+# Pattern for preview deployments
+cs_ta_pattern = re.compile(r"^https://[a-z0-9-]+\.cs-teachable-agent\.pages\.dev$")
 
-class CustomCORSMiddleware(CORSMiddleware):
-    def is_origin_allowed(self, origin: str) -> bool:
-        # Check exact match
-        if origin in allowed_origins:
-            return True
-        # Check wildcard pattern for cs-teachable-agent.pages.dev
-        if cs_ta_pattern.match(origin):
-            return True
-        # Check environment variables
-        frontend_url = os.getenv("FRONTEND_URL")
-        if frontend_url and origin == frontend_url:
-            return True
-        workers_url = os.getenv("WORKERS_URL")
-        if workers_url and origin == workers_url:
-            return True
-        return False
+class DynamicCORSMiddleware(CORSMiddleware):
+    async def __call__(self, scope, receive, send):
+        # Handle both preflight and regular requests
+        if scope["type"] == "http":
+            headers = dict(scope.get("headers", []))
+            origin = None
+            for key, value in headers.items():
+                if key.decode().lower() == "origin":
+                    origin = value.decode()
+                    break
+            
+            # Check if origin is allowed
+            if origin:
+                allowed = origin in get_allowed_origins()
+                if not allowed:
+                    # Check preview deployment pattern
+                    allowed = bool(cs_ta_pattern.match(origin))
+                
+                if allowed:
+                    # Add CORS headers to the scope
+                    scope["headers"].append((b"access-control-allow-origin", origin.encode()))
+                    scope["headers"].append((b"access-control-allow-credentials", b"true"))
+                    scope["headers"].append((b"access-control-allow-methods", b"*"))
+                    scope["headers"].append((b"access-control-allow-headers", b"*"))
+        
+        await super().__call__(scope, receive, send)
 
+# Use standard CORS with dynamic origin checking
 app.add_middleware(
-    CustomCORSMiddleware,
-    allow_origins=get_allowed_origins(),
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all, we do custom checking
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=86400,  # Cache preflight for 24 hours
 )
 
 
