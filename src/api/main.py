@@ -5,10 +5,11 @@ import os
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from fastapi.exceptions import HTTPException
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from src.db.database import init_db
 
@@ -17,41 +18,39 @@ logger = logging.getLogger(__name__)
 from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification, experiment, collaboration, ai_experiments, reports, adaptive_test, spaced_repetition, learning_analytics, advanced_features
 from src.api.limiter import limiter
 
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Max-Age": "86400",
+}
+
 app = FastAPI(
     title="CS Teachable Agent API",
     description="Backend for the Teachable Agent: teach, test, state, trace.",
-    version="0.1.0",
+    version="2.0.0",
 )
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-@app.middleware("http")
-async def cors_middleware(request: Request, call_next):
-    """Handle CORS for all requests including OPTIONS preflight."""
-    # Handle preflight OPTIONS request
-    if request.method == "OPTIONS":
-        origin = request.headers.get("origin", "*")
-        return JSONResponse(
-            content={"detail": "OK"},
-            status_code=200,
-            headers={
-                "Access-Control-Allow-Origin": origin,
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With, Accept, Origin",
-                "Access-Control-Allow-Credentials": "true",
-                "Access-Control-Max-Age": "86400",
-            }
-        )
-    
-    # For non-OPTIONS requests, add CORS headers to response
-    response = await call_next(request)
-    origin = request.headers.get("origin", "*")
-    response.headers["Access-Control-Allow-Origin"] = origin
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With, Accept, Origin"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return response
+class CORSEverythingMiddleware(BaseHTTPMiddleware):
+    """Ensure every single response has CORS headers, including preflight."""
+
+    async def dispatch(self, request: Request, call_next):
+        if request.method == "OPTIONS":
+            return Response(
+                status_code=200,
+                headers=CORS_HEADERS,
+            )
+        response = await call_next(request)
+        for k, v in CORS_HEADERS.items():
+            response.headers[k] = v
+        return response
+
+
+app.add_middleware(CORSEverythingMiddleware)
+
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
@@ -62,6 +61,7 @@ async def global_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
         content={"detail": "An internal error occurred. Please try again later."},
+        headers=CORS_HEADERS,
     )
 
 @app.on_event("startup")
@@ -93,7 +93,7 @@ app.include_router(advanced_features.router)
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "version": "1.0.0"}
+    return {"status": "ok", "version": "2.0.0", "cors": "CORSEverythingMiddleware"}
 
 
 @app.get("/api/config")
