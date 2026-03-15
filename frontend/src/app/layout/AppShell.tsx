@@ -14,6 +14,7 @@ const PAGE_NAMES: Record<string, string> = {
   "/test": "Test TA",
   "/mastery": "Mastery",
   "/history": "History",
+  "/learning-analytics": "Learning Analytics",
   "/teacher": "Overview",
   "/teacher/students": "Students",
   "/teacher/transcripts": "Transcripts",

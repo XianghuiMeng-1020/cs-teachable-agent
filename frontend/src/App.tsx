@@ -13,6 +13,7 @@ const DashboardPage = lazy(() => import("./pages/student/DashboardPage").then((m
 const TestPage = lazy(() => import("./pages/student/TestPage").then((m) => ({ default: m.TestPage })));
 const HistoryPage = lazy(() => import("./pages/student/HistoryPage").then((m) => ({ default: m.HistoryPage })));
 const MasteryPage = lazy(() => import("./pages/student/MasteryPage").then((m) => ({ default: m.MasteryPage })));
+const LearningAnalyticsPage = lazy(() => import("./pages/student/LearningAnalyticsPage").then((m) => ({ default: m.LearningAnalyticsPage })));
 const OverviewPage = lazy(() => import("./pages/teacher/OverviewPage").then((m) => ({ default: m.OverviewPage })));
 const TranscriptsPage = lazy(() => import("./pages/teacher/TranscriptsPage").then((m) => ({ default: m.TranscriptsPage })));
 const StudentsPage = lazy(() => import("./pages/teacher/StudentsPage").then((m) => ({ default: m.StudentsPage })));
@@ -66,6 +67,7 @@ function App() {
           <Route path={ROUTES.test} element={<TestPage />} />
           <Route path={ROUTES.mastery} element={<MasteryPage />} />
           <Route path={ROUTES.history} element={<HistoryPage />} />
+          <Route path="/learning-analytics" element={<LearningAnalyticsPage />} />
         </Route>
 
         <Route path="teacher" element={<TeacherLayout />}>

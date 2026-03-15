@@ -5,6 +5,7 @@ import {
   Play,
   BookOpen,
   History,
+  Brain,
   LayoutGrid,
   Users,
   FileText,
@@ -24,6 +25,7 @@ const studentNav = [
   { to: ROUTES.teach, label: "Teach TA", icon: MessageSquare },
   { to: ROUTES.test, label: "Test TA", icon: Play },
   { to: ROUTES.mastery, label: "Mastery", icon: BookOpen },
+  { to: "/learning-analytics", label: "Analytics", icon: Brain },
   { to: ROUTES.history, label: "History", icon: History },
 ];
 
