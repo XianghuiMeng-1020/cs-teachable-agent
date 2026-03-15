@@ -50,7 +50,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <TooltipProvider delayDuration={300}>
         <Auth401Handler>
           {children}
-          <Toaster position="top-right" richColors closeButton />
+          <Toaster 
+            position="top-center"
+            richColors 
+            closeButton 
+            toastOptions={{
+              className: "max-w-[90vw] sm:max-w-md",
+            }}
+          />
         </Auth401Handler>
       </TooltipProvider>
     </QueryClientProvider>

@@ -50,13 +50,12 @@ export function TeachPage() {
 
   return (
     <div
-      className="grid h-[calc(100vh-var(--topbar-height)-40px)] gap-4"
-      style={{ gridTemplateColumns: "1fr 380px" }}
+      className="grid h-[calc(100vh-var(--topbar-height)-40px)] gap-4 grid-cols-1 lg:grid-cols-[1fr_380px]"
     >
-      <div className="min-h-0 overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-card">
+      <div className="min-h-0 overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-card order-2 lg:order-1">
         <ChatPanel taId={currentTaId} />
       </div>
-      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto">
+      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto order-1 lg:order-2">
         <KnowledgeGraph
           units={units}
           knowledgeUnitDefinitions={(state as { knowledge_unit_definitions?: unknown })?.knowledge_unit_definitions ?? undefined}
