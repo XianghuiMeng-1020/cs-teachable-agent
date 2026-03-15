@@ -6,7 +6,10 @@ import { LearningPacePanel } from "@/components/analytics/LearningPacePanel";
 import { CognitiveLoadPanel } from "@/components/analytics/CognitiveLoadPanel";
 import { ConceptRelationGraph } from "@/components/analytics/ConceptRelationGraph";
 import { LearningBehaviorDashboard } from "@/components/analytics/LearningBehaviorDashboard";
+import { CrossDomainTransfer } from "@/components/analytics/CrossDomainTransfer";
 import { StreakTracker } from "@/components/gamification/StreakTracker";
+import { AchievementShowcase } from "@/components/gamification/AchievementShowcase";
+import { KnowledgeGraph3D } from "@/components/learning/KnowledgeGraph3D";
 import { 
   Brain, 
   Activity, 
@@ -15,7 +18,10 @@ import {
   Flame,
   Download,
   Share2,
-  Sparkles
+  Sparkles,
+  Trophy,
+  ArrowRightLeft,
+  Box
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -57,7 +63,7 @@ export function LearningAnalyticsPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-white p-1 border border-slate-200 rounded-xl">
+          <TabsList className="bg-white p-1 border border-slate-200 rounded-xl flex-wrap">
             <TabsTrigger value="overview" className="rounded-lg">
               <Activity className="w-4 h-4 mr-2" />
               总览
@@ -77,6 +83,18 @@ export function LearningAnalyticsPage() {
             <TabsTrigger value="behavior" className="rounded-lg">
               <BarChart3 className="w-4 h-4 mr-2" />
               行为分析
+            </TabsTrigger>
+            <TabsTrigger value="3d-graph" className="rounded-lg">
+              <Box className="w-4 h-4 mr-2" />
+              3D图谱
+            </TabsTrigger>
+            <TabsTrigger value="achievements" className="rounded-lg">
+              <Trophy className="w-4 h-4 mr-2" />
+              成就
+            </TabsTrigger>
+            <TabsTrigger value="transfer" className="rounded-lg">
+              <ArrowRightLeft className="w-4 h-4 mr-2" />
+              迁移
             </TabsTrigger>
           </TabsList>
 
@@ -261,6 +279,21 @@ export function LearningAnalyticsPage() {
           {/* Behavior Tab */}
           <TabsContent value="behavior">
             <LearningBehaviorDashboard taId={mockTaId} userId={mockUserId} />
+          </TabsContent>
+
+          {/* 3D Graph Tab */}
+          <TabsContent value="3d-graph" className="space-y-6">
+            <KnowledgeGraph3D className="h-[600px]" />
+          </TabsContent>
+
+          {/* Achievements Tab */}
+          <TabsContent value="achievements" className="space-y-6">
+            <AchievementShowcase />
+          </TabsContent>
+
+          {/* Transfer Tab */}
+          <TabsContent value="transfer" className="space-y-6">
+            <CrossDomainTransfer />
           </TabsContent>
         </Tabs>
       </div>
