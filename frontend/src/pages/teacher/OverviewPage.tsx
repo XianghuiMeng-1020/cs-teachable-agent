@@ -50,6 +50,11 @@ export function OverviewPage() {
           icon={MessageSquare}
           iconColor="bg-accent-50 text-accent-500"
           loading={isLoading}
+          change={
+            (analytics?.sessions_today ?? 0) > 0 
+              ? { value: 0, label: "active sessions" }
+              : { value: 0, label: "no sessions yet today" }
+          }
         />
       </div>
 

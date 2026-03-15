@@ -12,7 +12,10 @@ import {
   Layers,
   Info,
   Sparkles,
-  Grid3X3
+  Grid3X3,
+  X,
+  Smartphone,
+  Cpu
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -77,16 +80,73 @@ interface KnowledgeGraph3DProps {
   knowledgeUnitDefinitions?: unknown;
 }
 
+// Detect low-end device
+function useDevicePerformance() {
+  const [isLowEnd, setIsLowEnd] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check for mobile device
+    const mobileCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    setIsMobile(mobileCheck);
+
+    // Check for low memory
+    const memory = (navigator as any).deviceMemory;
+    if (memory && memory < 4) {
+      setIsLowEnd(true);
+      return;
+    }
+
+    // Check for low-end CPU
+    const cores = navigator.hardwareConcurrency;
+    if (cores && cores < 4) {
+      setIsLowEnd(true);
+      return;
+    }
+
+    // Check connection speed
+    const connection = (navigator as any).connection;
+    if (connection && (connection.saveData || connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g')) {
+      setIsLowEnd(true);
+      return;
+    }
+
+    // Test frame rate
+    let frameCount = 0;
+    const startTime = performance.now();
+    
+    const countFrames = () => {
+      frameCount++;
+      if (performance.now() - startTime < 1000) {
+        requestAnimationFrame(countFrames);
+      } else {
+        // Less than 30fps is considered low-end
+        if (frameCount < 30) {
+          setIsLowEnd(true);
+        }
+      }
+    };
+    
+    requestAnimationFrame(countFrames);
+  }, []);
+
+  return { isLowEnd, isMobile };
+}
+
 export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }: KnowledgeGraph3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedNode, setSelectedNode] = useState<Node3D | null>(null);
   const [autoRotate, setAutoRotate] = useState(true);
   const [zoom, setZoom] = useState(1);
-  const [viewMode, setViewMode] = useState<"3d" | "2d">("3d");
+  const { isLowEnd, isMobile } = useDevicePerformance();
+  const [viewMode, setViewMode] = useState<"3d" | "2d">(isLowEnd || isMobile ? "2d" : "3d");
   const [rotation, setRotation] = useState({ x: 0.3, y: 0.5 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastMouse, setLastMouse] = useState({ x: 0, y: 0 });
+  const [showPerformanceWarning, setShowPerformanceWarning] = useState(isLowEnd);
 
   // Simple 3D projection
   const project3D = (x: number, y: number, z: number, rotX: number, rotY: number, scale: number) => {
@@ -271,20 +331,63 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
     setSelectedNode(closest);
   };
 
+  // Handle performance warning dismiss
+  const dismissPerformanceWarning = () => {
+    setShowPerformanceWarning(false);
+    setViewMode("2d");
+  };
+
   return (
     <Card 
       padding="none" 
       className={`relative overflow-hidden ${isExpanded ? "fixed inset-4 z-50" : className}`}
     >
+      {/* Performance Warning */}
+      <AnimatePresence>
+        {showPerformanceWarning && viewMode === "3d" && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-0 left-0 right-0 z-20 bg-amber-500/90 backdrop-blur-sm p-2 text-center text-white text-sm"
+          >
+            <div className="flex items-center justify-center gap-2">
+              <span>⚡ 检测到设备性能较低，建议使用2D视图以获得更流畅体验</span>
+              <button 
+                onClick={dismissPerformanceWarning}
+                className="px-2 py-0.5 bg-white/20 hover:bg-white/30 rounded text-xs font-medium transition-colors"
+              >
+                切换到2D
+              </button>
+              <button 
+                onClick={() => setShowPerformanceWarning(false)}
+                className="p-1 hover:bg-white/20 rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 bg-gradient-to-b from-slate-900/80 to-transparent">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-indigo-500/20 rounded-lg backdrop-blur">
-            <Box className="w-5 h-5 text-indigo-400" />
+            {viewMode === "3d" ? (
+              <Box className="w-5 h-5 text-indigo-400" />
+            ) : (
+              <Grid3X3 className="w-5 h-5 text-emerald-400" />
+            )}
           </div>
           <div>
-            <h3 className="font-semibold text-white">3D知识图谱</h3>
-            <p className="text-sm text-slate-400">沉浸式概念探索</p>
+            <h3 className="font-semibold text-white">
+              {viewMode === "3d" ? "3D知识图谱" : "2D知识图谱"}
+            </h3>
+            <p className="text-sm text-slate-400">
+              {viewMode === "3d" ? "沉浸式概念探索" : "清晰的概念关系视图"}
+              {(isMobile || isLowEnd) && viewMode === "3d" && " (性能模式推荐2D)"}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
