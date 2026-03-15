@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Bot, Copy, Check } from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import ReactMarkdown from "react-markdown";
+import { Bot, Copy, Check, Code2, Image as ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MultimodalContent } from "./MultimodalContent";
 
 export interface MessageBubbleProps {
   role: "student" | "ta";
@@ -14,87 +12,16 @@ export interface MessageBubbleProps {
   onRetry?: () => void;
 }
 
-function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  const [copied, setCopied] = useState(false);
-  const copy = () => {
-    navigator.clipboard.writeText(code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-  return (
-    <div className="relative group">
-      <SyntaxHighlighter
-        language={lang}
-        style={oneDark}
-        customStyle={{ margin: 0, borderRadius: 8, fontSize: "0.8rem", paddingTop: "2rem" }}
-        codeTagProps={{ style: { fontFamily: "inherit" } }}
-        PreTag="div"
-      >
-        {code}
-      </SyntaxHighlighter>
-      <button
-        type="button"
-        onClick={copy}
-        className="absolute right-2 top-2 rounded border border-slate-500/50 bg-slate-700/80 px-2 py-1 text-xs text-slate-200 opacity-0 transition group-hover:opacity-100 hover:bg-slate-600/80"
-        aria-label="Copy code"
-      >
-        {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-      </button>
-    </div>
-  );
-}
-
 function MessageContent({ content, isStudent }: { content: string; isStudent: boolean }) {
-  const parts = content.split(/(```[\s\S]*?```)/g);
-  if (parts.length === 1) {
+  // For student messages, use simple text rendering
+  if (isStudent) {
     return (
-      <div className="prose prose-sm max-w-none prose-p:whitespace-pre-wrap prose-p:my-0.5 prose-ul:my-1 prose-li:my-0 text-sm">
-        <ReactMarkdown
-          components={{
-            p: ({ children }) => <p className="whitespace-pre-wrap">{children}</p>,
-            a: ({ href, children }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">
-                {children}
-              </a>
-            ),
-          }}
-        >
-          {content}
-        </ReactMarkdown>
-      </div>
+      <p className="text-sm whitespace-pre-wrap">{content}</p>
     );
   }
-  return (
-    <div className="space-y-2 text-sm">
-      {parts.map((part, i) => {
-        if (part.startsWith("```") && part.endsWith("```")) {
-          const raw = part.slice(3, -3).trim();
-          const firstLine = raw.split("\n")[0] || "";
-          const langMatch = firstLine.match(/^(\w+)/);
-          const lang = langMatch ? langMatch[1] : "text";
-          const code = langMatch ? raw.slice(firstLine.length).replace(/^\n/, "") : raw;
-          return <CodeBlock key={i} code={code} lang={lang} />;
-        }
-        return (
-          <div key={i} className="prose prose-sm max-w-none prose-p:my-0.5 prose-ul:my-1 text-inherit">
-            <ReactMarkdown
-              components={{
-                p: ({ children }) => <p className="whitespace-pre-wrap">{children}</p>,
-                a: ({ href, children }) => (
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-brand-600 underline">
-                    {children}
-                  </a>
-                ),
-              }}
-            >
-              {part}
-            </ReactMarkdown>
-          </div>
-        );
-      })}
-    </div>
-  );
+  
+  // For TA messages, use rich multimodal rendering
+  return <MultimodalContent content={content} />;
 }
 
 export function MessageBubble({ role, content, timestamp, metadata, onRetry }: MessageBubbleProps) {

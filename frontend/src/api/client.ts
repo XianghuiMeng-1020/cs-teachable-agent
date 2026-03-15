@@ -570,12 +570,23 @@ export async function getGamification(): Promise<GamificationResponse> {
 export interface LearningPathItem {
   id: string;
   name: string;
-  topic_group?: string;
+  topic_group: string;
   prerequisites: string[];
+  difficulty: number;
+  estimated_minutes: number;
+}
+
+export interface PathSummary {
+  total_estimated_minutes: number;
+  average_difficulty: number;
+  confidence: number;
+  rationale: string;
+  path_length: number;
 }
 
 export interface LearningPathResponse {
   recommended: LearningPathItem[];
+  path_summary?: PathSummary;
   learned_count: number;
   total_count: number;
   estimated_minutes_remaining: number;

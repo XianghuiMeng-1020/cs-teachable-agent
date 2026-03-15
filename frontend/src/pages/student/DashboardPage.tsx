@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { useAppStore } from "@/stores/appStore";
@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { PointsSystem } from "@/components/gamification/PointsSystem";
 import { AchievementSystem } from "@/components/gamification/AchievementSystem";
 import { LearningPath } from "@/components/learning/LearningPath";
+import { SmartLearningPath } from "@/components/learning/SmartLearningPath";
 import { MisconceptionAI } from "@/components/diagnosis/MisconceptionAI";
 import { DomainSelector } from "@/components/onboarding/DomainSelector";
 import { useAuthStore } from "@/stores/authStore";
@@ -49,6 +50,7 @@ const ONBOARDING_KEY = "cs-ta-onboarding-completed";
 export function DashboardPage() {
   const currentTaId = useAppStore((s) => s.currentTaId);
   const user = useAuthStore((s) => s.user);
+  const navigate = useNavigate();
   const [hintDismissed, setHintDismissed] = useState(() =>
     typeof localStorage !== "undefined" && localStorage.getItem(DASHBOARD_HINT_KEY) === "1"
   );
@@ -277,11 +279,15 @@ export function DashboardPage() {
             </>
           )}
           {learningPath && (
-            <LearningPath
+            <SmartLearningPath
               recommended={learningPath.recommended}
+              pathSummary={learningPath.path_summary}
               learnedCount={learningPath.learned_count}
               totalCount={learningPath.total_count}
-              estimatedMinutesRemaining={learningPath.estimated_minutes_remaining}
+              onStartLearning={(nodeId) => {
+                // Navigate to teach page with the recommended concept pre-filled
+                navigate(`${ROUTES.teach}?focus=${nodeId}`);
+              }}
             />
           )}
           <Card padding="md">
