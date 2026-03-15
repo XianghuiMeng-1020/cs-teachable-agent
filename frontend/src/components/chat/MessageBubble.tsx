@@ -97,7 +97,7 @@ function MessageContent({ content, isStudent }: { content: string; isStudent: bo
   );
 }
 
-export function MessageBubble({ role, content, timestamp, metadata }: MessageBubbleProps) {
+export function MessageBubble({ role, content, timestamp, metadata, onRetry }: MessageBubbleProps) {
   const isStudent = role === "student";
 
   return (

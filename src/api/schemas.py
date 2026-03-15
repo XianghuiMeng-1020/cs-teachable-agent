@@ -12,10 +12,21 @@ USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_]{3,32}$")
 MIN_PASSWORD_LENGTH = 6
 
 
+ALLOWED_ROLES = {"student", "teacher"}
+ALLOWED_DOMAINS = {"python", "database", "ai_literacy"}
+
+
 class UserCreate(BaseModel):
     username: str
     password: str
     role: str = "student"
+
+    @field_validator("role")
+    @classmethod
+    def role_must_be_valid(cls, v: str) -> str:
+        if v not in ALLOWED_ROLES:
+            raise ValueError(f"Role must be one of: {', '.join(sorted(ALLOWED_ROLES))}")
+        return v
 
     @field_validator("username")
     @classmethod
@@ -61,6 +72,13 @@ class UserResponse(BaseModel):
 class TACreate(BaseModel):
     domain_id: str = "python"
     name: str | None = None
+
+    @field_validator("domain_id")
+    @classmethod
+    def domain_must_be_valid(cls, v: str) -> str:
+        if v not in ALLOWED_DOMAINS:
+            raise ValueError(f"Domain must be one of: {', '.join(sorted(ALLOWED_DOMAINS))}")
+        return v
 
 
 class TAResponse(BaseModel):

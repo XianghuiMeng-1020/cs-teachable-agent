@@ -78,8 +78,8 @@ def analytics(current_user: CurrentUser, db: DbSession):
         .join(TAInstance)
         .filter(
             TAInstance.user_id.in_(student_ids),
-            TeachingSession.created_at >= today_start,
-            TeachingSession.created_at < today_end,
+            TeachingSession.started_at >= today_start,
+            TeachingSession.started_at < today_end,
         )
         .count()
     )
