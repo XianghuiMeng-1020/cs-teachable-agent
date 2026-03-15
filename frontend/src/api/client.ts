@@ -2,8 +2,8 @@
 const API_BASE = "https://cs-teachable-agent-production.up.railway.app/api";
 
 const DEFAULT_TIMEOUT_MS = 30_000;
-const MAX_RETRIES = 2;
-const RETRY_DELAY_MS = 1_000;
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1_500;
 
 let token: string | null = null;
 
@@ -21,17 +21,58 @@ export function setOnUnauthorized(fn: (() => void) | null) {
   onUnauthorized = fn;
 }
 
+/** Network status callbacks */
+let onNetworkStatusChange: ((isOnline: boolean) => void) | null = null;
+export function setOnNetworkStatusChange(fn: ((isOnline: boolean) => void) | null) {
+  onNetworkStatusChange = fn;
+}
+
+/** Retry callback for UI feedback */
+let onRetry: ((attempt: number, maxRetries: number) => void) | null = null;
+export function setOnRetry(fn: ((attempt: number, maxRetries: number) => void) | null) {
+  onRetry = fn;
+}
+
 function headers(): HeadersInit {
   const h: HeadersInit = { "Content-Type": "application/json" };
   if (token) h["Authorization"] = `Bearer ${token}`;
   return h;
 }
 
-function isRetryable(method: string, status: number, err?: unknown): boolean {
-  if (method !== "GET") return false;
-  if (status >= 500 && status < 600) return true;
-  if (err instanceof TypeError && (err.message === "Failed to fetch" || err.message === "Load failed")) return true;
+function isNetworkError(err: unknown): boolean {
+  if (err instanceof TypeError) {
+    const msg = err.message.toLowerCase();
+    return msg.includes("failed to fetch") || 
+           msg.includes("load failed") ||
+           msg.includes("network") ||
+           msg.includes("internet");
+  }
   return false;
+}
+
+function isRetryable(method: string, status: number, err?: unknown): boolean {
+  if (isNetworkError(err)) return true;
+  if (method !== "GET" && method !== "POST") return false;
+  if (status >= 500 && status < 600) return true;
+  if (status === 429) return true; // Rate limited
+  if (status === 0) return true; // Network error
+  return false;
+}
+
+function getErrorMessage(err: unknown, status?: number): string {
+  if (isNetworkError(err)) {
+    return "Network connection failed. Please check your internet connection and try again.";
+  }
+  if (err instanceof Error) {
+    if (err.name === "AbortError") {
+      return "Request timed out. The server may be busy. Please try again.";
+    }
+    return err.message;
+  }
+  if (status === 429) return "Too many requests. Please wait a moment and try again.";
+  if (status === 500) return "Server error. Our team has been notified.";
+  if (status === 503) return "Service temporarily unavailable. Please try again later.";
+  return "An unexpected error occurred. Please try again.";
 }
 
 async function fetchWithTimeout(
@@ -57,9 +98,16 @@ async function apiFetch(
   const method = (fetchInit.method || "GET").toUpperCase();
   let lastErr: unknown;
   let lastRes: Response | null = null;
+  
   for (let attempt = 0; attempt <= (skipRetry ? 0 : MAX_RETRIES); attempt++) {
     try {
+      // Notify retry attempt
+      if (attempt > 0) {
+        onRetry?.(attempt, MAX_RETRIES);
+      }
+      
       lastRes = await fetchWithTimeout(`${API_BASE}${url}`, fetchInit, timeout);
+      
       if (lastRes.status === 401) {
         setToken(null);
         onUnauthorized?.();
@@ -73,22 +121,37 @@ async function apiFetch(
         }
         throw new Error(msg);
       }
+      
       if (!lastRes.ok && !isRetryable(method, lastRes.status)) {
         const text = await lastRes.text();
-        throw new Error(text);
+        throw new Error(text || getErrorMessage(null, lastRes.status));
       }
+      
       if (lastRes.ok) return lastRes;
       lastErr = new Error(await lastRes.text());
     } catch (err) {
       lastErr = err;
-      if (err instanceof Error && err.name === "AbortError") throw new Error("Request timed out. Please try again.");
-      if (attempt < MAX_RETRIES && isRetryable(method, 0, err)) {
-        await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
+      
+      // Handle abort error
+      if (err instanceof Error && err.name === "AbortError") {
+        throw new Error("Request timed out. Please try again.");
+      }
+      
+      // Check if we should retry
+      const shouldRetry = attempt < MAX_RETRIES && isRetryable(method, lastRes?.status ?? 0, err);
+      
+      if (shouldRetry) {
+        // Exponential backoff with jitter
+        const delay = RETRY_DELAY_MS * Math.pow(2, attempt) + Math.random() * 1000;
+        await new Promise((r) => setTimeout(r, delay));
         continue;
       }
-      throw err;
+      
+      // Final error - provide helpful message
+      throw new Error(getErrorMessage(err, lastRes?.status));
     }
   }
+  
   if (lastRes) return lastRes;
   throw lastErr;
 }

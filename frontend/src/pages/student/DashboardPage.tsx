@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMastery, getMisconceptions, getHistory, getConfig, getGamification, getLearningPath } from "@/api/client";
+import { getState, getMastery, getMisconceptions, getHistory, getConfig, getGamification, getLearningPath, listTA } from "@/api/client";
 import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit, Bot, MessageSquare, Play, X } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
@@ -16,6 +16,7 @@ import { PointsSystem } from "@/components/gamification/PointsSystem";
 import { AchievementSystem } from "@/components/gamification/AchievementSystem";
 import { LearningPath } from "@/components/learning/LearningPath";
 import { MisconceptionAI } from "@/components/diagnosis/MisconceptionAI";
+import { DomainSelector } from "@/components/onboarding/DomainSelector";
 import { useAuthStore } from "@/stores/authStore";
 import { ROUTES } from "@/lib/constants";
 import type { TimelineEvent } from "@/components/state/TimelineView";
@@ -43,13 +44,40 @@ function useActivityTrend(taId: number | null) {
   return last7Days.map((date) => ({ date: date.slice(5), count: byDay[date] ?? 0 }));
 }
 
+const ONBOARDING_KEY = "cs-ta-onboarding-completed";
+
 export function DashboardPage() {
   const currentTaId = useAppStore((s) => s.currentTaId);
   const user = useAuthStore((s) => s.user);
   const [hintDismissed, setHintDismissed] = useState(() =>
     typeof localStorage !== "undefined" && localStorage.getItem(DASHBOARD_HINT_KEY) === "1"
   );
+  const [showDomainSelector, setShowDomainSelector] = useState(false);
   const activityTrend = useActivityTrend(currentTaId);
+
+  // Check if user has any TAs
+  const { data: taList, isLoading: isLoadingTAs } = useQuery({
+    queryKey: ["ta", "list"],
+    queryFn: listTA,
+  });
+
+  // Show domain selector for new users
+  useEffect(() => {
+    if (!isLoadingTAs && taList && taList.length === 0) {
+      const hasCompletedOnboarding = typeof localStorage !== "undefined" && 
+        localStorage.getItem(ONBOARDING_KEY) === "1";
+      if (!hasCompletedOnboarding) {
+        setShowDomainSelector(true);
+      }
+    }
+  }, [taList, isLoadingTAs]);
+
+  const handleOnboardingComplete = () => {
+    try {
+      localStorage.setItem(ONBOARDING_KEY, "1");
+    } catch {}
+    setShowDomainSelector(false);
+  };
 
   const { data: state } = useQuery({
     queryKey: ["ta", currentTaId, "state"],
@@ -121,6 +149,12 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      <DomainSelector 
+        open={showDomainSelector} 
+        onOpenChange={setShowDomainSelector}
+        onComplete={handleOnboardingComplete}
+      />
+      
       {/* Stub mode notification banner */}
       {isStubMode && (
         <Card padding="md" className="bg-gradient-to-r from-slate-50 to-zinc-50 border-slate-200">

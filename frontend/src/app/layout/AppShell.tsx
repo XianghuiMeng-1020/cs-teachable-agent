@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
+import { NetworkStatus } from "@/components/ui/NetworkStatus";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 
@@ -57,6 +58,7 @@ export function AppShell() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-surface">
+      <NetworkStatus />
       {mobileMenuOpen && (
         <button
           type="button"

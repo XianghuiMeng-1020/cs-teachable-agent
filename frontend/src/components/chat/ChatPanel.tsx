@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { Send, MessageCircle } from "lucide-react";
+import { Send, MessageCircle, AlertCircle, CheckCircle, BarChart3 } from "lucide-react";
 import { teach, teachStream, getMessages, analyzeTeaching } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -27,6 +27,67 @@ interface ChatPanelProps {
   taId: number | null;
 }
 
+const MAX_INPUT_LENGTH = 2000;
+const MIN_QUALITY_INPUT_LENGTH = 20;
+const QUALITY_CHECK_DEBOUNCE_MS = 800;
+
+// Simple debounce hook
+function useDebouncedCallback<T extends (...args: Parameters<T>) => ReturnType<T>>(
+  callback: T,
+  delay: number
+) {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  
+  return useCallback((...args: Parameters<T>) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  }, [callback, delay]);
+}
+
+// Quality indicator component
+function QualityIndicator({ 
+  length, 
+  maxLength, 
+  qualityResult 
+}: { 
+  length: number; 
+  maxLength: number; 
+  qualityResult: TeachingHelperResult | null;
+}) {
+  const isNearLimit = length > maxLength * 0.9;
+  const isOverLimit = length > maxLength;
+  
+  if (isOverLimit) {
+    return (
+      <div className="flex items-center gap-1 text-xs text-rose-600">
+        <AlertCircle className="w-3 h-3" />
+        <span>{length}/{maxLength}</span>
+      </div>
+    );
+  }
+  
+  if (qualityResult) {
+    const isGood = qualityResult.pattern === "good";
+    return (
+      <div className={`flex items-center gap-1 text-xs ${isGood ? 'text-emerald-600' : 'text-amber-600'}`}>
+        {isGood ? <CheckCircle className="w-3 h-3" /> : <AlertCircle className="w-3 h-3" />}
+        <span>{isGood ? 'Quality: Good' : 'Quality: Needs improvement'}</span>
+      </div>
+    );
+  }
+  
+  return (
+    <div className={`flex items-center gap-1 text-xs ${isNearLimit ? 'text-amber-600' : 'text-slate-400'}`}>
+      <BarChart3 className="w-3 h-3" />
+      <span>{length}/{maxLength}</span>
+    </div>
+  );
+}
+
 export function ChatPanel({ taId }: ChatPanelProps) {
   const queryClient = useQueryClient();
   const [input, setInput] = useState("");
@@ -34,13 +95,39 @@ export function ChatPanel({ taId }: ChatPanelProps) {
   const [loading, setLoading] = useState(false);
   const [teachingHelperResult, setTeachingHelperResult] = useState<TeachingHelperResult | null>(null);
   const [pendingInput, setPendingInput] = useState<string | null>(null);
+  const [isCheckingQuality, setIsCheckingQuality] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const lastCheckRef = useRef<string>("");
 
   const { data: messagesData } = useQuery({
     queryKey: ["ta", taId, "messages"],
     queryFn: () => getMessages(taId!),
     enabled: !!taId,
   });
+
+  // Auto quality check with debounce
+  const performQualityCheck = useCallback(async (text: string) => {
+    if (!taId || text.length < MIN_QUALITY_INPUT_LENGTH) {
+      setTeachingHelperResult(null);
+      return;
+    }
+    
+    // Don't check if we already checked this text
+    if (text === lastCheckRef.current && teachingHelperResult) return;
+    
+    setIsCheckingQuality(true);
+    try {
+      const result = await analyzeTeaching(taId, text.trim());
+      setTeachingHelperResult(result);
+      lastCheckRef.current = text;
+    } catch {
+      // Silently fail - quality check is optional
+    } finally {
+      setIsCheckingQuality(false);
+    }
+  }, [taId, teachingHelperResult]);
+
+  const debouncedQualityCheck = useDebouncedCallback(performQualityCheck, QUALITY_CHECK_DEBOUNCE_MS);
 
   const persistedMessages: ChatMessage[] =
     messagesData?.messages?.map((m) => ({
@@ -65,11 +152,26 @@ export function ChatPanel({ taId }: ChatPanelProps) {
 
   const handleCheckQuality = async () => {
     if (!taId || !input.trim()) return;
+    setIsCheckingQuality(true);
     try {
       const result = await analyzeTeaching(taId, input.trim());
       setTeachingHelperResult(result);
+      lastCheckRef.current = input.trim();
     } catch {
       setTeachingHelperResult(null);
+    } finally {
+      setIsCheckingQuality(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    if (newValue.length <= MAX_INPUT_LENGTH) {
+      setInput(newValue);
+      // Clear quality result if input changed significantly
+      if (Math.abs(newValue.length - (lastCheckRef.current?.length ?? 0)) > 10) {
+        debouncedQualityCheck(newValue);
+      }
     }
   };
 
@@ -227,27 +329,40 @@ export function ChatPanel({ taId }: ChatPanelProps) {
           </div>
         )}
         <div className="flex gap-2">
-          <textarea
-            placeholder="Type to teach... (Shift+Enter for new line)"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="flex-1 min-h-[40px] max-h-32 resize-y rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-slate-50 disabled:text-slate-500"
-            disabled={!taId || loading}
-            rows={2}
-          />
+          <div className="flex-1 relative">
+            <textarea
+              placeholder="Type to teach... (Shift+Enter for new line)"
+              value={input}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              className="w-full min-h-[40px] max-h-32 resize-y rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-slate-50 disabled:text-slate-500"
+              disabled={!taId || loading}
+              rows={2}
+              maxLength={MAX_INPUT_LENGTH}
+            />
+            <div className="absolute bottom-1 right-2">
+              <QualityIndicator 
+                length={input.length} 
+                maxLength={MAX_INPUT_LENGTH} 
+                qualityResult={teachingHelperResult}
+              />
+            </div>
+          </div>
           <Button
             variant="outline"
             onClick={handleCheckQuality}
-            disabled={!taId || loading || !input.trim()}
+            disabled={!taId || loading || !input.trim() || isCheckingQuality}
+            loading={isCheckingQuality}
             className="shrink-0"
+            title="Check teaching quality"
           >
             Check
           </Button>
           <Button
             icon={Send}
             onClick={handleSend}
-            disabled={!taId || !input.trim() || loading}
+            disabled={!taId || !input.trim() || loading || input.length > MAX_INPUT_LENGTH}
+            title="Send message"
           >
             Send
           </Button>

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as Tabs from "@radix-ui/react-tabs";
-import { CheckCircle2, Bot, Eye, EyeOff } from "lucide-react";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { CheckCircle2, Bot, Eye, EyeOff, Info, GraduationCap, User, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuthStore } from "@/stores/authStore";
@@ -13,6 +14,64 @@ import {
   getFriendlyAuthError,
   MIN_PASSWORD_LENGTH,
 } from "@/lib/validation";
+
+function PasswordStrengthIndicator({ password }: { password: string }) {
+  const strength = useMemo(() => {
+    let score = 0;
+    if (password.length >= MIN_PASSWORD_LENGTH) score++;
+    if (password.length >= 10) score++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
+    return score;
+  }, [password]);
+
+  const levels = [
+    { label: "Too weak", color: "bg-rose-500", textColor: "text-rose-600" },
+    { label: "Weak", color: "bg-orange-500", textColor: "text-orange-600" },
+    { label: "Fair", color: "bg-amber-500", textColor: "text-amber-600" },
+    { label: "Good", color: "bg-brand-500", textColor: "text-brand-600" },
+    { label: "Strong", color: "bg-emerald-500", textColor: "text-emerald-600" },
+    { label: "Very Strong", color: "bg-emerald-600", textColor: "text-emerald-700" },
+  ];
+
+  if (password.length === 0) return null;
+
+  const level = levels[Math.min(strength, levels.length - 1)];
+  const width = Math.min(100, (strength / 5) * 100);
+
+  return (
+    <div className="mt-2 space-y-1">
+      <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+        <div
+          className={`h-full ${level.color} transition-all duration-300`}
+          style={{ width: `${width}%` }}
+        />
+      </div>
+      <div className="flex items-center justify-between">
+        <span className={`text-xs ${level.textColor}`}>{level.label}</span>
+        <span className="text-xs text-slate-400">{password.length} chars</span>
+      </div>
+      <div className="flex flex-wrap gap-1 mt-1">
+        {[
+          { met: password.length >= MIN_PASSWORD_LENGTH, text: `${MIN_PASSWORD_LENGTH}+ chars` },
+          { met: /[a-z]/.test(password) && /[A-Z]/.test(password), text: "Mixed case" },
+          { met: /\d/.test(password), text: "Number" },
+          { met: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password), text: "Special char" },
+        ].map((req, idx) => (
+          <span
+            key={idx}
+            className={`text-[10px] px-1.5 py-0.5 rounded ${
+              req.met ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
+            }`}
+          >
+            {req.met ? "✓" : "○"} {req.text}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const bullets = [
   "Knowledge-state-driven TA behavior",
@@ -168,29 +227,94 @@ export function LoginPage() {
             <Tabs.Content value="register">
               <h2 className="text-xl font-semibold text-slate-900">Create your account</h2>
               <form onSubmit={handleRegister} className="mt-6 space-y-4">
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setRole("student")}
-                    className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
-                      role === "student"
-                        ? "border-brand-500 bg-brand-50 text-brand-700"
-                        : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                    }`}
-                  >
-                    Student
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRole("teacher")}
-                    className={`flex-1 rounded-lg border py-2 text-sm font-medium ${
-                      role === "teacher"
-                        ? "border-brand-500 bg-brand-50 text-brand-700"
-                        : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                    }`}
-                  >
-                    Teacher
-                  </button>
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-medium text-slate-700">Select your role</span>
+                    <Tooltip.Provider delayDuration={100}>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <button type="button" className="text-slate-400 hover:text-slate-600">
+                            <Info className="w-4 h-4" />
+                          </button>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
+                            sideOffset={4}
+                          >
+                            <p className="font-medium mb-1">Student:</p>
+                            <p className="text-slate-300 mb-2">Teach the TA concepts and test its understanding</p>
+                            <p className="font-medium mb-1">Teacher:</p>
+                            <p className="text-slate-300">View student progress and analytics</p>
+                            <Tooltip.Arrow className="fill-slate-900" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Tooltip.Provider delayDuration={100}>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => setRole("student")}
+                            className={`flex items-center gap-2 rounded-lg border p-3 text-left transition-colors ${
+                              role === "student"
+                                ? "border-brand-500 bg-brand-50 text-brand-700"
+                                : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                            }`}
+                          >
+                            <User className={`w-5 h-5 ${role === "student" ? "text-brand-600" : "text-slate-400"}`} />
+                            <div>
+                              <div className="text-sm font-medium">Student</div>
+                              <div className="text-xs opacity-75">Teach & Test</div>
+                            </div>
+                          </button>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
+                            sideOffset={4}
+                          >
+                            <p>Learn by teaching! You explain concepts to the TA, then run tests to see how well it learned.</p>
+                            <Tooltip.Arrow className="fill-slate-900" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+
+                    <Tooltip.Provider delayDuration={100}>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => setRole("teacher")}
+                            className={`flex items-center gap-2 rounded-lg border p-3 text-left transition-colors ${
+                              role === "teacher"
+                                ? "border-brand-500 bg-brand-50 text-brand-700"
+                                : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                            }`}
+                          >
+                            <GraduationCap className={`w-5 h-5 ${role === "teacher" ? "text-brand-600" : "text-slate-400"}`} />
+                            <div>
+                              <div className="text-sm font-medium">Teacher</div>
+                              <div className="text-xs opacity-75">Monitor & Analyze</div>
+                            </div>
+                          </button>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
+                            sideOffset={4}
+                          >
+                            <p>View student progress, analyze learning patterns, and export teaching transcripts.</p>
+                            <Tooltip.Arrow className="fill-slate-900" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+                  </div>
                 </div>
                 <Input
                   placeholder="Username (3–32 chars, letters, numbers, _)"
@@ -199,23 +323,26 @@ export function LoginPage() {
                   autoComplete="username"
                   maxLength={32}
                 />
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder={`Password (min ${MIN_PASSWORD_LENGTH} characters)`}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="new-password"
-                  rightIcon={
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((s) => !s)}
-                      className="text-slate-400 hover:text-slate-600"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  }
-                />
+                <div>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
+                    rightIcon={
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((s) => !s)}
+                        className="text-slate-400 hover:text-slate-600"
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    }
+                  />
+                  <PasswordStrengthIndicator password={password} />
+                </div>
                 <Input
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm password"

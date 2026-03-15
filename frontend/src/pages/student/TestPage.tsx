@@ -7,7 +7,8 @@ import { Card } from "@/components/ui/Card";
 import { ProblemSelector } from "@/components/workspace/ProblemSelector";
 import { TestResultCard } from "@/components/workspace/TestResultCard";
 import { ComprehensiveReport } from "@/components/workspace/ComprehensiveReport";
-import { Play, Lightbulb, GraduationCap } from "lucide-react";
+import { ProblemUnlockPanel } from "@/components/workspace/ProblemUnlockPanel";
+import { Play, Lightbulb, GraduationCap, Trophy, Target } from "lucide-react";
 import { toast } from "sonner";
 
 export function TestPage() {
@@ -85,29 +86,21 @@ export function TestPage() {
   const hasUnlockableProblems = problems.length > 0;
   const learnedCount = (problemsData?.learned_unit_ids?.length ?? 0);
   const requiredCount = (problemsData?.required_kus?.length ?? 0);
+  const eligibleIds = problemsData?.eligible_ids ?? [];
+  const learnedUnitIds = problemsData?.learned_unit_ids ?? [];
+  const requiredKus = problemsData?.required_kus ?? [];
 
   return (
     <div className="space-y-6">
-      {/* Educational hint for problem unlocking */}
-      {!hasUnlockableProblems && currentTaId && (
-        <Card padding="md" className="bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200">
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-amber-100 rounded-lg">
-              <GraduationCap className="w-5 h-5 text-amber-600" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-amber-900">Teach More Concepts to Unlock Tests</h3>
-              <p className="mt-1 text-sm text-amber-800">
-                Your TA needs to learn more concepts before it can attempt problems. 
-                Go to the <strong>Teach</strong> page and teach concepts like variables, loops, or functions.
-              </p>
-              <div className="mt-3 flex items-center gap-2 text-xs text-amber-700">
-                <Lightbulb className="w-4 h-4" />
-                <span>Tip: Try teaching &quot;variable_assignment&quot; or &quot;print_function&quot; first!</span>
-              </div>
-            </div>
-          </div>
-        </Card>
+      {/* Problem Unlock Progress Panel */}
+      {currentTaId && (
+        <ProblemUnlockPanel
+          problems={problems}
+          eligibleIds={eligibleIds}
+          learnedUnitIds={learnedUnitIds}
+          requiredKus={requiredKus}
+          currentTaId={currentTaId}
+        />
       )}
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
