@@ -115,7 +115,9 @@ def get_ta_code_attempt(
     use_llm_code: bool | None = None,
 ) -> str:
     """
-    Return TA code attempt. If filled_prompt and use_llm_code, try LLM then guard; else stub.
+    Return TA code attempt. When filled_prompt is provided (knowledge-state-constrained prompt
+    from domain adapter), use LLM to generate code that respects learned units and active
+    misconceptions; stub is fallback when LLM is disabled or fails guard.
     """
     required = set(problem.get("knowledge_units_tested", []))
     force_fail = force_fail_problem_ids or set()
@@ -130,7 +132,9 @@ def get_ta_code_attempt(
         return _get_stub_attempt(
             problem, learned_unit_ids, force_fail, active_mis_list
         )
-    if use_llm_code is not True or not filled_prompt:
+    # Prefer LLM when domain adapter provided a constrained prompt (no env gate required)
+    try_llm = (use_llm_code is True) or (filled_prompt and use_llm_code is not False)
+    if not try_llm or not filled_prompt:
         return _get_stub_attempt(
             problem, learned_unit_ids, force_fail, active_mis_list
         )

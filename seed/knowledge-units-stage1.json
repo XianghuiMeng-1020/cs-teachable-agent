@@ -281,6 +281,46 @@
       "topic_group": "miscellaneous",
       "prerequisites": ["error_types"],
       "example_correct_code": "# debugging"
+    },
+    {
+      "id": "list_slicing",
+      "name": "List Slicing",
+      "description": "Slicing lists with [start:end:step] to get sublists.",
+      "topic_group": "lists",
+      "prerequisites": ["list_indexing"],
+      "example_correct_code": "nums[1:4]\nnums[::-1]"
+    },
+    {
+      "id": "string_indexing",
+      "name": "String Indexing and Slicing",
+      "description": "Accessing characters and substrings by index and slice.",
+      "topic_group": "operators",
+      "prerequisites": ["data_types_string"],
+      "example_correct_code": "s[0]\ns[1:4]"
+    },
+    {
+      "id": "try_except_basics",
+      "name": "Try and Except",
+      "description": "Catching exceptions with try/except blocks.",
+      "topic_group": "miscellaneous",
+      "prerequisites": ["error_types"],
+      "example_correct_code": "try:\n    n = int(s)\nexcept ValueError:\n    n = 0"
+    },
+    {
+      "id": "list_comprehension_basic",
+      "name": "List Comprehension",
+      "description": "Building lists with [expr for x in iterable].",
+      "topic_group": "lists",
+      "prerequisites": ["list_creation", "for_loop_iterable"],
+      "example_correct_code": "[x*2 for x in nums]"
+    },
+    {
+      "id": "none_type",
+      "name": "None Type",
+      "description": "The None value and its use as default or missing value.",
+      "topic_group": "basic_data_types",
+      "prerequisites": ["variable_assignment"],
+      "example_correct_code": "x = None\nif x is None:\n    pass"
     }
   ]
 }

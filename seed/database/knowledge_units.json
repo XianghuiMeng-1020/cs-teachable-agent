@@ -26,6 +26,13 @@
     {"id": "update", "name": "UPDATE", "description": "Update rows with UPDATE SET WHERE.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "UPDATE t SET a = 1 WHERE b = 2"},
     {"id": "delete", "name": "DELETE", "description": "Delete rows with DELETE FROM WHERE.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "DELETE FROM t WHERE a = 0"},
     {"id": "null_is_null", "name": "NULL and IS NULL", "description": "Check for NULL with IS NULL.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE x IS NULL"},
-    {"id": "and_or", "name": "AND / OR in WHERE", "description": "Combine conditions with AND, OR.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE a = 1 AND b > 0"}
+    {"id": "and_or", "name": "AND / OR in WHERE", "description": "Combine conditions with AND, OR.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE a = 1 AND b > 0"},
+    {"id": "in_clause", "name": "IN Clause", "description": "IN (list) for multiple values.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE id IN (1, 2, 3)"},
+    {"id": "like_pattern", "name": "LIKE Pattern", "description": "LIKE for pattern matching with % and _.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE name LIKE 'A%'"},
+    {"id": "between", "name": "BETWEEN", "description": "BETWEEN for range conditions.", "topic_group": "dml", "prerequisites": ["where_basic"], "example_correct_code": "SELECT * FROM t WHERE x BETWEEN 1 AND 10"},
+    {"id": "subquery_select", "name": "Subquery in SELECT", "description": "Scalar subquery in SELECT list.", "topic_group": "subqueries", "prerequisites": ["select_columns", "subquery_where"], "example_correct_code": "SELECT a, (SELECT COUNT(*) FROM b WHERE b.a_id = a.id) FROM a"},
+    {"id": "view_basics", "name": "CREATE VIEW", "description": "Create a view.", "topic_group": "ddl", "prerequisites": ["select_basic"], "example_correct_code": "CREATE VIEW v AS SELECT * FROM t"},
+    {"id": "index_basics", "name": "CREATE INDEX", "description": "Create index for performance.", "topic_group": "ddl", "prerequisites": ["create_table"], "example_correct_code": "CREATE INDEX idx_t_a ON t(a)"},
+    {"id": "transaction_basics", "name": "BEGIN/COMMIT", "description": "Transaction boundaries.", "topic_group": "ddl", "prerequisites": ["insert", "update"], "example_correct_code": "BEGIN; INSERT INTO t VALUES (1); COMMIT;"}
   ]
 }

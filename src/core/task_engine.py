@@ -12,8 +12,9 @@ STRATEGY_COVERAGE = "coverage"
 STRATEGY_DIFFICULTY = "difficulty"
 STRATEGY_SPACED = "spaced"
 STRATEGY_MISCONCEPTION = "misconception"
+STRATEGY_UNCERTAINTY = "uncertainty"
 STRATEGY_ROUND_ROBIN = "round_robin"
-DEFAULT_STRATEGY = STRATEGY_COVERAGE
+DEFAULT_STRATEGY = STRATEGY_UNCERTAINTY
 
 
 def load_problems(path: Path) -> list[dict]:
@@ -97,6 +98,17 @@ def _score_misconception(problem: dict, active_misconception_ids: list[str]) -> 
     return float(overlap)
 
 
+def _score_uncertainty(problem: dict, p_know: dict[str, float]) -> float:
+    """Uncertainty-based: prefer problem whose required KUs have p_know closest to 0.5 (max uncertainty)."""
+    required = problem.get("knowledge_units_tested", [])
+    if not required:
+        return 0.0
+    # Score = 1 - min distance from 0.5 (higher = more uncertain = better to test)
+    distances = [abs(p_know.get(uid, 0.5) - 0.5) for uid in required]
+    min_dist = min(distances)
+    return 1.0 - min_dist
+
+
 def select_problem(
     problems: list[dict],
     learned_unit_ids: set[str],
@@ -128,11 +140,18 @@ def select_problem(
     if hasattr(tracker, "get_active_misconception_ids"):
         active_mis = tracker.get_active_misconception_ids(learned_unit_ids) or []
 
+    # Misconception-targeted: prefer problems that exercise active misconceptions
     if strategy == STRATEGY_MISCONCEPTION and active_mis:
         scored = [(p, _score_misconception(p, active_mis)) for p in eligible]
         scored = [(p, s) for p, s in scored if s > 0]
         if scored:
             scored.sort(key=lambda x: -x[1])
+            return scored[0][0]
+    # Uncertainty-based: prefer problem where p_know is closest to 0.5 (most informative)
+    if strategy == STRATEGY_UNCERTAINTY and p_know:
+        scored = [(p, _score_uncertainty(p, p_know)) for p in eligible]
+        scored.sort(key=lambda x: -x[1])
+        if scored and scored[0][1] > 0:
             return scored[0][0]
     if strategy == STRATEGY_SPACED and last_practiced:
         scored = [(p, _score_spaced(p, last_practiced)) for p in eligible]

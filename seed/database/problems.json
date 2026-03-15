@@ -30,6 +30,15 @@
     {"problem_id": "db_having_002", "problem_statement": "Roles that have exactly 2 users.", "knowledge_units_tested": ["group_by", "having"], "expected_rows": [["user"]]},
     {"problem_id": "db_subquery_002", "problem_statement": "User names who have orders with amount > 15.", "knowledge_units_tested": ["subquery_where", "inner_join"], "expected_rows": [["Alice"], ["Bob"]]},
     {"problem_id": "db_count_003", "problem_statement": "Number of products.", "knowledge_units_tested": ["count_agg"], "expected_rows": [[3]]},
-    {"problem_id": "db_distinct_002", "problem_statement": "Distinct user_id from orders.", "knowledge_units_tested": ["distinct"], "expected_rows": [[1], [2]]}
+    {"problem_id": "db_distinct_002", "problem_statement": "Distinct user_id from orders.", "knowledge_units_tested": ["distinct"], "expected_rows": [[1], [2]]},
+    {"problem_id": "db_in_001", "problem_statement": "Select users with id 1 or 2 using IN.", "knowledge_units_tested": ["in_clause", "where_basic"], "expected_rows": [[1, "Alice", "admin"], [2, "Bob", "user"]]},
+    {"problem_id": "db_like_001", "problem_statement": "Select users whose name starts with 'A'.", "knowledge_units_tested": ["like_pattern"], "expected_rows": [[1, "Alice", "admin"]]},
+    {"problem_id": "db_between_001", "problem_statement": "Select orders with amount between 10 and 20 inclusive.", "knowledge_units_tested": ["between", "from_clause"], "expected_rows": [[1, 1, 10.5], [2, 1, 20.0], [3, 2, 15.0]]},
+    {"problem_id": "db_subquery_003", "problem_statement": "Users whose id is in the set of order user_ids.", "knowledge_units_tested": ["subquery_where", "in_clause"], "expected_rows": [[1, "Alice", "admin"], [2, "Bob", "user"]]},
+    {"problem_id": "db_and_or_002", "problem_statement": "Orders with amount > 10 AND user_id = 1.", "knowledge_units_tested": ["and_or", "comparison_ops"], "expected_rows": [[1, 1, 10.5], [2, 1, 20.0]]},
+    {"problem_id": "db_null_001", "problem_statement": "Select users where role is NULL (if any).", "knowledge_units_tested": ["null_is_null"], "expected_rows": []},
+    {"problem_id": "db_count_004", "problem_statement": "Count of distinct roles.", "knowledge_units_tested": ["count_agg", "distinct"], "expected_rows": [[2]]},
+    {"problem_id": "db_order_004", "problem_statement": "Users ordered by id descending, limit 1.", "knowledge_units_tested": ["order_by", "order_asc_desc", "limit"], "expected_rows": [[3, "Carol", "user"]]},
+    {"problem_id": "db_join_004", "problem_statement": "Order ids and amounts for user 'Alice'.", "knowledge_units_tested": ["inner_join", "where_basic"], "expected_rows": [[1, 10.5], [2, 20.0]]}
   ]
 }

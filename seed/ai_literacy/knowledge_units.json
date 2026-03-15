@@ -21,6 +21,15 @@
     {"id": "vision_intro", "name": "Computer Vision", "description": "Image and video understanding.", "topic_group": "applications", "prerequisites": ["ai_what"], "example_correct_code": ""},
     {"id": "recommendation", "name": "Recommendation Systems", "description": "How recommendation systems work.", "topic_group": "applications", "prerequisites": ["supervised"], "example_correct_code": ""},
     {"id": "ai_limits", "name": "Limits of AI", "description": "What AI cannot do; narrow vs general.", "topic_group": "basics", "prerequisites": ["ai_what"], "example_correct_code": ""},
-    {"id": "human_ai", "name": "Human-AI Collaboration", "description": "Humans and AI working together.", "topic_group": "ethics", "prerequisites": ["ai_limits"], "example_correct_code": ""}
+    {"id": "human_ai", "name": "Human-AI Collaboration", "description": "Humans and AI working together.", "topic_group": "ethics", "prerequisites": ["ai_limits"], "example_correct_code": ""},
+    {"id": "prompt_engineering", "name": "Prompt Engineering", "description": "Writing effective prompts for LLMs.", "topic_group": "applications", "prerequisites": ["nlp_intro"], "example_correct_code": ""},
+    {"id": "llm_basics", "name": "Large Language Models", "description": "What LLMs are and how they generate text.", "topic_group": "ml", "prerequisites": ["neural_networks", "nlp_intro"], "example_correct_code": ""},
+    {"id": "generative_ai", "name": "Generative AI", "description": "AI that creates new content (text, images).", "topic_group": "applications", "prerequisites": ["ai_what"], "example_correct_code": ""},
+    {"id": "llm_limits", "name": "LLM Limitations", "description": "Hallucination, outdated knowledge, no reasoning guarantee.", "topic_group": "basics", "prerequisites": ["llm_basics"], "example_correct_code": ""},
+    {"id": "ai_safety", "name": "AI Safety", "description": "Risks and safeguards for AI systems.", "topic_group": "ethics", "prerequisites": ["ai_limits"], "example_correct_code": ""},
+    {"id": "hallucination", "name": "Hallucination", "description": "When AI produces plausible but false output.", "topic_group": "ml", "prerequisites": ["llm_basics"], "example_correct_code": ""},
+    {"id": "responsible_ai", "name": "Responsible AI", "description": "Designing and deploying AI responsibly.", "topic_group": "ethics", "prerequisites": ["fairness", "transparency"], "example_correct_code": ""},
+    {"id": "prompt_best_practices", "name": "Prompt Best Practices", "description": "Clarity, context, and structure in prompts.", "topic_group": "applications", "prerequisites": ["prompt_engineering"], "example_correct_code": ""},
+    {"id": "ai_ethics_cases", "name": "AI Ethics in Practice", "description": "Case studies of AI ethics issues.", "topic_group": "ethics", "prerequisites": ["fairness", "privacy"], "example_correct_code": ""}
   ]
 }

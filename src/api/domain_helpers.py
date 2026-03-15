@@ -29,8 +29,14 @@ def get_tracker_for_ta(ta: TAInstance) -> StateTracker:
     adapter = get_domain_adapter(ta.domain_id)
     units = adapter.load_knowledge_units()
     tracker = StateTracker(unit_definitions=units, domain=ta.domain_id)
-    if ta.knowledge_state and isinstance(ta.knowledge_state, dict) and "units" in ta.knowledge_state:
-        tracker.merge_persisted_state(ta.knowledge_state["units"])
+    if ta.knowledge_state and isinstance(ta.knowledge_state, dict):
+        units = ta.knowledge_state.get("units", {})
+        if not isinstance(units, dict):
+            units = {}
+        tracker.merge_persisted_state(
+            units,
+            reflection_store=ta.knowledge_state.get("reflection_store"),
+        )
     return tracker
 
 

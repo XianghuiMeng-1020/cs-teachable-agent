@@ -140,6 +140,15 @@ export async function getTA(taId: number) {
   return r.json();
 }
 
+export async function analyzeTeaching(taId: number, student_input: string): Promise<{ pattern: string; feedback: string; suggestions: string[] }> {
+  const r = await apiFetch(`/ta/${taId}/analyze-teaching`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ student_input }),
+  });
+  return r.json();
+}
+
 export async function teach(taId: number, student_input: string) {
   const r = await apiFetch(`/ta/${taId}/teach`, {
     method: "POST",
@@ -147,6 +156,65 @@ export async function teach(taId: number, student_input: string) {
     body: JSON.stringify({ student_input }),
   });
   return r.json();
+}
+
+export interface TeachStreamCallbacks {
+  onChunk?: (text: string) => void;
+}
+
+/** Stream TA response via SSE. Calls onChunk for each chunk; resolves with final { ta_response, interpreted_units, topic_taught }. */
+export async function teachStream(
+  taId: number,
+  student_input: string,
+  callbacks: TeachStreamCallbacks = {}
+): Promise<{ ta_response: string; interpreted_units: string[]; topic_taught: string }> {
+  const { onChunk } = callbacks;
+  const url = `${API_BASE}/ta/${taId}/teach/stream`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
+    body: JSON.stringify({ student_input }),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+  const reader = res.body?.getReader();
+  if (!reader) throw new Error("No response body");
+  const dec = new TextDecoder();
+  let buffer = "";
+  let donePayload: { ta_response?: string; interpreted_units?: string[]; topic_taught?: string } = {};
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += dec.decode(value, { stream: true });
+    const lines = buffer.split("\n\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (line.startsWith("data: ")) {
+        try {
+          const data = JSON.parse(line.slice(6)) as { type: string; text?: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string };
+          if (data.type === "chunk" && data.text != null && onChunk) onChunk(data.text);
+          if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught };
+        } catch {
+          // skip malformed
+        }
+      }
+    }
+  }
+  if (buffer.startsWith("data: ")) {
+    try {
+      const data = JSON.parse(buffer.slice(6)) as { type: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string };
+      if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught };
+    } catch {
+      // skip
+    }
+  }
+  return {
+    ta_response: donePayload.ta_response ?? "",
+    interpreted_units: donePayload.interpreted_units ?? [],
+    topic_taught: donePayload.topic_taught ?? "",
+  };
 }
 
 export async function runTest(taId: number, problem_id?: string) {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import * as Tabs from "@radix-ui/react-tabs";
@@ -24,11 +25,14 @@ export function StudentDetailPage() {
     enabled: !Number.isNaN(id),
   });
 
+  const [selectedTaIndex, setSelectedTaIndex] = useState(0);
+
   if (Number.isNaN(id) || isLoading || !data) {
     return <p className="text-sm text-slate-500">Loading...</p>;
   }
 
-  const primary = data.ta_instances[0];
+  const taInstances = data.ta_instances ?? [];
+  const primary = taInstances[selectedTaIndex] ?? taInstances[0];
   const units: UnitNode[] = primary?.units
     ? Object.entries(primary.units).map(([unit_id, rec]) => ({
         unit_id,
@@ -50,6 +54,22 @@ export function StudentDetailPage() {
         </div>
       </div>
 
+      {taInstances.length > 1 && (
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium text-slate-600">TA:</span>
+          <select
+            value={selectedTaIndex}
+            onChange={(e) => setSelectedTaIndex(Number(e.target.value))}
+            className="rounded border border-slate-300 bg-white px-2 py-1 text-sm"
+          >
+            {taInstances.map((ta, i) => (
+              <option key={ta.id ?? i} value={i}>
+                {(ta as { name?: string; domain_id?: string }).name ?? (ta as { domain_id?: string }).domain_id ?? `TA ${i + 1}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <StatCard label="Learned KUs" value={primary ? `${primary.learned_count}/${primary.total_kus}` : "—"} icon={BookOpen} iconColor="bg-brand-50 text-brand-500" />
         <StatCard label="Mastery %" value={primary ? `${primary.mastery_percent}%` : "—"} icon={Target} iconColor="bg-emerald-50 text-success" />
@@ -69,11 +89,11 @@ export function StudentDetailPage() {
         </Tabs.Content>
         <Tabs.Content value="misconceptions">
           {primary?.active_misconceptions?.length ? (
-            primary.active_misconceptions.map((mid) => (
+            primary.active_misconceptions.map((mid: string) => (
               <MisconceptionCard
                 key={mid}
                 misconceptionId={mid}
-                description="Active for this student."
+                description="Active for this TA instance."
                 affectedUnits={[]}
                 remediationHint="Have the student teach the correct concept."
                 status="active"

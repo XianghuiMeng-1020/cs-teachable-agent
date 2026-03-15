@@ -1,6 +1,9 @@
-"""Teaching: POST /teach, POST /correct."""
+"""Teaching: POST /teach, POST /correct, POST /analyze-teaching, POST /teach/stream (SSE)."""
 
+import json
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
 
 from src.api.schemas import TeachRequest, TeachResponse, CorrectRequest
 from src.api.deps import DbSession, CurrentUser
@@ -11,8 +14,75 @@ from src.core.teaching_events import make_teaching_event
 from src.core.teaching_interpreter import interpret_teaching
 from src.core.orchestrator import run_teaching_and_test, run_correction
 from src.core.trace import set_trace_db_session
+from src.core.teaching_helper import analyze_teaching
+from src.core.reflect_respond import (
+    extract_new_knowledge,
+    update_reflection_store,
+    retrieve_relevant,
+    generate_constrained_response_stream,
+)
+from src.core.teaching_events import apply_teaching_event
+from src.core.mode_shifting import maybe_append_questioner_response
 
 router = APIRouter(tags=["teaching"])
+
+
+def _teach_stream_generator(
+    tracker,
+    ta,
+    session,
+    db,
+    teaching_event: dict,
+    adapter,
+    conversation_history: list,
+    learned: list,
+    active_mis_ids: list,
+):
+    """Yield SSE events: chunk (text) then done (full response + metadata). Saves state after done."""
+    from src.core.reflect_respond import _last_n_messages
+    store = tracker.get_reflection_store()
+    topic = teaching_event.get("topic_taught", "")
+    note = teaching_event.get("note", "")
+    messages = _last_n_messages(conversation_history or [], note, n=5)
+    extracted = extract_new_knowledge(messages, tracker.get_domain())
+    updated_store = update_reflection_store(store, extracted)
+    retrieved = retrieve_relevant(
+        updated_store, topic, note, tracker.get_domain(),
+        learned_unit_ids=learned, active_misconceptions=active_mis_ids,
+    )
+    full_parts: list[str] = []
+    for chunk in generate_constrained_response_stream(
+        retrieved, topic, note, learned, active_mis_ids, tracker.get_domain(),
+        conversation_history=conversation_history, ask_why_or_how=True,
+    ):
+        full_parts.append(chunk)
+        yield f"data: {json.dumps({'type': 'chunk', 'text': chunk})}\n\n"
+    ta_response = "".join(full_parts).strip()
+    if len(ta_response) > 400:
+        ta_response = ta_response[:397].rsplit(".", 1)[0] + "."
+    msg_count = (len(conversation_history) + 1) if conversation_history else 1
+    ta_response = maybe_append_questioner_response(
+        ta_response, msg_count, topic, note, tracker.get_domain(),
+        list(learned), conversation_history, phase="teach",
+    )
+    tracker.set_reflection_store(updated_store)
+    yield f"data: {json.dumps({'type': 'done', 'ta_response': ta_response, 'interpreted_units': teaching_event.get('knowledge_units_taught', []), 'topic_taught': topic})}\n\n"
+    save_tracker_to_ta(ta, tracker, db)
+    te = TeachingEvent(
+        session_id=session.id,
+        teaching_event_id=teaching_event["teaching_event_id"],
+        student_input=teaching_event.get("note", "")[:2000],
+        topic_taught=topic,
+        interpreted_units=teaching_event.get("knowledge_units_taught", []),
+        quality_score=teaching_event.get("quality_score", 0.6),
+        ta_response=ta_response[:2000] if ta_response else None,
+    )
+    db.add(te)
+    db.commit()
+
+
+class AnalyzeTeachingRequest(BaseModel):
+    student_input: str = ""
 
 
 def _get_ta(ta_id: int, user_id: int, db: DbSession) -> TAInstance:
@@ -54,6 +124,7 @@ def teach(
         units_taught = [unit_ids[0]] if unit_ids else []
 
     teaching_event = make_teaching_event(topic, units_taught, note=body.student_input[:500])
+    teaching_event["quality_score"] = quality
 
     conversation_history = []
     for te in db.query(TeachingEvent).filter(TeachingEvent.session_id == session.id).order_by(TeachingEvent.created_at.asc()).all():
@@ -97,6 +168,53 @@ def teach(
     )
 
 
+@router.post("/api/ta/{ta_id}/teach/stream")
+def teach_stream(
+    ta_id: int,
+    body: TeachRequest,
+    current_user: CurrentUser,
+    db: DbSession,
+):
+    """Stream TA response via Server-Sent Events. Same as teach but response is streamed chunk-by-chunk."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    session = get_or_create_teaching_session(db, ta.id)
+    set_trace_db_session(db, session.id)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
+    unit_ids = [u["id"] for u in adapter.load_knowledge_units()]
+    filled_prompt = adapter.get_teaching_interpreter_prompt(body.student_input)
+    interpreted = interpret_teaching(
+        body.student_input,
+        unit_ids,
+        filled_prompt=filled_prompt,
+        use_llm=True if filled_prompt else None,
+    )
+    topic = interpreted.get("topic_taught", "Teaching")
+    units_taught = interpreted.get("knowledge_units_taught", [])
+    quality = interpreted.get("quality_score", 0.6)
+    if not units_taught:
+        units_taught = [unit_ids[0]] if unit_ids else []
+    teaching_event = make_teaching_event(topic, units_taught, note=body.student_input[:500])
+    teaching_event["quality_score"] = quality
+    apply_teaching_event(tracker, teaching_event, new_status="learned")
+    conversation_history = []
+    for te in db.query(TeachingEvent).filter(TeachingEvent.session_id == session.id).order_by(TeachingEvent.created_at.asc()).all():
+        if te.student_input:
+            conversation_history.append({"role": "student", "content": te.student_input})
+        if te.ta_response:
+            conversation_history.append({"role": "ta", "content": te.ta_response})
+    learned = list(tracker.get_learned_units())
+    active_mis_ids = list(tracker.get_active_misconception_ids(tracker.get_learned_units()))
+    return StreamingResponse(
+        _teach_stream_generator(
+            tracker, ta, session, db, teaching_event, adapter,
+            conversation_history, learned, active_mis_ids,
+        ),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "Connection": "keep-alive", "X-Accel-Buffering": "no"},
+    )
+
+
 @router.post("/api/ta/{ta_id}/correct")
 def correct(
     ta_id: int,
@@ -114,3 +232,27 @@ def correct(
     )
     save_tracker_to_ta(ta, tracker, db)
     return {"correction_applied": applied, "new_state": tracker.get_state()}
+
+
+@router.post("/api/ta/{ta_id}/analyze-teaching")
+def analyze_teaching_endpoint(
+    ta_id: int,
+    body: AnalyzeTeachingRequest,
+    current_user: CurrentUser,
+    db: DbSession,
+):
+    """Teaching Helper: analyze current teaching input for antipatterns (commanding, spoon_feeding, under_teaching)."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    session = get_or_create_teaching_session(db, ta.id)
+    conversation_history = []
+    for te in db.query(TeachingEvent).filter(TeachingEvent.session_id == session.id).order_by(TeachingEvent.created_at.asc()).all():
+        if te.student_input:
+            conversation_history.append({"role": "student", "content": te.student_input})
+        if te.ta_response:
+            conversation_history.append({"role": "ta", "content": te.ta_response})
+    result = analyze_teaching(
+        conversation_history,
+        body.student_input or "",
+        domain=ta.domain_id or "python",
+    )
+    return result

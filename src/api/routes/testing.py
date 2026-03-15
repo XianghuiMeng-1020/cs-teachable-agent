@@ -131,7 +131,7 @@ def _run_single_test(
     report = result.get("mastery_report", build_mastery_report(None, learned, None, None))
     active_mis_after = list(tracker.get_active_misconception_ids(units_tested))
 
-    if not result.get("pass_fail") and ta_code and ta.domain_id == "python":
+    if not result.get("pass_fail") and ta_code:
         misconceptions_catalog = adapter.load_misconceptions()
         try_auto_activate_misconception_after_fail(
             tracker, selected, ta_code, misconceptions_catalog

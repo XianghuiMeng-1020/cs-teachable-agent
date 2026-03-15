@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { Send, MessageCircle } from "lucide-react";
-import { teach, getMessages } from "@/api/client";
+import { teach, teachStream, getMessages, analyzeTeaching } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { MessageBubble } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
+import { TeachingHelper, type TeachingHelperResult } from "./TeachingHelper";
+import { ModeIndicator } from "./ModeIndicator";
 import { formatRelative } from "@/lib/utils";
 
 export interface ChatMessage {
@@ -17,6 +19,7 @@ export interface ChatMessage {
     quality_score?: number;
     failed?: boolean;
     lastInput?: string;
+    streaming?: boolean;
   };
 }
 
@@ -29,6 +32,8 @@ export function ChatPanel({ taId }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
+  const [teachingHelperResult, setTeachingHelperResult] = useState<TeachingHelperResult | null>(null);
+  const [pendingInput, setPendingInput] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const { data: messagesData } = useQuery({
@@ -58,30 +63,64 @@ export function ChatPanel({ taId }: ChatPanelProps) {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
+  const handleCheckQuality = async () => {
+    if (!taId || !input.trim()) return;
+    try {
+      const result = await analyzeTeaching(taId, input.trim());
+      setTeachingHelperResult(result);
+    } catch {
+      setTeachingHelperResult(null);
+    }
+  };
+
   const handleSend = async () => {
     if (!taId || !input.trim()) return;
     const text = input.trim();
     setInput("");
+    setTeachingHelperResult(null);
+    setPendingInput(null);
     const now = new Date().toISOString();
     setLocalMessages((m) => [
       ...m,
       { role: "student", content: text, timestamp: formatRelative(now) },
     ]);
     setLoading(true);
+    const streamedContent = { current: "" };
+    setLocalMessages((m) => [
+      ...m,
+      {
+        role: "ta",
+        content: "",
+        timestamp: formatRelative(new Date().toISOString()),
+        metadata: { streaming: true },
+      },
+    ]);
     try {
-      const res = await teach(taId, text);
-      setLocalMessages((m) => [
-        ...m,
-        {
-          role: "ta",
-          content: res.ta_response ?? "OK.",
-          timestamp: formatRelative(new Date().toISOString()),
-          metadata: {
-            interpreted_units: res.interpreted_units,
-            quality_score: res.quality_score,
-          },
+      const res = await teachStream(taId, text, {
+        onChunk: (chunk) => {
+          streamedContent.current += chunk;
+          setLocalMessages((prev) => {
+            const next = [...prev];
+            const last = next[next.length - 1];
+            if (last?.role === "ta" && last.metadata?.streaming) {
+              next[next.length - 1] = { ...last, content: streamedContent.current };
+            }
+            return next;
+          });
         },
-      ]);
+      });
+      setLocalMessages((m) => {
+        const next = [...m];
+        const last = next[next.length - 1];
+        if (last?.role === "ta" && last.metadata?.streaming) {
+          next[next.length - 1] = {
+            ...last,
+            content: res.ta_response ?? last.content,
+            metadata: { interpreted_units: res.interpreted_units },
+          };
+        }
+        return next;
+      });
       if (taId != null) {
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "state"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "misconceptions"] });
@@ -89,15 +128,16 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "messages"] });
       }
     } catch (err) {
-      setLocalMessages((m) => [
-        ...m,
-        {
-          role: "ta",
-          content: "Error: " + (err instanceof Error ? err.message : "Failed"),
-          timestamp: formatRelative(new Date().toISOString()),
-          metadata: { failed: true, lastInput: text },
-        },
-      ]);
+      const errMsg = "Error: " + (err instanceof Error ? err.message : "Failed");
+      setLocalMessages((m) => {
+        const next = [...m];
+        const last = next[next.length - 1];
+        if (last?.role === "ta" && last.metadata?.streaming) {
+          next[next.length - 1] = { ...last, content: errMsg, metadata: { failed: true, lastInput: text } };
+          return next;
+        }
+        return [...next, { role: "ta" as const, content: errMsg, timestamp: formatRelative(new Date().toISOString()), metadata: { failed: true, lastInput: text } }];
+      });
     } finally {
       setLoading(false);
     }
@@ -145,8 +185,13 @@ export function ChatPanel({ taId }: ChatPanelProps) {
       .finally(() => setLoading(false));
   };
 
+  const taMessageCount = messages.filter((m) => m.role === "ta").length;
+
   return (
     <div className="flex h-full flex-col">
+      <div className="flex flex-wrap items-center justify-end gap-2 border-b border-slate-200 px-3 py-2 dark:border-slate-700">
+        <ModeIndicator taMessageCount={taMessageCount} compact />
+      </div>
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
         {messages.length === 0 && !loading && (
           <EmptyState
@@ -173,6 +218,14 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         <div ref={bottomRef} />
       </div>
       <div className="border-t border-slate-200 p-3">
+        {teachingHelperResult && (
+          <div className="mb-3">
+            <TeachingHelper
+              result={teachingHelperResult}
+              onDismiss={() => { setTeachingHelperResult(null); setPendingInput(null); }}
+            />
+          </div>
+        )}
         <div className="flex gap-2">
           <textarea
             placeholder="Type to teach... (Shift+Enter for new line)"
@@ -183,6 +236,14 @@ export function ChatPanel({ taId }: ChatPanelProps) {
             disabled={!taId || loading}
             rows={2}
           />
+          <Button
+            variant="outline"
+            onClick={handleCheckQuality}
+            disabled={!taId || loading || !input.trim()}
+            className="shrink-0"
+          >
+            Check
+          </Button>
           <Button
             icon={Send}
             onClick={handleSend}

@@ -25,6 +25,15 @@
     {"problem_id": "ai_022", "problem_statement": "When is more data not better?", "knowledge_units_tested": ["training_data", "bias_data"], "rubric": "Biased data, noisy data, wrong distribution."},
     {"problem_id": "ai_023", "problem_statement": "Name one way to improve fairness in an AI system.", "knowledge_units_tested": ["fairness"], "rubric": "Diverse data, fairness metrics, auditing."},
     {"problem_id": "ai_024", "problem_statement": "What is explainable AI and why might we need it?", "knowledge_units_tested": ["transparency"], "rubric": "Understanding why model made a decision; trust, law."},
-    {"problem_id": "ai_025", "problem_statement": "Distinguish narrow AI from general AI.", "knowledge_units_tested": ["ai_limits"], "rubric": "Narrow: specific tasks. General: human-like breadth (not yet)."}
+    {"problem_id": "ai_025", "problem_statement": "Distinguish narrow AI from general AI.", "knowledge_units_tested": ["ai_limits"], "rubric": "Narrow: specific tasks. General: human-like breadth (not yet)."},
+    {"problem_id": "ai_026", "problem_statement": "What is prompt engineering? Why does it matter?", "knowledge_units_tested": ["prompt_engineering"], "rubric": "Designing inputs to get desired outputs from LLMs."},
+    {"problem_id": "ai_027", "problem_statement": "In one sentence: what is a large language model?", "knowledge_units_tested": ["llm_basics"], "rubric": "Neural model trained on text to predict/generate text."},
+    {"problem_id": "ai_028", "problem_statement": "What is generative AI? Give two examples.", "knowledge_units_tested": ["generative_ai"], "rubric": "AI that creates new content; e.g. text, images, code."},
+    {"problem_id": "ai_029", "problem_statement": "What is hallucination in the context of LLMs?", "knowledge_units_tested": ["hallucination"], "rubric": "Model producing confident but false or nonsensical output."},
+    {"problem_id": "ai_030", "problem_statement": "Name two limitations of current LLMs.", "knowledge_units_tested": ["llm_limits"], "rubric": "e.g. hallucination, no grounding, no guarantee of correctness."},
+    {"problem_id": "ai_031", "problem_statement": "What does responsible AI mean?", "knowledge_units_tested": ["responsible_ai"], "rubric": "Fair, transparent, accountable, safe design and deployment."},
+    {"problem_id": "ai_032", "problem_statement": "Give one best practice when writing prompts.", "knowledge_units_tested": ["prompt_best_practices"], "rubric": "e.g. be specific, provide context, give examples."},
+    {"problem_id": "ai_033", "problem_statement": "Why is AI safety a concern?", "knowledge_units_tested": ["ai_safety"], "rubric": "Misuse, unintended behavior, alignment, security."},
+    {"problem_id": "ai_034", "problem_statement": "Describe one real-world AI ethics case (e.g. bias in hiring).", "knowledge_units_tested": ["ai_ethics_cases"], "rubric": "Identify issue, stakeholders, and possible mitigation."}
   ]
 }

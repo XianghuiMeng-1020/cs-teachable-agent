@@ -1,11 +1,22 @@
 """
 Run TA code against problem test cases and compute pass/fail and mastery summary.
 Uses subprocess to execute Python with stdin (minimal sandbox).
+Supports partial credit, error type classification, and optional AST-based concept check.
 """
 
 import subprocess
 import tempfile
 from pathlib import Path
+
+# Error type classification
+ERROR_SYNTAX = "SyntaxError"
+ERROR_RUNTIME = "RuntimeError"
+ERROR_LOGIC = "LogicError"
+ERROR_TIMEOUT = "TimeoutError"
+ERROR_NONE = "None"
+
+# Partial credit: pass when at least this fraction of test cases pass
+PARTIAL_PASS_THRESHOLD = 0.8
 
 
 def run_python_code(
@@ -33,33 +44,82 @@ def run_python_code(
         path.unlink(missing_ok=True)
 
 
+def _classify_error(stderr: str, returncode: int, got: str, expected: str) -> str:
+    """Classify failure into SyntaxError, RuntimeError, LogicError, TimeoutError."""
+    if "timeout" in (stderr or "").lower() or returncode == -1:
+        return ERROR_TIMEOUT
+    if "SyntaxError" in (stderr or "") or "IndentationError" in (stderr or ""):
+        return ERROR_SYNTAX
+    if returncode != 0 and stderr:
+        return ERROR_RUNTIME
+    if returncode == 0 and (got or "").strip() != (expected or "").strip():
+        return ERROR_LOGIC
+    return ERROR_NONE
+
+
+def _code_uses_constructs(code: str) -> list[str]:
+    """Lightweight heuristic: which Stage One constructs appear in code (for analytics)."""
+    out = []
+    if "=" in code and "input()" not in code.split("=")[0]:
+        out.append("assignment")
+    if "print(" in code:
+        out.append("print")
+    if "input(" in code:
+        out.append("input")
+    if "if " in code or " elif " in code or " else:" in code:
+        out.append("conditional")
+    if "for " in code or "while " in code:
+        out.append("loop")
+    if "[" in code and "]" in code:
+        out.append("list")
+    return out
+
+
 def evaluate_attempt(problem: dict, ta_code: str) -> dict:
-    """Run TA code against each test case. Returns passed, details, stdout, stderr."""
+    """
+    Run TA code against each test case. Returns passed, details, partial_score,
+    error_type, and optional used_constructs. Partial credit: passed if
+    (passed_count / total) >= PARTIAL_PASS_THRESHOLD.
+    """
     test_cases = problem.get("test_cases", [])
     details = []
-    all_passed = True
+    passed_count = 0
     last_stdout, last_stderr = "", ""
+    error_type = ERROR_NONE
 
     for tc in test_cases:
         stdin_input = tc.get("input", "")
         expected = tc.get("expected_output", "")
         stdout, stderr, returncode = run_python_code(ta_code, stdin_input)
-        passed = returncode == 0 and (stdout or "") == (expected or "")
+        passed = returncode == 0 and (stdout or "").strip() == (expected or "").strip()
+        if passed:
+            passed_count += 1
+        elif error_type == ERROR_NONE:
+            error_type = _classify_error(stderr, returncode, stdout, expected)
         details.append({
             "input": repr(stdin_input),
             "expected": repr(expected),
             "got": repr(stdout),
             "passed": passed,
         })
-        if not passed:
-            all_passed = False
         last_stdout, last_stderr = stdout, stderr
+
+    total = len(test_cases) if test_cases else 1
+    partial_score = passed_count / total if total else 0.0
+    all_passed = passed_count == total
+    passed_threshold = partial_score >= PARTIAL_PASS_THRESHOLD
 
     return {
         "passed": all_passed,
+        "partial_score": partial_score,
+        "passed_count": passed_count,
+        "total_count": total,
+        "passed_partial_threshold": passed_threshold,
+        "error_type": error_type,
         "details": details,
         "stdout": last_stdout,
         "stderr": last_stderr,
+        "used_constructs": _code_uses_constructs(ta_code),
     }
 
 

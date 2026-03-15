@@ -94,9 +94,22 @@ class StateTracker:
         self._state: dict[str, dict] = {}
         for uid, u in self._units.items():
             self._state[uid] = _make_unit_record(u, self._domain, self.STATUS_UNKNOWN)
+        # Reflection store for Reflect-Respond pipeline: facts and code the TA "believes"
+        self._reflection_store: dict = {"facts": [], "code_implementations": []}
 
-    def merge_persisted_state(self, units_state: dict[str, dict]) -> None:
-        """Merge persisted units (e.g. from DB) into tracker; ensure BKT fields exist."""
+    def merge_persisted_state(
+        self,
+        units_state: dict[str, dict],
+        reflection_store: dict | None = None,
+    ) -> None:
+        """Merge persisted units (e.g. from DB) into tracker; ensure BKT fields exist.
+        If reflection_store is provided (e.g. from knowledge_state['reflection_store']), restore it.
+        """
+        if reflection_store is not None and isinstance(reflection_store, dict):
+            self._reflection_store = {
+                "facts": list(reflection_store.get("facts", [])),
+                "code_implementations": list(reflection_store.get("code_implementations", [])),
+            }
         for uid, rec in units_state.items():
             if uid not in self._state:
                 continue
@@ -137,15 +150,26 @@ class StateTracker:
         rec = self._state.get(unit_id, {})
         return float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
 
+    def _effective_decay_lambda(self, unit_id: str) -> float:
+        """Personalized decay: more teaching/testing evidence -> slower forgetting."""
+        rec = self._state.get(unit_id, {})
+        n_teaching = len(rec.get("teaching_evidence", []))
+        n_testing = len(rec.get("testing_evidence", []))
+        n_total = n_teaching + n_testing
+        if n_total <= 0:
+            return DECAY_LAMBDA
+        return DECAY_LAMBDA / (1.0 + 0.15 * n_total)
+
     def get_p_know_decayed(self, unit_id: str) -> float:
-        """Get p_know after applying Ebbinghaus-style decay."""
+        """Get p_know after applying Ebbinghaus-style decay (personalized by evidence count)."""
         rec = self._state.get(unit_id, {})
         p = float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
         last = rec.get("last_practiced_at", _timestamp())
         days = self._days_since(last)
         if days <= 0:
             return p
-        decay = math.exp(-DECAY_LAMBDA * days)
+        lam = self._effective_decay_lambda(unit_id)
+        decay = math.exp(-lam * days)
         return p * decay
 
     def _prerequisites_satisfied(self, unit_id: str) -> bool:
@@ -154,6 +178,30 @@ class StateTracker:
             if self.get_p_know_decayed(prereq_id) < PREREQ_MIN_P_KNOW:
                 return False
         return True
+
+    def _decay_misconceptions_after_teaching(
+        self,
+        unit_id: str,
+        *,
+        decay_factor: float = 0.85,
+        drop_threshold: float = 0.2,
+    ) -> None:
+        """After teaching, reduce severity of active misconceptions on this unit; remove if below threshold."""
+        if unit_id not in self._state:
+            return
+        rec = self._state[unit_id]
+        active = rec.get("active_misconceptions", [])
+        new_active = []
+        for m in active:
+            sev = float(m.get("severity_score", 0.5))
+            sev = sev * decay_factor
+            if sev >= drop_threshold:
+                m["severity_score"] = round(sev, 3)
+                new_active.append(m)
+        rec["active_misconceptions"] = new_active
+        if new_active != active:
+            rec["last_updated"] = _timestamp()
+            self._last_updated = rec["last_updated"]
 
     def _effective_p_transit(self, unit_id: str) -> float:
         """p_transit reduced to 0 if prerequisites not satisfied."""
@@ -234,6 +282,7 @@ class StateTracker:
             "schema_version": self._schema_version,
             "last_updated": self._last_updated,
             "units": dict(self._state),
+            "reflection_store": dict(self._reflection_store),
         }
 
     def get_learned_units(self) -> set[str]:
@@ -316,6 +365,39 @@ class StateTracker:
                     self._sync_status_from_bkt(uid)
         return True
 
+    def _bkt_update_after_teaching_observation(
+        self,
+        uid: str,
+        quality_score: float,
+        now: str,
+    ) -> None:
+        """
+        Apply standard BKT update for a teaching observation (treat as correct observation).
+        p_transit is scaled by quality_score so higher-quality teaching increases transition probability.
+        """
+        if uid not in self._state:
+            return
+        rec = self._state[uid]
+        p_know = float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
+        p_slip = float(rec.get("bkt_p_slip", DEFAULT_P_SLIP))
+        p_guess = float(rec.get("bkt_p_guess", DEFAULT_P_GUESS))
+        p_transit = self._effective_p_transit(uid)
+        # Scale p_transit by teaching quality (0.5--1.0) so good teaching increases chance of learning
+        quality = max(0.3, min(1.0, float(quality_score)))
+        p_transit = p_transit * (0.5 + 0.5 * quality)
+        # BKT update given "correct" observation (student taught correctly)
+        p_correct = p_know * (1 - p_slip) + (1 - p_know) * p_guess
+        if p_correct <= 0:
+            p_correct = 1e-6
+        p_know_given_correct = (p_know * (1 - p_slip)) / p_correct
+        p_know = p_know_given_correct + (1 - p_know_given_correct) * p_transit
+        p_know = max(0.01, min(0.99, p_know))
+        rec["bkt_p_know"] = p_know
+        rec["last_practiced_at"] = now
+        rec["last_updated"] = now
+        rec["confidence"] = round(p_know, 4)
+        self._sync_status_from_bkt(uid)
+
     def update_after_teaching(
         self,
         unit_ids: list[str],
@@ -330,6 +412,7 @@ class StateTracker:
         units_taught = (
             teaching_event.get("knowledge_units_taught", unit_ids) if teaching_event else unit_ids
         )
+        quality_score = float(teaching_event.get("quality_score", 0.7)) if teaching_event else 0.7
         now = _timestamp()
         self._last_updated = now
         for uid in unit_ids:
@@ -342,11 +425,11 @@ class StateTracker:
                 rec["bkt_p_know"] = min(0.6, float(rec.get("bkt_p_know", 0)) + 0.2)
             else:
                 new_status_here = new_status
-                rec["bkt_p_know"] = max(float(rec.get("bkt_p_know", 0)), 0.7)
-            rec["status"] = new_status_here
+                self._bkt_update_after_teaching_observation(uid, quality_score, now)
+                new_status_here = rec["status"]
             rec["last_practiced_at"] = now
             rec["last_updated"] = now
-            rec["confidence"] = round(rec["bkt_p_know"], 4)
+            rec["confidence"] = round(rec.get("bkt_p_know", 0), 4)
             if event_id is not None:
                 rec["teaching_evidence"].append({
                     "teaching_event_id": event_id,
@@ -358,6 +441,8 @@ class StateTracker:
                     "misconception_activated": None,
                     "note": note,
                 })
+            # Confidence decay: correct teaching weakens active misconceptions on this unit
+            self._decay_misconceptions_after_teaching(uid, decay_factor=0.85, drop_threshold=0.2)
 
     def mark_taught(self, unit_ids: list[str], new_status: str = STATUS_LEARNED) -> None:
         for uid in unit_ids:
@@ -587,3 +672,14 @@ class StateTracker:
     def get_bkt_state(self) -> dict[str, float]:
         """Return decayed p_know per unit (for API / analytics)."""
         return {uid: round(self.get_p_know_decayed(uid), 4) for uid in self._state}
+
+    def get_reflection_store(self) -> dict:
+        """Return the reflection store (facts, code_implementations) for Reflect-Respond pipeline."""
+        return dict(self._reflection_store)
+
+    def set_reflection_store(self, store: dict) -> None:
+        """Set the reflection store (e.g. after Reflect-Respond pipeline update)."""
+        self._reflection_store = {
+            "facts": list(store.get("facts", [])),
+            "code_implementations": list(store.get("code_implementations", [])),
+        }

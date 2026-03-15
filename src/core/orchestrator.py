@@ -18,6 +18,8 @@ from src.core.task_engine import (
     get_ineligible_reasons,
 )
 from src.core.dialogue_engine import get_ta_learner_response
+from src.core.reflect_respond import run_reflect_respond_pipeline
+from src.core.mode_shifting import maybe_append_questioner_response
 from src.core.attempt_engine import get_ta_code_attempt
 from src.core.evaluator import (
     evaluate_attempt as _evaluate_attempt_python,
@@ -123,19 +125,59 @@ def run_teaching_and_test(
 
     learned = tracker.get_learned_units()
     active_mis_ids = tracker.get_active_misconception_ids(learned)
-    filled_dialogue_prompt = None
-    if domain_adapter and hasattr(domain_adapter, "get_conversation_prompt"):
-        filled_dialogue_prompt = domain_adapter.get_conversation_prompt(
-            tracker.get_full_state(), teaching_event, list(learned)
+    ta_learner_response: str
+    # Prefer Reflect-Respond pipeline when domain adapter is present (knowledge-state-constrained response)
+    if domain_adapter is not None:
+        reflection_store = tracker.get_reflection_store()
+        ta_learner_response, updated_store = run_reflect_respond_pipeline(
+            reflection_store,
+            teaching_event,
+            list(learned),
+            active_mis_ids or [],
+            tracker.get_domain(),
+            conversation_history=conversation_history,
+            student_input=teaching_event.get("note"),
+            use_llm=True,
         )
-    ta_learner_response = get_ta_learner_response(
-        learned,
-        teaching_event,
-        active_misconceptions=active_mis_ids or None,
-        filled_prompt=filled_dialogue_prompt,
-        use_llm=True if filled_dialogue_prompt else None,
-        conversation_history=conversation_history,
-    )
+        tracker.set_reflection_store(updated_store)
+        # Mode-shifting: every 3 turns append a thought-provoking "why"/"how" question
+        msg_count = (len(conversation_history) + 1) if conversation_history else 1
+        ta_learner_response = maybe_append_questioner_response(
+            ta_learner_response,
+            msg_count,
+            teaching_event.get("topic_taught", ""),
+            teaching_event.get("note", ""),
+            tracker.get_domain(),
+            list(learned),
+            conversation_history,
+            phase="teach",
+        )
+    else:
+        filled_dialogue_prompt = None
+        if domain_adapter and hasattr(domain_adapter, "get_conversation_prompt"):
+            filled_dialogue_prompt = domain_adapter.get_conversation_prompt(
+                tracker.get_full_state(), teaching_event, list(learned)
+            )
+        ta_learner_response = get_ta_learner_response(
+            learned,
+            teaching_event,
+            active_misconceptions=active_mis_ids or None,
+            filled_prompt=filled_dialogue_prompt,
+            use_llm=True if filled_dialogue_prompt else None,
+            conversation_history=conversation_history,
+        )
+        if conversation_history is not None:
+            msg_count = len(conversation_history) + 1
+            ta_learner_response = maybe_append_questioner_response(
+                ta_learner_response,
+                msg_count,
+                teaching_event.get("topic_taught", ""),
+                teaching_event.get("note", ""),
+                tracker.get_domain(),
+                list(learned),
+                conversation_history,
+                phase="teach",
+            )
     record_learner_dialogue(
         domain=domain,
         teaching_event_id=teaching_event.get("teaching_event_id", ""),

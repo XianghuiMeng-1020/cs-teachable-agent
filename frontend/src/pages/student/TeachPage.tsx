@@ -8,6 +8,7 @@ import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
 import { MasteryRadial } from "@/components/state/MasteryRadial";
 import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
 import { LiveCodeEditor } from "@/components/workspace/LiveCodeEditor";
+import { LearningObjectives } from "@/components/workspace/LearningObjectives";
 import { PromptLab } from "@/components/ai-experiments/PromptLab";
 import { ModelComparison } from "@/components/ai-experiments/ModelComparison";
 import type { UnitNode } from "@/components/state/KnowledgeGraph";
@@ -62,6 +63,7 @@ export function TeachPage() {
           className="min-h-[200px] flex-shrink-0"
         />
         <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
+        <LearningObjectives learnedUnitIds={state?.learned_unit_ids ?? []} compact />
         {misconceptions.length > 0 ? (
           misconceptions.map((m) => (
             <MisconceptionCard
@@ -97,7 +99,7 @@ export function TeachPage() {
         {domainId === "ai_literacy" && (
           <div className="space-y-4">
             <PromptLab taId={currentTaId} />
-            <ModelComparison />
+            <ModelComparison taId={currentTaId} />
           </div>
         )}
       </div>

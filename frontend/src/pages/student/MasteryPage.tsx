@@ -33,13 +33,21 @@ export function MasteryPage() {
     fill: u.status === "learned" ? "#10B981" : u.status === "partially_learned" ? "#F59E0B" : "#F1F5F9",
   }));
 
-  const radarData = [
-    { subject: "Variables", value: barData.filter((b) => b.name.toLowerCase().includes("variable")).length ? 80 : 0, fullMark: 100 },
-    { subject: "I/O", value: barData.filter((b) => b.name.toLowerCase().includes("print") || b.name.toLowerCase().includes("input")).length ? 70 : 0, fullMark: 100 },
-    { subject: "Conditionals", value: barData.filter((b) => b.name.toLowerCase().includes("if") || b.name.toLowerCase().includes("comparison")).length ? 60 : 0, fullMark: 100 },
-    { subject: "Loops", value: barData.filter((b) => b.name.toLowerCase().includes("loop") || b.name.toLowerCase().includes("range")).length ? 50 : 0, fullMark: 100 },
-    { subject: "Lists", value: barData.filter((b) => b.name.toLowerCase().includes("list")).length ? 40 : 0, fullMark: 100 },
-  ];
+  const byTopicGroup = units.reduce<Record<string, { learned: number; total: number }>>((acc, u) => {
+    const g = u.topic_group ?? "other";
+    if (!acc[g]) acc[g] = { learned: 0, total: 0 };
+    acc[g].total += 1;
+    if (u.status === "learned" || u.status === "partially_learned") acc[g].learned += 1;
+    return acc;
+  }, {});
+  let radarData = Object.entries(byTopicGroup).map(([subject, v]) => ({
+    subject: subject.replace(/_/g, " "),
+    value: v.total ? Math.round((v.learned / v.total) * 100) : 0,
+    fullMark: 100,
+  }));
+  if (radarData.length === 0) {
+    radarData = [{ subject: "Knowledge", value: 0, fullMark: 100 }];
+  }
 
   return (
     <div className="space-y-6">

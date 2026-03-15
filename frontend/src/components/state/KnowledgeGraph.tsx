@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { KU_DISPLAY_NAMES } from "@/lib/constants";
 
@@ -13,8 +13,10 @@ export interface UnitNode {
 export interface KnowledgeUnitDefinition {
   id: string;
   name?: string;
+  description?: string;
   prerequisites?: string[];
   topic_group?: string;
+  example_correct_code?: string;
 }
 
 const TOPIC_ORDER = [
@@ -63,6 +65,35 @@ interface KnowledgeGraphProps {
 }
 
 export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: KnowledgeGraphProps) {
+  const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
+  const [selectedEdge, setSelectedEdge] = useState<{ from: string; to: string } | null>(null);
+  const [transform, setTransform] = useState({ scale: 1, tx: 0, ty: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{ x: number; y: number } | null>(null);
+
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      setTransform((t) => ({ ...t, scale: Math.max(0.5, Math.min(2, t.scale + delta)) }));
+    },
+    []
+  );
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (e.button === 0) dragRef.current = { x: e.clientX, y: e.clientY };
+  }, []);
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (dragRef.current) {
+      const dx = e.clientX - dragRef.current.x;
+      const dy = e.clientY - dragRef.current.y;
+      dragRef.current = { x: e.clientX, y: e.clientY };
+      setTransform((t) => ({ ...t, tx: t.tx + dx, ty: t.ty + dy }));
+    }
+  }, []);
+  const handleMouseUp = useCallback(() => {
+    dragRef.current = null;
+  }, []);
+
   const defsById = useMemo(() => {
     const m: Record<string, KnowledgeUnitDefinition> = {};
     for (const d of knowledgeUnitDefinitions ?? []) {
@@ -117,61 +148,104 @@ export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: K
   const nodeWidth = 72;
   const nodeHeight = 32;
 
+  const viewW = byGroup.length * colWidth;
+  const viewH = Math.max(...byGroup.map((c) => c.nodes.length * rowHeight), 1);
+  const selectedDef = selectedUnitId ? defsById[selectedUnitId] : null;
+
   return (
-    <div className={cn("overflow-auto rounded-xl border border-slate-200 bg-white p-4", className)}>
-      <svg
-        viewBox={`0 0 ${byGroup.length * colWidth} ${Math.max(...byGroup.map((c) => c.nodes.length * rowHeight), 1)}`}
-        className="w-full min-h-[200px]"
-        style={{ maxHeight: "400px" }}
+    <div className={cn("flex flex-col rounded-xl border border-slate-200 bg-white overflow-hidden", className)}>
+      <div
+        ref={containerRef}
+        className="overflow-hidden min-h-[200px] max-h-[400px] cursor-grab active:cursor-grabbing"
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
-        {edges.map((e, i) => {
-          const from = nodePos.pos[e.from];
-          const to = nodePos.pos[e.to];
-          if (!from || !to) return null;
-          return (
-            <line
-              key={`${e.from}-${e.to}-${i}`}
-              x1={from.x}
-              y1={from.y}
-              x2={to.x}
-              y2={to.y}
-              stroke="currentColor"
-              strokeOpacity={0.2}
-              strokeWidth={1}
-              className="text-slate-300"
-            />
-          );
-        })}
-        {byGroup.map((col, ci) =>
-          col.nodes.map((node, ni) => {
-            const x = ci * colWidth + (colWidth - nodeWidth) / 2;
-            const y = ni * rowHeight + (rowHeight - nodeHeight) / 2;
-            const label =
-              defsById[node.unit_id]?.name ?? KU_DISPLAY_NAMES[node.unit_id] ?? node.unit_id;
+        <svg
+          viewBox={`0 0 ${viewW} ${viewH}`}
+          className="w-full h-full block"
+          style={{
+            transform: `translate(${transform.tx}px, ${transform.ty}px) scale(${transform.scale})`,
+            transformOrigin: "0 0",
+          }}
+        >
+          {edges.map((e, i) => {
+            const from = nodePos.pos[e.from];
+            const to = nodePos.pos[e.to];
+            if (!from || !to) return null;
+            const isSelected = selectedEdge?.from === e.from && selectedEdge?.to === e.to;
             return (
-              <g key={node.unit_id}>
-                <rect
-                  x={x}
-                  y={y}
-                  width={nodeWidth}
-                  height={nodeHeight}
-                  rx={6}
-                  className={cn("stroke-[1.5] transition-colors duration-300", statusRectStyles[node.status])}
-                />
-                <text
-                  x={x + nodeWidth / 2}
-                  y={y + nodeHeight / 2}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className={cn("text-[11px] font-medium fill-current", statusTextStyles[node.status])}
-                >
-                  {label.length > 12 ? label.slice(0, 11) + "…" : label}
-                </text>
-              </g>
+              <line
+                key={`${e.from}-${e.to}-${i}`}
+                x1={from.x}
+                y1={from.y}
+                x2={to.x}
+                y2={to.y}
+                stroke="currentColor"
+                strokeOpacity={isSelected ? 0.5 : 0.2}
+                strokeWidth={isSelected ? 2 : 1}
+                className="text-slate-300"
+              />
             );
-          })
-        )}
-      </svg>
+          })}
+          {byGroup.map((col, ci) =>
+            col.nodes.map((node, ni) => {
+              const x = ci * colWidth + (colWidth - nodeWidth) / 2;
+              const y = ni * rowHeight + (rowHeight - nodeHeight) / 2;
+              const label =
+                defsById[node.unit_id]?.name ?? KU_DISPLAY_NAMES[node.unit_id] ?? node.unit_id;
+              const isSelected = selectedUnitId === node.unit_id;
+              return (
+                <g
+                  key={node.unit_id}
+                  onClick={() => setSelectedUnitId((id) => (id === node.unit_id ? null : node.unit_id))}
+                  className="cursor-pointer"
+                >
+                  <rect
+                    x={x}
+                    y={y}
+                    width={nodeWidth}
+                    height={nodeHeight}
+                    rx={6}
+                    className={cn(
+                      "stroke-[1.5] transition-colors duration-300",
+                      statusRectStyles[node.status],
+                      isSelected && "stroke-2 stroke-brand-500 ring-2 ring-brand-500/30"
+                    )}
+                  />
+                  <text
+                    x={x + nodeWidth / 2}
+                    y={y + nodeHeight / 2}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className={cn("text-[11px] font-medium fill-current pointer-events-none", statusTextStyles[node.status])}
+                  >
+                    {label.length > 12 ? label.slice(0, 11) + "…" : label}
+                  </text>
+                </g>
+              );
+            })
+          )}
+        </svg>
+      </div>
+      {selectedDef && (
+        <div className="border-t border-slate-200 p-3 bg-slate-50 dark:bg-slate-900/30 text-sm">
+          <p className="font-medium text-slate-800 dark:text-slate-200">{selectedDef.name ?? selectedDef.id}</p>
+          {selectedDef.description && (
+            <p className="mt-1 text-slate-600 dark:text-slate-400">{selectedDef.description}</p>
+          )}
+          {selectedDef.prerequisites?.length ? (
+            <p className="mt-1 text-xs text-slate-500">Prerequisites: {selectedDef.prerequisites.join(", ")}</p>
+          ) : null}
+          {selectedDef.example_correct_code && (
+            <pre className="mt-2 rounded bg-slate-100 dark:bg-slate-800 p-2 text-xs overflow-x-auto">
+              {selectedDef.example_correct_code}
+            </pre>
+          )}
+        </div>
+      )}
     </div>
   );
 }
