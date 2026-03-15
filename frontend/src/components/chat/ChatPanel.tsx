@@ -3,7 +3,6 @@ import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { Send, MessageCircle } from "lucide-react";
 import { teach, getMessages } from "@/api/client";
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { MessageBubble } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
@@ -13,7 +12,12 @@ export interface ChatMessage {
   role: "student" | "ta";
   content: string;
   timestamp?: string;
-  metadata?: { interpreted_units?: string[]; quality_score?: number };
+  metadata?: {
+    interpreted_units?: string[];
+    quality_score?: number;
+    failed?: boolean;
+    lastInput?: string;
+  };
 }
 
 interface ChatPanelProps {
@@ -91,6 +95,7 @@ export function ChatPanel({ taId }: ChatPanelProps) {
           role: "ta",
           content: "Error: " + (err instanceof Error ? err.message : "Failed"),
           timestamp: formatRelative(new Date().toISOString()),
+          metadata: { failed: true, lastInput: text },
         },
       ]);
     } finally {
@@ -98,11 +103,46 @@ export function ChatPanel({ taId }: ChatPanelProps) {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
+  };
+
+  const handleRetry = (lastInput: string) => {
+    if (!taId || !lastInput.trim()) return;
+    setLocalMessages((m) => m.slice(0, -2));
+    setLoading(true);
+    const studentMsg: ChatMessage = {
+      role: "student",
+      content: lastInput,
+      timestamp: formatRelative(new Date().toISOString()),
+    };
+    teach(taId, lastInput)
+      .then((res) => {
+        const taMsg: ChatMessage = {
+          role: "ta",
+          content: res.ta_response ?? "OK.",
+          timestamp: formatRelative(new Date().toISOString()),
+          metadata: { interpreted_units: res.interpreted_units, quality_score: res.quality_score },
+        };
+        setLocalMessages((m) => [...m, studentMsg, taMsg]);
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "state"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "misconceptions"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "history"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "messages"] });
+      })
+      .catch((err) => {
+        const taMsg: ChatMessage = {
+          role: "ta",
+          content: "Error: " + (err instanceof Error ? err.message : "Failed"),
+          timestamp: formatRelative(new Date().toISOString()),
+          metadata: { failed: true, lastInput },
+        };
+        setLocalMessages((m) => [...m, studentMsg, taMsg]);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -122,6 +162,11 @@ export function ChatPanel({ taId }: ChatPanelProps) {
             content={msg.content}
             timestamp={msg.timestamp}
             metadata={msg.metadata}
+            onRetry={
+              msg.metadata?.failed && msg.metadata?.lastInput
+                ? () => handleRetry(msg.metadata!.lastInput!)
+                : undefined
+            }
           />
         ))}
         {loading && <TypingIndicator />}
@@ -129,13 +174,14 @@ export function ChatPanel({ taId }: ChatPanelProps) {
       </div>
       <div className="border-t border-slate-200 p-3">
         <div className="flex gap-2">
-          <Input
-            placeholder="Type to teach..."
+          <textarea
+            placeholder="Type to teach... (Shift+Enter for new line)"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1"
+            className="flex-1 min-h-[40px] max-h-32 resize-y rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-slate-50 disabled:text-slate-500"
             disabled={!taId || loading}
+            rows={2}
           />
           <Button
             icon={Send}

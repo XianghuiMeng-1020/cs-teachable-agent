@@ -1,10 +1,24 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
+import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "CS Teachable Agent",
+        short_name: "CS TA",
+        description: "A knowledge-state-constrained teachable agent for CS education",
+        theme_color: "#1e1b4b",
+        background_color: "#f8fafc",
+        display: "standalone",
+        start_url: "/",
+      },
+    }),
+  ],
   resolve: {
     alias: { "@": path.resolve(__dirname, "./src") },
   },

@@ -22,3 +22,15 @@ export function formatRelative(date: string | Date, baseDate: Date = new Date())
   if (diffDays < 7) return `${diffDays}d ago`;
   return formatDate(d);
 }
+
+/** Decode JWT payload without verification (read-only for exp). Returns exp in seconds or null. */
+export function getJwtExpiration(token: string): number | null {
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/"))) as { exp?: number };
+    return typeof payload.exp === "number" ? payload.exp : null;
+  } catch {
+    return null;
+  }
+}

@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as Tabs from "@radix-ui/react-tabs";
-import { CheckCircle2, Bot } from "lucide-react";
+import { CheckCircle2, Bot, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuthStore } from "@/stores/authStore";
 import { ROUTES } from "@/lib/constants";
 import { toast } from "sonner";
+import {
+  validateUsername,
+  validatePassword,
+  getFriendlyAuthError,
+  MIN_PASSWORD_LENGTH,
+} from "@/lib/validation";
 
 const bullets = [
   "Knowledge-state-driven TA behavior",
@@ -21,6 +27,8 @@ export function LoginPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState<"student" | "teacher">("student");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { login, register } = useAuthStore();
   const navigate = useNavigate();
@@ -29,8 +37,14 @@ export function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim() || !password) {
-      toast.error("Please enter username and password");
+    const userError = validateUsername(username);
+    if (userError) {
+      toast.error(userError);
+      return;
+    }
+    const pwdError = validatePassword(password);
+    if (pwdError) {
+      toast.error(pwdError);
       return;
     }
     setLoading(true);
@@ -39,7 +53,7 @@ export function LoginPage() {
       toast.success("Signed in");
       navigate(from, { replace: true });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Login failed");
+      toast.error(getFriendlyAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -47,8 +61,14 @@ export function LoginPage() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim() || !password) {
-      toast.error("Please enter username and password");
+    const userError = validateUsername(username);
+    if (userError) {
+      toast.error(userError);
+      return;
+    }
+    const pwdError = validatePassword(password);
+    if (pwdError) {
+      toast.error(pwdError);
       return;
     }
     if (password !== confirmPassword) {
@@ -61,7 +81,7 @@ export function LoginPage() {
       toast.success("Account created");
       navigate(from, { replace: true });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Registration failed");
+      toast.error(getFriendlyAuthError(err));
     } finally {
       setLoading(false);
     }
@@ -116,17 +136,28 @@ export function LoginPage() {
               <h2 className="text-xl font-semibold text-slate-900">Welcome back</h2>
               <form onSubmit={handleLogin} className="mt-6 space-y-4">
                 <Input
-                  placeholder="Username"
+                  placeholder="Username (letters, numbers, underscore)"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
+                  maxLength={32}
                 />
                 <Input
-                  type="password"
-                  placeholder="Password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password (min 6 characters)"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
+                  rightIcon={
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((s) => !s)}
+                      className="text-slate-400 hover:text-slate-600"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  }
                 />
                 <Button type="submit" fullWidth loading={loading}>
                   Sign in
@@ -162,24 +193,45 @@ export function LoginPage() {
                   </button>
                 </div>
                 <Input
-                  placeholder="Username"
+                  placeholder="Username (3–32 chars, letters, numbers, _)"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
+                  maxLength={32}
                 />
                 <Input
-                  type="password"
-                  placeholder="Password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder={`Password (min ${MIN_PASSWORD_LENGTH} characters)`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="new-password"
+                  rightIcon={
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((s) => !s)}
+                      className="text-slate-400 hover:text-slate-600"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  }
                 />
                 <Input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   autoComplete="new-password"
+                  rightIcon={
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword((s) => !s)}
+                      className="text-slate-400 hover:text-slate-600"
+                      aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  }
                 />
                 <Button type="submit" fullWidth loading={loading}>
                   Create account

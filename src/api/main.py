@@ -1,20 +1,25 @@
 """FastAPI application entry point."""
 
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from src.db.database import init_db
-from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard
+from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification
+from src.api.limiter import limiter
 
 app = FastAPI(
     title="CS Teachable Agent API",
     description="Backend for the Teachable Agent: teach, test, state, trace.",
     version="0.1.0",
 )
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS 配置：生产环境使用特定域名，开发环境允许本地
-import os
-
 allowed_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -57,6 +62,8 @@ app.include_router(teaching.router)
 app.include_router(testing.router)
 app.include_router(state.router)
 app.include_router(teacher_dashboard.router)
+app.include_router(sandbox.router)
+app.include_router(gamification.router)
 
 
 @app.get("/api/health")

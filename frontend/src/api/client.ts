@@ -1,6 +1,10 @@
 // API Base URL: 开发环境用相对路径（Vite 代理），生产环境用环境变量或绝对路径
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
+const DEFAULT_TIMEOUT_MS = 30_000;
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 1_000;
+
 let token: string | null = null;
 
 export function setToken(t: string | null) {
@@ -11,79 +15,146 @@ export function getToken(): string | null {
   return token;
 }
 
+/** Called on 401 so app can clear auth state and redirect */
+let onUnauthorized: (() => void) | null = null;
+export function setOnUnauthorized(fn: (() => void) | null) {
+  onUnauthorized = fn;
+}
+
 function headers(): HeadersInit {
   const h: HeadersInit = { "Content-Type": "application/json" };
   if (token) h["Authorization"] = `Bearer ${token}`;
   return h;
 }
 
+function isRetryable(method: string, status: number, err?: unknown): boolean {
+  if (method !== "GET") return false;
+  if (status >= 500 && status < 600) return true;
+  if (err instanceof TypeError && (err.message === "Failed to fetch" || err.message === "Load failed")) return true;
+  return false;
+}
+
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  timeoutMs: number = DEFAULT_TIMEOUT_MS
+): Promise<Response> {
+  const ac = new AbortController();
+  const id = setTimeout(() => ac.abort(), timeoutMs);
+  try {
+    const r = await fetch(url, { ...init, signal: ac.signal });
+    return r;
+  } finally {
+    clearTimeout(id);
+  }
+}
+
+async function apiFetch(
+  url: string,
+  init: RequestInit & { timeout?: number; skipRetry?: boolean } = {}
+): Promise<Response> {
+  const { timeout = DEFAULT_TIMEOUT_MS, skipRetry = false, ...fetchInit } = init;
+  const method = (fetchInit.method || "GET").toUpperCase();
+  let lastErr: unknown;
+  let lastRes: Response | null = null;
+  for (let attempt = 0; attempt <= (skipRetry ? 0 : MAX_RETRIES); attempt++) {
+    try {
+      lastRes = await fetchWithTimeout(`${API_BASE}${url}`, fetchInit, timeout);
+      if (lastRes.status === 401) {
+        setToken(null);
+        onUnauthorized?.();
+        const text = await lastRes.text();
+        let msg = text;
+        try {
+          const o = JSON.parse(text) as { detail?: string };
+          if (typeof o.detail === "string") msg = o.detail;
+        } catch {
+          // use text
+        }
+        throw new Error(msg);
+      }
+      if (!lastRes.ok && !isRetryable(method, lastRes.status)) {
+        const text = await lastRes.text();
+        throw new Error(text);
+      }
+      if (lastRes.ok) return lastRes;
+      lastErr = new Error(await lastRes.text());
+    } catch (err) {
+      lastErr = err;
+      if (err instanceof Error && err.name === "AbortError") throw new Error("Request timed out. Please try again.");
+      if (attempt < MAX_RETRIES && isRetryable(method, 0, err)) {
+        await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      throw err;
+    }
+  }
+  if (lastRes) return lastRes;
+  throw lastErr;
+}
+
 export async function register(username: string, password: string, role = "student") {
-  const r = await fetch(`${API_BASE}/auth/register`, {
+  const r = await apiFetch("/auth/register", {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({ username, password, role }),
+    skipRetry: true,
   });
-  if (!r.ok) throw new Error(await r.text());
-  return r.json();
+  const data = await r.json();
+  return data;
 }
 
 export async function login(username: string, password: string) {
-  const r = await fetch(`${API_BASE}/auth/login`, {
+  const r = await apiFetch("/auth/login", {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({ username, password }),
+    skipRetry: true,
   });
-  if (!r.ok) throw new Error(await r.text());
   const data = await r.json();
   if (data.access_token) setToken(data.access_token);
   return data;
 }
 
 export async function me() {
-  const r = await fetch(`${API_BASE}/auth/me`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch("/auth/me", { headers: headers() });
   return r.json();
 }
 
 export async function listTA() {
-  const r = await fetch(`${API_BASE}/ta`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch("/ta", { headers: headers() });
   return r.json();
 }
 
 export async function createTA(domain_id = "python", name?: string) {
-  const r = await fetch(`${API_BASE}/ta`, {
+  const r = await apiFetch("/ta", {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({ domain_id, name }),
   });
-  if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
 
 export async function getTA(taId: number) {
-  const r = await fetch(`${API_BASE}/ta/${taId}`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}`, { headers: headers() });
   return r.json();
 }
 
 export async function teach(taId: number, student_input: string) {
-  const r = await fetch(`${API_BASE}/ta/${taId}/teach`, {
+  const r = await apiFetch(`/ta/${taId}/teach`, {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({ student_input }),
   });
-  if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
 
 export async function runTest(taId: number, problem_id?: string) {
-  const r = await fetch(`${API_BASE}/ta/${taId}/test`, {
+  const r = await apiFetch(`/ta/${taId}/test`, {
     method: "POST",
     headers: headers(),
     body: JSON.stringify(problem_id ? { problem_id } : {}),
   });
-  if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
 
@@ -101,18 +172,16 @@ export interface ComprehensiveTestResponse {
 }
 
 export async function runTestComprehensive(taId: number): Promise<ComprehensiveTestResponse> {
-  const r = await fetch(`${API_BASE}/ta/${taId}/test/comprehensive`, {
+  const r = await apiFetch(`/ta/${taId}/test/comprehensive`, {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({}),
   });
-  if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
 
 export async function getState(taId: number) {
-  const r = await fetch(`${API_BASE}/ta/${taId}/state`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/state`, { headers: headers() });
   return r.json();
 }
 
@@ -130,8 +199,7 @@ export interface MasteryResponse {
 }
 
 export async function getMastery(taId: number): Promise<MasteryResponse> {
-  const r = await fetch(`${API_BASE}/ta/${taId}/mastery`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/mastery`, { headers: headers() });
   return r.json();
 }
 
@@ -148,14 +216,12 @@ export interface ProblemsResponse {
 }
 
 export async function getProblems(taId: number): Promise<ProblemsResponse> {
-  const r = await fetch(`${API_BASE}/ta/${taId}/problems`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/problems`, { headers: headers() });
   return r.json();
 }
 
 export async function getTrace(taId: number) {
-  const r = await fetch(`${API_BASE}/ta/${taId}/trace`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/trace`, { headers: headers() });
   return r.json();
 }
 
@@ -174,8 +240,7 @@ export interface MisconceptionsResponse {
 }
 
 export async function getMisconceptions(taId: number): Promise<MisconceptionsResponse> {
-  const r = await fetch(`${API_BASE}/ta/${taId}/misconceptions`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/misconceptions`, { headers: headers() });
   return r.json();
 }
 
@@ -204,8 +269,7 @@ export async function getHistory(
   if (params?.per_page != null) sp.set("per_page", String(params.per_page));
   if (params?.type != null) sp.set("type", params.type);
   const q = sp.toString();
-  const r = await fetch(`${API_BASE}/ta/${taId}/history${q ? `?${q}` : ""}`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/history${q ? `?${q}` : ""}`, { headers: headers() });
   return r.json();
 }
 
@@ -220,20 +284,17 @@ export interface GetMessagesResponse {
 }
 
 export async function getMessages(taId: number): Promise<GetMessagesResponse> {
-  const r = await fetch(`${API_BASE}/ta/${taId}/messages`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/ta/${taId}/messages`, { headers: headers() });
   return r.json();
 }
 
 export async function teacherStudents() {
-  const r = await fetch(`${API_BASE}/teacher/students`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch("/teacher/students", { headers: headers() });
   return r.json();
 }
 
 export async function teacherAnalytics() {
-  const r = await fetch(`${API_BASE}/teacher/analytics`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch("/teacher/analytics", { headers: headers() });
   return r.json();
 }
 
@@ -273,8 +334,7 @@ export async function teacherTranscripts(params?: {
   if (params?.search) sp.set("search", params.search);
   if (params?.ku) sp.set("ku", params.ku);
   const q = sp.toString();
-  const r = await fetch(`${API_BASE}/teacher/transcripts${q ? `?${q}` : ""}`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/teacher/transcripts${q ? `?${q}` : ""}`, { headers: headers() });
   return r.json();
 }
 
@@ -297,15 +357,13 @@ export interface TranscriptDetailResponse {
 }
 
 export async function teacherTranscriptDetail(sessionId: number): Promise<TranscriptDetailResponse> {
-  const r = await fetch(`${API_BASE}/teacher/transcripts/${sessionId}`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/teacher/transcripts/${sessionId}`, { headers: headers() });
   return r.json();
 }
 
 export async function teacherTranscriptsExport(sessionId?: number): Promise<Blob> {
   const q = sessionId != null ? `?session_id=${sessionId}` : "";
-  const r = await fetch(`${API_BASE}/teacher/transcripts/export${q}`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/teacher/transcripts/export${q}`, { headers: headers() });
   return r.blob();
 }
 
@@ -327,8 +385,7 @@ export interface StudentDetailResponse {
 }
 
 export async function teacherStudentDetail(userId: number): Promise<StudentDetailResponse> {
-  const r = await fetch(`${API_BASE}/teacher/student/${userId}/detail`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch(`/teacher/student/${userId}/detail`, { headers: headers() });
   return r.json();
 }
 
@@ -339,7 +396,61 @@ export interface ConfigResponse {
 }
 
 export async function getConfig(): Promise<ConfigResponse> {
-  const r = await fetch(`${API_BASE}/config`, { headers: headers() });
-  if (!r.ok) throw new Error(await r.text());
+  const r = await apiFetch("/config", { headers: headers() });
+  return r.json();
+}
+
+export interface RunPythonResponse {
+  stdout: string;
+  stderr: string;
+  returncode: number;
+}
+
+export async function runPythonSandbox(code: string, stdin = ""): Promise<RunPythonResponse> {
+  const r = await apiFetch("/sandbox/run-python", {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ code, stdin }),
+  });
+  return r.json();
+}
+
+export interface GamificationAchievement {
+  id: string;
+  name: string;
+  description: string;
+  unlocked: boolean;
+}
+
+export interface GamificationResponse {
+  points: number;
+  level: number;
+  teach_count: number;
+  test_attempt_count: number;
+  test_pass_count: number;
+  achievements: GamificationAchievement[];
+}
+
+export async function getGamification(): Promise<GamificationResponse> {
+  const r = await apiFetch("/gamification/me", { headers: headers() });
+  return r.json();
+}
+
+export interface LearningPathItem {
+  id: string;
+  name: string;
+  topic_group?: string;
+  prerequisites: string[];
+}
+
+export interface LearningPathResponse {
+  recommended: LearningPathItem[];
+  learned_count: number;
+  total_count: number;
+  estimated_minutes_remaining: number;
+}
+
+export async function getLearningPath(taId: number): Promise<LearningPathResponse> {
+  const r = await apiFetch(`/ta/${taId}/learning-path`, { headers: headers() });
   return r.json();
 }

@@ -1,14 +1,20 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { ChevronDown, ChevronUp, Code } from "lucide-react";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMisconceptions } from "@/api/client";
+import { getState, getMisconceptions, getTA } from "@/api/client";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
 import { MasteryRadial } from "@/components/state/MasteryRadial";
 import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
+import { LiveCodeEditor } from "@/components/workspace/LiveCodeEditor";
+import { PromptLab } from "@/components/ai-experiments/PromptLab";
+import { ModelComparison } from "@/components/ai-experiments/ModelComparison";
 import type { UnitNode } from "@/components/state/KnowledgeGraph";
 
 export function TeachPage() {
   const currentTaId = useAppStore((s) => s.currentTaId);
+  const [playgroundOpen, setPlaygroundOpen] = useState(false);
 
   const { data: state } = useQuery({
     queryKey: ["ta", currentTaId, "state"],
@@ -21,6 +27,12 @@ export function TeachPage() {
     queryFn: () => getMisconceptions(currentTaId!),
     enabled: currentTaId != null,
   });
+  const { data: taData } = useQuery({
+    queryKey: ["ta", currentTaId],
+    queryFn: () => getTA(currentTaId!),
+    enabled: currentTaId != null,
+  });
+  const domainId = (taData?.domain_id as string) ?? "python";
 
   const defs = (state as { knowledge_unit_definitions?: { id: string; topic_group?: string }[] })?.knowledge_unit_definitions;
   const units: UnitNode[] = state?.units
@@ -63,6 +75,30 @@ export function TeachPage() {
           ))
         ) : (
           <MisconceptionCardEmpty />
+        )}
+        <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setPlaygroundOpen((o) => !o)}
+            className="flex w-full items-center justify-between px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            <span className="flex items-center gap-2">
+              <Code className="h-4 w-4 text-brand-500" />
+              Code playground
+            </span>
+            {playgroundOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </button>
+          {playgroundOpen && (
+            <div className="border-t border-slate-100 p-2">
+              <LiveCodeEditor maxHeight="200px" />
+            </div>
+          )}
+        </div>
+        {domainId === "ai_literacy" && (
+          <div className="space-y-4">
+            <PromptLab taId={currentTaId} />
+            <ModelComparison />
+          </div>
         )}
       </div>
     </div>

@@ -1,19 +1,55 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMastery, getMisconceptions, getHistory, getConfig } from "@/api/client";
-import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit, Bot } from "lucide-react";
+import { getState, getMastery, getMisconceptions, getHistory, getConfig, getGamification, getLearningPath } from "@/api/client";
+import { BookOpen, CheckCircle, AlertTriangle, MessageCircle, Sparkles, BrainCircuit, Bot, MessageSquare, Play, X } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
 import { MasteryRadial } from "@/components/state/MasteryRadial";
 import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
 import { TimelineView } from "@/components/state/TimelineView";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Button } from "@/components/ui/Button";
+import { PointsSystem } from "@/components/gamification/PointsSystem";
+import { AchievementSystem } from "@/components/gamification/AchievementSystem";
+import { LearningPath } from "@/components/learning/LearningPath";
+import { MisconceptionAI } from "@/components/diagnosis/MisconceptionAI";
 import { useAuthStore } from "@/stores/authStore";
+import { ROUTES } from "@/lib/constants";
 import type { TimelineEvent } from "@/components/state/TimelineView";
+
+const DASHBOARD_HINT_KEY = "cs-ta-dashboard-hint-dismissed";
+
+function useActivityTrend(taId: number | null) {
+  const { data: historyData } = useQuery({
+    queryKey: ["ta", taId, "history-trend", 1, 50],
+    queryFn: () => getHistory(taId!, { page: 1, per_page: 50 }),
+    enabled: taId != null && taId > 0,
+  });
+  const items = historyData?.items ?? [];
+  const last7Days = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (6 - i));
+    return d.toISOString().slice(0, 10);
+  });
+  const byDay: Record<string, number> = {};
+  last7Days.forEach((day) => (byDay[day] = 0));
+  items.forEach((evt) => {
+    const day = (evt.timestamp || "").slice(0, 10);
+    if (day in byDay) byDay[day]++;
+  });
+  return last7Days.map((date) => ({ date: date.slice(5), count: byDay[date] ?? 0 }));
+}
 
 export function DashboardPage() {
   const currentTaId = useAppStore((s) => s.currentTaId);
   const user = useAuthStore((s) => s.user);
+  const [hintDismissed, setHintDismissed] = useState(() =>
+    typeof localStorage !== "undefined" && localStorage.getItem(DASHBOARD_HINT_KEY) === "1"
+  );
+  const activityTrend = useActivityTrend(currentTaId);
 
   const { data: state } = useQuery({
     queryKey: ["ta", currentTaId, "state"],
@@ -42,6 +78,15 @@ export function DashboardPage() {
   const { data: config } = useQuery({
     queryKey: ["config"],
     queryFn: getConfig,
+  });
+  const { data: gamification } = useQuery({
+    queryKey: ["gamification"],
+    queryFn: getGamification,
+  });
+  const { data: learningPath } = useQuery({
+    queryKey: ["ta", currentTaId, "learning-path"],
+    queryFn: () => getLearningPath(currentTaId!),
+    enabled: currentTaId != null && currentTaId > 0,
   });
 
   const learnedCount = state?.learned_unit_ids?.length ?? 0;
@@ -104,6 +149,39 @@ export function DashboardPage() {
         <p className="mt-1 text-slate-500">Welcome back, {user?.username}</p>
       </div>
 
+      {!hintDismissed && (
+        <Card padding="md" className="bg-brand-50 border-brand-200">
+          <div className="flex items-start gap-3">
+            <div className="flex-1">
+              <h3 className="font-semibold text-slate-900">Quick tip</h3>
+              <p className="mt-1 text-sm text-slate-600">
+                Teach your TA a concept first (e.g. variables or print), then run a test to see how well it learned.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setHintDismissed(true);
+                try { localStorage.setItem(DASHBOARD_HINT_KEY, "1"); } catch {}
+              }}
+              className="rounded p-1 text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+              aria-label="Dismiss"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </Card>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        <Link to={ROUTES.teach}>
+          <Button icon={MessageSquare} variant="primary">Start teaching</Button>
+        </Link>
+        <Link to={ROUTES.test}>
+          <Button icon={Play} variant="secondary">Run a test</Button>
+        </Link>
+      </div>
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Concepts Learned"
@@ -132,7 +210,22 @@ export function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 space-y-4">
+          {activityTrend.some((d) => d.count > 0) && (
+            <Card padding="md">
+              <h2 className="text-lg font-semibold text-slate-900">Activity (last 7 days)</h2>
+              <div className="mt-2 h-[120px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={activityTrend} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+                    <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+                    <YAxis allowDecimals={false} tick={{ fontSize: 10 }} width={24} />
+                    <Tooltip />
+                    <Bar dataKey="count" fill="var(--color-brand-500, #6366f1)" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+          )}
           <Card padding="md">
             <h2 className="text-lg font-semibold text-slate-900">Recent Activity</h2>
             {recentEvents.length === 0 ? (
@@ -143,20 +236,37 @@ export function DashboardPage() {
           </Card>
         </div>
         <div className="space-y-4">
+          {gamification && (
+            <>
+              <PointsSystem points={gamification.points} level={gamification.level} />
+              <AchievementSystem achievements={gamification.achievements} />
+            </>
+          )}
+          {learningPath && (
+            <LearningPath
+              recommended={learningPath.recommended}
+              learnedCount={learningPath.learned_count}
+              totalCount={learningPath.total_count}
+              estimatedMinutesRemaining={learningPath.estimated_minutes_remaining}
+            />
+          )}
           <Card padding="md">
             <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
           </Card>
           {misconceptions.length > 0 ? (
-            misconceptions.slice(0, 2).map((m) => (
-              <MisconceptionCard
-                key={m.id}
-                misconceptionId={m.id}
-                description={m.description}
-                affectedUnits={m.affected_units}
-                remediationHint={m.remediation_hint}
-                status={m.status as "active" | "correcting" | "resolved"}
-              />
-            ))
+            <>
+              <MisconceptionAI misconceptions={misconceptions} />
+              {misconceptions.slice(0, 2).map((m) => (
+                <MisconceptionCard
+                  key={m.id}
+                  misconceptionId={m.id}
+                  description={m.description}
+                  affectedUnits={m.affected_units}
+                  remediationHint={m.remediation_hint}
+                  status={m.status as "active" | "correcting" | "resolved"}
+                />
+              ))}
+            </>
           ) : (
             <MisconceptionCardEmpty />
           )}

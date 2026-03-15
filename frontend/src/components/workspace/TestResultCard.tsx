@@ -4,6 +4,7 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { CodeEditor } from "./CodeEditor";
+import { SQLVisualizer } from "./SQLVisualizer";
 import { cn } from "@/lib/utils";
 
 export interface TestResultCardProps {
@@ -16,6 +17,9 @@ export interface TestResultCardProps {
   defaultExpanded?: boolean;
   outputLabel?: string;
   reflectionPrompt?: string | null;
+  /** For database domain: optional result set to visualize */
+  resultRows?: Record<string, unknown>[];
+  resultColumns?: string[];
 }
 
 export function TestResultCard({
@@ -27,6 +31,8 @@ export function TestResultCard({
   defaultExpanded = false,
   outputLabel = "TA's code",
   reflectionPrompt,
+  resultRows,
+  resultColumns,
 }: TestResultCardProps) {
   const [open, setOpen] = useState(defaultExpanded);
 
@@ -59,6 +65,12 @@ export function TestResultCard({
               <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">{outputLabel}</h4>
               <CodeEditor code={taCode} copyButton maxHeight="200px" />
             </div>
+            {resultColumns && resultRows && (
+              <div>
+                <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">Result set</h4>
+                <SQLVisualizer columns={resultColumns} rows={resultRows} showChart />
+              </div>
+            )}
             <div>
               <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">
                 Test cases

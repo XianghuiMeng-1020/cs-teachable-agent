@@ -13,6 +13,7 @@ from src.api.schemas import (
 from src.api.deps import DbSession, CurrentUser
 from src.api.domain_helpers import get_domain_adapter, get_tracker_for_ta
 from src.core.misconception_engine import get_adaptive_remediation_hint
+from src.core.adaptive_learning import recommend_next_kus, estimate_minutes_per_ku
 from src.db.models import TAInstance, TeachingSession, TeachingEvent, TestAttempt, TraceEvent
 
 router = APIRouter(tags=["state"])
@@ -49,6 +50,30 @@ def get_state(ta_id: int, current_user: CurrentUser, db: DbSession):
         active_misconception_ids=active_mis,
         knowledge_unit_definitions=definitions,
     )
+
+
+@router.get("/api/ta/{ta_id}/learning-path")
+def get_learning_path(ta_id: int, current_user: CurrentUser, db: DbSession):
+    """Return recommended next KUs and estimated time to complete."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
+    kus = adapter.load_knowledge_units()
+    definitions = [
+        {"id": u["id"], "name": u.get("name", u["id"]), "prerequisites": u.get("prerequisites", []), "topic_group": u.get("topic_group")}
+        for u in kus
+    ]
+    learned = set(tracker.get_learned_units())
+    recommended = recommend_next_kus(definitions, learned)
+    total = len(definitions)
+    remaining = total - len(learned)
+    minutes_per = estimate_minutes_per_ku()
+    return {
+        "recommended": recommended[:5],
+        "learned_count": len(learned),
+        "total_count": total,
+        "estimated_minutes_remaining": remaining * minutes_per,
+    }
 
 
 @router.get("/api/ta/{ta_id}/mastery", response_model=MasteryResponse)

@@ -1,16 +1,40 @@
 """Pydantic request/response schemas."""
 
+import re
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 # ----- Auth -----
+USERNAME_PATTERN = re.compile(r"^[a-zA-Z0-9_]{3,32}$")
+MIN_PASSWORD_LENGTH = 6
+
+
 class UserCreate(BaseModel):
     username: str
     password: str
     role: str = "student"
+
+    @field_validator("username")
+    @classmethod
+    def username_format(cls, v: str) -> str:
+        v = v.strip()[:32]  # sanitize: strip and cap length
+        if len(v) < 3:
+            raise ValueError("Username must be at least 3 characters")
+        if len(v) > 32:
+            raise ValueError("Username must be at most 32 characters")
+        if not USERNAME_PATTERN.match(v):
+            raise ValueError("Username can only contain letters, numbers, and underscores")
+        return v
+
+    @field_validator("password")
+    @classmethod
+    def password_length(cls, v: str) -> str:
+        if len(v) < MIN_PASSWORD_LENGTH:
+            raise ValueError(f"Password must be at least {MIN_PASSWORD_LENGTH} characters")
+        return v
 
 
 class UserLogin(BaseModel):

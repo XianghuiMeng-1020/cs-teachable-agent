@@ -1,6 +1,6 @@
 """Auth: register, login, me."""
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 
 from src.api.schemas import UserCreate, UserLogin, Token, UserResponse
 from src.api.deps import (
@@ -10,19 +10,15 @@ from src.api.deps import (
     verify_password,
     CurrentUser,
 )
+from src.api.limiter import limiter
 from src.db.models import User
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
-def _validate_password(password: str) -> None:
-    if len(password) < 6:
-        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
-
-
 @router.post("/register", response_model=UserResponse)
-def register(data: UserCreate, db=Depends(get_db)):
-    _validate_password(data.password)
+@limiter.limit("6/minute")
+def register(request: Request, data: UserCreate, db=Depends(get_db)):
     if db.query(User).filter(User.username == data.username).first():
         raise HTTPException(status_code=400, detail="Username already registered")
     user = User(
@@ -37,7 +33,8 @@ def register(data: UserCreate, db=Depends(get_db)):
 
 
 @router.post("/login", response_model=Token)
-def login(data: UserLogin, db=Depends(get_db)):
+@limiter.limit("10/minute")
+def login(request: Request, data: UserLogin, db=Depends(get_db)):
     user = db.query(User).filter(User.username == data.username).first()
     if not user or not verify_password(data.password, user.password_hash):
         raise HTTPException(
