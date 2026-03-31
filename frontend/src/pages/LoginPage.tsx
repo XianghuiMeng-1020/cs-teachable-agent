@@ -145,7 +145,7 @@ export function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-stone-600">HKU CS Education Research</p>
+        <p className="text-xs text-stone-600">AI Resistant Teaching System for CS</p>
       </div>
 
       {/* Right panel */}
@@ -156,7 +156,7 @@ export function LoginPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-stone-900">TeachAgent</span>
+            <span className="text-lg font-semibold text-stone-900">ARTS-CS</span>
           </Link>
 
           <Tabs.Root value={activeTab} onValueChange={(v) => setActiveTab(v as "login" | "register")}>
@@ -178,7 +178,7 @@ export function LoginPage() {
             <Tabs.Content value="login">
               <div className="mb-6">
                 <h2 className="font-serif text-2xl font-bold text-stone-900">Welcome back</h2>
-                <p className="mt-1 text-sm text-stone-500">Sign in to continue teaching your agent.</p>
+                <p className="mt-1 text-sm text-stone-500">Sign in to ARTS-CS — teach AI agents, track mastery.</p>
               </div>
               <form onSubmit={handleLogin} className="space-y-4">
                 <Input
@@ -216,7 +216,7 @@ export function LoginPage() {
             <Tabs.Content value="register">
               <div className="mb-6">
                 <h2 className="font-serif text-2xl font-bold text-stone-900">Create your account</h2>
-                <p className="mt-1 text-sm text-stone-500">Choose a role and get started in seconds.</p>
+                <p className="mt-1 text-sm text-stone-500">Create demo account: demo_student / demo123</p>
               </div>
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>

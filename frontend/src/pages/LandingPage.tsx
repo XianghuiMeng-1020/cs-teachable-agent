@@ -90,7 +90,7 @@ export function LandingPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-stone-900">TeachAgent</span>
+            <span className="text-lg font-semibold text-stone-900">ARTS-CS</span>
           </div>
           <div className="flex items-center gap-3">
             <Link
@@ -124,7 +124,7 @@ export function LandingPage() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
             <span className="text-sm font-medium text-brand-800">
-              HKU CS Education Research
+              AI Resistant Teaching System for CS
             </span>
           </motion.div>
 
@@ -140,9 +140,9 @@ export function LandingPage() {
             variants={fadeUp}
             className="mt-6 max-w-2xl text-lg leading-relaxed text-stone-500"
           >
-            A knowledge-state-constrained teachable agent for introductory computer
-            science. Students teach, the agent learns, and mastery emerges through
-            the act of explanation.
+            <strong>ARTS-CS</strong>: A unified, knowledge-state-constrained teaching
+            system where students teach AI agents, agents learn through explicit knowledge
+            states, and mastery emerges through explanation — resistant to AI shortcuts.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-10 flex items-center gap-4">
@@ -222,8 +222,8 @@ export function LandingPage() {
             Ready to learn by teaching?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-stone-400">
-            Create your free account and start teaching your virtual agent
-            introductory Python today.
+            Create your free account and start teaching your AI agent Python,
+            SQL, or AI Literacy concepts. Resistant to shortcuts, designed for mastery.
           </p>
           <Link
             to={ROUTES.login}
@@ -242,10 +242,10 @@ export function LandingPage() {
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand-700">
               <BookOpen className="h-4 w-4 text-white" />
             </div>
-            <span className="text-sm font-semibold text-stone-700">TeachAgent</span>
+            <span className="text-sm font-semibold text-stone-700">ARTS-CS</span>
           </div>
           <p className="text-sm text-stone-400">
-            HKU CS Education Research
+            AI Resistant Teaching System for Computer Science
           </p>
         </div>
       </footer>

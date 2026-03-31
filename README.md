@@ -1,6 +1,12 @@
-# CS Teachable Agent
+# ARTS-CS: AI Resistant Teaching System for Computer Science
 
-Research prototype: a **Teachable Agent (TA)** that starts with no programming knowledge and learns Introductory Python from a human student. The student teaches; the TA is tested with programming problems; mastery is reported.
+Research prototype: an **AI Resistant Teaching System** that combines "Learning by Teaching" pedagogy with explicit knowledge-state constraints. Students teach virtual agents (starting with zero knowledge) across Python, Database (SQL), and AI Literacy domains. Agents learn through structured knowledge states, are tested with programming problems, and demonstrate mastery through explanation — resistant to AI shortcuts.
+
+## Core Concept
+
+ARTS-CS fuses two design philosophies:
+1. **Stage One (Original)**: Zero-knowledge TA + programming test validation + rapid prototyping
+2. **Full Framework (Colleague)**: Unified knowledge-state engine + misconception lifecycle + cross-domain extensibility
 
 ## Recommended: Full stack (FastAPI + React)
 

@@ -64,7 +64,10 @@ export function Sidebar() {
           <BookOpen className="h-4 w-4 text-white" />
         </div>
         {!sidebarCollapsed && (
-          <span className="text-[15px] font-semibold text-stone-900">TeachAgent</span>
+          <div className="flex flex-col">
+            <span className="text-[15px] font-semibold text-stone-900">ARTS-CS</span>
+            <span className="text-[10px] text-stone-400">AI Resistant Teaching</span>
+          </div>
         )}
       </div>
 
