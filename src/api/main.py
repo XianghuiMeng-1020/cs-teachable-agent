@@ -40,8 +40,8 @@ CORS_HEADERS = {
 }
 
 app = FastAPI(
-    title="CS Teachable Agent API",
-    description="Backend for the Teachable Agent: teach, test, state, trace.",
+    title="ARTS-CS API",
+    description="AI Resistant Teaching System for Computer Science: teach, test, state, trace, misconception lifecycle.",
     version="2.0.0",
 )
 app.state.limiter = limiter
