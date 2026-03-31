@@ -400,7 +400,7 @@ export function DashboardPage() {
                   <BarChart data={activityTrend} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
                     <XAxis 
                       dataKey="date" 
-                      tick={{ fontSize: 11, fill:="#78716C" }} 
+                      tick={{ fontSize: 11, fill: "#78716C" }} 
                       axisLine={false} 
                       tickLine={false} 
                     />
