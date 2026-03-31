@@ -1,0 +1,4 @@
+{
+    "program": "def assign_mythological_creature(zodiac_sign):\n    # Dictionary mapping zodiac signs to mythological creatures\n    creatures = {\n        'Aries': 'Dragon',\n        'Taurus': 'Minotaur',\n        'Gemini': 'Griffin',\n        'Cancer': 'Cyclops',\n        'Leo': 'Phoenix',\n        'Virgo': 'Sphinx',\n        'Libra': 'Centaur',\n        'Scorpio': 'Hydra',\n        'Sagittarius': 'Pegasus',\n        'Capricorn': 'Leviathan',\n        'Aquarius': 'Kraken',\n        'Pisces': 'Mermaid'\n    }\n    \n    # Return the mythological creature for the given zodiac sign\n    # Use selection statement for unknown zodiac\n    return creatures.get(zodiac_sign, \"Unknown Creature\")\n",
+    "context_relevance": 1.0
+}

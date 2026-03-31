@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______________________ ERROR at teardown of test_scores5 _______________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'scores1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:30: AssertionError: assert [] == [('Alice', 30...'Charlie', 5)]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores2.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores3.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores4.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores5.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores1
+FAILED outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores2
+FAILED outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores3
+FAILED outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores4
+FAILED outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores5
+ERROR outputs/results1/query_22/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_scores5
+========================== 5 failed, 1 error in 0.16s ==========================

@@ -1,0 +1,29 @@
+Write a function `play_game_of_chance(file_name, bet_amount, bet_guess)` that simulates a simple game of chance by reading results from a file and determining the player's win or loss. The game is played as follows:
+
+1. `file_name` will contain a sequence, where each line represents a game with one integer number from 1 to 10, which is a generated winning number.
+2. `bet_amount` is a positive integer representing the amount the player bets.
+3. `bet_guess` is the player's guess of the winning number, an integer between 1 and 10.
+
+The function should return an integer value representing the player's balance after the game based on the following conditions:
+- If the `bet_guess` matches the winning number in any line of the file, the player wins double the `bet_amount` for each match.
+- If there are no matches, the player loses the `bet_amount`.
+
+Assume `file_name` refers to a valid file path, and the file is guaranteed to have contents properly formatted according to the description.
+
+#### Example
+Suppose `file_game.txt` contains:
+```
+5
+7
+3
+9
+1
+2
+4
+5
+8
+9
+```
+Calling `play_game_of_chance('file_game.txt', 100, 9)` should return `190` since `9` appears twice in the file, resulting in two wins (2 * 100), leading to 200 - 10 (since `bet_amount` is subtracted once) = 190.
+
+If `bet_guess` was `11`, the function should return `-100` since there is no match, resulting in a loss of the `bet_amount.`

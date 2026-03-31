@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/random.py:378: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:8: TypeError: test_incorrect_guess.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:40: FileNotFoundError: [Errno 2] No such file or directory: 'words.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:49: FileNotFoundError: [Errno 2] No such file or directory: 'words.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'words.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_correct_guess
+FAILED outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_incorrect_guess
+FAILED outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_output_correct
+FAILED outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_output_incorrect
+FAILED outputs/results1/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_results_file_created
+============================== 5 failed in 0.15s ===============================

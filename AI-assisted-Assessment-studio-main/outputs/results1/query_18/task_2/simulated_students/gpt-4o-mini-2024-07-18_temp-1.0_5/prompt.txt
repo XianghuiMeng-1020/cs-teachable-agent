@@ -1,0 +1,17 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a science fiction universe, a spacecraft is designed to analyze energy readings from various cosmic structures. During each mission, the spacecraft records these energy readings in a file named `energy_readings.txt`. Each line in this file contains a single integer representing one energy measurement.
+
+You are required to write a Python function `average_energy(file_name)` that calculates and returns the average energy reading recorded by the spacecraft. The file name is passed as an argument to the function. If the file is empty or doesn't exist, the function should return 0.
+
+How your solution will be tested:
+1. The function `average_energy(file_name)` will be called with different file names corresponding to various test cases.
+2. The test suite will check if the output of your function matches the expected average value for each test case.
+3. It must handle any cases where the file may not exist or is empty gracefully by returning 0.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

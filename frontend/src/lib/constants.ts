@@ -4,6 +4,7 @@ export const ROUTES = {
   dashboard: "/dashboard",
   teach: "/teach",
   test: "/test",
+  practice: "/practice",
   mastery: "/mastery",
   history: "/history",
   teacher: {
@@ -12,6 +13,9 @@ export const ROUTES = {
     studentDetail: (id: number) => `/teacher/students/${id}`,
     transcripts: "/teacher/transcripts",
     analytics: "/teacher/analytics",
+    assessments: "/teacher/assessments",
+    metrics: "/teacher/metrics",
+    proctoring: "/teacher/proctoring",
   },
 } as const;
 

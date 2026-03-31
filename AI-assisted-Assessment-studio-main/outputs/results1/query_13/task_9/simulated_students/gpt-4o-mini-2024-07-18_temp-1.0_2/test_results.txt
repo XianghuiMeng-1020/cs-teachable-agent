@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 20%]
+...FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+__________________ ERROR at teardown of test_empty_quantities __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_ingredients.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:22: AssertionError: assert 7.25 == 9.25
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:38: AssertionError: assert None == 0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_valid_file_full_use
+FAILED outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_empty_quantities
+ERROR outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_empty_quantities
+===================== 2 failed, 3 passed, 1 error in 0.14s =====================

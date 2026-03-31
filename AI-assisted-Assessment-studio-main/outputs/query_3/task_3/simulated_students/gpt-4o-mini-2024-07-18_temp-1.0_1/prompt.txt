@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are commissioned by the Galactic Space Program to develop a program that tracks alien population changes on different planets within a galaxy. This program must be capable of analyzing yearly population changes as logged by the interstellar census.
+
+Write a Python function called `alien_population_change(data)` that accepts a dictionary `data`. This dictionary contains planet names as keys and a list of strings representing annual population changes (in thousands) for each planet as values. Each string in the list is in the format of 'year:change'. A positive number indicates an increase in population, while a negative number indicates a decrease.
+
+Your task is to compute the current population for each planet assuming that population started at 1 million when the records began. Return a new dictionary where the keys are planet names and the corresponding value is the final (current) population (in millions).
+
+Function Signature: `def alien_population_change(data):`
+
+**Constraints:**
+- Assume all populations start at 1 million per planet.
+- The `data` dictionary will have no more than 10 entries and each list will have up to 5 years of data.
+
+**Example:**
+
+```python
+data = {
+    "Mars": ["2021:20", "2022:-5"],
+    "Venus": ["2021:-15", "2022:10", "2023:5"]
+}
+assert alien_population_change(data) == {"Mars": 1.015, "Venus": 1.0}
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

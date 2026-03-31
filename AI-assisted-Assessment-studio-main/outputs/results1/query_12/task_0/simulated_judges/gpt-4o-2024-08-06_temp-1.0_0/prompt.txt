@@ -1,0 +1,18 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['File Handling and I/O', 'Selection Statements (if/else, etc.)', 'Variables', 'Loops']:
+
+### Beginning of task description
+Create a Python function `compute_total_calories(filename)` that reads a text file where each line contains the name of the dish and its associated calories separated by a comma. The function should return a string indicating the name of the dish with the highest calorie content and its respective calorie count in the format: 'DishName: Calories'. If the file is empty or if a line is not formatted correctly (i.e., doesn't contain exactly one comma), the function should return 'No valid data'.
+### End of task description
+
+### Beginning of test suite
+import pytest\nimport os\nfrom solution_program import compute_total_calories\n\ndef setup_module(module):\n    with open('test1.txt', 'w') as f:\n        f.write('Pasta,500\nSteak,700\nSalad,150\n')\n    with open('test2.txt', 'w') as f:\n        f.write('Soup,250\n')\n    with open('test3.txt', 'w') as f:\n        f.write('')\n    with open('test4.txt', 'w') as f:\n        f.write('Grilled Cheese,300\nPizza,850\nBurger,700\n')\n    with open('test5.txt', 'w') as f:\n        f.write('Incorrect line\nAnother incorrect line\n')\n\ndef teardown_module(module):\n    os.remove('test1.txt')\n    os.remove('test2.txt')\n    os.remove('test3.txt')\n    os.remove('test4.txt')\n    os.remove('test5.txt')\n\ndef test_common_cases():\n    assert compute_total_calories('test1.txt') == 'Steak: 700'\n    assert compute_total_calories('test2.txt') == 'Soup: 250'\n\ndef test_empty_file():\n    assert compute_total_calories('test3.txt') == 'No valid data'\n\ndef test_varied_values():\n    assert compute_total_calories('test4.txt') == 'Pizza: 850'\n\ndef test_malformed_file():\n    assert compute_total_calories('test5.txt') == 'No valid data'\n
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

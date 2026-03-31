@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 8 items
+
+outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 12%]
+FFF.FF.                                                                  [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:27: AssertionError: assert 'Pew! Pew!' == 'Remaining energy: 50'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:27: AssertionError: assert 'Pew! Pew!' == 'Out of energy!'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:27: AssertionError: assert 'Pew! Pew!' == 'Remaining energy: 10'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:27: AssertionError: assert 'Pew! Pew!' == 'Remaining energy: 0'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:37: AssertionError: assert 'Energy must ...tive integer.' == 'Invalid energy value.'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:37: AssertionError: assert 'Energy must ...tive integer.' == 'Invalid energy value.'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_lasergun_functionality[100-5-Remaining energy: 50]
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_lasergun_functionality[50-5-Out of energy!]
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_lasergun_functionality[30-2-Remaining energy: 10]
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_lasergun_functionality[10-1-Remaining energy: 0]
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_invalid_initialization[0-Invalid energy value.]
+FAILED outputs/results1/query_16/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_invalid_initialization[-10-Invalid energy value.]
+========================= 6 failed, 2 passed in 0.06s ==========================

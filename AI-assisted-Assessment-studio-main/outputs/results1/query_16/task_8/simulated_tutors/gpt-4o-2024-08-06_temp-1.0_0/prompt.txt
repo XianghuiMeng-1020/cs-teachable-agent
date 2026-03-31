@@ -1,0 +1,54 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In a futuristic world, a scientist has developed a remarkable machine capable of converting Martian units of distance into Earth-based units. However, the machine is currently unable to handle any errors or unexpected inputs gracefully. Your task is to improve the machine's code by creating a program that converts Martian distance units into Earth kilometers and handles errors appropriately.
+
+You need to implement a `MartianConverter` class with the following function:
+
+- `convert_to_kilometers(distance)`: This method takes a string `distance` which signifies the distance in Martian units. The Martian unit system defines 1 Martian unit as equivalent to 2.5 Earth kilometers. Your task is to return a string that represents the distance in Earth kilometers, rounded to 2 decimal places.
+
+Keep in mind:
+1. If the input string is not a valid number or is negative, the method should gracefully return the string "Error: Invalid input".
+2. If the input contains additional spaces or is formatted incorrectly (but still can be interpreted as a number), correct it and perform the conversion.
+
+__Examples:__
+- `convert_to_kilometers("10")` should return "25.00"
+- `convert_to_kilometers("10.5")` should return "26.25"
+- `convert_to_kilometers(" 12.3 ")` should return "30.75"
+- `convert_to_kilometers("abc")` should return "Error: Invalid input"
+- `convert_to_kilometers("-5")` should return "Error: Invalid input"
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import MartianConverter
+
+@pytest.fixture(scope="module")
+def setup_module():
+    return MartianConverter()
+
+@pytest.mark.parametrize("test_input,expected_output", [
+    ("10", "25.00"),
+    ("10.5", "26.25"),
+    (" 12.3 ", "30.75"),
+    ("abc", "Error: Invalid input"),
+    ("-5", "Error: Invalid input"),
+    ("3.14159", "7.85"),
+    ("  14 ", "35.00"),
+    ("100", "250.00"),
+    ("2.5 ", "6.25"),
+    ("", "Error: Invalid input"),
+])
+def test_convert_to_kilometers(setup_module, test_input, expected_output):
+    converter = setup_module
+    result = converter.convert_to_kilometers(test_input)
+    assert result == expected_output
+
+def teardown_module(module):
+    pass
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

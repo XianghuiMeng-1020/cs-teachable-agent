@@ -1,0 +1,23 @@
+def manage_high_scores(records_file, new_scores):
+    with open(records_file, 'r') as f:
+        lines = f.readlines()
+
+    scores = []
+    for line in lines:
+        name, score = line.strip().rsplit(' ', 1)
+        scores.append((name, int(score)))
+
+    for player, new_score in new_scores:
+        for i in range(len(scores)):
+            if scores[i][0] == player:
+                if new_score > scores[i][1]:
+                    scores[i] = (player, new_score)
+                break
+        else:
+            scores.append((player, new_score))
+
+    scores.sort(key=lambda x: x[1], reverse=True)
+
+    with open(records_file, 'w') as f:
+        for name, score in scores:
+            f.write(f'{name} {score}\n')

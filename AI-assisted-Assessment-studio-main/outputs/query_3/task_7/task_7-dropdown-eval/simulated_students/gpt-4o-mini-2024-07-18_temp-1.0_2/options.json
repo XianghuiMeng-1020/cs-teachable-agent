@@ -1,0 +1,20 @@
+{
+  "blank_1": [
+    "'INVALID'",
+    "'MISSING'",
+    "'UNKNOWN'",
+    "'ERROR'"
+  ],
+  "blank_2": [
+    "'TODO'",
+    "'UNKNOWN'",
+    "' '",
+    "''"
+  ],
+  "blank_3": [
+    "decode_message",
+    "codebook",
+    "galactic_message",
+    "words"
+  ]
+}

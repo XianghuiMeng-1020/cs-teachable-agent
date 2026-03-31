@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 10%]
+FFFFF..F.                                                                [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'alice' == 'Alice'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'alice, bob' == 'Alice, Bob'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'bob' == 'Bob'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'bob' == 'Bob'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'charlie' == 'Charlie'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'alice' == 'Alice'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: AssertionError: assert 'ana' == 'Ana'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions0-Alice]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions1-Alice, Bob]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions2-Bob]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions3-Bob]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions4-Charlie]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions5-Alice]
+FAILED outputs/results1/query_23/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_board_game[actions8-Ana]
+========================= 7 failed, 3 passed in 0.14s ==========================

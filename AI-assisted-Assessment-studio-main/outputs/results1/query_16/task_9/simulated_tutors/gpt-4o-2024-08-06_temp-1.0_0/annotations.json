@@ -1,0 +1,4 @@
+{
+    "program": "class Starship:\n    def __init__(self, initial_time_travelled, velocity_factor):\n        self.initial_time_travelled = initial_time_travelled\n        self.velocity_factor = velocity_factor\n        self.effective_time = initial_time_travelled\n\n    def travel_through_wormhole(self, wormhole_intensity):\n        self.effective_time = self.initial_time_travelled * wormhole_intensity * self.velocity_factor\n\n    def get_effective_time(self):\n        return f\"{self.effective_time:.2f} years\"\n\n    def handle_exception_test(self):\n        try:\n            _ = 1/0\n        except ZeroDivisionError:\n            return 'Handled Exception: Division by zero.'\n",
+    "context_relevance": 1.0
+}

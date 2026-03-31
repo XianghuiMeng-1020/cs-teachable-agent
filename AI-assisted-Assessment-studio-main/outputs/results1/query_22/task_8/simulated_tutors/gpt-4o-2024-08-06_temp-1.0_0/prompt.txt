@@ -1,0 +1,84 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+## Task: Board Game Score Tracker
+
+You are tasked with creating a Python program that reads and records the scores of players from board games into a text file. This program should help track the scores of multiple players in multiple rounds of a board game.
+
+### Details:
+1. **Function**: Implement a function `record_scores(filename, players_scores)`. 
+   - `filename` (str): The name of the text file where scores will be stored.
+   - `players_scores` (list of lists): Each sublist represents a round of scores for players, for example: `[[10, 20, 15], [30, 40, 25]]` represents two rounds of scores for three players.
+
+2. The program should write to the provided filename, storing each round of scores on a new line in the format:
+   - `Round 1: Player1-Score Player2-Score ...`
+   - Example entry: `Round 1: 10 20 15`
+
+3. You should append to the file if it already exists.
+
+4. **Retrieving Recorded Scores**: Implement another function `get_scores(filename)` that reads the file content and returns a list of stored scores.
+   - Example return value: `['Round 1: 10 20 15', 'Round 2: 30 40 25']`
+
+### Assumptions:
+- You can assume that the number of players is consistent across all rounds.
+- The scores for each player are given as integers.
+
+Your task is to develop both the `record_scores` and `get_scores` functions to read from and write to files accordingly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import record_scores, get_scores
+
+def setup_module(module):
+    # Create the temporary file with initial data
+    with open('test_scores.txt', 'w') as f:
+        f.write("Round 1: 10 20 15\n")
+
+    with open('test_empty.txt', 'w') as f:
+        f.write("")
+
+def teardown_module(module):
+    # Remove the temporary files after tests
+    os.remove('test_scores.txt')
+    os.remove('test_empty.txt')
+
+
+def test_initial_file_content():
+    record_scores('test_scores.txt', [[30, 40, 25]])
+    with open('test_scores.txt', 'r') as f:
+        content = f.readlines()
+    assert content == ['Round 1: 10 20 15\n', 'Round 2: 30 40 25\n']
+
+
+def test_append_score_to_existing_file():
+    record_scores('test_scores.txt', [[50, 60, 70]])
+    with open('test_scores.txt', 'r') as f:
+        content = f.readlines()
+    assert content == ['Round 1: 10 20 15\n', 'Round 2: 30 40 25\n', 'Round 3: 50 60 70\n']
+
+
+def test_get_scores():
+    expected_scores = ['Round 1: 10 20 15', 'Round 2: 30 40 25', 'Round 3: 50 60 70']
+    scores = get_scores('test_scores.txt')
+    assert scores == expected_scores
+
+
+def test_append_to_empty_file():
+    record_scores('test_empty.txt', [[10, 20, 30]])
+    with open('test_empty.txt', 'r') as f:
+        content = f.readlines()
+    assert content == ['Round 1: 10 20 30\n']
+
+
+def test_get_scores_empty_file():
+    scores = get_scores('test_empty.txt')
+    assert scores == ['Round 1: 10 20 30']
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

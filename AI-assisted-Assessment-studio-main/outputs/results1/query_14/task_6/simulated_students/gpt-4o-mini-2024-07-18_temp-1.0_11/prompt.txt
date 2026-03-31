@@ -1,0 +1,10 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Write a function `recipe_summary` that takes a string representing a recipe and returns a dictionary summarizing the recipe's contents. The input string will contain multiple lines, each formatted as `'ingredient: quantity unit'`. Your task is to build a dictionary where each key is an ingredient and the value is a dictionary with keys 'quantity' and 'unit'. Each ingredient will appear only once in the input.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

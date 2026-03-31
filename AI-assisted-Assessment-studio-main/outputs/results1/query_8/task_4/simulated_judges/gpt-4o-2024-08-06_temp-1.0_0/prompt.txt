@@ -1,0 +1,57 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+In many ancient cultures, gods and mythological creatures judged the actions of humans and other beings. In this task, you will write a function `mythological_judgment(creature, action)` that determines a judgment made by a mythological creature based on a given action.
+
+The function receives two parameters:
+- `creature`: a string representing the name of the mythological creature.
+- `action`: a string describing an action a human character has performed.
+
+Your task is to return a phrase describing the judgment passed by the creature for the given action, according to the following rules:
+1. If the creature is "Zeus" and the action is "help", the judgment should be "Blessing granted".
+2. If the creature is "Zeus" and any other action is provided, the judgment should be "Storms befall you".
+3. If the creature is "Cerberus" and the action is "steal", the judgment should be "Growling disapproval".
+4. If the creature is "Cerberus" and any other action is provided, the judgment should be "Pass freely".
+5. If the creature is "Aphrodite" and the action is "love", the judgment should be "Heart's desire fulfilled".
+6. For any other combination of creature and action, return "No judgment found".
+
+You may assume that the inputs are always lowercase string values. Ensure your solution uses dictionaries to perform the mappings of creature and action to the respective judgment.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import mythological_judgment
+
+def test_zeus_help():
+    result = mythological_judgment("zeus", "help")
+    assert result == "Blessing granted"
+
+def test_zeus_other_action():
+    result = mythological_judgment("zeus", "fight")
+    assert result == "Storms befall you"
+
+def test_cerberus_steal():
+    result = mythological_judgment("cerberus", "steal")
+    assert result == "Growling disapproval"
+
+def test_cerberus_other_action():
+    result = mythological_judgment("cerberus", "explore")
+    assert result == "Pass freely"
+
+def test_aphrodite_love():
+    result = mythological_judgment("aphrodite", "love")
+    assert result == "Heart's desire fulfilled"
+
+def test_other_creature():
+    result = mythological_judgment("minotaur", "roar")
+    assert result == "No judgment found"
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

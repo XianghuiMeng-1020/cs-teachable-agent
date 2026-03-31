@@ -1,0 +1,82 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+### Game of Chance: Lucky Draw Game Result
+
+In a game of chance, participants buy tickets with unique identifiers. A file named `participants.txt` contains ticket identifiers, one per line. At the end of the game, a winning ticket is drawn, and its identifier is stored in another file `winner.txt` as a single line without newline endings.
+
+Your task is to write a function, `check_winner(participants_file, winner_file)`, that takes the path to the `participants.txt` file and the `winner.txt` file as its input. The function should read both files, check if the winning ticket identifier exists among the participant tickets, and return `True` if the ticket is valid and `False` otherwise.
+
+#### Example
+Suppose `participants.txt` contains:
+```
+A1234
+B5678
+C9012
+```
+And `winner.txt` contains:
+```
+B5678
+```
+The function `check_winner('participants.txt', 'winner.txt')` should return `True` as the winner ticket identifies a valid participant.
+
+#### Notes
+- A ticket identifier will never contain newlines or whitespace.
+- There will always be at least one participant and one winning ticket. All identifiers are unique.
+- Make sure to handle input and output file operations carefully as invalid file paths should raise an error.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import check_winner
+
+PARTICIPANTS_FILE = 'test_participants.txt'
+WINNER_FILE = 'test_winner.txt'
+
+
+def setup_module(module):
+    with open(PARTICIPANTS_FILE, 'w') as f:
+        f.write("A1234\nB5678\nC9012\n")
+    with open('test_participants_2.txt', 'w') as f:
+        f.write("A1234\nC9012\nE3456\n")
+    with open('test_participants_3.txt', 'w') as f:
+        f.write("X1234\nY5678\nZ9012\n")
+    with open(WINNER_FILE, 'w') as f:
+        f.write("B5678")
+    with open('test_winner_2.txt', 'w') as f:
+        f.write("E3456")
+    with open('test_winner_3.txt', 'w') as f:
+        f.write("Z9012")
+
+
+def teardown_module(module):
+    os.remove(PARTICIPANTS_FILE)
+    os.remove('test_participants_2.txt')
+    os.remove('test_participants_3.txt')
+    os.remove(WINNER_FILE)
+    os.remove('test_winner_2.txt')
+    os.remove('test_winner_3.txt')
+
+
+def test_valid_winner():
+    assert check_winner(PARTICIPANTS_FILE, WINNER_FILE) == True
+
+def test_invalid_winner():
+    assert check_winner('test_participants_2.txt', WINNER_FILE) == False
+
+def test_different_winner_from_participants_2():
+    assert check_winner('test_participants_2.txt', 'test_winner_2.txt') == True
+
+def test_different_files_no_winner():
+    assert check_winner(PARTICIPANTS_FILE, 'test_winner_2.txt') == False
+
+def test_different_file_sets_valid_winner():
+    assert check_winner('test_participants_3.txt', 'test_winner_3.txt') == True
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

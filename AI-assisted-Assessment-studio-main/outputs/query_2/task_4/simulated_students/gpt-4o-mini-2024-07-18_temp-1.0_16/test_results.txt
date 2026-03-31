@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_unsorted_input ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:46: AssertionError: assert ['NAME', 'NAM...NAME', 'NAME'] == ['Apple Pie',...getable Soup']
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'noblock.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:73: AssertionError: assert ['NAME'] == []
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:104: AssertionError: assert ['NAME', 'NAME', 'NAME'] == ['Apple Tart'... 'Zebra Cake']
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_organize_recipes_single_case
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_empty_file
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_no_recipes_block
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_incomplete_recipe
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_unsorted_input
+ERROR outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_unsorted_input
+========================== 5 failed, 1 error in 0.13s ==========================

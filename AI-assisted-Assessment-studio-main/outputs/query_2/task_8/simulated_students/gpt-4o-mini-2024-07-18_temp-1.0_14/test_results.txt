@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:23: AssertionError: assert 'Pasta Carbon...a\nOrange\n\n' == 'Pasta Carbon...nPancetta\n\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:29: AssertionError: assert '' == 'Pasta Carbon...ana\nOrange\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:49: AssertionError: assert 'Fruit Salad\...a\nOrange\n\n' == 'Fruit Salad\...ana\nOrange\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::TestFilterIngredients::test_filter_ingredients_exceeding
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::TestFilterIngredients::test_filter_ingredients_no_exceed
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::TestFilterIngredients::test_filter_various_lines
+========================= 3 failed, 2 passed in 0.12s ==========================

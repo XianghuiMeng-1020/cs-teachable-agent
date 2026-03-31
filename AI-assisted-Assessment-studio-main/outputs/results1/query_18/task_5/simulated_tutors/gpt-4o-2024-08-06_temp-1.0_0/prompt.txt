@@ -1,0 +1,69 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+You have been hired by a futuristic space travel company ‘GalactoCorp’ that specializes in interstellar cargo shipment. They use advanced technology to calculate space-time anomalies to optimize route planning. As part of their latest project, they want to simulate the effect of anomalous energy clouds on the weight of cargo over time.
+
+You need to write a Python function `calculate_final_weight(filename)`, which computes the final weight of cargo after passing through a series of energy clouds. The `filename` references a text file which contains lines of integer weight alterations (in kilograms) that occur due to these energy clouds. Specifically, it contains numbers where each number represents the change in weight per hour.
+
+Your task is to read these numbers from the file, apply the arithmetic changes cumulatively starting from an initial weight of 1000 kg, and then write the final weight to a new file called `final_weight.txt`.
+
+To solve this task, follow these rules:
+1. Read changes from the file specified by `filename`.
+2. Start with an initial cargo weight of 1000 kg.
+3. Apply each change cumulatively to determine the final cargo weight.
+4. Write this final weight value in kilograms to `final_weight.txt`.
+
+For example, given a file with the following contents:
+```
+-50
+20
+-30
+60
+```
+The final weight in `final_weight.txt` should be `1000 - 50 + 20 - 30 + 60 = 1000 kg`
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_final_weight
+
+def setup_module(module):
+    with open('test1.txt', 'w') as f:
+        f.write('10\n-20\n30\n')
+    with open('test2.txt', 'w') as f:
+        f.write('-100\n-50\n-50\n')
+    with open('test3.txt', 'w') as f:
+        f.write('50\n50\n100\n')
+    with open('test4.txt', 'w') as f:
+        f.write('0\n0\n0\n')
+    with open('test5.txt', 'w') as f:
+        f.write('-20\n80\n-10\n')
+
+def teardown_module(module):
+    os.remove('test1.txt')
+    os.remove('test2.txt')
+    os.remove('test3.txt')
+    os.remove('test4.txt')
+    os.remove('test5.txt')
+    if os.path.exists('final_weight.txt'):
+        os.remove('final_weight.txt')
+
+@pytest.mark.parametrize("filename,expected", [
+    ('test1.txt', '1020\n'),
+    ('test2.txt', '800\n'),
+    ('test3.txt', '1200\n'),
+    ('test4.txt', '1000\n'),
+    ('test5.txt', '1050\n')
+])
+def test_calculate_final_weight(filename, expected):
+    calculate_final_weight(filename)
+    with open('final_weight.txt', 'r') as f:
+        result = f.read()
+    assert result == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

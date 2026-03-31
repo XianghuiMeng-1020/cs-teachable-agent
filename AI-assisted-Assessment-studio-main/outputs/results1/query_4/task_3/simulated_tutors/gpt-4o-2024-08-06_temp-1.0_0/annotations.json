@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef simulate_game(players):\n    # Dictionary to store the sum of roll outcomes for each player\n    outcomes = {}\n    \n    # Iterate through each player and their list of dice\n    for player, dice in players.items():\n        # Calculate the sum of random roll outcomes for player's dice\n        total = sum(random.randint(1, sides) for sides in dice)\n        outcomes[player] = total\n    \n    # Determine the highest roll sum\n    highest_sum = max(outcomes.values())\n    # Find all players with this highest sum\n    winners = [player for player, total in outcomes.items() if total == highest_sum]\n    \n    # Determine winner or tie\n    if len(winners) == 1:\n        return winners[0]\n    else:\n        return \"Tie\"\n",
+    "context_relevance": 1.0
+}

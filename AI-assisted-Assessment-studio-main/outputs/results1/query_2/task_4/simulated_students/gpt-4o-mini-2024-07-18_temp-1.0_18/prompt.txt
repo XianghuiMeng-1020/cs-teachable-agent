@@ -1,0 +1,26 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+In a virtual casino, players participate in lottery draws which are logged into a file. Each lottery draw result is recorded as a string with the format `"PLAYER_NAME WINNING_NUMBER"` where `PLAYER_NAME` is the name of the player and `WINNING_NUMBER` is the number obtained from the draw.
+
+Your task is to write a function `def check_winner(log_file, player_name, lucky_number):` that reads from a text file `log_file` containing multiple lines of lottery results. The function should return `True` if the player `player_name` has a winning number that matches the `lucky_number`, and `False` otherwise.
+
+#### Example
+If the `log_file` contains the following:
+```
+Alice 7
+Bob 15
+Alice 23
+Charlie 5
+```
+- `check_winner("log.txt", "Alice", 23)` should return `True`.
+- `check_winner("log.txt", "Bob", 7)` should return `False`.
+
+The function should ignore extra spaces and handle varying cases in player names (e.g., 'Alice', 'alice', and 'ALICE' should be treated as the same player). Assume that each line will contain a valid entry with a single player's result.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

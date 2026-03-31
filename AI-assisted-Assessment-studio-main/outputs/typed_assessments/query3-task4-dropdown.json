@@ -1,0 +1,97 @@
+{
+  "item_id": "task_4-dropdown",
+  "source_task_id": "task_4",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_4",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for classify_planets",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n**Task Description:** In the distant future, the Galactic Institute of Astronomical Studies is classifying various planets in the galaxy based on their atmospheric density and the presence of alien lifeforms. You have been tasked to write a Python function, `classify_planets(data)`, that takes a list of planets as its argument. Each planet is represented as a dictionary containing the following keys: - `name`: A string representing the planet's name. - `atmos_density`: A float value represent...",
+  "interaction_content": {
+    "function_name": "classify_planets",
+    "prompt_template": "def classify_planets(data):\n    categories = {\n        'Habitable': [],\n        'Potentially Habitable': [],\n        'Uninhabitable': []\n    }\n    for planet in data:\n        density = planet['atmos_density']\n        life = planet['alien_life']\n        name = planet['name']\n        if __BLANK_3__ __BLANK_1__ density __BLANK_2__ 3.0:\n            if life:\n                categories['Habitable'].append(name)\n            else:\n                categories['Potentially Habitable'].append(name)\n        else:\n            categories['Uninhabitable'].append(name)\n    return categories",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "<=",
+          "<",
+          ">=",
+          ">"
+        ],
+        "correct_answer": "<=",
+        "misconception_tags": {
+          "<": "operator_confusion",
+          ">=": "operator_confusion",
+          ">": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "<=",
+          "<",
+          ">=",
+          ">"
+        ],
+        "correct_answer": "<=",
+        "misconception_tags": {
+          "<": "operator_confusion",
+          ">=": "operator_confusion",
+          ">": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "1.0",
+          "0",
+          "1",
+          "2"
+        ],
+        "correct_answer": "1.0",
+        "misconception_tags": {
+          "0": "off_by_one_or_default_value",
+          "1": "off_by_one_or_default_value",
+          "2": "off_by_one_or_default_value"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "<=",
+      "blank_2": "<=",
+      "blank_3": "1.0"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_4",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

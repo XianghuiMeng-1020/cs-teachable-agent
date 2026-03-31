@@ -1,0 +1,49 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Design a Python function `play_roulette(starting_amount, rounds, bets)` simulating a simple game of chance - Roulette. In this game variant, the player starts with a certain amount of money and bets on a sequence of predefined rounds. The player can bet on 'red' or 'black'. Each color has an equal probability of winning, and each win doubles the player's bet amount, while a loss means the loss of the bet amount from the available funds. If the player's funds drop to zero before finishing the specified number of rounds, the game ends prematurely.
+
+The function should take:
+1. `starting_amount` (integer) representing the initial amount of money the player has.
+2. `rounds` (integer) specifying the number of rounds to play.
+3. `bets` (list of tuples) where each tuple contains a string ('red' or 'black') and an integer representing the amount of money the player bets on that color for each round.
+
+Return a dictionary with the following keys:
+- `'remaining_amount'` indicating the final amount of money the player has after the game.
+- `'played_rounds'` indicating the number of rounds that were actually played before funds were exhausted or all betting rounds were completed.
+
+Hints:
+- You can assume the input values are valid and bets do not exceed the current funds available before starting any round.
+- Use a random integer generator to simulate winning/losing outcomes of each round (0 for 'red' wins, 1 for 'black' wins).
+
+Implement this function using only variables, arithmetic operators, selection statements, loops, and dictionaries.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import random
+from my_module import play_roulette
+
+random.seed(0)  # For consistent testing
+
+@pytest.mark.parametrize("starting_amount, rounds, bets, expected", [
+    (100, 5, [('red', 10), ('black', 20), ('red', 30), ('black', 40), ('red', 50)], {'remaining_amount': 30, 'played_rounds': 5}),
+    (50, 4, [('red', 5), ('black', 5), ('red', 5), ('black', 5)], {'remaining_amount': 90, 'played_rounds': 4}),
+    (20, 6, [('black', 10), ('red', 10), ('black', 5)], {'remaining_amount': 5, 'played_rounds': 3}),
+    (10, 3, [('red', 5), ('black', 3), ('red', 3)], {'remaining_amount': 5, 'played_rounds': 3}),
+    (200, 2, [('black', 50), ('red', 50)], {'remaining_amount': 100, 'played_rounds': 2})
+])
+def test_play_roulette(starting_amount, rounds, bets, expected):
+    result = play_roulette(starting_amount, rounds, bets)
+    assert result == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,4 @@
+{
+    "program": "def dice_game(dice_rolls):\n    outcomes = []\n    for roll in dice_rolls:\n        sum_of_dice = sum(roll)\n        if sum_of_dice in [7, 11]:\n            outcomes.append(\"Win\")\n        elif sum_of_dice in [2, 3, 12]:\n            outcomes.append(\"Lose\")\n        else:\n            outcomes.append(\"Neutral\")\n    return outcomes",
+    "context_relevance": 1.0
+}

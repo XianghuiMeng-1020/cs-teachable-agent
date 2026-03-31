@@ -1,0 +1,60 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+In the ancient world of Greek mythology, each Olympian god had their area of influence and realms they presided over. Your task is to create a function `describe_god(name)` that takes a string `name` representing the name of an Olympian god and returns a string describing their primary domain of influence.
+
+The god names you need to handle are:
+- 'Zeus': "God of the sky and thunder"
+- 'Poseidon': "God of the sea"
+- 'Hades': "God of the underworld"
+- 'Athena': "Goddess of wisdom and war"
+- 'Apollo': "God of the sun and music"
+- 'Artemis': "Goddess of the hunt and moon"
+- 'Ares': "God of war"
+- 'Demeter': "Goddess of the harvest"
+- 'Hera': "Goddess of marriage"
+
+If the `name` provided does not correspond to any of these gods, the function should return "Unknown god".
+
+Ensure that the function handles both lowercase and mixed-case input effectively, making it case insensitive.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import describe_god
+
+def setup_module(module):
+    pass
+
+def teardown_module(module):
+    pass
+
+def test_zeus():
+    assert describe_god("Zeus") == "God of the sky and thunder"
+
+
+def test_poseidon():
+    assert describe_god("poseidon") == "God of the sea"
+
+
+def test_unknown_god():
+    assert describe_god("Hermes") == "Unknown god"
+
+
+def test_athena_mixed_case():
+    assert describe_god("aThEnA") == "Goddess of wisdom and war"
+
+
+def test_hades_lowercase():
+    assert describe_god("hades") == "God of the underworld"
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

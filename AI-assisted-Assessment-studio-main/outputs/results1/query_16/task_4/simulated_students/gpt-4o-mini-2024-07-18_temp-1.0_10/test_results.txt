@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/results1/query_16/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py _
+ImportError while importing test module '/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+outputs/results1/query_16/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:3: in <module>
+    from spaceship_module import Spaceship
+E   ModuleNotFoundError: No module named 'spaceship_module'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_16/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.45s ===============================

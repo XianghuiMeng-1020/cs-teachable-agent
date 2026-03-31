@@ -1,0 +1,4 @@
+{
+    "program": "def sort_creatures_by_realm(creature_data):\n    # Initialize an empty dictionary to hold the sorted creatures by realm\n    realm_dict = {}\n    \n    # Iterate over each creature and its realm in the input dictionary\n    for creature, realm in creature_data.items():\n        # If the realm is not already a key in the realm_dict, create it\n        if realm not in realm_dict:\n            realm_dict[realm] = []\n        # Append the creature to the list corresponding to its realm\n        realm_dict[realm].append(creature)\n    \n    # Sort the list of creatures for each realm\n    for realm in realm_dict:\n        realm_dict[realm].sort()\n    \n    return realm_dict\n",
+    "context_relevance": 1.0
+}

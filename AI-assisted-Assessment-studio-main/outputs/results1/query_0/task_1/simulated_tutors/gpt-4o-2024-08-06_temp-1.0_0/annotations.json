@@ -1,0 +1,4 @@
+{
+    "program": "def play_dice_game(dice1, dice2):\n    \"\"\"\n    Simulates a game of chance using two dice rolls and logs the outcome.\n    The outcome ('Win', 'Lose', or 'Tie') is determined based on the sum of dice rolls\n    and is then written to 'game_log.txt'.\n    \"\"\"\n    # Calculate the sum of the dice\n    dice_sum = dice1 + dice2\n\n    # Determine the outcome based on the sum of the dice\n    if dice_sum in [7, 11]:\n        outcome = 'Win'\n    elif dice_sum in [2, 3, 12]:\n        outcome = 'Lose'\n    else:\n        outcome = 'Tie'\n\n    # Create the log entry\n    log_entry = f\"{dice1}, {dice2} - {outcome}\"\n\n    # Write the log entry to the file\n    with open('game_log.txt', 'a') as file:\n        file.write(log_entry + '\\n')",
+    "context_relevance": 1.0
+}

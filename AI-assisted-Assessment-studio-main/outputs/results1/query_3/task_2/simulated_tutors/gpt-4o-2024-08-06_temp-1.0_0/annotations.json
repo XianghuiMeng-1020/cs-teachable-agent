@@ -1,0 +1,4 @@
+{
+    "program": "def play_game_of_chance(strategy):\n    bets = len(strategy.keys())\n    outcome = 'win' if bets % 2 == 0 else 'lose'\n\n    if outcome == 'win':\n        balance = strategy['win'] * 2 - strategy['lose']\n    else:\n        balance = -strategy['lose']\n\n    return {'result': outcome, 'balance': balance}",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,79 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+Poseidon has decided to conduct a race among his sea creatures, and he wants to calculate the winner based on the fastest time recorded in seconds. You are tasked to create a Python script to read a file containing the race results and determine the winner.
+
+The input file will be named 'race_results.txt', and each line of the file will contain the name of a creature followed by its time in seconds, separated by a comma, like this:
+
+```
+Hydra,1200
+Kraken,1100
+Nereid,1150
+Sirens,1250
+```
+
+Your task is to implement a function `find_winner(filename)` which takes the filename as an input (the file will always be named 'race_results.txt'). The function should return the name of the creature with the fastest time. If two or more creatures have the same fastest time, return the first one that appears in the file.
+
+You must handle file input/output as part of your solution. Will be tested by creating several such files and asserting the output of the function against the expected winner.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import find_winner
+
+def setup_module(module):
+    with open('race_results_1.txt', 'w') as f:
+        f.write('Hydra,1200\n')
+        f.write('Kraken,1100\n')
+        f.write('Nereid,1150\n')
+        f.write('Sirens,1250\n')
+    with open('race_results_2.txt', 'w') as f:
+        f.write('Mermaid,890\n')
+        f.write('Kraken,1100\n')
+        f.write('Hydra,890\n')
+    with open('race_results_3.txt', 'w') as f:
+        f.write('Leviathan,2000\n')
+        f.write('Ceto,2100\n')
+        f.write('Sirens,2000\n')
+    with open('race_results_4.txt', 'w') as f:
+        f.write('Cyclops,1300\n')
+    with open('race_results_5.txt', 'w') as f:
+        f.write('Syrenka,950\n')
+        f.write('Sirens,850\n')
+        f.write('Kraken,1100\n')
+
+
+def teardown_module(module):
+    os.remove('race_results_1.txt')
+    os.remove('race_results_2.txt')
+    os.remove('race_results_3.txt')
+    os.remove('race_results_4.txt')
+    os.remove('race_results_5.txt')
+
+
+def test_find_winner_1():
+    assert find_winner('race_results_1.txt') == 'Kraken'
+
+def test_find_winner_2():
+    assert find_winner('race_results_2.txt') == 'Mermaid'
+
+def test_find_winner_3():
+    assert find_winner('race_results_3.txt') == 'Leviathan'
+
+def test_find_winner_4():
+    assert find_winner('race_results_4.txt') == 'Cyclops'
+
+def test_find_winner_5():
+    assert find_winner('race_results_5.txt') == 'Sirens'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

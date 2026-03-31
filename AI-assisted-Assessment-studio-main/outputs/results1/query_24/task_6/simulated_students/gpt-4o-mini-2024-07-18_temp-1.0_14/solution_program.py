@@ -1,0 +1,18 @@
+def roll_dice(input_str):
+    results = []
+    rolls = input_str.split(',')
+    for roll in rolls:
+        if 'd' not in roll:
+            return 'Invalid roll format'
+        parts = roll.split('d')
+        if len(parts) != 2:
+            return 'Invalid roll format'
+        try:
+            num_dice = int(parts[0])
+            num_sides = int(parts[1])
+            if num_dice < 1 or num_sides < 1:
+                return 'Invalid number of dice or sides'
+        except ValueError:
+            return 'Invalid number of dice or sides'
+        results.append(num_dice * num_sides)
+    return results

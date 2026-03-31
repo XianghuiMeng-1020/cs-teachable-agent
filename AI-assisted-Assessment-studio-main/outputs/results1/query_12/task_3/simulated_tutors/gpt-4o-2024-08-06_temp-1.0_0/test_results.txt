@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______ ERROR at teardown of test_categorize_recipes[recipe5.txt: simple] _______
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_recipes/._recipe1.txt'
+=================================== FAILURES ===================================
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py:322: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py:322: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py:322: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py:322: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py:322: UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe1.txt: simple]
+FAILED outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe2.txt: simple]
+FAILED outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe3.txt: simple]
+FAILED outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe4.txt: complex]
+FAILED outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe5.txt: simple]
+ERROR outputs/results1/query_12/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_categorize_recipes[recipe5.txt: simple]
+========================== 5 failed, 1 error in 0.06s ==========================

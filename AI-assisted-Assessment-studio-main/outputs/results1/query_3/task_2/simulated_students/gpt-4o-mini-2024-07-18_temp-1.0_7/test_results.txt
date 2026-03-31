@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py F [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:14: AssertionError: assert {'balance': 150, 'result': 'win'} in [{'balance': 100, 'result': 'win'}, {'balance': -50, 'result': 'lose'}]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:14: AssertionError: assert {'balance': 250, 'result': 'win'} in [{'balance': 200, 'result': 'win'}, {'balance': -150, 'result': 'lose'}]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:14: AssertionError: assert {'balance': 900, 'result': 'win'} in [{'balance': 500, 'result': 'win'}, {'balance': -100, 'result': 'lose'}]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:14: AssertionError: assert {'balance': 125, 'result': 'win'} in [{'balance': 75, 'result': 'win'}, {'balance': -25, 'result': 'lose'}]
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_of_chance[strategy0-expected_outcomes0]
+FAILED outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_of_chance[strategy1-expected_outcomes1]
+FAILED outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_of_chance[strategy3-expected_outcomes3]
+FAILED outputs/results1/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_of_chance[strategy4-expected_outcomes4]
+========================= 4 failed, 1 passed in 0.04s ==========================

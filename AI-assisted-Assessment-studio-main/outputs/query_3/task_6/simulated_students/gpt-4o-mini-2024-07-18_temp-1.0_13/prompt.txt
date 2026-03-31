@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+**Interstellar Cargo Dispatcher:**
+
+In the distant future, interstellar travel is routine, and managing space cargo is a critical task for every cosmic fleet. You are tasked with developing a small module of an intergalactic cargo management system. Your job is to handle cargo demands across various star systems, ensuring cargo is evenly distributed.
+
+Write a function `dispatch_cargo(cargo_requests)` that receives a dictionary `cargo_requests`. The dictionary's keys are star system names (unique strings), and the values are integers representing the quantity of cargo requested by each star system.
+
+Your task is to calculate how many star systems will receive at least one cargo unit if the total available cargo is equal to the sum of all requests and how evenly the cargo can be distributed among them. Return a dictionary with two keys:
+- `'systems_with_cargo'`: Integer indicating how many star systems receive at least one unit of cargo.
+- `'leftover_cargo'`: Integer indicating how many cargo units are leftover after the cargo distribution.
+
+Assumption: Star systems with zero demand are not given cargo units nor counted.
+
+#### Example
+```python
+dispatch_cargo({'Andromeda': 5, 'MilkyWay': 2, 'Triangulum': 3})  # Returns: {'systems_with_cargo': 3, 'leftover_cargo': 0}
+```
+
+### Constraints
+- The dictionary will contain between 0 to 1000 star systems, inclusively.
+- Each cargo request (integer value) is between 0 and 10000, inclusively.
+
+### Notes
+- Enforce that star systems request at least one unit to be considered satisfied.
+- Use a single pass through the dictionary for the solution.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

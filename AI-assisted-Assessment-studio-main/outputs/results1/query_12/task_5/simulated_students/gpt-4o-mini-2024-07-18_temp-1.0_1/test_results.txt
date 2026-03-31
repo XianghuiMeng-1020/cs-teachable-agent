@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+FF..                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:45: AssertionError: assert ['salt: 5\n',...st: 2\n', ...] == ['salt: 5\n',...st: 2\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:49: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:63: AssertionError: assert 'salt: 5\nwat...potatoes: 1\n' == ''
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_generate_ingredient_report_general
+FAILED outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_generate_ingredient_report_no_file
+FAILED outputs/results1/query_12/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_generate_ingredient_report_empty_file
+========================= 3 failed, 2 passed in 0.08s ==========================

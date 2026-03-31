@@ -1,0 +1,7 @@
+In a distant future, Earth is plagued by an increasing number of asteroids that frequently threaten its surface. As a part of the Intergalactic Defense Committee, you've been tasked with writing a program that analyzes data from daily asteroid impact reports.
+
+Each report provides details about asteroids detected on that day, including their ID and the estimated impact force. These reports are stored in text files with information presented line by line. Each line in a report contains a single asteroid's information formatted as: `asteroid_id,impact_force`.
+
+Your task is to write a function `analyze_asteroid_reports(input_filename, output_filename)` that reads an input file, computes the average impact force for that file, and writes this average impact force to the specified output file in the format: `average impact force: <value>`. If the input file does not exist or contains no data, the function should handle it gracefully by storing "No data available" in the output file.
+
+Your program will be tested with various input files to ensure accuracy and correctness.

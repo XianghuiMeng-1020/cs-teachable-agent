@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:20: AssertionError: assert 'Bob:win' in ''
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:10: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:10: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:10: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:10: ValueError: invalid literal for int() with base 10: 'lose'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_win_case
+FAILED outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_lose_case
+FAILED outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_multiple_lines
+FAILED outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_format
+FAILED outputs/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_play_game_original_content_replacement
+============================== 5 failed in 0.03s ===============================

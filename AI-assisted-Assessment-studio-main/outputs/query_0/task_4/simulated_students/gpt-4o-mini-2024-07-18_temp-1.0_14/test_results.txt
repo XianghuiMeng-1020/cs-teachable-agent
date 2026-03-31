@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________________ ERROR at teardown of test_subtle_tie _____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins_tie.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins_one_player.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins_negative.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'daily_wins_subtle_tie.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_luckiest_player_normal
+FAILED outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_luckiest_player_tie
+FAILED outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_luckiest_player_one_player
+FAILED outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_with_negative_winnings
+FAILED outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_subtle_tie
+ERROR outputs/query_0/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_subtle_tie
+========================== 5 failed, 1 error in 0.14s ==========================

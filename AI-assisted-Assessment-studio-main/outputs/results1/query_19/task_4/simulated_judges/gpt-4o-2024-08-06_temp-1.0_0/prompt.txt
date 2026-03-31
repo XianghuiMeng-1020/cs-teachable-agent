@@ -1,0 +1,114 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+**Task Description:**
+
+The inhabitants of the distant planet Zog have a peculiar way of encoding their historical records. They use a special file format where every line contains a record about an astronomical event. Each record consists of a date and a description, separated by a comma. Unfortunately, sometimes the records may contain errors such as missing dates or separators. Your task is to write a Python program that reads these records from a text file, validates them, and writes valid records to a new file.
+
+Create a function `process_records(input_file, output_file)` that takes the name of the input file and the output file as parameters. The input file will be a text file containing several lines, each representing a record. Your function should open the input file, read each line one by one, and check if it is a valid record. A record is considered valid if it:
+1. Contains exactly one comma.
+2. The text before the comma represents a valid date in the format 'YYYY-MM-DD'.
+
+If a line is a valid record, it should be written to the output file. If a line is invalid, it should be skipped. Handle any exceptions that may arise during file operations gracefully. Ensure that the program does not crash and any IOError is handled.
+
+The function should return the number of valid records written to the output file.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import process_records
+
+def setup_module(module):
+    with open('test_input1.txt', 'w') as f:
+        f.write("2023-10-23, Asteroid pass by planet Zog\n")
+        f.write("New species discovery\n")
+        f.write("2023-09-15, Moon eclipse observed\n")
+        f.write("2023-09-31, Invalid date record\n")
+        f.write("2022-06-19, Meteor shower\n")
+    
+    with open('test_input2.txt', 'w') as f:
+        f.write("2023-05-11, Spacecraft launch\n")
+        f.write("2021-02-28, Interstellar signal detected\n")
+        f.write("202, Partial data\n")
+        f.write("2022-12-25, Holiday record\n")
+    
+    with open('test_input3.txt', 'w') as f:
+        f.write("2025-11-11, Galactic cloud observation\n")
+
+
+def teardown_module(module):
+    try:
+        os.remove('test_input1.txt')
+        os.remove('test_input2.txt')
+        os.remove('test_input3.txt')
+        os.remove('test_output1.txt')
+        os.remove('test_output2.txt')
+        os.remove('test_output3.txt')
+    except OSError:
+        pass
+
+
+def test_process_records_valid_cases():
+    result = process_records('test_input1.txt', 'test_output1.txt')
+    assert result == 2
+    with open('test_output1.txt', 'r') as f:
+        records = f.readlines()
+    assert records == [
+        "2023-10-23, Asteroid pass by planet Zog\n",
+        "2023-09-15, Moon eclipse observed\n"
+    ]
+
+def test_process_records_invalid_dates():
+    result = process_records('test_input2.txt', 'test_output2.txt')
+    assert result == 2
+    with open('test_output2.txt', 'r') as f:
+        records = f.readlines()
+    assert records == [
+        "2023-05-11, Spacecraft launch\n",
+        "2021-02-28, Interstellar signal detected\n"
+    ]
+
+
+def test_process_records_all_valid():
+    result = process_records('test_input3.txt', 'test_output3.txt')
+    assert result == 1
+    with open('test_output3.txt', 'r') as f:
+        records = f.readlines()
+    assert records == [
+        "2025-11-11, Galactic cloud observation\n"
+    ]
+
+def test_empty_file():
+    with open('test_empty.txt', 'w') as f:
+        pass
+    result = process_records('test_empty.txt', 'test_output_empty.txt')
+    assert result == 0
+    with open('test_output_empty.txt', 'r') as f:
+        records = f.readlines()
+    assert records == []
+    os.remove('test_empty.txt')
+    os.remove('test_output_empty.txt')
+
+def test_no_valid_records():
+    with open('test_no_valid.txt', 'w') as f:
+        f.write("No valid data here\n")
+        f.write("Invalid,\n")
+        f.write(", Totally empty before comma\n")
+    result = process_records('test_no_valid.txt', 'test_output_no_valid.txt')
+    assert result == 0
+    with open('test_output_no_valid.txt', 'r') as f:
+        records = f.readlines()
+    assert records == []
+    os.remove('test_no_valid.txt')
+    os.remove('test_output_no_valid.txt')
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

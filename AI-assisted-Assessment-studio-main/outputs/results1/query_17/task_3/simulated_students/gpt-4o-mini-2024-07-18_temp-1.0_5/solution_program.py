@@ -1,0 +1,16 @@
+class Spaceship:
+    def __init__(self, name, captain='Unknown'):
+        self.name = name
+        self.captain = captain
+        self.missions = []
+
+    def add_mission(self, mission_type):
+        if mission_type not in ['Reconnaissance', 'Transport', 'Combat']:
+            raise ValueError('Invalid mission type')
+        self.missions.append(mission_type)
+
+    def get_missions_summary(self):
+        summary = {'Reconnaissance': 0, 'Transport': 0, 'Combat': 0}
+        for mission in self.missions:
+            summary[mission] += 1
+        return summary

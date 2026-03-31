@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 20%]
+.F..E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_multiple_recipes_same_name _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:25: AssertionError: assert '' == 'Pasta\nTomat...\nTomato\n2\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'empty_recipes.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_basic_sorting
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_empty_file
+ERROR outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_multiple_recipes_same_name
+===================== 2 failed, 3 passed, 1 error in 0.16s =====================

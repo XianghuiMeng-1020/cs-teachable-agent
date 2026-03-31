@@ -1,0 +1,81 @@
+{
+  "item_id": "task_7-execution-trace",
+  "source_task_id": "task_7",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_7",
+  "item_type": "execution-trace",
+  "title": "Execution Trace for decode_message",
+  "prompt": "Trace the execution of the Python function call shown below. For each checkpoint, write the value of the named variable immediately after the referenced line has executed.\n\nFunction: decode_message\nConcrete call: decode_message('QXZ BFO GAO', {'QXZ': 'hello', 'BFO': 'world', 'DZT': 'alien'})\n\nSource task summary:\n### Task Description The Galactic Federation requires your programming prowess to help them decipher alien messages. You have intercepted encoded messages sent from different planets in the Andromeda Galaxy to Earth. Each intercepted message is a string containing words that correspond to specific planetary codes. Your task is to create a function `decode_message(galactic_message, codebook)` that takes in: - `galactic_message`: a string representing an encoded message. The words in the messag...",
+  "interaction_content": {
+    "function_name": "decode_message",
+    "function_source": "def decode_message(galactic_message, codebook):\n    words = galactic_message.split()\n    decoded_words = []\n    for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')\n    return ' '.join(decoded_words)",
+    "call_expression": "decode_message('QXZ BFO GAO', {'QXZ': 'hello', 'BFO': 'world', 'DZT': 'alien'})",
+    "checkpoints": [
+      {
+        "checkpoint_id": "checkpoint_1",
+        "line_number": 2,
+        "line_excerpt": "    words = galactic_message.split()",
+        "variable_name": "words"
+      },
+      {
+        "checkpoint_id": "checkpoint_2",
+        "line_number": 3,
+        "line_excerpt": "    decoded_words = []",
+        "variable_name": "decoded_words"
+      },
+      {
+        "checkpoint_id": "checkpoint_3",
+        "line_number": 4,
+        "line_excerpt": "    for word in words:",
+        "variable_name": "word"
+      },
+      {
+        "checkpoint_id": "checkpoint_4",
+        "line_number": 6,
+        "line_excerpt": "            decoded_words.append(codebook[word])",
+        "variable_name": "decoded_words"
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "checkpoint_1": "['QXZ', 'BFO', 'GAO']",
+      "checkpoint_2": "[]",
+      "checkpoint_3": "'QXZ'",
+      "checkpoint_4": "['hello']"
+    }
+  },
+  "grading_rule": "Each checkpoint must match the canonical variable value immediately after the referenced line executes.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_7",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "dynamic_execution_trace_from_first_test_case",
+    "trace_call_args": [
+      "'QXZ BFO GAO'",
+      "{'QXZ': 'hello', 'BFO': 'world', 'DZT': 'alien'}"
+    ],
+    "trace_call_kwargs": {},
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

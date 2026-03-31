@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py . [ 16%]
+FF.FF                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:67: AssertionError: assert {'Thor'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:8: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:67: AssertionError: assert set() == {'Achilles', 'Hercules'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:67: AssertionError: assert {'Achilles', 'Hercules'} == set()
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_edge_cases[<lambda>-expected0]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+========================= 4 failed, 2 passed in 0.13s ==========================

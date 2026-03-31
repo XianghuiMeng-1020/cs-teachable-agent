@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py F [ 20%]
+....                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:35: AssertionError: assert False == True
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_valid_winner
+========================= 1 failed, 4 passed in 0.09s ==========================

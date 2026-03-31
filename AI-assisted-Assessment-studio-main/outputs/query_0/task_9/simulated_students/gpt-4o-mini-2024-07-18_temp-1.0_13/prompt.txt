@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In this task, you will create a simple game of chance simulator in Python. The program will simulate a series of coin flips and determine the winner based on a specified number of rounds. Each round consists of a single coin flip for which the result is randomly chosen: 'Heads' or 'Tails'. The results of each round will be stored and written to a text file called `flips_log.txt`. The program then determines the winner based on which side showed up more frequently.
+
+The program should define a function `coin_flip_game(rounds)` which takes an integer `rounds` as its parameter. The function will: 
+- Simulate the coin flips for the specified number of rounds.
+- Keep track of the number of 'Heads' and 'Tails' flips.
+- Write each flip's result to the `flips_log.txt` file, one result per line. 
+- Output the final winner of the game as a string: 'Heads' or 'Tails'.
+
+__Details to Consider:__
+- If both sides win an equal number of rounds, your program should return 'Draw'.
+- It should be noted that only the import of `random` is required for generating the randomized flips, and no other libraries or data structures should be used beyond strings and basic I/O operations.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

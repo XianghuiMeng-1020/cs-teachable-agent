@@ -1,0 +1,87 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+## Task Description
+
+You are tasked with creating a basic inventory tracking program for a board game store. The program needs to track the inventory of different board games, handle sales, and update stock levels.
+
+### Requirements:
+
+1. **Function Name**: `update_inventory`
+    - **Parameters**:
+        - `inventory`: A dictionary where each key is the name of a board game (string), and the value is the available stock (integer).
+        - `sales`: A list of tuples, where each tuple contains a board game name (string) and a quantity sold (integer).
+    - **Returns**: Updated dictionary with adjusted stock levels.
+
+2. If a game sale cannot be fulfilled due to insufficient stock, the stock should remain unchanged.
+
+3. Implement the solution only using variables, arithmetic operators, selection statements, loops, and dictionaries.
+
+4. The program will be tested with several sales scenarios to ensure proper stock adjustments and validity constraints.
+
+### Example
+
+**Input**:
+```python
+inventory = {
+    'Monopoly': 5,
+    'Risk': 7,
+    'Catan': 3
+}
+sales = [
+    ('Monopoly', 2),
+    ('Risk', 8),
+    ('Catan', 1)
+]
+```
+
+**Output**:
+```python
+{
+    'Monopoly': 3,
+    'Risk': 7,  # Sale could not be processed due to insufficient stock
+    'Catan': 2
+}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import update_inventory
+
+@pytest.mark.parametrize("inventory, sales, expected", [
+    (   # Base case with normal processing
+        {'Monopoly': 5, 'Risk': 7, 'Catan': 3},
+        [('Monopoly', 2), ('Risk', 8), ('Catan', 1)],
+        {'Monopoly': 3, 'Risk': 7, 'Catan': 2}
+    ),
+    (   # All sales possible
+        {'Chess': 10, 'Checkers': 5, 'Go': 8},
+        [('Chess', 5), ('Checkers', 5), ('Go', 8)],
+        {'Chess': 5, 'Checkers': 0, 'Go': 0}
+    ),
+    (   # Sale not possible due to zero initial stock
+        {'Scrabble': 0, 'Pictionary': 4},
+        [('Scrabble', 1), ('Pictionary', 3)],
+        {'Scrabble': 0, 'Pictionary': 1}
+    ),
+    (   # No sales scenario
+        {'Life': 6, 'Guess Who?': 3},
+        [],
+        {'Life': 6, 'Guess Who?': 3}
+    ),
+    (   # High quantity sale, cannot be fulfilled, all left unchanged
+        {'Sushi Go': 2},
+        [('Sushi Go', 5)],
+        {'Sushi Go': 2}
+    ),
+])
+def test_update_inventory(inventory, sales, expected):
+    assert update_inventory(inventory, sales) == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

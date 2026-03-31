@@ -1,0 +1,73 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In the distant future, space tourists rent spaceships for a journey to distant stars. To ensure smooth travel, a spaceship rental company needs a Python program to manage spaceship reservations, calculate travel time, and handle booking errors.
+
+You are tasked with creating a `Spaceship` class that allows booking trips based on spaceship's speed and the distance to the target star. Here are the requirements:
+
+1. Create a `Spaceship` class with the following properties:
+   - `name`: a string representing the name of the spaceship.
+   - `max_speed`: an integer representing the maximum speed of the spaceship in lightyears per hour.
+
+2. Implement a method `book_trip(destination, distance)` that takes:
+   - `destination`: a string representing the name of the star destination.
+   - `distance`: an integer representing the distance to the destination in lightyears.
+
+   The method should calculate the travel time using the formula `time = distance / max_speed`. Return the result as a string in the format: "Trip to {destination} will take {time} hours."
+
+3. Implement error handling to manage the following:
+   - If `distance` is non-positive, throw a `ValueError` with the message "Distance must be a positive integer."
+   - If a `division by zero` occurs (e.g., if `max_speed` is zero), catch the error and return the message "Cannot book trip: spaceship speed is zero."
+
+Your program will be tested with multiple scenarios, including edge cases where distances might be zero or negative, or the spaceship speed is zero. Ensure your class and methods are robust to these scenarios.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import Spaceship
+
+@pytest.fixture(scope="module")
+def setup_module():
+    return None
+
+@pytest.fixture(scope="module")
+def teardown_module():
+    return None
+
+
+def test_normal_trip():
+    spaceship = Spaceship('Galactic Voyager', 5)
+    result = spaceship.book_trip('Alpha Centauri', 20)
+    assert result == "Trip to Alpha Centauri will take 4.0 hours."
+
+def test_max_speed_zero():
+    spaceship = Spaceship('Light Slug', 0)
+    result = spaceship.book_trip('Proxima Centauri', 15)
+    assert result == "Cannot book trip: spaceship speed is zero."
+
+def test_distance_zero():
+    spaceship = Spaceship('Cosmos Racer', 10)
+    with pytest.raises(ValueError) as excinfo:
+        spaceship.book_trip('Sirius', 0)
+    assert "Distance must be a positive integer." in str(excinfo.value)
+
+def test_negative_distance():
+    spaceship = Spaceship('Star Hopper', 10)
+    with pytest.raises(ValueError) as excinfo:
+        spaceship.book_trip('Vega', -5)
+    assert "Distance must be a positive integer." in str(excinfo.value)
+
+def test_large_distance():
+    spaceship = Spaceship('Galaxy Cruiser', 100000)
+    result = spaceship.book_trip('Andromeda', 1000000)
+    assert result == "Trip to Andromeda will take 10.0 hours."
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

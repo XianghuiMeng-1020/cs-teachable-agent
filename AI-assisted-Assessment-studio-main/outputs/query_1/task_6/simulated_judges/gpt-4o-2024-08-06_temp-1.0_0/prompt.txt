@@ -1,0 +1,79 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+In the realm of Mythologia, various mythical creatures inhabit the Kingdom's great forests. Each creature has its own 'Mythical Power' which can be calculated based on their characteristics and affinities. Your task is to implement a function `calculate_mythical_power(affinities)` that takes a list of numbers representing the affinities of each mythical creature and returns the total 'Mythical Power'. 
+
+The Mythical Power is determined using the following rules:
+1. Affinities with a value greater than 10 are considered "Strong" and add twice their value to the total power.
+2. Affinities with a value between 5 and 10 (inclusive) are considered "Moderate" and add their value as is to the total power.
+3. Affinities with a value less than 5 are considered "Weak" and subtract twice their value from the total power.
+
+**Function Signature:**
+```python
+def calculate_mythical_power(affinities):
+    pass
+```
+
+**Constraints:**
+- The list `affinities` contains 0 to 100 integers where each integer is between -100 and 100 inclusive.
+
+Complete the function so that it returns the total 'Mythical Power'.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_mythical_power
+
+@pytest.fixture(autouse=True)
+def setup_teardown():
+    # Setup before tests
+    yield
+    # Teardown after tests
+
+# Test with all strong affinities
+@pytest.mark.parametrize("affinities, expected", [
+    ([15, 20, 25], 2*15 + 2*20 + 2*25),
+    ([11, 12], 2*11 + 2*12)])
+def test_all_strong_affinities(calculate_mythical_power, affinities, expected):
+    assert calculate_mythical_power(affinities) == expected
+
+# Test with all moderate affinities
+@pytest.mark.parametrize("affinities, expected", [
+    ([5, 6, 10], 5 + 6 + 10),
+    ([7], 7)])
+def test_all_moderate_affinities(calculate_mythical_power, affinities, expected):
+    assert calculate_mythical_power(affinities) == expected
+
+# Test with all weak affinities
+@pytest.mark.parametrize("affinities, expected", [
+    ([1, 2, 3], -(2*1 + 2*2 + 2*3)),
+    ([4], -(2*4))])
+def test_all_weak_affinities(calculate_mythical_power, affinities, expected):
+    assert calculate_mythical_power(affinities) == expected
+
+# Test with a mix of affinities
+@pytest.mark.parametrize("affinities, expected", [
+    ([3, 5, 11], -(2*3) + 5 + 2*11),
+    ([15, 7, 2], 2*15 + 7 - (2*2))])
+def test_mixed_affinities(calculate_mythical_power, affinities, expected):
+    assert calculate_mythical_power(affinities) == expected
+
+# Test with an empty list
+@pytest.mark.parametrize("affinities, expected", [
+    ([], 0)])
+def test_empty_affinities(calculate_mythical_power, affinities, expected):
+    assert calculate_mythical_power(affinities) == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

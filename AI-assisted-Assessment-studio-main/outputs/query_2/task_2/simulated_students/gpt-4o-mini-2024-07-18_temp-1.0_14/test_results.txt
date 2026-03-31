@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py _
+E   AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.20s ===============================

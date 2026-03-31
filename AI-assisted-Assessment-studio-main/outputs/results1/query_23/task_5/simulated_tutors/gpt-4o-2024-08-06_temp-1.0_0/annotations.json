@@ -1,0 +1,4 @@
+{
+    "program": "class ScoreCard:\n    def __init__(self, players):\n        # Initialize a dictionary to keep track of each player's score\n        self.scores = {player: 0 for player in players}\n        self.players = players  # Maintain the list of players\n\n    def add_score(self, player, points):\n        # Add points to the player's score if the player exists\n        if player in self.scores:\n            self.scores[player] += points\n\n    def get_score(self, player):\n        # Return the player's score or None if player not found\n        return self.scores.get(player, None)\n\n    def get_winner(self):\n        # Find the player with the highest score\n        max_score = max(self.scores.values())\n        for player in self.players:\n            if self.scores[player] == max_score:\n                return player",
+    "context_relevance": 1.0
+}

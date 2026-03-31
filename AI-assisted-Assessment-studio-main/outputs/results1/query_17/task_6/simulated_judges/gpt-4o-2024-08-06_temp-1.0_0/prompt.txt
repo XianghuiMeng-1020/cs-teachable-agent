@@ -1,0 +1,76 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+### Science Fiction Adventure Management System
+
+In this programming task, you are required to implement a simple adventure management system that caters to science fiction enthusiasts. In this world, there exist various alien races, each with unique abilities and characteristics. Your task is to model an adventure management system that helps manage missions involving these aliens.
+
+#### Structure
+- **Alien Class**: You need to implement a class `Alien` that encapsulates information and functionalities related to an alien character. Each `Alien` instance has a `name` (string), `species` (string), and a `skills` dictionary where keys are skill names and values are the proficiency levels.
+
+- **Mission Management**: Implement a function `assign_mission(aliens, mission_requirements)` where `aliens` is a list of `Alien` objects, and `mission_requirements` is a dictionary with skill names as keys and minimum skill levels required as values.
+  - The `assign_mission` function should return a list of aliens who meet or exceed the skills listed in `mission_requirements`. If an alien does not have a required skill, assume its proficiency is 0.
+  - If no aliens can be assigned to a mission, the function should raise a `ValueError` with the message "No suitable aliens found".
+
+#### Requirements
+- **Selection**: Use condition checks to determine if an alien satisfies the mission requirements.
+- **Exception Handling**: Raise an exception if no appropriate aliens can be assigned to the mission.
+- **Objects and Classes**: Use classes to encapsulate the alien data and functionalities.
+
+#### Example
+Suppose there is a mission that requires 'hacking' skill level of at least 5 and 'flying' skill level of at least 7. You should implement the `assign_mission` function such that it correctly identifies which aliens can be assigned to this mission, based on their skill levels in those areas. The solution should be robust and handle cases where no aliens are suitable for the mission.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import Alien, assign_mission
+
+def test_all_aliens_qualified():
+    alien1 = Alien("Zog", "Martian", {"hacking": 5, "flying": 8})
+    alien2 = Alien("Xena", "Venusian", {"hacking": 6, "flying": 8})
+    aliens = [alien1, alien2]
+    mission_requirements = {"hacking": 5, "flying": 7}
+    result = assign_mission(aliens, mission_requirements)
+    assert result == [alien1, alien2]
+
+def test_some_aliens_qualified():
+    alien1 = Alien("Zog", "Martian", {"hacking": 4, "flying": 9})
+    alien2 = Alien("Xena", "Venusian", {"hacking": 6, "flying": 2})
+    alien3 = Alien("Glorp", "Jupiterian", {"hacking": 5, "flying": 8})
+    aliens = [alien1, alien2, alien3]
+    mission_requirements = {"hacking": 5, "flying": 7}
+    result = assign_mission(aliens, mission_requirements)
+    assert result == [alien3]
+
+def test_no_aliens_qualified():
+    alien1 = Alien("Zog", "Martian", {"hacking": 4, "flying": 6})
+    alien2 = Alien("Xena", "Venusian", {"hacking": 5, "flying": 5})
+    aliens = [alien1, alien2]
+    mission_requirements = {"hacking": 5, "flying": 7}
+    with pytest.raises(ValueError, match="No suitable aliens found"):
+        assign_mission(aliens, mission_requirements)
+
+def test_no_skills_listed_yet_met():
+    alien1 = Alien("Zog", "Martian", {})
+    alien2 = Alien("Xena", "Venusian", {"hacking": 6, "flying": 2})
+    aliens = [alien1, alien2]
+    mission_requirements = {"hacking": 5}
+    result = assign_mission(aliens, mission_requirements)
+    assert result == [alien2]
+
+
+def test_empty_alien_list():
+    aliens = []
+    mission_requirements = {"hacking": 5, "flying": 7}
+    with pytest.raises(ValueError, match="No suitable aliens found"):
+        assign_mission(aliens, mission_requirements)
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

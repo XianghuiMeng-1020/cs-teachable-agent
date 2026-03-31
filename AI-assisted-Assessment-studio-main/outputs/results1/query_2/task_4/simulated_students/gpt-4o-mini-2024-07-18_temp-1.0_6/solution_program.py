@@ -1,0 +1,11 @@
+def check_winner(log_file, player_name, lucky_number):
+    player_name = player_name.lower()
+    with open(log_file, 'r') as file:
+        for line in file:
+            parts = line.strip().split()
+            if len(parts) == 2:
+                name = parts[0].lower()
+                winning_number = int(parts[1])
+                if name == player_name and winning_number == lucky_number:
+                    return True
+    return False

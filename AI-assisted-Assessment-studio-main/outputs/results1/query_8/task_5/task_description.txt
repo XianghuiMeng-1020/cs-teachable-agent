@@ -1,0 +1,11 @@
+Write a function `god_info(god_name)` that takes a single string parameter `god_name`, representing the name of a Greek god or goddess, and returns a string describing their domain and symbol.
+
+The function should use a dictionary to store the data of the following Greek gods:
+- `Zeus`: Domain - "Sky and Thunder", Symbol - "Thunderbolt"
+- `Poseidon`: Domain - "Sea", Symbol - "Trident"
+- `Hades`: Domain - "Underworld", Symbol - "Helmet of invisibility"
+- `Ares`: Domain - "War", Symbol - "Spear"
+- `Aphrodite`: Domain - "Love", Symbol - "Dove"
+- `Athena`: Domain - "Wisdom", Symbol - "Owl"
+
+The function should return a formatted string in the format 'Domain: <Domain>, Symbol: <Symbol>' for the given god if they exist in the dictionary. If the god does not exist in the dictionary, the function should return "Unknown god". The function and data should not be case sensitive, so input should be handled accordingly.

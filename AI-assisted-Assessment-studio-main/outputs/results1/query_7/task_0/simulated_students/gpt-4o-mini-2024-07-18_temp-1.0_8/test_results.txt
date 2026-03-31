@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:30: AssertionError: assert ['Zeus 1\n', ...\n', 'In 1\n'] == ['Zeus 1\n', ...\n', 'In 1\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:41: AssertionError: assert ['Zeus 3\n', ...', 'None 0\n'] == ['Zeus 3\n', 'Zeus 3\n', '\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:71: AssertionError: assert [] == ['Gaia 3\n', 'Aphrodite 2\n']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_analyze_myths_case1
+FAILED outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_analyze_myths_case2
+FAILED outputs/results1/query_7/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_analyze_myths_case5
+========================= 3 failed, 2 passed in 0.04s ==========================

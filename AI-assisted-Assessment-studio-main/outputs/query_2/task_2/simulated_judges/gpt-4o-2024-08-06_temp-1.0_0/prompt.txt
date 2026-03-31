@@ -1,0 +1,84 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+### Task Description:
+
+You have been tasked with creating a program to manage and display recipes. Your program will read a text file containing recipe details, process the data, and provide a lookup functionality by categories. The recipe file is organized as follows:
+
+- Each line in the file represents a recipe entry.
+- Each entry contains the following fields separated by a semicolon `;`:
+  - Recipe Name: Name of the dish
+  - Ingredients: Comma-separated list of ingredients
+  - Preparation Time: Time required for preparing the dish
+  - Category: The category of dish (e.g., appetizer, main course, dessert)
+
+Write a function `get_recipes_by_category(filename, category_name)` that:
+- Takes the name of the file containing recipes and a string `category_name`.
+- Reads and processes the file to retrieve recipes belonging to the specified category.
+- Returns a list of strings, where each string is a recipe's name belonging to the specified category.
+
+Your program should handle cases where:
+- The specified file does not exist.
+- There are no recipes in the given category.
+- Recipe entries do not strictly follow the expected format.
+
+### Requirements
+
+- Your program should handle invalid or corrupted lines gracefully (e.g., lines not having the expected number of fields)
+- Your program should return an empty list in cases where no recipes match the specified category or the file is empty or cannot be read.
+
+Provide a full solution including a test suite for your function.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import get_recipes_by_category
+
+# Sample recipe file data
+data = '''Pasta;Tomato,Garlic,Olive Oil;15 minutes;Main Course
+Apple Pie;Apple,Flour,Sugar;90 minutes;Dessert
+Bruschetta;Tomato,Basil,Olive Oil;10 minutes;Appetizer
+Chocolate Cake;Cocoa,Butter,Flour,Milk;120 minutes;Dessert
+Salad;Lettuce,Tomato,Cucumber;5 minutes;Appetizer
+'''  # Note no trailing newline
+
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as file:
+        file.write(data)
+
+
+def teardown_module(module):
+    os.remove('recipes.txt')
+
+
+def test_main_course_recipes():
+    assert get_recipes_by_category('recipes.txt', 'Main Course') == ['Pasta']
+
+
+def test_dessert_recipes():
+    assert get_recipes_by_category('recipes.txt', 'Dessert') == ['Apple Pie', 'Chocolate Cake']
+
+
+def test_appetizer_recipes():
+    assert get_recipes_by_category('recipes.txt', 'Appetizer') == ['Bruschetta', 'Salad']
+
+
+def test_no_matching_category():
+    assert get_recipes_by_category('recipes.txt', 'Beverage') == []
+
+
+def test_file_not_found():
+    assert get_recipes_by_category('non_existing_file.txt', 'Appetizer') == []
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

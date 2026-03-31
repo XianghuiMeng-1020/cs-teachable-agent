@@ -1,0 +1,114 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+### Game of Chance: Lottery System
+
+Create a function called `lottery_game(entries, winning_number)` that simulates a lottery game. The function should determine the winnings for each participant based on their guess of a winning number. 
+
+#### Input:
+- `entries`: A dictionary where keys are participant names (strings) and values are their guessed numbers (integers).
+- `winning_number`: An integer representing the lottery's winning number.
+
+#### Output:
+- A dictionary with participant names as keys and their winnings as values (strings). Use 'Jackpot', 'Half-Pot', 'Quarter-Pot', or 'No Winnings' based on the following rules:
+  - If the guessed number matches the winning number exactly, the participant wins a 'Jackpot'.
+  - If the guessed number matches plus or minus 1 of the winning number, the participant wins 'Half-Pot'.
+  - If the guessed number matches plus or minus 2 of the winning number, the participant wins 'Quarter-Pot'.
+  - If none of the above, the participant receives 'No Winnings'.
+
+#### Example:
+```python
+entries = {
+    'Alice': 5,
+    'Bob': 3,
+    'Charlie': 8
+}
+winning_number = 4
+print(lottery_game(entries, winning_number))
+```
+Expected output:
+```
+{
+    'Alice': 'Jackpot',
+    'Bob': 'Half-Pot',
+    'Charlie': 'No Winnings'
+}
+```
+
+Implement the `lottery_game` function to fulfill the task requirements.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import lottery_game
+
+def test_exact_match():
+    entries = {
+        'John': 15,
+        'Doe': 15,
+    }
+    winning_number = 15
+    result = lottery_game(entries, winning_number)
+    assert result == {
+        'John': 'Jackpot',
+        'Doe': 'Jackpot'
+    }
+
+def test_one_off_match():
+    entries = {
+        'Emily': 7,
+        'Sarah': 9
+    }
+    winning_number = 8
+    result = lottery_game(entries, winning_number)
+    assert result == {
+        'Emily': 'Half-Pot',
+        'Sarah': 'Half-Pot'
+    }
+
+def test_two_off_match():
+    entries = {
+        'Anna': 10,
+        'Steve': 14
+    }
+    winning_number = 12
+    result = lottery_game(entries, winning_number)
+    assert result == {
+        'Anna': 'Quarter-Pot',
+        'Steve': 'Quarter-Pot'
+    }
+
+def test_no_winnings():
+    entries = {
+        'Paul': 32,
+        'Charles': 7,
+    }
+    winning_number = 10
+    result = lottery_game(entries, winning_number)
+    assert result == {
+        'Paul': 'No Winnings',
+        'Charles': 'No Winnings'
+    }
+
+def test_mixture_of_cases():
+    entries = {
+        'Luke': 5,
+        'Leia': 6,
+        'Han': 7,
+        'Chewie': 10
+    }
+    winning_number = 7
+    result = lottery_game(entries, winning_number)
+    assert result == {
+        'Luke': 'Quarter-Pot',
+        'Leia': 'Half-Pot',
+        'Han': 'Jackpot',
+        'Chewie': 'No Winnings'
+    }
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

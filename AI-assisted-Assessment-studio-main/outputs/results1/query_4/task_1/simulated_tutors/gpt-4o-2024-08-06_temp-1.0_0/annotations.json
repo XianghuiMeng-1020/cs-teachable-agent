@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_winnings(tosses):\n    # Initialize a variable to hold total winnings\n    total = 0\n    \n    # Loop over each character in the string of tosses\n    for toss in tosses:\n        # Selection statement to determine winnings or loss\n        if toss == 'H':\n            total += 2  # Add $2 for heads\n        elif toss == 'T':\n            total -= 1  # Subtract $1 for tails\n    \n    # Return the final calculated total\n    return total\n\n# Example usage\nif __name__ == \"__main__\":\n    example_tosses = \"HTHTTHH\"\n    print(calculate_winnings(example_tosses))  # Should output 5",
+    "context_relevance": 1.0
+}

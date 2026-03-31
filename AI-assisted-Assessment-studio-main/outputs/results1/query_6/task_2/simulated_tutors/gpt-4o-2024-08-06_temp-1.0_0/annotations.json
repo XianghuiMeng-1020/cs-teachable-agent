@@ -1,0 +1,4 @@
+{
+    "program": "class MythologyManager:\n    def __init__(self, filename):\n        self.filename = filename\n        self.stories = {}\n        try:\n            with open(filename, 'r') as file:\n                for line in file:\n                    name, story = line.strip().split(': ', 1)\n                    self.stories[name] = story\n        except FileNotFoundError:\n            open(filename, 'w').close()\n\n    def add_story(self, name, story):\n        self.stories[name] = story\n\n    def remove_story(self, name):\n        if name in self.stories:\n            del self.stories[name]\n\n    def get_story(self, name):\n        return self.stories.get(name, '')\n\n    def save(self):\n        with open(self.filename, 'w') as file:\n            for name, story in self.stories.items():\n                file.write(f'{name}: {story}\\n')",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py F [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/solution_program.py:11: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/solution_program.py:11: IndexError: list index out of range
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_organize_recipes_single_case
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_unsorted_input
+========================= 2 failed, 3 passed in 0.03s ==========================

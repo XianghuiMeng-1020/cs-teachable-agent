@@ -1,0 +1,19 @@
+### Task Description
+
+Create a Python program that manages a simple recipe book for cooking recipes. The program should define a `Recipe` class and manage recipes using text files. Each recipe should have the following attributes: `name`, `ingredients`, and `instructions`.
+
+**Functional Requirements:**
+- Implement a `Recipe` class with:
+  - A constructor to initialize the `name`, `ingredients`, and `instructions`.
+  - A method `save_to_file(self, filename)` that saves the recipe to a specified file. Each line in the file should be structured as follows:
+    - Line 1 contains the recipe name.
+    - Line 2 contains a comma-separated list of ingredients.
+    - Line 3 contains the instructions.
+  - A static method `load_from_file(filename)` that reads a recipe from a file and returns a `Recipe` object. Handle any exception that might occur if the file does not exist or is malformed.
+
+- If a recipe cannot be loaded due to file not existing or file corruption, the method should return `None`.
+- There should be no restriction on the number or type of ingredients and the length of instructions.
+
+**How the Program Will Be Tested:**
+- Various recipes will be written to and then read from files to verify the correctness of the implementation.
+- Use the class methods to ensure all attributes are handled properly during file I/O operations.

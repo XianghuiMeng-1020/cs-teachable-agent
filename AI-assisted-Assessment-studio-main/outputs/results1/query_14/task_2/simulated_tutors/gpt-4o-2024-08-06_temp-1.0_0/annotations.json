@@ -1,0 +1,4 @@
+{
+    "program": "def get_ingredient_list(recipe_text):\n    ingredients = recipe_text.split('\\n')\n    ingredient_dict = {}\n    \n    for item in ingredients:\n        parts = item.split()\n        \n        if len(parts) == 0:\n            continue\n        elif len(parts) == 1:\n            # Only the ingredient name is present\n            ingredient_name = parts[0].lower()\n            ingredient_dict[ingredient_name] = ''\n        else:\n            # At least quantity + ingredient_name or quantity + unit + ingredient_name\n            *quantity_unit, ingredient_name = parts\n            ingredient_name = ingredient_name.lower()\n            ingredient_dict[ingredient_name] = ' '.join(quantity_unit)\n\n    return ingredient_dict\n\n# Example usage\nrecipe_text = \"2 cups flour\\n1/2 teaspoon salt\\negg\"\nprint(get_ingredient_list(recipe_text))\n# Output: {'flour': '2 cups', 'salt': '1/2 teaspoon', 'egg': ''}",
+    "context_relevance": 1.0
+}

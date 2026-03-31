@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+collected 1 item
+
+outputs/results1/query_2/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py FE [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_lucky_strings ____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'output2.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:35: AssertionError: assert '10\n3\n1\n3' == '6\n9\n6\n4'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_lucky_strings
+ERROR outputs/results1/query_2/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_lucky_strings
+========================== 1 failed, 1 error in 0.05s ==========================

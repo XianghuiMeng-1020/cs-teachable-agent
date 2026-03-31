@@ -1,0 +1,33 @@
+{
+  "item_id": "task_7-execution-trace",
+  "item_type": "execution-trace",
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 1.0,
+  "num_students": 20,
+  "num_passed": 20,
+  "pass_rate": 100.0,
+  "population_pass_threshold": 50.0,
+  "population_passed": true,
+  "passed_rollouts": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ]
+}

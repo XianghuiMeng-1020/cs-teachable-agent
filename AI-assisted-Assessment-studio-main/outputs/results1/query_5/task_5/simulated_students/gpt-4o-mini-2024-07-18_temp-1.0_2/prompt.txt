@@ -1,0 +1,21 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are a keeper of ancient mythology scrolls. Your task is to evaluate different mythical creatures based on their powers and skills documented in given text files and determine which creatures are deemed 'Legendary'.
+
+Create a Python function `identify_legendary_creatures(input_file, output_file)` that reads a list of mythical creatures from a text file (`input_file`). Each line in the `input_file` contains a creature's name followed by two integers separated by spaces. The first integer, 'power', indicates the creature's maximum power score, and the second integer, 'skill', represents the creature's skill level.
+
+A creature is classified as 'Legendary' if its power is greater than or equal to 90 and its skill level is greater than or equal to 75.
+
+Your program should:
+- Read from the `input_file`, where each line contains 'CreatureName Power Skill'.
+- Determine if each creature is 'Legendary'.
+- Write only the names of the 'Legendary' creatures, each on a new line, into the `output_file`.
+
+The function should not return anything, just read from the `input_file`, process the information, and write to the `output_file`. You can assume that the file is well-formed and that each creature's data is specified correctly.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

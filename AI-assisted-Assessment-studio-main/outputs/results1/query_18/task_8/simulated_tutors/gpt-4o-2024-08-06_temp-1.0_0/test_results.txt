@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:52: AssertionError: assert 'Total Energy: 45.0 kWh' == 'Total Energy: 45 kWh'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:68: AssertionError: assert 'Total Energy: 0.0 kWh' == 'Total Energy: 0 kWh'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:78: AssertionError: assert 'Total Energy: 15.0 kWh' == 'Total Energy: 15 kWh'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:88: AssertionError: assert 'Total Energy: 45.0 kWh' == 'Total Energy: 45 kWh'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_energy_report_with_data
+FAILED outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_energy_report_with_zero_data
+FAILED outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_energy_report_not_written_if_energy_data_is_modified
+FAILED outputs/results1/query_18/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_energy_report_handles_perm_vari
+========================= 4 failed, 1 passed in 0.08s ==========================

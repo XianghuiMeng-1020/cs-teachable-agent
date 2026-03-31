@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Cooking Recipe Decoder
+
+You are tasked with creating a function that helps with organizing and quantifying ingredients needed for a cooking recipe.
+
+Your function, `ingredient_quantifier(recipe)`, receives a dictionary where the keys are ingredient names as strings, and the values are the quantities needed for the recipe, also as strings formatted as 'amount unit'. For example, `'2 cups'` or `'3 tablespoons'`.
+
+In the test environment, your function will be tested with a series of ingredient dictionaries representing different recipes. Your function must return a string that integrates the ingredients of the recipe in the format:
+
+```
+"To make this recipe, you will need: Amount1 Unit1 of Ingredient1, Amount2 Unit2 of Ingredient2, ..."
+```
+
+If the recipe dictionary is empty, return the string "The recipe requires no ingredients.".
+
+The function will be tested with various input dictionaries, covering different units, amounts, and quantities.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,4 @@
+{
+    "program": "def organize_recipes(filename):\n    recipes = []\n    \n    with open(filename, 'r') as file:\n        content = file.read().strip()\n        if not content:\n            return []\n        \n        for recipe_block in content.split('\\n\\n'):\n            lines = recipe_block.strip().split('\\n')\n            if len(lines) < 2:\n                continue\n\n            title = lines[0]\n            ingredients = lines[1].split(', ')\n            instructions = lines[2:] if len(lines) > 2 else []\n\n            recipes.append({\n                'title': title,\n                'ingredients': ingredients,\n                'instructions': instructions\n            })\n    \n    recipes.sort(key=lambda r: r['title'])\n    return recipes",
+    "context_relevance": 1.0
+}

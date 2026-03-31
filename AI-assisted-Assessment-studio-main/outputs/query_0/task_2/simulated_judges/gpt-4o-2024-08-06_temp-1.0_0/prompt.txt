@@ -1,0 +1,103 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task Description: Game of Chance
+
+In the "Game of Chance," players roll a virtual dice and win or lose depending on the outcome of the roll. You are to create a Python program to simulate this simple gambling game.
+
+#### Detailed Requirements:
+1. **Create a Function `play_game(file_path)`**:
+   - The function reads player game data from a file, located at `file_path`. Each line in the file is formatted as: `"player_name:bet_number"`.
+   - `player_name` represents the name of the player.
+   - `bet_number` is an integer between 1 and 6, indicating the number the player bets will ``roll``.
+
+2. **Simulate the Dice Roll**:
+   - For each player in the file, simulate a dice roll in the range of 1 to 6 inclusive (can use arithmetic operations to generate this as a random outcome isn't allowed).
+   - Determine each player's result:
+     - If the `bet_number` matches the simulated roll, the player wins.
+     - Otherwise, the player loses.
+
+3. **Output Results**:
+   - Write the results to an output file at `file_path`. The results should replace the content of the file. Each line should state:
+     - `"player_name:win"` if the player wins.
+     - `"player_name:lose"` if the player loses.
+
+### Assumptions:
+- The input file is guaranteed to be well-formed.
+- Each line has exactly one player entry.
+
+### Example:
+Given an input file containing:
+```
+Alice:3
+Bob:5
+Charlie:2
+```
+
+After calling `play_game(file_path)`, the output in file could be:
+```
+Alice:lose
+Bob:win
+Charlie:lose
+```
+(Note: the actual output may vary as it's based on a simulated dice roll.)
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import play_game
+
+
+def setup_module(module):
+    with open('test_file.txt', 'w') as f:
+        f.write("Alice:3\nBob:5\nCharlie:2")
+
+
+def teardown_module(module):
+    os.remove('test_file.txt')
+
+
+def test_play_game_win_case():
+    play_game('test_file.txt')
+    with open('test_file.txt', 'r') as f:
+        content = f.read().strip()
+    assert 'Bob:win' in content
+
+
+def test_play_game_lose_case():
+    play_game('test_file.txt')
+    with open('test_file.txt', 'r') as f:
+        content = f.read().strip()
+    assert 'Alice:lose' in content
+
+
+def test_play_game_multiple_lines():
+    play_game('test_file.txt')
+    with open('test_file.txt', 'r') as f:
+        lines = f.readlines()
+    assert len(lines) == 3
+
+
+def test_play_game_format():
+    play_game('test_file.txt')
+    with open('test_file.txt', 'r') as f:
+        content = f.read().strip()
+    assert ':' in content.split('\n')[0]
+    
+
+def test_play_game_original_content_replacement():
+    play_game('test_file.txt')
+    with open('test_file.txt', 'r') as f:
+        content = f.read().strip()
+    assert 'Charlie:lose' in content
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

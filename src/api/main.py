@@ -15,8 +15,22 @@ from src.db.database import init_db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification, experiment, collaboration, ai_experiments, reports, adaptive_test, spaced_repetition, learning_analytics, advanced_features
+from src.api.routes import auth, ta, teaching, testing, state, teacher_dashboard, sandbox, gamification, experiment, collaboration, ai_experiments, reports, adaptive_test, spaced_repetition, learning_analytics, advanced_features, assessment, admin_config
 from src.api.limiter import limiter
+
+_frontend_url = os.getenv("FRONTEND_URL", "*")
+_workers_url = os.getenv("WORKERS_URL", "")
+
+def _allowed_origin(request_origin: str | None) -> str:
+    if _frontend_url == "*":
+        return "*"
+    allowed = [o.strip() for o in _frontend_url.split(",") if o.strip()]
+    if _workers_url:
+        allowed.extend(o.strip() for o in _workers_url.split(",") if o.strip())
+    allowed += ["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000"]
+    if request_origin and request_origin in allowed:
+        return request_origin
+    return allowed[0] if allowed else "*"
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -89,6 +103,8 @@ app.include_router(adaptive_test.router)
 app.include_router(spaced_repetition.router)
 app.include_router(learning_analytics.router)
 app.include_router(advanced_features.router)
+app.include_router(assessment.router)
+app.include_router(admin_config.router)
 
 
 @app.get("/api/health")

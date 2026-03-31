@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_4/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py . [ 16%]
+....F                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:27: assert 0.0833 == 0.1111
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_dice_probability_less_common_score
+========================= 1 failed, 5 passed in 0.13s ==========================

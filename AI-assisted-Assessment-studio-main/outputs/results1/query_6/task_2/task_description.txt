@@ -1,0 +1,17 @@
+In ancient mythology, many legends were passed down through stories. You will create a Python program that helps manage these mythological stories.
+
+Create a class `MythologyManager` with the following specifications:
+
+1. **Constructor**: The constructor should take a filename where the stories will be stored. If the file already exists, it should be read, and existing stories should be loaded into the manager. Otherwise, a new file should be created.
+
+2. **add_story(name, story)**: Adds a story to the manager under the given name. Each story should have a unique name within the manager.
+
+3. **remove_story(name)**: Removes an existing story by its name. If the story does not exist, the method should do nothing.
+
+4. **get_story(name)**: Retrieves the story by its name. If the story does not exist, it should return an empty string.
+
+5. **save()**: Saves all stories to the specified file with each story stored on a new line in the format `name: story`. Multiple stories should be stored one after another without extra spaces between them.
+
+The program will be tested by creating multiple `MythologyManager` objects, adding stories, retrieving them, and verifying the persistence across different sessions. The order of stories in the file does not matter.
+
+The stories will be stored in a text file. Each story should be uniquely identified by a name using strings.

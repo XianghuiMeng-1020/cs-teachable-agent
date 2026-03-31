@@ -1,0 +1,20 @@
+In the distant future, in a space-faring society, a team of astronauts is tasked with maintaining a fleet of interstellar ships. These ships, called "StarWranglers", need periodic checks and updates every 1,000 light years they travel. Each StarWrangler records its traveled distance in light years.
+
+Write a function called `check_maintenance` that takes in a list of non-negative integers, where each integer represents the distance (in light years) traveled by a StarWrangler. The function should determine if each ship needs a maintenance check. If a ship has traveled a multiple of 1,000 light years, it needs a check.
+
+Your function should return a list of strings, where each string corresponds to a StarWrangler, indicating "Check required" or "No check needed" based on the traveled distance.
+
+Function Signature:
+
+```python
+def check_maintenance(distances):
+    pass
+```
+
+Here is how the function will be tested:
+- The input will always be a list of non-negative integers.
+- Your function must return a list of strings, with each string either "Check required" or "No check needed".
+
+Example:
+
+- If the input list is `[1000, 1450, 3000, 3200]`, then the output should be `["Check required", "No check needed", "Check required", "No check needed"]`.

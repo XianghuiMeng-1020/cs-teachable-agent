@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:14: AssertionError: assert {'final_amoun...esult': 'win'} == {'final_amoun...sult': 'lose'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:26: AssertionError: assert {'message': '...ult': 'error'} == {'error': 'In...d bet amount'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:32: AssertionError: assert {'message': '...ult': 'error'} == {'error': 'In...d bet choice'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_valid_lose_case_1
+FAILED outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_invalid_bet_amount
+FAILED outputs/results1/query_3/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_invalid_bet_on_value
+========================= 3 failed, 2 passed in 0.16s ==========================

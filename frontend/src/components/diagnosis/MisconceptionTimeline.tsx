@@ -26,7 +26,7 @@ export function MisconceptionTimeline({
 }: MisconceptionTimelineProps) {
   return (
     <div className={className}>
-      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">{misconceptionId}</p>
+      <p className="text-sm font-medium text-stone-700 dark:text-stone-300">{misconceptionId}</p>
       <div className="mt-3 space-y-0">
         {events.map((evt, i) => (
           <div key={i} className="flex gap-3">
@@ -36,19 +36,19 @@ export function MisconceptionTimeline({
               ) : (
                 <CheckCircle className="h-4 w-4 text-green-500" />
               )}
-              {i < events.length - 1 && <div className="w-px flex-1 min-h-[8px] bg-slate-200 dark:bg-slate-600" />}
+              {i < events.length - 1 && <div className="w-px flex-1 min-h-[8px] bg-stone-200 dark:bg-stone-600" />}
             </div>
             <div className="pb-4">
-              <p className="text-xs font-medium text-slate-600 dark:text-slate-400 capitalize">{evt.type}</p>
-              <p className="text-xs text-slate-500">{evt.at}</p>
-              {evt.label && <p className="text-sm text-slate-700 dark:text-slate-300">{evt.label}</p>}
-              {evt.detail && <p className="text-xs text-slate-500 mt-0.5">{evt.detail}</p>}
+              <p className="text-xs font-medium text-stone-600 dark:text-stone-400 capitalize">{evt.type}</p>
+              <p className="text-xs text-stone-500">{evt.at}</p>
+              {evt.label && <p className="text-sm text-stone-700 dark:text-stone-300">{evt.label}</p>}
+              {evt.detail && <p className="text-xs text-stone-500 mt-0.5">{evt.detail}</p>}
             </div>
           </div>
         ))}
       </div>
       {confidenceCurve && confidenceCurve.length > 1 && (
-        <p className="mt-2 text-xs text-slate-500">Confidence over time: {confidenceCurve.length} points</p>
+        <p className="mt-2 text-xs text-stone-500">Confidence over time: {confidenceCurve.length} points</p>
       )}
     </div>
   );

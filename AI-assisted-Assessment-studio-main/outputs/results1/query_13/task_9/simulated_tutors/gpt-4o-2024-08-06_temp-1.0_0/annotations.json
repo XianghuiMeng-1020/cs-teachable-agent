@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_ingredient_costs(filename, quantities):\n    try:\n        total_cost = 0\n        with open(filename, 'r') as file:\n            ingredient_prices = {}\n            for line in file:\n                name, price = line.strip().split(':')\n                ingredient_prices[name.strip()] = float(price.strip())\n            for ingredient, quantity in quantities.items():\n                if ingredient in ingredient_prices:\n                    total_cost += ingredient_prices[ingredient] * quantity\n        return total_cost\n    except FileNotFoundError:\n        return None",
+    "context_relevance": 0.0
+}

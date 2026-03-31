@@ -1,0 +1,29 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+In the distant future, aboard a space station orbiting around a newly discovered planet "Zeta-X9", scientists have developed a sophisticated system to monitor different types of celestial phenomena. As a software engineer on the station, your task is to develop a Python program to manage and process information about these phenomena.
+
+You need to create a class `PhenomenaMonitor` that maintains a list of phenomena, where each phenomenon is described by a dictionary with the following keys:
+- `type`: a string representing the type of the phenomenon (e.g., "Aurora", "Supernova")
+- `severity`: a string describing the severity level (e.g., "low", "medium", "high")
+- `observation_notes`: a list of strings containing notes taken during observations
+
+The class should support the following operations:
+
+1. `add_phenomenon(phenomenon)`: Add the given phenomenon (passed as a dictionary) to the list.
+
+2. `get_phenomena_by_type(phenomenon_type)`: Retrieve all phenomena of a given type and return them as a list.
+
+3. `get_severity_count()`: Return a dictionary with the count of phenomena for each severity level.
+
+4. `add_observation(phenomenon_index, note)`: Add a new observation note to a phenomenon identified by its index in the list. If the index is invalid, handle the exception and continue gracefully.
+
+Implement the `PhenomenaMonitor` class and ensure that it works smoothly with a variety of input scenarios.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

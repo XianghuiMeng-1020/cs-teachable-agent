@@ -1,0 +1,4 @@
+{
+    "program": "def vegetable_counter(order):\n    vegetable_totals = {}\n    for dish in order:\n        # Split the dish into main part and ingredients\n        _, ingredients = dish.split(':')\n        items = ingredients.split(',')\n        for item in items:\n            vegetable, quantity = item.split('=')\n            vegetable = vegetable.strip()\n            quantity = int(quantity.strip())\n            if vegetable in vegetable_totals:\n                vegetable_totals[vegetable] += quantity\n            else:\n                vegetable_totals[vegetable] = quantity\n    \n    # Sort vegetables alphabetically and format them as required\n    result = [f\"{veg}={qty}\" for veg, qty in sorted(vegetable_totals.items())]\n    # Convert list to string resembling a dictionary\n    return str(result)",
+    "context_relevance": 1.0
+}

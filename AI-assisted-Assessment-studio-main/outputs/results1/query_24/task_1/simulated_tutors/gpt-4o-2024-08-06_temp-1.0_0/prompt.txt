@@ -1,0 +1,60 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+You are tasked with simulating a simple board game turn for an imaginary board game competition. You need to create a Python function named `simulate_turn` that will be used to simulate turns in the game. This function should take two arguments:
+
+- `board_state`: a list of non-negative integers representing the board slots, where each number represents tokens available at that slot.
+- `roll`: an integer value between 1 and 6 (inclusive) representing the outcome of a dice roll.
+
+The function should perform the following:
+- Start from the beginning of the board (`board_state[0]`) and move `roll` slots forward.
+- If the roll exceeds the length of the board, the player remains at the last slot of the board.
+- Assign a collected total of tokens starting from the initial slot through to the destination slot (as determined by the dice roll) to the player.
+- The encountered slots should have their token values deducted to zero after the player's move.
+
+Return the total number of tokens collected by the player during the move.
+
+Handle any possible exceptions that may arise during your solution. Ensure your solution works efficiently for cases where there may be invalid board states or roll values. If the roll is invalid (not between 1 and 6) or if the board is not a list of non-negative integers, your function should return 0 without modifying the board state.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import simulate_turn
+
+@pytest.fixture(autouse=True)
+def setup_teardown():
+    yield
+    # No file operations needed for this task
+
+def test_valid_turn():
+    board_state = [4, 5, 2, 8, 1]
+    assert simulate_turn(board_state, 3) == 11
+    assert board_state == [0, 0, 0, 8, 1]
+
+def test_roll_exceeds_board():
+    board_state = [1, 1, 1, 1, 1]
+    assert simulate_turn(board_state, 6) == 5
+    assert board_state == [0, 0, 0, 0, 0]
+
+def test_zeroed_board_state():
+    board_state = [0, 0, 0]
+    assert simulate_turn(board_state, 2) == 0
+    assert board_state == [0, 0, 0]
+
+def test_invalid_roll():
+    board_state = [3, 3, 3]
+    assert simulate_turn(board_state, 0) == 0
+    assert board_state == [3, 3, 3]
+
+def test_invalid_board_state():
+    board_state = [3, 'a', 3]
+    assert simulate_turn(board_state, 3) == 0
+    assert board_state == [3, 'a', 3]
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

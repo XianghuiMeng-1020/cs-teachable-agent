@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py . [ 20%]
+..FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at teardown of test_cannot_cook_missing_ingredient ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'ingredients.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'ingredients.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'ingredients.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_cannot_cook_not_enough_sugar
+FAILED outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_cannot_cook_missing_ingredient
+ERROR outputs/results1/query_12/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_cannot_cook_missing_ingredient
+===================== 2 failed, 3 passed, 1 error in 0.12s =====================

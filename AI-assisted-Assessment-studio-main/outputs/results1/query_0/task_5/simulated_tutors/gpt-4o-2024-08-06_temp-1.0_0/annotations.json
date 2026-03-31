@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef play_game_of_chance():\n    # Read words from file\n    with open('words.txt', 'r') as file:\n        words = [line.strip() for line in file]\n    \n    # Randomly select a word\n    selected_word = random.choice(words)\n\n    # Get user guess\n    guess = input(\"Guess the word: \")\n\n    # Determine if guess is correct\n    if guess == selected_word:\n        print(\"Correct! You've won!\")\n        result = \"won\"\n    else:\n        print(\"Incorrect! Try again another time!\")\n        result = \"lost\"\n\n    # Write the result to file\n    with open('game_results.txt', 'a') as file:\n        file.write(f\"{guess} {result}\\n\")",
+    "context_relevance": 1.0
+}

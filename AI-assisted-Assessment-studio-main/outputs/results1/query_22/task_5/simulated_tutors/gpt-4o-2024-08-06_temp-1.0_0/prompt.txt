@@ -1,0 +1,93 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+## Task Description
+
+Create a Python function `calculate_winner_board_game(file_path)` that simulates reading a file containing board game score records and determines the winner of the game. Each line in the file represents a different player, their score, and a certain number of rounds they played. Each line in the file is in the format: `player_name:score:rounds`.
+
+Your function should read the file, process each player's score and rounds, and determine which player has the highest `average score per round`. If two or more players have the same average score per round, the tie is broken by the player who played fewer rounds. You can assume that `rounds` will always be greater than 0.
+
+Your program will be tested using different files as input, and you should ensure your function returns the name of the winning player as a string.
+
+### Example format of input file:
+```
+Alice:150:3
+Bob:120:4
+Charlie:180:2
+```
+
+### Example output:
+For the above file, `calculate_winner_board_game()` should return `'Charlie'` because Charlie has an average score of `90` per round which is higher than Alice's (`50`) and Bob's (`30`).
+
+### Constraints:
+- You can assume the input file is well-formed and follows the specified format.
+- There are at least two players in the file.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_winner_board_game
+
+file_content_1 = """Alice:150:3
+Bob:120:4
+Charlie:180:2
+"""
+
+file_content_2 = """Daisy:200:4
+Eve:300:6
+Frank:100:2
+"""
+
+file_content_3 = """Uni:100:1
+Vivi:90:3
+Xander:300:5
+"""
+
+file_content_4 = """Yara:550:5
+Zane:480:4
+Alex:600:6
+"""
+
+file_content_5 = """Oscar:480:6
+Peter:570:4
+Quincy:470:2
+"""
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_module():
+    with open('test1.txt', 'w') as f:
+        f.write(file_content_1)
+    with open('test2.txt', 'w') as f:
+        f.write(file_content_2)
+    with open('test3.txt', 'w') as f:
+        f.write(file_content_3)
+    with open('test4.txt', 'w') as f:
+        f.write(file_content_4)
+    with open('test5.txt', 'w') as f:
+        f.write(file_content_5)
+    
+    yield
+
+    os.remove('test1.txt')
+    os.remove('test2.txt')
+    os.remove('test3.txt')
+    os.remove('test4.txt')
+    os.remove('test5.txt')
+
+@pytest.mark.parametrize("file_path, expected_winner", [
+    ('test1.txt', 'Charlie'),
+    ('test2.txt', 'Frank'),
+    ('test3.txt', 'Uni'),
+    ('test4.txt', 'Zane'),
+    ('test5.txt', 'Peter')
+])
+def test_calculate_winner_board_game(file_path, expected_winner):
+    result = calculate_winner_board_game(file_path)
+    assert result == expected_winner
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

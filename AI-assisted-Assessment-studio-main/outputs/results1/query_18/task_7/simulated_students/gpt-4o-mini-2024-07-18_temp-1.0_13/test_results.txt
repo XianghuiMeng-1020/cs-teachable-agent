@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at teardown of test_calculate_total_distance_single_line ________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_file1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'test_file1.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'test_file2.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'test_file3.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'test_empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'test_single_line.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_file1
+FAILED outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_file2
+FAILED outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_file3
+FAILED outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_empty
+FAILED outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_single_line
+ERROR outputs/results1/query_18/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_total_distance_single_line
+========================== 5 failed, 1 error in 0.12s ==========================

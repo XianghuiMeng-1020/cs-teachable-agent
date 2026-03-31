@@ -1,0 +1,59 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Strings']:
+
+### Beginning of task description
+### Task Description
+You are tasked with creating a function that determines the winner of a fictional board game called "Numerical Conquest". In this game, two players, Alice and Bob, take turns to roll a die. The score each player gets for a roll is double the number rolled on the die. They roll the die a fixed number of times, and their scores for each roll are summed to get their total scores. 
+
+Your function `determine_winner(alice_rolls, bob_rolls)` must take two arguments:
+- `alice_rolls`: a string containing the results of Alice's rolls as a sequence of digits, where each digit represents a die roll.
+- `bob_rolls`: a string containing the results of Bob's rolls, each digit representing a die roll.
+
+The function should calculate the total score for each player and return a string: 
+- "Alice" if Alice has a higher total score,
+- "Bob" if Bob has a higher total score,
+- "Draw" if both players have the same total score.
+
+Note:
+- Each player rolls the same number of times.
+- Each die roll result is a single digit ('1' to '6').
+
+### Example
+```python
+determine_winner("123", "321")  # should return "Draw"
+determine_winner("456", "123")  # should return "Alice"
+```
+
+### Constraints
+- The length of `alice_rolls` and `bob_rolls` will be the same.
+- The strings will only contain characters '1' through '6'.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution_program import determine_winner
+
+def test_all_draws():
+    assert determine_winner("123", "321") == "Draw"
+    
+def test_alice_wins():
+    assert determine_winner("456", "123") == "Alice"
+    
+def test_bob_wins():
+    assert determine_winner("123", "456") == "Bob"
+    
+def test_empty_rolls():
+    assert determine_winner("", "") == "Draw"
+    
+def test_large_numbers():
+    assert determine_winner("666", "555") == "Alice"
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

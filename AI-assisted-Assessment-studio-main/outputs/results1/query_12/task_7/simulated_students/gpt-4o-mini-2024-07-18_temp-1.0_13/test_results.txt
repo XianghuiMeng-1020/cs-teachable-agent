@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py F [ 20%]
+..FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____________ ERROR at teardown of test_summarize_recipes_mixed_case ____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:44: AssertionError: assert {'no_cook': 0...0, 'stove': 0} == {'no_cook': 1...1, 'stove': 1}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:51: AssertionError: assert {'no_cook': 1...0, 'stove': 0} == {'no_cook': 1...1, 'stove': 1}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_summarize_recipes_basic
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_summarize_recipes_complex
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_summarize_recipes_mixed_case
+ERROR outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_summarize_recipes_mixed_case
+===================== 3 failed, 2 passed, 1 error in 0.11s =====================

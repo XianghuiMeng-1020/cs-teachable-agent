@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 11 items
+
+outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py . [  9%]
+FFF.....F.                                                               [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:20: AssertionError: assert 'speci vuyegi' == 'spici vuyegi'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:20: AssertionError: assert 'scoinci foctoun' == 'sciinci ficoiun'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:20: AssertionError: assert 'anovirsis cullodi' == 'anovirsis celluldi'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:20: AssertionError: assert 'xyluphunis end zothirs' == 'xuluiphunis end zuthirs'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_encode_message[space voyage-spici vuyegi]
+FAILED outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_encode_message[science fiction-sciinci ficoiun]
+FAILED outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_encode_message[universes collide-anovirsis celluldi]
+FAILED outputs/results1/query_15/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_encode_message[xylophones and zithers-xuluiphunis end zuthirs]
+========================= 4 failed, 7 passed in 0.18s ==========================

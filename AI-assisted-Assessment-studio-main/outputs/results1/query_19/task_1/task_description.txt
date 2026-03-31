@@ -1,0 +1,11 @@
+You are tasked with developing a program that processes data from a futuristic space mission report file. This file contains information about various planets discovered by the mission. Each line in the file describes a single planet in the format:
+
+`<Planet Name> <Distance from Earth in light years> <Surface Temperature in Celsius>`
+
+Your task is to write a function `process_planet_data(file_name)` that reads the file with the given `file_name` and processes the planetary data as follows:
+
+1. Read the data from the provided file. If the file does not exist or there's an error in reading, return "File Error".
+2. For each planet, determine if it is habitable. A planet is considered habitable if its surface temperature is between -50 and 50 degrees Celsius, inclusive.
+3. Return a list of planet names that are considered habitable.
+
+Your solution will be tested against several test files. Make sure your solution efficiently handles file input and appropriate exceptions.

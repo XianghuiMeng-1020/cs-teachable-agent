@@ -1,0 +1,28 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are going to create a simulated board game based on the concept of a "Game of Chance". In this board game, players will take turns rolling a die, and based on the result of their roll, they will move forward on the board. The board is circular, and once a player reaches or passes the last position on the board, they loop back to the start.
+
+Your task is to implement a function `play_game_of_chance(board_positions, rolls)` that simulates this board game. The function will take the following parameters:
+
+- `board_positions`: an integer indicating the number of positions on the board.
+- `rolls`: a dictionary where the keys are player names (strings) and the values are lists of integers representing the rolls each player makes during their turn.
+
+Each player starts at position 0 on the board. For each roll in the list, update the player's position and continue to the next roll. If a player's current position + roll exceeds `board_positions`, the player should wrap around to the start of the board. After processing all rolls for all players, return a dictionary that maps each player's name to their final position on the board.
+
+Constraints:
+- `board_positions` will be at least 1.
+- Each player's list of rolls will contain at least one roll.
+- Assume a roll will always result in moving at least 1 position forward.
+
+Example:
+```python
+result = play_game_of_chance(10, {'Alice': [3, 4, 2], 'Bob': [5, 2]})
+# Example output: {'Alice': 9, 'Bob': 7}
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

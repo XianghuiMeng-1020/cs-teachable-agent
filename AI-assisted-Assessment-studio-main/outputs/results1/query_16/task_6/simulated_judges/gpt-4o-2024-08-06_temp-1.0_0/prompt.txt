@@ -1,0 +1,69 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In the distant future of interstellar travel, spaceships navigate through the cosmos using hyperdrive technology. Your task is to create a Python program that simulates the hyperdrive system of a spaceship. 
+
+You are to implement a `Spaceship` class with the following specifications:
+
+1. **Attributes:**
+   - `fuel_level`: A floating point number representing the fuel level of the spaceship (in units).
+   - `hyperdrive_multiplier`: A floating point number representing the hyperdrive multiplier. This value indicates how fast the spaceship can travel relative to a standard speed.
+
+2. **Constructor:**
+   - The constructor should initialize the spaceship with a given `fuel_level` and `hyperdrive_multiplier`. If either value is not provided, they should default to 100.0 and 1.0 respectively.
+
+3. **Methods:**
+   - `calculate_travel_time(self, distance)`: This method takes the `distance` to be traveled as a float, in light years, and returns the time it will take to travel this distance using the formula: 
+     
+     \[\text{Time} = \frac{\text{distance}}{(\text{hyperdrive_multiplier} \times \text{fuel_efficiency})},\]
+     
+     where `fuel_efficiency` is determined by the formula \[ \text{fuel_efficiency} = \frac{\text{fuel_level}}{100}.\]
+
+   - The method `calculate_travel_time` should handle any errors that arise from invalid input values (such as non-positive numbers for `distance`, zero or negative `hyperdrive_multiplier`, or `fuel_level`) by raising a ValueError with a string message specifying the nature of the error.
+
+Your solution will be tested against specific test cases to verify the correctness of the implementation.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import Spaceship
+
+@pytest.fixture(scope='module')
+def setup_module():
+    pass
+
+def teardown_module(module):
+    pass
+
+class TestSpaceship:
+    def test_valid_travel_time(self):
+        ship = Spaceship(100.0, 2.0)
+        assert ship.calculate_travel_time(100.0) == 50.0
+
+    def test_zero_distance(self):
+        ship = Spaceship(100.0, 2.0)
+        with pytest.raises(ValueError, match="Distance must be positive"):
+            ship.calculate_travel_time(0)
+
+    def test_non_positive_fuel_multiplier(self):
+        with pytest.raises(ValueError, match="Hyperdrive multiplier must be positive"):
+            Spaceship(100.0, 0)
+
+    def test_negative_fuel_level(self):
+        with pytest.raises(ValueError, match="Fuel level must be non-negative"):
+            Spaceship(-10.0, 1.0)
+
+    def test_valid_edge_case_large_distance(self):
+        ship = Spaceship(50.0, 1.5)
+        assert ship.calculate_travel_time(150.0) == 2.0
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

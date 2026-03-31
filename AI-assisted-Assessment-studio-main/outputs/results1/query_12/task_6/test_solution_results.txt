@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/test_suite_sol.py:31: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/test_suite_sol.py:45: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/test_suite_sol.py:65: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/test_suite_sol.py:79: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/test_suite_sol.py:99: AttributeError: 'dict' object has no attribute 'input'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_6/test_suite_sol.py::test_organize_recipes_favorite
+FAILED outputs/results1/query_12/task_6/test_suite_sol.py::test_organize_recipes_different_categories
+FAILED outputs/results1/query_12/task_6/test_suite_sol.py::test_organize_recipes_all_disliked
+FAILED outputs/results1/query_12/task_6/test_suite_sol.py::test_organize_recipes_invalid_then_valid
+FAILED outputs/results1/query_12/task_6/test_suite_sol.py::test_organize_recipes_all_to_try
+5 failed in 0.05s

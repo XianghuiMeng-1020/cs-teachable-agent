@@ -1,0 +1,4 @@
+{
+    "program": "def find_winner(score_a, score_b):\n    if score_a > score_b:\n        return \"Player A wins\"\n    elif score_b > score_a:\n        return \"Player B wins\"\n    else:\n        return \"Tie\"\n\n# Testing the function\nprint(find_winner(250, 150))  # Should return \"Player A wins\"\nprint(find_winner(100, 100))  # Should return \"Tie\"\nprint(find_winner(150, 250))  # Should return \"Player B wins\"\nprint(find_winner(-50, -100)) # Should return \"Player A wins\"\nprint(find_winner(-100, -50)) # Should return \"Player B wins\"",
+    "context_relevance": 0.0
+}

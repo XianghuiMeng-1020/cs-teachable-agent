@@ -1,0 +1,4 @@
+{
+    "program": "def summarize_recipes(filename):\n    summary = {'stove': 0, 'oven': 0, 'no_cook': 0}\n    \n    with open(filename, 'r') as file:\n        for line in file:\n            line = line.strip().lower()\n            if 'stove' in line:\n                summary['stove'] += 1\n            if 'oven' in line:\n                summary['oven'] += 1\n            if 'no_cook' in line:\n                summary['no_cook'] += 1\n\n    return summary",
+    "context_relevance": 1.0
+}

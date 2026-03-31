@@ -1,0 +1,8 @@
+..F.F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_0/test_suite_sol.py:13: assert -20 == -40
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_0/test_suite_sol.py:13: assert -200 == -400
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_0/test_suite_sol.py::test_calculate_winnings[bets2-6--40]
+FAILED outputs/results1/query_3/task_0/test_suite_sol.py::test_calculate_winnings[bets4-1--400]
+2 failed, 3 passed in 0.03s

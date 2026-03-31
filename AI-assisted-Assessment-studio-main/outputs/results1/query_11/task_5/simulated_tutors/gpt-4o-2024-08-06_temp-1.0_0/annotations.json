@@ -1,0 +1,4 @@
+{
+    "program": "def ingredient_converter(recipe, conversion_factor):\n    converted_recipe = []\n    for item in recipe:\n        # Split the string into a quantity part and the rest (unit and name)\n        parts = item.split(' ', 1)\n        quantity = float(parts[0])\n        rest = parts[1]\n        \n        # Calculate the new quantity\n        new_quantity = quantity * conversion_factor\n        \n        # Format the new string with the converted quantity\n        new_item = f\"{new_quantity} {rest}\"\n        converted_recipe.append(new_item)\n    return converted_recipe",
+    "context_relevance": 1.0
+}

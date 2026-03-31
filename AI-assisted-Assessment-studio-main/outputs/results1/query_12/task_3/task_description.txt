@@ -1,0 +1,14 @@
+**Background:**
+During a cooking contest, participants submit their recipes, and the analysis team wants to categorize these recipes based on their complexity. Recipes with more than 7 ingredients are considered 'complex', whereas those with 7 or fewer ingredients are 'simple'. Each recipe is stored in a separate text file with each line of the file representing an ingredient.
+
+**Task:**
+You are required to write a function `categorize_recipes(input_folder, output_file)` that reads several recipe files from the directory specified by `input_folder`. Each recipe file is structured such that each line contains the name of one ingredient. 
+
+- The `input_folder` will contain multiple text files, each corresponding to one recipe. The names of these files follow the format `recipe1.txt`, `recipe2.txt`, ..., and so on.
+- The function should read each file, count the number of ingredients, and determine if the recipe is 'simple' or 'complex'.
+- The function should write the results to `output_file`. Each line of the output file should contain the recipe file name followed by its category ('simple' or 'complex'), separated by a colon (e.g., `recipe1.txt: simple`).
+
+**Evaluation Criteria:**
+- Correctly counts the number of ingredients in each recipe.
+- Accurately categorizes each recipe as 'simple' or 'complex'.
+- Correctly writes the results to the output file in the specified format.

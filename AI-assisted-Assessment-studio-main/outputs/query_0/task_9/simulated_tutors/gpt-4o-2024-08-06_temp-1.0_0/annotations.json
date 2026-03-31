@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef coin_flip_game(rounds):\n    heads_count = 0\n    tails_count = 0\n    \n    with open(\"flips_log.txt\", \"w\") as f:\n        for _ in range(rounds):\n            flip_result = \"Heads\" if random.randint(0, 1) == 0 else \"Tails\"\n            f.write(flip_result + \"\\n\")\n\n            if flip_result == \"Heads\":\n                heads_count += 1\n            else:\n                tails_count += 1\n\n    if heads_count > tails_count:\n        return \"Heads\"\n    elif tails_count > heads_count:\n        return \"Tails\"\n    else:\n        return \"Draw\"\n",
+    "context_relevance": 1.0
+}

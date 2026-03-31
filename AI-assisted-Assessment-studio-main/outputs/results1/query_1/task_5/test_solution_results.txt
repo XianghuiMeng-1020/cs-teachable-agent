@@ -1,0 +1,6 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_5/test_suite_sol.py:9: AssertionError: assert 2 == 0
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_5/test_suite_sol.py::test_high_or_low_game
+1 failed in 0.02s

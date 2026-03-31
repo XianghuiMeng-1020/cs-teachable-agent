@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,24 +9,126 @@
     --sidebar-collapsed: 68px;
     --topbar-height: 56px;
     --content-max-width: 1440px;
-    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    --radius: 0.625rem;
   }
+
+  html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply font-sans text-slate-900 bg-surface antialiased;
+    @apply font-sans text-ink bg-surface antialiased;
   }
+
   ::selection {
-    @apply bg-brand-200 text-brand-900;
+    @apply bg-brand-200/60 text-brand-950;
   }
+
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-500;
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-xl shadow-card;
+    @apply bg-white border border-stone-200/80 rounded-xl shadow-card
+           transition-shadow duration-200;
   }
   .glass-card:hover {
     @apply shadow-card-hover;
   }
+
+  .prose-body {
+    @apply text-[15px] leading-relaxed text-ink-secondary;
+  }
+
+  .section-label {
+    @apply text-[11px] font-semibold uppercase tracking-widest text-ink-tertiary;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium
+           text-stone-600 transition-all duration-150
+           hover:bg-stone-100 hover:text-stone-900;
+  }
+  .nav-link-active {
+    @apply bg-brand-50 text-brand-800 hover:bg-brand-100;
+  }
+
+  .input-base {
+    @apply w-full rounded-lg border border-stone-300 bg-white px-3.5 py-2.5
+           text-sm text-ink placeholder:text-ink-tertiary
+           transition-colors duration-150
+           hover:border-stone-400
+           focus:border-brand-500 focus:ring-2 focus:ring-brand-500/10 focus:outline-none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white
+           shadow-sm transition-all duration-150
+           hover:bg-brand-800 active:bg-brand-900
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-ink
+           shadow-sm transition-all duration-150
+           hover:bg-stone-50 active:bg-stone-100
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full
+           border border-stone-200 bg-stone-50 px-3 py-1 text-xs font-medium text-ink-secondary;
+  }
+}
+
+/* Anti-cheat: prevent text selection in assessment mode */
+.anti-cheat-shell {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.anti-cheat-shell input,
+.anti-cheat-shell textarea,
+.anti-cheat-shell [data-allow-clipboard="true"] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Block print / print-to-PDF */
+@media print {
+  .anti-cheat-shell {
+    display: none !important;
+  }
+  body::before {
+    content: "Printing is disabled during assessment.";
+    display: block;
+    font-size: 2rem;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #78716c;
+  }
+}
+
+/* OCR-resistant noise for code blocks inside assessments */
+.anti-cheat-shell pre,
+.anti-cheat-shell code {
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  letter-spacing: 0.02em;
+}
+.anti-cheat-shell .ocr-noise {
+  transform: rotate(0.3deg);
+  letter-spacing: 0.03em;
+  word-spacing: 0.06em;
 }

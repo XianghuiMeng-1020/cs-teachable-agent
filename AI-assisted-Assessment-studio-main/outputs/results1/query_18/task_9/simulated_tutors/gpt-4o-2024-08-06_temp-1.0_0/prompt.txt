@@ -1,0 +1,99 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In a distant future, humanity has established colonies on various planets across the galaxy. These colonies are connected via star gates and require frequent energy consumption reports to maintain the interstellar communication infrastructure. You have been tasked to develop a Python program that reads a file containing energy consumptions logged from different planets, calculates the total consumption, and writes the result to another file.
+
+The input file will have multiple lines, each line containing the name of the planet followed by its energy consumption separated by a space. For example:
+
+```
+Earth 15000
+Mars 12000
+Jupiter 30000
+```
+
+Your program should read this file, sum up all the energy consumptions, and write the total energy consumption to an output file.
+
+Implement the following function:
+
+`def calculate_total_consumption(input_file, output_file):`
+
+- `input_file`: a string representing the filepath to the input file containing energy consumption data.
+- `output_file`: a string representing the filepath to where the total energy consumption will be written.
+
+Your task is to ensure that the total energy consumption is calculated correctly and that it appears as a single number in the provided output file. You are guaranteed that the input file format is valid and does not have any empty lines or invalid data.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_total_consumption
+
+def setup_module(module):
+    with open('test_input1.txt', 'w') as f:
+        f.write("Earth 15000\nMars 12000\nJupiter 30000\n")
+    
+    with open('test_input2.txt', 'w') as f:
+        f.write("Venus 5000\nNeptune 7000\nUranus 10000\n")
+
+    with open('test_input3.txt', 'w') as f:
+        f.write("Pluto 500\n")
+
+    with open('test_input4.txt', 'w') as f:
+        f.write("Mercury 30000\nVenus 2000\nEarth 1000\nMars 5000\n")
+
+    with open('test_input5.txt', 'w') as f:
+        f.write("Earth 0\nMars 0\nJupiter 0\n")
+
+
+def teardown_module(module):
+    os.remove('test_input1.txt')
+    os.remove('test_input2.txt')
+    os.remove('test_output1.txt')
+    os.remove('test_output2.txt')
+    os.remove('test_output3.txt')
+    os.remove('test_output4.txt')
+    os.remove('test_output5.txt')
+    os.remove('test_input3.txt')
+    os.remove('test_input4.txt')
+    os.remove('test_input5.txt')
+
+
+def test_calculate_total_consumption_case1():
+    calculate_total_consumption('test_input1.txt', 'test_output1.txt')
+    with open('test_output1.txt', 'r') as f:
+        content = f.read().strip()
+    assert content == '57000'
+
+
+def test_calculate_total_consumption_case2():
+    calculate_total_consumption('test_input2.txt', 'test_output2.txt')
+    with open('test_output2.txt', 'r') as f:
+        content = f.read().strip()
+    assert content == '22000'
+
+
+def test_calculate_total_consumption_single_line():
+    calculate_total_consumption('test_input3.txt', 'test_output3.txt')
+    with open('test_output3.txt', 'r') as f:
+        content = f.read().strip()
+    assert content == '500'
+
+
+def test_calculate_total_consumption_with_multiple_lines():
+    calculate_total_consumption('test_input4.txt', 'test_output4.txt')
+    with open('test_output4.txt', 'r') as f:
+        content = f.read().strip()
+    assert content == '38000'
+
+
+def test_calculate_total_consumption_all_zero():
+    calculate_total_consumption('test_input5.txt', 'test_output5.txt')
+    with open('test_output5.txt', 'r') as f:
+        content = f.read().strip()
+    assert content == '0'
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

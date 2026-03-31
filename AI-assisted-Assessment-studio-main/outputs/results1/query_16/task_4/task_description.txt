@@ -1,0 +1,25 @@
+Welcome to the Spaceship Fuel Efficiency Calculator.
+
+In the distant future, space travel has become commonplace. To efficiently manage spaceship fuel consumption, you're tasked with creating a system that calculates and interprets fuel efficiency data for various spaceship models. The scoring for each spaceship is based on a fictional 'Fuel Efficiency Score' (FES), which is calculated by dividing the spaceship's total distance covered by its fuel consumption.
+
+Your task is to implement a class `Spaceship` that will handle these calculations and assessments.
+
+**Methods to implement:**
+
+1. **`__init__(self, name, distance, fuel)`**: Initializes a spaceship with a name (string), total distance traveled in light years (integer), and total fuel consumed (integer).
+
+2. **`calculate_fuel_efficiency(self)`**: Computes the Fuel Efficiency Score (FES) as total distance divided by total fuel and returns it as a float. Raise a `ValueError` if fuel is zero to handle division errors.
+
+3. **`efficiency_report(self)`**: Returns a string report of the spaceship's efficiency:
+   - If FES is above 0 but less than or equal to 2, "Low Efficiency"
+   - If FES is above 2 but less than or equal to 5, "Moderate Efficiency"
+   - If FES is above 5, "High Efficiency"
+
+**Assumptions:**
+- All spaceships will have a valid name.
+- Distance and fuel are positive integers; however, fuel may sometimes be 0, in which case you should handle the exception.
+
+**How your implementation will be tested:**
+- Your spaceship class and methods will be tested using a variety of input values.
+- Make sure your methods are named correctly, and they handle errors and edge cases as described.
+- Your implementation should not produce any output itself during testing.

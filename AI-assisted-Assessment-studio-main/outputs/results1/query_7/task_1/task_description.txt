@@ -1,0 +1,37 @@
+You are tasked with creating a Python program that explores Greek mythology by reading details about various mythological creatures from a text file and extracting specific information. You will be given a text file containing entries of mythological creatures, where each entry has the following format:
+
+```
+CreatureName: Description
+Attributes: Attribute1, Attribute2, ..., AttributeN
+```
+
+The entries in the file are separated by a blank line. Your program should read the file 'mythical_creatures.txt' and extract the names of all creatures that have a specific attribute provided as input. The results should be returned as a list of creature names. If no creature with the given attribute is found, return an empty list.
+
+### Function Signature
+
+```python
+def find_creatures_by_attribute(file_path, attribute):
+    # Your code here
+```
+
+### Input
+- `file_path`: a string representing the path to the text file 'mythical_creatures.txt'.
+- `attribute`: a string representing the attribute to search for among the creatures.
+
+### Output
+- A list of strings, where each string is the name of a creature with the specified attribute.
+
+### Example
+Suppose the content of 'mythical_creatures.txt' is as follows:
+```
+Minotaur: A creature with the body of a man and the head of a bull.
+Attributes: labyrinth, beast, angry
+
+Medusa: A Gorgon with snakes for hair.
+Attributes: petrifying, snake
+
+Hydra: A many-headed serpent.
+Attributes: regenerating, water
+```
+
+Calling `find_creatures_by_attribute('mythical_creatures.txt', 'snake')` should return `['Medusa']` because Medusa is the only creature with the attribute 'snake'.

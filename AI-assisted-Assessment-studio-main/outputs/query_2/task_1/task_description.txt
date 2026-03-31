@@ -1,0 +1,44 @@
+## Task Description
+
+You are tasked with creating a Python program to manage a digital cookbook. Your program will read from a text file containing multiple recipes, each with a list of ingredients. Your goal is to process these recipes and return specific information based on user queries.
+
+**Function to Implement:**
+- `def find_recipes_with_ingredient(file_path, ingredient):`
+
+**Parameters:**
+- `file_path`: a string representing the path to the recipe file.
+- `ingredient`: a string representing the ingredient to search for within each recipe.
+
+**Returns:**
+- A list of recipe names that include the specified ingredient.
+
+**Recipe File Format:**
+- Each recipe starts with its name on a new line.
+- The subsequent lines contain the ingredients (one ingredient per line).
+- Recipes are separated by a blank line.
+
+**Example Format:**
+```
+Chocolate Cake
+Flour
+Sugar
+Cocoa
+Eggs
+Milk
+
+Caesar Salad
+Lettuce
+Croutons
+Parmesan Cheese
+Caesar Dressing
+
+Spaghetti Bolognese
+Spaghetti
+Ground Beef
+Tomato Sauce
+Garlic
+```
+
+**Important Note:**
+- Ingredients are case-sensitive. "garlic" and "Garlic" should be considered different.
+- Do not include extra spaces or line breaks in your results.

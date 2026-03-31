@@ -1,0 +1,58 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+You are tasked with creating a Python function that manages a cookbook which records recipes and their ingredients. Each recipe is associated with a list of ingredients, and you will manage this information using a dictionary. Your task is to implement the function `manage_cookbook` which will handle adding, updating, and deleting recipes.
+
+The function `manage_cookbook(cookbook, operation, recipe)` takes three parameters:
+1. `cookbook`: A dictionary where keys are recipe names (strings) and values are lists of ingredients (strings).
+2. `operation`: A string that can be either 'add', 'update', or 'delete'.
+   - 'add' : Adds a new recipe to the cookbook. If the recipe already exists, it will not modify it.
+   - 'update': Updates the ingredients of an existing recipe.
+   - 'delete': Removes a recipe from the cookbook.
+3. `recipe`: A tuple containing the recipe name and a list of its ingredients. For 'add' and 'update' operations, this will include the recipe name and a list of ingredients. For 'delete', this will include only the recipe name and an empty list.
+
+The function should return the updated cookbook after performing the specified operation.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+
+def test_add_new_recipe():
+    cookbook = {}
+    updated_cookbook = manage_cookbook(cookbook, 'add', ('Pasta', ['noodles', 'sauce']))
+    assert updated_cookbook == {'Pasta': ['noodles', 'sauce']}
+
+
+def test_add_existing_recipe():
+    cookbook = {'Pasta': ['noodles', 'sauce']}
+    updated_cookbook = manage_cookbook(cookbook, 'add', ('Pasta', ['noodles', 'alt-sauce']))
+    assert updated_cookbook == {'Pasta': ['noodles', 'sauce']}
+
+
+def test_update_existing_recipe():
+    cookbook = {'Pasta': ['noodles', 'sauce']}
+    updated_cookbook = manage_cookbook(cookbook, 'update', ('Pasta', ['noodles', 'alt-sauce']))
+    assert updated_cookbook == {'Pasta': ['noodles', 'alt-sauce']}
+
+
+def test_delete_existing_recipe():
+    cookbook = {'Pasta': ['noodles', 'sauce']}
+    updated_cookbook = manage_cookbook(cookbook, 'delete', ('Pasta', []))
+    assert updated_cookbook == {}
+
+
+def test_delete_non_existing_recipe():
+    cookbook = {'Pasta': ['noodles', 'sauce']}
+    updated_cookbook = manage_cookbook(cookbook, 'delete', ('Cake', []))
+    assert updated_cookbook == {'Pasta': ['noodles', 'sauce']}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

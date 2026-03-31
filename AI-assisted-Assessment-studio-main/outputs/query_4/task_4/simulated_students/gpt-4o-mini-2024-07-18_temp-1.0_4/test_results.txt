@@ -1,0 +1,76 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py E [ 20%]
+EEEE                                                                     [100%]
+
+==================================== ERRORS ====================================
+_________________________ ERROR at setup of test_basic _________________________
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 37
+  def test_basic(setup_module):
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 6
+  @pytest.fixture
+
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:6
+_______________________ ERROR at setup of test_no_games ________________________
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 42
+  def test_no_games(setup_module):
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 6
+  @pytest.fixture
+
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:6
+_______________________ ERROR at setup of test_all_draws _______________________
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 47
+  def test_all_draws(setup_module):
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 6
+  @pytest.fixture
+
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:6
+______________________ ERROR at setup of test_one_winner _______________________
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 56
+  def test_one_winner(setup_module):
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 6
+  @pytest.fixture
+
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:6
+_______________________ ERROR at setup of test_no_winner _______________________
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 64
+  def test_no_winner(setup_module):
+file /Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 6
+  @pytest.fixture
+
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:6
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_basic
+ERROR outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_no_games
+ERROR outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_draws
+ERROR outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_one_winner
+ERROR outputs/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_no_winner
+============================== 5 errors in 0.12s ===============================

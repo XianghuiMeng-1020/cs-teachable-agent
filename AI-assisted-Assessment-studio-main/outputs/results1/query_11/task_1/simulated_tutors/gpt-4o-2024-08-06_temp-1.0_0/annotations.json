@@ -1,0 +1,4 @@
+{
+    "program": "def check_ingredient_availability(ingredients, required_item, required_quantity):\n    for ingredient in ingredients:\n        name, available_quantity = ingredient.rsplit(' ', 1)\n        if name == required_item:\n            if int(available_quantity) >= required_quantity:\n                return 'Available'\n            else:\n                return 'Not Available'\n    return 'Not Available'",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,69 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+### Dice Game of Chance
+
+Create a function `dice_game(num_rolls)` that simulates a simple dice game where two six-sided dice are rolled `num_rolls` times. The function returns a list, where each element corresponds to the outcome of a roll. For each roll, check the sum of the two dice:
+
+- If the sum is 7 or 11, add 10 points.
+- If the sum is 2, 3, or 12, subtract 5 points.
+- Otherwise, add 0 points.
+
+The function should return a list of integers, where each element represents the cumulative score after each roll.
+
+The dice rolls should be simulated using a predetermined list of integer pairs, where each pair represents a roll of two dice. This is to eliminate the need for random number generation, which is outside the scope of this task. This list will be in the format `dice_pairs` with each pair as `(d1, d2)`, and should be used in order of appearance during the rolls.
+
+### Example
+
+```
+dice_pairs = [(1,6), (6,6), (1,1), (6,5)]
+result = dice_game(4, dice_pairs)
+assert result == [10, 10, 5, 5]
+```
+
+In this example:
+- First roll (1+6): 7 => 10 points
+- Second roll (6+6): 12 => -5 points (cumulative 5)
+- Third roll (1+1): 2 => -5 points (cumulative 0)
+- Fourth roll (6+5): 11 => 10 points (cumulative 10)
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import dice_game
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_teardown_module():
+    yield
+    # No file creation involved in this task
+
+def test_basic_case():
+    dice_pairs = [(1,6), (5,6), (1,1), (6,5)]
+    result = dice_game(4, dice_pairs)
+    assert result == [10, 20, 15, 25]
+
+def test_all_neutral():
+    dice_pairs = [(3,3), (4,5), (2,4), (1,4)]
+    result = dice_game(4, dice_pairs)
+    assert result == [0, 0, 0, 0]
+
+def test_all_losses():
+    dice_pairs = [(1,1), (1,2), (6,6), (2,1)]
+    result = dice_game(4, dice_pairs)
+    assert result == [-5, -10, -15, -20]
+
+def test_all_wins():
+    dice_pairs = [(6,1), (5,2), (6,5), (4,3)]
+    result = dice_game(4, dice_pairs)
+    assert result == [10, 20, 30, 40]
+
+def test_mixed_case():
+    dice_pairs = [(2,2), (6,1), (1,2), (6,5), (3,3)]
+    result = dice_game(5, dice_pairs)
+    assert result == [0, 10, 5, 15, 15]
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

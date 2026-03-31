@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 20%]
+FF..E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______________________ ERROR at teardown of test_case_5 _______________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'output_empty.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:30: AssertionError: assert 'Anna,35\nBen,15\n' == 'Alice,40\nBo...nCharlie,15\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:36: AssertionError: assert '' == 'David,44\nEve,55\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'log_empty.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_case_1
+FAILED outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_case_2
+FAILED outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_case_3
+ERROR outputs/results1/query_22/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_case_5
+===================== 3 failed, 2 passed, 1 error in 0.16s =====================

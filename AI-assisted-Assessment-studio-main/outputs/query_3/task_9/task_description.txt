@@ -1,0 +1,35 @@
+Welcome to the Intergalactic Space Station. Your mission is to develop a Python program, 'alien_communication', facilitating communication with alien species from different planets. Each planet has its own rules for computing the frequency of specific strange signals (strings) they communicate with. Your task is to create a function called `alien_signal_count` that processes a dataset of signal logs from different planets and computes how many times each signal appears.
+
+### Task Details:
+You're provided with a dictionary, `signal_logs`, where the keys are planet names (strings) and the values are lists of signals (strings) sent from the respective planets. Your function should return a nested dictionary of the same structure with the planet names as keys and a dictionary of signal frequencies as values.
+
+#### Function signature
+```python
+def alien_signal_count(signal_logs):
+    pass
+```
+
+#### Parameters
+- `signal_logs` (dict): A dictionary with planet names as keys and lists of signal strings as values.
+
+#### Returns
+- `dict`: A dictionary where each key is a planet name and its value is another dictionary with signal strings as keys and their corresponding frequency counts as values.
+
+#### Example
+```python
+signal_logs = {
+    'Mars': ['beep', 'boop', 'beep', 'beep', 'boop'],
+    'Venus': ['buzz', 'bop', 'buzz'],
+    'Jupiter': [],
+    'Saturn': ['zap', 'zip', 'zap', 'zip', 'zip']
+}
+
+expected_output = {
+    'Mars': {'beep': 3, 'boop': 2},
+    'Venus': {'buzz': 2, 'bop': 1},
+    'Jupiter': {},
+    'Saturn': {'zap': 2, 'zip': 3}
+}
+
+assert alien_signal_count(signal_logs) == expected_output
+```

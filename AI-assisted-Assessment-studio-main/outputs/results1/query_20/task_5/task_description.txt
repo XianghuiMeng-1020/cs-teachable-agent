@@ -1,0 +1,10 @@
+In the board game "Kingdom Builder", players aim to connect as many of their settlements to special location tiles as possible. Each player builds their kingdom by placing different settlements on a game board, scored according to specific rules.
+
+Your task is to write a Python function `calculate_score(settlementsA, settlementsB, specialLocations)` that calculates and compares the scores of two players, Player A and Player B, based on their settlements' proximity to three special location tiles.
+
+- `settlementsA` and `settlementsB` are strings representing the settlements for Player A and Player B, respectively. Each character in the string corresponds to a location on the board, and is either '0' (no settlement) or '1' (a settlement).
+- `specialLocations` is a string of the same length indicating the location of three special tiles on the board. Each character is either '0' (no special tile) or 'S' (special tile).
+
+A player's score is the number of settlements adjacent to special locations. Two locations are considered adjacent if they differ by exactly 1 index (either left or right).
+
+Return a string with 'A', 'B', or 'Tie' indicating which player has the higher score or if it's a tie.

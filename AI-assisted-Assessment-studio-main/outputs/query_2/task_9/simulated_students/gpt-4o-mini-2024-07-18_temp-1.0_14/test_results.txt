@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:32: AssertionError: assert ['ingredient'] == []
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:45: AssertionError: assert ['beetroot', ...alapeno', ...] == ['ingredient']
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_ingredients_sorted_uniq_1
+FAILED outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_no_recipes
+FAILED outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_single_recipe
+FAILED outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_duplicate_ingredients
+========================= 4 failed, 1 passed in 0.11s ==========================

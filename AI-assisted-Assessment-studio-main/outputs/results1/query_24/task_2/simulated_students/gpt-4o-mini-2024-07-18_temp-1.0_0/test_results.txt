@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 20%]
+FF.FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at teardown of test_calculate_winner_score_invalid_data _________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_file.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:25: FileNotFoundError: [Errno 2] No such file or directory: 'temp_test_file.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:32: FileNotFoundError: [Errno 2] No such file or directory: 'temp_test_file.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:43: FileNotFoundError: [Errno 2] No such file or directory: 'bad_data_file.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_calculate_winner_score_different_file
+FAILED outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_calculate_winner_score_single_entry
+FAILED outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_calculate_winner_score_invalid_data
+ERROR outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_calculate_winner_score_invalid_data
+===================== 3 failed, 2 passed, 1 error in 0.15s =====================

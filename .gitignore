@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 .env
-.env.production
 .env.local
 *.egg-info/
 dist/
@@ -16,7 +15,6 @@ venv/
 # Node / Frontend
 node_modules/
 frontend/dist/
-frontend/.env.production
 frontend/.env.local
 
 # IDE

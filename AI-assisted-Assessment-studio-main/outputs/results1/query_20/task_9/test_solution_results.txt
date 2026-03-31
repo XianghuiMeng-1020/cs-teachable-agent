@@ -1,0 +1,6 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_9/test_suite_sol.py:15: AssertionError: assert 26 == 18
+=========================== short test summary info ============================
+FAILED outputs/results1/query_20/task_9/test_suite_sol.py::test_mixed_development
+1 failed, 4 passed in 0.03s

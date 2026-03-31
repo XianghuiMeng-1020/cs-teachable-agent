@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py . [ 20%]
+...FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at teardown of test_calculate_total_energy_5 ______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'quantum_energy.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:58: assert 1520 == 45
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_calculate_total_energy_5
+ERROR outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_calculate_total_energy_5
+===================== 1 failed, 4 passed, 1 error in 0.14s =====================

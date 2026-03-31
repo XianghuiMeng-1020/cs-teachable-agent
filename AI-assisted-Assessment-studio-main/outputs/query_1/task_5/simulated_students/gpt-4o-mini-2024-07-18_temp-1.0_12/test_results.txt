@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:8: assert [6] == [8]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:20: assert [13, 8] == [16, 8]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:26: assert [25, 17, 18] == [30, 19, 14]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:32: assert [3] == [6]
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_hydra_heads_basic
+FAILED outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_hydra_heads_multiple_hydras
+FAILED outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_hydra_heads_large_heads_list
+FAILED outputs/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_hydra_heads_no_heads_case
+========================= 4 failed, 1 passed in 0.13s ==========================

@@ -1,0 +1,34 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with writing a Python program related to cooking recipes. Your task is to create a function called `get_ingredient_list(recipe_text)` which takes a single string argument called `recipe_text`. This string will represent the ingredients part of a recipe written in a specific format.
+
+The format of the `recipe_text` is as follows:
+- Each ingredient is listed on a new line in the format `quantity unit ingredient_name`.
+- `quantity` and `unit` are optional but if they appear, they appear in that order.
+- If `quantity` and `unit` are not present, the ingredient is only its `ingredient_name`.
+
+Here are some example ingredients:
+- `2 cups flour`
+- `1/2 teaspoon salt`
+- `egg`
+
+Your function should return a dictionary where each key is an ingredient name ( a case-insensitive match of the absolute string) and the value is a string of its quantity and unit, or if missing, an empty string.
+
+For example:
+- Input: "2 cups flour\n1/2 teaspoon salt\negg"
+- Output: {"flour": "2 cups", "salt": "1/2 teaspoon", "egg": ""}
+
+**Function Signature**
+```
+def get_ingredient_list(recipe_text):
+```
+
+### Evaluation:
+The `recipe_text` will be tested with various strings of ingredients. Your implementation must be able to handle multiple ingredients that may be listed with different formattings, as shown in the example, and should ignore the case of the ingredient names when storing in the dictionary.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

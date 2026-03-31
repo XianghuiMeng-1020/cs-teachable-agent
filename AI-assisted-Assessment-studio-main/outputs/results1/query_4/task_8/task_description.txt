@@ -1,0 +1,12 @@
+Design a simple Python program that simulates a basic game of chance called 'Lucky Draw'. In this game, a player selects a number between 1 and 5 and the program randomly selects a winning number between 1 and 5. If the player's number matches the winning number, the player wins 10 points, otherwise, they score 0 for the round. The game allows a player to play multiple rounds while tracking their total score. The program will end when the user chooses to stop playing after a round.
+
+You need to implement a function `def lucky_draw_game(player_numbers):` where `player_numbers` is a list of numbers representing the player's guesses for each round. The function should return the total score of all rounds played based on the player’s guesses.
+
+In your implementation, use a dictionary to simulate multiple rounds of the game. The keys of the dictionary should represent the round numbers (starting from 1), and the values should be another dictionary containing the player's guessed number and the randomly selected winning number.
+
+To summarize:
+- In each round, the player selects a number between 1 and 5.
+- The game randomly picks a winning number between 1 and 5.
+- If the player's guess matches the winning number, award the player 10 points for that round.
+- Track each round's results using a dictionary.
+- Return the total score accumulated after all the rounds provided in `player_numbers`.

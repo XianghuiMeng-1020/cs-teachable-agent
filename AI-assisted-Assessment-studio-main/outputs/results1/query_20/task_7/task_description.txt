@@ -1,0 +1,23 @@
+You are working on the digital rules enforcement for a popular board game which involves moving pieces around a board with a specific number of squares, akin to a Monopoly-like game. Each player starts with an initial amount of money and can gain or lose money as they land on different squares while moving around the board.
+
+Your task is to create a function `move_player_on_board(current_position, dice_roll, net_money, board_profit)` that determines the new position of a player on a circular board and updates their money based on the square they land on. 
+
+- `current_position` (int): The player's starting square on the board, numbered from 1 to n (n is the total number of squares).
+- `dice_roll` (int): The result of the dice roll indicating how many squares the player will move. Always a positive integer.
+- `net_money` (int): The player's starting amount of money.
+- `board_profit` (string): A space-separated string of integers where each integer represents the profit or loss when landing on the corresponding square.
+
+The board operates in a circular manner, meaning if a player goes past the last square, they continue from the first square. Update the player's money based on the net gain or loss on the square they land on after the move.
+
+The function should return a tuple (new_position, updated_money) where:
+- `new_position` is the square index where the player ends after applying the dice roll (1-based index).
+- `updated_money` is the player's money after applying the profit/loss of the square they landed on.
+
+You can assume there are at least 2 squares on the board and you will not be given an empty `board_profit` input.
+
+### Example:
+```python
+move_player_on_board(5, 3, 1000, '0 20 -50 30 40 10 0 -20 70 -30')
+# The player moves from square 5 to 8, gaining 70 money, resulting in final money of 1070.
+# Returns (8, 1070)
+```

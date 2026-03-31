@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py F [ 16%]
+FFFF.                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:7: AssertionError: assert 'No judgment found' == 'Blessing granted'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:11: AssertionError: assert 'No judgment found' == 'Storms befall you'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:15: AssertionError: assert 'No judgment found' == 'Growling disapproval'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:19: AssertionError: assert 'No judgment found' == 'Pass freely'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:23: assert 'No judgment found' == "Heart's desire fulfilled"
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_zeus_help
+FAILED outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_zeus_other_action
+FAILED outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_cerberus_steal
+FAILED outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_cerberus_other_action
+FAILED outputs/results1/query_8/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_aphrodite_love
+========================= 5 failed, 1 passed in 0.12s ==========================

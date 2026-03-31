@@ -1,0 +1,10 @@
+**Task Description**: You are given the mission to create a log parser for a fictional intergalactic spaceship system called 'Star Voyager'. Your task is to review spaceship logs stored in text files to identify specific events for later analysis. Each log file will be named as `star_log_<number>.txt` and located in the `logs/` directory. Each file contains entries recording log messages from the ship's system with each entry on a new line. Logs are in the format: `YYYY-MM-DD EVENT_TYPE: message`. You need to implement a function `parse_logs(directory, event_type, output_file)` to perform the following:
+
+1. Iterate over each file in the specified `directory` and read lines from files that follow the naming pattern `star_log_<number>.txt`.
+2. Extract and collect all the lines that contain the specified `event_type`.
+3. Write these collected entries into an output file specified by `output_file`.
+4. If a file does not exist or an error occurs while reading a file, the function should gracefully handle this by skipping the file and continuing with the others.
+
+You can assume that the input files only contain valid log entries and ignore any files that do not match the `star_log_<number>.txt` naming scheme. Your implementation should handle possible I/O exceptions and other unforeseen errors gracefully to ensure robust execution.
+
+**Function Signature**: `parse_logs(directory, event_type, output_file)`

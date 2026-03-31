@@ -1,0 +1,8 @@
+Create a program named `game_of_chance.py`. This program will simulate a simple betting game called "Lucky Draw". The game involves a player selecting a number between 1 and 10, and the program then generates a random value. If the player's number matches the generated value, they win a prize.
+
+Here are the detailed steps your program must perform:
+1. Read a text file named `player_choice.txt` where the player's chosen number (between 1 and 10) is stored on the first line as a string.
+2. Generate a random number (as an integer) between 1 and 10, inclusive.
+3. Compare the player's chosen number with the randomly generated number. If they match, store the message 'Congratulations! You won! Lucky number: <number>' in a text file named `outcome.txt`. If they do not match, store the message 'Sorry! Better luck next time. Chosen number: <chosen>, Generated number: <generated>' in the `outcome.txt` file.
+
+Write your code in such a way that it correctly completes these steps.

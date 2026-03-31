@@ -1,0 +1,113 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+Create a Python program related to cooking that involves processing recipes stored in a text file. You will write a function `filter_ingredients(input_file, output_file, max_ingredients)` to help filter out recipes that have more ingredients than specified. Your function should perform the following steps:
+
+1. **Read the recipes** from the `input_file`. Each recipe is formatted with a name followed by a list of ingredients separated by commas:
+   - The first line of a recipe is the recipe name.
+   - Subsequent lines list the ingredients, each on a new line.
+   - An empty line signifies the end of the current recipe.
+
+2. **Filter recipes** based on the `max_ingredients` parameter. If a recipe has more ingredients than `max_ingredients`, it should be skipped.
+
+3. **Write the filtered recipes** to the `output_file`, maintaining the same format as in the input file.
+
+### Function Signature:
+The function signature should be:
+`def filter_ingredients(input_file, output_file, max_ingredients):`
+
+### Testing:
+- Function will be tested by reading from a sample input file. The specific file names and paths will be provided to your function during testing.
+- Ensure you write only the recipes that have equal to or fewer than `max_ingredients` and retain the original structure of the continuous ingredients list.
+- Note: Lines in the file should not be altered other than filtering based on length criteria.
+
+### Example:
+If an input file contains:
+```
+Pasta Carbonara
+Spaghetti
+Eggs
+Parmesan Cheese
+Pancetta
+
+Chocolate Cake
+Flour
+Cocoa Powder
+Eggs
+Milk
+Sugar
+Butter
+Baking Powder
+
+`
+And the function is called as:
+`filter_ingredients('recipes.txt', 'filtered_recipes.txt', 4)`
+
+The output file `filtered_recipes.txt` should contain:
+```
+Pasta Carbonara
+Spaghetti
+Eggs
+Parmesan Cheese
+Pancetta
+
+```
+
+This example demonstrates that only the recipe 'Pasta Carbonara', which has 4 ingredients, is retained.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import filter_ingredients
+
+def setup_module(module):
+    with open('test_recipes.txt', 'w') as f:
+        f.write('Pasta Carbonara\nSpaghetti\nEggs\nParmesan Cheese\nPancetta\n\n')
+        f.write('Chocolate Cake\nFlour\nCocoa Powder\nEggs\nMilk\nSugar\nButter\nBaking Powder\n\n')
+        f.write('Fruit Salad\nApple\nBanana\nOrange\n')
+
+def teardown_module(module):
+    os.remove('test_recipes.txt')
+    if os.path.exists('result_recipes.txt'):
+        os.remove('result_recipes.txt')
+
+class TestFilterIngredients:
+
+    def test_filter_ingredients_exceeding(self):
+        filter_ingredients('test_recipes.txt', 'result_recipes.txt', 4)
+        with open('result_recipes.txt', 'r') as f:
+            content = f.read()
+            assert content == 'Pasta Carbonara\nSpaghetti\nEggs\nParmesan Cheese\nPancetta\n\n'
+
+    def test_filter_ingredients_no_exceed(self):
+        filter_ingredients('test_recipes.txt', 'result_recipes.txt', 8)
+        with open('result_recipes.txt', 'r') as f:
+            content = f.read()
+            assert content == ('Pasta Carbonara\nSpaghetti\nEggs\nParmesan Cheese\nPancetta\n\n'
+                               'Chocolate Cake\nFlour\nCocoa Powder\nEggs\nMilk\nSugar\nButter\nBaking Powder\n\n'
+                               'Fruit Salad\nApple\nBanana\nOrange\n')
+
+    def test_filter_no_recipes(self):
+        filter_ingredients('test_recipes.txt', 'result_recipes.txt', 2)
+        with open('result_recipes.txt', 'r') as f:
+            content = f.read()
+            assert content == ''
+
+    def test_filter_all_recipes_removed(self):
+        filter_ingredients('test_recipes.txt', 'result_recipes.txt', 0)
+        with open('result_recipes.txt', 'r') as f:
+            content = f.read()
+            assert content == ''
+
+    def test_filter_various_lines(self):
+        filter_ingredients('test_recipes.txt', 'result_recipes.txt', 3)
+        with open('result_recipes.txt', 'r') as f:
+            content = f.read()
+            assert content == ('Fruit Salad\nApple\nBanana\nOrange\n')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

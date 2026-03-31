@@ -1,0 +1,6 @@
+.DS_Store
+._*
+assessment-studio/.next
+assessment-studio/.next.stale-*
+assessment-studio/node_modules
+assessment-studio/tsconfig.tsbuildinfo

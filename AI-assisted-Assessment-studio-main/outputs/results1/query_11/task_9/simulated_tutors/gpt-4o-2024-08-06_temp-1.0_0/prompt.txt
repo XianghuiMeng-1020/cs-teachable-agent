@@ -1,0 +1,40 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+You are tasked with writing a Python function to help a chef prepare for dinner by determining the total cost of the ingredients needed for a list of recipes. 
+
+Write a function `calculate_total_cost(recipe_ingredients, ingredient_prices)` that takes in two parameters:
+- `recipe_ingredients`: a list of strings, where each string contains the ingredients for one recipe separated by commas. Each ingredient is in the format `ingredient_name:quantity`, where `quantity` is an integer denoting how many units of that ingredient are needed.
+- `ingredient_prices`: a list of strings, where each string is in the format `ingredient_name:price`, where `price` is a float indicating the price per unit of that ingredient.
+
+The function should return the total cost as a float, which is the sum of the cost of all ingredients for all recipes.
+
+You can expect the `ingredient_prices` list to include an entry for every ingredient mentioned in `recipe_ingredients`. Ingredients will not appear multiple times in a single recipe entry, and all quantities and prices will be positive.
+
+The function should handle the following:
+- Calculate the cost of ingredients for each recipe.
+- Accumulate the costs into a total sum.
+
+The costs should be calculated using basic arithmetic, string manipulation, and list operations. No additional libraries are allowed.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_total_cost
+
+@pytest.mark.parametrize("recipe_ingredients, ingredient_prices, expected_total", [
+    (['flour:2,sugar:1','milk:3'],'flour:0.5,sugar:0.2,milk:1.0', 4.4),
+    (['rice:3,chicken:2','salt:1,pepper:1'],'rice:1.0,chicken:2.5,salt:0.3,pepper:0.4', 9.4),
+    (['eggs:6','bacon:2'],'eggs:0.4,bacon:1.5', 4.9),
+    (['sugar:2,cocoa:1,milk:1'],'sugar:0.5,cocoa:1.0,milk:0.8', 3.3),
+    (['flour:3,butter:2','butter:1','sugar:1'],'flour:0.6,butter:2.0,sugar:0.7', 8.5)
+])
+def test_calculate_total_cost(recipe_ingredients, ingredient_prices, expected_total):
+    assert calculate_total_cost(recipe_ingredients, ingredient_prices) == expected_total
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

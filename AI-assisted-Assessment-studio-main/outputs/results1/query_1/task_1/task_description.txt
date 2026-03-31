@@ -1,0 +1,23 @@
+In this task, you will create a simple 'dice game', which simulates a game of chance. The game involves rolling two six-sided dice and calculating the score based on the sum of the rolled values. If the sum is 7 or 11, the player wins. If the sum is 2, 3, 12, the player loses. Any other sum results in a neutral outcome.
+
+You need to implement the following function:
+
+```python
+def dice_game(dice_rolls):
+    pass
+```
+
+This function takes a parameter `dice_rolls`, which is a list of tuples. Each tuple contains two integers representing the values rolled on two dice (e.g., (3, 4) represents rolling a 3 and a 4 with two dice).
+
+The function should return a list of strings, where each string represents the outcome of each roll based on the following rules:
+- "Win" if the sum of the dice is 7 or 11
+- "Lose" if the sum of the dice is 2, 3, or 12
+- "Neutral" for any other sum
+
+### Constraints:
+- Each dice face value will be between 1 and 6, inclusive.
+- No more than 100 dice rolls need to be evaluated.
+
+### Examples:
+- Given the input `[(3, 4), (1, 1), (5, 6), (2, 5)]`, the output should be `['Win', 'Lose', 'Win', 'Win']`.
+- For the input `[(2, 2), (4, 3), (6, 6), (4, 5)]`, the output should be `['Neutral', 'Win', 'Lose', 'Win']`.

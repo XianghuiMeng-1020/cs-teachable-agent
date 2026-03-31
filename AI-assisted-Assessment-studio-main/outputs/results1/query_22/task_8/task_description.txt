@@ -1,0 +1,23 @@
+## Task: Board Game Score Tracker
+
+You are tasked with creating a Python program that reads and records the scores of players from board games into a text file. This program should help track the scores of multiple players in multiple rounds of a board game.
+
+### Details:
+1. **Function**: Implement a function `record_scores(filename, players_scores)`. 
+   - `filename` (str): The name of the text file where scores will be stored.
+   - `players_scores` (list of lists): Each sublist represents a round of scores for players, for example: `[[10, 20, 15], [30, 40, 25]]` represents two rounds of scores for three players.
+
+2. The program should write to the provided filename, storing each round of scores on a new line in the format:
+   - `Round 1: Player1-Score Player2-Score ...`
+   - Example entry: `Round 1: 10 20 15`
+
+3. You should append to the file if it already exists.
+
+4. **Retrieving Recorded Scores**: Implement another function `get_scores(filename)` that reads the file content and returns a list of stored scores.
+   - Example return value: `['Round 1: 10 20 15', 'Round 2: 30 40 25']`
+
+### Assumptions:
+- You can assume that the number of players is consistent across all rounds.
+- The scores for each player are given as integers.
+
+Your task is to develop both the `record_scores` and `get_scores` functions to read from and write to files accordingly.

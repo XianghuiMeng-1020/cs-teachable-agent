@@ -1,0 +1,61 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+You are tasked with implementing a function that calculates the score from a string representing a series of moves in simplified "Snakes and Ladders." The board is numbered from 1 to 100. The player can roll a 1 to 6 and can land on positions represented by a string of comma-separated numbers. For simplicity, we will assume moving from square to square involves no additional game mechanics other than moving according to dice rolls until we potentially land beyond the 100th square. The function should return the final score which represents the highest reached position without exceeding 100. If a move lands the player beyond 100, the roll is discarded.
+
+Implement the following function:
+
+`def calculate_final_score(moves):`
+
+### Parameters:
+- `moves`: a string containing comma-separated dice rolls. Each roll is a number between 1 to 6.
+
+### Returns:
+- An integer representing the final highest position reached on the board (maximum 100).
+
+### Constraints:
+- You must handle cases where the input contains invalid numbers (not between 1 and 6) gracefully by ignoring those moves.
+
+### Example:
+
+`calculate_final_score("4,5,6,2,1,1")` should return 19.
+
+`calculate_final_score("3,6,6,8,5")` should return 20 (skips roll of 8).
+
+`calculate_final_score("1,1,3,4,50,60,1")` should return 9 (skips rolls of 50 and 60).
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_final_score
+
+def test_calculate_final_score_base_case():
+    assert calculate_final_score("4,5,6,2,1,1") == 19
+
+def test_calculate_final_score_ignore_invalid():
+    assert calculate_final_score("3,6,6,8,5") == 20
+
+def test_calculate_final_score_ignore_large_numbers():
+    assert calculate_final_score("1,1,3,4,50,60,1") == 9
+
+def test_calculate_final_score_no_invalid_numbers():
+    assert calculate_final_score("3,3,3,3,3,3,3") == 21
+
+def test_calculate_final_score_ignore_out_of_range_moves():
+    assert calculate_final_score("6,6,6,6,6,6,6,3") == 99
+
+@pytest.fixture
+def setup_module():
+    yield
+
+
+def teardown_module():
+    pass
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

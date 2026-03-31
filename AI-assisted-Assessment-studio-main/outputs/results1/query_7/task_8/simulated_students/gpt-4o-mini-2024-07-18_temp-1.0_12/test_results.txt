@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py . [ 16%]
+.F.F.E                                                                   [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at teardown of test_edge_cases[<lambda>-expected4] ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythology_stories.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:67: AssertionError: assert {'Hercules', ...heus', 'Thor'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:67: AssertionError: assert set() == {'Achilles', 'Hercules'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+ERROR outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+===================== 2 failed, 4 passed, 1 error in 0.13s =====================

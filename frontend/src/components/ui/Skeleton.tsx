@@ -11,7 +11,7 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
     <div
       ref={ref}
       className={cn(
-        "relative overflow-hidden bg-slate-200",
+        "relative overflow-hidden bg-stone-200",
         shimmer && "before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent",
         variant === "line" && "h-4 rounded",
         variant === "circle" && "rounded-full",

@@ -1,0 +1,119 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+In the realm of ancient Mythology, explorers often needed to record their encounters with mythical creatures. You have been asked to write a Python program that computes essential statistics from recorded data on these encounters.
+
+You need to create a Python function `mythical_creature_stats(input_filename, output_filename)`. This function will read encounter data from a file, process it, and write computed statistics to another file. The input file will contain data about encounters with various mythical creatures in the following format:
+
+`creature_name,number_of_encounters,distance_traveled`
+
+Each line represents a separate encounter record.
+
+The program should: 
+1. Compute the total number of encounters for each unique creature.
+2. Compute the average distance traveled per encounter for each creature.
+3. Write the results to the output file in the following format:
+
+`creature_name,total_encounters,average_distance`
+
+Write each creature's results on a new line.
+
+**Note:**
+- The `average_distance` should be rounded to two decimal places.
+- Assume the input file and output file paths are valid and accessible.
+- The function should create the output file if it does not already exist.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import mythical_creature_stats
+
+# Setup module for creating input test files
+
+def setup_module(module):
+    with open('test_input_1.txt', 'w') as f:
+        f.write('Hydra,3,300\n')
+        f.write('Cerberus,2,150\n')
+        f.write('Hydra,2,200\n')
+
+    with open('test_input_2.txt', 'w') as f:
+        f.write('Griffin,5,250\n')
+        f.write('Phoenix,4,400\n')
+        f.write('Griffin,2,100\n')
+        f.write('Kraken,1,500\n')
+        f.write('Phoenix,2,200\n')
+
+    with open('test_input_3.txt', 'w') as f:
+        f.write('Minotaur,1,100\n')
+
+    with open('test_input_4.txt', 'w') as f:
+        f.write('Dragon,4,1200\n')
+        f.write('Dragon,3,600\n')
+        f.write('Dragon,7,2100\n')
+
+    with open('test_input_5.txt', 'w') as f:
+        f.write('Cyclops,7,280\n')
+        f.write('Cyclops,3,120\n')
+        f.write('Cyclops,5,500\n')
+
+def teardown_module(module):
+    os.remove('test_input_1.txt')
+    os.remove('test_input_2.txt')
+    os.remove('test_input_3.txt')
+    os.remove('test_input_4.txt')
+    os.remove('test_input_5.txt')
+    os.remove('output_1.txt')
+    os.remove('output_2.txt')
+    os.remove('output_3.txt')
+    os.remove('output_4.txt')
+    os.remove('output_5.txt')
+
+
+def test_mythical_creature_stats_1():
+    mythical_creature_stats('test_input_1.txt', 'output_1.txt')
+    with open('output_1.txt', 'r') as f:
+        content = f.readlines()
+    assert 'Hydra,5,100.00\n' in content
+    assert 'Cerberus,2,75.00\n' in content
+
+
+def test_mythical_creature_stats_2():
+    mythical_creature_stats('test_input_2.txt', 'output_2.txt')
+    with open('output_2.txt', 'r') as f:
+        content = f.readlines()
+    assert 'Griffin,7,50.00\n' in content
+    assert 'Phoenix,6,100.00\n' in content
+    assert 'Kraken,1,500.00\n' in content
+
+
+def test_mythical_creature_stats_3():
+    mythical_creature_stats('test_input_3.txt', 'output_3.txt')
+    with open('output_3.txt', 'r') as f:
+        content = f.readlines()
+    assert 'Minotaur,1,100.00\n' in content
+
+
+def test_mythical_creature_stats_4():
+    mythical_creature_stats('test_input_4.txt', 'output_4.txt')
+    with open('output_4.txt', 'r') as f:
+        content = f.readlines()
+    assert 'Dragon,14,150.00\n' in content
+
+
+def test_mythical_creature_stats_5():
+    mythical_creature_stats('test_input_5.txt', 'output_5.txt')
+    with open('output_5.txt', 'r') as f:
+        content = f.readlines()
+    assert 'Cyclops,15,60.00\n' in content
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

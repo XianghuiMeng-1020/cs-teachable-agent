@@ -1,0 +1,4 @@
+{
+    "program": "def process_myth_artifacts(artifacts):\n    result = {}\n    totals = {}\n    total_artifacts = 0\n    \n    for artifact in artifacts:\n        myth = artifact['myth']\n        name = artifact['name']\n        \n        if myth not in result:\n            result[myth] = []\n            totals[myth] = 0\n        result[myth].append(name)\n        totals[myth] += 1\n        total_artifacts += 1\n    \n    totals['total'] = total_artifacts\n    result['totals'] = totals\n    return result\n",
+    "context_relevance": 1.0
+}

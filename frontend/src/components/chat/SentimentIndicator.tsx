@@ -72,8 +72,8 @@ const EMOTION_CONFIGS: Record<string, {
   neutral: {
     icon: Meh,
     label: "Neutral",
-    color: "text-slate-600",
-    bg: "bg-slate-50",
+    color: "text-stone-600",
+    bg: "bg-stone-50",
     description: "Monitoring engagement",
   },
   excited: {
@@ -86,8 +86,8 @@ const EMOTION_CONFIGS: Record<string, {
   bored: {
     icon: Minus,
     label: "Bored",
-    color: "text-slate-500",
-    bg: "bg-slate-100",
+    color: "text-stone-500",
+    bg: "bg-stone-100",
     description: "May need more challenge",
   },
 };
@@ -117,7 +117,7 @@ export function SentimentIndicator({ message, className }: SentimentIndicatorPro
 
   if (!sentiment || analyzeMutation.isPending) {
     return (
-      <div className={cn("flex items-center gap-2 text-xs text-slate-400", className)}>
+      <div className={cn("flex items-center gap-2 text-xs text-stone-400", className)}>
         <Brain className="w-3 h-3" />
         <span>Analyzing...</span>
       </div>
@@ -144,9 +144,9 @@ export function SentimentIndicator({ message, className }: SentimentIndicatorPro
         <span className={cn("font-medium", config.color)}>
           {config.label}
         </span>
-        <span className="text-slate-400">|</span>
+        <span className="text-stone-400">|</span>
         <div className="flex items-center gap-1">
-          <div className="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+          <div className="w-12 h-1.5 bg-stone-200 rounded-full overflow-hidden">
             <div
               className={cn(
                 "h-full rounded-full",
@@ -170,7 +170,7 @@ export function SentimentIndicator({ message, className }: SentimentIndicatorPro
             {/* Engagement Meter */}
             <div>
               <div className="flex justify-between text-xs mb-1">
-                <span className="text-slate-600">Engagement</span>
+                <span className="text-stone-600">Engagement</span>
                 <span className={cn(
                   "font-medium",
                   sentiment.engagement_score > 0.3 ? "text-emerald-600" :
@@ -182,7 +182,7 @@ export function SentimentIndicator({ message, className }: SentimentIndicatorPro
                    "Low"}
                 </span>
               </div>
-              <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-stone-100 rounded-full overflow-hidden">
                 <div
                   className={cn(
                     "h-full rounded-full transition-all",

@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_total_cost[recipe_ingredients0-flour:0.5,sugar:0.2,milk:1.0-4.4]
+FAILED outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_total_cost[recipe_ingredients1-rice:1.0,chicken:2.5,salt:0.3,pepper:0.4-9.4]
+FAILED outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_total_cost[recipe_ingredients2-eggs:0.4,bacon:1.5-4.9]
+FAILED outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_total_cost[recipe_ingredients3-sugar:0.5,cocoa:1.0,milk:0.8-3.3]
+FAILED outputs/results1/query_11/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_total_cost[recipe_ingredients4-flour:0.6,butter:2.0,sugar:0.7-8.5]
+============================== 5 failed in 0.14s ===============================

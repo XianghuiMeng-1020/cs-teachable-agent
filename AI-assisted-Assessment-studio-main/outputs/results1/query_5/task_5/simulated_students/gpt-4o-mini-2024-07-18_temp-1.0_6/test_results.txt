@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py . [ 20%]
+.F.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:48: FileNotFoundError: [Errno 2] No such file or directory: 'creatures_edge.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:75: FileNotFoundError: [Errno 2] No such file or directory: 'creatures_all.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_identify_legendary_creatures_edge_case_min_power_skill
+FAILED outputs/results1/query_5/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_identify_legendary_creatures_all_legendary_case
+========================= 2 failed, 3 passed in 0.07s ==========================

@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 20%]
+....E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at teardown of test_empty_removal_handling _______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_empty_removal_handling
+========================== 5 passed, 1 error in 0.05s ==========================

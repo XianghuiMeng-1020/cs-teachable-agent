@@ -1,0 +1,55 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+Create a function `spin_wheel(bet_list, target_number)` that simulates a simple game of chance akin to a roulette wheel. 
+
+The function should accept two inputs:
+- `bet_list`: A list containing tuples where each tuple consists of two elements: a number (between 0 to 36, inclusive) a player bets on, and the amount of money bet on that number.
+- `target_number`: The winning number that was randomly generated.
+
+Your task is to determine the outcomes for each bet in the `bet_list`. A player wins if the number they bet on matches the `target_number`. For each winning bet, the payoff is calculated as `bet_amount * 10`. The function should return an integer which is the total amount of money won by all players.
+
+For simplicity, assume all input numbers are valid, `bet_list` only contains valid tuples, and the `target_number` is between 0 and 36, inclusive. If no players win, the function should return 0.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import spin_wheel
+
+
+def test_no_wins():
+    bets = [(5, 10), (12, 20), (18, 5)]
+    target = 7
+    assert spin_wheel(bets, target) == 0
+
+
+def test_single_bet_single_win():
+    bets = [(24, 15)]
+    target = 24
+    assert spin_wheel(bets, target) == 150
+
+
+def test_multiple_bets_single_win():
+    bets = [(2, 100), (35, 50), (10, 25)]
+    target = 35
+    assert spin_wheel(bets, target) == 500
+
+
+def test_multiple_bets_multiple_wins():
+    bets = [(7, 30), (7, 50), (13, 20)]
+    target = 7
+    assert spin_wheel(bets, target) == 800
+
+
+def test_high_stakes():
+    bets = [(0, 200), (36, 10), (15, 100), (36, 90)]
+    target = 36
+    assert spin_wheel(bets, target) == 1000
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

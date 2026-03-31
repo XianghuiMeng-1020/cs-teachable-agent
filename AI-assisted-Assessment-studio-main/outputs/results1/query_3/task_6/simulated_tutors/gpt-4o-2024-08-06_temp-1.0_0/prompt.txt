@@ -1,0 +1,114 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+In this programming task, you are required to create a simple 'Game of Chance'. Your goal is to simulate a basic dice roll game and calculate the total score for a series of games. Implement a function `play_dice_games(games)`, where `games` is a dictionary representing a series of games played. Each key in the dictionary is the player's name, and each value is a list of numbers representing the outcomes of the dice rolls in their respective game. Each dice roll can have an integer value from 1 to 6, inclusive.
+
+Your function should compute and return a dictionary that maps each player's name to their total score. The score of a player is simply the sum of their dice roll outcomes. For example, if a player's dice rolls are `[3, 5, 1]`, their score would be `9`.
+
+The output dictionary should list the players' scores in the same order as they appear in the input dictionary. Additionally, include a check to ensure a player has a roll of exactly 3 dice. If a player has rolled less or more than 3 dice, their score should be set to `-1` indicating an invalid game.
+
+### Example
+Input:
+```python
+{
+  'Alice': [3, 5, 2],
+  'Bob': [1, 6, 3],
+  'Charlie': [4, 4, 4],
+  'David': [2, 2]
+}
+```
+Output:
+```python
+{
+  'Alice': 10,
+  'Bob': 10,
+  'Charlie': 12,
+  'David': -1
+}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import play_dice_games
+
+def setup_module(module):
+    module.test_data_1 = {
+        'Alice': [3, 5, 2],
+        'Bob': [1, 6, 3],
+        'Charlie': [4, 4, 4],
+        'David': [2, 2]
+    }
+    module.test_data_2 = {
+        'Eve': [5, 5, 5],
+        'Frank': [1, 2, 3],
+        'Grace': [6, 6, 6],
+        'Heidi': [2, 4, 5, 6]
+    }
+    module.test_data_3 = {
+        'Ivan': [4, 4, 4],
+        'Judy': [2],
+        'Ken': [3, 3, 3, 1],
+        'Leo': [5, 6, 2]
+    }
+    module.test_data_4 = {
+        'Mia': [1, 1, 1],
+        'Nina': [0, 5, 6],
+        'Oscar': [2, 3]
+    }
+    module.test_data_5 = {
+        'Pat': [3, 3, 3],
+        'Quinn': [2, 2, 2],
+        'Ralph': [6, 6, 6]
+    }
+
+def teardown_module(module):
+    del module.test_data_1
+    del module.test_data_2
+    del module.test_data_3
+    del module.test_data_4
+    del module.test_data_5
+
+def test_play_dice_games_case_1():
+    assert play_dice_games(test_data_1) == {
+        'Alice': 10,
+        'Bob': 10,
+        'Charlie': 12,
+        'David': -1
+    }
+
+def test_play_dice_games_case_2():
+    assert play_dice_games(test_data_2) == {
+        'Eve': 15,
+        'Frank': 6,
+        'Grace': 18,
+        'Heidi': -1
+    }
+
+def test_play_dice_games_case_3():
+    assert play_dice_games(test_data_3) == {
+        'Ivan': 12,
+        'Judy': -1,
+        'Ken': -1,
+        'Leo': 13
+    }
+
+def test_play_dice_games_case_4():
+    assert play_dice_games(test_data_4) == {
+        'Mia': 3,
+        'Nina': 11,
+        'Oscar': -1
+    }
+
+def test_play_dice_games_case_5():
+    assert play_dice_games(test_data_5) == {
+        'Pat': 9,
+        'Quinn': 6,
+        'Ralph': 18
+    }
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

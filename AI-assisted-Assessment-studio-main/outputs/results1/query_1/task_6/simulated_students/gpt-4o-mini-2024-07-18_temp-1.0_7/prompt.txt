@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Welcome to the Dice Lottery, a simple game of chance! Your task is to write a Python program that determines if a player has won in this game. The game consists of a player rolling two six-sided dice and computing a result based on the possible sums of the roll.
+
+**Task**: You need to implement a function `check_dice_lottery_results(results)` which takes a list `results` where each element is a tuple of two integers representing the dice roll results (e.g., [(1, 2), (3, 4), (6, 6)]). For each pair of dice results, calculate the sum of the two numbers.
+
+The player wins in the following situations:
+- The sum of the dice is 7 or 11.
+- Both dice show the same number (a pair), but only if the sum is greater than 8.
+
+Return a list of boolean values where `True` indicates a winning roll and `False` indicates a losing roll.
+
+**Examples**: 
+1. check_dice_lottery_results([(1, 6), (5, 5), (2, 3)]) returns [True, True, False]
+2. check_dice_lottery_results([(4, 3), (2, 2), (6, 5)]) returns [True, False, True]
+
+Make sure to implement the program strictly using basic constructs like arithmetic operators, selection statements, variables, and lists.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

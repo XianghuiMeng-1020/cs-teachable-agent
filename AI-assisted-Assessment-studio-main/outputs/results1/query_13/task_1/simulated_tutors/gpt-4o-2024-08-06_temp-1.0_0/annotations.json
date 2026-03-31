@@ -1,0 +1,4 @@
+{
+    "program": "def estimate_cooking_time(dish_list):\n    total_time = 0\n    for dish in dish_list:\n        if not isinstance(dish, str):\n            raise ValueError(\"Invalid item in dish list\")\n        cooking_time = len(dish) * 5\n        total_time += cooking_time\n    return total_time",
+    "context_relevance": 1.0
+}

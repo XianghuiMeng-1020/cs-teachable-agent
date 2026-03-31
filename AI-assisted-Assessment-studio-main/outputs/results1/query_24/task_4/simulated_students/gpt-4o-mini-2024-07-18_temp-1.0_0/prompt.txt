@@ -1,0 +1,25 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function `play_turn(game_log)` that simulates a single turn in a board game and returns the updated game state.
+
+Each turn consists of a player rolling a die and adding the result to their score. The game log is a list of strings, each representing an event in the board game. Use a loop to iterate over the game log and apply each event to update the game state.
+
+Each log entry has the format `'<player_name> rolls <die_result>'` where `player_name` is the name of the player performing the roll, and `die_result` is the value obtained from rolling the die (a positive integer).
+
+Your task is to maintain a dictionary `scores` where keys are player names and values are their corresponding total scores. A log event should increase the score of the player by the corresponding `die_result`. Use exception handling to manage possible issues such as if an invalid event is encountered (e.g., not following the format or having non-integer die results). For invalid events, add the string 'Invalid entry' to the `invalid_entries` list. Finally, return a tuple `(scores, invalid_entries)` where `scores` is the dictionary of player scores and `invalid_entries` contains all invalid event strings encountered.
+
+Example:
+```python
+play_turn(['Alice rolls 4', 'Bob rolls 5', 'Alice rolls apple'])
+```
+Should return:
+```python
+({'Alice': 4, 'Bob': 5}, ['Alice rolls apple'])
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

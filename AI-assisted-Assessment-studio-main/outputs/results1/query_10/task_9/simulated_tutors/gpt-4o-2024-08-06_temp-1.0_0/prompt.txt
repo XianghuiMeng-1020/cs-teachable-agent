@@ -1,0 +1,107 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+You are asked to build a simple inventory management system for a kitchen. You will implement a class called `KitchenInventory` that allows for tracking availability of different ingredients. The functionality includes loading data from a file, checking ingredient availability, adding new ingredients, and saving back to the file.
+
+**Specifications:**
+
+1. Implement a class `KitchenInventory` with the following methods:
+   - `__init__(self, filename)`: Initialize with the filename of the inventory.
+   - `load_inventory(self)`: Load the inventory from a text file where each line contains 'ingredient_name:quantity' (e.g., 'sugar:5'). If the file does not exist, start with an empty inventory and handle exceptions appropriately.
+   - `check_availability(self, ingredient)`: Check if a given ingredient is available in the inventory. Return True if available, otherwise False.
+   - `add_ingredient(self, ingredient, quantity)`: Add a specified quantity of an ingredient to the inventory. If the ingredient already exists, increase its quantity. Otherwise, add it as new.
+   - `save_inventory(self)`: Save the current inventory back to the file specified during initialization. Each ingredient and its quantity should be saved on a new line in the format 'ingredient_name:quantity'.
+
+**Testing:**
+
+The inventory will be tested using a text file named 'test_inventory.txt'. Prepare test cases to ensure that:
+- The inventory can load from a file correctly.
+- Ingredients are added correctly.
+- Ingredient availability is checked correctly.
+- Saving to a file properly writes the current state of the inventory.
+- The handling of non-existing files at initialization works correctly.
+
+To test your solution, use pytest framework and ensure that you both setup and cleanup the testing environment, including any necessary files.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import KitchenInventory
+
+filename = 'test_inventory.txt'
+
+# Setup function creates a test file with initial data
+
+def setup_module(module):
+    with open(filename, 'w') as f:
+        f.write('sugar:10\n')
+        f.write('flour:5\n')
+        f.write('butter:2\n')
+
+# Teardown function removes the test file
+
+def teardown_module(module):
+    if os.path.exists(filename):
+        os.remove(filename)
+
+@pytest.fixture
+def inventory():
+    inv = KitchenInventory(filename)
+    inv.load_inventory()
+    return inv
+
+# Tests loading the inventory from a file
+
+def test_load_inventory(inventory):
+    assert inventory.check_availability('sugar') == True
+    assert inventory.check_availability('flour') == True
+    assert inventory.check_availability('butter') == True
+    assert inventory.check_availability('milk') == False
+
+# Tests checking availability of ingredients
+
+def test_check_availability(inventory):
+    assert inventory.check_availability('sugar') == True
+    assert inventory.check_availability('olive oil') == False
+
+# Tests adding ingredients to the inventory
+
+def test_add_ingredient(inventory):
+    inventory.add_ingredient('sugar', 5)
+    assert inventory.check_availability('sugar') == True
+    inventory.add_ingredient('olive oil', 3)
+    assert inventory.check_availability('olive oil') == True
+
+# Tests saving the inventory to a file
+
+def test_save_inventory():
+    inv = KitchenInventory(filename)
+    inv.load_inventory()
+    inv.add_ingredient('salt', 2)
+    inv.save_inventory()
+    with open(filename, 'r') as file:
+        data = file.read()
+        assert 'salt:2' in data
+
+# Tests handling non-existing file
+
+def test_non_existing_file_handling():
+    temp_filename = 'non_existing_inventory.txt'
+    if os.path.exists(temp_filename):
+        os.remove(temp_filename)
+    inv = KitchenInventory(temp_filename)
+    inv.load_inventory() # Should not raise any exception
+    assert inv.check_availability('sugar') == False
+    inv.add_ingredient('sugar', 5)
+    inv.save_inventory()
+    with open(temp_filename, 'r') as file:
+        data = file.read()
+    assert 'sugar:5' in data
+    os.remove(temp_filename)
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

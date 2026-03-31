@@ -1,0 +1,8 @@
+[
+  "decoded_words = ''",
+  "def decode_message(galactic_message, codebook):",
+  "for word in words:\n        if word in codebook:\n            decoded_words.extend(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')",
+  "words = galactic_message.split()\ndecoded_words = [''] * 0",
+  "return ' '.join(decoded_words)",
+  "for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')"
+]

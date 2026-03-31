@@ -1,0 +1,71 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+Create a Python function `calculate_winner_score(filepath)` that takes a file path as a string argument. The file at the given path contains a summary of a board game scored by various players. The file is expected to have lines of format `player_name score`, where `player_name` is a string representing the player's name and `score` is an integer representing their score.
+
+Your task is to read from the file and determine the player with the highest total score. Note that players may appear multiple times in the file. You should return a tuple of the player's name and their total score as an integer (name, total_score). If multiple players have the highest score, return any of them. Handle exceptions where the file might not be found or contain invalid data.
+
+Example file content:
+```
+Alice 20
+Bob 35
+Alice 30
+Charlie 25
+Bob 40
+```
+For the above file, the function should return ('Bob', 75) since Bob has the highest cumulative score (35 + 40).
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_winner_score
+
+filename = "test_file.txt"
+
+
+def setup_module(module):
+    with open(filename, 'w') as f:
+        f.write("Alice 20\nBob 35\nAlice 30\nCharlie 25\nBob 40\n")
+
+def teardown_module(module):
+    os.remove(filename)
+
+
+def test_calculate_winner_score_base_case():
+    assert calculate_winner_score(filename) == ('Bob', 75)
+
+
+def test_calculate_winner_score_different_file():
+    with open('temp_test_file.txt', 'w') as f:
+        f.write("Dana 10\nEva 15\nDana 20\nEva 15\n")
+    assert calculate_winner_score('temp_test_file.txt') in [('Dana', 30), ('Eva', 30)]
+    os.remove('temp_test_file.txt')
+
+
+def test_calculate_winner_score_single_entry():
+    with open('temp_test_file.txt', 'w') as f:
+        f.write("Frank 40\n")
+    assert calculate_winner_score('temp_test_file.txt') == ('Frank', 40)
+    os.remove('temp_test_file.txt')
+
+
+def test_calculate_winner_score_file_not_found():
+    assert calculate_winner_score('non_existent_file.txt') == None
+
+
+def test_calculate_winner_score_invalid_data():
+    with open('bad_data_file.txt', 'w') as f:
+        f.write("Invalid Data\nMore Bad Data\n")
+    assert calculate_winner_score('bad_data_file.txt') == None
+    os.remove('bad_data_file.txt')
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

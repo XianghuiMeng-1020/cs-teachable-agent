@@ -1,0 +1,13 @@
+You are tasked with creating a Python program that simulates a leaderboard for a board game tournament. Your program should allow players to have their scores updated after each game they play. The data of player scores should persist across program runs using a file to store and retrieve data. 
+
+Implement a class `Leaderboard` with the following methods:
+
+- `add_player(self, player_name)`: Add a new player to the leaderboard with a default score of 0. If the player already exists, do nothing.
+- `update_score(self, player_name, score)`: Update the player's score by adding the given `score` to the player's current score. If the player does not exist, add them to the leaderboard with the provided score.
+- `get_score(self, player_name)`: Return the current score of the player. If the player does not exist, return `None`.
+- `save_scores(self, filepath)`: Save the current state of the leaderboard to a file specified by `filepath`. Each line in the file should contain `player_name:score`.
+- `load_scores(self, filepath)`: Load player scores from a file specified by `filepath`. If a player is already in the leaderboard, update their score with the one from the file.
+
+Your implementation should correctly maintain player data, update scores, and load from/save to files. The scores in the file should always reflect the state of the leaderboard at the last save operation. Use a colon `:` as the delimiter between player names and their scores in the file.
+
+The test suite will involve creating files to load scores from, checking player scores after updates, and ensuring file content reflects the leaderboard's state.

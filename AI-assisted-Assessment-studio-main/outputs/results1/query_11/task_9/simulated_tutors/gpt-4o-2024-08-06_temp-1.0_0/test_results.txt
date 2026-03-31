@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FFF.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:13: AssertionError: assert 4.2 == 4.4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:13: AssertionError: assert 8.700000000000001 == 9.4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:13: AssertionError: assert 5.4 == 4.9
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:13: AssertionError: assert 2.8 == 3.3
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_total_cost[recipe_ingredients0-flour:0.5,sugar:0.2,milk:1.0-4.4]
+FAILED outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_total_cost[recipe_ingredients1-rice:1.0,chicken:2.5,salt:0.3,pepper:0.4-9.4]
+FAILED outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_total_cost[recipe_ingredients2-eggs:0.4,bacon:1.5-4.9]
+FAILED outputs/results1/query_11/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_total_cost[recipe_ingredients3-sugar:0.5,cocoa:1.0,milk:0.8-3.3]
+========================= 4 failed, 1 passed in 0.08s ==========================

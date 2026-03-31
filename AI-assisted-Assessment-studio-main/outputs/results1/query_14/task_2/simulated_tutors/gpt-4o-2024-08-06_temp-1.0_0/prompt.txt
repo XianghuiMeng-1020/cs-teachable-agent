@@ -1,0 +1,83 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+You are tasked with writing a Python program related to cooking recipes. Your task is to create a function called `get_ingredient_list(recipe_text)` which takes a single string argument called `recipe_text`. This string will represent the ingredients part of a recipe written in a specific format.
+
+The format of the `recipe_text` is as follows:
+- Each ingredient is listed on a new line in the format `quantity unit ingredient_name`.
+- `quantity` and `unit` are optional but if they appear, they appear in that order.
+- If `quantity` and `unit` are not present, the ingredient is only its `ingredient_name`.
+
+Here are some example ingredients:
+- `2 cups flour`
+- `1/2 teaspoon salt`
+- `egg`
+
+Your function should return a dictionary where each key is an ingredient name ( a case-insensitive match of the absolute string) and the value is a string of its quantity and unit, or if missing, an empty string.
+
+For example:
+- Input: "2 cups flour\n1/2 teaspoon salt\negg"
+- Output: {"flour": "2 cups", "salt": "1/2 teaspoon", "egg": ""}
+
+**Function Signature**
+```
+def get_ingredient_list(recipe_text):
+```
+
+### Evaluation:
+The `recipe_text` will be tested with various strings of ingredients. Your implementation must be able to handle multiple ingredients that may be listed with different formattings, as shown in the example, and should ignore the case of the ingredient names when storing in the dictionary.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import get_ingredient_list
+
+def test_ingredients_with_quantities_and_units():
+    recipe_text = "2 cups flour\n1/2 teaspoon salt\n1 egg"
+    expected_output = {
+        "flour": "2 cups",
+        "salt": "1/2 teaspoon",
+        "egg": "1"
+    }
+    assert get_ingredient_list(recipe_text) == expected_output
+
+def test_ingredients_without_quantities_or_units():
+    recipe_text = "egg\nsugar"
+    expected_output = {
+        "egg": "",
+        "sugar": ""
+    }
+    assert get_ingredient_list(recipe_text) == expected_output
+
+def test_mixed_format_ingredients():
+    recipe_text = "egg\n2 tablespoons sugar\nsalt"
+    expected_output = {
+        "egg": "",
+        "sugar": "2 tablespoons",
+        "salt": ""
+    }
+    assert get_ingredient_list(recipe_text) == expected_output
+
+def test_case_insensitivity():
+    recipe_text = "1 Liter Water\n1 liter water\nFlour 100g"
+    expected_output = {
+        "water": "1 liter",
+        "flour": ""
+    }
+    assert get_ingredient_list(recipe_text) == expected_output
+
+def test_complex_ingredient_names():
+    recipe_text = "1 kg chicken breast\n100 ml olive oil\nbasil"
+    expected_output = {
+        "chicken breast": "1 kg",
+        "olive oil": "100 ml",
+        "basil": ""
+    }
+    assert get_ingredient_list(recipe_text) == expected_output
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

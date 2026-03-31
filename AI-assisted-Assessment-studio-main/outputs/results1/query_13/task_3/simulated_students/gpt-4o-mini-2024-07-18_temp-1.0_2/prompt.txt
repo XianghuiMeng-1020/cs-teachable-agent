@@ -1,0 +1,23 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function `cook_recipe` that simulates preparing a simple dish given a list of ingredients. Each ingredient should be processed one by one using a loop.
+
+The `cook_recipe` function should take:
+- a list of ingredient tuples where each tuple contains a string (ingredient name) and an integer (required quantity in grams).
+- a dictionary representing available ingredients in the format `{ingredient_name: available_weight_in_grams}`.
+
+The function should return a list of strings indicating the status of each ingredient. The status should be one of the following:
+- "{ingredient_name}: Enough"
+- "{ingredient_name}: Not Enough, {required - available} grams more needed"
+
+If an ingredient from the recipe is not present in the available ingredients dictionary, handle the situation gracefully and report "{ingredient_name}: Missing".
+Use exception handling to catch any unforeseen issues during processing and return 'Error'.
+
+The task will be tested using the given list of ingredients and available ingredients dictionary. Your implementation will be checked against multiple scenarios including abundant, insufficient, and missing ingredients scenarios.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

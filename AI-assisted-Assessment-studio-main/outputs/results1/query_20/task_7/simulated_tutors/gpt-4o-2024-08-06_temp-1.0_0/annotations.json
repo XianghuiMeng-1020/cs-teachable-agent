@@ -1,0 +1,4 @@
+{
+    "program": "def move_player_on_board(current_position, dice_roll, net_money, board_profit):\n    # Convert board_profit from string to list of integers\n    board_profit_list = list(map(int, board_profit.split()))\n    total_squares = len(board_profit_list)\n    \n    # Calculate new position\n    new_position = (current_position + dice_roll - 1) % total_squares + 1\n    \n    # Calculate money adjustment\n    updated_money = net_money + board_profit_list[new_position - 1]\n    \n    return new_position, updated_money\n\n# Example usage:\nresult = move_player_on_board(5, 3, 1000, '0 20 -50 30 40 10 0 -20 70 -30')\nprint(result)  # Should output: (8, 1070)",
+    "context_relevance": 1.0
+}

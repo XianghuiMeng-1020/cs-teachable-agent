@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py . [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:37: AssertionError: assert 'Creature added' is None
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:44: AssertionError: assert 'Creature added' == 'Creature already exists'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:49: AssertionError: assert set() == {'Centaurs', 'Phoenix'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_add_creature_new
+FAILED outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_add_creature_existing
+FAILED outputs/results1/query_6/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_get_creatures_by_origin
+========================= 3 failed, 2 passed in 0.15s ==========================

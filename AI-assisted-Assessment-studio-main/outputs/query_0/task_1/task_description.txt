@@ -1,0 +1,32 @@
+### Game of Chance - Lucky Number Generator
+In the world of chance games, participants often rely on lucky charms and numbers for success. You've been tasked with developing a simple Lucky Number Generator in Python that reads participant names from an input text file and generates a lucky number for each. This lucky number is calculated using the length of the participant's name along with some predefined rules.
+
+#### Task Description
+Write a Python program `lucky_number_generator.py` that reads a file `participants.txt` containing a list of participant names with one name per line. For each name, the program should calculate a lucky number using the following rules:
+- If the length of the name is an even number, the lucky number is the length multiplied by 3.
+- If the length of the name is odd, the lucky number is the length multiplied by 5 minus 2.
+
+The program should output the participant names and their corresponding lucky numbers to a file named `lucky_numbers.txt`, with each name and its lucky number on a separate line, formatted as: `Name: LuckyNumber`.
+
+#### File Handling
+- Read names from a file `participants.txt`.
+- Write results to a file `lucky_numbers.txt`.
+
+#### Function signature
+```python
+def generate_lucky_numbers(input_file, output_file):
+```
+
+#### Example
+If the `participants.txt` contains:
+```
+Alice
+Bob
+Catherine
+```
+The `lucky_numbers.txt` should be:
+```
+Alice: 13
+Bob: 9
+Catherine: 27
+```

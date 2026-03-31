@@ -1,0 +1,74 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In a futuristic science fiction scenario, you are tasked with creating a standardized communication system for astronauts exploring alien worlds. Each astronaut uses a special device, called the "CommsHandler," to send and receive messages. This device automatically appends a special code to each message, known as the transmit code, which is calculated based on the message content.
+
+Your task is to implement the `CommsHandler` class in Python that can handle messages. The class should support the following operations:
+
+1. Initialize the object with a default transmit code factor.
+2. Send a message using the `send_message` method which takes a single string argument `message`, calculates the transmit code by determining the sum of all characters' ASCII values, multiplies this sum by the transmit code factor, and appends this code to the message separated by a '#'.
+3. Implement a `receive_message` method that takes one argument, a message string with its transmit code appended, and returns only the message content after validating the code. The method should return the original message if the extracted code matches the calculated transmit code, otherwise it should raise a `ValueError` indicating "Transmit code mismatch".
+
+Use exception handling to properly manage any errors that may arise when sending or receiving messages.
+
+Example usage:
+- Creating a `CommsHandler` with a factor of 2.
+- Sending "Hello" would result in "Hello#1048" if the transmit code is successfully calculated and appended.
+- Receiving "Hello#1048" should return "Hello", but receiving "Hello#999" should raise an exception with "Transmit code mismatch".
+
+Write the class `CommsHandler` and ensure it passes all provided tests.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import CommsHandler
+
+@pytest.fixture(scope="module")
+def setup_module():
+    comm = CommsHandler(2)
+    return comm
+
+@pytest.fixture(scope="module")
+def teardown_module(request):
+    request.addfinalizer(cleanup)
+
+def cleanup():
+    pass
+
+# Test the sending of a valid message
+@pytest.mark.parametrize("message, result", [
+    ("Hello", "Hello#1048"),
+    ("SF", "SF#410"),
+    ("Mars", "Mars#920"),
+    ("Galaxy", "Galaxy#1450")
+])
+def test_send_message(setup_module, message, result):
+    assert setup_module.send_message(message) == result
+
+# Test successful receiving of a message
+@pytest.mark.parametrize("message_with_code, expected_message", [
+    ("Hello#1048", "Hello"),
+    ("SF#410", "SF"),
+    ("Mars#920", "Mars"),
+    ("Galaxy#1450", "Galaxy")
+])
+def test_receive_message_success(setup_module, message_with_code, expected_message):
+    assert setup_module.receive_message(message_with_code) == expected_message
+
+# Test receiving of a message with mismatched code
+@pytest.mark.parametrize("message_with_code", [
+    "Hello#999",
+    "SF#123",
+    "Mars#456",
+    "Galaxy#321"
+])
+def test_receive_message_failure(setup_module, message_with_code):
+    with pytest.raises(ValueError) as excinfo:
+        setup_module.receive_message(message_with_code)
+    assert str(excinfo.value) == "Transmit code mismatch"
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

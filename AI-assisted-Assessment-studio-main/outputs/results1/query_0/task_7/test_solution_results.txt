@@ -1,0 +1,10 @@
+FFF..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/test_suite_sol.py:37: AssertionError: assert '5' == '9'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/test_suite_sol.py:44: AssertionError: assert '9' == '11'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/test_suite_sol.py:51: AssertionError: assert '10' == '15'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_7/test_suite_sol.py::test_game_of_chance_case1
+FAILED outputs/results1/query_0/task_7/test_suite_sol.py::test_game_of_chance_case2
+FAILED outputs/results1/query_0/task_7/test_suite_sol.py::test_game_of_chance_case3
+3 failed, 2 passed in 0.06s

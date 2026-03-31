@@ -1,0 +1,6 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_2/test_suite_sol.py:11: AssertionError: assert {'Alpha-1': 0...elta-4': 0.43} == {'Alpha-1': 0...elta-4': 0.49}
+=========================== short test summary info ============================
+FAILED outputs/query_3/task_2/test_suite_sol.py::test_calculate_efficiency - ...
+1 failed in 0.02s

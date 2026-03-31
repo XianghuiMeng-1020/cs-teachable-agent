@@ -1,0 +1,55 @@
+You are given a list of mythological characters and their respective domains in the following format: [['Character', 'Domain'], ...]. Create a function `group_by_domain(characters)` that processes this list and returns a dictionary that groups characters by their domain. Each key in the dictionary should be a domain, and each value should be a list of characters associated with that domain.
+
+**Function signature:**
+```python
+def group_by_domain(characters):
+```
+
+**Parameters:**
+- `characters` (list of lists): A list of pairs where each pair contains a mythological character’s name and their domain.
+
+**Returns:**
+- `dict`: A dictionary where keys are domains and values are lists of characters.
+
+**Example:**
+
+```python
+characters = [
+    ['Zeus', 'Sky'],
+    ['Poseidon', 'Sea'],
+    ['Hades', 'Underworld'],
+    ['Hera', 'Marriage'],
+    ['Aphrodite', 'Love'],
+    ['Ares', 'War'],
+    ['Athena', 'Wisdom'],
+    ['Hephaestus', 'Forge'],
+    ['Demeter', 'Harvest'],
+    ['Dionysus', 'Wine'],
+    ['Hermes', 'Travel'],
+    ['Artemis', 'Hunt'],
+    ['Apollo', 'Sun'],
+    ['Nyx', 'Night']
+]
+
+expected_output = {
+    'Sky': ['Zeus'],
+    'Sea': ['Poseidon'],
+    'Underworld': ['Hades'],
+    'Marriage': ['Hera'],
+    'Love': ['Aphrodite'],
+    'War': ['Ares'],
+    'Wisdom': ['Athena'],
+    'Forge': ['Hephaestus'],
+    'Harvest': ['Demeter'],
+    'Wine': ['Dionysus'],
+    'Travel': ['Hermes'],
+    'Hunt': ['Artemis'],
+    'Sun': ['Apollo'],
+    'Night': ['Nyx']
+}
+
+result = group_by_domain(characters)
+assert result == expected_output
+```
+
+The function should be efficient and only use basic operations involving lists, dictionaries, and loops. Always assume that the characters list will contain non-empty strings and it may have multiple characters for the same domain.

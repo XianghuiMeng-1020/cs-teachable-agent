@@ -1,0 +1,4 @@
+{
+    "program": "def cook_recipe(ingredients, available):\n    status_list = []\n    try:\n        for ingredient, required_qty in ingredients:\n            if isinstance(required_qty, int):\n                available_qty = available.get(ingredient, None)\n                if available_qty is None:\n                    status_list.append(f\"{ingredient}: Missing\")\n                elif available_qty >= required_qty:\n                    status_list.append(f\"{ingredient}: Enough\")\n                else:\n                    shortage = required_qty - available_qty\n                    status_list.append(f\"{ingredient}: Not Enough, {shortage} grams more needed\")\n            else:\n                return 'Error'\n        return status_list\n    except Exception:\n        return 'Error'",
+    "context_relevance": 1.0
+}

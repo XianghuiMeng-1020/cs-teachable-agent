@@ -1,0 +1,83 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task Description
+
+Welcome to the 'Game of Chance' coding challenge! Your task is to create a Python program that simulates a simple guessing game involving words derived from a 'word list'.
+
+The program should perform the following:
+1. Read the list of words from a file named `words.txt`. Each word will be on a new line.
+2. Randomly select a word from the list and determine if a guess by the player, input via the console, matches the selected word.
+3. If the guess matches the selected word, output "Correct! You've won!". If not, output "Incorrect! Try again another time!".
+4. Record the result of each attempt into a file named `game_results.txt`, where each line contains the guessed word and either "won" or "lost" based on the outcome.
+
+Ensure the program only works with valid inputs as it directly relates to the game outcome.
+
+Implement a function `play_game_of_chance()` to achieve the above functionality. Ensure this function handles all input and output operations as described based on the file contents. The random word selection for the game's purpose can be mocked or assumed to be handled externally in this task context.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import play_game_of_chance
+
+def setup_module(module):
+    with open('words.txt', 'w') as f:
+        f.write("apple\nbanana\ncherry\n")
+
+
+def teardown_module(module):
+    if os.path.exists('words.txt'):
+        os.remove('words.txt')
+    if os.path.exists('game_results.txt'):
+        os.remove('game_results.txt')
+
+
+def test_correct_guess(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda: "cherry")
+    with open('words.txt', 'r') as f:
+        selected_word = f.readlines()[2].strip()
+    play_game_of_chance()
+    with open('game_results.txt', 'r') as f:
+        result = f.readline().strip()
+    assert result == f"cherry won"
+
+
+def test_incorrect_guess(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda: "banana")
+    with open('words.txt', 'r') as f:
+        selected_word = f.readlines()[2].strip()
+    play_game_of_chance()
+    with open('game_results.txt', 'r') as f:
+        result = f.readline().strip()
+    assert result == f"banana lost"
+
+
+def test_output_correct(monkeypatch, capsys):
+    monkeypatch.setattr('builtins.input', lambda: "apple")
+    with open('words.txt', 'r') as f:
+        selected_word = f.readlines()[0].strip()
+    play_game_of_chance()    
+    captured = capsys.readouterr()
+    assert "Correct! You've won!" in captured.out
+
+
+def test_output_incorrect(monkeypatch, capsys):
+    monkeypatch.setattr('builtins.input', lambda: "pear")
+    with open('words.txt', 'r') as f:
+        selected_word = f.readlines()[1].strip()
+    play_game_of_chance()
+    captured = capsys.readouterr()
+    assert "Incorrect! Try again another time!" in captured.out
+
+
+def test_results_file_created(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda: "apple")
+    play_game_of_chance()
+    assert os.path.exists('game_results.txt')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

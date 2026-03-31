@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_final_score(moves):\n    position = 0\n    for move in moves.split(','):\n        try:\n            roll = int(move)\n            if 1 <= roll <= 6:\n                if position + roll <= 100:\n                    position += roll\n        except ValueError:\n            continue  # Skip invalid entries\n    return position",
+    "context_relevance": 0.0
+}

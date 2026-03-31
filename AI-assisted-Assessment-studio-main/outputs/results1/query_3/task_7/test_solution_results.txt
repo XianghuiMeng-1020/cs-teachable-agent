@@ -1,0 +1,10 @@
+.FF.F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/test_suite_sol.py:22: assert 0 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/test_suite_sol.py:32: assert 3 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/test_suite_sol.py:50: assert 1 == 0
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_7/test_suite_sol.py::test_all_wins - ass...
+FAILED outputs/results1/query_3/task_7/test_suite_sol.py::test_some_wins - as...
+FAILED outputs/results1/query_3/task_7/test_suite_sol.py::test_invalid_round_numbers
+3 failed, 2 passed in 0.04s

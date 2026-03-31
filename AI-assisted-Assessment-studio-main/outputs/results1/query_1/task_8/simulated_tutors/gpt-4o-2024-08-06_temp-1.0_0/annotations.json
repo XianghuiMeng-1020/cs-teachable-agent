@@ -1,0 +1,4 @@
+{
+    "program": "def predict_winnings(numbers, bet_amounts):\n    total_payout = 0\n    winning_number = 32\n    \n    for i in range(len(numbers)):\n        if numbers[i] == winning_number:\n            total_payout += bet_amounts[i] * 36\n    \n    return total_payout",
+    "context_relevance": 1.0
+}

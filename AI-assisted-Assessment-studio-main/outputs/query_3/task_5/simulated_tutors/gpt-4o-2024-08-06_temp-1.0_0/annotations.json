@@ -1,0 +1,4 @@
+{
+    "program": "def decode_message(code, translation_rules):\n    total_sum = 0\n    for char in code:\n        # Get the coordinate value; default to 0 if character not in translation_rules\n        coordinate = translation_rules.get(char, 0)\n        # Add the coordinate to the total sum\n        total_sum += coordinate\n    return total_sum\n\n# Test cases\nprint(decode_message(\"ABCAAA\", {'A': 10, 'B': 5, 'C': 2})) # Output should be 39\nprint(decode_message(\"XXYYZ\", {'X': 3, 'Y': 4}))          # Output should be 14\nprint(decode_message(\"\", {'A': 1}))                        # Output should be 0\nprint(decode_message(\"ZZZZ\", {'Z': 0}))                   # Output should be 0\nprint(decode_message(\"PTQ\", {}))                           # Output should be 0",
+    "context_relevance": 1.0
+}

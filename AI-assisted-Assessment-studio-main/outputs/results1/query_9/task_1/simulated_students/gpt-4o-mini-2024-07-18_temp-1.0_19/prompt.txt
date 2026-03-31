@@ -1,0 +1,45 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Design a function `count_gods_attributes` that processes a list of Greek gods, where each god is represented as a dictionary. Each dictionary contains the god's name and a list of their attributes (powers, symbols, etc.). Your task is to create a summary dictionary that counts how many times each attribute appears across all gods.
+
+The function should take the following argument:
+- `gods_list`: a list where each element is a dictionary with the following keys:
+    - `name`: a string representing the name of the god.
+    - `attributes`: a list of strings where each string is an attribute associated with that god.
+
+The function should return a dictionary where the keys are unique attributes and the values are the counts of how many times each attribute occurs in the list of gods.
+
+### Constraints:
+- All names and attributes are given in lowercase and will only contain alphabetic characters.
+
+### Example
+```python
+count_gods_attributes([
+    {"name": "zeus", "attributes": ["thunder", "sky", "justice"]},
+    {"name": "hera", "attributes": ["marriage", "sky", "womanhood"]},
+    {"name": "poseidon", "attributes": ["sea", "horses", "earthquake"]},
+    {"name": "athena", "attributes": ["wisdom", "war", "justice"]},
+])
+```
+Should return:
+```python
+{
+    "thunder": 1,
+    "sky": 2,
+    "justice": 2,
+    "marriage": 1,
+    "womanhood": 1,
+    "sea": 1,
+    "horses": 1,
+    "earthquake": 1,
+    "wisdom": 1,
+    "war": 1
+}
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

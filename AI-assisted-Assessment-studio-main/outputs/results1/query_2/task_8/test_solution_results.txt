@@ -1,0 +1,6 @@
+....F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_8/test_suite_sol.py:39: AssertionError: assert False == True
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_8/test_suite_sol.py::test_check_ticket_case_sensitivity
+1 failed, 4 passed in 0.02s

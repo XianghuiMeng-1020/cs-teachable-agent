@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:5: ValueError: invalid literal for int() with base 10: '2p'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:29: AssertionError: assert ['Flour:00g'] == ['Flour:0g']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:5: ValueError: invalid literal for int() with base 10: ''
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_multiple_ingredients_multiple_servings
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_no_servings
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_single_ingredient_edge_case
+========================= 3 failed, 2 passed in 0.08s ==========================

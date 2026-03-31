@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:37: AssertionError: assert '5' == '9'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:44: AssertionError: assert '9' == '11'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:51: AssertionError: assert '110' == '15'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:65: AssertionError: assert '113' == '13'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_game_of_chance_case1
+FAILED outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_game_of_chance_case2
+FAILED outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_game_of_chance_case3
+FAILED outputs/results1/query_0/task_7/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_game_of_chance_case5
+========================= 4 failed, 1 passed in 0.09s ==========================

@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_energy():\n    # Read integers from 'quantum_energy.txt'\n    with open('quantum_energy.txt', 'r') as file:\n        # Split the file contents into a list of strings, then convert to integers\n        numbers = map(int, file.read().split())\n        \n    # Calculate the total energy level by summing the integers\n    total_energy = sum(numbers)\n    \n    # Write the total sum to 'total_energy.txt'\n    with open('total_energy.txt', 'w') as file:\n        file.write(str(total_energy))",
+    "context_relevance": 1.0
+}

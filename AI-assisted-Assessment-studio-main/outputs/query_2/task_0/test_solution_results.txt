@@ -1,0 +1,6 @@
+....F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_0/test_suite_sol.py:62: AssertionError: assert [{'ingredient...le': 'Broth'}] == [{'ingredient...le': 'Broth'}]
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_0/test_suite_sol.py::test_with_no_ingredients - A...
+1 failed, 4 passed in 0.04s

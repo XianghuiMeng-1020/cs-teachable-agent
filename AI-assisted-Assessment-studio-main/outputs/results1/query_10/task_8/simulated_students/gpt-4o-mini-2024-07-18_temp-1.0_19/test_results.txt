@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+__________________ ERROR at teardown of test_file_persistence __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:18: AssertionError: assert {'ingredients...ructions': ''} == {'ingredients...read slices.'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:23: Failed: DID NOT RAISE <class 'Exception'>
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:30: TypeError: 'NoneType' object is not subscriptable
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:36: Failed: DID NOT RAISE <class 'Exception'>
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:43: TypeError: 'NoneType' object is not subscriptable
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_add_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_add_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_get_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_get_nonexistent_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_file_persistence
+ERROR outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_file_persistence
+========================== 5 failed, 1 error in 0.20s ==========================

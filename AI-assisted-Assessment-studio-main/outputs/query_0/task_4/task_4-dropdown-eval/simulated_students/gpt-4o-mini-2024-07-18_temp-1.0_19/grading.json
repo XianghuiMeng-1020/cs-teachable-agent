@@ -1,0 +1,18 @@
+{
+  "raw_answers": {
+    "__BLANK_1__": ">",
+    "__BLANK_2__": "><",
+    "__BLANK_3__": "1"
+  },
+  "answers": {
+    "blank_1": ">",
+    "blank_2": "><",
+    "blank_3": "1"
+  },
+  "is_correct": false,
+  "correct_answers": {
+    "blank_1": "-",
+    "blank_2": ">",
+    "blank_3": "1"
+  }
+}

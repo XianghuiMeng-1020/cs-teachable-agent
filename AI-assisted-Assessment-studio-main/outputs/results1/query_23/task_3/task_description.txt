@@ -1,0 +1,27 @@
+### Task Description
+
+You are tasked with creating a simple text-based representation of board games. You need to create a class `BoardGame` that manages the players of a board game. The class should allow you to add and remove players, as well as display the current list of players. Implement the following methods:
+
+1. `__init__`: This method should initialize an empty list to store player names.
+2. `add_player(player_name)`: This method should take a single string `player_name` and add it to the list of players. If the player already exists in the list, do nothing.
+3. `remove_player(player_name)`: This method should take a single string `player_name` and remove it from the list of players if it exists. If the player does not exist, do nothing.
+4. `get_players()`: This method should return a single string with all player names joined by a comma and a space. If no players are in the list, return "No players".
+
+### Example Usage:
+```python
+bg = BoardGame()
+bg.add_player("Alice")
+bg.add_player("Bob")
+assert bg.get_players() == "Alice, Bob"
+bg.remove_player("Alice")
+assert bg.get_players() == "Bob"
+bg.remove_player("Charlie")
+assert bg.get_players() == "Bob"
+```
+
+### Constraints:
+- Player names will only contain alphabetical characters and spaces, and will not be an empty string.
+- The methods must be case-insensitive with regards to player names, so "Alice" and "alice" should be considered the same.
+- There should be no more than 100 players.
+
+Your program will receive multiple test cases of different player configurations and actions.

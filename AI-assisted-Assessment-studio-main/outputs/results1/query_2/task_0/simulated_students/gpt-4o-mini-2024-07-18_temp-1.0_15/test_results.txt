@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py F [ 20%]
+FF..E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________________ ERROR at teardown of test_empty_file _____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'tickets1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:6: FileNotFoundError: [Errno 2] No such file or directory: 'tickets1.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:6: FileNotFoundError: [Errno 2] No such file or directory: 'tickets2.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:6: FileNotFoundError: [Errno 2] No such file or directory: 'tickets3.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_winner_case1
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_winner_case2
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_winner_case3
+ERROR outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_empty_file
+===================== 3 failed, 2 passed, 1 error in 0.12s =====================

@@ -1,0 +1,6 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_6/test_suite_sol.py:46: AssertionError: assert 2 == 3
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_6/test_suite_sol.py::test_correct_handling_of_lines
+1 failed, 4 passed in 0.03s

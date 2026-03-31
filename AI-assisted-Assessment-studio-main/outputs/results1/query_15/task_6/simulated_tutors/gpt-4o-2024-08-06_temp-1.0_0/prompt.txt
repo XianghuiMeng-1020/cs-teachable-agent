@@ -1,0 +1,51 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+### Task: Alien Message Decoder
+
+You have intercepted a message from an alien culture. The message is encoded as a string of lowercase characters in a fictional alien alphabet. The encoding rules dictate that each character in the message refers to a position in the standard English alphabet, where 'a' corresponds to 1, 'b' corresponds to 2, ..., 'z' corresponds to 26.
+
+Write a function `decode_alien_message(message)` that takes a single `message` string as input and returns a list of integers representing the decoded values based on the above rules.
+
+Your task is to implement the `decode_alien_message` function such that:
+- It processes each character of the `message` string.
+- Converts each character to its corresponding integer value.
+- Returns a list containing these integer values.
+
+Assumptions:
+- The input `message` will only contain lowercase alphabetic characters, with a length of at least 1 and no more than 100.
+
+**Examples:**
+
+- `decode_alien_message('abc')` should return `[1, 2, 3]`.
+- `decode_alien_message('zzz')` should return `[26, 26, 26]`.
+- `decode_alien_message('hello')` should return `[8, 5, 12, 12, 15]`.
+
+Your solution will be tested against several cases to ensure its correctness.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import decode_alien_message
+
+@pytest.mark.parametrize("message, expected", [
+    ("abc", [1, 2, 3]),
+    ("zzz", [26, 26, 26]),
+    ("hello", [8, 5, 12, 12, 15]),
+    ("sphinx", [19, 16, 8, 9, 14, 24]),
+    ("space", [19, 16, 1, 3, 5]),
+    ("quantum", [17, 21, 1, 14, 20, 21, 13]),
+    ("python", [16, 25, 20, 8, 15, 14]),
+    ("a", [1]),
+    ("zebra", [26, 5, 2, 18, 1]),
+    ("moon", [13, 15, 15, 14])
+])
+def test_decode_alien_message(message, expected):
+    assert decode_alien_message(message) == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

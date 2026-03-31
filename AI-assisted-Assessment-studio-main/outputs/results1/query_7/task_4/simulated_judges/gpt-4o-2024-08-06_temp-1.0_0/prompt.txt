@@ -1,0 +1,103 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+**Problem Description**:
+
+You are tasked with creating a program that processes a text file containing the names of mythological creatures and their associated characteristics. Your program should read the information from a file, parse it, and return a list of unique mythological creature names that have a specific characteristic.
+
+**File Format**:
+
+The file 'creatures.txt' will contain several lines, each describing a unique mythological creature in the following format:
+
+`<CreatureName>: <Characteristic1>, <Characteristic2>, ..., <CharacteristicN>`
+
+- `<CreatureName>` is the name of the mythological creature (e.g., "Phoenix").
+- `<Characteristic>` is a descriptive attribute of the creature (e.g., "fire", "immortal").
+
+Each line is structured such that the creature name is followed by a colon, then a comma-separated list of its characteristics.
+
+**Function Signature**:
+
+```python
+find_creatures_by_characteristic(filename, characteristic) -> list
+```
+
+**Parameters**:
+- `filename` (str): The name of the file containing the creature data.
+- `characteristic` (str): The characteristic to filter creatures by.
+
+**Returns**:
+- A list of strings, each being the name of a creature that has the given characteristic.
+
+**Example**:
+
+Suppose the `creatures.txt` file contains:
+```
+Phoenix: fire, rebirth, immortal
+Kraken: sea, colossal, tentacles
+Sphinx: riddle, lion, human
+Unicorn: magic, horse, horn
+```
+
+With `find_creatures_by_characteristic('creatures.txt', 'immortal')`, the function should return `['Phoenix']`.
+
+**Assumptions**:
+- The input file will always have a proper format as described above.
+- Creature names and characteristics in the file are case-sensitive.
+- A characteristic can be listed multiple times for different creatures but not for the same creature.
+- The order of creatures in the returned list should match the order in the file.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import find_creatures_by_characteristic
+
+FILE_NAME = 'creatures.txt'
+
+CREATURES_CONTENT = '''
+Phoenix: fire, rebirth, immortal
+Kraken: sea, colossal, tentacles
+Sphinx: riddle, lion, human
+Unicorn: magic, horse, horn
+Cerberus: guard, eternal, dog
+Jormungandr: sea, serpent, colossal
+'''
+
+@pytest.fixture(autouse=True)
+def setup_module():
+    with open(FILE_NAME, 'w') as f:
+        f.write(CREATURES_CONTENT)
+    yield
+    os.remove(FILE_NAME)
+
+# Test 1: Basic test with characteristic that exists for one creature only
+def test_immortal_creature():
+    assert find_creatures_by_characteristic(FILE_NAME, 'immortal') == ['Phoenix']
+
+# Test 2: Characteristic that exists for more than one creature
+def test_colossal_creatures():
+    assert find_creatures_by_characteristic(FILE_NAME, 'colossal') == ['Kraken', 'Jormungandr']
+
+# Test 3: Characteristic that doesn't exist in any creature
+def test_nonexistent_characteristic():
+    assert find_creatures_by_characteristic(FILE_NAME, 'invisible') == []
+
+# Test 4: Ensure case sensitivity is respected
+def test_case_sensitivity():
+    assert find_creatures_by_characteristic(FILE_NAME, 'Fire') == []
+
+# Test 5: Characteristic found in the middle of the list
+def test_human_creature():
+    assert find_creatures_by_characteristic(FILE_NAME, 'human') == ['Sphinx']
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

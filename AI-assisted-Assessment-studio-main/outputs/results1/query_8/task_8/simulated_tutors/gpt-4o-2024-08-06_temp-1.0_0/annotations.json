@@ -1,0 +1,4 @@
+{
+    "program": "def classify_hero(traits):\n    if traits['strength'] > 50 and traits['strength'] > traits['wisdom'] and traits['strength'] > traits['courage']:\n        return 'Warrior'\n    elif traits['wisdom'] > 50 and traits['wisdom'] > traits['strength'] and traits['wisdom'] > traits['courage']:\n        return 'Seer'\n    elif traits['courage'] > 50 and traits['courage'] > traits['strength'] and traits['courage'] > traits['wisdom']:\n        return 'Champion'\n    else:\n        return 'Unsung Hero'",
+    "context_relevance": 1.0
+}

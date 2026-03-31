@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_2/solution_program.py:2: NameError: name 'os' is not defined
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_2/solution_program.py:2: NameError: name 'os' is not defined
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_2/solution_program.py:2: NameError: name 'os' is not defined
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_2/solution_program.py:2: NameError: name 'os' is not defined
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_2/solution_program.py:2: NameError: name 'os' is not defined
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_2/test_suite_sol.py::test_average_energy_case_1
+FAILED outputs/results1/query_18/task_2/test_suite_sol.py::test_average_energy_case_2
+FAILED outputs/results1/query_18/task_2/test_suite_sol.py::test_average_energy_case_3
+FAILED outputs/results1/query_18/task_2/test_suite_sol.py::test_average_energy_case_4
+FAILED outputs/results1/query_18/task_2/test_suite_sol.py::test_average_energy_case_5
+5 failed in 0.05s

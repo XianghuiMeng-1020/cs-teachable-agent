@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py . [ 16%]
+.FFFF                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:9: ValueError: not enough values to unpack (expected 3, got 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:9: ValueError: not enough values to unpack (expected 3, got 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:9: ValueError: not enough values to unpack (expected 3, got 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:9: ValueError: not enough values to unpack (expected 3, got 2)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_edge_cases[<lambda>-expected2]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+========================= 4 failed, 2 passed in 0.07s ==========================

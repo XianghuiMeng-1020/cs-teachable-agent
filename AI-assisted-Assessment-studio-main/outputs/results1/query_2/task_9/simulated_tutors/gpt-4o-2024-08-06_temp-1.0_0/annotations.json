@@ -1,0 +1,4 @@
+{
+    "program": "import os\nimport random\n\ndef register_entries(file_path, entries):\n    \"\"\"\n    Write player names to the given file path. If file exists, append names; otherwise, create file.\n    \"\"\"\n    with open(file_path, 'a') as file:  # 'a' mode to append new entries\n        for entry in entries:\n            file.write(f\"{entry}\\n\")\n\ndef draw_winner(file_path):\n    \"\"\"\n    Read player names from the given file path and draw a random winner.\n    Return a list of entries along with the winner's name.\n    \"\"\"\n    entries = []\n    if os.path.exists(file_path):  # Check if the file exists\n        with open(file_path, 'r') as file:\n            entries = file.read().strip().split('\\n')\n    # Return empty list if no entries\n    if len(entries) == 0:\n        return []\n    # Randomly select a winner\n    winner = random.choice(entries)\n    return entries, winner",
+    "context_relevance": 1.0
+}

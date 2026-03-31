@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_find_winner_5 ____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'race_results_1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'race_results_1.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'race_results_2.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'race_results_3.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'race_results_4.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'race_results_5.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_1
+FAILED outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_2
+FAILED outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_3
+FAILED outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_4
+FAILED outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_5
+ERROR outputs/results1/query_5/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_find_winner_5
+========================== 5 failed, 1 error in 0.15s ==========================

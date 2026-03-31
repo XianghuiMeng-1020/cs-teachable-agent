@@ -1,0 +1,76 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+In a distant future, Earth is plagued by an increasing number of asteroids that frequently threaten its surface. As a part of the Intergalactic Defense Committee, you've been tasked with writing a program that analyzes data from daily asteroid impact reports.
+
+Each report provides details about asteroids detected on that day, including their ID and the estimated impact force. These reports are stored in text files with information presented line by line. Each line in a report contains a single asteroid's information formatted as: `asteroid_id,impact_force`.
+
+Your task is to write a function `analyze_asteroid_reports(input_filename, output_filename)` that reads an input file, computes the average impact force for that file, and writes this average impact force to the specified output file in the format: `average impact force: <value>`. If the input file does not exist or contains no data, the function should handle it gracefully by storing "No data available" in the output file.
+
+Your program will be tested with various input files to ensure accuracy and correctness.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import analyze_asteroid_reports
+
+def setup_module(module):
+    reports = {
+        "report1.txt": "1234,5000\n5678,3000\n9101,2000\n",
+        "report2.txt": "\n",
+        "report3.txt": "1100,1000\n2100,3000\n3100,2000\n4100,4000\n",
+        "report4.txt": "2020,5000\n",
+        "report_invalid.txt": ""
+    }
+    for filename, content in reports.items():
+        with open(filename, 'w') as f:
+            f.write(content)
+
+
+def teardown_module(module):
+    files = ["report1.txt", "report2.txt", "report3.txt", "report4.txt", "report_invalid.txt", "output1.txt", "output2.txt", "output3.txt", "output4.txt", "output_invalid.txt", "nonexistent_output.txt"]
+    for filename in files:
+        if os.path.exists(filename):
+            os.remove(filename)
+
+
+def test_normal_case():
+    analyze_asteroid_reports("report1.txt", "output1.txt")
+    with open("output1.txt", 'r') as file:
+        assert file.read().strip() == "average impact force: 3333.33"
+
+
+def test_no_asteroids():
+    analyze_asteroid_reports("report2.txt", "output2.txt")
+    with open("output2.txt", 'r') as file:
+        assert file.read().strip() == "No data available"
+
+
+def test_multiple_asteroids():
+    analyze_asteroid_reports("report3.txt", "output3.txt")
+    with open("output3.txt", 'r') as file:
+        assert file.read().strip() == "average impact force: 2500.00"
+
+
+def test_single_asteroid():
+    analyze_asteroid_reports("report4.txt", "output4.txt")
+    with open("output4.txt", 'r') as file:
+        assert file.read().strip() == "average impact force: 5000.00"
+
+
+def test_nonexistent_file():
+    analyze_asteroid_reports("report_nonexistent.txt", "nonexistent_output.txt")
+    with open("nonexistent_output.txt", 'r') as file:
+        assert file.read().strip() == "No data available"
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

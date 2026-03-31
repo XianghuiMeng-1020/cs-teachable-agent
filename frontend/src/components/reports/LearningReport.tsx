@@ -45,7 +45,7 @@ interface LearningReportProps {
   taId: number;
 }
 
-const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
+const COLORS = ["#0D9488", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
 
 export function LearningReport({ taId }: LearningReportProps) {
   const reportRef = useRef<HTMLDivElement>(null);
@@ -79,7 +79,7 @@ export function LearningReport({ taId }: LearningReportProps) {
     return (
       <Card padding="lg" className="text-center py-12">
         <div className="w-12 h-12 border-4 border-brand-200 border-t-brand-500 rounded-full animate-spin mx-auto" />
-        <p className="text-slate-500 mt-4">Generating your learning report...</p>
+        <p className="text-stone-500 mt-4">Generating your learning report...</p>
       </Card>
     );
   }
@@ -87,8 +87,8 @@ export function LearningReport({ taId }: LearningReportProps) {
   if (!report) {
     return (
       <Card padding="lg" className="text-center py-12">
-        <FileText className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-        <p className="text-slate-500">No report data available</p>
+        <FileText className="w-12 h-12 text-stone-300 mx-auto mb-4" />
+        <p className="text-stone-500">No report data available</p>
       </Card>
     );
   }
@@ -120,19 +120,19 @@ export function LearningReport({ taId }: LearningReportProps) {
     id: string;
     children: React.ReactNode;
   }) => (
-    <div className="border border-slate-200 rounded-xl overflow-hidden mb-4">
+    <div className="border border-stone-200 rounded-xl overflow-hidden mb-4">
       <button
         onClick={() => toggleSection(id)}
-        className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-colors"
+        className="w-full flex items-center justify-between p-4 bg-stone-50 hover:bg-stone-100 transition-colors"
       >
         <div className="flex items-center gap-3">
           <Icon className="w-5 h-5 text-brand-600" />
-          <span className="font-semibold text-slate-900">{title}</span>
+          <span className="font-semibold text-stone-900">{title}</span>
         </div>
         {expandedSections.has(id) ? (
-          <ChevronUp className="w-5 h-5 text-slate-400" />
+          <ChevronUp className="w-5 h-5 text-stone-400" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-slate-400" />
+          <ChevronDown className="w-5 h-5 text-stone-400" />
         )}
       </button>
       {expandedSections.has(id) && <div className="p-4">{children}</div>}
@@ -154,15 +154,15 @@ export function LearningReport({ taId }: LearningReportProps) {
       {/* Report Content */}
       <div ref={reportRef} className="bg-white">
         {/* Header */}
-        <div className="text-center border-b border-slate-200 pb-6 mb-6">
+        <div className="text-center border-b border-stone-200 pb-6 mb-6">
           <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Award className="w-8 h-8 text-brand-600" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">Learning Analytics Report</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-stone-900">Learning Analytics Report</h1>
+          <p className="text-stone-500 mt-1">
             Domain: <span className="font-medium capitalize">{report.student_info?.domain}</span>
           </p>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-stone-400 mt-1">
             Generated: {new Date(report.student_info?.generated_at).toLocaleString()}
           </p>
         </div>
@@ -172,19 +172,19 @@ export function LearningReport({ taId }: LearningReportProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="p-4 bg-brand-50 rounded-lg text-center">
               <p className="text-3xl font-bold text-brand-600">{summary?.total_concepts_learned || 0}</p>
-              <p className="text-sm text-slate-600 mt-1">Concepts Learned</p>
+              <p className="text-sm text-stone-600 mt-1">Concepts Learned</p>
             </div>
             <div className="p-4 bg-emerald-50 rounded-lg text-center">
               <p className="text-3xl font-bold text-emerald-600">{Math.round(summary?.test_pass_rate || 0)}%</p>
-              <p className="text-sm text-slate-600 mt-1">Test Pass Rate</p>
+              <p className="text-sm text-stone-600 mt-1">Test Pass Rate</p>
             </div>
             <div className="p-4 bg-amber-50 rounded-lg text-center">
               <p className="text-3xl font-bold text-amber-600">{summary?.total_teaching_sessions || 0}</p>
-              <p className="text-sm text-slate-600 mt-1">Teaching Sessions</p>
+              <p className="text-sm text-stone-600 mt-1">Teaching Sessions</p>
             </div>
             <div className="p-4 bg-purple-50 rounded-lg text-center">
               <p className="text-3xl font-bold text-purple-600">{summary?.study_duration_days || 0}</p>
-              <p className="text-sm text-slate-600 mt-1">Days Active</p>
+              <p className="text-sm text-stone-600 mt-1">Days Active</p>
             </div>
           </div>
 
@@ -211,8 +211,8 @@ export function LearningReport({ taId }: LearningReportProps) {
         <Section title="Knowledge Mastery" icon={Target} id="mastery">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-slate-600">Average Mastery</span>
-              <span className="font-semibold text-slate-900">
+              <span className="text-stone-600">Average Mastery</span>
+              <span className="font-semibold text-stone-900">
                 {Math.round((progress?.average_mastery_probability || 0) * 100)}%
               </span>
             </div>
@@ -229,7 +229,7 @@ export function LearningReport({ taId }: LearningReportProps) {
                     <XAxis dataKey="unit" tick={{ fontSize: 10 }} angle={-45} textAnchor="end" height={60} />
                     <YAxis tick={{ fontSize: 10 }} domain={[0, 100]} />
                     <Tooltip />
-                    <Bar dataKey="probability" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="probability" fill="#0D9488" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -237,7 +237,7 @@ export function LearningReport({ taId }: LearningReportProps) {
 
             {progress?.concepts_mastered?.length > 0 && (
               <div className="mt-4">
-                <p className="text-sm font-medium text-slate-700 mb-2">Mastered Concepts</p>
+                <p className="text-sm font-medium text-stone-700 mb-2">Mastered Concepts</p>
                 <div className="flex flex-wrap gap-2">
                   {progress.concepts_mastered.map((concept: string) => (
                     <span
@@ -258,7 +258,7 @@ export function LearningReport({ taId }: LearningReportProps) {
         <Section title="Activity Analysis" icon={Activity} id="activity">
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <h4 className="text-sm font-medium text-slate-700 mb-3">Teaching vs Testing</h4>
+              <h4 className="text-sm font-medium text-stone-700 mb-3">Teaching vs Testing</h4>
               <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
                   <RePieChart>
@@ -283,23 +283,23 @@ export function LearningReport({ taId }: LearningReportProps) {
                 {activityData.map((item) => (
                   <div key={item.name} className="flex items-center gap-1">
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-xs text-slate-600">{item.name}</span>
+                    <span className="text-xs text-stone-600">{item.name}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="p-3 bg-slate-50 rounded-lg">
+              <div className="p-3 bg-stone-50 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <TrendingUp className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm font-medium text-slate-700">Quality Trend</span>
+                  <TrendingUp className="w-4 h-4 text-stone-400" />
+                  <span className="text-sm font-medium text-stone-700">Quality Trend</span>
                 </div>
                 <p className={cn(
                   "text-sm",
                   engagement?.quality_trend === "improving" ? "text-emerald-600" :
                   engagement?.quality_trend === "declining" ? "text-rose-600" :
-                  "text-slate-600"
+                  "text-stone-600"
                 )}>
                   {engagement?.quality_trend === "improving" ? "📈 Improving" :
                    engagement?.quality_trend === "declining" ? "📉 Declining" :
@@ -307,22 +307,22 @@ export function LearningReport({ taId }: LearningReportProps) {
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg">
+              <div className="p-3 bg-stone-50 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm font-medium text-slate-700">Teaching/Test Ratio</span>
+                  <Clock className="w-4 h-4 text-stone-400" />
+                  <span className="text-sm font-medium text-stone-700">Teaching/Test Ratio</span>
                 </div>
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-stone-900">
                   {engagement?.teaching_to_test_ratio || 0}:1
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg">
+              <div className="p-3 bg-stone-50 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <Zap className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm font-medium text-slate-700">Avg Teaching Quality</span>
+                  <Zap className="w-4 h-4 text-stone-400" />
+                  <span className="text-sm font-medium text-stone-700">Avg Teaching Quality</span>
                 </div>
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-stone-900">
                   {Math.round((summary?.average_teaching_quality || 0) * 100)}%
                 </p>
               </div>
@@ -337,10 +337,10 @@ export function LearningReport({ taId }: LearningReportProps) {
               {progress.topics_covered.map((topic: string) => (
                 <div
                   key={topic}
-                  className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"
+                  className="flex items-center gap-2 p-2 bg-stone-50 rounded-lg"
                 >
                   <CheckCircle className="w-4 h-4 text-emerald-500" />
-                  <span className="text-sm text-slate-700">{topic}</span>
+                  <span className="text-sm text-stone-700">{topic}</span>
                 </div>
               ))}
             </div>

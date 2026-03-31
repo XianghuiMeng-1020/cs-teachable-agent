@@ -1,0 +1,23 @@
+You are tasked with writing a Python function that simulates the assigning of a mythological creature to a person based on their zodiac sign. Each zodiac sign is associated with a specific creature using a dictionary. The function you need to write is as follows:
+
+`def assign_mythological_creature(zodiac_sign):`
+
+The function should accept a single argument, `zodiac_sign`, which is a string representing the zodiac sign. The function should return the name of the mythological creature associated with that zodiac sign. If the given zodiac sign is not recognized, the function should return "Unknown Creature".
+
+The relationships between zodiac signs and mythological creatures are as follows:
+- Aries: Dragon
+- Taurus: Minotaur
+- Gemini: Griffin
+- Cancer: Cyclops
+- Leo: Phoenix
+- Virgo: Sphinx
+- Libra: Centaur
+- Scorpio: Hydra
+- Sagittarius: Pegasus
+- Capricorn: Leviathan
+- Aquarius: Kraken
+- Pisces: Mermaid
+
+Use these associations to create a dictionary that maps each zodiac sign to its corresponding mythological creature.
+
+Your implementation will be tested with various inputs to ensure that the correct creature is returned for known zodiac signs, and "Unknown Creature" is returned for any unlisted or incorrectly spelled zodiac signs.

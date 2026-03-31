@@ -1,0 +1,74 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+In the distant future, aboard a space station orbiting around a newly discovered planet "Zeta-X9", scientists have developed a sophisticated system to monitor different types of celestial phenomena. As a software engineer on the station, your task is to develop a Python program to manage and process information about these phenomena.
+
+You need to create a class `PhenomenaMonitor` that maintains a list of phenomena, where each phenomenon is described by a dictionary with the following keys:
+- `type`: a string representing the type of the phenomenon (e.g., "Aurora", "Supernova")
+- `severity`: a string describing the severity level (e.g., "low", "medium", "high")
+- `observation_notes`: a list of strings containing notes taken during observations
+
+The class should support the following operations:
+
+1. `add_phenomenon(phenomenon)`: Add the given phenomenon (passed as a dictionary) to the list.
+
+2. `get_phenomena_by_type(phenomenon_type)`: Retrieve all phenomena of a given type and return them as a list.
+
+3. `get_severity_count()`: Return a dictionary with the count of phenomena for each severity level.
+
+4. `add_observation(phenomenon_index, note)`: Add a new observation note to a phenomenon identified by its index in the list. If the index is invalid, handle the exception and continue gracefully.
+
+Implement the `PhenomenaMonitor` class and ensure that it works smoothly with a variety of input scenarios.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import PhenomenaMonitor
+
+@pytest.fixture
+def monitor():
+    return PhenomenaMonitor()
+
+
+def test_add_phenomenon_and_retrieve_by_type(monitor):
+    monitor.add_phenomenon({"type": "Aurora", "severity": "low", "observation_notes": []})
+    monitor.add_phenomenon({"type": "Supernova", "severity": "high", "observation_notes": []})
+    auroras = monitor.get_phenomena_by_type("Aurora")
+    assert len(auroras) == 1
+    assert auroras[0]["type"] == "Aurora"
+
+def test_get_severity_count(monitor):
+    monitor.add_phenomenon({"type": "Aurora", "severity": "low", "observation_notes": []})
+    monitor.add_phenomenon({"type": "Supernova", "severity": "high", "observation_notes": []})
+    monitor.add_phenomenon({"type": "Meteor Shower", "severity": "medium", "observation_notes": []})
+    severity_count = monitor.get_severity_count()
+    assert severity_count == {"low": 1, "medium": 1, "high": 1}
+
+def test_add_observation(monitor):
+    monitor.add_phenomenon({"type": "Aurora", "severity": "low", "observation_notes": []})
+    monitor.add_observation(0, "Observed during night shift.")
+    auroras = monitor.get_phenomena_by_type("Aurora")
+    assert auroras[0]["observation_notes"] == ["Observed during night shift."]
+
+def test_add_observation_invalid_index_gracefully(monitor):
+    monitor.add_phenomenon({"type": "Aurora", "severity": "low", "observation_notes": []})
+    monitor.add_observation(10, "Impossible observation.")  # Invalid index
+    auroras = monitor.get_phenomena_by_type("Aurora")
+    assert auroras[0]["observation_notes"] == []
+
+def test_empty_severity_count(monitor):
+    severity_count = monitor.get_severity_count()
+    assert severity_count == {}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,27 @@
+### Task Description
+
+In Greek mythology, a labyrinth is a convoluted structure designed with many confusing paths and dead ends. Your task is to create a function named `guard_treasure` that simulates guarding a secret treasure within such a labyrinth.
+
+Given a list containing tuples of guards positioned along various corridors within this labyrinth, your task is to determine which guards prevent the treasure (located at the end of the labyrinth) from being stolen by blocking the thieves at the correct paths. Each tuple contains information about the guard's positioning. The guard stops the thieves if the corridor number is odd.
+
+Function Signature:
+```python
+def guard_treasure(guards):
+```
+
+#### Input
+- `guards`: A list containing non-empty tuples, where each tuple has the format `(name, corridor_number)`.
+
+#### Output
+- The function should return a list of strings containing names of guards positioned on odd-numbered corridors.
+
+#### Example
+```python
+guards = [("Athena", 1), ("Hermes", 2), ("Apollo", 3), ("Artemis", 4)]
+print(guard_treasure(guards))
+```
+
+#### Expected Output
+```python
+['Athena', 'Apollo']
+```

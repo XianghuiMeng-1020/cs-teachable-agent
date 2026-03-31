@@ -1,0 +1,67 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+### Theme: Board Games
+
+**Task**
+
+You are tasked with creating a simplified tracking system for a two-player board game involving points. Players gain various amounts of points as they progress on the board and can also lose some points through specific hurdles.
+
+**Functional Requirements**
+
+Create a function named `calculate_final_scores(game_log)` that takes a dictionary `game_log` as input. This dictionary contains player names as keys and a list of integers representing the player's point changes throughout the game.
+
+- The function should return a dictionary with the players' names as keys and their final scores as values.
+- Calculate the final score of each player by summing up their point changes in the provided list.
+- If a player's score drops below zero at any step, it should be reset to zero for that step and continue to accumulate from there.
+
+**For example:**
+```python
+calculate_final_scores({'Alice': [10, -5, 20, -30, 5], 'Bob': [-10, 20, 15, -5, 10]})
+```
+
+- Result: `{'Alice': 5, 'Bob': 30}`
+
+**Constraints:**
+- The point change integers in the input dictionary can be positive or negative and will be between -100 to 100.
+- Input will always have two players.
+
+### Notes
+- You should not worry about handling any special cases like non-integer values or empty lists, as all inputs will follow the format above.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution_program import calculate_final_scores
+
+# Test cases
+def test_case_1():
+    result = calculate_final_scores({'Alice': [10, -5, 20, -30, 5], 'Bob': [-10, 20, 15, -5, 10]})
+    assert result == {'Alice': 5, 'Bob': 30}
+
+def test_case_2():
+    result = calculate_final_scores({'Max': [0, -50, 50, 20], 'John': [-20, 30, -10, 0, 50]})
+    assert result == {'Max': 20, 'John': 50}
+
+def test_case_3():
+    result = calculate_final_scores({'Charlie': [5, 5, 5, -15, 10], 'David': [5, -5, 5, -5]})
+    assert result == {'Charlie': 10, 'David': 0}
+
+def test_case_4():
+    result = calculate_final_scores({'Eve': [-10, -20, 40, -10, 10], 'Frank': [30, -10, 5]})
+    assert result == {'Eve': 20, 'Frank': 25}
+
+def test_case_5():
+    result = calculate_final_scores({'Tom': [100, -50, -30, 10, -20], 'Jerry': [25, -25, 25, -25]})
+    assert result == {'Tom': 10, 'Jerry': 0}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

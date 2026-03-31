@@ -1,0 +1,14 @@
+In a futuristic world, a group of astronauts are collecting data from various planets. The data is stored in text files where each line contains the name of a planet followed by the distance in light-years from Earth, separated by a space.
+
+Your task is to create a Python function `calculate_total_distance(filename)` that reads the data from a specified file and calculates the total distance (in light-years) of all the planets listed. The function should return this total distance as an integer.
+
+The format of the file is as follows:
+- Each line contains: `"PlanetName Distance"`. For example: `"AlphaCentauri 4.37"`.
+- The distance is a floating-point number, but the total distance should be returned as an integer.
+
+Here's what your program needs to do:
+1. Open and read the specified file.
+2. Sum the distances (converted to integers) of all planets listed in the file.
+3. Return the total distance.
+
+You may assume that the input file is correct and has entries in the given format.

@@ -1,0 +1,12 @@
+........FFFF.                                                            [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/test_suite_sol.py:27: Failed: Timeout >5.0s
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/test_suite_sol.py:30: assert 1 == 4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/test_suite_sol.py:27: Failed: Timeout >5.0s
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/test_suite_sol.py:30: assert 1 == 3
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_4/test_suite_sol.py::test_game_completes[0]
+FAILED outputs/results1/query_4/task_4/test_suite_sol.py::test_game_completes[1]
+FAILED outputs/results1/query_4/task_4/test_suite_sol.py::test_game_completes[2]
+FAILED outputs/results1/query_4/task_4/test_suite_sol.py::test_game_completes[3]
+4 failed, 9 passed in 84.89s (0:01:24)

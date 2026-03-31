@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/results1/query_5/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythology_ledger.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_5/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.35s ===============================

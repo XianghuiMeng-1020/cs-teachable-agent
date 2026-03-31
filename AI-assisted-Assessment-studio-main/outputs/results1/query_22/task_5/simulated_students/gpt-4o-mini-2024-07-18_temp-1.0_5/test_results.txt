@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____ ERROR at teardown of test_calculate_winner_board_game[test5.txt-Peter] ____
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test1.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test2.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test3.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test4.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test5.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test1.txt-Charlie]
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test2.txt-Frank]
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test3.txt-Uni]
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test4.txt-Zane]
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+ERROR outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+========================== 5 failed, 1 error in 0.14s ==========================

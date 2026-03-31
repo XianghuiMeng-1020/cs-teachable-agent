@@ -1,0 +1,4 @@
+{
+    "program": "def extract_entities(file_path):\n    heroes = set()\n    gods = set()\n    creatures = set()\n    \n    with open(file_path, 'r') as file:\n        for line in file:\n            story_title, entities = line.strip().split(': ')\n            hero_name, god_name, creature_name = map(str.strip, entities.split(','))\n            if hero_name:\n                heroes.add(hero_name)\n            if god_name:\n                gods.add(god_name)\n            if creature_name:\n                creatures.add(creature_name)\n\n    return {\n        'heroes': sorted(heroes),\n        'gods': sorted(gods),\n        'creatures': sorted(creatures)\n    }",
+    "context_relevance": 1.0
+}

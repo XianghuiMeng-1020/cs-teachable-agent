@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 16%]
+FFF..E                                                                   [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_file_not_found ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:39: AssertionError
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:25: AssertionError: assert [] == ['Pasta']
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:29: AssertionError: assert [] == ['Apple Pie',...ocolate Cake']
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:33: AssertionError: assert [] == ['Bruschetta', 'Salad']
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_get_recipes_by_category
+FAILED outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_main_course_recipes
+FAILED outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_dessert_recipes
+FAILED outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_appetizer_recipes
+ERROR outputs/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_file_not_found
+===================== 4 failed, 2 passed, 1 error in 0.14s =====================

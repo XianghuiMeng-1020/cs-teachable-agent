@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py . [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at teardown of test_empty_user_tickets _________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'winning_numbers.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'winning_numbers.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'winning_numbers.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'winning_numbers.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_multiple_matching_tickets
+FAILED outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_all_tickets_matching_some
+FAILED outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_empty_user_tickets
+ERROR outputs/results1/query_2/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_empty_user_tickets
+===================== 3 failed, 2 passed, 1 error in 0.12s =====================

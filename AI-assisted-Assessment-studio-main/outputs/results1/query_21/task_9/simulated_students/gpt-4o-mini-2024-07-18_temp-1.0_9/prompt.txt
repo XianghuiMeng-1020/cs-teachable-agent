@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a program to manage a simple collection of board games stored in a text file. Implement a `BoardGame` class and a `BoardGameCollection` class. Each board game has a name, the number of players, and the play time in minutes. Implement the following functionalities:
+
+1. The `BoardGame` class should have attributes: `name`, `num_players`, and `play_time`. Implement a method `to_string()` that returns a string in the format: `"name,num_players,play_time"`.
+
+2. The `BoardGameCollection` class should manage multiple `BoardGame` objects, and should be initialized with a list of `BoardGame` instances.
+
+3. Implement a method `add_game` in `BoardGameCollection` that takes a `BoardGame` object and adds it to the internal list, preventing any game with an existing name from being added.
+
+4. Implement a method `to_file(filename)` in `BoardGameCollection` that saves the collection to a file. Each game's string representation (using `to_string()`) should be on a new line.
+
+5. Implement a method `from_file(filename)` in `BoardGameCollection` that reads a file and populates the collection from its contents. Each line in the file represents a game in the format: `"name,num_players,play_time"`.
+
+Ensure that duplicate games (based on name) are not added while reading from the file.
+
+Create a text file named `games.txt` using the `to_file` method and test the implementation by reading its content using the `from_file` method.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

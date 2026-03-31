@@ -1,0 +1,82 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+In ancient mythology, many legends were passed down through stories. You will create a Python program that helps manage these mythological stories.
+
+Create a class `MythologyManager` with the following specifications:
+
+1. **Constructor**: The constructor should take a filename where the stories will be stored. If the file already exists, it should be read, and existing stories should be loaded into the manager. Otherwise, a new file should be created.
+
+2. **add_story(name, story)**: Adds a story to the manager under the given name. Each story should have a unique name within the manager.
+
+3. **remove_story(name)**: Removes an existing story by its name. If the story does not exist, the method should do nothing.
+
+4. **get_story(name)**: Retrieves the story by its name. If the story does not exist, it should return an empty string.
+
+5. **save()**: Saves all stories to the specified file with each story stored on a new line in the format `name: story`. Multiple stories should be stored one after another without extra spaces between them.
+
+The program will be tested by creating multiple `MythologyManager` objects, adding stories, retrieving them, and verifying the persistence across different sessions. The order of stories in the file does not matter.
+
+The stories will be stored in a text file. Each story should be uniquely identified by a name using strings.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution_program import MythologyManager
+
+def setup_module(module):
+    with open('test_mythology.txt', 'w') as file:
+        file.write('')
+
+def teardown_module(module):
+    os.remove('test_mythology.txt')
+
+def test_add_and_get_story():
+    manager = MythologyManager('test_mythology.txt')
+    manager.add_story('Zeus', 'Ruler of the Olympian gods.')
+    assert manager.get_story('Zeus') == 'Ruler of the Olympian gods.'
+
+
+def test_get_nonexistent_story():
+    manager = MythologyManager('test_mythology.txt')
+    assert manager.get_story('Poseidon') == ''
+
+
+def test_remove_story():
+    manager = MythologyManager('test_mythology.txt')
+    manager.add_story('Hades', 'God of the underworld.')
+    manager.remove_story('Hades')
+    assert manager.get_story('Hades') == ''
+
+
+def test_persistence_across_sessions():
+    manager = MythologyManager('test_mythology.txt')
+    manager.add_story('Athena', 'Goddess of wisdom and war.')
+    manager.save()
+
+    new_manager = MythologyManager('test_mythology.txt')
+    assert new_manager.get_story('Athena') == 'Goddess of wisdom and war.'
+
+
+def test_overwrite_existing_file():
+    manager = MythologyManager('test_mythology.txt')
+    manager.add_story('Hermes', 'Messenger of the gods.')
+    manager.save()
+
+    overwrite_manager = MythologyManager('test_mythology.txt')
+    assert overwrite_manager.get_story('Hermes') == 'Messenger of the gods.'
+
+    overwrite_manager.add_story('Apollo', 'God of the sun.')
+    overwrite_manager.save()
+
+    final_manager = MythologyManager('test_mythology.txt')
+    assert final_manager.get_story('Apollo') == 'God of the sun.'
+    assert final_manager.get_story('Hermes') == 'Messenger of the gods.'
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

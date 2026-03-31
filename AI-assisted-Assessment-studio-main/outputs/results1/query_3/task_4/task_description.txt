@@ -1,0 +1,16 @@
+You are tasked with creating a simulation of a simple 'Game of Chance' where a player can bet on a number and win or lose points based on a random draw. The game works as follows:
+
+1. The game has 10 integers ranging from 1 to 10, each having a unique probability of being chosen when the game is played.
+2. These probabilities are represented using a dictionary where keys are the integers (1 to 10) and values are the respective probabilities. 
+3. A player can place a bet on any of these integers before a 'draw'.
+4. During a 'draw', a random number according to the probabilities is "drawn".
+5. If the drawn number matches the player's bet, they win twice the bet amount. Otherwise, they lose the bet amount.
+6. You must implement a function `simulate_game(bet_number, bet_amount, probabilities)` that calculates the player's final points after one play.
+7. The function takes an integer `bet_number` (1-10), an integer `bet_amount` (a positive number), and a dictionary `probabilities` containing the game probabilities.
+8. Return the player's net gain or loss after the draw, which is twice the `bet_amount` if the guess is correct, and the negative `bet_amount` otherwise.
+
+Use the given function signature:
+```python
+def simulate_game(bet_number, bet_amount, probabilities):
+    pass
+```

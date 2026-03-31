@@ -1,0 +1,85 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+### Task Description
+
+You are tasked with creating a simple text-based data logger for a spaceship navigation system. The logger should be able to record and retrieve the positions of the spaceship at different times. The data is stored in a file named `navigation_log.txt`. Each entry in the file should be represented as follows:
+
+```
+<timestamp>, <x_coordinate>, <y_coordinate>
+```
+
+Your task is to implement a function `log_position(timestamp, x, y)` that logs the spaceship's position, and a function `retrieve_positions()` that returns all logged positions as a list of dictionaries. In each dictionary, keys should be 'timestamp', 'x', and 'y'. The `timestamp` should be a string, while `x` and `y` should be integers.
+
+#### Function Signatures:
+- `log_position(timestamp, x, y)`: Appends a new entry to the `navigation_log.txt` with the given `timestamp`, `x`, and `y` coordinates.
+  - `timestamp` is a string.
+  - `x` and `y` are integers.
+
+- `retrieve_positions()`: Reads the `navigation_log.txt` and returns a list of dictionaries, each representing a logged entry with keys 'timestamp', 'x', and 'y'. If the file does not exist, it should return an empty list.
+
+### Requirements
+- Use file handling to log positions into `navigation_log.txt`.
+- Implement proper exception handling to manage file operations.
+- If `navigation_log.txt` is missing during retrieval, handle the situation gracefully.
+
+### Constraints
+- Do not use any external libraries for parsing or data handling.
+- Each time a new position is logged, it is added to `navigation_log.txt` in a new line.
+- Ensure the retrieval function correctly converts `x` and `y` values back to integers when reading from the log.
+
+The test suite will check these functionalities extensively.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from spaceship_log import log_position, retrieve_positions
+
+
+def setup_module():
+    log_position("2023-10-01 00:00:00", 100, 200)
+    log_position("2023-10-01 00:01:00", 150, 250)
+
+
+def teardown_module():
+    if os.path.exists('navigation_log.txt'):
+        os.remove('navigation_log.txt')
+
+
+def test_log_position_creates_file():
+    assert os.path.exists('navigation_log.txt')
+
+
+def test_retrieve_positions_size():
+    positions = retrieve_positions()
+    assert len(positions) == 2
+
+
+def test_retrieve_positions_content():
+    positions = retrieve_positions()
+    assert positions[0]['timestamp'] == "2023-10-01 00:00:00"
+    assert positions[0]['x'] == 100
+    assert positions[0]['y'] == 200
+
+
+def test_log_additional_entry():
+    log_position("2023-10-01 00:02:00", 300, 400)
+    positions = retrieve_positions()
+    assert len(positions) == 3
+    assert positions[2]['timestamp'] == "2023-10-01 00:02:00"
+
+
+def test_retrieve_positions_missing_file():
+    os.remove('navigation_log.txt')
+    positions = retrieve_positions()
+    assert positions == []
+    log_position("2023-10-01 00:03:00", 500, 600)
+    positions_once_again = retrieve_positions()
+    assert positions_once_again[0]['x'] == 500
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

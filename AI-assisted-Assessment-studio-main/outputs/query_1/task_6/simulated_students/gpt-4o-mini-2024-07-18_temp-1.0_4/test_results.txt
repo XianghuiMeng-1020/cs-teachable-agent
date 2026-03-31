@@ -1,0 +1,118 @@
+============================= test session starts ==============================
+collected 9 items
+
+outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py E [ 11%]
+EEEEEEEE                                                                 [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at setup of test_all_strong_affinities[affinities0-120] _________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 13
+  @pytest.mark.parametrize("affinities, expected", [
+      ([15, 20, 25], 2*15 + 2*20 + 2*25),
+      ([11, 12], 2*11 + 2*12)])
+  def test_all_strong_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:13
+_________ ERROR at setup of test_all_strong_affinities[affinities1-46] _________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 13
+  @pytest.mark.parametrize("affinities, expected", [
+      ([15, 20, 25], 2*15 + 2*20 + 2*25),
+      ([11, 12], 2*11 + 2*12)])
+  def test_all_strong_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:13
+________ ERROR at setup of test_all_moderate_affinities[affinities0-21] ________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 20
+  @pytest.mark.parametrize("affinities, expected", [
+      ([5, 6, 10], 5 + 6 + 10),
+      ([7], 7)])
+  def test_all_moderate_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:20
+________ ERROR at setup of test_all_moderate_affinities[affinities1-7] _________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 20
+  @pytest.mark.parametrize("affinities, expected", [
+      ([5, 6, 10], 5 + 6 + 10),
+      ([7], 7)])
+  def test_all_moderate_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:20
+_________ ERROR at setup of test_all_weak_affinities[affinities0--12] __________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 27
+  @pytest.mark.parametrize("affinities, expected", [
+      ([1, 2, 3], -(2*1 + 2*2 + 2*3)),
+      ([4], -(2*4))])
+  def test_all_weak_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:27
+__________ ERROR at setup of test_all_weak_affinities[affinities1--8] __________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 27
+  @pytest.mark.parametrize("affinities, expected", [
+      ([1, 2, 3], -(2*1 + 2*2 + 2*3)),
+      ([4], -(2*4))])
+  def test_all_weak_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:27
+___________ ERROR at setup of test_mixed_affinities[affinities0-21] ____________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 34
+  @pytest.mark.parametrize("affinities, expected", [
+      ([3, 5, 11], -(2*3) + 5 + 2*11),
+      ([15, 7, 2], 2*15 + 7 - (2*2))])
+  def test_mixed_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:34
+___________ ERROR at setup of test_mixed_affinities[affinities1-33] ____________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 34
+  @pytest.mark.parametrize("affinities, expected", [
+      ([3, 5, 11], -(2*3) + 5 + 2*11),
+      ([15, 7, 2], 2*15 + 7 - (2*2))])
+  def test_mixed_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:34
+____________ ERROR at setup of test_empty_affinities[affinities0-0] ____________
+file /Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py, line 41
+  @pytest.mark.parametrize("affinities, expected", [
+      ([], 0)])
+  def test_empty_affinities(calculate_mythical_power, affinities, expected):
+E       fixture 'calculate_mythical_power' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_teardown, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:41
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_strong_affinities[affinities0-120]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_strong_affinities[affinities1-46]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_moderate_affinities[affinities0-21]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_moderate_affinities[affinities1-7]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_weak_affinities[affinities0--12]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_all_weak_affinities[affinities1--8]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_mixed_affinities[affinities0-21]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_mixed_affinities[affinities1-33]
+ERROR outputs/query_1/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_empty_affinities[affinities0-0]
+============================== 9 errors in 0.12s ===============================

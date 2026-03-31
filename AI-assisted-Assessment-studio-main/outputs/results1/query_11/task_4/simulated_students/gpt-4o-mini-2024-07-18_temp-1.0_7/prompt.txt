@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function called `calculate_ingredient_amounts` that helps a chef adjust ingredient amounts based on the number of servings. 
+
+The function should take two inputs:
+1. `ingredient_list`: A list of strings representing different ingredients followed by a colon (:) and the amount needed for one serving. Each ingredient and its amount are given in a single string, such as "Flour:200g".
+2. `desired_servings`: An integer representing the number of servings the chef wants to prepare.
+
+The function should return a list of strings where each string contains an ingredient and its adjusted amount for the desired number of servings, formatted in the same way as the input, i.e., "Ingredient:Amount" with the amount adjusted according to the `desired_servings`.
+
+The input list `ingredient_list` will have between 1 and 20 items. The function should handle ingredient amounts given in different units such as grams (g), milliliters (ml), or pieces (pcs). The function should assume that the amounts are always numeric and units have no spaces, and the amount will always be a non-negative integer followed by either 'g', 'ml', or 'pcs'.
+
+The function does not need to validate the input format and can assume it is always well-formed.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

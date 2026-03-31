@@ -1,0 +1,4 @@
+{
+    "program": "def read_log_file(file_path):\n    import os\n    from datetime import datetime\n\n    try:\n        if not os.path.isfile(file_path):\n            return []\n\n        with open(file_path, 'r') as file:\n            lines = file.readlines()\n\n        log_entries = []\n\n        for line in lines:\n            try:\n                timestamp_str, event_description = line.split(\" - \", 1)\n                timestamp = datetime.strptime(timestamp_str, \"%Y-%m-%d %H:%M:%S\")\n                log_entries.append((timestamp, event_description.strip()))\n            except ValueError:\n                # Skip lines that do not match the expected format\n                continue\n\n        log_entries.sort(key=lambda entry: entry[0])\n        return [entry[1] for entry in log_entries]\n\n    except Exception:\n        return []",
+    "context_relevance": 1.0
+}

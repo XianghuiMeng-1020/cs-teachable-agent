@@ -1,0 +1,12 @@
+Create a function `roulette_game(money, bets)` that simulates a simple roulette game. The function takes two inputs:
+
+1. `money` - an integer representing the total amount of money the player starts with.
+2. `bets` - a dictionary where each key is a string representing either "even" or "odd", and the value is an integer representing the amount of money the player bets on that option.
+
+The task is to simulate one spin of a roulette wheel. The wheel has numbers from 1 to 36, where each number is either odd or even.
+
+The function should return an integer representing the total amount of money the player ends up with after all the bets are settled. If the spin results in an even number and the player bet money on "even", the player should receive double the bet amount. Similarly, if the spin results in an odd number and the player bet on "odd", they should receive double the bet amount. If a player bets on a number type (odd/even) and loses, they lose the bet amount.
+
+You can assume the player will not bet more money than they have. The player can only bet on "odd" or "even" or both, with a valid (non-negative, within player's total money) bet amount for each.
+
+Edge cases include betting nothing, betting the entire money on one option, or splitting the money between both options.

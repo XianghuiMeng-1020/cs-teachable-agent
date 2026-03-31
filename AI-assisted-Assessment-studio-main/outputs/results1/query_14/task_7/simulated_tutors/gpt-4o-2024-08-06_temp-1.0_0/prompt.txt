@@ -1,0 +1,87 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+Create a function `recipe_calculator` that takes two arguments: a recipe dictionary and a multiplier as an integer. The recipe dictionary contains ingredient names as keys and their quantities as string values (e.g., "2 cups of flour"). The function should return a new dictionary, where each ingredient's quantity is multiplied by the multiplier and rounded to the nearest whole number if necessary. The unit of each ingredient should remain unchanged in the string.
+
+Function signature: `recipe_calculator(recipe, multiplier)`
+
+Consider that the quantities are always integers in the initial dictionary, and will only need to be rounded when multiplied. Assume all quantities and the multiplier are positive and greater than zero.
+
+The program will be tested using the `pytest` framework for validating the function's correctness with multiple scenarios.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import recipe_calculator
+
+def test_recipe_calculator_base_case():
+    recipe = {
+        'flour': '2 cups',
+        'sugar': '1 cup',
+        'eggs': '3 units'
+    }
+    multiplier = 2
+    expected = {
+        'flour': '4 cups',
+        'sugar': '2 cups',
+        'eggs': '6 units'
+    }
+    assert recipe_calculator(recipe, multiplier) == expected
+
+
+def test_recipe_calculator_fractional_result():
+    recipe = {
+        'milk': '3 cups',
+        'butter': '1 cup'
+    }
+    multiplier = 1.5
+    expected = {
+        'milk': '5 cups',  # 4.5 rounded to 5
+        'butter': '2 cups'  # 1.5 rounded to 2
+    }
+    assert recipe_calculator(recipe, multiplier) == expected
+
+
+def test_recipe_calculator_edge_case():
+    recipe = {
+        'vanilla': '1 teaspoon'
+    }
+    multiplier = 5
+    expected = {
+        'vanilla': '5 teaspoons'
+    }
+    assert recipe_calculator(recipe, multiplier) == expected
+
+
+def test_recipe_calculator_single_ingredient_zero_multiplier():
+    recipe = {
+        'salt': '1 pinch'
+    }
+    multiplier = 0.01
+    expected = {
+        'salt': '0 pinches'
+    }
+    assert recipe_calculator(recipe, multiplier) == expected
+
+
+def test_recipe_calculator_large_number_of_ingredients():
+    recipe = {
+        'flour': '100 grams',
+        'sugar': '200 grams',
+        'butter': '300 grams'
+    }
+    multiplier = 10
+    expected = {
+        'flour': '1000 grams',
+        'sugar': '2000 grams',
+        'butter': '3000 grams'
+    }
+    assert recipe_calculator(recipe, multiplier) == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

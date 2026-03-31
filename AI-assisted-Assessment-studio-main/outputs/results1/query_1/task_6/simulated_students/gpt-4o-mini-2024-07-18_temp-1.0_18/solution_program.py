@@ -1,0 +1,11 @@
+def check_dice_lottery_results(results):
+    wins = []
+    for dice in results:
+        sum_dice = sum(dice)
+        if sum_dice == 7 or sum_dice == 11:
+            wins.append(True)
+        elif dice[0] == dice[1] and sum_dice > 8:
+            wins.append(True)
+        else:
+            wins.append(False)
+    return wins

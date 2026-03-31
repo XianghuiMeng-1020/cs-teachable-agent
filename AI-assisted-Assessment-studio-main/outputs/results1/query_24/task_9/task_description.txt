@@ -1,0 +1,15 @@
+You are tasked to write a Python function that simulates the process of scoring a player's turn in a board game. In this game, players roll two dice and move forward by the sum of the numbers rolled. Then they will receive points equal to their new position multiplied by 10. 
+
+Write a function `calculate_score(position, rolls)` where `position` is the player's current position on a linear board (an integer starting from 0) and `rolls` is a list of integers representing dice rolls (each roll is between 1 and 6).
+
+The function should:
+- Calculate the sum of the dice rolls.
+- Compute the player's new position by adding the sum of rolls to the initial position.
+- Calculate the score as the new position multiplied by 10.
+- Return the score.
+
+Note:
+- If `rolls` contains any value not between 1 and 6, an exception should be raised.
+- If `position` is negative, raise an exception.
+
+Your implementation should strictly handle exceptions related to invalid input as described above.

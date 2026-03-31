@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+collected 12 items
+
+outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py F [  8%]
+FFFFFFF....                                                              [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:25: AssertionError: assert 'Hello#1000' == 'Hello#1048'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:25: AssertionError: assert 'SF#306' == 'SF#410'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:25: AssertionError: assert 'Mars#806' == 'Mars#920'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:25: AssertionError: assert 'Galaxy#1228' == 'Galaxy#1450'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:22: ValueError: Transmit code mismatch
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:22: ValueError: Transmit code mismatch
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:22: ValueError: Transmit code mismatch
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:22: ValueError: Transmit code mismatch
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_send_message[Hello-Hello#1048]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_send_message[SF-SF#410]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_send_message[Mars-Mars#920]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_send_message[Galaxy-Galaxy#1450]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_receive_message_success[Hello#1048-Hello]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_receive_message_success[SF#410-SF]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_receive_message_success[Mars#920-Mars]
+FAILED outputs/results1/query_16/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_receive_message_success[Galaxy#1450-Galaxy]
+========================= 8 failed, 4 passed in 0.16s ==========================

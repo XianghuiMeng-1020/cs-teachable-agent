@@ -1,0 +1,82 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+Create a Python program that simulates a basic game of chance lottery drawing. In this game, users have a list of numbers as their ticket, and the program will randomly select a winning set of numbers from a list of possible numbers in a text file. 
+
+You need to write a function `find_winning_tickets(filename, user_tickets)` where:
+- `filename` is a string representing the path to a text file that contains 10 sets of possible winning numbers, each separated by a newline. Each set is a string of 5 space-separated integers ranging from 1 to 50.
+- `user_tickets` is a list of strings, with each string representing a user's ticket and containing 5 space-separated integers ranging from 1 to 50.
+
+The function should return a list of strings where each string is a user's ticket that matches any of the winning sets from the file. If no tickets match, return an empty list.
+
+Make sure to handle file input/output appropriately.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import find_winning_tickets
+
+winning_numbers_file_path = 'winning_numbers.txt'
+
+winning_numbers_content = '''
+1 2 3 4 5
+6 7 8 9 10
+11 12 13 14 15
+16 17 18 19 20
+21 22 23 24 25
+26 27 28 29 30
+31 32 33 34 35
+36 37 38 39 40
+41 42 43 44 45
+46 47 48 49 50
+'''
+
+def setup_module(module):
+    with open(winning_numbers_file_path, 'w') as f:
+        f.write(winning_numbers_content)
+
+
+def teardown_module(module):
+    os.remove(winning_numbers_file_path)
+
+
+def test_no_matching_tickets():
+    user_tickets = ["1 1 1 1 1", "6 6 6 6 6"]
+    result = find_winning_tickets(winning_numbers_file_path, user_tickets)
+    assert result == []
+
+
+def test_single_matching_ticket():
+    user_tickets = ["11 12 13 14 15", "50 49 48 47 46"]
+    result = find_winning_tickets(winning_numbers_file_path, user_tickets)
+    assert result == ["11 12 13 14 15"]
+
+
+def test_multiple_matching_tickets():
+    user_tickets = ["1 2 3 4 5", "46 47 48 49 50"]
+    result = find_winning_tickets(winning_numbers_file_path, user_tickets)
+    assert result == ["1 2 3 4 5", "46 47 48 49 50"]
+
+
+def test_all_tickets_matching_some():
+    user_tickets = ["1 2 3 4 5", "11 12 13 14 15", "41 42 43 44 45"]
+    result = find_winning_tickets(winning_numbers_file_path, user_tickets)
+    assert result == ["1 2 3 4 5", "11 12 13 14 15"]
+
+
+def test_empty_user_tickets():
+    user_tickets = []
+    result = find_winning_tickets(winning_numbers_file_path, user_tickets)
+    assert result == []
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

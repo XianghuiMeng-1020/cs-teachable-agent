@@ -1,0 +1,29 @@
+Create a function `ingredient_substitutes(recipe, substitutes)` that takes as input two dictionaries:
+1. `recipe`: A dictionary where each key is a string representing an ingredient and its value is a string representing the quantity needed for the recipe.
+2. `substitutes`: A dictionary where each key is a string representing an ingredient and its value is another string representing a potential substitute for that ingredient.
+
+The function should return a new dictionary where each ingredient in the original recipe is replaced by its substitute if a substitute exists in the `substitutes` dictionary. If no substitute exists for an ingredient, the original ingredient should remain unchanged in the output dictionary.
+
+### Example
+```python
+recipe = {
+    'sugar': '1 cup',
+    'flour': '2 cups',
+    'butter': '200g'
+}
+
+substitutes = {
+    'sugar': 'honey',
+    'butter': 'margarine'
+}
+
+ingredient_substitutes(recipe, substitutes)
+# Output: {'honey': '1 cup', 'flour': '2 cups', 'margarine': '200g'}
+```
+
+### Constraints
+- The input dictionaries will not be empty.
+- Ingredient names and substitutes are case-sensitive.
+- All ingredient names and substitutes will be alphabetic strings.
+- Quantities will always be provided as strings.
+- There will be no circular substitutions (an ingredient won't be replaced by something that has its own substitute).

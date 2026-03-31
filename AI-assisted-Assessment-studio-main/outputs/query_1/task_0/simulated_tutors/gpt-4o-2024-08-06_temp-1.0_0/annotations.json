@@ -1,0 +1,4 @@
+{
+    "program": "def determine_wielder_power(artifacts, power_requirements):\n    total_wieldable_artifacts = 0\n    for artifact, required_power in artifacts:\n        for power in power_requirements:\n            if power >= required_power:\n                total_wieldable_artifacts += 1\n                break  # Stop checking once we find a character who can wield it\n    return total_wieldable_artifacts\n\n# Test cases will automatically run using pytest if saved and executed in the appropriate environment.",
+    "context_relevance": 1.0
+}

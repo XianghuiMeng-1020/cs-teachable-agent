@@ -1,0 +1,23 @@
+def calculate_average_cooking_time(file_path):
+    cooking_times = []
+    
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                line = line.strip()
+                if line:
+                    parts = line.split(',')
+                    if len(parts) == 2:
+                        try:
+                            cooking_time = float(parts[1])
+                            cooking_times.append(cooking_time)
+                        except ValueError:
+                            continue
+    except FileNotFoundError:
+        raise FileNotFoundError
+    
+    if not cooking_times:
+        raise ValueError("No valid cooking times found")
+    
+    average_time = sum(cooking_times) / len(cooking_times)
+    return round(average_time, 2)

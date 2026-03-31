@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_dish_time(dish_times):\n    total_time = 0\n    for time in dish_times:\n        if isinstance(time, int):\n            total_time += time\n        elif isinstance(time, str):\n            try:\n                total_time += int(time)\n            except ValueError:\n                continue\n    return total_time",
+    "context_relevance": 0.0
+}

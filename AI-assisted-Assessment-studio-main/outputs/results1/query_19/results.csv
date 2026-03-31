@@ -1,0 +1,11 @@
+task,total_num_tc,gen_consistency,LLMJudge,Q-Testsuite,Q-Context,total_num_stu,num_passed_stu,passed_stus
+task_0,5,1,0,0.0,1,20,18,"['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+task_1,5,0,1,0.0,1,20,0,[]
+task_2,5,0,1,0.0,1,20,0,[]
+task_3,0,0,1,0.0,1,20,0,[]
+task_4,5,0,1,0.0,1,20,0,[]
+task_5,0,0,1,0.0,1,20,0,[]
+task_6,5,1,1,0.0,1,20,0,[]
+task_7,5,1,1,0.0,1,20,0,[]
+task_8,0,0,1,0.0,1,20,0,[]
+task_9,0,0,1,0.0,1,20,0,[]

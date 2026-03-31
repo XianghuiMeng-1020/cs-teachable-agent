@@ -1,0 +1,70 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+Welcome to the "Lucky Draw" game simulation! In this game, participants buy tickets, each identified by a unique ticket number, and one ticket is randomly drawn to win a prize.
+
+Your task is to create a Python program to simulate the "Lucky Draw". You will read data from an input file, "tickets.txt", containing participant names and their corresponding ticket numbers. Each line in the file has the format: 'Name:TicketNumber', e.g., 'Alice:12345'.
+
+Your program should include a function `get_lucky_winner(file_path)`, which will:
+1. Read the file from the given `file_path`.
+2. Collect all ticket numbers.
+3. Use the length of the characters of each ticket number as positions on a roulette wheel, where their total length represents the wheel's circumference.
+4. Pick a "lucky winner" based on which ticket number represents the stopping position by traversing the tickets sequentially and wrapping around as needed.
+5. Return the 'Name' of the ticket holder who is the winner.
+
+Your program will be tested with the test suite provided below and must accurately read, process the input, and determine the winner. Ensure that you handle file I/O robustly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import get_lucky_winner
+
+def setup_module(module):
+    with open('tickets1.txt', 'w') as f:
+        f.write('Alice:12345\nBob:67890\nCharlie:24680')
+    with open('tickets2.txt', 'w') as f:
+        f.write('Anna:12\nEli:3456\nOwen:789')
+    with open('tickets3.txt', 'w') as f:
+        f.write('Kate:111\nMilo:2222\nToby:33333')
+
+def teardown_module(module):
+    os.remove('tickets1.txt')
+    os.remove('tickets2.txt')
+    os.remove('tickets3.txt')
+
+def test_winner_case1():
+    winner = get_lucky_winner('tickets1.txt')
+    assert winner == 'Charlie'
+
+
+def test_winner_case2():
+    winner = get_lucky_winner('tickets2.txt')
+    assert winner == 'Eli'
+
+
+def test_winner_case3():
+    winner = get_lucky_winner('tickets3.txt')
+    assert winner == 'Toby'
+
+
+def test_winner_single_entry():
+    with open('single_ticket.txt', 'w') as f:
+        f.write('Solo:5555')
+    winner = get_lucky_winner('single_ticket.txt')
+    assert winner == 'Solo'
+    os.remove('single_ticket.txt')
+
+
+def test_empty_file():
+    with open('empty_tickets.txt', 'w') as f:
+        pass
+    winner = get_lucky_winner('empty_tickets.txt')
+    assert winner is None
+    os.remove('empty_tickets.txt')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

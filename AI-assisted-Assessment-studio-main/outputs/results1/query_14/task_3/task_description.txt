@@ -1,0 +1,18 @@
+In many kitchens, maintaining a well-organized pantry is essential for efficient cooking. To help with pantry management, you will write a function called `update_pantry` that takes two strings and updates a pantry record stored as a dictionary.
+
+The first string, `inventory`, represents the current state of the pantry. It is formatted as a comma-separated list of items with their respective quantities, e.g., `'sugar:5,flour:10,olive oil:3'`. Each item's quantity will be a non-negative integer.
+
+The second string, `updates`, represents changes to be made to the pantry. It is formatted similarly as a comma-separated list of items with quantities, e.g., `'sugar:-2,flour:5'`. The quantity represents the amount by which the current item quantity should be increased or decreased. Positive values indicate an increase, while negative values indicate a decrease.
+
+Your task is to implement `update_pantry(inventory, updates)` that returns a string representing the updated pantry state in the same format as `inventory`. The resulting quantities should be non-negative. If an item's quantity falls below zero due to an update, its quantity should be set to zero.
+
+Function Signature:
+`def update_pantry(inventory, updates):`
+
+### Example
+Given `inventory='sugar:5,flour:10,olive oil:3'` and `updates='sugar:-2,flour:5'`, calling `update_pantry(inventory, updates)` should return `'sugar:3,flour:15,olive oil:3'`.
+
+### Additional Information
+1. Both `inventory` and `updates` will always follow the correct format.
+2. Each item in `updates` is guaranteed to exist in `inventory`.
+3. Items should appear in the output string in the same order as they appear in `inventory`. Items should not be removed or added to the inventory, even if an update sets its quantity to zero.

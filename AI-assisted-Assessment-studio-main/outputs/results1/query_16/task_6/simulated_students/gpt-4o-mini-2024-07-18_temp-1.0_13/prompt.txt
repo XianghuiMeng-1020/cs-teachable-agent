@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In the distant future of interstellar travel, spaceships navigate through the cosmos using hyperdrive technology. Your task is to create a Python program that simulates the hyperdrive system of a spaceship. 
+
+You are to implement a `Spaceship` class with the following specifications:
+
+1. **Attributes:**
+   - `fuel_level`: A floating point number representing the fuel level of the spaceship (in units).
+   - `hyperdrive_multiplier`: A floating point number representing the hyperdrive multiplier. This value indicates how fast the spaceship can travel relative to a standard speed.
+
+2. **Constructor:**
+   - The constructor should initialize the spaceship with a given `fuel_level` and `hyperdrive_multiplier`. If either value is not provided, they should default to 100.0 and 1.0 respectively.
+
+3. **Methods:**
+   - `calculate_travel_time(self, distance)`: This method takes the `distance` to be traveled as a float, in light years, and returns the time it will take to travel this distance using the formula: 
+     
+     \[\text{Time} = \frac{\text{distance}}{(\text{hyperdrive_multiplier} \times \text{fuel_efficiency})},\]
+     
+     where `fuel_efficiency` is determined by the formula \[ \text{fuel_efficiency} = \frac{\text{fuel_level}}{100}.\]
+
+   - The method `calculate_travel_time` should handle any errors that arise from invalid input values (such as non-positive numbers for `distance`, zero or negative `hyperdrive_multiplier`, or `fuel_level`) by raising a ValueError with a string message specifying the nature of the error.
+
+Your solution will be tested against specific test cases to verify the correctness of the implementation.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

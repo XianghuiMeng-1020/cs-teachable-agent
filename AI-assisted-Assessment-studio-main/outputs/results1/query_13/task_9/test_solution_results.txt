@@ -1,0 +1,6 @@
+F....                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/test_suite_sol.py:22: AssertionError: assert 7.25 == 9.25
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_9/test_suite_sol.py::test_valid_file_full_use
+1 failed, 4 passed in 0.03s

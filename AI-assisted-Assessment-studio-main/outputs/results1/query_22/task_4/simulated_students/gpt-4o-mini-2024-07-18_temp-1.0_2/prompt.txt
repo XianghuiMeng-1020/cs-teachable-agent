@@ -1,0 +1,12 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python function `tally_scores(file_path)` that reads a given file with the records of board game scores. The file contains multiple lines where each line represents a single game record formatted as 'player_name:score'. Your task is to calculate the total score for each player by summing up the scores from all their games and return a list of tuples where each tuple is in the form (player_name, total_score). The list should be sorted in descending order by total_score. If two players have the same total score, sort them by their player name in alphabetical order. Each player's name will be unique and scores will be non-negative integers.
+
+The test will involve several input files to check the functionality of your function. You are expected to use basic file operations to process the contents of the file.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,120 @@
+{
+  "item_id": "task_1-rainfall",
+  "source_task_id": "task_1",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_1",
+  "item_type": "rainfall",
+  "title": "Rainfall Problem seeded by Science Fiction",
+  "prompt": "In the Science Fiction monitoring log, sensors report rainfall readings as floats in the order they were entered. Implement `average_valid_readings(readings)` so it scans the list from left to right, stops at the sentinel -999.0, ignores any other negative value, and returns the average of the valid non-negative readings seen before the sentinel. If no valid readings are seen before the sentinel, return 0.0.",
+  "interaction_content": {
+    "function_name": "average_valid_readings",
+    "problem_description": "In the Science Fiction monitoring log, sensors report rainfall readings as floats in the order they were entered. Implement `average_valid_readings(readings)` so it scans the list from left to right, stops at the sentinel -999.0, ignores any other negative value, and returns the average of the valid non-negative readings seen before the sentinel. If no valid readings are seen before the sentinel, return 0.0.",
+    "input_rule": "`readings` is a list of floats in the exact order received from the sensor log.",
+    "sentinel": -999.0,
+    "filter_rule": "Ignore negative readings except for the sentinel itself.",
+    "edge_cases": [
+      "The sentinel may appear as the first element.",
+      "The input may contain negative noise values before the sentinel.",
+      "The input may contain no valid readings at all."
+    ],
+    "reference_solution": "def average_valid_readings(readings):\n    total = 0.0\n    count = 0\n    for value in readings:\n        if value == -999.0:\n            break\n        if value < 0:\n            continue\n        total += value\n        count += 1\n    if count == 0:\n        return 0.0\n    return total / count\n",
+    "public_tests": [
+      {
+        "name": "basic_average",
+        "input_data": [
+          10.0,
+          20.0,
+          30.0,
+          -999.0
+        ],
+        "expected_output": 20.0
+      },
+      {
+        "name": "ignore_invalid_negative",
+        "input_data": [
+          8.0,
+          -2.0,
+          4.0,
+          -999.0
+        ],
+        "expected_output": 6.0
+      },
+      {
+        "name": "stop_at_sentinel",
+        "input_data": [
+          5.0,
+          15.0,
+          -999.0,
+          40.0
+        ],
+        "expected_output": 10.0
+      }
+    ],
+    "hidden_tests": [
+      {
+        "name": "no_valid_values",
+        "input_data": [
+          -1.0,
+          -5.0,
+          -999.0
+        ],
+        "expected_output": 0.0
+      },
+      {
+        "name": "sentinel_first",
+        "input_data": [
+          -999.0,
+          10.0,
+          20.0
+        ],
+        "expected_output": 0.0
+      },
+      {
+        "name": "single_valid_value",
+        "input_data": [
+          12.5,
+          -999.0
+        ],
+        "expected_output": 12.5
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "function_name": "average_valid_readings",
+    "sentinel": -999.0,
+    "expected_behavior": "Average all valid non-negative readings before the sentinel and return 0.0 if there are none."
+  },
+  "grading_rule": "Score by executing the submitted function against the public and hidden tests; full credit requires all tests to pass.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_1",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "source_seed_task": "task_1",
+    "compilation_strategy": "template_fallback_from_theme"
+  },
+  "validation": {
+    "passed": true,
+    "issues": [
+      {
+        "severity": "warning",
+        "message": "Rainfall item uses a theme-seeded template fallback rather than a direct transformation of the source task."
+      }
+    ]
+  }
+}

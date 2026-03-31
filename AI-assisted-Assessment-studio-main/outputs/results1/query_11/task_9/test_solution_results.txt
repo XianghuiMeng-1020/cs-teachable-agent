@@ -1,0 +1,12 @@
+FFFF.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/test_suite_sol.py:13: AssertionError: assert 4.2 == 4.4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/test_suite_sol.py:13: AssertionError: assert 8.700000000000001 == 9.4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/test_suite_sol.py:13: AssertionError: assert 5.4 == 4.9
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_9/test_suite_sol.py:13: AssertionError: assert 2.8 == 3.3
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_9/test_suite_sol.py::test_calculate_total_cost[recipe_ingredients0-flour:0.5,sugar:0.2,milk:1.0-4.4]
+FAILED outputs/results1/query_11/task_9/test_suite_sol.py::test_calculate_total_cost[recipe_ingredients1-rice:1.0,chicken:2.5,salt:0.3,pepper:0.4-9.4]
+FAILED outputs/results1/query_11/task_9/test_suite_sol.py::test_calculate_total_cost[recipe_ingredients2-eggs:0.4,bacon:1.5-4.9]
+FAILED outputs/results1/query_11/task_9/test_suite_sol.py::test_calculate_total_cost[recipe_ingredients3-sugar:0.5,cocoa:1.0,milk:0.8-3.3]
+4 failed, 1 passed in 0.03s

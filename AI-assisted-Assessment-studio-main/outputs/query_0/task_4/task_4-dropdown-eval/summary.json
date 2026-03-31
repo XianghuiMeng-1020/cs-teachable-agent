@@ -1,0 +1,16 @@
+{
+  "item_id": "task_4-dropdown",
+  "item_type": "dropdown",
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 1.0,
+  "num_students": 20,
+  "num_passed": 3,
+  "pass_rate": 15.0,
+  "population_pass_threshold": 50.0,
+  "population_passed": false,
+  "passed_rollouts": [
+    3,
+    7,
+    14
+  ]
+}

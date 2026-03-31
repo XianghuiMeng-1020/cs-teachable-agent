@@ -1,0 +1,18 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a distant science fiction future, data on intergalactic travel between planets is stored in a text file called `intergalactic_travel.txt`. Each line of the file contains records of one journey in the format `planet_name,duration_in_hours`. Each planet name is unique in this context, but there may be multiple entries for a single planet, representing different journeys made to/from it.
+
+Your task is to write a function `calculate_avg_travel_time(input_file, output_file)` that reads the data from `input_file`, calculates the average travel duration for each planet, and writes this average duration to `output_file`. The output file should have each line formatted as `planet_name:average_duration`, where average_duration is a float rounded to one decimal place. You must ensure the records are processed accurately and the required average calculations are performed.
+
+Ensure your solution is efficient and handles the reading and writing of files properly. Here's how the program will be tested and what the `intergalactic_travel.txt` file will look like:
+
+1. The `input_file` will contain lines like "Mars,10" (meaning the journey to Mars took 10 hours). The file will include multiple such records.
+2. The `output_file` should reflect the average travel time for each planet as described.
+3. You have to handle cases where there are multiple records for multiple planets.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

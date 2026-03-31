@@ -1,0 +1,4 @@
+{
+    "program": "class BoardGame:\n    games = []\n    \n    def __init__(self, title, min_players, max_players):\n        self.title = title\n        self.min_players = min_players\n        self.max_players = max_players\n\n    @classmethod\n    def add_game(cls, title, min_players, max_players):\n        game = BoardGame(title, min_players, max_players)\n        cls.games.append(game)\n\n    @classmethod\n    def games_with_min_players(cls, num):\n        return [game.title for game in cls.games if game.min_players <= num]\n\n    @classmethod\n    def games_with_max_players(cls, num):\n        return [game.title for game in cls.games if game.max_players >= num]",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:22: assert 0 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:32: assert 3 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:50: assert 1 == 0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_all_wins
+FAILED outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_some_wins
+FAILED outputs/results1/query_3/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_invalid_round_numbers
+========================= 3 failed, 2 passed in 0.13s ==========================

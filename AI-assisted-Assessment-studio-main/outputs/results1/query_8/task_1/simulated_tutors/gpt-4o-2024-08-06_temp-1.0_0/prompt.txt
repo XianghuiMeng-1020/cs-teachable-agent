@@ -1,0 +1,68 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+In the realm of ancient mythology, heroes often undertake journeys inspired by divine beings. In this task, you will write a function `interpret_omens` godded by mythology, which helps a hero interpret omens from various gods. Each god can represent an omen favoring a certain realm, element, or adventure.
+
+The function `interpret_omens(omens)` takes a dictionary `omens`, where each key is a string representing the name of a god, and the value is a string representing the type of omen (`"Victory"`, `"Defeat"`, or `"Neutral"`).
+
+You need to compute the overall outcome based on these omens. The program will invoke this function by passing omens into it and asserting the result. The desired outcome should be:
+- If more gods predict "Victory", return the string "Triumph approaches!"
+- If more gods predict "Defeat", return the string "Danger looms ahead!"
+- If the number of "Victory" and "Defeat" predictions are equal, or all are "Neutral", return "Path is uncertain".
+
+### Example:
+interpret_omens({'Zeus': 'Victory', 'Hades': 'Defeat'}) should return "Path is uncertain".
+
+The function should be tested with various dictionaries to validate functionality.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import interpret_omens
+
+# Test startup function
+
+def test_more_victories():
+    omens = {
+        'Zeus': 'Victory',
+        'Hera': 'Victory',
+        'Ares': 'Defeat'
+    }
+    assert interpret_omens(omens) == "Triumph approaches!"
+
+def test_more_defeats():
+    omens = {
+        'Hades': 'Defeat',
+        'Poseidon': 'Defeat',
+        'Aphrodite': 'Victory'
+    }
+    assert interpret_omens(omens) == "Danger looms ahead!"
+
+def test_equal_victories_defeats():
+    omens = {
+        'Apollo': 'Victory',
+        'Athena': 'Defeat'
+    }
+    assert interpret_omens(omens) == "Path is uncertain"
+
+def test_only_neutral():
+    omens = {
+        'Demeter': 'Neutral',
+        'Dionysus': 'Neutral'
+    }
+    assert interpret_omens(omens) == "Path is uncertain"
+
+def test_all_favored_same():
+    omens = {
+        'Hermes': 'Victory',
+        'Artemis': 'Victory',
+        'Apollo': 'Victory'
+    }
+    assert interpret_omens(omens) == "Triumph approaches!"
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,8 @@
+..F.F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_9/test_suite_sol.py:47: AssertionError: assert {'Apple Pie',... 'Cheesecake'} == {'Curry', 'Pa...alad', 'Soup'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_9/test_suite_sol.py:55: AssertionError: assert set() == {'Burger', 'C...alad', 'Soup'}
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_9/test_suite_sol.py::test_find_low_cal_recipes_exact_match
+FAILED outputs/results1/query_12/task_9/test_suite_sol.py::test_find_low_cal_recipes_all_match
+2 failed, 3 passed in 0.03s

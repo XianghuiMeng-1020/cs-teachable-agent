@@ -1,0 +1,4 @@
+{
+    "program": "def can_cook_recipe(recipe, ingredients_file):\n    # Initialize an empty dictionary to store ingredient quantities\n    available = {}\n    \n    # Read from the ingredients file\n    with open(ingredients_file, 'r') as file:\n        for line in file:\n            # Clean and split the line to extract ingredient name and quantity\n            ingredient, quantity = line.strip().split(',')\n            available[ingredient] = int(quantity)\n    \n    # Check each ingredient in the recipe\n    for item, needed in recipe.items():\n        # If the ingredient is not available or not enough quantity, return False\n        if item not in available or available[item] < needed:\n            return False\n    \n    # All ingredients are available in required quantities\n    return True",
+    "context_relevance": 1.0
+}

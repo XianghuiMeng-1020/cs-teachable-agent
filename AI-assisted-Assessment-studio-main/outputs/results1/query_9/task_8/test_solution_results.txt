@@ -1,0 +1,6 @@
+....F.                                                                   [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_9/task_8/test_suite_sol.py:24: AssertionError: assert ['Zeus'] == []
+=========================== short test summary info ============================
+FAILED outputs/results1/query_9/task_8/test_suite_sol.py::test_filter_deities[criteria4-expected4]
+1 failed, 5 passed in 0.02s

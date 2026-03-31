@@ -1,0 +1,23 @@
+You are working on an inventory application for a small bakery. The application needs to keep track of the inventory usage to ensure that all items are available for baking.
+
+Write a function `process_ingredient_usage(file_path)` that takes the path of a text file `file_path` containing a list of ingredients and their usage in grams. Each line in the file contains the ingredient name and the amount used, separated by a colon, like this: `Flour:500`. Implement the function to process this file and return a dictionary containing each ingredient as a key and the total amount used as the value.
+
+The format of the file will be:
+- Each line corresponds to an ingredient and its amount, separated by a colon `:`.
+- Any line may contain errors, such as a missing colon, non-numeric usage, or an empty line. These lines should be handled gracefully without stopping the program.
+
+Your function should sum the usage across multiple entries. For example, if the file contains:
+```
+Flour:500
+Sugar:a50
+Eggs:70
+Butter:200
+Flour:200
+```
+Your function should return: `{"Flour": 700, "Eggs": 70, "Butter": 200}`.
+
+Note:
+- The function must handle incorrectly formatted lines and continue processing the rest of the file.
+- All usage amounts should be summed as integers.
+
+Prepare your solution such that it passes a suite of test cases.

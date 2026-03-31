@@ -1,0 +1,37 @@
+{
+    "judge": {
+        "completion_tokens": 25,
+        "prompt_tokens": 1184,
+        "total_tokens": 1209,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "tutor": {
+        "completion_tokens": 379,
+        "prompt_tokens": 1070,
+        "total_tokens": 1449,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "student": {
+        "prompt_tokens": 8180,
+        "completion_tokens": 7241,
+        "total_tokens": 15421
+    }
+}

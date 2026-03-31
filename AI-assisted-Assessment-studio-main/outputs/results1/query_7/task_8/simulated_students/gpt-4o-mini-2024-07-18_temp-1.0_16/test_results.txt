@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 16%]
+FFFFFE                                                                   [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at teardown of test_edge_cases[<lambda>-expected4] ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythology_stories.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:27: AssertionError: assert set() == {'Achilles', ... 'Prometheus'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:67: AssertionError: assert {'Hercules', ...heus', 'Thor'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:67: AssertionError: assert {'Achilles', 'Hercules'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:67: AssertionError: assert {'Achilles', ... 'Prometheus'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:67: AssertionError: assert set() == {'Achilles', 'Hercules'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:6: FileNotFoundError: [Errno 2] No such file or directory: 'mythology_stories.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_extract_entities[mythology_stories.txt-expected0]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected0]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected2]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+ERROR outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+========================== 6 failed, 1 error in 0.14s ==========================

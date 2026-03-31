@@ -1,0 +1,6 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/solution_program.py:16: ValueError: max() arg is an empty sequence
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_6/test_suite_sol.py::test_no_score - Va...
+1 failed, 4 passed in 0.03s

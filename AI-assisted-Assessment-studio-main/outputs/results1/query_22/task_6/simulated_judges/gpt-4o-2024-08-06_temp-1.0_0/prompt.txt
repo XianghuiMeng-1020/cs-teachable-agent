@@ -1,0 +1,88 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+### Task:
+You are tasked to create a Python program that manages scores during a board game session.
+
+Write a program with the following functions:
+
+1. `log_scores(filename, players, scores)`: This function takes a filename (string), a list of players' names, and a matching list of scores. The function should write each player's name and their respective score to the specified file, in the format `name: score` on separate lines.
+
+2. `top_score(filename)`: This function reads from the file with the name `filename` and returns the name(s) of the player(s) with the highest score as a list.
+
+The format of the file will be as follows:
+- Each line contains a player's name followed by their score, separated by a colon and a space (e.g., `Alice: 10`).
+- There will be no duplicate player names.
+
+### Example:
+Suppose you call `log_scores('game_scores.txt', ['Alice', 'Bob', 'Charlie'], [10, 15, 20])`. The file 'game_scores.txt' will contain:
+```
+Alice: 10
+Bob: 15
+Charlie: 20
+```
+Calling `top_score('game_scores.txt')` will return `['Charlie']` as Charlie has the highest score.
+
+### Constraints:
+- The `players` and `scores` lists will always have the same length.
+- If there are multiple players with the highest score, your function should return all their names in the same order they appear in the file.
+- All scores are non-negative integers.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import log_scores, top_score
+
+FILENAME = 'test_game_scores.txt'
+
+
+def setup_module(module):
+    with open(FILENAME, 'w') as f:
+        f.write('')
+
+
+def teardown_module(module):
+    if os.path.exists(FILENAME):
+        os.remove(FILENAME)
+
+
+def test_single_high_score():
+    log_scores(FILENAME, ['Alice', 'Bob', 'Charlie'], [10, 15, 20])
+    result = top_score(FILENAME)
+    assert result == ['Charlie']
+
+
+def test_multiple_high_scores():
+    log_scores(FILENAME, ['Dan', 'Eve', 'Frank'], [20, 20, 5])
+    result = top_score(FILENAME)
+    assert result == ['Dan', 'Eve']
+
+
+def test_tie_scores_same_order():
+    log_scores(FILENAME, ['George', 'Hannah', 'Ian'], [20, 20, 20])
+    result = top_score(FILENAME)
+    assert result == ['George', 'Hannah', 'Ian']
+
+
+def test_no_score():
+    log_scores(FILENAME, [], [])
+    result = top_score(FILENAME)
+    assert result == []
+
+
+def test_all_unique_scores():
+    log_scores(FILENAME, ['Jack', 'Karen'], [8, 20])
+    result = top_score(FILENAME)
+    assert result == ['Karen']
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

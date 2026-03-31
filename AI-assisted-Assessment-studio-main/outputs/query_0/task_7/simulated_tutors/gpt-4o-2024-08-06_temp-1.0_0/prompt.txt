@@ -1,0 +1,108 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task Description
+
+You are tasked with creating a simple game of chance simulator called `LuckyNumbers`. In this game, each player will draw a set of numbers and compare them to a predetermined set of winning numbers. 
+
+The program should:
+1. Read a file named `players.txt`, containing the names of participants. Each line contains a player's name and their chosen number, separated by a comma (e.g., `John,25`).
+2. Read a file named `winning_numbers.txt`, containing the winning numbers separated by commas on the first line (e.g., `5,15,25,35`).
+3. Calculate how many of the player's number matches the winning numbers.
+4. Write to a file named `results.txt`, and for each player append a line with their name and how many numbers matched (e.g., `John: 1`).
+5. The program should handle cases when no players or no winning numbers are provided.
+
+Implement the `lucky_numbers()` function which takes no arguments and performs the above steps. The function should not return any value, as the results should be written to the `results.txt` file.
+
+### Example
+Given a `players.txt` with the content:
+```
+John,25
+Alice,5
+Bob,15
+```
+
+And a `winning_numbers.txt` with the content:
+```
+5,10,25,40
+```
+
+The `results.txt` should contain:
+```
+John: 1
+Alice: 1
+Bob: 1
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import lucky_numbers
+
+players_content = '''John,25\nAlice,5\nBob,15\nSue,10\n'''
+winning_content = '5,10,25,40'
+expected_results_1 = '''John: 1\nAlice: 1\nBob: 1\nSue: 1\n'''
+
+players_empty = ''
+winning_empty = ''
+expected_results_2 = ''
+
+players_no_match = '''Anna,3\nMike,11\nSam,20\n'''
+winning_no_match = '99,100,101'
+expected_results_3 = '''Anna: 0\nMike: 0\nSam: 0\n'''
+
+@pytest.fixture(autouse=True)
+def setup_module():
+    with open('players.txt', 'w') as f:
+        f.write(players_content)
+    with open('winning_numbers.txt', 'w') as f:
+        f.write(winning_content)
+    yield
+    teardown_module()
+
+@pytest.fixture()
+def teardown_module():
+    os.remove('players.txt')
+    os.remove('winning_numbers.txt')
+    if os.path.exists('results.txt'):
+        os.remove('results.txt')
+
+# Base case
+@pytest.mark.parametrize("players, winnings, expected_results", [
+    (players_content, winning_content, expected_results_1)
+])
+def test_lucky_numbers_base(players, winnings, expected_results):
+    with open('players.txt', 'w') as f:
+        f.write(players)
+    with open('winning_numbers.txt', 'w') as f:
+        f.write(winnings)
+
+    lucky_numbers()
+
+    with open('results.txt', 'r') as result_file:
+        results = result_file.read()
+    assert results == expected_results
+
+# Edge cases
+@pytest.mark.parametrize("players, winnings, expected_results", [
+    (players_empty, winning_empty, expected_results_2),
+    (players_no_match, winning_no_match, expected_results_3)
+])
+def test_lucky_numbers_edges(players, winnings, expected_results):
+    with open('players.txt', 'w') as f:
+        f.write(players)
+    with open('winning_numbers.txt', 'w') as f:
+        f.write(winnings)
+
+    lucky_numbers()
+
+    with open('results.txt', 'r') as result_file:
+        results = result_file.read()
+    assert results == expected_results
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

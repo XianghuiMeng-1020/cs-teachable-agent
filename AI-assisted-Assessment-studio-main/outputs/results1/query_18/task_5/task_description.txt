@@ -1,0 +1,20 @@
+You have been hired by a futuristic space travel company ‘GalactoCorp’ that specializes in interstellar cargo shipment. They use advanced technology to calculate space-time anomalies to optimize route planning. As part of their latest project, they want to simulate the effect of anomalous energy clouds on the weight of cargo over time.
+
+You need to write a Python function `calculate_final_weight(filename)`, which computes the final weight of cargo after passing through a series of energy clouds. The `filename` references a text file which contains lines of integer weight alterations (in kilograms) that occur due to these energy clouds. Specifically, it contains numbers where each number represents the change in weight per hour.
+
+Your task is to read these numbers from the file, apply the arithmetic changes cumulatively starting from an initial weight of 1000 kg, and then write the final weight to a new file called `final_weight.txt`.
+
+To solve this task, follow these rules:
+1. Read changes from the file specified by `filename`.
+2. Start with an initial cargo weight of 1000 kg.
+3. Apply each change cumulatively to determine the final cargo weight.
+4. Write this final weight value in kilograms to `final_weight.txt`.
+
+For example, given a file with the following contents:
+```
+-50
+20
+-30
+60
+```
+The final weight in `final_weight.txt` should be `1000 - 50 + 20 - 30 + 60 = 1000 kg`

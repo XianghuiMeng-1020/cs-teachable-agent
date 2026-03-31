@@ -1,0 +1,34 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a distant future, science fiction has become reality with the rise of autonomous spaceships capable of interstellar travel. Your task is to create a simple simulation of a fleet of spaceships exploring a galaxy. Each spaceship can have a name, fuel level, and a list of destinations it needs to explore. These ships also rely on a central command system to pass or fail diagnostics based on their fuel levels.
+
+1. Implement a `Spaceship` class with the following:
+   - A constructor that initializes the name, fuel level, and a list of destinations for the spaceship.
+   - A method `add_fuel(amount)` that increases the fuel level by the specified amount.
+   - A method `travel(destination)` that attempts to travel to the given destination. If the destination exists on the spaceship's list, it removes it from the list and decreases the fuel level by 10 units. If not enough fuel is available, it should raise an exception.
+
+2. Implement a `Fleet` class with the following:
+   - A constructor that initializes an empty list of spaceships.
+   - A method `add_spaceship(spaceship)` that adds a spaceship object to the fleet.
+   - A method `diagnostic()` that returns a dictionary with spaceship names as keys. The values should be 'PASS' or 'FAIL' based on whether their fuel level is above 50 units.
+
+3. Handle exceptions gracefully using try-except blocks, particularly when trying to travel to a destination without enough fuel.
+
+Create these classes in a module named `galaxy_explorer`. The code will be tested using different scenarios to ensure that spaceships are correctly added to the fleet, fuel is added, travel can be attempted with proper exception handling, and the diagnostics system accurately reports the status of each spaceship.
+
+Function signatures to be implemented:
+- class `Spaceship`
+- def `__init__(self, name, fuel_level, destinations)`
+- def `add_fuel(self, amount)`
+- def `travel(self, destination)`
+- class `Fleet`
+- def `__init__(self)`
+- def `add_spaceship(self, spaceship)`
+- def `diagnostic(self)`
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

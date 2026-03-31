@@ -1,0 +1,4 @@
+{
+    "program": "def check_winner(log_file, player_name, lucky_number):\n    player_name = player_name.strip().lower()  # Ensure the player name is case insensitive\n    lucky_number = str(lucky_number)  # Convert the lucky number to string for comparison\n    \n    with open(log_file, 'r') as file:\n        for line in file:\n            # Split the line into name and number, remove any extra spaces\n            current_name, winning_number = line.strip().split()\n            \n            # Check if case-normalized name matches and number matches\n            if current_name.lower() == player_name and winning_number == lucky_number:\n                return True  # Winner found\n    return False  # No matching winner found",
+    "context_relevance": 1.0
+}

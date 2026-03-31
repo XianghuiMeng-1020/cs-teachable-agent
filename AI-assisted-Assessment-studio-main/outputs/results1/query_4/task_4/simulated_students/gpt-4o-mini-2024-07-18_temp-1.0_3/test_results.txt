@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 13 items
+
+outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py . [  7%]
+.......FFFFF                                                             [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:27: Failed: Timeout >5.0s
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:30: assert 1 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:27: Failed: Timeout >5.0s
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:30: assert 1 == 3
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:30: assert 1 == 5
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_game_completes[0]
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_game_completes[1]
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_game_completes[2]
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_game_completes[3]
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_game_completes[4]
+========================= 5 failed, 8 passed in 10.17s =========================

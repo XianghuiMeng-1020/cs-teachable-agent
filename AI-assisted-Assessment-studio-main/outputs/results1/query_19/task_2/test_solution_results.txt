@@ -1,0 +1,10 @@
+FFF..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/test_suite_sol.py:48: AssertionError: assert [] == ['Engine powe...d warp speed']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/test_suite_sol.py:56: AssertionError: assert [] == ['Left Mars o...ing sequence']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/test_suite_sol.py:64: AssertionError: assert [] == ['Final maint...rks in orbit']
+=========================== short test summary info ============================
+FAILED outputs/results1/query_19/task_2/test_suite_sol.py::TestReadLogFile::test_correct_log_parsing
+FAILED outputs/results1/query_19/task_2/test_suite_sol.py::TestReadLogFile::test_unordered_log_file
+FAILED outputs/results1/query_19/task_2/test_suite_sol.py::TestReadLogFile::test_unordered_entries
+3 failed, 2 passed in 0.07s

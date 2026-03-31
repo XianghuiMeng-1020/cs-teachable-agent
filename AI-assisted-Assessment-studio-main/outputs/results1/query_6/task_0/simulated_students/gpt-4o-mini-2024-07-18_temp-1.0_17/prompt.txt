@@ -1,0 +1,22 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that models a simple textual database of mythological creatures. Each creature has a name, origin (such as Greek, Norse, etc.), and a brief description. The program must support adding new creatures, listing all creatures, and saving/loading the creatures to/from a file.
+
+Implement a class `MythicalCreature` with attributes `name`, `origin`, and `description`. Provide a method `__str__` which returns a string representation in the format: `'Name: [name], Origin: [origin], Description: [description]'`.
+
+Implement a class `MythicalDatabase` that maintains a list of `MythicalCreature` objects. This class should implement the following methods:
+- `add_creature(name, origin, description)`: Adds a new creature to the database.
+- `list_creatures()`: Returns a list of string representations of all creatures in the database.
+- `save_to_file(filename)`: Saves all creatures to a file with one creature per line, using the format `name|origin|description`.
+- `load_from_file(filename)`: Loads creatures from a file and adds them to the database, parsing each line into a `MythicalCreature` object.
+
+Your program should not produce any output or take any input by itself. It is intended to be tested through its methods.
+
+The program will be evaluated based on the functionality of the implemented methods, especially in handling file operations accurately.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

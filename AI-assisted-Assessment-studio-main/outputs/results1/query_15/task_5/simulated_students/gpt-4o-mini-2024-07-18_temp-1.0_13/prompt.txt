@@ -1,0 +1,22 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a far-future galaxy, humans and robots are working together in harmony. One of the tasks in this utopian society is mining precious crystals from distant asteroids. Each mining expedition collects raw ores, and it's your job to analyze the data and determine the total weight of different types of crystals discovered.
+
+You are given a list of integers `mining_data` representing the weights of raw ores gathered by the mining team. The task is to write a function `calculate_crystal_weights(mining_data)` that processes this list.
+
+Each even number in the list represents the weight of a `Glimmer Crystal` and each odd number represents the weight of a `Shadow Crystal`. Your function should return a tuple with two integers: the total weight of `Glimmer Crystals` and the total weight of `Shadow Crystals`.
+
+### Function Signature
+```
+def calculate_crystal_weights(mining_data):
+    pass
+```
+
+The function should be tested with various test cases to ensure it handles edge cases and performs correctly for a variety of inputs.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

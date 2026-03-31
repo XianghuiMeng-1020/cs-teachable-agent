@@ -1,0 +1,4 @@
+{
+    "program": "def ingredient_quantifier(recipe):\n    if not recipe:\n        return \"The recipe requires no ingredients.\"\n    \n    # Create list to store formatted ingredient parts\n    ingredient_list = []\n    for ingredient, quantity in recipe.items():\n        # Concatenate the quantity and ingredient\n        ingredient_list.append(f\"{quantity} of {ingredient}\")\n        \n    # Join the list into a single string with appropriate format\n    return \"To make this recipe, you will need: \" + \", \".join(ingredient_list)",
+    "context_relevance": 1.0
+}

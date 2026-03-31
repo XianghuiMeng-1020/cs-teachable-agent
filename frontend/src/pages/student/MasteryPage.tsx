@@ -30,7 +30,7 @@ export function MasteryPage() {
   const barData = units.map((u) => ({
     name: nameById[u.unit_id] ?? KU_DISPLAY_NAMES[u.unit_id] ?? u.unit_id,
     mastery: u.status === "learned" ? 100 : u.status === "partially_learned" ? 50 : u.status === "misconception" ? 0 : 0,
-    fill: u.status === "learned" ? "#10B981" : u.status === "partially_learned" ? "#F59E0B" : "#F1F5F9",
+    fill: u.status === "learned" ? "#059669" : u.status === "partially_learned" ? "#D97706" : "#E7E5E4",
   }));
 
   const byTopicGroup = units.reduce<Record<string, { learned: number; total: number }>>((acc, u) => {
@@ -49,12 +49,20 @@ export function MasteryPage() {
     radarData = [{ subject: "Knowledge", value: 0, fullMark: 100 }];
   }
 
+  const learnedCount = units.filter((u) => u.status === "learned").length;
+  const partialCount = units.filter((u) => u.status === "partially_learned").length;
+
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Mastery</h1>
+    <div className="space-y-8">
+      <div>
+        <h1 className="font-serif text-display-sm text-stone-900">Mastery</h1>
+        <p className="mt-1 text-stone-500">
+          {learnedCount} concepts mastered, {partialCount} in progress, {units.length} total
+        </p>
+      </div>
 
       <Card padding="md">
-        <h2 className="mb-4 text-lg font-semibold text-slate-800">Knowledge state</h2>
+        <h2 className="font-serif text-heading text-stone-900 mb-4">Knowledge Graph</h2>
         <KnowledgeGraph
           units={units}
           knowledgeUnitDefinitions={defs ?? undefined}
@@ -64,31 +72,32 @@ export function MasteryPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-slate-800">Per concept</h2>
+          <h2 className="font-serif text-heading text-stone-900 mb-4">Per Concept</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData} layout="vertical" margin={{ left: 100 }}>
-                <XAxis type="number" domain={[0, 100]} />
-                <YAxis type="category" dataKey="name" width={96} tick={{ fontSize: 11 }} />
-                <Tooltip />
-                <Bar dataKey="mastery" radius={[0, 2, 2, 0]}>
-                  {barData.map((_, i) => (
-                    <Cell key={i} fill={barData[i].fill} />
+                <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11, fill: "#78716C" }} axisLine={false} tickLine={false} />
+                <YAxis type="category" dataKey="name" width={96} tick={{ fontSize: 11, fill: "#57534E" }} axisLine={false} tickLine={false} />
+                <Tooltip contentStyle={{ borderRadius: "8px", border: "1px solid #E7E5E4", fontSize: "12px" }} />
+                <Bar dataKey="mastery" radius={[0, 4, 4, 0]}>
+                  {barData.map((entry, i) => (
+                    <Cell key={i} fill={entry.fill} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
         </Card>
+
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-slate-800">Topic coverage</h2>
+          <h2 className="font-serif text-heading text-stone-900 mb-4">Topic Coverage</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar name="Mastery" dataKey="value" stroke="#6366F1" fill="#6366F1" fillOpacity={0.4} />
+                <PolarGrid stroke="#D6D3D1" />
+                <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: "#57534E" }} />
+                <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fontSize: 10, fill: "#A8A29E" }} />
+                <Radar name="Mastery" dataKey="value" stroke="#0D9488" fill="#0D9488" fillOpacity={0.2} />
               </RadarChart>
             </ResponsiveContainer>
           </div>

@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\n# Task 1: generate_slots function\ndef generate_slots(num_slots, word_list):\n    return ' '.join(random.choice(word_list) for _ in range(num_slots))\n\n# Task 2: determine_outcome function\ndef determine_outcome(slot_str):\n    words = slot_str.split()\n    return 'WIN' if all(word == words[0] for word in words) else 'LOSE'\n\n# Task 3: read_words_from_file function\ndef read_words_from_file(filename):\n    with open(filename, 'r') as file:\n        return [line.strip() for line in file.readlines()]\n\n# Task 4: spin_and_check function\ndef spin_and_check(filename, num_slots):\n    word_list = read_words_from_file(filename)\n    slots_outcome = generate_slots(num_slots, word_list)\n    return determine_outcome(slots_outcome)\n",
+    "context_relevance": 1.0
+}

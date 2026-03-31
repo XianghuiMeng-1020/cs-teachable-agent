@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_ingredient_amounts(ingredient_list, desired_servings):\n    result = []\n    for item in ingredient_list:\n        ingredient, amount_with_unit = item.split(':')\n        amount_str = ''.join(filter(str.isdigit, amount_with_unit))\n        unit = ''.join(filter(str.isalpha, amount_with_unit))\n        amount = int(amount_str) * desired_servings\n        result.append(f\"{ingredient}:{amount}{unit}\")\n    return result",
+    "context_relevance": 1.0
+}

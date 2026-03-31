@@ -683,3 +683,63 @@ class StateTracker:
             "facts": list(store.get("facts", [])),
             "code_implementations": list(store.get("code_implementations", [])),
         }
+
+    # Mapping from Assessment Studio concept labels to TA KU ids
+    _CONCEPT_TO_KU_MAP: dict[str, list[str]] = {
+        "variables": ["variable_assignment"],
+        "arithmetic operators": ["arithmetic_operators"],
+        "comparison operators": ["comparison_operators"],
+        "logical operators": ["logical_operators"],
+        "selection statements (if/else, etc.)": ["if_else"],
+        "if/else": ["if_else"],
+        "loops": ["for_loop_range", "while_loop"],
+        "for loops": ["for_loop_range"],
+        "while loops": ["while_loop"],
+        "lists": ["list_basics", "list_indexing"],
+        "strings": ["string_basics", "string_methods"],
+        "dictionaries": ["variable_assignment"],
+        "functions": ["function_def", "function_params", "return_statement"],
+        "input/output": ["print_function", "user_input"],
+        "type conversion": ["type_conversion"],
+    }
+
+    def _resolve_concepts_to_ku_ids(self, concepts: list[str]) -> list[str]:
+        """Map assessment concept labels to KU ids present in this tracker."""
+        ku_ids: list[str] = []
+        seen: set[str] = set()
+        for concept in concepts:
+            key = concept.strip().lower()
+            mapped = self._CONCEPT_TO_KU_MAP.get(key, [])
+            for ku_id in mapped:
+                if ku_id in self._state and ku_id not in seen:
+                    ku_ids.append(ku_id)
+                    seen.add(ku_id)
+        return ku_ids
+
+    def update_from_assessment(
+        self,
+        concepts: list[str],
+        correct: bool,
+        *,
+        timestamp: str | None = None,
+    ) -> list[str]:
+        """
+        Update BKT state after a structured assessment attempt.
+        Maps concept labels from the assessment to KU ids and applies
+        a standard BKT observation update.
+        Returns the list of KU ids that were updated.
+        """
+        ku_ids = self._resolve_concepts_to_ku_ids(concepts)
+        if not ku_ids:
+            return []
+        self.update_bkt_after_observation(ku_ids, correct, timestamp)
+        now = timestamp or _timestamp()
+        for uid in ku_ids:
+            if uid in self._state:
+                self._state[uid].setdefault("assessment_evidence", [])
+                self._state[uid]["assessment_evidence"].append({
+                    "timestamp": now,
+                    "correct": correct,
+                    "concepts": concepts,
+                })
+        return ku_ids

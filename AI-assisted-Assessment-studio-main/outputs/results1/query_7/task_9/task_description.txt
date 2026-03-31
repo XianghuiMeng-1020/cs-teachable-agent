@@ -1,0 +1,16 @@
+You are tasked with creating a Python program to transform and analyze mythological data. The program should read data from a file named `mythology_stories.txt`. The input file contains a collection of lines, each representing a story title and a brief description, separated by a hyphen ("-"). There might be extra spaces around the hyphens.
+
+Your task is to implement a function `process_mythology_data(input_file, output_file)` where:
+- `input_file` is the name of the input file (`mythology_stories.txt` in this task).
+- `output_file` is the name of the file where the processed data will be written.
+
+The function should:
+1. Read the input file line by line.
+2. Split each line into a title and a description based on the first hyphen encountered. Ignore leading and trailing whitespace.
+3. Reverse the words in each title and description, switch them into uppercase, and join them back using spaces.
+4. Write each processed title and description pair into the output file, with each pair on a new line, separated by a hyphen ('-'), and no extra spaces.
+
+Example of input line: `Pandora's Box - A story of the first woman created by Hephaestus.`
+Expected output for the line: `BOX PANDORA'S - HEPHAESTUS. BY CREATED WOMAN FIRST THE OF STORY A`
+
+The program should handle any number of stories efficiently.

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 13 items
+
+outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py . [  7%]
+.......F.F..                                                             [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:27: Failed: Timeout >5.0s
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:27: Failed: Timeout >5.0s
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_game_completes[0]
+FAILED outputs/results1/query_4/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_game_completes[2]
+======================== 2 failed, 11 passed in 10.15s =========================

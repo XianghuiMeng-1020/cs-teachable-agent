@@ -1,0 +1,22 @@
+Simulated student,0,1,2,3,4
+Expert,1,1,1,1,0
+SimSTU 0,0,1,1,1,0
+SimSTU 1,1,0,0,0,0
+SimSTU 2,0,1,1,0,0
+SimSTU 3,0,0,0,0,0
+SimSTU 4,-1,-1,-1,-1,-1
+SimSTU 5,0,0,0,1,0
+SimSTU 6,1,1,1,1,0
+SimSTU 7,1,1,0,1,0
+SimSTU 8,1,0,1,1,0
+SimSTU 9,1,1,0,0,0
+SimSTU 10,0,1,0,0,0
+SimSTU 11,0,1,0,0,0
+SimSTU 12,0,0,1,1,0
+SimSTU 13,0,0,1,0,0
+SimSTU 14,0,0,0,1,0
+SimSTU 15,0,0,1,1,0
+SimSTU 16,1,1,1,0,0
+SimSTU 17,1,1,1,1,0
+SimSTU 18,0,0,1,1,0
+SimSTU 19,0,0,1,1,0

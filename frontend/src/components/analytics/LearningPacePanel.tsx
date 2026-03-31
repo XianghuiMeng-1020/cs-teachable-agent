@@ -86,7 +86,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
       fast: "text-blue-500",
       very_fast: "text-purple-500",
     };
-    return colors[pace] || "text-slate-500";
+    return colors[pace] || "text-stone-500";
   };
 
   const getPaceIcon = (pace: string) => {
@@ -103,8 +103,8 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
             <Gauge className="w-5 h-5 text-brand-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900">自适应学习节奏</h3>
-            <p className="text-sm text-slate-500">基于你的学习行为动态调整</p>
+            <h3 className="font-semibold text-stone-900">自适应学习节奏</h3>
+            <p className="text-sm text-stone-500">基于你的学习行为动态调整</p>
           </div>
         </div>
         <Button
@@ -124,7 +124,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
           >
             <Brain className="w-8 h-8 text-brand-500" />
           </motion.div>
-          <span className="ml-3 text-slate-600">分析学习节奏中...</span>
+          <span className="ml-3 text-stone-600">分析学习节奏中...</span>
         </div>
       ) : paceData ? (
         <div className="space-y-6">
@@ -145,7 +145,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                   {paceData.pace_category === "very_fast" && "快速节奏"}
                 </span>
               </div>
-              <p className="text-sm text-slate-500 mt-1">
+              <p className="text-sm text-stone-500 mt-1">
                 参与度: <span className="capitalize">{paceData.engagement_level}</span>
               </p>
             </motion.div>
@@ -153,21 +153,21 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
 
           {/* Key Metrics */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-slate-50 rounded-lg p-3">
-              <div className="flex items-center gap-2 text-slate-600 mb-1">
+            <div className="bg-stone-50 rounded-lg p-3">
+              <div className="flex items-center gap-2 text-stone-600 mb-1">
                 <Clock className="w-4 h-4" />
                 <span className="text-sm">每概念时间</span>
               </div>
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-lg font-semibold text-stone-900">
                 {paceData.metrics.time_per_concept} 分钟
               </p>
             </div>
-            <div className="bg-slate-50 rounded-lg p-3">
-              <div className="flex items-center gap-2 text-slate-600 mb-1">
+            <div className="bg-stone-50 rounded-lg p-3">
+              <div className="flex items-center gap-2 text-stone-600 mb-1">
                 <Zap className="w-4 h-4" />
                 <span className="text-sm">平均响应</span>
               </div>
-              <p className="text-lg font-semibold text-slate-900">
+              <p className="text-lg font-semibold text-stone-900">
                 {paceData.metrics.response_time_avg} 秒
               </p>
             </div>
@@ -204,19 +204,19 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="border-t border-slate-200 pt-4 space-y-4">
-                  <h4 className="font-medium text-slate-900">详细配置</h4>
+                <div className="border-t border-stone-200 pt-4 space-y-4">
+                  <h4 className="font-medium text-stone-900">详细配置</h4>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm text-slate-500">最佳学习时长</label>
+                      <label className="text-sm text-stone-500">最佳学习时长</label>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-brand-500" />
                         <span className="font-medium">{paceData.recommendations.optimal_session_length} 分钟</span>
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-slate-500">建议休息间隔</label>
+                      <label className="text-sm text-stone-500">建议休息间隔</label>
                       <div className="flex items-center gap-2">
                         <Coffee className="w-4 h-4 text-brand-500" />
                         <span className="font-medium">每 {paceData.recommendations.recommended_break_interval} 分钟</span>
@@ -225,7 +225,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm text-slate-500">最佳学习时段</label>
+                    <label className="text-sm text-stone-500">最佳学习时段</label>
                     <div className="flex gap-2">
                       {paceData.recommendations.best_learning_times.map((time) => (
                         <span

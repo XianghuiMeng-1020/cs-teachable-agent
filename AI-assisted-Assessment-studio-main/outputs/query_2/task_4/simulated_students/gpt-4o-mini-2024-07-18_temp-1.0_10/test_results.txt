@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py . [ 20%]
+F.FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_unsorted_input ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:54: FileNotFoundError: [Errno 2] No such file or directory: 'empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:73: AssertionError: assert [''] == []
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:104: AssertionError: assert [] == ['Apple Tart'... 'Zebra Cake']
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_empty_file
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_incomplete_recipe
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_unsorted_input
+ERROR outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_unsorted_input
+===================== 3 failed, 2 passed, 1 error in 0.12s =====================

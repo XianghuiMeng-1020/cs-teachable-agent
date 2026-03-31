@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_payout(bets, winning_number):\n    payouts = {}\n    for bet in bets:\n        player = bet[\"player\"]\n        bet_type = bet[\"bet_type\"]\n        amount = bet[\"amount\"]\n        payout = 0\n\n        if bet_type == \"number\":\n            if bet.get(\"number\", None) == winning_number:\n                payout = 35 * amount\n        elif bet_type == \"even\":\n            if winning_number != 0 and winning_number % 2 == 0:\n                payout = 2 * amount\n        elif bet_type == \"odd\":\n            if winning_number % 2 != 0:\n                payout = 2 * amount\n        \n        payouts[player] = payout\n\n    return payouts",
+    "context_relevance": 1.0
+}

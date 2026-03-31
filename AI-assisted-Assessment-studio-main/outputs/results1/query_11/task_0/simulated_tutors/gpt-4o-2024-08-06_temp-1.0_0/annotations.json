@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_ingredients(recipe_list, recipe_name):\n    for recipe in recipe_list:\n        if recipe[0] == recipe_name:\n            ingredient_dict = {}\n            for ingredient, quantity in recipe[1]:\n                if ingredient in ingredient_dict:\n                    ingredient_dict[ingredient] += quantity\n                else:\n                    ingredient_dict[ingredient] = quantity\n            return list(ingredient_dict.items())\n    return []\n\n# Test the function with a basic recipe list\nrecipe_list = [ \n    (\"Pasta\", [(\"Flour\", 100), (\"Egg\", 2), (\"Salt\", 1)]),\n    (\"Omelette\", [(\"Egg\", 3), (\"Salt\", 1), (\"Oil\", 1)]),\n    (\"Cake\", [(\"Flour\", 200), (\"Egg\", 3), (\"Sugar\", 100), (\"Salt\", 1)])\n]\n\n# Example usage\nprint(calculate_ingredients(recipe_list, \"Cake\"))\n# Output: [('Flour', 200), ('Egg', 3), ('Sugar', 100), ('Salt', 1)]",
+    "context_relevance": 1.0
+}

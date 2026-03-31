@@ -1,0 +1,88 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+You are tasked with creating a program that reads a list of mythical creatures and their powers from an input file and determines which creature is the ultimate being based on their power rating.
+
+The input file is structured such that each line contains the name of a creature followed by its power rating, separated by a semicolon. Power ratings are integers. An example of the input format is:
+```
+Dragon;100
+Phoenix;85
+Unicorn;65
+Hydra;95
+```
+Write a function `determine_ultimate_being(input_file_path)` that reads the input file, calculates which creature has the highest power rating, and writes the name of that creature to an output file named `ultimate_being.txt`. If there are multiple creatures with the same highest power, write "It's a draw" to the output file.
+
+Your function will be tested with different input files containing various mythical creatures and power ratings. Make sure your program handles the files I/O correctly and identifies the correct result based on the given data.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import determine_ultimate_being
+
+def setup_module(module):
+    with open('test1.txt', 'w') as f:
+        f.write('Dragon;100\nPhoenix;85\nUnicorn;65\nHydra;95\n')
+    
+    with open('test2.txt', 'w') as f:
+        f.write('Minotaur;70\nGriffin;90\nSphinx;90\n')
+
+    with open('test3.txt', 'w') as f:
+        f.write('Cerberus;77\nCyclops;77\n')
+
+    with open('test4.txt', 'w') as f:
+        f.write('Kraken;120\nNaga;95\nMermaid;110\n')
+
+    with open('test5.txt', 'w') as f:
+        f.write('Basilisk;130\nMedusa;130\n')
+
+def teardown_module(module):
+    os.remove('test1.txt')
+    os.remove('test2.txt')
+    os.remove('test3.txt')
+    os.remove('test4.txt')
+    os.remove('test5.txt')
+    if os.path.exists('ultimate_being.txt'):
+        os.remove('ultimate_being.txt')
+
+
+def test_determine_ultimate_being_1():
+    determine_ultimate_being('test1.txt')
+    with open('ultimate_being.txt', 'r') as f:
+        result = f.read().strip()
+    assert result == 'Dragon'
+
+
+def test_determine_ultimate_being_2():
+    determine_ultimate_being('test2.txt')
+    with open('ultimate_being.txt', 'r') as f:
+        result = f.read().strip()
+    assert result == "It's a draw"
+
+
+def test_determine_ultimate_being_3():
+    determine_ultimate_being('test3.txt')
+    with open('ultimate_being.txt', 'r') as f:
+        result = f.read().strip()
+    assert result == "It's a draw"
+
+
+def test_determine_ultimate_being_4():
+    determine_ultimate_being('test4.txt')
+    with open('ultimate_being.txt', 'r') as f:
+        result = f.read().strip()
+    assert result == 'Kraken'
+
+
+def test_determine_ultimate_being_5():
+    determine_ultimate_being('test5.txt')
+    with open('ultimate_being.txt', 'r') as f:
+        result = f.read().strip()
+    assert result == "It's a draw"
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

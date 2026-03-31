@@ -1,0 +1,80 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Strings', 'Loops', 'Selection Statements (if/else, etc.)', 'Classes and Objects']:
+
+### Beginning of task description
+### Task: Chess Piece Movement Validation
+
+You are to design a class to represent a chessboard that can validate moves for specific pieces. In this task, you will focus on two chess pieces: the Rook and the Bishop. Your class should be capable of determining if a move is valid based on the piece's movement abilities.
+
+#### Chess Rules:
+- A **Rook** can move horizontally or vertically across the board any number of squares, but cannot jump over other pieces.
+- A **Bishop** can move diagonally any number of squares, but similarly cannot jump over other pieces.
+
+### Specifications
+
+1. Implement a class `ChessBoard` that can:
+   - Check if a move from one position to another is valid for a given piece.
+   - Account only for moves within an 8x8 board where rows are numbered 1 to 8 and columns are lettered 'a' to 'h'.
+
+2. Implement the following methods inside your class:
+   - `__init__(self)`: Initializes the board.
+   - `is_valid_move(self, piece, start, end)`: Takes a piece type ('Rook' or 'Bishop'), a start position (e.g. 'a1'), and an end position (e.g. 'h1'), and returns a boolean indicating if the move is valid.
+
+#### Example:
+- `is_valid_move('Rook', 'a1', 'a8')` should return `True` as the Rook can move vertically across the board.
+- `is_valid_move('Bishop', 'a1', 'b2')` should return `True` since the Bishop can move diagonally.
+- `is_valid_move('Rook', 'a1', 'b2')` should return `False` because a Rook cannot move diagonally.
+
+### Constraints:
+- The board is empty with no other pieces to consider blocking moves.
+- Input positions will be valid (strings in the format 'a1' to 'h8').
+- Do not consider any obstacles or ongoing rules like 'check' or 'checkmate'.
+
+Write the function inside a module named `chess_module.py`. Your solution should pass the provided test suite.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from chess_module import ChessBoard
+
+def setup_module(module):
+    module.chessboard = ChessBoard()
+
+def teardown_module(module):
+    del module.chessboard
+
+class TestChessMoves:
+
+    def test_rook_horizontal_move(self):
+        assert chessboard.is_valid_move('Rook', 'a1', 'a8') == True
+
+    def test_bishop_diagonal_move(self):
+        assert chessboard.is_valid_move('Bishop', 'a1', 'b2') == True
+
+    def test_rook_invalid_diagonal_move(self):
+        assert chessboard.is_valid_move('Rook', 'a1', 'b2') == False
+
+    def test_bishop_invalid_vertical_move(self):
+        assert chessboard.is_valid_move('Bishop', 'a1', 'a2') == False
+
+    def test_edge_case_valid_move_across_board(self):
+        # Testing border limits
+        assert chessboard.is_valid_move('Bishop', 'a1', 'h8') == True
+
+    def test_edge_case_invalid_move_same_position(self):
+        assert chessboard.is_valid_move('Rook', 'a1', 'a1') == False
+
+    def test_rook_moving_one_square(self):
+        assert chessboard.is_valid_move('Rook', 'b2', 'b3') == True
+
+    def test_bishop_moving_one_square(self):
+        assert chessboard.is_valid_move('Bishop', 'c1', 'd2') == True
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

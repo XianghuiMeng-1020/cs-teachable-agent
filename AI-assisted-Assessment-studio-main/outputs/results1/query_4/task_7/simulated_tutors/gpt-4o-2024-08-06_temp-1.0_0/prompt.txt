@@ -1,0 +1,57 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+
+**Game of Chance - Dice Probability Calculator**
+
+In this task, you will write a function `dice_probability(target_score)` that calculates the probability of reaching the target score when rolling two six-sided dice. Each die is numbered from 1 to 6. The probability should be in the form of a float with up to 4 decimal places.
+
+The total score that can be achieved by rolling two dice ranges from 2 (when both dice show 1) to 12 (when both dice show 6). The task is to compute the probability of attaining exactly the given `target_score` through any combination of rolls of the two dice.
+
+The function should return the calculated probability or 0 if the `target_score` is outside the range of possible scores (i.e., less than 2 or greater than 12).
+
+Here are some points to consider:
+- The probability is calculated as `favorable outcomes / total possible outcomes`, where the total possible outcomes when rolling two dice are 36 (6 sides per die).
+- For a valid target score, you need to find favorable pairs `(a, b)` where `a` and `b` are the results from the first and second die respectively such that `a + b = target_score`.
+
+Example:
+- `dice_probability(7)` should return `0.1667`, because out of 36 possible roll outcomes, there are 6 combinations that sum up to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1).
+
+Your function will be tested against several cases to ensure the correct probability is returned for different target scores.
+
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+
+def test_dice_probability_lowest_score():
+    from solution import dice_probability
+    assert dice_probability(2) == 0.0278
+
+def test_dice_probability_highest_score():
+    from solution import dice_probability
+    assert dice_probability(12) == 0.0278
+
+def test_dice_probability_most_common_score():
+    from solution import dice_probability
+    assert dice_probability(7) == 0.1667
+
+def test_dice_probability_out_of_bounds_low():
+    from solution import dice_probability
+    assert dice_probability(1) == 0
+
+def test_dice_probability_out_of_bounds_high():
+    from solution import dice_probability
+    assert dice_probability(13) == 0
+
+def test_dice_probability_less_common_score():
+    from solution import dice_probability
+    assert dice_probability(4) == 0.1111
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,4 @@
+{
+    "program": "def parse_recipe_ingredients(file_path):\n    recipe_dict = {}\n    with open(file_path, 'r') as file:\n        content = file.read().strip().split('\\n\\n')\n\n    for block in content:\n        lines = block.strip().split('\\n')\n        if lines:\n            recipe_name = lines[0].replace('Recipe: ', '').strip()\n            ingredients = [line.replace('-', '').strip() for line in lines[2:]]\n            recipe_dict[recipe_name] = ingredients\n\n    return recipe_dict",
+    "context_relevance": 1.0
+}

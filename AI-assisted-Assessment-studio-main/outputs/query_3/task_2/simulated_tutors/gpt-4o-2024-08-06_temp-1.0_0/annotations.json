@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_efficiency(messages: dict) -> dict:\n    efficiencies = {}\n    for station, connections in messages.items():\n        total_messages = sum(connections.values())\n        id_sum = sum(ord(char) for char in station)\n        efficiency = total_messages / id_sum if id_sum != 0 else 0\n        efficiencies[station] = round(efficiency, 2)\n    return efficiencies\n\n# Example usage:\nmessages1 = {\n    'Alpha-1': {'Beta-2': 100, 'Delta-4': 250},\n    'Beta-2': {'Alpha-1': 50},\n    'Delta-4': {'Alpha-1': 100, 'Beta-2': 150}\n}\nresult = calculate_efficiency(messages1)\nprint(result)",
+    "context_relevance": 1.0
+}

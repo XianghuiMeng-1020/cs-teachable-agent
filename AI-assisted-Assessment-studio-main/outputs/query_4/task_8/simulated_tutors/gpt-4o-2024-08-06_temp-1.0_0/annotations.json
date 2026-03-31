@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_final_scores(game_log):\n    final_scores = {}\n    for player, changes in game_log.items():\n        score = 0\n        for change in changes:\n            score += change\n            if score < 0:\n                score = 0\n        final_scores[player] = score\n    return final_scores\n\n# Sample usage:\ngame_log = {'Alice': [10, -5, 20, -30, 5], 'Bob': [-10, 20, 15, -5, 10]}\nprint(calculate_final_scores(game_log))  # Output: {'Alice': 5, 'Bob': 30}",
+    "context_relevance": 1.0
+}

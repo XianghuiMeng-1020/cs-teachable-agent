@@ -1,0 +1,41 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python function `game_of_chance(filename)` that simulates a simple game of chance. The function should read a file named `filename` which contains a series of player actions and outcomes, with one action or outcome per line. The player starts with an initial score of 10.
+
+Each line in the file should contain either a player's action ('win', 'lose', or 'draw') or a number indicating a bet amount. The file may contain a mix of actions and bet amounts in any order. The bet amount indicates how much the player wants to wager in the subsequent action.
+
+- If the action is 'win', the player's score should increase by the bet amount.
+- If the action is 'lose', the player's score should decrease by the bet amount.
+- If the action is 'draw', the player's score remains unchanged.
+
+The function should write the final score into the file `result.txt`. The player cannot bet more than his current score; in such cases, simply ignore the bet.
+
+### Example:
+Suppose initially, the file content is:
+```
+5
+win
+10
+lose
+3
+draw
+```
+After processing this file, `result.txt` should contain:
+```
+7
+```
+This resultant score is calculated as: 10 (initial) + 5 (win) - 10 (lose) + 0 (draw) since the last draw changes nothing.
+
+### Constraints:
+- All bet amounts are positive integers.
+- All actions are valid strings ('win', 'lose', 'draw').
+- The actions can be given without a preceding bet. These actions are ignored unless followed by a valid bet.
+
+Write the function `game_of_chance(filename)` to complete the task.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

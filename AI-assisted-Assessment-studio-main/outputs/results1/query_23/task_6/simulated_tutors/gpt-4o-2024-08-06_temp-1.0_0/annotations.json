@@ -1,0 +1,4 @@
+{
+    "program": "class ScrabbleScoreCalculator:\n    def __init__(self):\n        self.letter_points = {\n            1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],\n            2: ['D', 'G'],\n            3: ['B', 'C', 'M', 'P'],\n            4: ['F', 'H', 'V', 'W', 'Y'],\n            5: ['K'],\n            8: ['J', 'X'],\n            10: ['Q', 'Z']\n        }\n\n    def calculate_score(self, word):\n        word = word.upper()\n        score = 0\n        for char in word:\n            for points, letters in self.letter_points.items():\n                if char in letters:\n                    score += points\n                    break\n        return score\n\n# Test case execution is omitted here since it involves external test cases and framework requirements.",
+    "context_relevance": 1.0
+}

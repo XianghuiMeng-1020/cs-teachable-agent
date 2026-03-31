@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py . [ 20%]
+...FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______ ERROR at teardown of test_spin_and_check_lose_with_multiple_slots _______
+E   FileNotFoundError: [Errno 2] No such file or directory: 'words.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/solution_program.py:13: FileNotFoundError: [Errno 2] No such file or directory: 'words.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_spin_and_check_lose_with_multiple_slots
+ERROR outputs/results1/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_spin_and_check_lose_with_multiple_slots
+===================== 1 failed, 4 passed, 1 error in 0.05s =====================

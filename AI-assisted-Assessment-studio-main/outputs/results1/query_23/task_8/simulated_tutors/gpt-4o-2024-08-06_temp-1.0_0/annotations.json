@@ -1,0 +1,4 @@
+{
+    "program": "class PlayerScore:\n    def __init__(self, name):\n        self.name = name\n        self.highest_score = 0\n\n    def add_score(self, score):\n        if score > self.highest_score:\n            self.highest_score = score\n\n    def get_score(self):\n        return self.highest_score\n\n    def __str__(self):\n        return f\"Player: {self.name}, Highest Score: {self.highest_score}\"\n\n\ndef parse_scores(data):\n    player_dict = {}\n    if data:\n        score_entries = data.split(\",\")\n        for entry in score_entries:\n            name, score = entry.split(\":\")\n            score = int(score)\n            if name not in player_dict:\n                player_dict[name] = PlayerScore(name)\n            player_dict[name].add_score(score)\n    return list(player_dict.values())",
+    "context_relevance": 1.0
+}

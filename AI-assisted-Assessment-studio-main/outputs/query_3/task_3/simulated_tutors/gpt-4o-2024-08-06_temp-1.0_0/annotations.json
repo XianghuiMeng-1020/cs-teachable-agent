@@ -1,0 +1,4 @@
+{
+    "program": "def alien_population_change(data):\n    # Initial population in millions\n    initial_population = 1.0\n    result = {}\n    \n    # Iterate over each planet and its changes\n    for planet, changes in data.items():\n        current_population = initial_population\n        \n        # Process each year's change\n        for entry in changes:\n            year, change = entry.split(':')\n            change = int(change) / 1000  # Convert to millions\n            \n            # Update current population\n            current_population += change\n        \n        # Store the result for the current planet\n        result[planet] = current_population\n    \n    return result\n\n# Example usage: The function can be tested and debugged with appropriate data as hinted by the test cases",
+    "context_relevance": 1.0
+}

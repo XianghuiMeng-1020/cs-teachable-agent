@@ -1,0 +1,82 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+You are a crew member aboard the spaceship Transgalactic Voyager, tasked with regulating the power levels to ensure the optimal operation of the ship's core systems during interstellar travel. Power levels are recorded in a sequence of energy files, each containing a list of power changes (in megawatts) for a particular subsystem.
+
+Your task is to create a function `calculate_power(filename)` which reads a file (with a given `filename`) that contains a single line of comma-separated integers representing the changes in megawatts. Your function should calculate and return the final power level of the subsystem, starting from an initial power level of 1000 MW. A negative integer indicates a power reduction, while a positive integer indicates a power increase.
+
+The power level is updated by the sum of all changes specified in the file. For example, if the file contains the following line:
+
+```
+-50, +10, -20
+```
+
+The final power level will be `1000 - 50 + 10 - 20 = 940` MW.
+
+The function should return the computed power level as an integer.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import calculate_power
+
+# Setting up and tearing down test files
+
+def setup_module(module):
+    with open('energy1.txt', 'w') as f:
+        f.write('20,30,-10,5')
+
+    with open('energy2.txt', 'w') as f:
+        f.write('-100,-50,-150')
+
+    with open('energy3.txt', 'w') as f:
+        f.write('50,50,50,50,50')
+
+    with open('energy4.txt', 'w') as f:
+        f.write('0')
+
+    with open('energy5.txt', 'w') as f:
+        f.write('')
+
+def teardown_module(module):
+    os.remove('energy1.txt')
+    os.remove('energy2.txt')
+    os.remove('energy3.txt')
+    os.remove('energy4.txt')
+    os.remove('energy5.txt')
+
+# Test cases
+
+def test_calculate_power_with_positive_changes():
+    result = calculate_power('energy1.txt')
+    assert result == 1045  # 1000 + 20 + 30 - 10 + 5
+
+def test_calculate_power_with_negative_changes():
+    result = calculate_power('energy2.txt')
+    assert result == 700  # 1000 - 100 - 50 - 150
+
+def test_calculate_power_with_consistent_positive_changes():
+    result = calculate_power('energy3.txt')
+    assert result == 1250  # 1000 + 50 + 50 + 50 + 50 + 50
+
+def test_calculate_power_with_zero_changes():
+    result = calculate_power('energy4.txt')
+    assert result == 1000  # 1000 + 0
+
+# Edge Case: Test with No Changes
+
+def test_calculate_power_with_no_changes():
+    result = calculate_power('energy5.txt')
+    assert result == 1000  # 1000 + 0 (no change)
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

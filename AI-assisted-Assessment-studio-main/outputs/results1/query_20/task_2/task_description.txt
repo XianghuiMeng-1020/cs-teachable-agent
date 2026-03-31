@@ -1,0 +1,13 @@
+Create a function `chess_game_outcome(score_player1, score_player2, player1_name, player2_name)` that determines the outcome of a chess match given the scores of two players and their names. The function will take four arguments:
+
+1. `score_player1`: an integer representing the score of player1.
+2. `score_player2`: an integer representing the score of player2.
+3. `player1_name`: a string containing the name of player1.
+4. `player2_name`: a string containing the name of player2.
+
+The function should return a string as follows:
+- If player1's score is greater than player2's, return "[player1_name] is victorious!"
+- If player2's score is greater than player1's, return "[player2_name] is victorious!"
+- If both scores are equal, return "The game is a draw!"
+
+Ensure only standard arithmetic operations and comparisons are used to determine the outcome, and concatenation is used to form the result strings.

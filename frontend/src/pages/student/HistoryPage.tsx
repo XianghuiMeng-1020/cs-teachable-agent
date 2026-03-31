@@ -31,7 +31,7 @@ export function HistoryPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">History</h1>
+        <h1 className="text-2xl font-bold text-stone-900">History</h1>
         <div className="flex gap-2">
           {["all", "teach", "test_pass", "test_fail"].map((t) => (
             <button
@@ -40,8 +40,8 @@ export function HistoryPage() {
               onClick={() => { setTypeFilter(t); setPage(1); }}
               className={`rounded-lg border px-3 py-1.5 text-sm font-medium ${
                 typeFilter === t
-                  ? "border-brand-500 bg-brand-50 text-brand-700"
-                  : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                  ? "border-brand-700 bg-brand-50 text-brand-700"
+                  : "border-stone-200 text-stone-600 hover:bg-stone-50"
               }`}
             >
               {t === "all" ? "All" : t === "teach" ? "Teaching" : t === "test_pass" ? "Passed" : "Failed"}
@@ -52,9 +52,9 @@ export function HistoryPage() {
 
       <Card padding="md">
         {isLoading ? (
-          <p className="text-sm text-slate-500">Loading...</p>
+          <p className="text-sm text-stone-500">Loading...</p>
         ) : events.length === 0 ? (
-          <p className="text-sm text-slate-500">No events yet. Teach or run tests to see history.</p>
+          <p className="text-sm text-stone-500">No events yet. Teach or run tests to see history.</p>
         ) : (
           <>
             <TimelineView events={events} />
@@ -62,18 +62,18 @@ export function HistoryPage() {
               <div className="mt-4 flex justify-center gap-2">
                 <button
                   type="button"
-                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm disabled:opacity-50"
+                  className="rounded-lg border border-stone-200 px-3 py-1.5 text-sm disabled:opacity-50"
                   disabled={page <= 1}
                   onClick={() => setPage((p) => p - 1)}
                 >
                   Previous
                 </button>
-                <span className="py-1.5 text-sm text-slate-600">
+                <span className="py-1.5 text-sm text-stone-600">
                   Page {data.page} of {Math.ceil(data.total / data.per_page)}
                 </span>
                 <button
                   type="button"
-                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm disabled:opacity-50"
+                  className="rounded-lg border border-stone-200 px-3 py-1.5 text-sm disabled:opacity-50"
                   disabled={page >= Math.ceil(data.total / data.per_page)}
                   onClick={() => setPage((p) => p + 1)}
                 >

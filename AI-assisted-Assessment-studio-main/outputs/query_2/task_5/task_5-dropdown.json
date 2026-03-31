@@ -1,0 +1,96 @@
+{
+  "item_id": "task_5-dropdown",
+  "source_task_id": "task_5",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_2/task_5",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for sort_ingredients",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n## Task: Recipe Ingredient Sorter Your task is to create a program that reads a text file containing ingredients of various recipes, sorts the ingredients alphabetically, and saves the sorted list back into a new file. ### File Format: - Each line in the file contains ingredients of one recipe separated by commas. - There are no headers or labels in the file. ### Program Requirements: 1. Implement a function `sort_ingredients(input_filename, output_filename)` where: - `input_filename` is the ...",
+  "interaction_content": {
+    "function_name": "sort_ingredients",
+    "prompt_template": "def sort_ingredients(input_filename, output_filename):\n    with open(input_filename, __BLANK_2__) as f:\n        lines = f.readlines()\n\n    sorted_lines = []\n    for line in lines:\n        ingredients = line.strip().split(__BLANK_3__)\n        ingredients = [ingredient.strip() for ingredient in ingredients]\n        ingredients.sort()\n        sorted_line = ', '.join(ingredients)\n        sorted_lines.append(sorted_line)\n\n    with open(output_filename, 'w') as f:\n        for sorted_line in sorted_lines:\n            f.write(sorted_line __BLANK_1__ '\\n')",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "+",
+          "-",
+          "*",
+          "%"
+        ],
+        "correct_answer": "+",
+        "misconception_tags": {
+          "-": "operator_confusion",
+          "*": "operator_confusion",
+          "%": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "'r'",
+          "'UNKNOWN'",
+          "''",
+          "'TODO'"
+        ],
+        "correct_answer": "'r'",
+        "misconception_tags": {
+          "'UNKNOWN'": "sentinel_or_literal_confusion",
+          "''": "sentinel_or_literal_confusion",
+          "'TODO'": "sentinel_or_literal_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "','",
+          "'UNKNOWN'",
+          "''",
+          "'TODO'"
+        ],
+        "correct_answer": "','",
+        "misconception_tags": {
+          "'UNKNOWN'": "sentinel_or_literal_confusion",
+          "''": "sentinel_or_literal_confusion",
+          "'TODO'": "sentinel_or_literal_confusion"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "+",
+      "blank_2": "'r'",
+      "blank_3": "','"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Cooking",
+    "concepts": [
+      "Strings",
+      "Lists",
+      "File Handling and I/O"
+    ],
+    "quality_metrics": {
+      "task": "task_5",
+      "total_num_tc": "1",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "8",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_18']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

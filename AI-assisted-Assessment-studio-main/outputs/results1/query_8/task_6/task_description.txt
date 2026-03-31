@@ -1,0 +1,19 @@
+You are tasked with creating a mythology-based Python function named `mythical_creature_classification`. This function will classify creatures from Greek mythology based on their characteristics. The input will be a dictionary with keys representing creature names and values being another dictionary containing their characteristics such as 'type' (e.g., 'monstrous', 'divine'), 'danger_level' (an integer from 1 to 10), and 'favored_by' (e.g., 'Zeus', 'Poseidon').
+
+The function should return a new dictionary where the keys are creature names and values are strings representing their classification:
+- "Not Threatening": If the danger level is less than 3.
+- "Moderately Threatening": If the danger level is between 3 and 6 (inclusive).
+- "Highly Threatening": If the danger level is greater than 6.
+
+Furthermore, if a creature is favored by Zeus, append " - Zeus' favorite" to its classification regardless of its danger level.
+
+Function Signature:
+```python
+mythical_creature_classification(creatures)
+```
+
+Parameters:
+    creatures (dict): A dictionary where keys are creature names and values are dictionaries with keys 'type' (str), 'danger_level' (int), and 'favored_by' (str).
+
+Returns:
+    dict: A dictionary with creature names as keys and their classification strings as values.

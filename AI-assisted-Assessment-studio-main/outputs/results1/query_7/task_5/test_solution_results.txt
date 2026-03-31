@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/test_suite_sol.py:30: AssertionError: assert ['Aegis\n', '...kness\n', ...] == ['Aegis\n', '...kness\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/test_suite_sol.py:48: AssertionError: assert ['Aegis\n', '...kness\n', ...] == ['Aegis\n', '...elmet\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/test_suite_sol.py:48: AssertionError: assert ['Aegis\n', '...Eagle\n', ...] == ['Aegis\n', '...Eagle\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/test_suite_sol.py:48: AssertionError: assert ['Aegis\n', '...'Dove\n', ...] == ['Aegis\n', '...Eagle\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/test_suite_sol.py:48: AssertionError: assert ['Aegis\n', '...'Dove\n', ...] == ['Aegis\n', '...kness\n', ...]
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_5/test_suite_sol.py::test_extract_artifacts[expected_content0]
+FAILED outputs/results1/query_7/task_5/test_suite_sol.py::test_extract_artifacts_with_new_data[Athena;Helmet\n-expected_content0]
+FAILED outputs/results1/query_7/task_5/test_suite_sol.py::test_extract_artifacts_with_new_data[Hermes;Caduceus\n-expected_content1]
+FAILED outputs/results1/query_7/task_5/test_suite_sol.py::test_extract_artifacts_with_new_data[Aphrodite;Girdle;Dove\n-expected_content2]
+FAILED outputs/results1/query_7/task_5/test_suite_sol.py::test_extract_artifacts_with_new_data[Poseidon;Trident\n-expected_content3]
+5 failed in 0.03s

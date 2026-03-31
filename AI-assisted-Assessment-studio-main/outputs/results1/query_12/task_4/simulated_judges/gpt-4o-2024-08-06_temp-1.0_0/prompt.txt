@@ -1,0 +1,104 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['File Handling and I/O', 'Selection Statements (if/else, etc.)', 'Variables', 'Loops']:
+
+### Beginning of task description
+You are tasked to create a program that helps manage a simple cookbook, focusing on input/output operations with text files. Your program should read from an input file called `recipes.txt` and output to a file called `sorted_recipes.txt`. 
+
+The input file `recipes.txt` contains a list of recipes, each starting with the recipe name, followed by ingredients and their quantity. Each piece of information is on a new line, and recipes are separated by an empty line. Each recipe name and its ingredients should take exactly one line, and the quantity information follows right after its respective ingredient. 
+
+Example of `recipes.txt` content:
+```
+Pasta
+Tomato
+2
+Garlic
+1
+
+Soup
+Water
+1
+Carrot
+3
+Tomato
+2
+```
+
+Your program should read `recipes.txt`, sort the recipes alphabetically by their names, and write them into `sorted_recipes.txt` maintaining the input format, where each piece of information is on a new line and recipes are separated by an empty line.
+
+Write a function `sort_recipes(input_file, output_file)`, which takes the input and output file names as arguments. The function should perform the tasks as described to produce the required output.
+
+Make sure that your program handles the input and output files appropriately and ensures that the output is in the specified format.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import sort_recipes
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as f:
+        f.write('Pasta\nTomato\n2\nGarlic\n1\n\n')
+        f.write('Soup\nWater\n1\nCarrot\n3\nTomato\n2\n\n')
+        f.write('Salad\nLettuce\n1\nTomato\n1\nCucumber\n2\n')
+
+def teardown_module(module):
+    os.remove('recipes.txt')
+    if os.path.exists('sorted_recipes.txt'):
+        os.remove('sorted_recipes.txt')
+
+
+def test_basic_sorting():
+    sort_recipes('recipes.txt', 'sorted_recipes.txt')
+    with open('sorted_recipes.txt', 'r') as f:
+        content = f.read()
+    expected_content = ('Pasta\nTomato\n2\nGarlic\n1\n\n'
+                        'Salad\nLettuce\n1\nTomato\n1\nCucumber\n2\n\n'
+                        'Soup\nWater\n1\nCarrot\n3\nTomato\n2\n')
+    assert content == expected_content
+
+
+def test_no_input_file():
+    if os.path.exists('non_existing_file.txt'):
+        os.remove('non_existing_file.txt')
+    with pytest.raises(FileNotFoundError):
+        sort_recipes('non_existing_file.txt', 'sorted_recipes.txt')
+
+
+def test_empty_file():
+    with open('empty_recipes.txt', 'w') as f:
+        f.write('')
+    sort_recipes('empty_recipes.txt', 'sorted_recipes.txt')
+    with open('sorted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content == ''
+    os.remove('empty_recipes.txt')
+
+
+def test_single_recipe():
+    with open('single_recipe.txt', 'w') as f:
+        f.write('Bread\nFlour\n2\nWater\n1\n')
+    sort_recipes('single_recipe.txt', 'sorted_recipes.txt')
+    with open('sorted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content == 'Bread\nFlour\n2\nWater\n1\n'
+    os.remove('single_recipe.txt')
+
+
+def test_multiple_recipes_same_name():
+    with open('same_name_recipes.txt', 'w') as f:
+        f.write('Pie\nApple\n3\nFlour\n1\n\nPie\nPeach\n4\nSugar\n2\n')
+    sort_recipes('same_name_recipes.txt', 'sorted_recipes.txt')
+    with open('sorted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content == ('Pie\nApple\n3\nFlour\n1\n\n'
+                       'Pie\nPeach\n4\nSugar\n2\n')
+    os.remove('same_name_recipes.txt')
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

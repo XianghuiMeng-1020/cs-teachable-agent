@@ -1,0 +1,18 @@
+Create a Python program that manages a collection of mythical creatures. Each creature has the following attributes: 'name', 'type' (e.g., dragon, unicorn), 'origin' (e.g., Greek, Norse), and 'power'. Implement your program such that it allows: 
+
+1. Adding a new mythical creature with its details.
+2. Saving all creatures to a file, each line in the format: "name,type,origin,power".
+3. Loading creatures from a file, reading them into a collection.
+
+You need to define a class `MythicalCreature` to represent each creature and a class `CreatureManager` to handle the collection of creatures.
+
+- `MythicalCreature` class should have attributes for the creature's details.
+- `CreatureManager` class should have methods to add a creature, save to file, and load from file.
+
+Function signatures you must implement are:
+
+- `class MythicalCreature` with initialization for the attributes.
+- `class CreatureManager` with:
+  - `add_creature(self, name, type, origin, power)`: Adds a new creature.
+  - `save_to_file(self, filename)`: Saves all creatures to the given file.
+  - `load_from_file(self, filename)`: Loads all creatures from the given file.

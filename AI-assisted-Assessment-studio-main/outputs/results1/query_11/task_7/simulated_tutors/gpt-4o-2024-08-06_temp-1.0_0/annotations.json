@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_spices(dishes):\n    # Initialize the spice amounts for each category\n    mild = 0\n    medium = 0\n    hot = 0\n    extra_hot = 0\n    \n    # Dictionary to map dishes to their spice requirements\n    spice_requirements = {\n        'Salad': 2,   # Mild spice\n        'Soup': 3,    # Medium spice\n        'Curry': 5,   # Hot spice\n        'Grill': 7   # Extra Hot spice\n    }\n\n    # Iterate over each dish in the list\n    for dish in dishes:\n        if dish == 'Salad':\n            mild += spice_requirements[dish]\n        elif dish == 'Soup':\n            medium += spice_requirements[dish]\n        elif dish == 'Curry':\n            hot += spice_requirements[dish]\n        elif dish == 'Grill':\n            extra_hot += spice_requirements[dish]\n          \n    # Return the total spice amounts in the specified order\n    return [mild, medium, hot, extra_hot]",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,47 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+In a far-future galaxy, humans and robots are working together in harmony. One of the tasks in this utopian society is mining precious crystals from distant asteroids. Each mining expedition collects raw ores, and it's your job to analyze the data and determine the total weight of different types of crystals discovered.
+
+You are given a list of integers `mining_data` representing the weights of raw ores gathered by the mining team. The task is to write a function `calculate_crystal_weights(mining_data)` that processes this list.
+
+Each even number in the list represents the weight of a `Glimmer Crystal` and each odd number represents the weight of a `Shadow Crystal`. Your function should return a tuple with two integers: the total weight of `Glimmer Crystals` and the total weight of `Shadow Crystals`.
+
+### Function Signature
+```
+def calculate_crystal_weights(mining_data):
+    pass
+```
+
+The function should be tested with various test cases to ensure it handles edge cases and performs correctly for a variety of inputs.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_crystal_weights
+
+def test_calculate_crystal_weights_normal_case():
+    assert calculate_crystal_weights([4, 9, 6, 3, 10, 15, 2]) == (22, 27)
+
+def test_calculate_crystal_weights_all_glimmer():
+    assert calculate_crystal_weights([2, 4, 6]) == (12, 0)
+
+def test_calculate_crystal_weights_all_shadow():
+    assert calculate_crystal_weights([1, 3, 5, 7]) == (0, 16)
+
+def test_calculate_crystal_weights_empty_list():
+    assert calculate_crystal_weights([]) == (0, 0)
+
+def test_calculate_crystal_weights_mixed_case():
+    assert calculate_crystal_weights([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) == (20, 25)
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

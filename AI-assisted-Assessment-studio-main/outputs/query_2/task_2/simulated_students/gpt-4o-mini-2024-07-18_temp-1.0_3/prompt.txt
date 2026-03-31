@@ -1,0 +1,36 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description:
+
+You have been tasked with creating a program to manage and display recipes. Your program will read a text file containing recipe details, process the data, and provide a lookup functionality by categories. The recipe file is organized as follows:
+
+- Each line in the file represents a recipe entry.
+- Each entry contains the following fields separated by a semicolon `;`:
+  - Recipe Name: Name of the dish
+  - Ingredients: Comma-separated list of ingredients
+  - Preparation Time: Time required for preparing the dish
+  - Category: The category of dish (e.g., appetizer, main course, dessert)
+
+Write a function `get_recipes_by_category(filename, category_name)` that:
+- Takes the name of the file containing recipes and a string `category_name`.
+- Reads and processes the file to retrieve recipes belonging to the specified category.
+- Returns a list of strings, where each string is a recipe's name belonging to the specified category.
+
+Your program should handle cases where:
+- The specified file does not exist.
+- There are no recipes in the given category.
+- Recipe entries do not strictly follow the expected format.
+
+### Requirements
+
+- Your program should handle invalid or corrupted lines gracefully (e.g., lines not having the expected number of fields)
+- Your program should return an empty list in cases where no recipes match the specified category or the file is empty or cannot be read.
+
+Provide a full solution including a test suite for your function.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

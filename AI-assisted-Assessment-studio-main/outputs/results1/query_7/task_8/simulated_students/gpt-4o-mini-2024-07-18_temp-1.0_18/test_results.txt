@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py F [ 16%]
+FFFF.                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:27: AssertionError: assert set() == {'Achilles', ... 'Prometheus'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:67: AssertionError: assert {'Hercules', ...heus', 'Thor'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:67: AssertionError: assert {'Thor'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:67: AssertionError: assert {'Achilles', ... 'Prometheus'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:67: AssertionError: assert set() == {'Achilles', 'Hercules'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_extract_entities[mythology_stories.txt-expected0]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_edge_cases[<lambda>-expected0]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_edge_cases[<lambda>-expected2]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+========================= 5 failed, 1 passed in 0.14s ==========================

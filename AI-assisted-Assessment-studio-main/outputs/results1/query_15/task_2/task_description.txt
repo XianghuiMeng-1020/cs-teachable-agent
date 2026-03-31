@@ -1,0 +1,11 @@
+In a distant future, humans have settled on various planets across the galaxy. Each planet has a specific algorithm to determine a planet's daily weather status based on a series of atmospheric readings. Your task is to implement the function `determine_weather(readings, threshold)`.
+
+The function takes two arguments:
+- `readings`: A list of integers representing atmospheric readings from low orbit scanners for a specific planet on a given day.
+- `threshold`: An integer value that determines the cutoff between 'Calm' and 'Stormy' weather.
+
+The function should return a string representing the day's weather:
+- If more than 50% of the reading values are above the `threshold`, the weather is considered 'Stormy'.
+- If 50% or less of the readings exceed the `threshold`, the weather is 'Calm'.
+
+Your solution will be tested against several sets of readings and thresholds to ensure correctness.

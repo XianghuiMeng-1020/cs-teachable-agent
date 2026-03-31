@@ -1,0 +1,103 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+### Task Description
+In ancient mythology, demigods manage the tasks of both gods and humans. To keep track of these tasks, we have records stored in a text file named `tasks.txt`. Each line in this file represents a task in the following format:
+
+```
+{name},{type},{priority}
+```
+- `name` is the name of the task (a string without spaces).
+- `type` is either 'mortal' or 'divine'.
+- `priority` is an integer representing the task's priority level (1 being the highest priority).
+
+Your task is to write a Python function `demigod_tasks(filename)` which reads the `tasks.txt` file and returns a dictionary summarizing tasks by type. The keys of the dictionary should be 'mortal' and 'divine'. The value for each key should be a tuple with the total number of tasks of that type and their average priority (rounded down to the nearest integer).
+
+### Example
+For a file `tasks.txt` with the following content:
+
+```
+HuntCreatures,mortal,3
+ChariotRace,divine,2
+FireCrafting,divine,1
+ConstructShelters,mortal,1
+
+```
+
+The function `demigod_tasks(filename)` should return:
+
+```
+{
+  'mortal': (2, 2),
+  'divine': (2, 1)
+}
+```
+
+### Note
+- The file may include empty lines which should be ignored.
+- If there are no tasks of a type, the dictionary should contain that type with a value of (0, 0).
+- Consider using arithmetic operators for calculations, and selection statements to handle the types of tasks.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import demigod_tasks
+
+
+def setup_module(module):
+    data = (
+        "HuntCreatures,mortal,3\n"
+        "ChariotRace,divine,2\n"
+        "FireCrafting,divine,1\n"
+        "ConstructShelters,mortal,1\n"
+    )
+    with open("tasks.txt", "w") as f:
+        f.write(data)
+
+
+def teardown_module(module):
+    os.remove("tasks.txt")
+
+
+def test_sample_tasks():
+    assert demigod_tasks("tasks.txt") == {'mortal': (2, 2), 'divine': (2, 1)}
+
+
+def test_empty_file():
+    with open("tasks_empty.txt", "w") as f:
+        f.write("")
+    assert demigod_tasks("tasks_empty.txt") == {'mortal': (0, 0), 'divine': (0, 0)}
+    os.remove("tasks_empty.txt")
+
+
+def test_no_mortal_tasks():
+    with open("tasks_no_mortal.txt", "w") as f:
+        f.write("ChariotRace,divine,2\nFireCrafting,divine,4\n")
+    assert demigod_tasks("tasks_no_mortal.txt") == {'mortal': (0, 0), 'divine': (2, 3)}
+    os.remove("tasks_no_mortal.txt")
+
+
+def test_no_divine_tasks():
+    with open("tasks_no_divine.txt", "w") as f:
+        f.write("HunterQuest,mortal,5\nConstructShelters,mortal,1\n")
+    assert demigod_tasks("tasks_no_divine.txt") == {'mortal': (2, 3), 'divine': (0, 0)}
+    os.remove("tasks_no_divine.txt")
+
+
+def test_ignore_empty_lines():
+    with open("tasks_with_empty_lines.txt", "w") as f:
+        f.write("\n\nSeekWisdom,divine,1\nRidePegasus,mortal,4\n\n")
+    assert demigod_tasks("tasks_with_empty_lines.txt") == {'mortal': (1, 4), 'divine': (1, 1)}
+    os.remove("tasks_with_empty_lines.txt")
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

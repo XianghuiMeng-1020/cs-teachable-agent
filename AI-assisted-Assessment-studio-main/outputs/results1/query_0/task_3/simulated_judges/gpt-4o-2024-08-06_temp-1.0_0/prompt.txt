@@ -1,0 +1,93 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task: Game of Chance Log Analyzer
+
+You are tasked with implementing a function `analyze_game_results(input_file)` that reads a text file containing the results of a game of chance. The file is structured such that each line represents a game round with the following format: `PlayerName,Outcome`. The `Outcome` is either "win" or "lose".
+
+Your function should:
+1. Calculate and return a string summarizing the game results in the format: `"PlayerName: Wins-Losses"` for each player who has played at least one round. The output should list each player's summary on a new line.
+2. If a player does not have any wins, the result should be represented as `"0"` and likewise `"0"` for losses.
+3. The function should ensure that the players’ names are sorted alphabetically in the output.
+
+### Example:
+Given a file 'game_results.txt' with the content:
+```
+Alice,win
+Bob,lose
+Alice,lose
+Bob,win
+Bob,lose
+Alice,win
+```
+
+Calling `analyze_game_results('game_results.txt')` should return the following string:
+```
+Alice: 2-1
+Bob: 1-2
+```
+
+### Constraints:
+- Each player's games are recorded on separate lines in the file.
+- Player names are case-sensitive and can contain spaces.
+- The file will have at least one line of valid data.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import analyze_game_results
+
+def setup_module(module):
+    with open('test1.txt', 'w') as f:
+        f.write('Alice,win\nBob,lose\nAlice,lose\nBob,win\nBob,lose\nAlice,win\n')
+    with open('test2.txt', 'w') as f:
+        f.write('Charles,win\nAlice,lose\nCharles,lose\nAlice,win\nAlice,lose\n')
+    with open('test3.txt', 'w') as f:
+        f.write('Dave,lose\nEve,win\nFiona,lose\nEve,lose\nFiona,win\nFiona,win\n')
+    with open('test4.txt', 'w') as f:
+        f.write('George,win\nHannah,lose\nGeorge,win\nGeorge,win\n')
+    with open('test5.txt', 'w') as f:
+        f.write('')
+
+def teardown_module(module):
+    os.remove('test1.txt')
+    os.remove('test2.txt')
+    os.remove('test3.txt')
+    os.remove('test4.txt')
+    os.remove('test5.txt')
+
+
+def test_analyze_game_results_1():
+    result = analyze_game_results('test1.txt')
+    assert result == 'Alice: 2-1\nBob: 1-2'
+
+
+def test_analyze_game_results_2():
+    result = analyze_game_results('test2.txt')
+    assert result == 'Alice: 1-2\nCharles: 1-1'
+
+
+def test_analyze_game_results_3():
+    result = analyze_game_results('test3.txt')
+    assert result == 'Dave: 0-1\nEve: 1-1\nFiona: 2-1'
+
+
+def test_analyze_game_results_4():
+    result = analyze_game_results('test4.txt')
+    assert result == 'George: 3-0\nHannah: 0-1'
+
+
+def test_analyze_game_results_empty():
+    result = analyze_game_results('test5.txt')
+    assert result == ''
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,98 @@
+{
+  "item_id": "task_0-dropdown",
+  "source_task_id": "task_0",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_4/task_0",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for calculate_scores",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n### Task Description: You are part of a team developing a board game scoring system. Each player in the board game has both positive and negative scores collected during gameplay. You need to write a Python program that calculates and returns the total score of each player. Your program should define a function `calculate_scores(player_scores)` that takes in a dictionary, `player_scores`, where the keys are strings representing player names, and the values are lists of integers representing t...",
+  "interaction_content": {
+    "function_name": "calculate_scores",
+    "prompt_template": "def calculate_scores(__BLANK_2__):\n    __BLANK_3__ = {}\n    for player, scores in player_scores.items():\n        total = __BLANK_1__\n        for score in scores:\n            total += score\n        total_scores[player] = total\n    return total_scores",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "0",
+          "1",
+          "-1",
+          "2"
+        ],
+        "correct_answer": "0",
+        "misconception_tags": {
+          "1": "off_by_one_or_default_value",
+          "-1": "off_by_one_or_default_value",
+          "2": "off_by_one_or_default_value"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "player_scores",
+          "calculate_scores",
+          "total_scores",
+          "player"
+        ],
+        "correct_answer": "player_scores",
+        "misconception_tags": {
+          "calculate_scores": "variable_reference_confusion",
+          "total_scores": "variable_reference_confusion",
+          "player": "variable_reference_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "total_scores",
+          "calculate_scores",
+          "player_scores",
+          "player"
+        ],
+        "correct_answer": "total_scores",
+        "misconception_tags": {
+          "calculate_scores": "variable_reference_confusion",
+          "player_scores": "variable_reference_confusion",
+          "player": "variable_reference_confusion"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "0",
+      "blank_2": "player_scores",
+      "blank_3": "total_scores"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Board Games",
+    "concepts": [
+      "Variables",
+      "Arithmetic Operators",
+      "Selection Statements (if/else, etc.)",
+      "Loops",
+      "Dictionaries"
+    ],
+    "quality_metrics": {
+      "task": "task_0",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,4 @@
+{
+    "program": "def dispatch_cargo(cargo_requests):\n    # Sum up all requests to get the total cargo available\n    total_cargo = sum(cargo_requests.values())\n    systems_with_demand = 0\n    leftover_cargo = 0\n\n    # Count systems with demand and calculate leftover cargo\n    for system, demand in cargo_requests.items():\n        if demand > 0:\n            systems_with_demand += 1\n\n    # If there's leftover cargo, it must be zero because total cargo matches the demand\n    leftover_cargo = 0 if total_cargo == sum(cargo_requests.values()) else total_cargo - systems_with_demand\n\n    return {\n        'systems_with_cargo': systems_with_demand,\n        'leftover_cargo': leftover_cargo\n    }",
+    "context_relevance": 1.0
+}

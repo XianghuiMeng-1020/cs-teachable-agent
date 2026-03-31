@@ -1,0 +1,37 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Your task is to create a Python program that simulates a simple leaderboard for a board game tournament. The tournament consists of games where players earn points. You need to implement a function `update_leaderboard(rounds)` that accepts a list of dictionaries, each representing a game and containing player names as keys and their respective points as values for that round.
+
+The program should maintain a cumulative leaderboard where each player's total score accumulates across all rounds. The leaderboard should be stored as a dictionary, with player names as keys and their total scores as values. The function should return the final leaderboard sorted in descending order based on total scores.
+
+Assume each round always contains contributions from the same set of players. If two players have the same score, sort them alphabetically by their name.
+
+Function signature:
+
+```python
+def update_leaderboard(rounds):
+    pass
+```
+
+Example:
+
+```python
+rounds = [
+    {'Alice': 10, 'Bob': 15, 'Charlie': 5},
+    {'Alice': 20, 'Bob': 10, 'Charlie': 15},
+    {'Alice': 5, 'Bob': 25, 'Charlie': 10}
+]
+
+# The cumulative leaderboard after all rounds should be:
+# {'Bob': 50, 'Alice': 35, 'Charlie': 30}
+# Bob has the highest score, followed by Alice and Charlie.
+
+assert update_leaderboard(rounds) == {'Bob': 50, 'Alice': 35, 'Charlie': 30}
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

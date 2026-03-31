@@ -1,0 +1,21 @@
+Create a Python program to manage a text database of mythology gods. The database will store information about each god, specifically their 'name', 'domain', and 'origin' (e.g., Greek, Norse). Implement the following:
+
+1. A class `MythologyDatabase` with methods to:
+   - Add a new god to the database.
+   - Remove a god by name.
+   - Search for a god by name and return their details.
+   - Save the database to a file.
+   - Load the database from a file.
+
+2. A text file named `mythology_db.txt` should be used to store information about the gods, each entry on a new line in the format: "name;domain;origin".
+
+Ensure your program handles file I/O correctly and can deal with an empty database or file.
+
+Functions needed:
+- `add_god(self, name, domain, origin)`: Adds a new god with the specified name, domain, and origin to the database.
+- `remove_god(self, name)`: Removes the god with the given name from the database.
+- `search_god(self, name)`: Returns a string of the god's details if found, otherwise returns "Not Found".
+- `save_to_file(self, filename)`: Saves the current state of the database to the given filename.
+- `load_from_file(self, filename)`: Loads database entries from the given filename.
+
+Write tests using pytest to ensure that all functions work as expected, especially checking that the file handling works correctly.

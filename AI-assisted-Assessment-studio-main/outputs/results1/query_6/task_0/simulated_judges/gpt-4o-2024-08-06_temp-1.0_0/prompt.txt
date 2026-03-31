@@ -1,0 +1,92 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Create a Python program that models a simple textual database of mythological creatures. Each creature has a name, origin (such as Greek, Norse, etc.), and a brief description. The program must support adding new creatures, listing all creatures, and saving/loading the creatures to/from a file.
+
+Implement a class `MythicalCreature` with attributes `name`, `origin`, and `description`. Provide a method `__str__` which returns a string representation in the format: `'Name: [name], Origin: [origin], Description: [description]'`.
+
+Implement a class `MythicalDatabase` that maintains a list of `MythicalCreature` objects. This class should implement the following methods:
+- `add_creature(name, origin, description)`: Adds a new creature to the database.
+- `list_creatures()`: Returns a list of string representations of all creatures in the database.
+- `save_to_file(filename)`: Saves all creatures to a file with one creature per line, using the format `name|origin|description`.
+- `load_from_file(filename)`: Loads creatures from a file and adds them to the database, parsing each line into a `MythicalCreature` object.
+
+Your program should not produce any output or take any input by itself. It is intended to be tested through its methods.
+
+The program will be evaluated based on the functionality of the implemented methods, especially in handling file operations accurately.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythicalCreature, MythicalDatabase
+
+CREATURES_FILE = 'test_creatures.txt'
+
+# Setup and teardown functions for file creation and removal
+def setup_module(module):
+    with open(CREATURES_FILE, 'w') as f:
+        f.write('Fenrir|Norse|A monstrous wolf\n')
+        f.write('Medusa|Greek|A Gorgon with snakes for hair\n')
+
+def teardown_module(module):
+    os.remove(CREATURES_FILE)
+
+# Test cases
+def test_add_creature():
+    db = MythicalDatabase()
+    db.add_creature('Phoenix', 'Greek', 'A firebird that regenerates')
+    assert len(db.list_creatures()) == 1
+    assert db.list_creatures()[0] == 'Name: Phoenix, Origin: Greek, Description: A firebird that regenerates'
+
+
+def test_list_creatures():
+    db = MythicalDatabase()
+    db.add_creature('Cerberus', 'Greek', 'A three-headed dog')
+    db.add_creature('Jormungandr', 'Norse', 'The world serpent')
+    creatures = db.list_creatures()
+    assert len(creatures) == 2
+    assert creatures[0] == 'Name: Cerberus, Origin: Greek, Description: A three-headed dog'
+    assert creatures[1] == 'Name: Jormungandr, Origin: Norse, Description: The world serpent'
+
+
+def test_save_to_file():
+    db = MythicalDatabase()
+    db.add_creature('Cerberus', 'Greek', 'A three-headed dog')
+    db.add_creature('Jormungandr', 'Norse', 'The world serpent')
+    db.save_to_file('output_creatures.txt')
+    with open('output_creatures.txt', 'r') as f:
+        lines = f.readlines()
+    os.remove('output_creatures.txt')
+    assert len(lines) == 2
+    assert lines[0].strip() == 'Cerberus|Greek|A three-headed dog'
+    assert lines[1].strip() == 'Jormungandr|Norse|The world serpent'
+
+
+def test_load_from_file():
+    db = MythicalDatabase()
+    db.load_from_file(CREATURES_FILE)
+    creatures = db.list_creatures()
+    assert len(creatures) == 2
+    assert creatures[0] == 'Name: Fenrir, Origin: Norse, Description: A monstrous wolf'
+    assert creatures[1] == 'Name: Medusa, Origin: Greek, Description: A Gorgon with snakes for hair'
+
+
+def test_append_after_loading():
+    db = MythicalDatabase()
+    db.load_from_file(CREATURES_FILE)
+    db.add_creature('Phoenix', 'Greek', 'A firebird that regenerates')
+    creatures = db.list_creatures()
+    assert len(creatures) == 3
+    assert creatures[2] == 'Name: Phoenix, Origin: Greek, Description: A firebird that regenerates'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

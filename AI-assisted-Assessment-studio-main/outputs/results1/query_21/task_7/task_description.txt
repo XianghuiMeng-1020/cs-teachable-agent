@@ -1,0 +1,21 @@
+You are to create a simple Python program that manages a collection of board games. Your program should manage board game information and store it persistently in a file. The following are the details of the task:
+
+1. **Class Definition**: Create a class named `BoardGame` with the following attributes:
+   - `name`: a string representing the name of the board game.
+   - `min_players`: an integer representing the minimum number of players required.
+   - `max_players`: an integer representing the maximum number of players allowed.
+
+2. **Class Methods**:
+   - A method `__str__` that returns a string representation of the board game in the format: `"name (min:max players)"`.
+
+3. **File Handling**:
+   - Write a function `save_board_games` that takes a list of `BoardGame` objects and saves them into a file named `board_games.txt`. Each board game should be stored on a new line in the file following the format: "name,min_players,max_players".
+   - Write another function `load_board_games` that reads from `board_games.txt` and returns a list of `BoardGame` objects.
+
+4. **Function Signatures**:
+   - `save_board_games(board_games)`: Save the list of board games to a file.
+   - `load_board_games() -> list`: Load and return the list of board games from a file.
+
+Ensure that all file I/O operations handle relevant exceptions gracefully. You should not implement the main method or code to initiate execution, just the classes and functions.
+
+This program will be tested with specific inputs and the correctness will be determined by comparing the output to expected outcomes based on these inputs.

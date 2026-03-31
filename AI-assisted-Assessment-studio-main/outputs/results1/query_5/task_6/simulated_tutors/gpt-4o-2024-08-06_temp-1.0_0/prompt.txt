@@ -1,0 +1,95 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+### Task
+You are a scribe in a mystical library dedicated to mythology. Your task is to create a program that reads from a text file containing the legends of different mythological characters. Each legend is preceded by a character's name on its own line and followed by a line containing just the word "END".
+
+Your program should parse this file to determine the character with the longest legend based on the number of words, and write this character's name along with their legend into a new output file called `longest_legend.txt`.
+
+### Input
+- A text file `mythology_legends.txt` with the following structure:
+```
+Achilles
+His strength is unparalleled. Known as the hero of the Trojan War.
+END
+Hercules
+This son of Zeus is famous for his incredible strength and for completing the Twelve Labors.
+END
+...
+```
+
+### Output
+- A file `longest_legend.txt` containing the name of the character followed by their longest legend.
+
+### Requirements
+- The program must correctly identify and handle multiple characters and their respective legends.
+- The legends must be compared based on the number of words.
+
+### Function Signature
+Implement the function `find_longest_legend(input_filepath: str, output_filepath: str):`
+
+Use this function to process `mythology_legends.txt` and generate `longest_legend.txt`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import find_longest_legend
+
+def setup_module(module):
+    with open('mythology_legends.txt', 'w') as f:
+        f.write('Achilles\nHis strength is unparalleled. Known as the hero of the Trojan War.\nEND\n')
+        f.write('Hercules\nThis son of Zeus is famous for his incredible strength and for completing the Twelve Labors.\nEND\n')
+        f.write('Thor\nThe hammer-wielding god associated with thunder protects the Norse gods. His might is unchallenged.\nEND\n')
+        f.write('Athena\nGoddess of wisdom, courage, and warfare, Athena is revered for her strategic skill in battle.\nEND\n')
+
+
+def teardown_module(module):
+    try:
+        os.remove('mythology_legends.txt')
+        os.remove('longest_legend.txt')
+    except OSError:
+        pass
+
+
+def test_longest_legend():
+    find_longest_legend('mythology_legends.txt', 'longest_legend.txt')
+    with open('longest_legend.txt', 'r') as f:
+        content = f.read()
+    assert content.startswith('Hercules\n')
+
+
+def test_longest_legend_content():
+    find_longest_legend('mythology_legends.txt', 'longest_legend.txt')
+    with open('longest_legend.txt', 'r') as f:
+        content = f.read()
+    assert 'Hercules' in content
+    assert 'Twelve Labors' in content
+
+
+def test_output_file_creation():
+    find_longest_legend('mythology_legends.txt', 'longest_legend.txt')
+    assert os.path.exists('longest_legend.txt')
+
+
+def test_correct_handling_of_lines():
+    find_longest_legend('mythology_legends.txt', 'longest_legend.txt')
+    with open('longest_legend.txt', 'r') as f:
+        content = f.read().strip().split('\n')
+    assert len(content) == 3
+
+
+def test_legend_word_count():
+    with open('mythology_legends.txt', 'w') as f:
+        f.write('Odin\nFather of the Aesir, deity of war and poetry.\nEND\n')
+        f.write('Hera\nQueen of the gods, protector of marriage. Known for her jealousy and vindictiveness.\nEND\n')
+    find_longest_legend('mythology_legends.txt', 'longest_legend.txt')
+    with open('longest_legend.txt', 'r') as f:
+        content = f.read()
+    assert content.startswith('Hera\n')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

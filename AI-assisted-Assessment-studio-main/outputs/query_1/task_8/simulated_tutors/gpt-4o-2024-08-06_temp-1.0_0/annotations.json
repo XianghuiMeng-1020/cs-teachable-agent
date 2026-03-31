@@ -1,0 +1,4 @@
+{
+    "program": "def pantheon_oracle(adventure_logs):\n    current_creature = None\n    current_count = 0\n    fortune = 0\n\n    for creature in adventure_logs:\n        if creature == current_creature:\n            current_count += 1\n            if current_count == 2:\n                fortune -= 5  # False Echo\n            elif current_count == 3:\n                fortune += 10  # Summon\n            elif current_count == 7:\n                fortune += 30  # Divine Revelation\n                current_count = 0  # Reset the count after revelation\n        else:\n            current_creature = creature\n            current_count = 1\n\n    return fortune",
+    "context_relevance": 1.0
+}

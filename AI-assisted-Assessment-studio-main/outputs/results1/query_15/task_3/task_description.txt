@@ -1,0 +1,17 @@
+In the year 3050, the Galaxy Alliance monitors more than 100 starships undertaking various missions across the universe. Each starship reports its status back to the central command. The command center maintains a log of the operational starships, listing them by their names and their fuel levels.
+
+You are tasked with developing a Python function `active_starships(log_lines)`. This function processes a list of strings where each string contains the name of the starship and its fuel level separated by a space. A starship is considered operational if its fuel level is greater than 50. The function should return a list of names of these operational starships in alphabetical order.
+
+Function signature: `def active_starships(log_lines):`
+
+**Parameters:**
+- `log_lines`: A list of strings. Each string is in the format `"<starship_name> <fuel_level>"` where `<starship_name>` is a non-empty string and `<fuel_level>` is an integer.
+
+**Returns:**
+- Return a list of names of the starships that have a fuel level greater than 50, sorted in alphabetical order.
+
+Example:
+```python
+active_starships(["Enterprise 75", "Discovery 35", "Voyager 60"])
+# Output: ["Enterprise", "Voyager"]
+```

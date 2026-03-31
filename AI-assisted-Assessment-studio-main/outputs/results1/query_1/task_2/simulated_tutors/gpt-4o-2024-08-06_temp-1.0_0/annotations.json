@@ -1,0 +1,4 @@
+{
+    "program": "def spin_wheel(bet_list, target_number):\n    total_winnings = 0\n    \n    for bet_number, bet_amount in bet_list:\n        if bet_number == target_number:  # Selection Statement\n            total_winnings += bet_amount * 10  # Arithmetic Operator\n            \n    return total_winnings\n\n# Example usage\nbets = [(5, 10), (12, 20), (18, 5)]\ntarget = 7\nprint(spin_wheel(bets, target))  # Output should be 0 as there is no match",
+    "context_relevance": 0.0
+}

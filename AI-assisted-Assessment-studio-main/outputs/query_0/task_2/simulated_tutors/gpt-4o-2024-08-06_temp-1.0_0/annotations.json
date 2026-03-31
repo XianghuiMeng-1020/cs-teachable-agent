@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\n# Function to simulate the game of chance\ndef play_game(file_path):\n    results = []\n\n    with open(file_path, 'r') as file:\n        for line in file:\n            player_name, bet_number = line.strip().split(\":\")\n            bet_number = int(bet_number)\n\n            # Simulate dice roll (using a fixed pattern for predictability)\n            simulated_roll = (bet_number + 2) % 6 + 1  # generates a number 1-6\n\n            # Determine if the player wins or loses\n            if bet_number == simulated_roll:\n                results.append(f\"{player_name}:win\")\n            else:\n                results.append(f\"{player_name}:lose\")\n\n    # Write results back to the same file\n    with open(file_path, 'w') as file:\n        for result in results:\n            file.write(result + '\\n')\n\n### End of solution\n",
+    "context_relevance": 1.0
+}

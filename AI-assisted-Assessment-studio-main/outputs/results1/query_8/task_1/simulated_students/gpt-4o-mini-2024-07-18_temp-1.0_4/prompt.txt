@@ -1,0 +1,22 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In the realm of ancient mythology, heroes often undertake journeys inspired by divine beings. In this task, you will write a function `interpret_omens` godded by mythology, which helps a hero interpret omens from various gods. Each god can represent an omen favoring a certain realm, element, or adventure.
+
+The function `interpret_omens(omens)` takes a dictionary `omens`, where each key is a string representing the name of a god, and the value is a string representing the type of omen (`"Victory"`, `"Defeat"`, or `"Neutral"`).
+
+You need to compute the overall outcome based on these omens. The program will invoke this function by passing omens into it and asserting the result. The desired outcome should be:
+- If more gods predict "Victory", return the string "Triumph approaches!"
+- If more gods predict "Defeat", return the string "Danger looms ahead!"
+- If the number of "Victory" and "Defeat" predictions are equal, or all are "Neutral", return "Path is uncertain".
+
+### Example:
+interpret_omens({'Zeus': 'Victory', 'Hades': 'Defeat'}) should return "Path is uncertain".
+
+The function should be tested with various dictionaries to validate functionality.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

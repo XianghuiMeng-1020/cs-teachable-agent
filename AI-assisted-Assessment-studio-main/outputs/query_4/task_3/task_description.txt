@@ -1,0 +1,14 @@
+### Task Description
+Create a function `calculate_player_scores(players, scores)` that calculates and returns the total score for each player in a board game session. The `players` list contains the names of players, while `scores` is a list of lists, where each inner list corresponds to a series of scores for a player. The task is to sum up the scores for each player and return a dictionary with player names as keys and their total scores as values.
+
+#### Constraints
+- The length of `players` is equal to the length of `scores`.
+- Each inner list in `scores` contains integers representing scores from individual rounds.
+- The function must return a dictionary containing player names and their total scores.
+
+#### Example:
+```python
+players = ['Alice', 'Bob', 'Charlie']
+scores = [[10, 20, 30], [15, 25], [5, 10, 5, 10]]
+assert calculate_player_scores(players, scores) == {'Alice': 60, 'Bob': 40, 'Charlie': 30}
+```

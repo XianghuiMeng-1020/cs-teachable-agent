@@ -1,0 +1,46 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+The board game club at a community center wants to organize game sessions for their members. They need a Python program to help manage registrations and leaderboards for three popular board games: Chess, Scrabble, and Monopoly.
+
+Your task is to create a function called `register_and_rank(players)`. The function takes a dictionary input `players` where keys are player names and values are dictionaries consisting of `game` played and `score`. Each player can play only one game per session.
+
+The function should perform the following operations:
+1. Calculate the highest score for each game.
+2. Generate a leaderboard list for each game, listing player names in descending order of their scores.
+3. Return a dictionary with game names as keys and tuples as values. Each tuple should contain the name of the highest scoring player for that game and the leaderboard list.
+
+### Example:
+
+Given the input:
+```python
+players = {
+  'Alice': {'game': 'Chess', 'score': 200},
+  'Bob': {'game': 'Scrabble', 'score': 300},
+  'Cathy': {'game': 'Chess', 'score': 250},
+  'David': {'game': 'Monopoly', 'score': 150},
+}
+```
+
+The function should return:
+```python
+{
+  'Chess': ('Cathy', ['Cathy', 'Alice']),
+  'Scrabble': ('Bob', ['Bob']),
+  'Monopoly': ('David', ['David']),
+}
+```
+
+### Requirements:
+- Implement the solution using only Variables, Arithmetic Operators, Selection Statements, Loops, and Dictionaries.
+- Input will always be a valid dictionary as described above.
+- Assume unique scores per game per session.
+- Players' leaderboard should be in descending order of scores.
+- The highest scoring player's name should appear at the beginning of the leaderboard list.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

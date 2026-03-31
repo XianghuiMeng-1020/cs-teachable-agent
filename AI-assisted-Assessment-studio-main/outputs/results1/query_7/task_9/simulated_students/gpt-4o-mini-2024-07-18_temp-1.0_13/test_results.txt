@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_whitespaces_around_hyphen ______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythology_stories.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:47: FileNotFoundError: [Errno 2] No such file or directory: 'empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:63: FileNotFoundError: [Errno 2] No such file or directory: 'single_output.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:76: AssertionError: assert '' == 'ATLANTIS A L...EN ISLAND. - '
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:92: FileNotFoundError: [Errno 2] No such file or directory: 'whitespace.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_empty_file
+FAILED outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_single_entry
+FAILED outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_no_hyphen_line
+FAILED outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_whitespaces_around_hyphen
+ERROR outputs/results1/query_7/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_whitespaces_around_hyphen
+===================== 4 failed, 1 passed, 1 error in 0.20s =====================

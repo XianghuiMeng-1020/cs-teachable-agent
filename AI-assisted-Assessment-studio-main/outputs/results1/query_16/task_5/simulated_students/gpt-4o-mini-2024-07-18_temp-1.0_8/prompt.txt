@@ -1,0 +1,34 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a distant future, on a space station orbiting a distant planet, a new form of literature is born. "Sci-Fi Haikus" have become a popular art form, combining mathematical precision with creative storytelling. Your task is to create a class called `SciFiHaiku` that will generate these haikus based on a given input.
+
+A Sci-Fi Haiku consists of three lines where the first and third lines have 5 characters each, and the second line has 7 characters. Due to the limitations of technology in space, certain characters are used in specific arrangements as mathematical expressions.
+
+Your `SciFiHaiku` class should include:
+
+- A constructor that initializes the haiku text. This text must be a combination of expressions and words.
+- A method `generate_haiku()` that will split the raw text into three lines according to the 5-7-5 pattern and evaluate any simple arithmetic expressions. Ensure that lines maintain their character counts of 5, 7, and 5.
+- A method `evaluate_expressions()` that evaluates and replaces any arithmetic expressions in the haiku lines with their result. Handle invalid expressions gracefully using exception handling, and replace them with the string "Err".
+
+An example input to initialize a `SciFiHaiku` object could be: `"3+2_in_space 8-1_SN 2*2=5 where stars shine"`.
+
+The output for the haiku should be:
+```
+3+2_
+in_space
+8-1_
+SN
+2x2=
+Err
+where stars
+shine
+```
+
+Implement the `SciFiHaiku` class and ensure it passes the given test suite.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

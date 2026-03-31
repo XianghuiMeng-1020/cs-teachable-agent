@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_score(controlled_territories, developed_territories):\n    # Initial score\n    score = 0\n    \n    # Iterate over the controlled territories\n    for territory in controlled_territories:\n        # Check if the territory is developed\n        if territory in developed_territories:\n            score += 8  # Full points for developed\n        else:\n            score += 5  # Deduction for not developed\n    \n    return score\n\n# Example usage\nif __name__ == \"__main__\":\n    print(calculate_score(\"AAA\", \"AAA\"))  # Output should be 24\n    print(calculate_score(\"ABC\", \"AB\"))   # Output should be 21\n    print(calculate_score(\"XYZ\", \"\"))    # Output should be 15\n    print(calculate_score(\"MNPQ\", \"PQ\")) # Output should be 18\n    print(calculate_score(\"\", \"\"))       # Output should be 0",
+    "context_relevance": 1.0
+}

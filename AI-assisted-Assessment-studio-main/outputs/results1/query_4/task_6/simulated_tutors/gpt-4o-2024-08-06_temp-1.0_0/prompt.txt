@@ -1,0 +1,42 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Create a function `roulette_game(money, bets)` that simulates a simple roulette game. The function takes two inputs:
+
+1. `money` - an integer representing the total amount of money the player starts with.
+2. `bets` - a dictionary where each key is a string representing either "even" or "odd", and the value is an integer representing the amount of money the player bets on that option.
+
+The task is to simulate one spin of a roulette wheel. The wheel has numbers from 1 to 36, where each number is either odd or even.
+
+The function should return an integer representing the total amount of money the player ends up with after all the bets are settled. If the spin results in an even number and the player bet money on "even", the player should receive double the bet amount. Similarly, if the spin results in an odd number and the player bet on "odd", they should receive double the bet amount. If a player bets on a number type (odd/even) and loses, they lose the bet amount.
+
+You can assume the player will not bet more money than they have. The player can only bet on "odd" or "even" or both, with a valid (non-negative, within player's total money) bet amount for each.
+
+Edge cases include betting nothing, betting the entire money on one option, or splitting the money between both options.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import roulette_game
+
+@pytest.mark.parametrize("money, bets, expected", [
+    (100, {"even": 50, "odd": 50}, 100), # Even odds: player neither loses nor gains
+    (100, {"even": 50}, 150),             # Wins the even bet
+    (100, {"odd": 50}, 50),               # Loses the odd bet
+    (50, {"even": 50}, 100),              # Wins full even bet
+    (75, {"even": 25, "odd": 50}, 75),  # Loses odd, wins even bet
+    (200, {"odd": 200}, 0),               # Loses on odd, loses all
+    (10, {}, 10),                          # No bets, no change
+    (30, {"even": 20, "odd": 10}, 40)   # Wins even, loses odd
+])
+def test_roulette_game(money, bets, expected):
+    result = roulette_game(money, bets)
+    assert result == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,111 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['File Handling and I/O', 'Selection Statements (if/else, etc.)', 'Variables', 'Loops']:
+
+### Beginning of task description
+### Task Description
+
+You are tasked with creating a simple ingredient management system for a cooking application. The program will read a file containing ingredient data and then allow users to query whether they have enough of each ingredient for a recipe.
+
+**File Format**:
+The file will be named `ingredients.txt` and contain lines of text. Each line will represent an ingredient with the name of the ingredient and the amount available, separated by a comma.
+
+Example line from the file:
+```
+flour,500
+sugar,200
+```
+
+The numbers represent the amount available in grams.
+
+**Function Signature**:
+```python
+def can_cook_recipe(recipe, ingredients_file):
+```
+
+- `recipe`: A dictionary where each key is the name of the ingredient and each value is the amount needed in grams.
+- `ingredients_file`: A string representing the file path of the `ingredients.txt`. All ingredient names in this file are lowercase.
+
+**Behavior**:
+- The function should read the `ingredients.txt` file to determine the availability of each ingredient.
+- The function should return `True` if all ingredients needed for the recipe are available in at least the required amounts, otherwise it should return `False`.
+
+**Constraints**:
+- Ingredient names in the `recipe` dictionary will always match those in the file by name (case-sensitive). Assume perfect matching for simplicity.
+- The input file will always exist and have the correct format.
+
+**Example**:
+For a recipe which requires:
+```python
+{'flour': 400, 'sugar': 150}
+```
+If the `ingredients.txt` file contains:
+```
+flour,500
+sugar,200
+```
+The function should return `True` because all required amounts are available.
+
+If the recipe requires:
+```python
+{'flour': 500, 'sugar': 250}
+```
+The function should return `False` because there is not enough sugar.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import can_cook_recipe
+
+files_content = {
+    'ingredients.txt': """
+    flour,500
+    sugar,200
+    eggs,12
+    butter,100
+    salt,50
+    """.strip()
+}
+
+
+def setup_module(module):
+    with open('ingredients.txt', 'w') as f:
+        f.write(files_content['ingredients.txt'])
+
+
+def teardown_module(module):
+    os.remove('ingredients.txt')
+
+
+def test_can_cook_exact_amount():
+    recipe = {'flour': 500, 'sugar': 200}
+    assert can_cook_recipe(recipe, 'ingredients.txt') is True
+
+
+def test_can_cook_less_than_available():
+    recipe = {'flour': 300, 'sugar': 100}
+    assert can_cook_recipe(recipe, 'ingredients.txt') is True
+
+
+def test_cannot_cook_not_enough_flour():
+    recipe = {'flour': 600, 'sugar': 200}
+    assert can_cook_recipe(recipe, 'ingredients.txt') is False
+
+
+def test_cannot_cook_not_enough_sugar():
+    recipe = {'flour': 400, 'sugar': 250}
+    assert can_cook_recipe(recipe, 'ingredients.txt') is False
+
+
+def test_cannot_cook_missing_ingredient():
+    recipe = {'flour': 500, 'chocolate': 50}
+    assert can_cook_recipe(recipe, 'ingredients.txt') is False
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 4 items
+
+outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 25%]
+F..                                                                      [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:14: AttributeError: 'SpaceshipFleet' object has no attribute 'ships'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:23: AttributeError: 'SpaceshipFleet' object has no attribute 'ships'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_add_spaceship
+FAILED outputs/results1/query_17/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_remove_spaceship
+========================= 2 failed, 2 passed in 0.13s ==========================

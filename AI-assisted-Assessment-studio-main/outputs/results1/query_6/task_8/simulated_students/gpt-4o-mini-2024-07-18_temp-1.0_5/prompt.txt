@@ -1,0 +1,44 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In the realm of mythology, there are countless heroic tales, mysterious creatures, and powerful gods. 
+
+Your task is to create a Python program that reads from a text file named `mythology_stories.txt`. This file contains different mythology stories in a specific format:
+```
+# Story Title: Zeus and the Thunderbolt
+Zeus, the king of the Greek gods, was known for many mythological exploits...
+# Story Title: The Odyssey
+Odysseus, the hero of The Odyssey, encountered many challenges...
+```
+
+Each story begins with a line that starts with `# Story Title:` followed by the title of the story. The subsequent lines contain the content of the story.
+
+Implement a class `Mythology` with the following specifications:
+- An instance variable `stories` that stores the stories in a dictionary where keys are story titles, and values are the story content.
+- A method `read_stories_from_file(filename)` that populates the `stories` dictionary by reading the given text file.
+- A method `get_story(titles)` that accepts a list of story titles and returns a list of story contents corresponding to the given titles.
+- A method `save_story_to_file(title, filename)` that writes the content of the story with the given title into a new file specified by `filename`.
+
+The method `read_stories_from_file` should be called automatically when an instance of the class is created.
+
+### Example:
+Suppose the file `mythology_stories.txt` contains the following:
+```
+# Story Title: Zeus and the Thunderbolt
+Zeus, the king of the Greek gods, was known for many mythological exploits...
+# Story Title: The Odyssey
+Odysseus, the hero of The Odyssey, encountered many challenges...
+```
+If you initiate `Mythology()` and call `get_story(['Zeus and the Thunderbolt'])`, it should return a list containing:
+```
+['Zeus, the king of the Greek gods, was known for many mythological exploits...']
+```
+Make sure to implement this class and its methods so that they can be tested with the test suite.
+
+**Note:** You may assume the `mythology_stories.txt` file is properly formatted (as shown above) and each title in the file is unique.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

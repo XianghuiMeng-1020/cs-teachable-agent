@@ -1,0 +1,4 @@
+{
+    "program": "class Spaceship:\n    def __init__(self, name, distance, fuel):\n        self.name = name\n        self.distance = distance\n        self.fuel = fuel\n\n    def calculate_fuel_efficiency(self):\n        if self.fuel == 0:\n            raise ValueError(\"Fuel cannot be zero for efficiency calculation.\")\n        return self.distance / self.fuel\n\n    def efficiency_report(self):\n        try:\n            fes = self.calculate_fuel_efficiency()\n            if 0 < fes <= 2:\n                return \"Low Efficiency\"\n            elif 2 < fes <= 5:\n                return \"Moderate Efficiency\"\n            elif fes > 5:\n                return \"High Efficiency\"\n        except ValueError:\n            return \"Fuel amount causes division by zero error in efficiency calculation.\"",
+    "context_relevance": 1.0
+}

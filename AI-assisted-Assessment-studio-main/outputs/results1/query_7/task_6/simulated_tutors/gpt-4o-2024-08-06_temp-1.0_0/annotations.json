@@ -1,0 +1,4 @@
+{
+    "program": "def filter_mythical_creatures(input_file, output_file, origin):\n    # Open the input file and read lines\n    with open(input_file, 'r') as infile:\n        lines = infile.readlines()\n    \n    # Prepare a list for filtered lines\n    filtered_lines = []\n    \n    # Process each line to filter by origin\n    for line in lines:\n        parts = line.strip().split(':')\n        if len(parts) >= 2 and parts[1] == origin:\n            filtered_lines.append(line.strip())\n\n    # Write the filtered result to the output file\n    with open(output_file, 'w') as outfile:\n        for filtered_line in filtered_lines:\n            outfile.write(filtered_line + \"\\n\")",
+    "context_relevance": 1.0
+}

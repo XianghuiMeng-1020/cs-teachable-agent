@@ -1,0 +1,4 @@
+{
+    "program": "def mythical_creature_classification(creatures):\n    classifications = {}\n    for creature, characteristics in creatures.items():\n        danger_level = characteristics['danger_level']\n        favored_by = characteristics['favored_by']\n\n        if danger_level < 3:\n            classification = \"Not Threatening\"\n        elif 3 <= danger_level <= 6:\n            classification = \"Moderately Threatening\"\n        else:\n            classification = \"Highly Threatening\"\n\n        if favored_by == \"Zeus\":\n            classification += \" - Zeus' favorite\"\n\n        classifications[creature] = classification\n\n    return classifications",
+    "context_relevance": 1.0
+}

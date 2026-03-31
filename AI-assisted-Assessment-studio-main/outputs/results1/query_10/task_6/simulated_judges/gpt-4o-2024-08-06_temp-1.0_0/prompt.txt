@@ -1,0 +1,88 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+**Task Description:**
+
+You are tasked with creating a Python program that helps manage recipes in a cooking application. The application should allow users to add new recipes, retrieve a recipe based on its name, and remove a recipe. Each recipe consists of a name, a list of ingredients, and instructions. All recipes should be saved to a file named `recipes.txt` and should be retrievable even after the program restarts.
+
+Implement a class called `RecipeManager` with the following methods:
+
+1. `add_recipe(name, ingredients, instructions)`: Adds a recipe to the collection. If a recipe with the given name already exists, raise an `Exception` with an appropriate message.
+
+2. `get_recipe(name)`: Retrieves the recipe with the given name. If the recipe is not found, return `None`.
+
+3. `remove_recipe(name)`: Removes the recipe with the given name. Return `True` if the recipe was successfully removed or `False` if the recipe was not found.
+
+The recipes should be stored in `recipes.txt` in the following format:
+```
+<Recipe Name>
+<Ingredient1, Ingredient2, ...>
+<Instructions>
+```
+Make sure your program handles the reading and writing of the `recipes.txt` file gracefully, including any exceptions that might occur if the file cannot be found or is corrupted.
+
+---
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import RecipeManager
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_module():
+    with open('recipes.txt', 'w') as f:
+        f.write("Simple Cake\nFlour, Sugar, Eggs\nMix ingredients and bake\n\n")
+
+    yield
+    
+    if os.path.exists('recipes.txt'):
+        os.remove('recipes.txt')
+
+def test_add_new_recipe():
+    rm = RecipeManager()
+    rm.add_recipe("Chocolate Cake", "Cocoa, Sugar, Milk", "Mix and bake")
+    rm.add_recipe("Pancakes", "Flour, Milk, Eggs", "Mix and cook")
+    with open('recipes.txt', 'r') as f:
+        content = f.read()
+    assert "Chocolate Cake" in content
+    assert "Pancakes" in content
+    
+def test_get_existing_recipe():
+    rm = RecipeManager()
+    recipe = rm.get_recipe("Simple Cake")
+    assert recipe == ("Flour, Sugar, Eggs", "Mix ingredients and bake")
+
+def test_get_nonexistent_recipe():
+    rm = RecipeManager()
+    recipe = rm.get_recipe("Nonexistent Cake")
+    assert recipe is None
+
+    
+def test_remove_existing_recipe():
+    rm = RecipeManager()
+    result = rm.remove_recipe("Simple Cake")
+    with open('recipes.txt', 'r') as f:
+        content = f.read()
+    assert result is True
+    assert "Simple Cake" not in content
+    
+def test_remove_nonexistent_recipe():
+    rm = RecipeManager()
+    result = rm.remove_recipe("Imaginary Cake")
+    assert result is False
+
+def test_add_duplicate_recipe():
+    rm = RecipeManager()
+    with pytest.raises(Exception, match="already exists"):
+        rm.add_recipe("Simple Cake", "Flour, Sugar", "Mix and bake")
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

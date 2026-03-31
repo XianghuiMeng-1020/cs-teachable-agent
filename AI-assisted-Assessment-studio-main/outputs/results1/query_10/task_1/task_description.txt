@@ -1,0 +1,20 @@
+### Task: Recipe Book Manager
+
+Create a Python program to manage a simple recipe book. A recipe is defined by its name and list of ingredients. Implement the following functionalities:
+
+1. **Load Recipes**: Read recipes from a specified text file. Each recipe in the file should be stored on a separate line in the format `recipe_name:ingredient1,ingredient2,ingredient3,...`.
+   - Example line: `Pasta:tomato,cheese,basil`
+2. **Add Recipe**: Add a recipe with its ingredients and save it to the file in the same format.
+3. **Find Recipe**: Search for recipes by name and retrieve their list of ingredients.
+4. **Handle Exceptions**: Appropriately handle any file reading/writing errors and indicate when a recipe is not found.
+
+Your implementation should include a class `RecipeBook` with the following methods:
+- `load_recipes(file_path)` : Reads recipes from a file and stores them internally.
+- `add_recipe(name, ingredients, file_path)`: Adds a recipe to the internal list and writes it to the file.
+- `find_recipe(name)`: Returns the ingredients of a recipe by its name.
+
+#### Note:
+- Raise a `ValueError` with the message "Recipe not found" if the recipe is not present when searched.
+- Use appropriate exception for file-related errors.
+
+**File Handling** is a critical aspect of this task, as the program must persistently store all recipes in the specified file.

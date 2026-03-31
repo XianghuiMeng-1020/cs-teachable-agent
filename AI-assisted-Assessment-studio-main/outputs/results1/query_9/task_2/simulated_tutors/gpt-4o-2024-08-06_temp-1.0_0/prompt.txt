@@ -1,0 +1,128 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Lists', 'Dictionaries', 'Loops']:
+
+### Beginning of task description
+In the realm of Mythology, legends speak of an enchanted library that holds the wisdom of ancient deities. Within this library, there exists a special scroll that lists every known mythical creature and their respective realms.
+
+Your task is to write a function `sort_creatures_by_realm(creature_data)` which takes in a dictionary `creature_data`. This dictionary contains mythical creatures as keys and their respective realms as values. Your task is to return a new dictionary where each key is a realm and the value is a sorted list of creatures that belong to that realm.
+
+**Function Signature:**
+`def sort_creatures_by_realm(creature_data):`
+
+**Arguments:**
+- `creature_data`: a dictionary where keys are strings representing the names of mythical creatures and values are strings representing the realm it belongs to.
+
+**Returns:**
+- A dictionary where each key is a realm and the value is a sorted list of creatures that belong to that realm.
+
+**Example:**
+
+If the input is:
+```python
+{
+    'Phoenix': 'Fire',
+    'Kraken': 'Ocean',
+    'Dragon': 'Fire',
+    'Nymph': 'Forest',
+    'Mermaid': 'Ocean'
+}
+```
+
+The output should be:
+```python
+{
+    'Fire': ['Dragon', 'Phoenix'],
+    'Ocean': ['Kraken', 'Mermaid'],
+    'Forest': ['Nymph']
+}
+```
+
+Use **only** lists, dictionaries, and loops to solve the task.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+@pytest.fixture(scope="module")
+def creature_data_set_1():
+    return {
+        'Phoenix': 'Fire',
+        'Kraken': 'Ocean',
+        'Dragon': 'Fire',
+        'Nymph': 'Forest',
+        'Mermaid': 'Ocean'
+    }
+
+@pytest.fixture(scope="module")
+def creature_data_set_2():
+    return {
+        'Centaur': 'Forest',
+        'Ice Giant': 'Ice',
+        'Firebird': 'Fire',
+        'Leviathan': 'Ocean'
+    }
+
+@pytest.fixture(scope="module")
+def creature_data_set_3():
+    return {
+        'Cyclops': 'Cave',
+        'Minotaur': 'Labyrinth',
+        'Pegasus': 'Sky'
+    }
+
+@pytest.fixture(scope="module")
+def creature_data_empty():
+    return {}
+
+@pytest.fixture(scope="module")
+def creature_data_single():
+    return {
+        'Unicorn': 'Forest'
+    }
+
+from solution import sort_creatures_by_realm
+
+def test_sort_creatures_by_realm_base_case(creature_data_set_1):
+    result = sort_creatures_by_realm(creature_data_set_1)
+    assert result == {
+        'Fire': ['Dragon', 'Phoenix'],
+        'Ocean': ['Kraken', 'Mermaid'],
+        'Forest': ['Nymph']
+    }
+
+
+def test_sort_creatures_by_realm_varied_realms(creature_data_set_2):
+    result = sort_creatures_by_realm(creature_data_set_2)
+    assert result == {
+        'Fire': ['Firebird'],
+        'Ocean': ['Leviathan'],
+        'Forest': ['Centaur'],
+        'Ice': ['Ice Giant']
+    }
+
+
+def test_sort_creatures_by_realm_unique_realms(creature_data_set_3):
+    result = sort_creatures_by_realm(creature_data_set_3)
+    assert result == {
+        'Cave': ['Cyclops'],
+        'Labyrinth': ['Minotaur'],
+        'Sky': ['Pegasus']
+    }
+
+
+def test_sort_creatures_by_realm_empty(creature_data_empty):
+    result = sort_creatures_by_realm(creature_data_empty)
+    assert result == {}
+
+
+def test_sort_creatures_by_realm_single_creature(creature_data_single):
+    result = sort_creatures_by_realm(creature_data_single)
+    assert result == {
+        'Forest': ['Unicorn']
+    }
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

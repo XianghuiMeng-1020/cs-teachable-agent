@@ -28,7 +28,7 @@ export function StudentDetailPage() {
   const [selectedTaIndex, setSelectedTaIndex] = useState(0);
 
   if (Number.isNaN(id) || isLoading || !data) {
-    return <p className="text-sm text-slate-500">Loading...</p>;
+    return <p className="text-sm text-stone-500">Loading...</p>;
   }
 
   const taInstances = data.ta_instances ?? [];
@@ -44,23 +44,23 @@ export function StudentDetailPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <button type="button" onClick={() => navigate(ROUTES.teacher.students)} className="rounded-lg p-1 hover:bg-slate-100">
+        <button type="button" onClick={() => navigate(ROUTES.teacher.students)} className="rounded-lg p-1 hover:bg-stone-100">
           <ArrowLeft className="h-5 w-5" />
         </button>
         <Avatar fallback={data.user.username} size="lg" />
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">{data.user.username}</h1>
-          <p className="text-sm text-slate-500">Joined {data.user.created_at ? formatDate(data.user.created_at) : "—"}</p>
+          <h1 className="text-2xl font-bold text-stone-900">{data.user.username}</h1>
+          <p className="text-sm text-stone-500">Joined {data.user.created_at ? formatDate(data.user.created_at) : "—"}</p>
         </div>
       </div>
 
       {taInstances.length > 1 && (
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-slate-600">TA:</span>
+          <span className="text-sm font-medium text-stone-600">TA:</span>
           <select
             value={selectedTaIndex}
             onChange={(e) => setSelectedTaIndex(Number(e.target.value))}
-            className="rounded border border-slate-300 bg-white px-2 py-1 text-sm"
+            className="rounded border border-stone-300 bg-white px-2 py-1 text-sm"
           >
             {taInstances.map((ta, i) => (
               <option key={ta.id ?? i} value={i}>
@@ -71,20 +71,20 @@ export function StudentDetailPage() {
         </div>
       )}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <StatCard label="Learned KUs" value={primary ? `${primary.learned_count}/${primary.total_kus}` : "—"} icon={BookOpen} iconColor="bg-brand-50 text-brand-500" />
+        <StatCard label="Learned KUs" value={primary ? `${primary.learned_count}/${primary.total_kus}` : "—"} icon={BookOpen} iconColor="bg-brand-50 text-brand-700" />
         <StatCard label="Mastery %" value={primary ? `${primary.mastery_percent}%` : "—"} icon={Target} iconColor="bg-emerald-50 text-success" />
         <StatCard label="Sessions / Tests" value={primary ? `${primary.test_count} tests` : "—"} icon={MessageSquare} iconColor="bg-accent-50 text-accent-500" />
       </div>
 
       <Tabs.Root defaultValue="knowledge">
-        <Tabs.List className="mb-4 flex gap-2 border-b border-slate-200">
-          <Tabs.Trigger value="knowledge" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-500 data-[state=active]:text-brand-600">Knowledge State</Tabs.Trigger>
-          <Tabs.Trigger value="misconceptions" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-500 data-[state=active]:text-brand-600">Misconceptions</Tabs.Trigger>
+        <Tabs.List className="mb-4 flex gap-2 border-b border-stone-200">
+          <Tabs.Trigger value="knowledge" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">Knowledge State</Tabs.Trigger>
+          <Tabs.Trigger value="misconceptions" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">Misconceptions</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="knowledge">
           <Card padding="md">
             <KnowledgeGraph units={units} className="min-h-[300px]" />
-            {units.length === 0 && <p className="py-4 text-center text-sm text-slate-500">No knowledge state data. Student may not have taught yet.</p>}
+            {units.length === 0 && <p className="py-4 text-center text-sm text-stone-500">No knowledge state data. Student may not have taught yet.</p>}
           </Card>
         </Tabs.Content>
         <Tabs.Content value="misconceptions">

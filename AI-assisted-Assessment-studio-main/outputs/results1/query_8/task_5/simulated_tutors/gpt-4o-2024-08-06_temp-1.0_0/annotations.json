@@ -1,0 +1,4 @@
+{
+    "program": "def god_info(god_name):\n    gods = {\n        \"zeus\": {\"Domain\": \"Sky and Thunder\", \"Symbol\": \"Thunderbolt\"},\n        \"poseidon\": {\"Domain\": \"Sea\", \"Symbol\": \"Trident\"},\n        \"hades\": {\"Domain\": \"Underworld\", \"Symbol\": \"Helmet of invisibility\"},\n        \"ares\": {\"Domain\": \"War\", \"Symbol\": \"Spear\"},\n        \"aphrodite\": {\"Domain\": \"Love\", \"Symbol\": \"Dove\"},\n        \"athena\": {\"Domain\": \"Wisdom\", \"Symbol\": \"Owl\"}\n    }\n    god_name_lower = god_name.lower()\n    if god_name_lower in gods:\n        god_data = gods[god_name_lower]\n        return f\"Domain: {god_data['Domain']}, Symbol: {god_data['Symbol']}\"\n    else:\n        return \"Unknown god\"",
+    "context_relevance": 1.0
+}

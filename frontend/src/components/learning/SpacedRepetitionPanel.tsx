@@ -138,8 +138,8 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
           <Brain className="w-6 h-6 text-brand-600" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-slate-900">Smart Review System</h3>
-          <p className="text-slate-500 mt-1">
+          <h3 className="text-xl font-semibold text-stone-900">Smart Review System</h3>
+          <p className="text-stone-500 mt-1">
             AI-powered spaced repetition based on the forgetting curve. Reviews are scheduled at optimal intervals for maximum retention.
           </p>
         </div>
@@ -178,10 +178,10 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
               <div className="w-8 h-8 border-4 border-brand-200 border-t-brand-500 rounded-full animate-spin mx-auto" />
             </div>
           ) : dueItems.length === 0 ? (
-            <div className="text-center py-12 bg-slate-50 rounded-xl">
+            <div className="text-center py-12 bg-stone-50 rounded-xl">
               <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto mb-4" />
-              <h4 className="font-semibold text-slate-900">All Caught Up!</h4>
-              <p className="text-slate-500 mt-2 max-w-sm mx-auto">
+              <h4 className="font-semibold text-stone-900">All Caught Up!</h4>
+              <p className="text-stone-500 mt-2 max-w-sm mx-auto">
                 No items are due for review. Your memory is well-maintained. Check back tomorrow!
               </p>
             </div>
@@ -225,7 +225,7 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                       "p-4 rounded-xl border transition-all cursor-pointer",
                       selectedItem?.unit_id === item.unit_id
                         ? "border-brand-500 bg-brand-50"
-                        : "border-slate-200 hover:border-slate-300 bg-white"
+                        : "border-stone-200 hover:border-stone-300 bg-white"
                     )}
                     onClick={() => {
                       setSelectedItem(item);
@@ -234,8 +234,8 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                   >
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-medium text-slate-900">{item.unit_name}</h4>
-                        <div className="flex items-center gap-3 mt-2 text-sm text-slate-500">
+                        <h4 className="font-medium text-stone-900">{item.unit_name}</h4>
+                        <div className="flex items-center gap-3 mt-2 text-sm text-stone-500">
                           <span className="flex items-center gap-1">
                             <RotateCw className="w-3.5 h-3.5" />
                             {item.repetitions} reviews
@@ -254,13 +254,13 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                           </span>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400" />
+                      <ChevronRight className="w-5 h-5 text-stone-400" />
                     </div>
 
                     {/* Progress */}
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-xs mb-1">
-                        <span className="text-slate-500">Retention strength</span>
+                        <span className="text-stone-500">Retention strength</span>
                         <span className={cn(
                           "font-medium",
                           item.average_rating >= 3 ? "text-emerald-600" :
@@ -287,8 +287,8 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
               <Card padding="lg" className="w-full max-w-lg animate-in fade-in zoom-in">
                 <div className="text-center mb-6">
-                  <h4 className="text-lg font-semibold text-slate-900">How well did you remember?</h4>
-                  <p className="text-slate-500 mt-1">{selectedItem.unit_name}</p>
+                  <h4 className="text-lg font-semibold text-stone-900">How well did you remember?</h4>
+                  <p className="text-stone-500 mt-1">{selectedItem.unit_name}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -300,12 +300,12 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                       className={cn(
                         "p-4 rounded-xl border-2 transition-all text-left",
                         "hover:scale-[1.02] active:scale-[0.98]",
-                        "border-slate-200 hover:border-brand-300"
+                        "border-stone-200 hover:border-brand-300"
                       )}
                     >
                       <div className={cn("w-3 h-3 rounded-full mb-2", option.color)} />
                       <p className={cn("font-semibold", option.text)}>{option.label}</p>
-                      <p className="text-xs text-slate-500 mt-1">{option.desc}</p>
+                      <p className="text-xs text-stone-500 mt-1">{option.desc}</p>
                     </button>
                   ))}
                 </div>
@@ -332,10 +332,10 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
             <>
               {/* Overview Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 bg-slate-50 rounded-xl text-center">
-                  <BookOpen className="w-5 h-5 text-slate-400 mx-auto mb-2" />
-                  <p className="text-2xl font-bold text-slate-900">{stats?.total_scheduled || 0}</p>
-                  <p className="text-xs text-slate-500">In Schedule</p>
+                <div className="p-4 bg-stone-50 rounded-xl text-center">
+                  <BookOpen className="w-5 h-5 text-stone-400 mx-auto mb-2" />
+                  <p className="text-2xl font-bold text-stone-900">{stats?.total_scheduled || 0}</p>
+                  <p className="text-xs text-stone-500">In Schedule</p>
                 </div>
                 <div className="p-4 bg-emerald-50 rounded-xl text-center">
                   <CheckCircle className="w-5 h-5 text-emerald-500 mx-auto mb-2" />
@@ -358,10 +358,10 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
 
               {/* Retention Prediction */}
               {stats?.predicted_retention && (
-                <div className="p-4 bg-slate-50 rounded-xl">
+                <div className="p-4 bg-stone-50 rounded-xl">
                   <div className="flex items-center gap-2 mb-4">
                     <Target className="w-5 h-5 text-brand-500" />
-                    <h4 className="font-medium text-slate-900">Predicted Retention</h4>
+                    <h4 className="font-medium text-stone-900">Predicted Retention</h4>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     {Object.entries(stats.predicted_retention).map(([period, value]) => (
@@ -374,7 +374,7 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                         )}>
                           {Math.round((value as number) * 100)}%
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-stone-500">
                           {period.replace("_", " ")}
                         </p>
                       </div>
@@ -385,18 +385,18 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
 
               {/* Repetition Distribution */}
               {stats?.repetition_distribution && Object.keys(stats.repetition_distribution).length > 0 && (
-                <div className="p-4 bg-slate-50 rounded-xl">
+                <div className="p-4 bg-stone-50 rounded-xl">
                   <div className="flex items-center gap-2 mb-4">
                     <RotateCw className="w-5 h-5 text-brand-500" />
-                    <h4 className="font-medium text-slate-900">Review Distribution</h4>
+                    <h4 className="font-medium text-stone-900">Review Distribution</h4>
                   </div>
                   <div className="space-y-2">
                     {Object.entries(stats.repetition_distribution).map(([count, num]) => (
                       <div key={count} className="flex items-center gap-3">
-                        <span className="w-16 text-sm text-slate-600">
+                        <span className="w-16 text-sm text-stone-600">
                           {count === "5" ? "5+ reps" : `${count} reps`}
                         </span>
-                        <div className="flex-1 h-4 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="flex-1 h-4 bg-stone-200 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-brand-500 rounded-full"
                             style={{
@@ -404,7 +404,7 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                             }}
                           />
                         </div>
-                        <span className="w-8 text-sm text-slate-600 text-right">{num as number}</span>
+                        <span className="w-8 text-sm text-stone-600 text-right">{num as number}</span>
                       </div>
                     ))}
                   </div>
@@ -417,12 +417,12 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
         {/* Forgetting Curve Tab */}
         <TabsContent value="curve" className="m-0">
           <div className="space-y-4">
-            <div className="p-4 bg-slate-50 rounded-xl">
+            <div className="p-4 bg-stone-50 rounded-xl">
               <div className="flex items-center gap-2 mb-4">
                 <TrendingUp className="w-5 h-5 text-brand-500" />
-                <h4 className="font-medium text-slate-900">Ebbinghaus Forgetting Curve</h4>
+                <h4 className="font-medium text-stone-900">Ebbinghaus Forgetting Curve</h4>
               </div>
-              <p className="text-sm text-slate-600 mb-4">
+              <p className="text-sm text-stone-600 mb-4">
                 Without review, memory retention follows an exponential decay pattern. 
                 Spaced repetition counteracts this by scheduling reviews at optimal intervals.
               </p>
@@ -433,8 +433,8 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                     <AreaChart data={forgettingCurve}>
                       <defs>
                         <linearGradient id="retentionGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                          <stop offset="5%" stopColor="#0D9488" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="#0D9488" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <XAxis
@@ -454,7 +454,7 @@ export function SpacedRepetitionPanel({ taId }: SpacedRepetitionPanelProps) {
                       <Area
                         type="monotone"
                         dataKey="retention"
-                        stroke="#6366f1"
+                        stroke="#0D9488"
                         strokeWidth={2}
                         fill="url(#retentionGradient)"
                       />

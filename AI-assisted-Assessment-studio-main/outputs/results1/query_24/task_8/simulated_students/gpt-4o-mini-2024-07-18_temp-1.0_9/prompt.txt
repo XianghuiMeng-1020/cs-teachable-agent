@@ -1,0 +1,16 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with building a simple program that simulates a leaderboard for a board game competition. The leaderboard will track the scores of players as they play multiple rounds of a game. You are provided with a list of strings, where each string contains a player name followed by their score for a particular round, separated by a comma.
+
+Your task is to implement a function `update_leaderboard(score_entries)` that processes this list and updates the total scores of the players. If a player appears multiple times in the list, simply add their scores. If an entry in the list is malformed (i.e., it does not contain exactly one comma or the score is not a valid integer), that entry should be skipped without disrupting the processing of subsequent entries.
+
+The function should return a dictionary where the keys are player names and the values are their total scores.
+
+The function will be tested against a series of test cases. Any player name appearing in the input is case-sensitive and entries must be processed in the order they appear in `score_entries`. Player names are unique in each entry.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

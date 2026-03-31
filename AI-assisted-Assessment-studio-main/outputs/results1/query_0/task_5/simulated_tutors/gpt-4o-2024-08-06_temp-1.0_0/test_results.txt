@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/program.py:12: TypeError: test_correct_guess.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/program.py:12: TypeError: test_incorrect_guess.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/program.py:12: TypeError: test_output_correct.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/program.py:12: TypeError: test_output_incorrect.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/program.py:12: TypeError: test_results_file_created.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_correct_guess
+FAILED outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_incorrect_guess
+FAILED outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_output_correct
+FAILED outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_output_incorrect
+FAILED outputs/results1/query_0/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_results_file_created
+============================== 5 failed in 0.07s ===============================

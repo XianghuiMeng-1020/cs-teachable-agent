@@ -1,0 +1,76 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+### Task Description
+
+In a distant future, humanity has established colonies on different planets. The Galactic Council gathered a variety of creatures to form a space exploration team tasked to explore new galaxies. 
+
+Your task is to create a Python function `count_creature_types` that will analyze the crew manifest and count how many of each type of creature is in the team. The function will take a list of strings as input, where each string represents the type of a creature (e.g., 'Human', 'Robot', 'Alien', etc.). The function should return a dictionary with the type of creature as keys and the counts as values.
+
+Function signature: `def count_creature_types(creatures):`
+
+### Example
+Suppose you have the following list of creatures in the team:
+```python
+creatures = ['Human', 'Robot', 'Alien', 'Human', 'Robot', 'Alien', 'Alien']
+```
+Your function should return:
+```python
+{'Human': 2, 'Robot': 2, 'Alien': 3}
+```
+
+### Notes
+- You can assume that the input list is non-empty and contains only valid creature types.
+- Creature types are case-sensitive (e.g., 'alien' and 'Alien' should be treated as different types).
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import count_creature_types
+
+def setup_module(module):
+    pass
+
+
+def teardown_module(module):
+    pass
+
+
+def test_creature_count_case_1():
+    creatures = ['Human', 'Robot', 'Alien', 'Human', 'Robot', 'Alien', 'Alien']
+    result = count_creature_types(creatures)
+    assert result == {'Human': 2, 'Robot': 2, 'Alien': 3}
+
+
+def test_creature_count_case_2():
+    creatures = ['Alien', 'Alien', 'Alien', 'Robot']
+    result = count_creature_types(creatures)
+    assert result == {'Alien': 3, 'Robot': 1}
+
+
+def test_creature_count_case_3():
+    creatures = ['Human']
+    result = count_creature_types(creatures)
+    assert result == {'Human': 1}
+
+
+def test_creature_count_case_4():
+    creatures = ['Robot', 'Robot', 'Robot']
+    result = count_creature_types(creatures)
+    assert result == {'Robot': 3}
+
+
+def test_creature_count_case_5():
+    creatures = ['Martian', 'Venusian', 'Martian', 'Human', 'Martian']
+    result = count_creature_types(creatures)
+    assert result == {'Martian': 3, 'Venusian': 1, 'Human': 1}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,79 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Classes and Objects', 'File Handling and I/O', 'Strings', 'Arithmetic Operators']:
+
+### Beginning of task description
+Create a program to manage a simple collection of board games stored in a text file. Implement a `BoardGame` class and a `BoardGameCollection` class. Each board game has a name, the number of players, and the play time in minutes. Implement the following functionalities:
+
+1. The `BoardGame` class should have attributes: `name`, `num_players`, and `play_time`. Implement a method `to_string()` that returns a string in the format: `"name,num_players,play_time"`.
+
+2. The `BoardGameCollection` class should manage multiple `BoardGame` objects, and should be initialized with a list of `BoardGame` instances.
+
+3. Implement a method `add_game` in `BoardGameCollection` that takes a `BoardGame` object and adds it to the internal list, preventing any game with an existing name from being added.
+
+4. Implement a method `to_file(filename)` in `BoardGameCollection` that saves the collection to a file. Each game's string representation (using `to_string()`) should be on a new line.
+
+5. Implement a method `from_file(filename)` in `BoardGameCollection` that reads a file and populates the collection from its contents. Each line in the file represents a game in the format: `"name,num_players,play_time"`.
+
+Ensure that duplicate games (based on name) are not added while reading from the file.
+
+Create a text file named `games.txt` using the `to_file` method and test the implementation by reading its content using the `from_file` method.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import BoardGame, BoardGameCollection
+
+def setup_module(module):
+    with open('games.txt', 'w') as f:
+        f.write('Chess,2,60\n')
+        f.write('Monopoly,4,120\n')
+
+def teardown_module(module):
+    os.remove('games.txt')
+
+def test_add_game():
+    collection = BoardGameCollection([])
+    game = BoardGame('Scrabble', 4, 90)
+    collection.add_game(game)
+    assert len(collection.games) == 1
+
+
+def test_add_duplicate_game():
+    collection = BoardGameCollection([])
+    game1 = BoardGame('Chess', 2, 60)
+    game2 = BoardGame('Chess', 4, 120)
+    collection.add_game(game1)
+    collection.add_game(game2)
+    assert len(collection.games) == 1
+
+
+def test_to_file():
+    collection = BoardGameCollection([])
+    collection.from_file('games.txt')
+    collection.to_file('output.txt')
+    with open('output.txt', 'r') as f:
+        content = f.read().strip()
+    os.remove('output.txt')
+    assert content == 'Chess,2,60\nMonopoly,4,120'
+
+
+def test_from_file_with_duplicates():
+    collection = BoardGameCollection([])
+    with open('games_with_dupes.txt', 'w') as f:
+        f.write('Chess,2,60\n')
+        f.write('Chess,4,60\n')
+        f.write('Monopoly,4,120\n')
+    collection.from_file('games_with_dupes.txt')
+    os.remove('games_with_dupes.txt')
+    assert len(collection.games) == 2
+
+
+def test_game_to_string():
+    game = BoardGame('Risk', 6, 180)
+    assert game.to_string() == 'Risk,6,180'
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

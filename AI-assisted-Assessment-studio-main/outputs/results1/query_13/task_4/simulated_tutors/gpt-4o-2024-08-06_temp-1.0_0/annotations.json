@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_ingredients(ingredient_list):\n    ingredient_summary = {}\n    for item in ingredient_list:\n        try:\n            ingredient, quantity = item.split(':')\n            quantity = int(quantity)  # Ensure quantity is a positive integer\n            # Sum the quantity for each ingredient\n            if ingredient in ingredient_summary:\n                ingredient_summary[ingredient] += quantity\n            else:\n                ingredient_summary[ingredient] = quantity\n        except (ValueError, IndexError):\n            # Skip items that cause exceptions due to improper format or conversion\n            continue\n    return ingredient_summary",
+    "context_relevance": 1.0
+}

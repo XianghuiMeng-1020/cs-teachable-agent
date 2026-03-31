@@ -1,0 +1,16 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Write a Python function `calculate_remaining_ingredients` that reads a text file named 'inventory.txt' containing available ingredients and their quantities, then determines if a specified recipe can be prepared, and if so, return the remaining quantities of ingredients after preparing it. Each line in the file follows the format: `ingredient_name quantity`, e.g., `sugar 100`. Quantities are non-negative integers and assumed to be positive for any required ingredient.
+
+The function should take one string argument `recipe_path`, which is the path of the file containing the recipe details. The content of the recipe file follows the same format as the inventory file, specifying the required ingredient and quantity to prepare the dish, e.g., `sugar 50`. Quantities in the recipe file always assume the preparation of a single unit of the dish.
+
+If the recipe can be prepared with the available ingredients, the function should return a dictionary containing the remaining quantities of each ingredient after preparation. If the ingredients are insufficient for the recipe, the function should raise a `ValueError` with the message "Insufficient ingredients".
+
+You may assume both files are already formatted correctly. Handle exceptions related to file I/O operations appropriately. You should not modify the 'inventory.txt' file.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,28 @@
+**Task:**
+
+Imagine you're building a simple Python script for a cooking application where users can read about various recipes stored in a text file. You need to implement a function called `read_vegetarian_recipes(file_path)` that reads a file containing multiple recipes and writes a new file with only vegetarian recipes. Each recipe is separated by an empty line, and each recipe starts with the word 'Name:' followed by the name of the recipe. If a recipe contains any of the following words: 'chicken', 'beef', 'pork', or 'fish', it is considered non-vegetarian and should not be included in the output file.
+
+The function should take a single argument:
+- `file_path`: which is a string representing the path to the input file where each recipe is separated by a double newline character ('\n\n').
+
+Your task is to write a new text file named `vegetarian_recipes.txt` in the same directory where only vegetarian recipes from the input file are written. Ensure that each recipe is correctly separated by a newline in the output file.
+
+**Example Input File Format**
+```
+Name: Chicken Curry
+Ingredients: chicken, curry powder, onions, garlic
+
+Name: Veggie Stir Fry
+Ingredients: broccoli, bell peppers, soy sauce
+
+Name: Beef Stroganoff
+Ingredients: beef, mushrooms, sour cream
+```
+
+**Expected Output File (vegetarian_recipes.txt) after running your function:**
+```
+Name: Veggie Stir Fry
+Ingredients: broccoli, bell peppers, soy sauce
+```
+
+**Note:** Ensure that your function overwrites `vegetarian_recipes.txt` if it already exists.

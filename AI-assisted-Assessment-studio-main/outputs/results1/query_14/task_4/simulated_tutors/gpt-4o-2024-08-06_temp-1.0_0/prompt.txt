@@ -1,0 +1,46 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+### Cooking Recipe Decoder
+
+You are tasked with creating a function that helps with organizing and quantifying ingredients needed for a cooking recipe.
+
+Your function, `ingredient_quantifier(recipe)`, receives a dictionary where the keys are ingredient names as strings, and the values are the quantities needed for the recipe, also as strings formatted as 'amount unit'. For example, `'2 cups'` or `'3 tablespoons'`.
+
+In the test environment, your function will be tested with a series of ingredient dictionaries representing different recipes. Your function must return a string that integrates the ingredients of the recipe in the format:
+
+```
+"To make this recipe, you will need: Amount1 Unit1 of Ingredient1, Amount2 Unit2 of Ingredient2, ..."
+```
+
+If the recipe dictionary is empty, return the string "The recipe requires no ingredients.".
+
+The function will be tested with various input dictionaries, covering different units, amounts, and quantities.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import ingredient_quantifier
+
+@pytest.mark.parametrize("recipe, expected_output", [
+    ({}
+     , "The recipe requires no ingredients."),
+    ({"flour": "2 cups", "sugar": "1 cup", "butter": "250 grams"},
+     "To make this recipe, you will need: 2 cups of flour, 1 cup of sugar, 250 grams of butter"),
+    ({"milk": "500 ml", "cocoa": "100 grams", "chocolate": "200 grams", "egg": "2 whole"},
+     "To make this recipe, you will need: 500 ml of milk, 100 grams of cocoa, 200 grams of chocolate, 2 whole of egg"),
+    ({"rice": "1 kg"},
+     "To make this recipe, you will need: 1 kg of rice"),
+    ({"olive oil": "1 tablespoon", "lemon juice": "3 tablespoons", "salt": "2 teaspoons"},
+     "To make this recipe, you will need: 1 tablespoon of olive oil, 3 tablespoons of lemon juice, 2 teaspoons of salt"),
+    ({"water": "litres"},
+     "To make this recipe, you will need: litres of water")
+])
+def test_ingredient_quantifier(recipe, expected_output):
+    assert ingredient_quantifier(recipe) == expected_output
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

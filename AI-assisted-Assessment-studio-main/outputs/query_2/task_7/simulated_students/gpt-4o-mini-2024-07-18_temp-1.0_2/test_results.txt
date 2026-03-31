@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py . [ 20%]
+F..FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_no_ingredients ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:5: FileNotFoundError: [Errno 2] No such file or directory: 'different_structure.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:144: FileNotFoundError: [Errno 2] No such file or directory: 'no_ingredients.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_different_structure_order
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_no_ingredients
+ERROR outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_no_ingredients
+===================== 2 failed, 3 passed, 1 error in 0.13s =====================

@@ -1,0 +1,4 @@
+{
+    "program": "def pantheon_summary(gods_list):\n    summary = {}\n    for god in gods_list:\n        pantheon = god['pantheon']\n        realm = god['realm']\n        if pantheon not in summary:\n            summary[pantheon] = {'count': 0, 'realms': set()}\n        summary[pantheon]['count'] += 1\n        summary[pantheon]['realms'].add(realm)\n    # Convert sets to sorted lists\n    for pantheon in summary:\n        summary[pantheon]['realms'] = sorted(summary[pantheon]['realms'])\n    return summary",
+    "context_relevance": 1.0
+}

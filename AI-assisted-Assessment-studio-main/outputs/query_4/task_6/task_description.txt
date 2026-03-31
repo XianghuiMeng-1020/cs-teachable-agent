@@ -1,0 +1,28 @@
+Create a Python program that simulates the end result of a small board game called "Score Hunt". Players move around a board collecting points from different positions. Your task is to calculate the final score for each player based on the paths they took.
+
+Write a function `compute_final_scores(moves)` where `moves` is a dictionary where each key is a player's name (a string), and its value is a list of integers representing the board positions they visited in order.
+
+The board is structured as follows:
+- Positions from 1 to 5 grant 2 points each.
+- Positions from 6 to 10 grant 3 points each.
+- Positions above 10 grant 5 points each.
+
+Your function should return a dictionary where the keys are player names and the values are the final scores (integers) for each player.
+
+**Example input**: 
+```
+{
+  "Alice": [1, 3, 5, 6, 10, 12],
+  "Bob": [2, 8, 11, 12],
+  "Charlie": [1, 1, 1, 6, 15]
+}
+```
+
+**Expected output**: 
+```
+{
+  "Alice": 17,
+  "Bob": 16,
+  "Charlie": 19
+}
+```

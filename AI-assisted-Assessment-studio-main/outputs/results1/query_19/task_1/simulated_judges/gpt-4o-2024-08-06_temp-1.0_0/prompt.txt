@@ -1,0 +1,79 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+You are tasked with developing a program that processes data from a futuristic space mission report file. This file contains information about various planets discovered by the mission. Each line in the file describes a single planet in the format:
+
+`<Planet Name> <Distance from Earth in light years> <Surface Temperature in Celsius>`
+
+Your task is to write a function `process_planet_data(file_name)` that reads the file with the given `file_name` and processes the planetary data as follows:
+
+1. Read the data from the provided file. If the file does not exist or there's an error in reading, return "File Error".
+2. For each planet, determine if it is habitable. A planet is considered habitable if its surface temperature is between -50 and 50 degrees Celsius, inclusive.
+3. Return a list of planet names that are considered habitable.
+
+Your solution will be tested against several test files. Make sure your solution efficiently handles file input and appropriate exceptions.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+
+from solution import process_planet_data
+
+TEST_FILE = "test_planets.txt"
+
+def setup_module(module):
+    with open(TEST_FILE, "w") as file:
+        file.write("Kepler-22b 600 15\n")
+        file.write("Tau-Ceti e 12 55\n")
+        file.write("Gliese 581g 20 -90\n")
+        file.write("Proxima Centauri b 4.24 30\n")
+        file.write("TRAPPIST-1d 39 -40\n")
+
+
+def teardown_module(module):
+    try:
+        os.remove(TEST_FILE)
+    except OSError:
+        pass
+
+
+def test_planet_data():
+    assert process_planet_data(TEST_FILE) == ["Kepler-22b", "Proxima Centauri b", "TRAPPIST-1d"]
+
+
+def test_missing_file():
+    assert process_planet_data("missing_file.txt") == "File Error"
+
+
+def test_empty_file():
+    with open("empty_file.txt", "w") as file:
+        pass
+    assert process_planet_data("empty_file.txt") == []
+
+
+def test_all_inhabitable_planets():
+    with open("inhabitable.txt", "w") as file:
+        file.write("Mercury 0.387 150\n")
+        file.write("Venus 0.723 462\n")
+        file.write("Jupiter 5.2 -110\n")
+
+    assert process_planet_data("inhabitable.txt") == []
+
+
+def test_invalid_formatted_file():
+    with open("invalid.txt", "w") as file:
+        file.write("UnknownFormatData\n")
+        file.write("Gliese 581g 20 -90...\n")
+    assert process_planet_data("invalid.txt") == "File Error"
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

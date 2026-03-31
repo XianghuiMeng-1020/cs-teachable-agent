@@ -1,0 +1,33 @@
+class Ship:
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+        self.missions = []
+
+class FleetManager:
+    def __init__(self):
+        self.ships = {}
+
+    def add_ship(self, name, max_speed):
+        if name in self.ships:
+            raise ValueError(f"Ship with name '{name}' already exists.")
+        self.ships[name] = Ship(name, max_speed)
+
+    def record_mission(self, ship_name, mission):
+        if ship_name not in self.ships:
+            raise KeyError(f"Ship '{ship_name}' does not exist in the fleet.")
+        self.ships[ship_name].missions.append(mission)
+
+    def get_missions(self, ship_name):
+        if ship_name not in self.ships:
+            return []
+        return self.ships[ship_name].missions
+
+    def get_fleet_summary(self):
+        summary = {}
+        for ship_name, ship in self.ships.items():
+            summary[ship_name] = {
+                'max_speed': ship.max_speed,
+                'missions': ship.missions
+            }
+        return summary

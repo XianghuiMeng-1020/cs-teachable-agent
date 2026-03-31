@@ -1,0 +1,23 @@
+In a distant future, Earthlings have established colonies throughout the galaxy, communicating through a complex network of communication stations. Each station processes messages and calculates communication efficiency with neighboring stations on different planets. 
+
+Your task is to create a function `calculate_efficiency(messages)` that takes a dictionary of messages as input. Each key in the dictionary represents a communication station identified by a string (e.g., 'Alpha-1''), and each value is another dictionary. This inner dictionary contains keys representing connected stations and values depicting the number of messages sent to that station.
+
+Your task is to analyze these communications and return a dictionary capturing each station's efficiency score. The efficiency score of a station is calculated as the ratio of messages successfully communicated to the sum of their IDs (ASCII values of the characters in the station's ID). The program should round the efficiency score to 2 decimal places.
+
+For example:
+```python
+messages = {
+    "Alpha-1": {"Beta-2": 100, "Delta-4": 250},
+    "Beta-2": {"Alpha-1": 50},
+    "Delta-4": {"Alpha-1": 100, "Beta-2": 150}
+}
+# Station "Alpha-1" sends to "Beta-2" and "Delta-4", sum of messages is 350, ID sum is 514....
+```
+
+Function signature:
+```python
+def calculate_efficiency(messages: dict) -> dict:
+    pass
+```
+
+Note: You can assume that there will be no circular references, and all characters in station IDs are alphanumeric. Return a dictionary where each key is a station ID, and each value is the station's efficiency score rounded to two decimal points.

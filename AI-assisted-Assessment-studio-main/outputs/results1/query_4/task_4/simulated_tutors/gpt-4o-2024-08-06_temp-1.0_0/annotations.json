@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef lucky_number_game() -> int:\n    score_map = {\n        1: 0,\n        2: 10,\n        3: -5,\n        4: 5,\n        5: 20,\n        6: -10\n    }\n    score = 0\n    rolls = 0\n    \n    # Roll the dice until we reach a positive net gain\n    while score <= 0:\n        dice_roll = random.randint(1, 6)\n        score += score_map[dice_roll]\n        rolls += 1\n    \n    return rolls\n",
+    "context_relevance": 1.0
+}

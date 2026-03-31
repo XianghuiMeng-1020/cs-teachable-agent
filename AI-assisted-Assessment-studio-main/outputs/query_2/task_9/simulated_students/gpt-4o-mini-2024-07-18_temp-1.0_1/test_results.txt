@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+...FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at teardown of test_duplicate_ingredients ________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:45: AssertionError: assert ['bread', 'bu...ce', 'tomato'] == ['ingredient']
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_duplicate_ingredients
+ERROR outputs/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_duplicate_ingredients
+===================== 1 failed, 4 passed, 1 error in 0.10s =====================

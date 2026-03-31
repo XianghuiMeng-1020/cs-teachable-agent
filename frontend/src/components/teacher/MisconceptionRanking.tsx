@@ -12,7 +12,7 @@ export function MisconceptionRanking({ counts }: MisconceptionRankingProps) {
     .slice(0, 10);
 
   if (data.length === 0) {
-    return <p className="py-4 text-center text-sm text-slate-500">No misconceptions recorded.</p>;
+    return <p className="py-4 text-center text-sm text-stone-500">No misconceptions recorded.</p>;
   }
 
   return (

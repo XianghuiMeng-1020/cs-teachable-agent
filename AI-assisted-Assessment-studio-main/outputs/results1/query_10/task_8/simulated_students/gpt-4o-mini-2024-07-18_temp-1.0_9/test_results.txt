@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:15: TypeError: Recipe.__init__() missing 3 required positional arguments: 'name', 'ingredients', and 'instructions'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:22: TypeError: Recipe.__init__() missing 3 required positional arguments: 'name', 'ingredients', and 'instructions'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:28: TypeError: Recipe.__init__() missing 3 required positional arguments: 'name', 'ingredients', and 'instructions'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:35: TypeError: Recipe.__init__() missing 3 required positional arguments: 'name', 'ingredients', and 'instructions'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:41: TypeError: Recipe.__init__() missing 3 required positional arguments: 'name', 'ingredients', and 'instructions'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_add_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_add_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_get_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_get_nonexistent_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_file_persistence
+============================== 5 failed in 0.04s ===============================

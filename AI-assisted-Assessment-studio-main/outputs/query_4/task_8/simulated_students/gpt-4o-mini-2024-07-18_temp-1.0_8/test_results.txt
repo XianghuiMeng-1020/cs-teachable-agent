@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+F.F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:9: AssertionError: assert {'Alice': 5, 'Bob': 40} == {'Alice': 5, 'Bob': 30}
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:13: AssertionError: assert {'John': 70, 'Max': 70} == {'John': 50, 'Max': 20}
+/Volumes/T7/idea/pytasksyn/outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:21: AssertionError: assert {'Eve': 40, 'Frank': 25} == {'Eve': 20, 'Frank': 25}
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_case_1
+FAILED outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_case_2
+FAILED outputs/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_case_4
+========================= 3 failed, 2 passed in 0.04s ==========================

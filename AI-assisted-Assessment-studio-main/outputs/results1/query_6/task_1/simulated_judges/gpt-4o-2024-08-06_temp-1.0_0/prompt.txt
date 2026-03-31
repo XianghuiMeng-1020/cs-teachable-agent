@@ -1,0 +1,97 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Create a Python program that manages a collection of mythical creatures. Each creature has the following attributes: 'name', 'type' (e.g., dragon, unicorn), 'origin' (e.g., Greek, Norse), and 'power'. Implement your program such that it allows: 
+
+1. Adding a new mythical creature with its details.
+2. Saving all creatures to a file, each line in the format: "name,type,origin,power".
+3. Loading creatures from a file, reading them into a collection.
+
+You need to define a class `MythicalCreature` to represent each creature and a class `CreatureManager` to handle the collection of creatures.
+
+- `MythicalCreature` class should have attributes for the creature's details.
+- `CreatureManager` class should have methods to add a creature, save to file, and load from file.
+
+Function signatures you must implement are:
+
+- `class MythicalCreature` with initialization for the attributes.
+- `class CreatureManager` with:
+  - `add_creature(self, name, type, origin, power)`: Adds a new creature.
+  - `save_to_file(self, filename)`: Saves all creatures to the given file.
+  - `load_from_file(self, filename)`: Loads all creatures from the given file.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythicalCreature, CreatureManager
+
+@pytest.fixture(scope='module', autouse=True)
+def setup_module(module):
+    with open('test_creatures.txt', 'w') as f:
+        f.write("Phoenix,Bird,Egyptian,Rebirth\n")
+        f.write("Minotaur,Beast,Greek,Strength\n")
+
+@pytest.fixture(scope='module', autouse=True)
+def teardown_module(module):
+    os.remove('test_creatures.txt')
+    if os.path.exists('output_creatures.txt'):
+        os.remove('output_creatures.txt')
+
+
+def test_add_creature():
+    manager = CreatureManager()
+    manager.add_creature("Dragon", "Reptile", "Chinese", "Fire Breathing")
+    assert len(manager.creatures) == 1
+    assert manager.creatures[0].name == "Dragon"
+
+
+def test_save_file():
+    manager = CreatureManager()
+    manager.add_creature("Dragon", "Reptile", "Chinese", "Fire Breathing")
+    manager.add_creature("Unicorn", "Horse", "Medieval", "Magic Horn")
+    manager.save_to_file("output_creatures.txt")
+    with open("output_creatures.txt", "r") as f:
+        data = f.readlines()
+    assert len(data) == 2
+    assert data[0].strip() == "Dragon,Reptile,Chinese,Fire Breathing"
+    assert data[1].strip() == "Unicorn,Horse,Medieval,Magic Horn"
+
+
+def test_load_file():
+    manager = CreatureManager()
+    manager.load_from_file("test_creatures.txt")
+    assert len(manager.creatures) == 2
+    assert manager.creatures[0].name == "Phoenix"
+    assert manager.creatures[1].type == "Beast"
+
+
+def test_save_and_load_combined():
+    manager = CreatureManager()
+    manager.load_from_file("test_creatures.txt")
+    manager.add_creature("Cerberus", "Dog", "Greek", "Guardian")
+    manager.save_to_file("output_creatures.txt")
+    manager2 = CreatureManager()
+    manager2.load_from_file("output_creatures.txt")
+    assert len(manager2.creatures) == 3
+    names = [creature.name for creature in manager2.creatures]
+    assert "Cerberus" in names
+
+
+def test_empty_file_load():
+    empty_filename = "empty_creatures.txt"
+    open(empty_filename, 'w').close()
+    manager = CreatureManager()
+    manager.load_from_file(empty_filename)
+    assert len(manager.creatures) == 0
+    os.remove(empty_filename)
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

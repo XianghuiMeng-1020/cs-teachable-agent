@@ -1,0 +1,4 @@
+{
+    "program": "def mythical_character_power(character_name):\n    # Define a dictionary with character names as keys and their powers as values\n    character_powers = {\n        'Zeus': 'Thunder',\n        'Poseidon': 'Sea',\n        'Hades': 'Underworld',\n        'Athena': 'Wisdom',\n        'Apollo': 'Sun'\n    }\n    # Look up the character name in the dictionary and return the corresponding power,\n    # or return 'Unknown' if the character is not found\n    return character_powers.get(character_name, 'Unknown')",
+    "context_relevance": 1.0
+}

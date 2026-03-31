@@ -1,0 +1,35 @@
+### Game of Chance: Lottery System
+
+Create a function called `lottery_game(entries, winning_number)` that simulates a lottery game. The function should determine the winnings for each participant based on their guess of a winning number. 
+
+#### Input:
+- `entries`: A dictionary where keys are participant names (strings) and values are their guessed numbers (integers).
+- `winning_number`: An integer representing the lottery's winning number.
+
+#### Output:
+- A dictionary with participant names as keys and their winnings as values (strings). Use 'Jackpot', 'Half-Pot', 'Quarter-Pot', or 'No Winnings' based on the following rules:
+  - If the guessed number matches the winning number exactly, the participant wins a 'Jackpot'.
+  - If the guessed number matches plus or minus 1 of the winning number, the participant wins 'Half-Pot'.
+  - If the guessed number matches plus or minus 2 of the winning number, the participant wins 'Quarter-Pot'.
+  - If none of the above, the participant receives 'No Winnings'.
+
+#### Example:
+```python
+entries = {
+    'Alice': 5,
+    'Bob': 3,
+    'Charlie': 8
+}
+winning_number = 4
+print(lottery_game(entries, winning_number))
+```
+Expected output:
+```
+{
+    'Alice': 'Jackpot',
+    'Bob': 'Half-Pot',
+    'Charlie': 'No Winnings'
+}
+```
+
+Implement the `lottery_game` function to fulfill the task requirements.

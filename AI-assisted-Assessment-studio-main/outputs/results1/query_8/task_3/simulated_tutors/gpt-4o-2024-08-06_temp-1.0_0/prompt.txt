@@ -1,0 +1,65 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+You are tasked with writing a Python function that simulates the assigning of a mythological creature to a person based on their zodiac sign. Each zodiac sign is associated with a specific creature using a dictionary. The function you need to write is as follows:
+
+`def assign_mythological_creature(zodiac_sign):`
+
+The function should accept a single argument, `zodiac_sign`, which is a string representing the zodiac sign. The function should return the name of the mythological creature associated with that zodiac sign. If the given zodiac sign is not recognized, the function should return "Unknown Creature".
+
+The relationships between zodiac signs and mythological creatures are as follows:
+- Aries: Dragon
+- Taurus: Minotaur
+- Gemini: Griffin
+- Cancer: Cyclops
+- Leo: Phoenix
+- Virgo: Sphinx
+- Libra: Centaur
+- Scorpio: Hydra
+- Sagittarius: Pegasus
+- Capricorn: Leviathan
+- Aquarius: Kraken
+- Pisces: Mermaid
+
+Use these associations to create a dictionary that maps each zodiac sign to its corresponding mythological creature.
+
+Your implementation will be tested with various inputs to ensure that the correct creature is returned for known zodiac signs, and "Unknown Creature" is returned for any unlisted or incorrectly spelled zodiac signs.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import assign_mythological_creature
+
+def test_known_signs():
+    assert assign_mythological_creature('Aries') == 'Dragon'
+    assert assign_mythological_creature('Taurus') == 'Minotaur'
+    assert assign_mythological_creature('Gemini') == 'Griffin'
+    assert assign_mythological_creature('Cancer') == 'Cyclops'
+    assert assign_mythological_creature('Leo') == 'Phoenix'
+    assert assign_mythological_creature('Virgo') == 'Sphinx'
+    assert assign_mythological_creature('Libra') == 'Centaur'
+    assert assign_mythological_creature('Scorpio') == 'Hydra'
+    assert assign_mythological_creature('Sagittarius') == 'Pegasus'
+    assert assign_mythological_creature('Capricorn') == 'Leviathan'
+    assert assign_mythological_creature('Aquarius') == 'Kraken'
+    assert assign_mythological_creature('Pisces') == 'Mermaid'
+
+def test_unknown_sign():
+    assert assign_mythological_creature('Ophiuchus') == 'Unknown Creature'
+
+def test_empty_string():
+    assert assign_mythological_creature('') == 'Unknown Creature'
+
+def test_lowercase_sign():
+    assert assign_mythological_creature('aries') == 'Unknown Creature'
+
+def test_random_string():
+    assert assign_mythological_creature('NotAZodiac') == 'Unknown Creature'
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,19 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a small cooking competition, each participant is required to bring a dish with specified ingredients. The competition judges have a list of mandatory ingredients for each round. Participants need to ensure they have the required ingredients to qualify for that round. 
+
+Write a Python function `can_qualify(dish_ingredients, mandatory_ingredients)` that takes two lists of strings: `dish_ingredients` and `mandatory_ingredients`. The list `dish_ingredients` contains ingredients that a participant has used in their dish. The list `mandatory_ingredients` contains ingredients that are required by the judges for the round.
+
+The function should return `True` if the participant's dish contains all mandatory ingredients, otherwise `False`.
+
+The function will be tested as follows:
+- It will be tested with a list of ingredients and a list of mandatory ingredients to check if all mandatory ingredients are present.
+- You should consider both lists will contain only lowercase alphabetic characters, without duplicates within each list.
+- Test cases will include scenarios where the dish contains: all mandatory ingredients, some grounds where no mandatory ingredients are included, and where some optional additional ingredients are present but mandatory ones are missing.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

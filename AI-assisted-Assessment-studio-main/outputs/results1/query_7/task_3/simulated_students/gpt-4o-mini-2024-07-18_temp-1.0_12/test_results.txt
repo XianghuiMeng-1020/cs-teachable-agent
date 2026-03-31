@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:36: AssertionError: assert 'Nessie\nGolem\n' == 'Minotaur\nKr...Frost_Giant\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:43: AssertionError: assert '' == 'Nessie\nGolem\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:68: AssertionError: assert '' == 'Banshee\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_filter_legendary
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_filter_myth
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_filter_partial_content
+========================= 3 failed, 2 passed in 0.11s ==========================

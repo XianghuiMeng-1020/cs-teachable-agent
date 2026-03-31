@@ -1,0 +1,4 @@
+{
+    "program": "import math\n\ndef play_dice_game(target):\n    # The maximum roll from a six-sided die is 6.\n    \n    # We need to find minimum rolls where each roll could be maximum (6)\n    # Calculate the number of rolls needed using ceil division\n    rolls_needed = math.ceil(target / 6.0)\n    return rolls_needed\n",
+    "context_relevance": 0.0
+}

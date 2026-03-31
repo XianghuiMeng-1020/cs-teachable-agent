@@ -1,0 +1,39 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+**Generate a Mythology Hero List**
+
+Your task is to write a Python program that reads data from a file containing information about mythological heroes and processes it to generate a structured list of heroes grouped by mythology. Each line in the input file describes a single mythological hero in the following format: `"<Hero Name>;<Mythology Type>"`.
+
+You need to implement a function `generate_hero_list(input_file)` that reads the file `input_file`, processes the data, and returns a dictionary where the keys are mythology types and the values are lists of hero names associated with that mythology, ordered alphabetically. Assume all hero names and mythology types are unique and non-empty strings.
+
+If the file is empty, the function should return an empty dictionary.
+
+**Example:**
+
+Suppose the content of `heroes.txt` is the following:
+```
+Perseus;Greek
+Thor;Norse
+Rama;Hindu
+Hercules;Greek
+Loki;Norse
+```
+
+For this input, the `generate_hero_list('heroes.txt')` function should return:
+```
+{
+    'Greek': ['Hercules', 'Perseus'],
+    'Norse': ['Loki', 'Thor'],
+    'Hindu': ['Rama']
+}
+```
+
+**Note:**
+- You do not need to handle malformed entries. Assume all lines are in the correct format.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

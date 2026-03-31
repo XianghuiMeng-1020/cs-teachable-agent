@@ -1,0 +1,65 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+**Task: Valhalla Warriors Calculation**
+
+In Norse mythology, warriors who die in combat are taken to Valhalla, where they become einherjar and train for the events of Ragnarok. We're interested in creating a program to keep track of these warriors and award them based on their achievements.
+
+Write a function `calculate_awards(warrior_achievements)` that takes a list of integers, `warrior_achievements`, where each integer represents the number of successful combats a warrior has won. You need to determine the award tier for each warrior based on their achievements.
+
+Tier Calculation:
+- If a warrior has won 0 combats, they receive the title 'Novice'.
+- If a warrior has won between 1 to 5 combats, they receive the title 'Adept'.
+- If a warrior has won between 6 to 10 combats, they receive the title 'Veteran'.
+- If a warrior has won more than 10 combats, they receive the title 'Elite'.
+
+The function should return a list of strings representing these titles corresponding to each input element.
+
+**Example:**
+
+```python
+warrior_achievements = [0, 2, 7, 4, 11]
+
+calculate_awards(warrior_achievements)
+# Output: ['Novice', 'Adept', 'Veteran', 'Adept', 'Elite']
+```
+
+Ensure your solution handles empty lists and odd distributions of achievements test cases.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_awards
+
+def test_calculate_awards_base_cases():
+    # Test with each tier
+    assert calculate_awards([0]) == ['Novice']
+    assert calculate_awards([3]) == ['Adept']
+    assert calculate_awards([8]) == ['Veteran']
+    assert calculate_awards([15]) == ['Elite']
+
+def test_calculate_awards_mixed_tiers():
+    # Mixed tiers
+    assert calculate_awards([0, 2, 6, 11]) == ['Novice', 'Adept', 'Veteran', 'Elite']
+    
+def test_calculate_awards_alternating_values():
+    # Alternating values
+    assert calculate_awards([5, 10, 11, 0, 1]) == ['Adept', 'Veteran', 'Elite', 'Novice', 'Adept']
+
+def test_calculate_awards_multiple_mixed_tiers():
+    # Common multiple mixed tiers
+    assert calculate_awards([1, 5, 0, 7, 12, 9, 4]) == ['Adept', 'Adept', 'Novice', 'Veteran', 'Elite', 'Veteran', 'Adept']
+
+def test_calculate_awards_empty():
+    # Test empty list
+    assert calculate_awards([]) == []
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,16 @@
+{
+  "raw_answers": {
+    "BLANK_1": "%",
+    "BLANK_2": "=="
+  },
+  "answers": {
+    "BLANK_1": "%",
+    "BLANK_2": "=="
+  },
+  "is_correct": false,
+  "correct_answers": {
+    "blank_1": "%",
+    "blank_2": "==",
+    "blank_3": "2"
+  }
+}

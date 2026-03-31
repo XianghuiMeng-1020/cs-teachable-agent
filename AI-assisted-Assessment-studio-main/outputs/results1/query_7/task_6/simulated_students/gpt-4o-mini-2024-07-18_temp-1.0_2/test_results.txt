@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at teardown of test_filter_case_sensitivity _______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythical_creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:29: AssertionError: assert 'Rama:Hindu:H...he Trojan War' == 'Cerberus:Gre...he Trojan War'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:36: AssertionError: assert 'Rama:Hindu:H...od of thunder' == 'Fenrir:Norse...od of thunder'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'mythical_creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'mythical_creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'mythical_creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_by_greek_origin
+FAILED outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_by_norse_origin
+FAILED outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_by_hindu_origin
+FAILED outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_with_no_match
+FAILED outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_case_sensitivity
+ERROR outputs/results1/query_7/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_filter_case_sensitivity
+========================== 5 failed, 1 error in 0.16s ==========================

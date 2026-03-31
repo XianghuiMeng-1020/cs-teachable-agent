@@ -1,0 +1,6 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_2/test_suite_sol.py:51: AssertionError: assert ['1 2 3 4 5',... 42 43 44 45'] == ['1 2 3 4 5',... 12 13 14 15']
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_2/test_suite_sol.py::test_all_tickets_matching_some
+1 failed, 4 passed in 0.03s

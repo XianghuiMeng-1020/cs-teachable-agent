@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 20%]
+FE...                                                                    [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at teardown of test_colossal_creatures _________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_colossal_creatures
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_colossal_creatures
+===================== 1 failed, 4 passed, 1 error in 0.18s =====================

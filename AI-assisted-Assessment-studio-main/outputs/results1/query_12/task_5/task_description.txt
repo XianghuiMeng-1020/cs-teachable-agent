@@ -1,0 +1,5 @@
+Create a Python program that reads a text file named 'recipes.txt' and processes it to generate a report called 'ingredient_report.txt'. Each line in 'recipes.txt' contains a recipe formatted as: `recipe_name | ingredient1, ingredient2, ingredient3,...`. Your task is to generate a report with each ingredient followed by the number of times it appears across all recipes, sorted in descending order of frequency. Write the output to 'ingredient_report.txt', with each line formatted as: `ingredient: count`.
+
+Your function should be named `generate_ingredient_report()`. This function does not take any parameters. Make sure to create this function and handle the file I/O within it. You will need to ignore lines in 'recipes.txt' that do not conform to the correct format of `recipe_name | ingredient1, ingredient2, ingredient3,...`. If 'recipes.txt' does not exist or is empty, the output file 'ingredient_report.txt' should also be empty.
+
+Ensure that your solution handles different cases where ingredients may be unfortunately misspelled or written in different cases (e.g., 'Salt' vs 'salt') by considering each distinct form separately.

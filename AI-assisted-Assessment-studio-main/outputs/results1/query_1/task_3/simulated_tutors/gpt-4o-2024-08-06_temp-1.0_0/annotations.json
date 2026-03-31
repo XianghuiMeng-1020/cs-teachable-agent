@@ -1,0 +1,4 @@
+{
+    "program": "def dice_game(target_score, rolls):\n    total_score = 0  # Initialize the total score\n    \n    # Iterate over each roll\n    for roll in rolls:\n        total_score += roll  # Add the roll value to the total score\n        \n        # Check if the total score reached or exceeded the target score\n        if total_score >= target_score:\n            return 'WIN'\n            \n    # If loop completes and target isn't met, the player loses\n    return 'LOSE'\n\n# After implementing the function, \n# you would place the given test cases in a separate test file, and use pytest to test the implementation.",
+    "context_relevance": 1.0
+}

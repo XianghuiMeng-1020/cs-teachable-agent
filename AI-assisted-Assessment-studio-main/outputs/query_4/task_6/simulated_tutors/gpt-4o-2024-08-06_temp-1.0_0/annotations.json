@@ -1,0 +1,4 @@
+{
+    "program": "def compute_final_scores(moves):\n    scores = {}\n    for player, path in moves.items():\n        total_score = 0\n        for position in path:\n            if 1 <= position <= 5:\n                total_score += 2\n            elif 6 <= position <= 10:\n                total_score += 3\n            elif position > 10:\n                total_score += 5\n        scores[player] = total_score\n    return scores\n\n# This implementation uses variables (scores, total_score, player, path, position),\n# arithmetic operators (+, +=, <=, and >), selection statements (if/else),\n# loops (for), and dictionaries (input moves and output scores).",
+    "context_relevance": 1.0
+}

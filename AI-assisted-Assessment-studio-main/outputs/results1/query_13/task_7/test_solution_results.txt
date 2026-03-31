@@ -1,0 +1,12 @@
+FF.FF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/test_suite_sol.py:34: assert 500.0 == 333.33
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/test_suite_sol.py:39: assert 200.0 == 150.0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/test_suite_sol.py:49: assert None == 216.67
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/test_suite_sol.py:54: assert 90.0 == 75.0
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_7/test_suite_sol.py::test_calculate_average_ingredient_weight_case1
+FAILED outputs/results1/query_13/task_7/test_suite_sol.py::test_calculate_average_ingredient_weight_case2
+FAILED outputs/results1/query_13/task_7/test_suite_sol.py::test_calculate_average_ingredient_weight_case4
+FAILED outputs/results1/query_13/task_7/test_suite_sol.py::test_calculate_average_ingredient_weight_case5
+4 failed, 1 passed in 0.03s

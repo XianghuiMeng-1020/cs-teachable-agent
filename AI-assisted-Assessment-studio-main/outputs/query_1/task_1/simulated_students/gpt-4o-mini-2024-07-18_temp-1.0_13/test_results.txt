@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py F [ 20%]
+..F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:7: AssertionError: assert [('Ares', 6),...Hercules', 1)] == [('Ares', 7),...Hercules', 0)]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:32: AssertionError: assert [('Hera', 4),..., ('Ares', 3)] == [('Hera', 7),..., ('Ares', 0)]
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_basic_distribution
+FAILED outputs/query_1/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_not_enough_allocation
+========================= 2 failed, 3 passed in 0.09s ==========================

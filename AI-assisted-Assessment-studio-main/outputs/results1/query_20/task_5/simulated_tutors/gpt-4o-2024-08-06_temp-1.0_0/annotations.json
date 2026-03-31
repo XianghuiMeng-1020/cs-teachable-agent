@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_score(settlementsA, settlementsB, specialLocations):\n    # Calculate the score for each player based on adjacency to special locations\n    def score(settlements):\n        score = 0\n        for i in range(len(specialLocations)):\n            if specialLocations[i] == 'S':\n                if i > 0 and settlements[i-1] == '1':\n                    score += 1\n                if i < len(specialLocations) - 1 and settlements[i+1] == '1':\n                    score += 1\n        return score\n\n    # Calculate scores for Player A and Player B\n    scoreA = score(settlementsA)\n    scoreB = score(settlementsB)\n\n    # Compare scores and return the result\n    if scoreA > scoreB:\n        return 'A'\n    elif scoreB > scoreA:\n        return 'B'\n    else:\n        return 'Tie'",
+    "context_relevance": 0.0
+}

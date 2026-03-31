@@ -1,0 +1,8 @@
+F...F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/test_suite_sol.py:12: AssertionError: assert {'1': '', 'fl...1/2 teaspoon'} == {'egg': '1', ...1/2 teaspoon'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/test_suite_sol.py:46: AssertionError: assert {'basil': '',...ve': '100 ml'} == {'basil': '',...il': '100 ml'}
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_2/test_suite_sol.py::test_ingredients_with_quantities_and_units
+FAILED outputs/results1/query_14/task_2/test_suite_sol.py::test_complex_ingredient_names
+2 failed, 3 passed in 0.02s

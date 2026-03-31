@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:9: AssertionError: assert {'flour': {'q...it': 'grams'}} == {'flour': {'q...it': 'grams'}}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:19: AssertionError: assert {'butter': {'...it': 'grams'}} == {'butter': {'...it': 'grams'}}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:28: AssertionError: assert {'eggs': {'qu...it': 'liter'}} == {'eggs': {'qu...it': 'liter'}}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:5: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:44: AssertionError: assert {'meat': {'qu...t': 'liters'}} == {'meat': {'qu...t': 'liters'}}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_single_ingredient
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_multiple_ingredients
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_different_units
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_empty_string
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_complex_input
+============================== 5 failed in 0.12s ===============================

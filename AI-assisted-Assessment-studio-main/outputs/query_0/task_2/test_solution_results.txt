@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/test_suite_sol.py:20: AssertionError: assert 'Bob:win' in 'Alice:lose\nBob:lose\nCharlie:lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/solution_program.py:9: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/solution_program.py:9: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/solution_program.py:9: ValueError: invalid literal for int() with base 10: 'lose'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_2/solution_program.py:9: ValueError: invalid literal for int() with base 10: 'lose'
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_2/test_suite_sol.py::test_play_game_win_case - As...
+FAILED outputs/query_0/task_2/test_suite_sol.py::test_play_game_lose_case - V...
+FAILED outputs/query_0/task_2/test_suite_sol.py::test_play_game_multiple_lines
+FAILED outputs/query_0/task_2/test_suite_sol.py::test_play_game_format - Valu...
+FAILED outputs/query_0/task_2/test_suite_sol.py::test_play_game_original_content_replacement
+5 failed in 0.04s

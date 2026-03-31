@@ -1,0 +1,81 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+### Task
+You're tasked with developing a small Python utility for board game enthusiasts. Your program should process a file named `games.txt` that contains a list of board game names, one per line. 
+
+Your job is to write a function `count_games_with_letter(filepath, letter)` that reads this file and counts how many games have names starting with a specific letter. 
+
+- **Function Signature**: `def count_games_with_letter(filepath, letter):`
+- **Parameters**:
+  - `filepath`: A string that represents the path to the `games.txt` file.
+  - `letter`: A single character string that represents the letter to count games beginning with.
+- **Returns**: An integer representing the count of game names starting with the specified letter.
+
+### Constraints:
+- Assume that `filepath` will always be a valid path of a readable file.
+- Assume that the `games.txt` is properly formatted.
+- Do not differentiate between uppercase and lowercase letters when counting (e.g., 'Catan' and 'catan' should be counted together for 'C').
+- Consider only the first letter of each game name.
+
+### Example
+`
+# If the `games.txt` contains:
+# Chess\n
+# Checkers\n
+# Catan\n
+# Battleship\n
+# Carcassonne\n
+# The call to the function with parameters `count_games_with_letter('games.txt', 'C')` would return `3`.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import count_games_with_letter
+
+# Creation of a sample games.txt file for testing
+
+def setup_module(module):
+    with open('games.txt', 'w') as f:
+        f.write("Chess\n")
+        f.write("Checkers\n")
+        f.write("Catan\n")
+        f.write("Battleship\n")
+        f.write("Carcassonne\n")
+        f.write("Monopoly\n")
+        f.write("Dominion\n")
+        f.write("Risk\n")
+        f.write("Clue\n")
+        f.write("Azul\n")
+
+# Removal of the sample games.txt file after testing
+
+def teardown_module(module):
+    os.remove('games.txt')
+
+
+def test_count_games_with_letter_C():
+    assert count_games_with_letter('games.txt', 'C') == 4
+
+def test_count_games_with_letter_B():
+    assert count_games_with_letter('games.txt', 'B') == 1
+
+def test_count_games_with_letter_M():
+    assert count_games_with_letter('games.txt', 'M') == 1
+
+def test_count_games_with_letter_D():
+    assert count_games_with_letter('games.txt', 'D') == 1
+
+def test_count_games_with_letter_R():
+    assert count_games_with_letter('games.txt', 'R') == 1
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

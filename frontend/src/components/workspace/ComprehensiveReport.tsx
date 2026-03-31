@@ -47,7 +47,7 @@ export function ComprehensiveReport({
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-6">
-        <div className="text-3xl font-bold text-slate-900">
+        <div className="text-3xl font-bold text-stone-900">
           {totalPassed}/{totalRun}
         </div>
         <div className="h-20 w-20">
@@ -70,7 +70,7 @@ export function ComprehensiveReport({
           </ResponsiveContainer>
         </div>
         {overallSummary && (
-          <p className="text-sm text-slate-600">{overallSummary}</p>
+          <p className="text-sm text-stone-600">{overallSummary}</p>
         )}
       </div>
       <div className="h-64">
@@ -87,9 +87,9 @@ export function ComprehensiveReport({
                 if (!active || !payload?.length) return null;
                 const d = payload[0].payload;
                 return (
-                  <div className="rounded-lg border border-slate-200 bg-white p-2 text-xs shadow-card">
-                    <p className="font-mono text-slate-600">{d.problem_id}</p>
-                    <p className="mt-1 text-slate-500">{d.fullLabel?.slice(0, 80)}...</p>
+                  <div className="rounded-lg border border-stone-200 bg-white p-2 text-xs shadow-card">
+                    <p className="font-mono text-stone-600">{d.problem_id}</p>
+                    <p className="mt-1 text-stone-500">{d.fullLabel?.slice(0, 80)}...</p>
                     <p className={d.passed ? "text-success" : "text-danger"}>
                       {d.passed ? "PASS" : "FAIL"}
                     </p>

@@ -1,0 +1,52 @@
+You are a student solving a Python dropdown question.
+Return only a JSON object with key `answers`.
+The value of `answers` must be a list of objects.
+Each object must contain `blank_id` and `selected_option`.
+Return exactly one answer object for every blank.
+Copy every selected option exactly as written in the choices.
+
+Title: Dropdown Question for luckiest_player
+Prompt: Fill each blank in the Python code with the single best option so the program matches the canonical source solution.
+
+Source task summary:
+### Luckiest Player of the Day In a casino themed on Games of Chance, players enjoy slot machines. Each day, the casino logs the wins of players in a text file named `daily_wins.txt`. Your task is to determine the 'Luckiest Player of the Day', meaning the player with the highest total winnings on that day. The log file, `daily_wins.txt`, will have the following format: - Each line contains a player's name followed by a space, and then their winnings as an integer. A player can appear multiple...
+
+Code template:
+```python
+def luckiest_player(filename):
+    with open(filename, 'r') as file:
+        player_totals = {}
+        for line in file:
+            name, winnings = line.rsplit(maxsplit=__BLANK_3__)
+            winnings = int(winnings)
+            if name in player_totals:
+                player_totals[name] += winnings
+            else:
+                player_totals[name] = winnings
+        max_winnings = __BLANK_1__float('inf')
+        luckiest = None
+        for player in sorted(player_totals):
+            if player_totals[player] __BLANK_2__ max_winnings:
+                max_winnings = player_totals[player]
+                luckiest = player
+        return luckiest
+```
+
+Choices by blank:
+blank_1 (__BLANK_1__):
+- *
+- -
+- %
+- +
+
+blank_2 (__BLANK_2__):
+- >=
+- >
+- <=
+- <
+
+blank_3 (__BLANK_3__):
+- 0
+- 3
+- 2
+- 1

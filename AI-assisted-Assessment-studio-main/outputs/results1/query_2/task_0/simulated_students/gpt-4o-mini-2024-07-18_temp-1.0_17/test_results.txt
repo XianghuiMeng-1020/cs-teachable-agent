@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+FF.FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________________ ERROR at teardown of test_empty_file _____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'tickets1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:21: AssertionError: assert 'Alice' == 'Charlie'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:26: AssertionError: assert 'Anna' == 'Eli'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:31: AssertionError: assert 'File not found' == 'Toby'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:46: AssertionError: assert 'File not found' is None
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_winner_case1
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_winner_case2
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_winner_case3
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_empty_file
+ERROR outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_empty_file
+===================== 4 failed, 1 passed, 1 error in 0.11s =====================

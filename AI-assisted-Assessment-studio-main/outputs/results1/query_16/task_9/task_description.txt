@@ -1,0 +1,13 @@
+In a distant future, scientists have developed a simulation to explore the effects of various celestial phenomena on time passage. Your task is to create a Python program that simulates a starship's journey through a wormhole, which can alter the perception of time based on different conditions.
+
+Implement a class named `Starship` that simulates this journey. Your class should have the following methods:
+
+1. **`__init__(self, initial_time_travelled, velocity_factor)`**: Initializes the starship with an initial time traveled (in years) and a velocity factor. The velocity factor is a floating-point number that affects time dilation due to relativistic effects.
+
+2. **`travel_through_wormhole(self, wormhole_intensity)`**: Computes the effective time traveled after passing through a wormhole. The intensity of a wormhole (`wormhole_intensity`) multiplies the `velocity_factor` and affects the `initial_time_travelled` as `effective_time = initial_time_travelled * wormhole_intensity * velocity_factor`.
+
+3. **`get_effective_time(self)`**: Returns the calculated effective time as a formatted string with two decimal places (e.g., `'123.45 years'`).
+
+4. **`handle_exception_test(self)`**: A method meant for testing exception handling that performs a division operation to raise and catch a `ZeroDivisionError`. It should return the string `'Handled Exception: Division by zero.'` upon catching the exception.
+
+Write test cases to ensure your program computes the effective time correctly based on the given parameters, and that it properly handles exceptions raised in `handle_exception_test()` method.

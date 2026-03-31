@@ -1,0 +1,85 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+### Task Description
+
+Create a Python program that manages a simple recipe book for cooking recipes. The program should define a `Recipe` class and manage recipes using text files. Each recipe should have the following attributes: `name`, `ingredients`, and `instructions`.
+
+**Functional Requirements:**
+- Implement a `Recipe` class with:
+  - A constructor to initialize the `name`, `ingredients`, and `instructions`.
+  - A method `save_to_file(self, filename)` that saves the recipe to a specified file. Each line in the file should be structured as follows:
+    - Line 1 contains the recipe name.
+    - Line 2 contains a comma-separated list of ingredients.
+    - Line 3 contains the instructions.
+  - A static method `load_from_file(filename)` that reads a recipe from a file and returns a `Recipe` object. Handle any exception that might occur if the file does not exist or is malformed.
+
+- If a recipe cannot be loaded due to file not existing or file corruption, the method should return `None`.
+- There should be no restriction on the number or type of ingredients and the length of instructions.
+
+**How the Program Will Be Tested:**
+- Various recipes will be written to and then read from files to verify the correctness of the implementation.
+- Use the class methods to ensure all attributes are handled properly during file I/O operations.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import Recipe
+
+def setup_module(module):
+    with open('test_recipe1.txt', 'w') as f:
+        f.write("Scrambled Eggs\nEggs, Salt, Pepper\nBeat the eggs and cook them.")
+    with open('test_recipe2.txt', 'w') as f:
+        f.write("Pasta\nPasta, Tomato Sauce\nBoil pasta and add sauce.")
+    with open('test_recipe3.txt', 'w') as f:
+        f.write("Pancakes\nFlour, Milk, Eggs\nMix ingredients and fry.")
+
+def teardown_module(module):
+    os.remove('test_recipe1.txt')
+    os.remove('test_recipe2.txt')
+    os.remove('test_recipe3.txt')
+    if os.path.exists('output_recipe.txt'):
+        os.remove('output_recipe.txt')
+
+
+def test_load_recipe_valid_file():
+    recipe = Recipe.load_from_file('test_recipe1.txt')
+    assert recipe.name == "Scrambled Eggs"
+    assert recipe.ingredients == ["Eggs", "Salt", "Pepper"]
+    assert recipe.instructions == "Beat the eggs and cook them."
+
+
+def test_load_recipe_another_valid_file():
+    recipe = Recipe.load_from_file('test_recipe2.txt')
+    assert recipe.name == "Pasta"
+    assert recipe.ingredients == ["Pasta", "Tomato Sauce"]
+    assert recipe.instructions == "Boil pasta and add sauce."
+
+
+def test_load_recipe_file_not_found():
+    recipe = Recipe.load_from_file('non_existent_file.txt')
+    assert recipe is None
+
+
+def test_save_and_load_recipe():
+    scrambled_eggs = Recipe("Scrambled Eggs", ["Eggs", "Salt", "Pepper"], "Beat the eggs and cook them.")
+    scrambled_eggs.save_to_file('output_recipe.txt')
+    loaded_recipe = Recipe.load_from_file('output_recipe.txt')
+    assert loaded_recipe.name == scrambled_eggs.name
+    assert loaded_recipe.ingredients == scrambled_eggs.ingredients
+    assert loaded_recipe.instructions == scrambled_eggs.instructions
+
+
+def test_load_recipe_malformed_file():
+    with open('malformed_recipe.txt', 'w') as f:
+        f.write("Invalid Content")  # Not enough lines
+    recipe = Recipe.load_from_file('malformed_recipe.txt')
+    assert recipe is None
+    os.remove('malformed_recipe.txt')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

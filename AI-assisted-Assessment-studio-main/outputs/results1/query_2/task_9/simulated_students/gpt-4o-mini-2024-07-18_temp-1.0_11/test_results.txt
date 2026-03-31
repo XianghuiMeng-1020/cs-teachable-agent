@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py F [ 20%]
+F.FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at teardown of TestLottery.test_draw_winner_single_entry ________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:19: AssertionError: assert ['Alice', 'Bo... 'Diana', ...] == ['Alice', 'Bo...lie', 'Diana']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:23: AssertionError: assert 32 == 4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:39: AssertionError: assert ['Eve', 'Fran...Eve', 'Frank'] == ['Eve', 'Frank']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:45: ValueError: not enough values to unpack (expected 2, got 0)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::TestLottery::test_register_entries_appends
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::TestLottery::test_draw_winner_with_entries
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::TestLottery::test_register_entries_to_empty_file
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::TestLottery::test_draw_winner_single_entry
+ERROR outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::TestLottery::test_draw_winner_single_entry
+===================== 4 failed, 1 passed, 1 error in 0.16s =====================

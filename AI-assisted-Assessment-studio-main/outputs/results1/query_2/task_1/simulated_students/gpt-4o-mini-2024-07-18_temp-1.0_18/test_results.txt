@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py F [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at teardown of test_different_file_sets_valid_winner __________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_participants_3.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:11: FileNotFoundError: One of the files was not found.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:11: FileNotFoundError: One of the files was not found.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:11: FileNotFoundError: One of the files was not found.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:11: FileNotFoundError: One of the files was not found.
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_valid_winner
+FAILED outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_different_winner_from_participants_2
+FAILED outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_different_files_no_winner
+FAILED outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_different_file_sets_valid_winner
+ERROR outputs/results1/query_2/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_different_file_sets_valid_winner
+===================== 4 failed, 1 passed, 1 error in 0.13s =====================

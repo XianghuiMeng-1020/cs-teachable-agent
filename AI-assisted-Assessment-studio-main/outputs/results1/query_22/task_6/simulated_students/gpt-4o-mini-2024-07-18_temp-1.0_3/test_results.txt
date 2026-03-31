@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py . [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:28: AssertionError: assert ['George', 'Hannah', 'Ian'] == ['Dan', 'Eve']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:13: ValueError: max() arg is an empty sequence
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:11: ValueError: not enough values to unpack (expected 2, got 1)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_multiple_high_scores
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_no_score
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_all_unique_scores
+========================= 3 failed, 2 passed in 0.22s ==========================

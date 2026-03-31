@@ -1,0 +1,32 @@
+### Task Description:
+
+In the realm of ancient Mythology, the concept of immortality is often associated with the consumption of a mystical fruit known as the 'Apple of Eternity'. In this Python task, you will simulate a scenario involving an orchard that is rumored to contain these very special apples.
+
+You are given a list of integers representing the mythical "age preservation value" of each apple in the orchard. The goal is to write a function, `best_fruits(apples, min_value)`, that will return the sum of the top two age preservation values above a given `min_value`. If fewer than two apples meet this criterion, the function should return `0`.
+
+#### Function Signature:
+```python
+    def best_fruits(apples, min_value):
+        # Your code here
+```
+
+#### Parameters:
+- `apples` - a list of integers where each integer represents the age preservation value of an apple.
+- `min_value` - an integer threshold which the apples must exceed in order to be considered.
+
+#### Return:
+- An integer representing the sum of the top two age preservation values that exceed `min_value`. If fewer than two apples meet this criterion, return `0`.
+
+### Example:
+
+```python
+best_fruits([5, 10, 25, 20], 15)
+```
+
+The function should return `45` because the two highest values greater than `15` are `25` and `20`.
+
+```python
+best_fruits([2, 3, 4], 10)
+```
+
+The function should return `0` because no apples have values greater than `10`.

@@ -1,0 +1,95 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+In ancient times, druids and sages stored knowledge of mythical creatures in sacred texts. Your task is to create a program that processes such a text file containing information about mythical creatures and outputs statistics based on them.
+
+You are provided with a text file named `creatures.txt`. Each line in the file describes a mythical creature with its name followed by a dash (`-`) and its category. Categories may include 'Dragon', 'Phoenix', 'Griffin', etc. For example:
+
+```
+Fire Drake - Dragon
+Ice Phoenix - Phoenix
+Storm Griffin - Griffin
+...
+```
+
+Write a function `count_creatures(input_file, output_file)` that reads the `creatures.txt`, counts the number of creatures in each category, and writes these statistics to `output_file`. The output format should be one category per line, with the category name followed by a colon and a space, then the count. For example:
+
+```
+Dragon: 10
+Phoenix: 5
+Griffin: 7
+...
+```
+
+### Testing
+
+- The function will be tested using Pytest.
+- Note that creature names are not unique and may appear under the same category multiple times.
+- The order of categories in the output doesn't matter.
+- Case sensitivity matters. Treat different cases as distinct.
+- Assume the input file is correctly formatted.
+
+### Examples
+
+Given a content of `creatures.txt`:
+
+```
+Fire Drake - Dragon
+Ice Phoenix - Phoenix
+Storm Griffin - Griffin
+Lake Dragon - Dragon
+...
+```
+
+Your `count_creatures` function should output to another file, e.g., `output.txt`, that appropriately summarizes the categories and their counts.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import count_creatures
+
+input_filename = 'creatures.txt'
+output_filename = 'output.txt'
+
+def setup_module(module):
+    with open(input_filename, 'w') as f:
+        f.write('Fire Drake - Dragon\n')
+        f.write('Ice Phoenix - Phoenix\n')
+        f.write('Storm Griffin - Griffin\n')
+        f.write('Lake Dragon - Dragon\n')
+        f.write('Earth Drake - Dragon\n')
+        f.write('Sky Phoenix - Phoenix\n')
+        f.write('Mountain Griffin - Griffin\n')
+        f.write('Wind Griffin - Griffin\n')
+        f.write('Forest Dragon - Dragon\n')
+
+def teardown_module(module):
+    os.remove(input_filename)
+    if os.path.exists(output_filename):
+        os.remove(output_filename)
+
+@pytest.mark.parametrize("expected_content", [
+    "Dragon: 4\nPhoenix: 2\nGriffin: 3\n",
+    "Griffin: 3\nDragon: 4\nPhoenix: 2\n",
+    "Phoenix: 2\nGriffin: 3\nDragon: 4\n",
+    "Dragon: 4\nGriffin: 3\nPhoenix: 2\n",
+    "Phoenix: 2\nDragon: 4\nGriffin: 3\n",
+])
+def test_count_creatures(expected_content):
+    count_creatures(input_filename, output_filename)
+    with open(output_filename) as f:
+        output_content = f.read()
+    assert output_content == expected_content
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

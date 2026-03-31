@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_score() -> int:\n    total_score = 0\n    with open('scores.txt', 'r') as file:\n        lines = file.readlines()\n        for line in lines:\n            scores = line.split(',')\n            scores_int = map(int, scores)\n            total_score += sum(scores_int)\n    return total_score",
+    "context_relevance": 1.0
+}

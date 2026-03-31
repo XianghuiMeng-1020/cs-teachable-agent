@@ -1,0 +1,34 @@
+In a science fiction universe, intelligent spacecrafts document their exploration data on distant planets. Create a Python program that reads a file named `spaceship_logs.txt` and summarizes the findings of each spacecraft. The file contains multiple spacecraft logs in the following format:
+
+```
+<spaceship_name>:<planet_name>:<observation>
+```
+
+For example:
+```
+Starship100:Mars:Discovered ancient ruins
+Starship200:Jupiter:Detected unusual energy signatures
+Starship100:Mars:Detected high levels of radiation
+...
+```
+
+Your task is to process this file and calculate how many unique observations each spaceship made. A unique observation for a spaceship is defined as a distinct observation message on a planet. The output should be written to a file named `summary.txt`. Each line in the `summary.txt` should be in the format:
+
+```
+<spaceship_name>:<number_of_unique_observations>
+```
+
+If there is an error reading the input file, handle it gracefully by creating an empty `summary.txt` file.
+
+### Additional Requirements:
+- The program should create `summary.txt` in the same directory as the input file.
+- Consider the possibility of duplicate observation entries within the same spaceship and the planet in the input file.
+- You may assume that the `spaceship_logs.txt` always exists when testing the solution.
+
+### Function Signature:
+```python
+def summarize_observations():
+    pass
+```
+
+The function `summarize_observations` should perform the above operations without requiring any parameters. The output file `summary.txt` should be used to validate the solution.

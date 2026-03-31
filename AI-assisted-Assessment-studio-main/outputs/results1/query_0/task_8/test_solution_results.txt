@@ -1,0 +1,8 @@
+
+==================================== ERRORS ====================================
+______ ERROR collecting outputs/results1/query_0/task_8/test_suite_sol.py ______
+E   NameError: name 'dataclass' is not defined
+=========================== short test summary info ============================
+ERROR outputs/results1/query_0/task_8/test_suite_sol.py - NameError: name 'da...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.06s

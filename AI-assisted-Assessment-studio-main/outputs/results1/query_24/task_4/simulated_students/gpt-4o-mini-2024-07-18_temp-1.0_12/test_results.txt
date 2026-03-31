@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py . [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:16: AssertionError: assert ({}, ['Alice ...Bob rolls 5']) == ({'Alice': 4, 'Bob': 5}, [])
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:24: AssertionError: assert ({}, ['Daisy ... rolls tree']) == ({'Daisy': 5}... rolls tree'])
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:28: AssertionError: assert ({}, ['Tom ro...Tom rolls 6']) == ({'Jerry': 0,...y rolls cat'])
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_valid_logs
+FAILED outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_mixed_valid_and_invalid_entries
+FAILED outputs/results1/query_24/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_multiple_players_with_invalid_entries
+========================= 3 failed, 2 passed in 0.13s ==========================

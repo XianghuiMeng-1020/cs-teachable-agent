@@ -19,68 +19,70 @@ export function OverviewPage() {
   }));
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Overview</h1>
+    <div className="space-y-8">
+      <div>
+        <h1 className="font-serif text-display-sm text-stone-900">Overview</h1>
+        <p className="mt-1 text-stone-500">Class-wide performance and activity summary</p>
+      </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         <StatCard
           label="Total Students"
           value={analytics?.student_count ?? 0}
           icon={Users}
-          iconColor="bg-brand-50 text-brand-500"
+          iconColor="bg-brand-50 text-brand-700"
           loading={isLoading}
         />
         <StatCard
           label="Avg Mastery"
           value={analytics?.avg_mastery != null ? `${Math.round(analytics.avg_mastery * 100)}%` : "—"}
           icon={BookOpen}
-          iconColor="bg-emerald-50 text-success"
+          iconColor="bg-emerald-50 text-emerald-700"
           loading={isLoading}
         />
         <StatCard
           label="Active Misconceptions"
           value={Object.values(analytics?.active_misconception_counts ?? {}).reduce((a, b) => a + b, 0) || 0}
           icon={AlertTriangle}
-          iconColor="bg-amber-50 text-warning"
+          iconColor="bg-amber-50 text-amber-700"
           loading={isLoading}
         />
         <StatCard
           label="Sessions Today"
           value={analytics?.sessions_today ?? 0}
           icon={MessageSquare}
-          iconColor="bg-accent-50 text-accent-500"
+          iconColor="bg-sky-50 text-sky-700"
           loading={isLoading}
-          change={
-            (analytics?.sessions_today ?? 0) > 0 
-              ? { value: 0, label: "active sessions" }
-              : { value: 0, label: "no sessions yet today" }
-          }
         />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-slate-800">Mastery trend</h2>
+          <h2 className="font-serif text-heading text-stone-900 mb-4">Mastery Trend</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={trendData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
-                <Tooltip formatter={(v: number) => [`${v}%`, "Mastery"]} />
-                <Line type="monotone" dataKey="mastery" stroke="#06B6D4" strokeWidth={2} dot={{ r: 3 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E7E5E4" />
+                <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#78716C" }} axisLine={false} tickLine={false} />
+                <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: "#78716C" }} axisLine={false} tickLine={false} />
+                <Tooltip
+                  formatter={(v: number) => [`${v}%`, "Mastery"]}
+                  contentStyle={{ borderRadius: "8px", border: "1px solid #E7E5E4", fontSize: "12px" }}
+                />
+                <Line type="monotone" dataKey="mastery" stroke="#0D9488" strokeWidth={2} dot={{ r: 3, fill: "#0D9488" }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </Card>
+
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-slate-800">Misconception ranking</h2>
+          <h2 className="font-serif text-heading text-stone-900 mb-4">Misconception Ranking</h2>
           <MisconceptionRanking counts={analytics?.active_misconception_counts ?? {}} />
         </Card>
       </div>
 
       <Card padding="md">
-        <h2 className="mb-4 text-lg font-semibold text-slate-800">Recent activity</h2>
+        <h2 className="font-serif text-heading text-stone-900 mb-4">Recent Activity</h2>
         <ActivityFeed items={analytics?.recent_activity ?? []} />
       </Card>
     </div>

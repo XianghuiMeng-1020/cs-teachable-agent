@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py . [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/solution_program.py:13: TypeError: list indices must be integers or slices, not str
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:61: AssertionError: assert 'Quincy' == 'Peter'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_calculate_winner_board_game[test2.txt-Frank]
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+========================= 2 failed, 3 passed in 0.05s ==========================

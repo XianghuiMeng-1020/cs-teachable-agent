@@ -1,0 +1,51 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+## Task Description
+
+You are tasked with creating a function, `lucky_draw(cards, player_choice)`, that simulates a basic game of chance called "Lucky Draw." 
+
+In this game, a deck of cards, represented by a list of integers, is shuffled, and players select a number from this deck. The function should:
+
+- Determine if the player's choice matches any of the first five cards in the deck.
+- Return `True` if the player chooses a card that appears within the first five cards of the shuffled deck, otherwise return `False`.
+- Always consider the first five cards of the list after the deck is shuffled.
+
+The input to the function is:
+
+- `cards`: a list of integers, where each integer represents a card in a deck.
+- `player_choice`: an integer representing the card chosen by the player.
+
+The game should ensure the following rules:
+
+- The deck should always contain at least five cards.
+- If the deck has less than five cards, the function should return `False` without further checking.
+
+Your implementation will be judged by a suite of test cases to verify its correctness.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import lucky_draw
+
+def test_lucky_draw_base_case():
+    assert lucky_draw([1, 2, 3, 4, 5, 6, 7, 8, 9], 3) == True
+
+def test_lucky_draw_case_not_in_first_five():
+    assert lucky_draw([1, 2, 3, 4, 5, 6, 7, 8, 9], 8) == False
+
+def test_lucky_draw_insufficient_cards():
+    assert lucky_draw([1, 2, 3], 2) == False
+
+def test_lucky_draw_exactly_five_cards():
+    assert lucky_draw([10, 20, 30, 40, 50], 50) == True
+
+def test_lucky_draw_no_match():
+    assert lucky_draw([11, 12, 13, 14, 15], 9) == False
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

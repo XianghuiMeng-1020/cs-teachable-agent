@@ -1,0 +1,83 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+### Task: Board Game Victory Tracker
+In this task, you will implement a `track_wins` function to track the number of victories across multiple board games. The program should handle various board games and keep track of victories for individual players consistently.
+
+### Function Signature:
+`def track_wins(games):`
+- `games`: List of tuples. Each tuple represents a game instance in the format `(game_name, winner_name)`. The list may contain the same game but played at different times, which would be represented by multiple tuples.
+
+### Requirements:
+1. The function should return a dictionary where each key is the player's name and the value is another dictionary.
+2. The inner dictionary should have the game names as keys and the number of wins as values.
+3. If a player has not won any game, their name should not appear in the dictionary.
+4. Consider edge cases like an empty list or cases where certain players have never won any games.
+
+### Example:
+```python
+track_wins([('chess', 'Alice'), ('checkers', 'Bob'), ('chess', 'Alice'), ('monopoly', 'Bob'), ('checkers', 'Alice')])
+```
+**Output:**
+```python
+{
+  'Alice': {
+    'chess': 2,
+    'checkers': 1
+  },
+  'Bob': {
+    'checkers': 1,
+    'monopoly': 1
+  }
+}
+```
+
+### Test your solution:
+You will implement this function and test it using pytest to ensure it handles all specified cases.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+def test_track_wins():
+    from solution import track_wins
+    
+    games1 = []
+    assert track_wins(games1) == {}
+    
+    games2 = [('chess', 'Alice')]
+    assert track_wins(games2) == {'Alice': {'chess': 1}}
+    
+    games3 = [
+        ('chess', 'Alice'), ('checkers', 'Bob'), ('chess', 'Alice'),
+        ('monopoly', 'Bob'), ('checkers', 'Alice')
+    ]
+    assert track_wins(games3) == {
+        'Alice': {'chess': 2, 'checkers': 1},
+        'Bob': {'checkers': 1, 'monopoly': 1}
+    }
+
+    games4 = [
+        ('poker', 'Charlie'), ('poker', 'Charlie'),
+        ('monopoly', 'Charlie')
+    ]
+    assert track_wins(games4) == {
+        'Charlie': {'poker': 2, 'monopoly': 1}
+    }
+
+    games5 = [
+        ('chess', 'David'), ('checkers', 'David'),
+        ('checkers', 'David'), ('monopoly', 'David'),
+        ('chess', 'Eve'), ('poker', 'Eve')
+    ]
+    assert track_wins(games5) == {
+        'David': {'chess': 1, 'checkers': 2, 'monopoly': 1},
+        'Eve': {'chess': 1, 'poker': 1}
+    }
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

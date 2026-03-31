@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_player_scores(players, scores):\n    # Initialize an empty dictionary to store the total scores for each player\n    player_scores = {}\n    \n    # Iterate through each player and their corresponding scores\n    for i, player in enumerate(players):\n        # Calculate the total score for the player\n        total_score = sum(scores[i])\n        # Add the player's name and their total score to the dictionary\n        player_scores[player] = total_score\n    \n    return player_scores\n\n# Example usage:\nplayers = ['Alice', 'Bob', 'Charlie']\nscores = [[10, 20, 30], [15, 25], [5, 10, 5, 10]]\nprint(calculate_player_scores(players, scores))  # Output: {'Alice': 60, 'Bob': 40, 'Charlie': 30}",
+    "context_relevance": 0.0
+}

@@ -1,0 +1,85 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+Create a Python program to manage cooking recipes. Your task is to implement a class, `RecipeManager`, that supports the following functionality:
+
+1. **Add Recipe**: Add a new recipe. Store each recipe with a name, a list of ingredients, and preparation steps. Save recipes to a file named `recipes.txt`. Each recipe should be stored in the format:
+   - Name of the recipe on one line, followed by its ingredients and preparation steps on the following lines.
+   - Separate the recipe name, ingredients, and preparation steps by lines.
+
+2. **Get Recipe**: Retrieve a recipe by its name. If the recipe does not exist, return a string message saying "Recipe not found". Extract the recipe details from the `recipes.txt` file.
+
+3. **Exception Handling**: Handle any errors that might occur during file operations or when processing non-existing entries.
+
+Implement the following methods in the `RecipeManager` class:
+- `add_recipe(name, ingredients, steps)`: This method takes the recipe's name, a list of its ingredients, and its preparation steps, and writes them to the `recipes.txt` file.
+- `get_recipe(name)`: This method retrieves the recipe details by its name from `recipes.txt`.
+
+Your task is to ensure that the functionality above works correctly and handles potential exceptions. The names and ingredients should be strings, while the steps can be a multiline string.
+
+The `recipes.txt` file should be stored in the same directory where the program is executed.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import RecipeManager
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as f:
+        f.write("Pasta\nTomato Sauce, Pasta\nBoil pasta, add sauce.\n")
+
+
+def teardown_module(module):
+    try:
+        os.remove('recipes.txt')
+    except FileNotFoundError:
+        pass
+
+
+def test_add_recipe():
+    manager = RecipeManager()
+    manager.add_recipe('Salad', ['Lettuce', 'Tomatoes'], 'Mix all ingredients.')
+    with open('recipes.txt', 'r') as f:
+        content = f.read()
+    assert 'Salad' in content
+    assert 'Lettuce, Tomatoes' in content
+    assert 'Mix all ingredients.' in content
+
+
+def test_get_existing_recipe():
+    manager = RecipeManager()
+    recipe = manager.get_recipe('Pasta')
+    assert recipe == "Pasta\nIngredients: Tomato Sauce, Pasta\nSteps: Boil pasta, add sauce."
+
+
+def test_get_non_existing_recipe():
+    manager = RecipeManager()
+    recipe = manager.get_recipe('Pizza')
+    assert recipe == "Recipe not found"
+
+
+def test_file_not_exist_get_recipe():
+    os.remove('recipes.txt')
+    manager = RecipeManager()
+    recipe = manager.get_recipe('Pasta')
+    assert recipe == "Recipe not found"
+
+
+def test_add_recipe_with_previous_exception():
+    setup_module(None)  # Reset file to ensure controlled state
+    manager = RecipeManager()
+    os.remove('recipes.txt')
+    manager.add_recipe('Sandwich', ['Bread', 'Ham'], 'Put ham between bread.')
+    with open('recipes.txt', 'r') as f:
+        content = f.read()
+    assert 'Sandwich' in content
+    assert 'Bread, Ham' in content
+    assert 'Put ham between bread.' in content
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

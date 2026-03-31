@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+collected 1 item
+
+outputs/results1/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:9: AssertionError: assert 2 == 0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_high_or_low_game
+============================== 1 failed in 0.11s ===============================

@@ -1,0 +1,28 @@
+You are tasked with creating a small game named "High or Low" where the player attempts to guess if the next randomly drawn number will be higher or lower than the current one. However, for simplicity, the game will use a pre-defined list of numbers instead of generating them randomly.
+
+**Task:**
+
+Write a function `high_or_low_game(numbers: list, guesses: list) -> int` where:
+- `numbers` is a list of distinct integers representing the sequence of numbers in the game.
+- `guesses` is a list of strings where each element is either "high" or "low" representing the player's guess for each pair of consecutive numbers.
+
+The game starts with the first number in the list `numbers`. For each guess in `guesses`, compare the consecutive numbers in `numbers`:
+- If the guess is "high" and the next number is higher than the current number, increment the score by 1.
+- If the guess is "low" and the next number is lower than the current number, increment the score by 1.
+
+Return the final score after all guesses are processed.
+
+**Example:**
+```python
+high_or_low_game([3, 8, 4], ["high", "low"]) # returns 2
+```
+
+In this example:
+- Compare 3 and 8: the guess is "high" and 8 > 3, increment the score.
+- Compare 8 and 4: the guess is "low" and 4 < 8, increment the score.
+
+The function should return 2 for this case.
+
+**Constraints:**
+- Do not use any libraries or external functions.
+- The length of `guesses` will always be exactly one less than `numbers`.

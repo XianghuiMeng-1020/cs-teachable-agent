@@ -54,7 +54,7 @@ interface CollaborationPanelProps {
 }
 
 const MESSAGE_TYPE_STYLES = {
-  chat: { icon: MessageCircle, bg: "bg-slate-100", text: "text-slate-700" },
+  chat: { icon: MessageCircle, bg: "bg-stone-100", text: "text-stone-700" },
   teaching_tip: { icon: Lightbulb, bg: "bg-amber-100", text: "text-amber-700" },
   question: { icon: HelpCircle, bg: "bg-brand-100", text: "text-brand-700" },
   celebration: { icon: PartyPopper, bg: "bg-emerald-100", text: "text-emerald-700" },
@@ -158,8 +158,8 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
         <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <Users className="w-8 h-8 text-brand-600" />
         </div>
-        <h3 className="text-lg font-semibold text-slate-900">Collaborative Learning</h3>
-        <p className="text-slate-500 mt-2 max-w-sm mx-auto">
+        <h3 className="text-lg font-semibold text-stone-900">Collaborative Learning</h3>
+        <p className="text-stone-500 mt-2 max-w-sm mx-auto">
           Join a study group to learn together with other students. Share tips, ask questions, and track your progress!
         </p>
         <Button
@@ -178,14 +178,14 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
   return (
     <Card padding="none" className="overflow-hidden">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <div className="border-b border-slate-200 px-4 py-3">
+        <div className="border-b border-stone-200 px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5 text-brand-600" />
-              <h3 className="font-semibold text-slate-900">
+              <h3 className="font-semibold text-stone-900">
                 {participantsData?.room_name || "Study Group"}
               </h3>
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-stone-500">
                 ({participants.length} online)
               </span>
             </div>
@@ -202,7 +202,7 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
         <TabsContent value="chat" className="m-0">
           <div className="h-[300px] overflow-y-auto p-4 space-y-3">
             {messages.length === 0 ? (
-              <p className="text-center text-slate-400 text-sm py-8">
+              <p className="text-center text-stone-400 text-sm py-8">
                 No messages yet. Be the first to say hello!
               </p>
             ) : (
@@ -230,16 +230,16 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
                       isMe && "text-right"
                     )}>
                       <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-xs font-medium text-slate-700">
+                        <span className="text-xs font-medium text-stone-700">
                           {msg.username}
                         </span>
-                        <span className="text-[10px] text-slate-400">
+                        <span className="text-[10px] text-stone-400">
                           {formatRelative(msg.created_at)}
                         </span>
                       </div>
                       <div className={cn(
                         "inline-block px-3 py-1.5 rounded-lg text-sm",
-                        isMe ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700"
+                        isMe ? "bg-brand-500 text-white" : "bg-stone-100 text-stone-700"
                       )}>
                         {msg.content}
                       </div>
@@ -252,7 +252,7 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
           </div>
 
           {/* Input */}
-          <div className="border-t border-slate-200 p-3">
+          <div className="border-t border-stone-200 p-3">
             <div className="flex gap-2">
               <Input
                 placeholder="Type a message..."
@@ -292,11 +292,11 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
             {sortedParticipants.map((p, index) => (
               <div
                 key={p.participant_id}
-                className="flex items-center gap-3 p-3 rounded-lg bg-slate-50"
+                className="flex items-center gap-3 p-3 rounded-lg bg-stone-50"
               >
                 <div className="relative">
-                  <div className="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-slate-500" />
+                  <div className="w-10 h-10 bg-stone-200 rounded-full flex items-center justify-center">
+                    <User className="w-5 h-5 text-stone-500" />
                   </div>
                   {index === 0 && (
                     <div className="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 rounded-full flex items-center justify-center">
@@ -307,7 +307,7 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-slate-900 truncate">
+                    <span className="font-medium text-stone-900 truncate">
                       {p.username}
                     </span>
                     {p.user_id === currentUserId && (
@@ -316,7 +316,7 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-slate-500 mt-0.5">
+                  <div className="flex items-center gap-3 text-xs text-stone-500 mt-0.5">
                     <span>Lv.{p.gamification?.level || 1}</span>
                     <span>•</span>
                     <span>{p.progress.percentage}% learned</span>
@@ -328,7 +328,7 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
                     <Zap className="w-4 h-4" />
                     <span className="font-semibold">{p.contribution_score}</span>
                   </div>
-                  <span className="text-[10px] text-slate-400">
+                  <span className="text-[10px] text-stone-400">
                     #{index + 1}
                   </span>
                 </div>
@@ -351,22 +351,22 @@ export function CollaborationPanel({ roomId, domainId, currentUserId }: Collabor
                 key={user.rank}
                 className={cn(
                   "flex items-center gap-3 p-3 rounded-lg mb-2",
-                  user.rank <= 3 ? "bg-amber-50" : "bg-slate-50"
+                  user.rank <= 3 ? "bg-amber-50" : "bg-stone-50"
                 )}
               >
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm",
                   user.rank === 1 ? "bg-amber-400 text-amber-900" :
-                  user.rank === 2 ? "bg-slate-300 text-slate-700" :
+                  user.rank === 2 ? "bg-stone-300 text-stone-700" :
                   user.rank === 3 ? "bg-orange-300 text-orange-900" :
-                  "bg-slate-200 text-slate-600"
+                  "bg-stone-200 text-stone-600"
                 )}>
                   {user.rank}
                 </div>
                 
                 <div className="flex-1">
-                  <span className="font-medium text-slate-900">{user.username}</span>
-                  <div className="text-xs text-slate-500">
+                  <span className="font-medium text-stone-900">{user.username}</span>
+                  <div className="text-xs text-stone-500">
                     Lv.{user.level} • {user.rooms_joined} rooms
                   </div>
                 </div>

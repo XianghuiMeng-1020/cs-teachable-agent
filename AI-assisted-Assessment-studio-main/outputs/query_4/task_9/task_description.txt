@@ -1,0 +1,29 @@
+
+### Task: Monopoly Profit Calculation
+
+Create a Python function named `calculate_monopoly_profit(player_moves)` that simulates a simplified version of a Monopoly board game profit calculation.
+
+In this problem, you are given a dictionary that represents a series of moves by a player in a game of Monopoly. Each move results in either a gain or a loss by the player. Your task is to compute the player's total profit or loss after all the moves have been completed.
+
+1. **Input**:
+   - `player_moves`: A dictionary where keys are the names of properties on the Monopoly board and the values are integers representing the amount gained or lost when stopping at that property.
+
+2. **Output**:
+   - Return an integer representing the net profit or loss after completing all the moves.
+
+### Example
+```python
+player_moves = {
+    'Boardwalk': 200,
+    'Park Place': -150,
+    'Baltic Avenue': -50,
+    'Reading Railroad': 100,
+    'Go': 200
+}
+
+print(calculate_monopoly_profit(player_moves)) # Output: 300
+```
+
+### Constraints:
+1. Each key on `player_moves` is a unique property name on the Monopoly board.
+2. The values in `player_moves` will be integers (positive or negative) representing monetary gain or loss when stopping at a property.

@@ -124,9 +124,9 @@ export function SmartLearningPath({
             <div className="p-2 bg-brand-100 rounded-lg">
               <MapPin className="w-5 h-5 text-brand-600" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900">Your Smart Learning Path</h3>
+            <h3 className="text-lg font-semibold text-stone-900">Your Smart Learning Path</h3>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-stone-500 mt-1">
             {hasPath 
               ? `Optimized path covering ${recommended.length} concepts across ${Object.keys(topicGroups).length} topics`
               : "Start teaching to unlock personalized recommendations"
@@ -140,7 +140,7 @@ export function SmartLearningPath({
               "px-2 py-1 rounded-full font-medium",
               pathSummary.confidence > 0.7 ? "bg-emerald-100 text-emerald-700" :
               pathSummary.confidence > 0.4 ? "bg-amber-100 text-amber-700" :
-              "bg-slate-100 text-slate-600"
+              "bg-stone-100 text-stone-600"
             )}>
               {Math.round(pathSummary.confidence * 100)}% confidence
             </span>
@@ -151,11 +151,11 @@ export function SmartLearningPath({
       {/* Overall Progress */}
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-slate-600">Overall Progress</span>
-          <span className="font-medium text-slate-900">{learnedCount} / {totalCount} concepts</span>
+          <span className="text-stone-600">Overall Progress</span>
+          <span className="font-medium text-stone-900">{learnedCount} / {totalCount} concepts</span>
         </div>
         <ProgressBar value={pct} className="h-2.5" color={pct > 70 ? "success" : pct > 40 ? "brand" : "warning"} />
-        <div className="flex items-center justify-between text-xs text-slate-500 mt-2">
+        <div className="flex items-center justify-between text-xs text-stone-500 mt-2">
           <span>{remainingCount} remaining</span>
           {pathSummary && (
             <span className="flex items-center gap-1">
@@ -179,7 +179,7 @@ export function SmartLearningPath({
           </button>
           
           {showRationale && (
-            <div className="mt-3 p-3 bg-brand-50 rounded-lg text-sm text-slate-700">
+            <div className="mt-3 p-3 bg-brand-50 rounded-lg text-sm text-stone-700">
               <div className="flex items-start gap-2">
                 <Lightbulb className="w-4 h-4 text-brand-500 mt-0.5 shrink-0" />
                 <p>{pathSummary.rationale}</p>
@@ -201,7 +201,7 @@ export function SmartLearningPath({
               <div key={node.id} className="relative">
                 {/* Connection line */}
                 {!isLast && (
-                  <div className="absolute left-6 top-12 w-0.5 h-6 bg-slate-200" />
+                  <div className="absolute left-6 top-12 w-0.5 h-6 bg-stone-200" />
                 )}
                 
                 <div
@@ -209,7 +209,7 @@ export function SmartLearningPath({
                     "flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer",
                     isExpanded 
                       ? "border-brand-300 bg-brand-50 shadow-sm" 
-                      : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                      : "border-stone-200 hover:border-stone-300 hover:bg-stone-50"
                   )}
                   onClick={() => setExpandedNode(isExpanded ? null : node.id)}
                 >
@@ -227,37 +227,37 @@ export function SmartLearningPath({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <h4 className="font-medium text-slate-900">{node.name}</h4>
+                        <h4 className="font-medium text-stone-900">{node.name}</h4>
                         <div className="flex items-center gap-2 mt-1">
                           <span className={cn("text-xs px-2 py-0.5 rounded-full font-medium", difficulty.bg, difficulty.text)}>
                             {difficulty.label}
                           </span>
-                          <span className="text-xs text-slate-500 flex items-center gap-1">
+                          <span className="text-xs text-stone-500 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             {node.estimated_minutes} min
                           </span>
                         </div>
                       </div>
                       <ChevronRight className={cn(
-                        "w-5 h-5 text-slate-400 transition-transform shrink-0",
+                        "w-5 h-5 text-stone-400 transition-transform shrink-0",
                         isExpanded && "rotate-90"
                       )} />
                     </div>
                     
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div className="mt-3 pt-3 border-t border-slate-200 space-y-2">
+                      <div className="mt-3 pt-3 border-t border-stone-200 space-y-2">
                         <div className="flex items-center gap-2 text-sm">
-                          <Target className="w-4 h-4 text-slate-400" />
-                          <span className="text-slate-600">Topic: {formatTopicGroup(node.topic_group)}</span>
+                          <Target className="w-4 h-4 text-stone-400" />
+                          <span className="text-stone-600">Topic: {formatTopicGroup(node.topic_group)}</span>
                         </div>
                         
                         {node.prerequisites.length > 0 && (
                           <div className="flex items-start gap-2 text-sm">
-                            <Lock className="w-4 h-4 text-slate-400 mt-0.5" />
+                            <Lock className="w-4 h-4 text-stone-400 mt-0.5" />
                             <div>
-                              <span className="text-slate-600">Prerequisites: </span>
-                              <span className="text-slate-500">
+                              <span className="text-stone-600">Prerequisites: </span>
+                              <span className="text-stone-500">
                                 {node.prerequisites.map(formatTopicGroup).join(", ")}
                               </span>
                             </div>
@@ -287,9 +287,9 @@ export function SmartLearningPath({
           })}
         </div>
       ) : (
-        <div className="text-center py-8 bg-slate-50 rounded-xl">
-          <BookOpen className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-          <p className="text-slate-500">Teach your first concept to see personalized recommendations</p>
+        <div className="text-center py-8 bg-stone-50 rounded-xl">
+          <BookOpen className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+          <p className="text-stone-500">Teach your first concept to see personalized recommendations</p>
           <div className="mt-4">
             <Link to={ROUTES.teach}>
               <Button variant="primary" size="sm" icon={ArrowRight}>
@@ -302,31 +302,31 @@ export function SmartLearningPath({
 
       {/* Stats */}
       {pathSummary && (
-        <div className="mt-6 pt-6 border-t border-slate-200 grid grid-cols-3 gap-4">
+        <div className="mt-6 pt-6 border-t border-stone-200 grid grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-slate-500 mb-1">
+            <div className="flex items-center justify-center gap-1 text-stone-500 mb-1">
               <TrendingUp className="w-4 h-4" />
               <span className="text-xs">Difficulty</span>
             </div>
-            <p className="text-lg font-semibold text-slate-900">
+            <p className="text-lg font-semibold text-stone-900">
               {pathSummary.average_difficulty.toFixed(1)}/5
             </p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-slate-500 mb-1">
+            <div className="flex items-center justify-center gap-1 text-stone-500 mb-1">
               <Clock className="w-4 h-4" />
               <span className="text-xs">Est. Time</span>
             </div>
-            <p className="text-lg font-semibold text-slate-900">
+            <p className="text-lg font-semibold text-stone-900">
               {pathSummary.total_estimated_minutes}m
             </p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-slate-500 mb-1">
+            <div className="flex items-center justify-center gap-1 text-stone-500 mb-1">
               <Target className="w-4 h-4" />
               <span className="text-xs">Concepts</span>
             </div>
-            <p className="text-lg font-semibold text-slate-900">
+            <p className="text-lg font-semibold text-stone-900">
               {pathSummary.path_length}
             </p>
           </div>

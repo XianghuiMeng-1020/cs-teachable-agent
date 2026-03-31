@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+collected 1 item
+
+outputs/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py F [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py:11: AssertionError: assert {'Alpha-1': 0...elta-4': 0.43} == {'Alpha-1': 0...elta-4': 0.49}
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_3/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_10/test_suite_stu.py::test_calculate_efficiency
+============================== 1 failed in 0.11s ===============================

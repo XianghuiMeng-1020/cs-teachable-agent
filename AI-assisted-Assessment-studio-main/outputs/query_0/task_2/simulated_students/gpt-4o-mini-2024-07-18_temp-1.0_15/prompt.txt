@@ -1,0 +1,49 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description: Game of Chance
+
+In the "Game of Chance," players roll a virtual dice and win or lose depending on the outcome of the roll. You are to create a Python program to simulate this simple gambling game.
+
+#### Detailed Requirements:
+1. **Create a Function `play_game(file_path)`**:
+   - The function reads player game data from a file, located at `file_path`. Each line in the file is formatted as: `"player_name:bet_number"`.
+   - `player_name` represents the name of the player.
+   - `bet_number` is an integer between 1 and 6, indicating the number the player bets will ``roll``.
+
+2. **Simulate the Dice Roll**:
+   - For each player in the file, simulate a dice roll in the range of 1 to 6 inclusive (can use arithmetic operations to generate this as a random outcome isn't allowed).
+   - Determine each player's result:
+     - If the `bet_number` matches the simulated roll, the player wins.
+     - Otherwise, the player loses.
+
+3. **Output Results**:
+   - Write the results to an output file at `file_path`. The results should replace the content of the file. Each line should state:
+     - `"player_name:win"` if the player wins.
+     - `"player_name:lose"` if the player loses.
+
+### Assumptions:
+- The input file is guaranteed to be well-formed.
+- Each line has exactly one player entry.
+
+### Example:
+Given an input file containing:
+```
+Alice:3
+Bob:5
+Charlie:2
+```
+
+After calling `play_game(file_path)`, the output in file could be:
+```
+Alice:lose
+Bob:win
+Charlie:lose
+```
+(Note: the actual output may vary as it's based on a simulated dice roll.)
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

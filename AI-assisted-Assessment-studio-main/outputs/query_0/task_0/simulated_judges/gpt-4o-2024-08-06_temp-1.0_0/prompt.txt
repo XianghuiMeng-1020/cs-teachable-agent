@@ -1,0 +1,162 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Lottery Stub Generation
+
+Your task is to simulate a simple "Lottery Stub Generator" game. Participants can enter a lottery where each entry comprises three values (a name, a chosen number, and an age) from which a "lottery stub" is generated. 
+
+Based on a simple algorithm, your program will read a text file containing participants' information, write a new file with results indicating whether each stub is a winning stub or not.
+
+
+#### Game Rules:
+1. **Input File Structure**: Each line in the input text file will have the format:
+   ```
+   <name>,<chosen_number>,<age>
+   ```
+   - `<name>` : String of participant's name
+   - `<chosen_number>` : A number the participant chooses (between 1 and 99)
+   - `<age>` : The age of the participant
+
+2. **Winning Condition**:
+   - For any entry, if ((chosen_number + age) \* 2) is divisible by 5, it is considered a winning stub.
+
+3. **Output**:
+   - Write a text file with the same participant entries but appended with either "WIN" or "LOSE" based on the winning condition.
+
+
+#### Function Signature
+- Your program will define a function `lottery_stub_generator(input_file, output_file)`.
+- `input_file`: A string representing the path to the input file.
+- `output_file`: A string representing the path where the output file should be written. Expected output format for each line:
+  ```
+  <name>,<chosen_number>,<age>,<result>
+  ```
+  where `<result>` can be either "WIN" or "LOSE".
+
+
+#### Example
+Suppose `input.txt` contains:
+```
+Alice,17,25
+Bob,3,30
+Charlie,48,20
+```
+Then calling `lottery_stub_generator('input.txt', 'output.txt')` will result in `output.txt` containing:
+```
+Alice,17,25,LOSE
+Bob,3,30,WIN
+Charlie,48,20,WIN
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import lottery_stub_generator
+
+input_file_content = """Alice,23,20\nBob,11,10\nEve,7,18\n"""
+expected_output_content = """Alice,23,20,LOSE\nBob,11,10,WIN\nEve,7,18,WIN\n"""
+
+new_input_file_content = """John,25,5\nMarry,8,24\nPaul,50,50\n"""
+new_expected_output_content = """John,25,5,WIN\nMarry,8,24,LOSE\nPaul,50,50,WIN\n"""
+
+input_filepath = "test_input.txt"
+output_filepath = "test_output.txt"
+
+new_input_filepath = "new_test_input.txt"
+new_output_filepath = "new_test_output.txt"
+
+
+def setup_module(module):
+    with open(input_filepath, 'w') as file:
+        file.write(input_file_content)
+
+    with open(new_input_filepath, 'w') as file:
+        file.write(new_input_file_content)
+
+
+def teardown_module(module):
+    if os.path.exists(input_filepath):
+        os.remove(input_filepath)
+    if os.path.exists(output_filepath):
+        os.remove(output_filepath)
+    if os.path.exists(new_input_filepath):
+        os.remove(new_input_filepath)
+    if os.path.exists(new_output_filepath):
+        os.remove(new_output_filepath)
+
+
+def test_lottery_stub_generator_output():
+    lottery_stub_generator(input_filepath, output_filepath)
+    with open(output_filepath, 'r') as result_file:
+        content = result_file.read()
+    assert content == expected_output_content
+
+
+def test_new_input_conditions():
+    lottery_stub_generator(new_input_filepath, new_output_filepath)
+    with open(new_output_filepath, 'r') as result_file:
+        content = result_file.read()
+    assert content == new_expected_output_content
+
+
+def test_empty_file_output():
+    empty_input_path = 'empty_test_input.txt'
+    empty_output_path = 'empty_test_output.txt'
+    with open(empty_input_path, 'w') as file:
+        file.write("")
+    try:
+        lottery_stub_generator(empty_input_path, empty_output_path)
+        with open(empty_output_path, 'r') as result_file:
+            content = result_file.read()
+            assert content == ""
+    finally:
+        if os.path.exists(empty_input_path):
+            os.remove(empty_input_path)
+        if os.path.exists(empty_output_path):
+            os.remove(empty_output_path)
+
+
+def test_single_entry():
+    single_input_path = 'single_test_input.txt'
+    single_output_path = 'single_test_output.txt'
+    with open(single_input_path, 'w') as file:
+        file.write("Dave,20,5\n")
+    try:
+        lottery_stub_generator(single_input_path, single_output_path)
+        with open(single_output_path, 'r') as result_file:
+            content = result_file.read()
+            assert content == "Dave,20,5,WIN\n"
+    finally:
+        if os.path.exists(single_input_path):
+            os.remove(single_input_path)
+        if os.path.exists(single_output_path):
+            os.remove(single_output_path)
+
+
+def test_invalid_format():
+    invalid_input_path = 'invalid_test_input.txt'
+    invalid_output_path = 'invalid_test_output.txt'
+    with open(invalid_input_path, 'w') as file:
+        file.write("Dan,30\n")  # Invalid line, missing age
+    try:
+        lottery_stub_generator(invalid_input_path, invalid_output_path)
+        with open(invalid_output_path, 'r') as result_file:
+            content = result_file.read()
+            assert content == ""
+    finally:
+        if os.path.exists(invalid_input_path):
+            os.remove(invalid_input_path)
+        if os.path.exists(invalid_output_path):
+            os.remove(invalid_output_path)
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

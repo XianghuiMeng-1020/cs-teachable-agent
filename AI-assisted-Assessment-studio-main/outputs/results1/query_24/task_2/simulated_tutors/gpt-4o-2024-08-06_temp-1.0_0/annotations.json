@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_winner_score(filepath):\n    scores = {}\n    try:\n        with open(filepath, 'r') as file:\n            for line in file:\n                try:\n                    name, score_str = line.split()\n                    score = int(score_str)\n                    if name in scores:\n                        scores[name] += score\n                    else:\n                        scores[name] = score\n                except ValueError:\n                    return None\n        max_score_player = max(scores, key=scores.get)\n        return (max_score_player, scores[max_score_player])\n    except FileNotFoundError:\n        return None",
+    "context_relevance": 1.0
+}

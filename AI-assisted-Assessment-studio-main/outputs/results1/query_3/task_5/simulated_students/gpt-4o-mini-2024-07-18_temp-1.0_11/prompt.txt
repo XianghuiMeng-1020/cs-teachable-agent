@@ -1,0 +1,29 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a simple betting game simulation called 'Balance Predictor'. This game involves a player making a series of bets on four different outcomes that are represented by a dictionary of probabilities, and a player's initial balance. The game will process a set of bets and update the player's balance according to the defined rules and outcomes.
+
+**Instructions:**
+
+1. Implement a function `balance_predictor(bets, initial_balance, outcome_probabilities)` where:
+    - `bets` is a list of strings. Each string represents a bet made by the player on one of the outcomes, e.g., 'A', 'B', 'C', or 'D'.
+    - `initial_balance` is an integer representing the starting balance of the player.
+    - `outcome_probabilities` is a dictionary containing outcome keys ('A', 'B', 'C', 'D') and their associated probabilities and bet multipliers. Each key maps to a tuple of (probability (int: from 0 to 100), multiplier).
+
+2. The function should calculate the final balance of the player after processing all the bets. Use the probability from the dictionary to simulate if the player wins or loses a particular bet (if the number rolled on a simulated 100-sided die is less than the probability, the player wins that round).
+
+3. Update the player's balance according to the following rules:
+    - If the player wins a bet, increase their balance by the bet amount multiplied by the associated multiplier (also from the dictionary).
+    - If the player loses a bet, decrease their balance by the same bet amount.
+
+4. Return the final balance of the player.
+
+**Example:**
+
+If the player starts with an initial balance of 1000 and bets on the following sequence of outcomes: ['A', 'B', 'D'], with specified probabilities and multipliers, calculate and return the resulting balance after processing all bets.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

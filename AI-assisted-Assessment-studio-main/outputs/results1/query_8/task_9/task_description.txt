@@ -1,0 +1,15 @@
+In ancient Greek mythology, there are various characters, each with distinct powers and domains. Create a function `mythical_character_power(character_name)` that determines the power or domain of a mythical character. You will use a dictionary to store the mapping of character names to their respective powers/domains. The function should return the power/domain if the character exists in the dictionary or return the string 'Unknown' if the character is not in the dictionary.
+
+Your function will be tested with a variety of character names to ensure it returns the correct power or domain, or 'Unknown' for characters not present in your dictionary.
+
+Example: 
+- `mythical_character_power('Zeus')` should return `'Thunder'`
+- `mythical_character_power('Apollo')` should return `'Sun'`
+- `mythical_character_power('UnknownCharacter')` should return `'Unknown'`
+
+The dictionary you create inside the function must contain at least the following character mappings:
+- `'Zeus': 'Thunder'`
+- `'Poseidon': 'Sea'`
+- `'Hades': 'Underworld'`
+- `'Athena': 'Wisdom'`
+- `'Apollo': 'Sun'`

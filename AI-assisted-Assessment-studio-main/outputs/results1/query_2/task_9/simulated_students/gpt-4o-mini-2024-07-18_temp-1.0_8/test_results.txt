@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+F.F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:19: AssertionError: assert ['Alice', 'Bo... 'Diana', ...] == ['Alice', 'Bo...lie', 'Diana']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: AssertionError: assert 10 == 4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:39: AssertionError: assert ['Eve', 'Fran... 'Frank', ...] == ['Eve', 'Frank']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestLottery::test_register_entries_appends
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestLottery::test_draw_winner_with_entries
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestLottery::test_register_entries_to_empty_file
+========================= 3 failed, 2 passed in 0.05s ==========================

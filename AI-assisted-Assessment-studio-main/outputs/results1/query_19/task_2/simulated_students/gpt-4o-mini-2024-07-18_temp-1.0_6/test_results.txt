@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py F [ 20%]
+FFE.                                                                     [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at setup of TestReadLogFile.test_non_existing_file ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_log_1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:48: AssertionError: assert [] == ['Engine powe...d warp speed']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:56: AssertionError: assert [] == ['Left Mars o...ing sequence']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:64: AssertionError: assert [] == ['Final maint...rks in orbit']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::TestReadLogFile::test_correct_log_parsing
+FAILED outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::TestReadLogFile::test_unordered_log_file
+FAILED outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::TestReadLogFile::test_unordered_entries
+ERROR outputs/results1/query_19/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::TestReadLogFile::test_non_existing_file
+===================== 3 failed, 1 passed, 1 error in 0.08s =====================

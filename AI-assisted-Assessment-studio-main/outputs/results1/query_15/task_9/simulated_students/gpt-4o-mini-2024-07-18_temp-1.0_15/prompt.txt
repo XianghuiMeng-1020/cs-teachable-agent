@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+In a distant future, humanity has established colonies on different planets. The Galactic Council gathered a variety of creatures to form a space exploration team tasked to explore new galaxies. 
+
+Your task is to create a Python function `count_creature_types` that will analyze the crew manifest and count how many of each type of creature is in the team. The function will take a list of strings as input, where each string represents the type of a creature (e.g., 'Human', 'Robot', 'Alien', etc.). The function should return a dictionary with the type of creature as keys and the counts as values.
+
+Function signature: `def count_creature_types(creatures):`
+
+### Example
+Suppose you have the following list of creatures in the team:
+```python
+creatures = ['Human', 'Robot', 'Alien', 'Human', 'Robot', 'Alien', 'Alien']
+```
+Your function should return:
+```python
+{'Human': 2, 'Robot': 2, 'Alien': 3}
+```
+
+### Notes
+- You can assume that the input list is non-empty and contains only valid creature types.
+- Creature types are case-sensitive (e.g., 'alien' and 'Alien' should be treated as different types).
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

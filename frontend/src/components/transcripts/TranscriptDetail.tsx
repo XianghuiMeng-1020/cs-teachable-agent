@@ -17,7 +17,7 @@ export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
   });
 
   if (isLoading || !data) {
-    return <p className="text-sm text-slate-500">Loading...</p>;
+    return <p className="text-sm text-stone-500">Loading...</p>;
   }
 
   return (
@@ -29,14 +29,14 @@ export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
         <ExportCSVButton sessionId={sessionId} />
       </div>
       <div className="flex items-center gap-2">
-        <h1 className="text-xl font-bold text-slate-900">
+        <h1 className="text-xl font-bold text-stone-900">
           {data.student.username} — {formatDate(data.started_at)}
         </h1>
       </div>
       <Card padding="none">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-xs font-medium uppercase tracking-wider text-slate-500">
+            <thead className="bg-stone-50 text-xs font-medium uppercase tracking-wider text-stone-500">
               <tr>
                 <th className="px-4 py-3 text-left w-12">#</th>
                 <th className="px-4 py-3 text-left w-28">Speaker</th>
@@ -47,7 +47,7 @@ export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
             </thead>
             <tbody>
               {data.messages.map((msg, i) => (
-                <tr key={i} className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`}>
+                <tr key={i} className={`border-b border-stone-100 ${i % 2 === 0 ? "bg-white" : "bg-stone-50/50"}`}>
                   <td className="px-4 py-3">{msg.seq}</td>
                   <td className="px-4 py-3">
                     <Badge variant={msg.speaker === "student" ? "info" : msg.speaker === "ta" ? "default" : "outline"}>

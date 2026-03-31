@@ -1,0 +1,91 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Design a Python program that handles mythical creatures and their attributes from various mythologies. Implement a `Creature` class that includes the essential attributes of a creature such as `name`, `origin`, and `description`. The program should be able to read data from a file called `creatures.txt` where each line of the file contains a creature's details in the format: `name,origin,description`. Implement the following functionalities:
+
+1. **`Creature` Class**: 
+   - Initialize with `name`, `origin`, and `description`.
+   - Method `__str__` to return a formatted string representing the creature.
+
+2. **Function `read_creatures_from_file(file_path)`**:
+   - Reads creature data from the specified file.
+   - Returns a list of `Creature` objects.
+
+3. **Function `save_creatures_to_file(creatures, file_path)`**:
+   - Saves a list of `Creature` objects to a specified file in the same format as the input file (one creature per line).
+
+Write code to read the creatures from `creatures.txt`, create `Creature` objects, and save them back to a file named `output_creatures.txt`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import Creature, read_creatures_from_file, save_creatures_to_file
+
+def setup_module(module):
+    with open('creatures.txt', 'w') as f:
+        f.write("Cerberus,Greek,A three-headed dog
+")
+        f.write("Sirens,Greek,Creatures who lure sailors
+")
+        f.write("Fenrir,Norse,A monstrous wolf
+")
+        f.write("Anansi,Akan,A spider god
+")
+        f.write("Ganesha,Hindu,God with an elephant head
+")
+
+def teardown_module(module):
+    os.remove('creatures.txt')
+    if os.path.exists('output_creatures.txt'):
+        os.remove('output_creatures.txt')
+
+def test_creature_initialization():
+    creature = Creature("Phoenix", "Egyptian", "A fire bird")
+    assert creature.name == "Phoenix"
+    assert creature.origin == "Egyptian"
+    assert creature.description == "A fire bird"
+
+
+def test_creature_string_representation():
+    creature = Creature("Phoenix", "Egyptian", "A fire bird")
+    assert str(creature) == "Phoenix from Egyptian: A fire bird"
+
+
+def test_read_creatures_from_file():
+    creatures = read_creatures_from_file('creatures.txt')
+    assert len(creatures) == 5
+    assert creatures[0].name == "Cerberus"
+    assert creatures[0].origin == "Greek"
+    assert creatures[0].description == "A three-headed dog"
+
+
+def test_save_creatures_to_file():
+    creatures = read_creatures_from_file('creatures.txt')
+    save_creatures_to_file(creatures, 'output_creatures.txt')
+    with open('output_creatures.txt', 'r') as f:
+        lines = f.readlines()
+    assert len(lines) == 5
+    assert lines[0].strip() == "Cerberus,Greek,A three-headed dog"
+
+
+def test_file_round_trip():
+    initial_creatures = read_creatures_from_file('creatures.txt')
+    save_creatures_to_file(initial_creatures, 'output_creatures.txt')
+    round_trip_creatures = read_creatures_from_file('output_creatures.txt')
+    assert len(round_trip_creatures) == len(initial_creatures)
+    for ic, rtc in zip(initial_creatures, round_trip_creatures):
+        assert ic.name == rtc.name
+        assert ic.origin == rtc.origin
+        assert ic.description == rtc.description
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

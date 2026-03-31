@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:35: AssertionError: assert 'House of Art... Drachmaroons' == 'House of Art... Drachmaroons'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:48: AssertionError: assert 'House of Pos... Drachmaroons' == 'House of Pos... Drachmaroons'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:84: AssertionError: assert 'House of Tit... Drachmaroons' == 'House of Tit... Drachmaroons'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_wealth_basic
+FAILED outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_wealth_single_house
+FAILED outputs/results1/query_5/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_calculate_wealth_large_numbers
+========================= 3 failed, 2 passed in 0.09s ==========================

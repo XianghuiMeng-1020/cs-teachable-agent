@@ -1,0 +1,4 @@
+{
+    "program": "def analyse_dice_game(input_file, output_file):\n    # Initialize counters for wins, loses, and draws\n    wins = 0\n    loses = 0\n    draws = 0\n\n    # Open the input file and process each line\n    with open(input_file, 'r') as file:\n        for line in file:\n            outcome = line.strip()\n            if outcome == \"win\":\n                wins += 1\n            elif outcome == \"lose\":\n                loses += 1\n            elif outcome == \"draw\":\n                draws += 1\n\n    # Prepare the output text\n    result = f\"Wins: {wins}\\nLoses: {loses}\\nDraws: {draws}\\n\"\n\n    # Write the result to the output file\n    with open(output_file, 'w') as file:\n        file.write(result)\n",
+    "context_relevance": 1.0
+}

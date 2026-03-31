@@ -58,11 +58,11 @@ export function StudentsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold text-slate-900">Students</h1>
+      <h1 className="text-2xl font-bold text-stone-900">Students</h1>
       <div className="flex gap-2">
         <Input placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} className="max-w-xs" />
       </div>
-      <p className="text-sm text-slate-500">Total: {filtered.length} students</p>
+      <p className="text-sm text-stone-500">Total: {filtered.length} students</p>
       <DataTable<StudentRow> columns={columns} data={filtered} loading={isLoading} emptyMessage="No students." />
     </div>
   );

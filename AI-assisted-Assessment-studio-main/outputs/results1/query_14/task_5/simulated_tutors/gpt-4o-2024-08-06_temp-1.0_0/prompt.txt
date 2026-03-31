@@ -1,0 +1,67 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+You are tasked with creating a function called `parse_ingredient_list` to help manage a cookbook. The function will take a single argument, `ingredient_str`, which is expected to be a string representing a list of ingredients needed for a recipe. Each ingredient in this list will have its data separated by commas in the format `ingredient_name, quantity, unit`. Multiple ingredients in the string will be separated by semicolons.
+
+Your task is to parse the string and return a dictionary where the keys are the ingredient names and the values are another dictionary containing the 'quantity' and 'unit' as strings for each ingredient.
+
+Function signature:
+```
+def parse_ingredient_list(ingredient_str):
+```
+
+### Example:
+If the input string is:
+- `"flour,200,grams; sugar,100,grams; eggs,3,units"`
+
+The function should return the following dictionary:
+```
+{
+    'flour': {'quantity': '200', 'unit': 'grams'},
+    'sugar': {'quantity': '100', 'unit': 'grams'},
+    'eggs': {'quantity': '3', 'unit': 'units'}
+}
+```
+
+### Notes:
+- Ensure the function handles different quantities, unit types, and correct splitting of the input string.
+- Capitalization and extra spaces in the input string can be ignored.
+- Input can be assumed to be well-formed according to the above descriptions.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import parse_ingredient_list
+
+@pytest.mark.parametrize("test_input,expected", [
+    ("flour,200,grams; sugar,100,grams; eggs,3,units", {
+        'flour': {'quantity': '200', 'unit': 'grams'},
+        'sugar': {'quantity': '100', 'unit': 'grams'},
+        'eggs': {'quantity': '3', 'unit': 'units'}
+    }),
+    ("milk,500,ml", {
+        'milk': {'quantity': '500', 'unit': 'ml'}
+    }),
+    ("chocolate,100,grams; butter,250,grams", {
+        'chocolate': {'quantity': '100', 'unit': 'grams'},
+        'butter': {'quantity': '250', 'unit': 'grams'}
+    }),
+    ("rice,2,cups; water,500,ml", {
+        'rice': {'quantity': '2', 'unit': 'cups'},
+        'water': {'quantity': '500', 'unit': 'ml'}
+    }),
+    ("eggplant,150,grams; olive oil,50,ml; garlic,3,cloves", {
+        'eggplant': {'quantity': '150', 'unit': 'grams'},
+        'olive oil': {'quantity': '50', 'unit': 'ml'},
+        'garlic': {'quantity': '3', 'unit': 'cloves'}
+    }),
+])
+def test_parse_ingredient_list(test_input, expected):
+    assert parse_ingredient_list(test_input) == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

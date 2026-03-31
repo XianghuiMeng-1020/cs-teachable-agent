@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:31: AssertionError: assert 'Results stri...ted or empty.' == 'Invalid form...esults string'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_board_game_summary_invalid_input_empty_string
+========================= 1 failed, 4 passed in 0.16s ==========================

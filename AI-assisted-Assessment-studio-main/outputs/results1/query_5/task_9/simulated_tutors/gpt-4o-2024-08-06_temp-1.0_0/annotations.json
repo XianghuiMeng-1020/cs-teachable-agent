@@ -1,0 +1,4 @@
+{
+    "program": "def determine_ultimate_being(input_file_path):\n    with open(input_file_path, 'r') as infile:\n        lines = infile.readlines()\n\n    max_power = -1\n    ultimate_creature = \"\"\n    is_draw = False\n\n    for line in lines:\n        name, power_str = line.strip().split(';')\n        power = int(power_str)\n\n        if power > max_power:\n            max_power = power\n            ultimate_creature = name\n            is_draw = False\n        elif power == max_power:\n            is_draw = True\n\n    with open('ultimate_being.txt', 'w') as outfile:\n        if is_draw:\n            outfile.write(\"It's a draw\")\n        else:\n            outfile.write(ultimate_creature)",
+    "context_relevance": 1.0
+}

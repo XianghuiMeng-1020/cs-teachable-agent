@@ -42,12 +42,12 @@ function PromptOptimizer({ domain = "general" }: PromptOptimizerProps) {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-sm font-medium text-slate-700">Your Prompt</label>
+        <label className="text-sm font-medium text-stone-700">Your Prompt</label>
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter a prompt to optimize... (e.g., 'Explain Python variables')"
-          className="w-full mt-1 p-3 border border-slate-200 rounded-lg min-h-[100px] text-sm focus:ring-2 focus:ring-brand-500"
+          className="w-full mt-1 p-3 border border-stone-200 rounded-lg min-h-[100px] text-sm focus:ring-2 focus:ring-brand-500"
         />
       </div>
 
@@ -63,18 +63,18 @@ function PromptOptimizer({ domain = "general" }: PromptOptimizerProps) {
       {result && (
         <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2">
           {/* Improvement Score */}
-          <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-lg">
+          <div className="flex items-center gap-4 p-4 bg-stone-50 rounded-lg">
             <div className={cn(
               "w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold",
               (result.improvement_score || 0) > 70 ? "bg-emerald-100 text-emerald-700" :
               (result.improvement_score || 0) > 40 ? "bg-amber-100 text-amber-700" :
-              "bg-slate-200 text-slate-600"
+              "bg-stone-200 text-stone-600"
             )}>
               {result.improvement_score || "?"}
             </div>
             <div>
-              <p className="font-medium text-slate-900">Improvement Score</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-stone-900">Improvement Score</p>
+              <p className="text-sm text-stone-500">
                 {result.improvement_score && result.improvement_score > 70 
                   ? "Excellent optimization!" 
                   : result.improvement_score && result.improvement_score > 40
@@ -104,7 +104,7 @@ function PromptOptimizer({ domain = "general" }: PromptOptimizerProps) {
                 <Sparkles className="w-5 h-5 text-brand-600 mt-0.5" />
                 <div className="flex-1">
                   <p className="font-medium text-brand-900">Optimized Prompt</p>
-                  <div className="mt-2 p-3 bg-white rounded border border-brand-200 text-sm text-slate-700">
+                  <div className="mt-2 p-3 bg-white rounded border border-brand-200 text-sm text-stone-700">
                     {result.optimized}
                   </div>
                   <Button
@@ -122,14 +122,14 @@ function PromptOptimizer({ domain = "general" }: PromptOptimizerProps) {
 
           {/* Tips */}
           {result.tips && result.tips.length > 0 && (
-            <div className="p-4 bg-slate-50 rounded-lg">
-              <p className="font-medium text-slate-900 flex items-center gap-2">
+            <div className="p-4 bg-stone-50 rounded-lg">
+              <p className="font-medium text-stone-900 flex items-center gap-2">
                 <Lightbulb className="w-4 h-4" />
                 Prompt Engineering Tips
               </p>
               <ul className="mt-2 space-y-1">
                 {result.tips.map((tip: string, i: number) => (
-                  <li key={i} className="text-sm text-slate-600 flex items-start gap-2">
+                  <li key={i} className="text-sm text-stone-600 flex items-start gap-2">
                     <span className="text-brand-500 mt-0.5">•</span>
                     {tip}
                   </li>
@@ -163,12 +163,12 @@ function TokenVisualizer() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-sm font-medium text-slate-700">Text to Analyze</label>
+        <label className="text-sm font-medium text-stone-700">Text to Analyze</label>
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter text to analyze token usage..."
-          className="w-full mt-1 p-3 border border-slate-200 rounded-lg min-h-[100px] text-sm focus:ring-2 focus:ring-brand-500"
+          className="w-full mt-1 p-3 border border-stone-200 rounded-lg min-h-[100px] text-sm focus:ring-2 focus:ring-brand-500"
         />
       </div>
 
@@ -186,29 +186,29 @@ function TokenVisualizer() {
           {/* Token Count */}
           <div className="grid grid-cols-3 gap-3">
             <Card padding="md" className="text-center">
-              <p className="text-2xl font-bold text-slate-900">{analysis.total_tokens}</p>
-              <p className="text-xs text-slate-500">Total Tokens</p>
+              <p className="text-2xl font-bold text-stone-900">{analysis.total_tokens}</p>
+              <p className="text-xs text-stone-500">Total Tokens</p>
             </Card>
             <Card padding="md" className="text-center">
-              <p className="text-2xl font-bold text-slate-900">{analysis.word_count}</p>
-              <p className="text-xs text-slate-500">Words</p>
+              <p className="text-2xl font-bold text-stone-900">{analysis.word_count}</p>
+              <p className="text-xs text-stone-500">Words</p>
             </Card>
             <Card padding="md" className="text-center">
-              <p className="text-2xl font-bold text-slate-900">{analysis.char_count}</p>
-              <p className="text-xs text-slate-500">Characters</p>
+              <p className="text-2xl font-bold text-stone-900">{analysis.char_count}</p>
+              <p className="text-xs text-stone-500">Characters</p>
             </Card>
           </div>
 
           {/* Token Distribution */}
-          <div className="p-4 bg-slate-50 rounded-lg">
-            <p className="font-medium text-slate-900 mb-3">Token Distribution</p>
+          <div className="p-4 bg-stone-50 rounded-lg">
+            <p className="font-medium text-stone-900 mb-3">Token Distribution</p>
             <div className="space-y-2">
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-slate-600">Text Content</span>
+                  <span className="text-stone-600">Text Content</span>
                   <span className="font-medium">{analysis.text_tokens} tokens</span>
                 </div>
-                <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-brand-500 rounded-full"
                     style={{ width: `${(analysis.text_tokens / analysis.total_tokens) * 100}%` }}
@@ -218,10 +218,10 @@ function TokenVisualizer() {
               {analysis.code_tokens > 0 && (
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-600">Code Blocks</span>
+                    <span className="text-stone-600">Code Blocks</span>
                     <span className="font-medium">{analysis.code_tokens} tokens</span>
                   </div>
-                  <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-purple-500 rounded-full"
                       style={{ width: `${(analysis.code_tokens / analysis.total_tokens) * 100}%` }}
@@ -240,12 +240,12 @@ function TokenVisualizer() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="p-2 bg-white rounded">
-                <p className="text-xs text-slate-500">GPT-4</p>
-                <p className="font-medium text-slate-900">${analysis.estimated_cost_gpt4.toFixed(6)}</p>
+                <p className="text-xs text-stone-500">GPT-4</p>
+                <p className="font-medium text-stone-900">${analysis.estimated_cost_gpt4.toFixed(6)}</p>
               </div>
               <div className="p-2 bg-white rounded">
-                <p className="text-xs text-slate-500">GPT-3.5</p>
-                <p className="font-medium text-slate-900">${analysis.estimated_cost_gpt3.toFixed(6)}</p>
+                <p className="text-xs text-stone-500">GPT-3.5</p>
+                <p className="font-medium text-stone-900">${analysis.estimated_cost_gpt3.toFixed(6)}</p>
               </div>
             </div>
           </div>
@@ -275,21 +275,21 @@ function ResponseComparator() {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="text-sm font-medium text-slate-700">Response A</label>
+          <label className="text-sm font-medium text-stone-700">Response A</label>
           <textarea
             value={responseA}
             onChange={(e) => setResponseA(e.target.value)}
             placeholder="Paste first response..."
-            className="w-full mt-1 p-3 border border-slate-200 rounded-lg min-h-[150px] text-sm"
+            className="w-full mt-1 p-3 border border-stone-200 rounded-lg min-h-[150px] text-sm"
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-slate-700">Response B</label>
+          <label className="text-sm font-medium text-stone-700">Response B</label>
           <textarea
             value={responseB}
             onChange={(e) => setResponseB(e.target.value)}
             placeholder="Paste second response..."
-            className="w-full mt-1 p-3 border border-slate-200 rounded-lg min-h-[150px] text-sm"
+            className="w-full mt-1 p-3 border border-stone-200 rounded-lg min-h-[150px] text-sm"
           />
         </div>
       </div>
@@ -306,7 +306,7 @@ function ResponseComparator() {
       {result && (
         <div className="space-y-4 animate-in fade-in">
           {/* Similarity Score */}
-          <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-lg">
+          <div className="flex items-center gap-4 p-4 bg-stone-50 rounded-lg">
             <div className={cn(
               "w-20 h-20 rounded-full flex items-center justify-center text-xl font-bold",
               result.similarity_score > 70 ? "bg-rose-100 text-rose-700" :
@@ -316,8 +316,8 @@ function ResponseComparator() {
               {result.similarity_score}%
             </div>
             <div>
-              <p className="font-medium text-slate-900">Similarity Score</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-stone-900">Similarity Score</p>
+              <p className="text-sm text-stone-500">
                 {result.similarity_score > 70 
                   ? "Very similar - responses are nearly identical" 
                   : result.similarity_score > 30
@@ -328,21 +328,21 @@ function ResponseComparator() {
           </div>
 
           {/* Length Comparison */}
-          <div className="p-4 bg-slate-50 rounded-lg">
-            <p className="font-medium text-slate-900 mb-3">Length Comparison</p>
+          <div className="p-4 bg-stone-50 rounded-lg">
+            <p className="font-medium text-stone-900 mb-3">Length Comparison</p>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 bg-white rounded border border-slate-200">
-                <p className="text-xs text-slate-500">Response A</p>
+              <div className="p-3 bg-white rounded border border-stone-200">
+                <p className="text-xs text-stone-500">Response A</p>
                 <p className="text-lg font-medium">{result.length_comparison?.response_a_words} words</p>
-                <p className="text-xs text-slate-400">{result.length_comparison?.response_a_chars} chars</p>
+                <p className="text-xs text-stone-400">{result.length_comparison?.response_a_chars} chars</p>
               </div>
-              <div className="p-3 bg-white rounded border border-slate-200">
-                <p className="text-xs text-slate-500">Response B</p>
+              <div className="p-3 bg-white rounded border border-stone-200">
+                <p className="text-xs text-stone-500">Response B</p>
                 <p className="text-lg font-medium">{result.length_comparison?.response_b_words} words</p>
-                <p className="text-xs text-slate-400">{result.length_comparison?.response_b_chars} chars</p>
+                <p className="text-xs text-stone-400">{result.length_comparison?.response_b_chars} chars</p>
               </div>
             </div>
-            <p className="text-sm text-slate-600 mt-2">
+            <p className="text-sm text-stone-600 mt-2">
               Length difference: {Math.abs(result.length_comparison?.length_difference_pct || 0)}%
             </p>
           </div>
@@ -354,18 +354,18 @@ function ResponseComparator() {
               <div className="flex items-center gap-2">
                 {result.structure_analysis?.response_a_has_code ? 
                   <CheckCircle className="w-4 h-4 text-emerald-600" /> :
-                  <AlertCircle className="w-4 h-4 text-slate-400" />
+                  <AlertCircle className="w-4 h-4 text-stone-400" />
                 }
-                <span className={result.structure_analysis?.response_a_has_code ? "text-slate-700" : "text-slate-400"}>
+                <span className={result.structure_analysis?.response_a_has_code ? "text-stone-700" : "text-stone-400"}>
                   A has code
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 {result.structure_analysis?.response_b_has_code ? 
                   <CheckCircle className="w-4 h-4 text-emerald-600" /> :
-                  <AlertCircle className="w-4 h-4 text-slate-400" />
+                  <AlertCircle className="w-4 h-4 text-stone-400" />
                 }
-                <span className={result.structure_analysis?.response_b_has_code ? "text-slate-700" : "text-slate-400"}>
+                <span className={result.structure_analysis?.response_b_has_code ? "text-stone-700" : "text-stone-400"}>
                   B has code
                 </span>
               </div>
@@ -404,8 +404,8 @@ export function AdvancedAILab({ domain = "general" }: AdvancedAILabProps) {
           <Zap className="w-5 h-5 text-brand-600" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-slate-900">Advanced AI Lab</h3>
-          <p className="text-sm text-slate-500">Experiment with AI capabilities</p>
+          <h3 className="text-lg font-semibold text-stone-900">Advanced AI Lab</h3>
+          <p className="text-sm text-stone-500">Experiment with AI capabilities</p>
         </div>
       </div>
 

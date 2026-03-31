@@ -1,0 +1,50 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+Create a function called `game_of_chance` that simulates a basic betting game.
+
+Here's how the game works:
+- The player starts with a balance of 100.
+- The game consists of rounds where the player can bet a certain amount of their balance.
+- In each round:
+  - A random number between 1 and 6 is rolled (consider it as a dice roll, but the function won't directly simulate the randomness; instead, it will receive a predefined sequence of outcomes).
+  - If the outcome of the dice roll is 4, 5, or 6, the player wins and doubles their bet amount, which is added to their balance.
+  - If the outcome is 1, 2, or 3, the player loses their bet amount, which is subtracted from their balance.
+
+Function Signature: `def game_of_chance(bets, outcomes):`
+- `bets`: A list of integers where each integer represents the bet amount for each round.
+- `outcomes`: A list of integers where each number represents the dice outcome for each round.
+
+The function should return the player's final balance after all rounds have been completed.
+
+Constraints:
+- The length of `bets` will always equal the length of `outcomes` and will be at least 1.
+- Bet amounts are positive integers.
+- Dice outcomes are integers from 1 to 6.
+- The player will not bet more than the available balance, meaning that if a bet reduces the balance below 0, no further rounds should be processed.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import game_of_chance
+
+def test_game_of_chance_basic_win_lose():
+    assert game_of_chance([10, 20, 15], [4, 3, 6]) == 130
+
+def test_game_of_chance_all_win():
+    assert game_of_chance([10, 20, 15], [4, 5, 6]) == 145
+
+def test_game_of_chance_all_lose():
+    assert game_of_chance([10, 20, 15], [1, 2, 3]) == 55
+
+def test_game_of_chance_just_enough_balance():
+    assert game_of_chance([100, 10, 15], [4, 5, 6]) == 230
+
+def test_game_of_chance_not_enough_balance():
+    assert game_of_chance([100, 150, 20], [3, 4, 2]) == 0
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

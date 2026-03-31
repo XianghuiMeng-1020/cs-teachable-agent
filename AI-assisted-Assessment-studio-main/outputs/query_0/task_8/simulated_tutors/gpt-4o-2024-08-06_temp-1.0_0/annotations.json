@@ -1,0 +1,4 @@
+{
+    "program": "def run_lucky_number_game():\n    # Open the file and read lucky numbers\n    with open('lucky_numbers.txt', 'r') as file:\n        lucky_numbers = [line.strip() for line in file]\n    \n    # Prompt user for input\n    user_input = input(\"Please select a number between 1 and 50: \")\n    \n    # Check if user's input matches any lucky number\n    if user_input in lucky_numbers:\n        print(\"Congratulations! You selected a lucky number!\")\n    else:\n        print(\"Sorry! Better luck next time.\")\n\n# Example usage\n# This line would typically be in the main part of the application\n# run_lucky_number_game()",
+    "context_relevance": 1.0
+}

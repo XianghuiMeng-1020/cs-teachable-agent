@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function `calculate_total_cost(recipe_data, cost_data)` that accepts two dictionaries `recipe_data` and `cost_data`. The `recipe_data` dictionary contains various recipes, where the key is the name of the dish and the value is a list of ingredients needed with their respective quantities as tuples `(ingredient, quantity)`. The `cost_data` dictionary provides the cost per unit of each ingredient, where the key is the ingredient's name and the value is the cost per unit.
+
+The function should return a new dictionary where each key is the name of a dish from `recipe_data` and the value is the total cost to prepare that dish, according to the ingredients' cost in `cost_data`. If any ingredient in a recipe is not present in `cost_data`, raise a `ValueError` indicating that the cost information is missing for that specific ingredient.
+
+Example:
+```python
+recipe_data = {
+    "Pancake": [("Flour", 2), ("Egg", 3), ("Milk", 1)],
+    "Omelette": [("Egg", 4), ("Milk", 2)]
+}
+cost_data = {
+    "Flour": 0.5,
+    "Egg": 0.2,
+    "Milk": 1.0
+}
+
+result = calculate_total_cost(recipe_data, cost_data)
+# result should be: {'Pancake': 2.6, 'Omelette': 1.4}
+```
+
+Write appropriate exception handling for missing cost data to ensure that the function returns informative error messages.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

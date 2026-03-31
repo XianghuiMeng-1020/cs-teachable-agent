@@ -1,0 +1,6 @@
+F....                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/test_suite_sol.py:23: AssertionError: assert 'Pasta Carbon...ana\nOrange\n' == 'Pasta Carbon...nPancetta\n\n'
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_8/test_suite_sol.py::TestFilterIngredients::test_filter_ingredients_exceeding
+1 failed, 4 passed in 0.04s

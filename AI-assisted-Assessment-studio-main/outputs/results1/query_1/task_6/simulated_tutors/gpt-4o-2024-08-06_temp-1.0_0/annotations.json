@@ -1,0 +1,4 @@
+{
+    "program": "def check_dice_lottery_results(results):\n    # List to store results of each dice roll\n    lottery_results = []\n    \n    # Iterate through each pair of dice results\n    for result in results:\n        # Extract individual dice values\n        die1, die2 = result\n        # Calculate sum of dice\n        total = die1 + die2\n        \n        # Determine if the current roll is a winning roll\n        if (total == 7) or (total == 11):\n            lottery_results.append(True)\n        elif die1 == die2 and total > 8:\n            lottery_results.append(True)\n        else:\n            lottery_results.append(False)\n    \n    return lottery_results\n\n# Example usage\nprint(check_dice_lottery_results([(1, 6), (3, 4), (2, 2), (6, 6), (5, 6)]))\n# Outputs: [True, True, False, True, False]",
+    "context_relevance": 1.0
+}

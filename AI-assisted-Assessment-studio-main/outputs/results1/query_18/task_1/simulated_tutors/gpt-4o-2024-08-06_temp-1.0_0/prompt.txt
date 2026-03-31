@@ -1,0 +1,76 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In a distant future, humans have discovered a system of sending messages between planets using quantum entangled particles. Each message needs to be sent with a precise energy level, calculated by manipulating code from a received 'quantum energy file'. Your task is to create a program to aid in this process by calculating the total energy level required based on data in a given file.
+
+The 'quantum energy file' will contain a series of integers separated by spaces, representing quantum energy packets received from space. Your program should read the integers from a file named `quantum_energy.txt`, calculate the total sum of these energy packets, and then write this total back to a file named `total_energy.txt`.
+
+Implement the function `calculate_total_energy()`. This function must read from `quantum_energy.txt`, calculate the sum of all integers, and write the result into `total_energy.txt`.
+
+Ensure that your program handles the input and output files correctly, and that it operates with integer values only.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import calculate_total_energy
+
+
+def setup_module(module):
+    with open('quantum_energy.txt', 'w') as file:
+        file.write('42 3 77')
+
+
+def teardown_module(module):
+    os.remove('quantum_energy.txt')
+    if os.path.exists('total_energy.txt'):
+        os.remove('total_energy.txt')
+
+
+def test_calculate_total_energy_1():
+    calculate_total_energy()
+    with open('total_energy.txt', 'r') as file:
+        total = int(file.read().strip())
+    assert total == 122
+
+
+def test_calculate_total_energy_2():
+    with open('quantum_energy.txt', 'w') as file:
+        file.write('1 2 3 4 5')
+    calculate_total_energy()
+    with open('total_energy.txt', 'r') as file:
+        total = int(file.read().strip())
+    assert total == 15
+
+
+def test_calculate_total_energy_3():
+    with open('quantum_energy.txt', 'w') as file:
+        file.write('100 200 300 400 500')
+    calculate_total_energy()
+    with open('total_energy.txt', 'r') as file:
+        total = int(file.read().strip())
+    assert total == 1500
+
+
+def test_calculate_total_energy_4():
+    with open('quantum_energy.txt', 'w') as file:
+        file.write('0')
+    calculate_total_energy()
+    with open('total_energy.txt', 'r') as file:
+        total = int(file.read().strip())
+    assert total == 0
+
+
+def test_calculate_total_energy_5():
+    with open('quantum_energy.txt', 'w') as file:
+        file.write('10 20 -5 15 -5 10')
+    calculate_total_energy()
+    with open('total_energy.txt', 'r') as file:
+        total = int(file.read().strip())
+    assert total == 45
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

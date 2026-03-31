@@ -1,0 +1,19 @@
+In ancient Greek mythology, heroes are classified based on their deeds and characteristics. You are tasked with writing a Python function named `classify_hero` that categorizes a given hero based on certain mythical traits.
+
+The function should take a single argument:
+- `traits`: a dictionary where the keys are strings representing the different traits a hero might possess (e.g., 'strength', 'wisdom', 'courage'), and the values are integers representing the magnitude of each trait.
+
+Your task is to classify the hero into one of the following categories based on their traits:
+- 'Warrior': A hero is a 'Warrior' if their 'strength' is the highest value and is greater than 50.
+- 'Seer': A hero is a 'Seer' if their 'wisdom' is the highest value and is greater than 50.
+- 'Champion': A hero is a 'Champion' if their 'courage' is the highest value and is greater than 50.
+- 'Unsung Hero': If none of the above conditions are met.
+
+Assume that each hero will always have 'strength', 'wisdom', and 'courage' keys in the traits dictionary. Your function should return the category as a string.
+
+### Example Usage:
+```python
+traits = {'strength': 55, 'wisdom': 30, 'courage': 40}
+result = classify_hero(traits)
+# result should be 'Warrior'
+```

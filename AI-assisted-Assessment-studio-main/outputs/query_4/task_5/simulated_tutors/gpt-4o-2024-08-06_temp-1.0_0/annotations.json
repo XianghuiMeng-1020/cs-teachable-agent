@@ -1,0 +1,4 @@
+{
+    "program": "def update_inventory(inventory, sales):\n    for game_name, quantity_sold in sales:\n        if game_name in inventory:\n            # Check if there is enough stock to process the sale\n            if inventory[game_name] >= quantity_sold:\n                # Update the inventory by reducing the sold quantity\n                inventory[game_name] -= quantity_sold\n    return inventory\n\n# Example usage\ninventory = {\n    'Monopoly': 5,\n    'Risk': 7,\n    'Catan': 3\n}\nsales = [\n    ('Monopoly', 2),\n    ('Risk', 8),\n    ('Catan', 1)\n]\n\nupdated_inventory = update_inventory(inventory, sales)\nprint(updated_inventory)  # Output should be {'Monopoly': 3, 'Risk': 7, 'Catan': 2}\n",
+    "context_relevance": 1.0
+}

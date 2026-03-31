@@ -1,0 +1,61 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Create a game simulation called 'Lucky Number'. The game involves rolling a 6-sided dice until a "lucky" number is rolled. A lucky number is any number between 1 and 6 that yields a positive net gain for the player. The player starts the game with 0 points, and for every roll, their score is determined by the value shown on the dice and the corresponding multiplier:
+
+Here is how points are assigned based on dice roll:
+
+- If the dice shows 1: 0 points
+- If the dice shows 2: +10 points
+- If the dice shows 3: -5 points
+- If the dice shows 4: +5 points
+- If the dice shows 5: +20 points
+- If the dice shows 6: -10 points
+
+The game should continue rolling the dice until the player's net gain is positive. This means if they start losing points after rolls, the game will continue rolling until the cumulative total score is positive.
+
+Implement a function `lucky_number_game()` that runs the game simulation and returns the number of dice rolls taken to achieve a positive net gain for the player.
+
+The score mapping should be implemented using a dictionary. Do not use input/output operations. The function should just return the number of rolls required to end the game with a positive score.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import lucky_number_game
+
+def test_positive_ending_rolls():
+    rolls = lucky_number_game()
+    assert isinstance(rolls, int)
+    assert rolls > 0
+
+def test_multiple_runs_consistency():
+    roll_counts = [lucky_number_game() for _ in range(10)]
+    assert all(isinstance(count, int) and count > 0 for count in roll_counts)
+
+def test_low_roll_count_eventually():
+    # Expect a positive score usually within a reasonable range
+    assert any(lucky_number_game() < 10 for _ in range(20))
+
+@pytest.mark.parametrize('iteration', range(5))
+def test_higher_number_of_trials(iteration):
+    assert lucky_number_game() > 0
+
+@pytest.mark.parametrize('iteration', range(5))
+def test_game_completes(iteration):
+    score_sum = 0
+    score_map = {1: 0, 2: 10, 3: -5, 4: 5, 5: 20, 6: -10}
+    rolls = 0
+    while score_sum <= 0:
+        rolls += 1
+        score_sum += score_map[iteration % 6 + 1]
+    assert rolls == lucky_number_game()
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

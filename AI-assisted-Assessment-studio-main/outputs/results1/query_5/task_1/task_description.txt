@@ -1,0 +1,31 @@
+You are tasked with creating a Python program to manage the inventory of mythical creatures in a sanctuary. The sanctuary holds different mythical creatures and you must compute various statistics based on this data.
+
+Your program should read a file named `creatures.txt`. Each line in this file contains the name of a mythical creature, a space, and then an integer value representing its magical power level. The task is to create a program that computes and outputs the following statistics:
+
+1. **Average power level** of all creatures.
+2. **Creature with the highest power** (output the name).
+3. **Total number** of creatures.
+
+Write a function `compute_mythical_stats(filename)` which reads the file `creatures.txt`, computes the required statistics, and writes them to a file named `stats.txt` with each statistic on a new line as follows:
+- The first line should contain the average power level, rounded to two decimal places.
+- The second line should contain the name of the creature with the highest power.
+- The third line should contain the total number of creatures.
+
+**Input file `creatures.txt` sample content**:
+```
+Griffon 150
+Dragon 220
+Phoenix 180
+Unicorn 160
+
+```
+
+**Output file `stats.txt` sample content**:
+```
+177.50
+Dragon
+4
+
+```
+
+Ensure that your program can handle edge cases such as when the `creatures.txt` file is empty. In such cases, write `0.00`, `None`, and `0` respectively for the three statistics.

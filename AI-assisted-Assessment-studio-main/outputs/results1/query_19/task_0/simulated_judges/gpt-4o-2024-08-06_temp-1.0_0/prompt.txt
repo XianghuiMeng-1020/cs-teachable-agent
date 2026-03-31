@@ -1,0 +1,109 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+In a science fiction universe, intelligent spacecrafts document their exploration data on distant planets. Create a Python program that reads a file named `spaceship_logs.txt` and summarizes the findings of each spacecraft. The file contains multiple spacecraft logs in the following format:
+
+```
+<spaceship_name>:<planet_name>:<observation>
+```
+
+For example:
+```
+Starship100:Mars:Discovered ancient ruins
+Starship200:Jupiter:Detected unusual energy signatures
+Starship100:Mars:Detected high levels of radiation
+...
+```
+
+Your task is to process this file and calculate how many unique observations each spaceship made. A unique observation for a spaceship is defined as a distinct observation message on a planet. The output should be written to a file named `summary.txt`. Each line in the `summary.txt` should be in the format:
+
+```
+<spaceship_name>:<number_of_unique_observations>
+```
+
+If there is an error reading the input file, handle it gracefully by creating an empty `summary.txt` file.
+
+### Additional Requirements:
+- The program should create `summary.txt` in the same directory as the input file.
+- Consider the possibility of duplicate observation entries within the same spaceship and the planet in the input file.
+- You may assume that the `spaceship_logs.txt` always exists when testing the solution.
+
+### Function Signature:
+```python
+def summarize_observations():
+    pass
+```
+
+The function `summarize_observations` should perform the above operations without requiring any parameters. The output file `summary.txt` should be used to validate the solution.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+
+def setup_module(module):
+    with open('spaceship_logs.txt', 'w') as f:
+        f.write("""
+Starship100:Mars:Discovered ancient ruins
+Starship200:Jupiter:Detected unusual energy signatures
+Starship100:Mars:Discovered ancient ruins
+Starship100:Venus:Found signs of water
+Starship200:Jupiter:Detected unusual energy signatures
+Starship300:Earth:Traces of biological activity
+Starship100:Mars:Detected high levels of radiation
+Starship300:Earth:Traces of biological activity
+Starship100:Venus:Found signs of water
+""".strip())
+
+def teardown_module(module):
+    try:
+        os.remove('spaceship_logs.txt')
+        os.remove('summary.txt')
+    except OSError:
+        pass
+
+def test_summary_file_creation():
+    summarize_observations()
+    assert os.path.exists('summary.txt')
+
+def test_starship100_observations():
+    summarize_observations()
+    with open('summary.txt', 'r') as f:
+        lines = f.readlines()
+    for line in lines:
+        if "Starship100" in line:
+            assert line.strip() == 'Starship100:3'
+
+def test_starship200_observations():
+    summarize_observations()
+    with open('summary.txt', 'r') as f:
+        lines = f.readlines()
+    for line in lines:
+        if "Starship200" in line:
+            assert line.strip() == 'Starship200:1'
+
+
+def test_starship300_observations():
+    summarize_observations()
+    with open('summary.txt', 'r') as f:
+        lines = f.readlines()
+    for line in lines:
+        if "Starship300" in line:
+            assert line.strip() == 'Starship300:1'
+
+def test_empty_logs_handling():
+    with open('spaceship_logs.txt', 'w') as f:
+        f.write("")
+    summarize_observations()
+    with open('summary.txt', 'r') as f:
+        assert f.read().strip() == ""
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

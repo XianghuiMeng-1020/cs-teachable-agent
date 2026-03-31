@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+F.F.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_different_file ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_scoreboard.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:17: AssertionError: assert 100 == 50
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:22: AssertionError: assert 175 == 75
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:33: AssertionError: assert 0 == 75
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_add_score_for_new_player
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_add_score_for_existing_player
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_persistence_after_save_and_load
+ERROR outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_different_file
+===================== 3 failed, 2 passed, 1 error in 0.14s =====================

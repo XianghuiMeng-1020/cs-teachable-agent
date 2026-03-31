@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that processes a recipe data file and outputs a summary of ingredients based on their availability. The program should read from an input file named `recipes.txt` where each line contains a recipe described in the format:
+`<recipe_name>: <ingredient1>,<ingredient2>,...`.
+For example:
+```
+Spaghetti Bolognese: tomato, beef, pasta, onion
+Chicken Salad: chicken, lettuce, tomato, cucumber
+Tomato Soup: tomato, garlic, onion
+```
+
+Your program should also read the current available ingredients from a file named `pantry.txt`. Each line in this file contains one ingredient. For example:
+```
+tomato
+pasta
+lettuce
+```
+
+The program should create a new file called `recipe_summary.txt`, which contains each recipe and whether it can be "Fully Prepared", is "Partially Missing" some ingredients, or is "Unavailable" due to lack of ingredients. These should be determined by checking the existence of the required ingredients in the `pantry.txt` file. If every ingredient required for the recipe is in the `pantry.txt`, then it is "Fully Prepared". If at least one ingredient is available but not all, it is "Partially Missing". If none of the required ingredients are available, it is "Unavailable".
+
+The output file should be in the format:
+```
+Spaghetti Bolognese: Fully Prepared
+Chicken Salad: Partially Missing
+Tomato Soup: Fully Prepared
+```
+
+Ensure that the output is correctly written to `recipe_summary.txt` by using appropriate file handling techniques.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

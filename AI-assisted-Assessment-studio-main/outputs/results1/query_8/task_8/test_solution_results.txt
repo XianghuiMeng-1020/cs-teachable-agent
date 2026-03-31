@@ -1,0 +1,6 @@
+.....F..                                                                 [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_8/test_suite_sol.py:17: AssertionError: assert 'Unsung Hero' == 'Warrior'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_8/task_8/test_suite_sol.py::test_classify_hero[traits5-Warrior]
+1 failed, 7 passed in 0.02s

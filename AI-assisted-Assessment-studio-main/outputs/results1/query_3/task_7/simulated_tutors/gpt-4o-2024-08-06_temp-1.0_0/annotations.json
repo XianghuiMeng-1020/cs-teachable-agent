@@ -1,0 +1,4 @@
+{
+    "program": "def simulate_lottery(player_numbers, rounds):\n    # Check for valid player_numbers\n    if not (isinstance(player_numbers, list) and len(player_numbers) == 6 and all(1 <= num <= 49 for num in player_numbers)):\n        return 0\n    \n    # Initialize the count of wins\n    win_count = 0\n    \n    # Iterate over each round to compare the player's numbers\n    for round_key, winning_numbers in rounds.items():\n        # Validate each round's winning numbers\n        if not (isinstance(winning_numbers, list) and len(winning_numbers) == 6 and all(1 <= num <= 49 for num in winning_numbers)):\n            return 0\n\n        # Count common numbers between player and winning numbers\n        common_numbers = set(player_numbers).intersection(winning_numbers)\n        if len(common_numbers) >= 4:\n            win_count += 1\n    \n    return win_count",
+    "context_relevance": 0.0
+}

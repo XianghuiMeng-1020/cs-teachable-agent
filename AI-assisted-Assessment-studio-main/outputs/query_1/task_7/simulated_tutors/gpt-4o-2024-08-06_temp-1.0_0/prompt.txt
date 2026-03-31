@@ -1,0 +1,60 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+### Task: Hero's Quest
+
+In a mythical realm, heroes embark on quests to gain divine favor. As a programmer tasked with analyzing these quests, your goal is to determine the best strategy for a hero to gain maximum divine favor when presented with a series of challenges.
+
+#### Function to Implement:
+Create a function `maximize_favor(challenges)` that accepts a list of tuples, where each tuple contains two integers: `(reward, difficulty)`. These integers represent the divine reward and the difficulty of each challenge that a hero must face.
+
+The hero can select challenges such that:
+1. The sum total of difficulty does not exceed 10 (this is the hero's maximum endurance).
+2. The goal is to maximize the total divine reward.
+
+Return the maximum divine reward possible without surpassing a total difficulty of 10.
+
+#### Example:
+Given the list of challenges:
+```
+challenges = [(3, 2), (5, 4), (7, 6), (1, 1)]
+```
+The function `maximize_favor(challenges)` should return `8`, since the hero can choose the challenges with rewards 7 and 1, having a total difficulty of 6+1 = 7, which is under the limit of 10.
+
+#### Additional Constraints:
+- The list of challenges will have at least one and at most ten items.
+
+Implement the function such that it operates efficiently within these constraints.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import maximize_favor
+
+def test_example_case():
+    challenges = [(3, 2), (5, 4), (7, 6), (1, 1)]
+    assert maximize_favor(challenges) == 8
+
+def test_no_challenges():
+    challenges = []
+    assert maximize_favor(challenges) == 0
+
+
+def test_single_challenge_under_limit():
+    challenges = [(4, 3)]
+    assert maximize_favor(challenges) == 4
+
+def test_single_challenge_over_limit():
+    challenges = [(5, 11)]
+    assert maximize_favor(challenges) == 0
+
+def test_multiple_combinations():
+    challenges = [(8, 9), (3, 1), (3, 2), (4, 5), (6, 4)]
+    assert maximize_favor(challenges) == 11
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

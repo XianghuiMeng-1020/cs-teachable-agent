@@ -1,0 +1,113 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+Create a Python class `Recipe` that can be used to manage cooking recipes. Each recipe has a name, a list of ingredients, and a cooking method. Implement the following methods in the `Recipe` class:
+
+1. `__init__(self, name, ingredients, cooking_method)`: Initializes a new recipe with the given name, list of ingredients, and cooking method.
+2. `add_ingredient(self, ingredient)`: Adds a new ingredient to the recipe.
+3. `remove_ingredient(self, ingredient)`: Removes an ingredient from the recipe. If the ingredient is not in the list, it should raise a `ValueError` exception with a message "Ingredient not found".
+4. `save_to_file(self, filename)`: Saves the recipe's details to a file. The file should be formatted as follows:
+
+   ```
+   Recipe: <name>
+   Ingredients:
+   - Ingredient 1
+   - Ingredient 2
+   ...
+   Cooking Method:
+   <cooking_method>
+   ```
+5. `load_from_file(self, filename)`: Loads the recipe details from a file and updates the current recipe object's attributes accordingly. If the file does not exist, it should handle the exception appropriately.
+
+Implement exception handling where appropriate for file operations and ensure only valid data is used.
+
+The program will be tested by:
+- Creating recipe objects and verifying their properties
+- Adding and removing ingredients
+- Saving and loading recipes from files
+- Handling invalid operations such as removing non-existent ingredients and loading from non-existent files.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import Recipe
+
+def setup_module(module):
+    with open('test_recipe.txt', 'w') as f:
+        f.write("""Recipe: Spaghetti
+Ingredients:
+- Pasta
+- Tomato sauce
+Cooking Method:
+Boil pasta. Add sauce.
+""")
+
+def teardown_module(module):
+    if os.path.exists('test_recipe.txt'):
+        os.remove('test_recipe.txt')
+    if os.path.exists('new_test_recipe.txt'):
+        os.remove('new_test_recipe.txt')
+
+
+def test_recipe_initialization():
+    recipe = Recipe('Pancakes', ['Flour', 'Milk', 'Eggs'], 'Fry light batter.')
+    assert recipe.name == 'Pancakes'
+    assert recipe.ingredients == ['Flour', 'Milk', 'Eggs']
+    assert recipe.cooking_method == 'Fry light batter.'
+
+
+def test_add_ingredient():
+    recipe = Recipe('Salad', ['Lettuce', 'Tomato'], 'Mix together.')
+    recipe.add_ingredient('Cucumber')
+    assert 'Cucumber' in recipe.ingredients
+
+
+def test_remove_ingredient():
+    recipe = Recipe('Smoothie', ['Banana', 'Milk'], 'Blend until smooth.')
+    recipe.remove_ingredient('Milk')
+    assert 'Milk' not in recipe.ingredients
+
+
+def test_remove_non_existent_ingredient():
+    recipe = Recipe('Omelette', ['Eggs', 'Salt'], 'Whisk eggs and fry.')
+    with pytest.raises(ValueError, match="Ingredient not found"):
+        recipe.remove_ingredient('Pepper')
+
+
+def test_save_to_file():
+    recipe = Recipe('Tea', ['Water', 'Tea leaves'], 'Boil water, steep leaves.')
+    recipe.save_to_file('new_test_recipe.txt')
+    with open('new_test_recipe.txt', 'r') as f:
+        content = f.read()
+    assert content == """Recipe: Tea
+Ingredients:
+- Water
+- Tea leaves
+Cooking Method:
+Boil water, steep leaves.
+"""
+
+
+def test_load_from_file():
+    recipe = Recipe('Default', [], '')
+    recipe.load_from_file('test_recipe.txt')
+    assert recipe.name == 'Spaghetti'
+    assert recipe.ingredients == ['Pasta', 'Tomato sauce']
+    assert recipe.cooking_method == 'Boil pasta. Add sauce.'
+
+
+def test_load_from_non_existent_file():
+    recipe = Recipe('Empty', [], '')
+    try:
+        recipe.load_from_file('non_existent.txt')
+    except FileNotFoundError:
+        assert recipe.name == 'Empty'
+        assert recipe.ingredients == []
+        assert recipe.cooking_method == ''
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

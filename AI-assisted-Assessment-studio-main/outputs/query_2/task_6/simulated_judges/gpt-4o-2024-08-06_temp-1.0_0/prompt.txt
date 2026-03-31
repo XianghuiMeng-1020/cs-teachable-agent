@@ -1,0 +1,92 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+### Task Description
+
+Write a function `generate_shopping_list(recipes_file, available_file, output_file)` that reads a file of recipes and a file of available ingredients, compares the two, and generates a shopping list of missing ingredients to an output file.
+
+**Detailed Instructions:**
+1. The function will take three parameters:
+    - `recipes_file`: the name of a text file containing a list of recipes. Each recipe starts with a line with the recipe name followed by the ingredients, one per line.
+    - `available_file`: the name of a text file containing a list of available ingredients, one per line.
+    - `output_file`: the name of the output file where the function will write the shopping list.
+2. Ingredients will be compared in a case-insensitive manner.
+3. Each recipe in the `recipes_file` will be separated by an empty line.
+4. Your function should write each missing ingredient to the `output_file`, with one ingredient per line.
+
+### Example
+#### recipes_file content:
+```
+Pasta
+Tomato
+Basil
+Garlic
+ 
+Salad
+Lettuce
+Tomato
+Cucumber
+```
+#### available_file content:
+```
+Tomato
+Lettuce
+Salt
+Oil
+```
+#### After running `generate_shopping_list('recipes.txt', 'available.txt', 'shopping_list.txt')`, the `shopping_list.txt` should contain:
+```
+Basil
+Garlic
+Cucumber
+```
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import generate_shopping_list
+
+recipes_file = 'recipes.txt'
+available_file = 'available.txt'
+output_file = 'shopping_list.txt'
+
+def setup_module(module):
+    with open(recipes_file, 'w') as f:
+        f.write('Pasta\nTomato\nBasil\nGarlic\n\nSalad\nLettuce\nTomato\nCucumber\n')
+
+    with open(available_file, 'w') as f:
+        f.write('Tomato\nLettuce\nSalt\nOil\n')
+
+def teardown_module(module):
+    os.remove(recipes_file)
+    os.remove(available_file)
+    if os.path.exists(output_file):
+        os.remove(output_file)
+
+@pytest.mark.parametrize('test_name, recipes_content, available_content, expected_output', [
+    ('test_full_missing_ingredients', 'Pasta\nSpaghetti\nOnions\n\nSoup\nWater\n', 'Salt\nOil\n', 'Spaghetti\nOnions\nWater\n'),
+    ('test_some_ingredients_missing', 'Pasta\nTomato\nBasil\nGarlic\n\nSalad\nLettuce\nTomato\nCucumber\n', 'Tomato\nLettuce\nSalt\nOil\n', 'Basil\nGarlic\nCucumber\n'),
+    ('test_no_file_overlap', 'Sandwich\nBread\nHam\nCheese\n', 'Pepper\nSalt\n', 'Bread\nHam\nCheese\n'),
+    ('test_no_missing_ingredients', 'Soup\nWater\nSalt\n\nPasta\nTomato\nGarlic\n', 'Water\nSalt\nTomato\nGarlic\n', ''),
+    ('test_case_insensitive', 'Pizza\nTomato\nMozzarella\nBasil\n', 'tomato\nmozzarella\n', 'Basil\n')
+])
+def test_generate_shopping_list(test_name, recipes_content, available_content, expected_output):
+    with open(recipes_file, 'w') as f:
+        f.write(recipes_content)
+    with open(available_file, 'w') as f:
+        f.write(available_content)
+    generate_shopping_list(recipes_file, available_file, output_file)
+    with open(output_file, 'r') as f:
+        shopping_content = f.read().strip() + '\n'
+    assert shopping_content == expected_output
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

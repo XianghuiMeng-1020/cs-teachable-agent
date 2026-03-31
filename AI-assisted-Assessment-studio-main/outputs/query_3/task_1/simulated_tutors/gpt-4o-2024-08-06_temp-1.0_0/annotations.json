@@ -1,0 +1,4 @@
+{
+    "program": "def sort_space_stations(stations):\n    # Create a new sorted dictionary with required prefix modifications\n    sorted_stations = {}\n    \n    # Sort the keys, which are the station numbers\n    for num in sorted(stations.keys()):\n        # Determine prefix based on even/odd station number\n        prefix = \"Human\" if num % 2 != 0 else \"Teklar\"\n        # Add to new dictionary with prefixed key\n        sorted_stations[f\"{prefix} {num}\"] = stations[num]\n\n    return sorted_stations\n\n# Example usage\nexample_stations = {3: \"Alpha Base\", 14: \"Gamma Outpost\", 1: \"Earth Station\"}\nprint(sort_space_stations(example_stations))\n# Output:\n# {'Human 1': 'Earth Station', \n#  'Human 3': 'Alpha Base', \n#  'Teklar 14': 'Gamma Outpost'}",
+    "context_relevance": 1.0
+}

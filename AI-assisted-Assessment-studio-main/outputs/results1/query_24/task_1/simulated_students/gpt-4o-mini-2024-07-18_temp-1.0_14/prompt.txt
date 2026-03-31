@@ -1,0 +1,23 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with simulating a simple board game turn for an imaginary board game competition. You need to create a Python function named `simulate_turn` that will be used to simulate turns in the game. This function should take two arguments:
+
+- `board_state`: a list of non-negative integers representing the board slots, where each number represents tokens available at that slot.
+- `roll`: an integer value between 1 and 6 (inclusive) representing the outcome of a dice roll.
+
+The function should perform the following:
+- Start from the beginning of the board (`board_state[0]`) and move `roll` slots forward.
+- If the roll exceeds the length of the board, the player remains at the last slot of the board.
+- Assign a collected total of tokens starting from the initial slot through to the destination slot (as determined by the dice roll) to the player.
+- The encountered slots should have their token values deducted to zero after the player's move.
+
+Return the total number of tokens collected by the player during the move.
+
+Handle any possible exceptions that may arise during your solution. Ensure your solution works efficiently for cases where there may be invalid board states or roll values. If the roll is invalid (not between 1 and 6) or if the board is not a list of non-negative integers, your function should return 0 without modifying the board state.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

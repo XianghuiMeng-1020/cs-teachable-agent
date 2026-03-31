@@ -1,0 +1,6 @@
+..F..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_1/test_suite_sol.py:15: AssertionError: assert ['Neutral', 'Win', 'Neutral'] == ['Neutral', 'Win', 'Win']
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_1/test_suite_sol.py::test_dice_game_neutral_conditions
+1 failed, 4 passed in 0.02s

@@ -1,0 +1,13 @@
+query,theme,n_tasks,gen_consistency_n,q_testsuite_n,q_context_n,llm_judge_n,stu50_n,pytasksyn50_n,pytasksyn50_list,avg_stu_pass_pct,med_stu_pass_pct,gen_to_tutor_drop,gen_to_stu_drop
+query_0,Game of Chance,10,3,1,8,9,1,0,[],9.0,0.0,3,2
+query_1,Game of Chance,10,5,3,7,10,5,2,"['task_3', 'task_4']",47.5,42.5,3,0
+query_2,Game of Chance,10,5,4,10,7,1,1,['task_3'],15.0,2.5,2,4
+query_3,Game of Chance,10,5,3,9,9,4,3,"['task_1', 'task_6', 'task_8']",40.0,0.0,2,1
+query_4,Game of Chance,10,2,2,9,7,2,1,['task_0'],20.0,0.0,1,0
+query_5,Mythology,10,6,4,10,10,1,1,['task_0'],10.0,0.0,2,5
+query_6,Mythology,10,7,4,10,10,1,1,['task_5'],13.5,5.0,3,6
+query_7,Mythology,10,4,3,10,10,0,0,[],2.5,0.0,1,4
+query_8,Mythology,10,8,8,10,10,7,7,"['task_0', 'task_1', 'task_2', 'task_3', 'task_6', 'task_7', 'task_9']",69.0,100.0,0,1
+query_9,Mythology,10,9,8,10,9,8,7,"['task_0', 'task_1', 'task_2', 'task_3', 'task_4', 'task_5', 'task_7']",80.0,100.0,1,1
+query_10,Cooking,10,5,1,9,10,0,0,[],6.0,0.0,4,5
+query_11,Cooking,10,7,8,8,9,7,4,"['task_1', 'task_3', 'task_5', 'task_7']",59.5,67.5,2,1

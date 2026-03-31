@@ -1,0 +1,4 @@
+{
+    "program": "def sort_ingredients(input_filename, output_filename):\n    # Open the input file and output file\n    with open(input_filename, 'r') as infile, open(output_filename, 'w') as outfile:\n        for line in infile:\n            # Split the line into ingredients\n            ingredients = line.strip().split(',')\n            # Trim spaces and sort the ingredients\n            sorted_ingredients = sorted(ingredient.strip() for ingredient in ingredients)\n            # Join sorted ingredients and write to the output file\n            outfile.write(', '.join(sorted_ingredients) + '\\n')",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,165 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Lists', 'Dictionaries', 'Loops']:
+
+### Beginning of task description
+You are given a list of mythological characters and their respective domains in the following format: [['Character', 'Domain'], ...]. Create a function `group_by_domain(characters)` that processes this list and returns a dictionary that groups characters by their domain. Each key in the dictionary should be a domain, and each value should be a list of characters associated with that domain.
+
+**Function signature:**
+```python
+def group_by_domain(characters):
+```
+
+**Parameters:**
+- `characters` (list of lists): A list of pairs where each pair contains a mythological character’s name and their domain.
+
+**Returns:**
+- `dict`: A dictionary where keys are domains and values are lists of characters.
+
+**Example:**
+
+```python
+characters = [
+    ['Zeus', 'Sky'],
+    ['Poseidon', 'Sea'],
+    ['Hades', 'Underworld'],
+    ['Hera', 'Marriage'],
+    ['Aphrodite', 'Love'],
+    ['Ares', 'War'],
+    ['Athena', 'Wisdom'],
+    ['Hephaestus', 'Forge'],
+    ['Demeter', 'Harvest'],
+    ['Dionysus', 'Wine'],
+    ['Hermes', 'Travel'],
+    ['Artemis', 'Hunt'],
+    ['Apollo', 'Sun'],
+    ['Nyx', 'Night']
+]
+
+expected_output = {
+    'Sky': ['Zeus'],
+    'Sea': ['Poseidon'],
+    'Underworld': ['Hades'],
+    'Marriage': ['Hera'],
+    'Love': ['Aphrodite'],
+    'War': ['Ares'],
+    'Wisdom': ['Athena'],
+    'Forge': ['Hephaestus'],
+    'Harvest': ['Demeter'],
+    'Wine': ['Dionysus'],
+    'Travel': ['Hermes'],
+    'Hunt': ['Artemis'],
+    'Sun': ['Apollo'],
+    'Night': ['Nyx']
+}
+
+result = group_by_domain(characters)
+assert result == expected_output
+```
+
+The function should be efficient and only use basic operations involving lists, dictionaries, and loops. Always assume that the characters list will contain non-empty strings and it may have multiple characters for the same domain.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import group_by_domain
+
+def test_group_by_domain():
+    characters = [
+        ['Zeus', 'Sky'],
+        ['Poseidon', 'Sea'],
+        ['Hades', 'Underworld'],
+        ['Hera', 'Marriage'],
+        ['Aphrodite', 'Love'],
+        ['Ares', 'War'],
+        ['Athena', 'Wisdom'],
+        ['Hephaestus', 'Forge'],
+        ['Demeter', 'Harvest'],
+        ['Dionysus', 'Wine'],
+        ['Hermes', 'Travel'],
+        ['Artemis', 'Hunt'],
+        ['Apollo', 'Sun'],
+        ['Nyx', 'Night']
+    ]
+    expected_output = {
+        'Sky': ['Zeus'],
+        'Sea': ['Poseidon'],
+        'Underworld': ['Hades'],
+        'Marriage': ['Hera'],
+        'Love': ['Aphrodite'],
+        'War': ['Ares'],
+        'Wisdom': ['Athena'],
+        'Forge': ['Hephaestus'],
+        'Harvest': ['Demeter'],
+        'Wine': ['Dionysus'],
+        'Travel': ['Hermes'],
+        'Hunt': ['Artemis'],
+        'Sun': ['Apollo'],
+        'Night': ['Nyx']
+    }
+    assert group_by_domain(characters) == expected_output
+
+    characters = [
+        ['Thor', 'Thunder'],
+        ['Odin', 'Wisdom'],
+        ['Loki', 'Trickery'],
+        ['Freya', 'Love'],
+        ['Frigg', 'Marriage'],
+        ['Balder', 'Light'],
+        ['Hel', 'Underworld'],
+        ['Frey', 'Fertility'],
+    ]
+    expected_output = {
+        'Thunder': ['Thor'],
+        'Wisdom': ['Odin'],
+        'Trickery': ['Loki'],
+        'Love': ['Freya'],
+        'Marriage': ['Frigg'],
+        'Light': ['Balder'],
+        'Underworld': ['Hel'],
+        'Fertility': ['Frey'],
+    }
+    assert group_by_domain(characters) == expected_output
+
+    characters = [
+        ['Anubis', 'Afterlife'],
+        ['Ra', 'Sun'],
+        ['Osiris', 'Resurrection'],
+        ['Horus', 'Sky'],
+        ['Isis', 'Magic'],
+        ['Thoth', 'Wisdom'],
+        ['Set', 'Chaos'],
+        ['Bastet', 'Home'],
+    ]
+    expected_output = {
+        'Afterlife': ['Anubis'],
+        'Sun': ['Ra'],
+        'Resurrection': ['Osiris'],
+        'Sky': ['Horus'],
+        'Magic': ['Isis'],
+        'Wisdom': ['Thoth'],
+        'Chaos': ['Set'],
+        'Home': ['Bastet'],
+    }
+    assert group_by_domain(characters) == expected_output
+
+    characters = []
+    expected_output = {}
+    assert group_by_domain(characters) == expected_output
+
+    characters = [
+        ['Zeus', 'Sky'],
+        ['Hera', 'Marriage'],
+        ['Thor', 'Sky']
+    ]
+    expected_output = {
+        'Sky': ['Zeus', 'Thor'],
+        'Marriage': ['Hera']
+    }
+    assert group_by_domain(characters) == expected_output
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

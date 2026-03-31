@@ -1,0 +1,4 @@
+{
+    "program": "def luckiest_player(filename):\n    player_winnings = {}\n    \n    # Reading file and processing winnings\n    with open(filename, 'r') as file:\n        for line in file:\n            name, winnings = line.split()\n            winnings = int(winnings)\n            \n            if name in player_winnings:\n                player_winnings[name] += winnings\n            else:\n                player_winnings[name] = winnings\n    \n    # Finding the luckiest player\n    luckiest, max_winnings = '', float('-inf')\n    for player, total_winnings in sorted(player_winnings.items()):\n        if total_winnings > max_winnings:\n            luckiest, max_winnings = player, total_winnings\n    \n    return luckiest",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,106 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+**Generate a Mythology Hero List**
+
+Your task is to write a Python program that reads data from a file containing information about mythological heroes and processes it to generate a structured list of heroes grouped by mythology. Each line in the input file describes a single mythological hero in the following format: `"<Hero Name>;<Mythology Type>"`.
+
+You need to implement a function `generate_hero_list(input_file)` that reads the file `input_file`, processes the data, and returns a dictionary where the keys are mythology types and the values are lists of hero names associated with that mythology, ordered alphabetically. Assume all hero names and mythology types are unique and non-empty strings.
+
+If the file is empty, the function should return an empty dictionary.
+
+**Example:**
+
+Suppose the content of `heroes.txt` is the following:
+```
+Perseus;Greek
+Thor;Norse
+Rama;Hindu
+Hercules;Greek
+Loki;Norse
+```
+
+For this input, the `generate_hero_list('heroes.txt')` function should return:
+```
+{
+    'Greek': ['Hercules', 'Perseus'],
+    'Norse': ['Loki', 'Thor'],
+    'Hindu': ['Rama']
+}
+```
+
+**Note:**
+- You do not need to handle malformed entries. Assume all lines are in the correct format.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution_program import generate_hero_list
+
+input_file_path = 'mythology_heroes.txt'
+
+def setup_module(module):
+    with open(input_file_path, 'w') as file:
+        file.write("Perseus;Greek\n")
+        file.write("Thor;Norse\n")
+        file.write("Rama;Hindu\n")
+        file.write("Hercules;Greek\n")
+        file.write("Loki;Norse\n")
+
+
+def teardown_module(module):
+    os.remove(input_file_path)
+
+
+def test_hero_list_normal_case():
+    expected = {
+        'Greek': ['Hercules', 'Perseus'],
+        'Norse': ['Loki', 'Thor'],
+        'Hindu': ['Rama']
+    }
+    assert generate_hero_list(input_file_path) == expected
+
+
+def test_empty_file():
+    with open(input_file_path, 'w') as file:
+        file.write("")
+    expected = {}
+    assert generate_hero_list(input_file_path) == expected
+
+
+def test_single_entry():
+    with open(input_file_path, 'w') as file:
+        file.write("Achilles;Greek\n")
+    expected = {'Greek': ['Achilles']}
+    assert generate_hero_list(input_file_path) == expected
+
+
+def test_multiple_entries_single_class():
+    with open(input_file_path, 'w') as file:
+        file.write("Zeus;Greek\n")
+        file.write("Ares;Greek\n")
+    expected = {'Greek': ['Ares', 'Zeus']}
+    assert generate_hero_list(input_file_path) == expected
+
+
+def test_varied_class_case():
+    with open(input_file_path, 'w') as file:
+        file.write("Hanuman;Hindu\n")
+        file.write("Krishna;Hindu\n")
+        file.write("Odin;Norse\n")
+    expected = {
+        'Hindu': ['Hanuman', 'Krishna'],
+        'Norse': ['Odin']
+    }
+    assert generate_hero_list(input_file_path) == expected
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

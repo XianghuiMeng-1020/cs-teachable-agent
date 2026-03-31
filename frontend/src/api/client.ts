@@ -1,5 +1,5 @@
-// API Base URL: 使用 Railway 后端（支持本地开发和生产环境）
-const API_BASE = "https://cs-teachable-agent-production.up.railway.app/api";
+const API_BASE = import.meta.env.VITE_API_URL
+  || (import.meta.env.DEV ? "/api" : "/api");
 
 const DEFAULT_TIMEOUT_MS = 30_000;
 const MAX_RETRIES = 3;
@@ -232,7 +232,9 @@ export async function teachStream(
   callbacks: TeachStreamCallbacks = {}
 ): Promise<{ ta_response: string; interpreted_units: string[]; topic_taught: string }> {
   const { onChunk } = callbacks;
-  const url = `${API_BASE}/ta/${taId}/teach/stream`;
+  const baseUrl = import.meta.env.VITE_API_URL
+    || (import.meta.env.DEV ? "/api" : "/api");
+  const url = `${baseUrl}/ta/${taId}/teach/stream`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },

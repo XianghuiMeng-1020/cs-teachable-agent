@@ -1,0 +1,4 @@
+{
+    "program": "import os\n\ndef find_winning_tickets(filename, user_tickets):\n    # Read winning numbers from file\n    with open(filename, 'r') as file:\n        winning_sets = file.read().splitlines()\n    \n    # Initialize result list\n    matching_tickets = []\n\n    # Check each user ticket against the winning numbers\n    for ticket in user_tickets:\n        if ticket in winning_sets:\n            matching_tickets.append(ticket)\n\n    return matching_tickets",
+    "context_relevance": 1.0
+}

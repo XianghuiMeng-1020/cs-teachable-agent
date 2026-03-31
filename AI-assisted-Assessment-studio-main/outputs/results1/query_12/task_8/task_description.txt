@@ -1,0 +1,48 @@
+### Task Description
+
+You are tasked with creating a simple ingredient management system for a cooking application. The program will read a file containing ingredient data and then allow users to query whether they have enough of each ingredient for a recipe.
+
+**File Format**:
+The file will be named `ingredients.txt` and contain lines of text. Each line will represent an ingredient with the name of the ingredient and the amount available, separated by a comma.
+
+Example line from the file:
+```
+flour,500
+sugar,200
+```
+
+The numbers represent the amount available in grams.
+
+**Function Signature**:
+```python
+def can_cook_recipe(recipe, ingredients_file):
+```
+
+- `recipe`: A dictionary where each key is the name of the ingredient and each value is the amount needed in grams.
+- `ingredients_file`: A string representing the file path of the `ingredients.txt`. All ingredient names in this file are lowercase.
+
+**Behavior**:
+- The function should read the `ingredients.txt` file to determine the availability of each ingredient.
+- The function should return `True` if all ingredients needed for the recipe are available in at least the required amounts, otherwise it should return `False`.
+
+**Constraints**:
+- Ingredient names in the `recipe` dictionary will always match those in the file by name (case-sensitive). Assume perfect matching for simplicity.
+- The input file will always exist and have the correct format.
+
+**Example**:
+For a recipe which requires:
+```python
+{'flour': 400, 'sugar': 150}
+```
+If the `ingredients.txt` file contains:
+```
+flour,500
+sugar,200
+```
+The function should return `True` because all required amounts are available.
+
+If the recipe requires:
+```python
+{'flour': 500, 'sugar': 250}
+```
+The function should return `False` because there is not enough sugar.

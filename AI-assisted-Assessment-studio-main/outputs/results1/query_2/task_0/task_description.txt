@@ -1,0 +1,12 @@
+Welcome to the "Lucky Draw" game simulation! In this game, participants buy tickets, each identified by a unique ticket number, and one ticket is randomly drawn to win a prize.
+
+Your task is to create a Python program to simulate the "Lucky Draw". You will read data from an input file, "tickets.txt", containing participant names and their corresponding ticket numbers. Each line in the file has the format: 'Name:TicketNumber', e.g., 'Alice:12345'.
+
+Your program should include a function `get_lucky_winner(file_path)`, which will:
+1. Read the file from the given `file_path`.
+2. Collect all ticket numbers.
+3. Use the length of the characters of each ticket number as positions on a roulette wheel, where their total length represents the wheel's circumference.
+4. Pick a "lucky winner" based on which ticket number represents the stopping position by traversing the tickets sequentially and wrapping around as needed.
+5. Return the 'Name' of the ticket holder who is the winner.
+
+Your program will be tested with the test suite provided below and must accurately read, process the input, and determine the winner. Ensure that you handle file I/O robustly.

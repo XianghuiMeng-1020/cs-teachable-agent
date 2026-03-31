@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function called `game_of_chance` that simulates a basic betting game.
+
+Here's how the game works:
+- The player starts with a balance of 100.
+- The game consists of rounds where the player can bet a certain amount of their balance.
+- In each round:
+  - A random number between 1 and 6 is rolled (consider it as a dice roll, but the function won't directly simulate the randomness; instead, it will receive a predefined sequence of outcomes).
+  - If the outcome of the dice roll is 4, 5, or 6, the player wins and doubles their bet amount, which is added to their balance.
+  - If the outcome is 1, 2, or 3, the player loses their bet amount, which is subtracted from their balance.
+
+Function Signature: `def game_of_chance(bets, outcomes):`
+- `bets`: A list of integers where each integer represents the bet amount for each round.
+- `outcomes`: A list of integers where each number represents the dice outcome for each round.
+
+The function should return the player's final balance after all rounds have been completed.
+
+Constraints:
+- The length of `bets` will always equal the length of `outcomes` and will be at least 1.
+- Bet amounts are positive integers.
+- Dice outcomes are integers from 1 to 6.
+- The player will not bet more than the available balance, meaning that if a bet reduces the balance below 0, no further rounds should be processed.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

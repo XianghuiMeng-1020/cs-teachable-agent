@@ -1,0 +1,4 @@
+{
+    "program": "def high_or_low_game(numbers: list, guesses: list) -> int:\n    score = 0\n    for i in range(len(guesses)):\n        current = numbers[i]\n        next = numbers[i + 1]\n\n        # Check the guess and increment the score accordingly\n        if guesses[i] == \"high\" and next > current:\n            score += 1\n        elif guesses[i] == \"low\" and next < current:\n            score += 1\n\n    return score\n\n# Example Usage:\nexample_numbers = [3, 8, 4]\nexample_guesses = [\"high\", \"low\"]\nprint(high_or_low_game(example_numbers, example_guesses))  # Output: 2",
+    "context_relevance": 0.0
+}

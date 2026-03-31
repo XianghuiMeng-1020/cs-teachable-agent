@@ -1,0 +1,85 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+Create a Python program that simulates a simple Game of Chance using dice rolls. The program should read input from a file named `bets.txt` and produce output into another file named `results.txt`. The `bets.txt` file consists of multiple lines, each containing a bet on a six-sided die roll. Each line in the `bets.txt` will have a string with two parts: a player's name and their bet on a number between 1 and 6 inclusive.
+
+Your task is to implement a function `process_bets(input_file, output_file)` that reads the file `bets.txt`, simulates a dice roll for each bet, and outputs the result in `results.txt`. For each player, the program should note whether the player won or lost the bet based on a random dice roll.
+
+The results should be written in `results.txt` with each line showing the player's name, their bet, the actual roll result, and whether they won or lost the bet, formatted as follows:
+
+`Player: {PlayerName}, Bet: {PlayerBet}, Roll: {DiceRoll}, Result: {WinOrLose}`
+
+Please assume a fair six-sided die for the random roll. Input and output should follow the exact format as specified in this description. The function will be tested with various `bets.txt` scenarios to ensure that it performs correctly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import process_bets
+
+file_data = {
+    'bets.txt': """James 4
+Anna 3
+Bob 2"""
+}
+
+expected_data = {
+    'results.txt': "\n"
+}
+
+other_rolls = {
+    4: 1,
+    3: 4,
+    2: 2,
+}
+
+
+def setup_module(module):
+    with open('bets.txt', 'w') as f:
+        f.write(file_data['bets.txt'])
+
+
+def teardown_module(module):
+    os.remove('bets.txt')
+    if os.path.exists('results.txt'):
+        os.remove('results.txt')
+
+
+@pytest.mark.parametrize("faked_roll", [5])
+@pytest.mark.parametrize("input_file, output_file, expected_file", [
+    ('bets.txt', 'results.txt', "results.txt"),
+])
+def test_process_bets(input_file, output_file, expected_file, faked_roll):
+    def fake_random_roll():
+        return faked_roll
+
+    __builtins__["open"].raw.__import__.random.randint = fake_random_roll
+    process_bets(input_file, output_file)
+
+    with open(output_file) as result_file, open(expected_file) as expected:
+        assert result_file.read() == expected_data[expected_file]
+
+
+@pytest.mark.parametrize("faked_rolls", [1,4,2])
+@pytest.mark.parametrize("input_file, output_file, expected_file", [
+    ('bets.txt', 'results.txt', "results.txt"),
+])
+def test_different_rolls(input_file, output_file, expected_file, faked_rolls):
+    def fake_random_roll():
+        return other_rolls[faked_rolls]
+
+    __builtins__["open"].raw.__import__.random.randint = fake_random_roll
+    process_bets(input_file, output_file)
+
+    with open(output_file) as result_file, open(expected_file) as expected:
+        assert result_file.read() == expected_data[expected_file]
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

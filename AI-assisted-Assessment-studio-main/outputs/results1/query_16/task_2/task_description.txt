@@ -1,0 +1,15 @@
+Write a Python program that simulates a futuristic Lasergun with energy tracking as described in a fictional science fiction universe.
+
+Create a class `Lasergun` that simulates the functionality of a laser weapon equipped with a finite energy source. The `Lasergun` should manage the remaining shots based on its energy capacity and handle shooting actions, while considering that each shot costs a certain amount of energy. Additionally, implement functionality to reload the Lasergun.
+
+**Class Attributes and Methods:**
+- `Lasergun` has a constructor that accepts `total_energy` (an integer) representing the total energy capacity of the Lasergun.
+- Implement a method `shoot` that reduces the energy by 10 per shot. If there is insufficient energy to shoot, an appropriate string message should be returned (e.g., "Out of energy!"). Otherwise, return a string indicating the successful shot (e.g., "Pew! Pew!").
+- Implement a method `reload` to restore the Lasergun's energy to its full capacity set during initialization.
+- Implement a method `remaining_energy` that returns a string showing the remaining energy as "Remaining energy: X", where X is the current energy level.
+
+Handle any incorrect use by raising an exception where necessary. For example, if negative or zero energy is used to initialize a `Lasergun`, raise a `ValueError` with an appropriate message.
+
+Create an instance of the `Lasergun` class and demonstrate the shooting action until the energy is depleted and then reload it to simulate functionality as per the science fiction universe.
+
+Ensure your solution includes these functionalities only and passes the provided test suite.

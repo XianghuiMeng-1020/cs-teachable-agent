@@ -1,0 +1,6 @@
+..F..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_8/test_suite_sol.py:19: AssertionError: assert 'Cookies' == 'Pie'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_8/test_suite_sol.py::test_one_recipe_within_budget
+1 failed, 4 passed in 0.02s

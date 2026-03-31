@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 20%]
+FFF.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_mythical_creature_stats_5 ______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_input_1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:51: AssertionError: assert 'Hydra,5,100.00\n' in []
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:59: AssertionError: assert 'Griffin,7,50.00\n' in ['Griffin,7,207.14\n', 'Phoenix,6,333.33\n', 'Kraken,1,500.00\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:68: AssertionError: assert 'Minotaur,1,100.00\n' in ['Minotaur,1,100.0\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:75: AssertionError: assert 'Dragon,14,150.00\n' in ['Dragon,14,278.57\n']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_mythical_creature_stats_1
+FAILED outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_mythical_creature_stats_2
+FAILED outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_mythical_creature_stats_3
+FAILED outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_mythical_creature_stats_4
+ERROR outputs/results1/query_5/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_mythical_creature_stats_5
+===================== 4 failed, 1 passed, 1 error in 0.17s =====================

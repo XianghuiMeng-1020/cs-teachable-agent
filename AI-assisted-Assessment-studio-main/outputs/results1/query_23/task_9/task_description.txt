@@ -1,0 +1,29 @@
+Create a class `BoardGame` to represent simple board games. The class should include:
+
+1. An `__init__` method to initialize the game with a name, a list of players, and the current status ('ongoing', 'completed'). The players are represented as a list of strings containing the names of the players.
+2. A method `add_player` that takes a single argument, a player's name (string), and adds it to the list of players only if the game is still ongoing and the player's name is not already on the list.
+3. A method `remove_player` that takes a single argument, a player's name (string), and removes it from the list of players, if present.
+4. A method `finish_game` that changes the game's status to 'completed'.
+5. A method `game_summary` that returns a string summary of the game, including the game name, player count, list of players, and current status.
+
+**Specifications**:
+- Names of the players and the game should always be stored as lowercase strings.
+- Use string manipulation, loops, and selection statements for managing players and game status.
+
+The `game_summary` should return a formatted string like:
+```
+"Game: {game_name}, Players: {player_count}, List: [{player1}, {player2}, ...], Status: {status}"
+```
+Where `{game_name}`, `{player_count}`, `{player1}, {player2}, ...`, and `{status}` are replaced with their respective values.
+
+**Example Usage**
+```python
+bg = BoardGame("Catan", ["alice", "bob"], "ongoing")
+bg.add_player("charlie")
+bg.remove_player("alice")
+assert bg.game_summary() == "Game: catan, Players: 2, List: [bob, charlie], Status: ongoing"
+bg.finish_game()
+assert bg.game_summary() == "Game: catan, Players: 2, List: [bob, charlie], Status: completed"
+```
+
+Test your `BoardGame` class with various scenarios to ensure that it handles adding and removing players correctly, manages game status changes, and correctly outputs the game summary.

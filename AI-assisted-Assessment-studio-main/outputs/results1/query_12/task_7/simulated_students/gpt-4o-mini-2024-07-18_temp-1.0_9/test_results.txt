@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FFF.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+____________ ERROR at teardown of test_summarize_recipes_mixed_case ____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'empty_recipes.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'no_keywords.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'complex_recipes.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_summarize_recipes_basic
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_summarize_recipes_empty
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_summarize_recipes_no_keywords
+FAILED outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_summarize_recipes_complex
+ERROR outputs/results1/query_12/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_summarize_recipes_mixed_case
+===================== 4 failed, 1 passed, 1 error in 0.04s =====================

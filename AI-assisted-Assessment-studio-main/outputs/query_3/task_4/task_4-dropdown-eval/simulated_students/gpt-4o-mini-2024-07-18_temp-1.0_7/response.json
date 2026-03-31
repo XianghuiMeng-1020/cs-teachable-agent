@@ -1,0 +1,20 @@
+{
+  "answers": [
+    {
+      "blank_id": "__BLANK_1__",
+      "selected_option": "1.0"
+    },
+    {
+      "blank_id": "__BLANK_2__",
+      "selected_option": "'Habitable'"
+    },
+    {
+      "blank_id": "__BLANK_3__",
+      "selected_option": "'Potentially Habitable'"
+    },
+    {
+      "blank_id": "__BLANK_4__",
+      "selected_option": ""
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that simulates part of a board game's setup by handling player data and initializing player properties. The program will read player information from a text file, where each line contains a player's name and their initial score, formatted as "Name,Score". Your task is to create a `Player` class that can handle player details and operations related to the board game.
+
+Here are the steps you need to implement:
+
+1. Implement a `Player` class with the following methods:
+   - `__init__(self, name, score)`: Initializes a player with a given `name` (string) and an `initial score` (integer).
+   - `add_score(self, points)`: Adds a specific number of `points` (integer) to the player's current score.
+   - `get_details(self)`: Returns a string in the format "Name: <name>, Score: <score>" with the player's current details.
+
+2. Implement a function `read_players_from_file(filename)` that reads player data from a given file `filename` and creates an instance of `Player` for each line. Each player's name and initial score should be extracted from the file, with scores being incremented by 2 during the creation of the `Player` objects.
+
+3. Ensure the `read_players_from_file` function maintains a list of `Player` objects, each initialized from the file. The function should return this list.
+
+You can assume the input file will always be properly formatted. For example, a file might contain:
+
+```
+Alice,10
+Bob,15
+Charlie,8
+```
+
+Would result in creating three Player objects with initial scores of 12, 17, and 10 respectively. Create functions as described and ensure proper execution to satisfy testing with varying inputs.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

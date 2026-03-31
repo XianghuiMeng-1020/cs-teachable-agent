@@ -1,0 +1,108 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+You have been tasked to create a game of chance called 'LuckyGuess'. The objective of the game is to guess a random number between 1 and 100 (inclusive) selected by the program. The player is required to guess numbers until they find the correct number. For each guess, the game should provide a hint that indicates whether the guessed number is too low or too high.
+
+The solution should be implemented in a Python function named `play_lucky_guess(input_file, output_file)`. The `input_file` will contain a list of guesses made by the player and the `output_file` will store the results of each guess.
+
+The random number will be read from a file named `secret_number.txt`, which contains a single integer between 1 and 100. Your program should read this number and process the player's guesses as follows:
+- If the guess is lower than the secret number, write "too low" to the output file.
+- If the guess is higher than the secret number, write "too high" to the output file.
+- If the guess is correct, write "correct" to the output file and stop processing further guesses. 
+
+The input and output between the files should be handled such that:
+- `input_file`: A text file containing one guess per line.
+- `output_file`: A text file where each line corresponds to the result of the player's guess based on the criteria above.
+
+### Function Signature
+```python
+def play_lucky_guess(input_file, output_file):
+ pass
+```
+### Example:
+Suppose `secret_number.txt` contains 50.
+- If `input_file` contains: "40\n50\n55", then the `output_file` after running the function will contain: "too low\ncorrect".
+- If `input_file` contains: "60\n45\n50", then the `output_file` will contain: "too high\ntoo low\ncorrect".
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from your_solution_file import play_lucky_guess
+
+SECRET_FILE = 'secret_number.txt'
+
+@pytest.fixture
+def setup_module():
+    with open(SECRET_FILE, 'w') as f:
+        f.write('50')  # Let's assume the secret number is 50
+
+
+yield
+
+    os.remove(SECRET_FILE)
+
+
+def test_correct_guess(setup_module, tmp_path):
+    input_file = tmp_path / "input.txt"
+    output_file = tmp_path / "output.txt"
+
+    input_file.write_text("50\n")
+    play_lucky_guess(input_file, output_file)
+
+    assert output_file.read_text() == "correct\n"
+
+
+def test_multiple_guesses(setup_module, tmp_path):
+    input_file = tmp_path / "input.txt"
+    output_file = tmp_path / "output.txt"
+
+    input_file.write_text("20\n40\n50\n")
+    play_lucky_guess(input_file, output_file)
+
+    assert output_file.read_text() == "too low\ntoo low\ncorrect\n"
+
+
+def test_first_guess_correct(setup_module, tmp_path):
+    input_file = tmp_path / "input.txt"
+    output_file = tmp_path / "output.txt"
+
+    input_file.write_text("50\n60\n70\n")
+    play_lucky_guess(input_file, output_file)
+
+    assert output_file.read_text() == "correct\n"
+
+
+def test_all_high_guesses(setup_module, tmp_path):
+    input_file = tmp_path / "input.txt"
+    output_file = tmp_path / "output.txt"
+
+    input_file.write_text("60\n70\n80\n")
+    play_lucky_guess(input_file, output_file)
+
+    assert output_file.read_text() == "too high\ntoo high\ntoo high\n"
+
+
+def test_all_low_guesses(setup_module, tmp_path):
+    input_file = tmp_path / "input.txt"
+    output_file = tmp_path / "output.txt"
+
+    input_file.write_text("10\n20\n30\n")
+    play_lucky_guess(input_file, output_file)
+
+    assert output_file.read_text() == "too low\ntoo low\ntoo low\n"
+
+
+@pytest.fixture(scope="function")
+def teardown_module():
+    pass
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

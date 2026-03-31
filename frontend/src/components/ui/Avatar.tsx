@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string | null;
   alt?: string;
-  fallback?: string; // e.g. initials "AB"
+  fallback?: string;
   size?: "sm" | "md" | "lg";
 }
 
@@ -21,7 +21,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       <div
         ref={ref}
         className={cn(
-          "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-100 text-brand-700 font-medium",
+          "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-100 text-brand-800 font-semibold",
           sizeClasses[size],
           className
         )}

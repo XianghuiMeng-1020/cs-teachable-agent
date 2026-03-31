@@ -1,0 +1,52 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+In ancient Greek mythology, heroes are classified based on their deeds and characteristics. You are tasked with writing a Python function named `classify_hero` that categorizes a given hero based on certain mythical traits.
+
+The function should take a single argument:
+- `traits`: a dictionary where the keys are strings representing the different traits a hero might possess (e.g., 'strength', 'wisdom', 'courage'), and the values are integers representing the magnitude of each trait.
+
+Your task is to classify the hero into one of the following categories based on their traits:
+- 'Warrior': A hero is a 'Warrior' if their 'strength' is the highest value and is greater than 50.
+- 'Seer': A hero is a 'Seer' if their 'wisdom' is the highest value and is greater than 50.
+- 'Champion': A hero is a 'Champion' if their 'courage' is the highest value and is greater than 50.
+- 'Unsung Hero': If none of the above conditions are met.
+
+Assume that each hero will always have 'strength', 'wisdom', and 'courage' keys in the traits dictionary. Your function should return the category as a string.
+
+### Example Usage:
+```python
+traits = {'strength': 55, 'wisdom': 30, 'courage': 40}
+result = classify_hero(traits)
+# result should be 'Warrior'
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import classify_hero
+
+@pytest.mark.parametrize("traits,expected", [
+    ({'strength': 55, 'wisdom': 30, 'courage': 40}, 'Warrior'),
+    ({'strength': 20, 'wisdom': 55, 'courage': 45}, 'Seer'),
+    ({'strength': 40, 'wisdom': 40, 'courage': 55}, 'Champion'),
+    ({'strength': 45, 'wisdom': 40, 'courage': 30}, 'Unsung Hero'),
+    ({'strength': 50, 'wisdom': 50, 'courage': 50}, 'Unsung Hero'),
+    ({'strength': 51, 'wisdom': 51, 'courage': 51}, 'Warrior'), # All traits are the same but 'strength' is highest with required threshold
+    ({'strength': 49, 'wisdom': 50, 'courage': 51}, 'Champion'),
+    ({'strength': 60, 'wisdom': 70, 'courage': 50}, 'Seer')
+])
+def test_classify_hero(traits, expected):
+    assert classify_hero(traits) == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,44 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+Create a Python function, `play_game_of_chance(strategy)`, where `strategy` is a dictionary containing betting outcomes and their respective bets in a game of chance. The function should simulate a simple roulette game where there are two main outcomes: 'win' and 'lose'.
+
+The dictionary `strategy` contains keys 'win' and 'lose', which correspond to the amount of money bet on winning or losing, respectively.
+
+The game rules are as follows:
+- If a player wins: they receive twice the amount of their bet.
+- If a player loses: they lose the amount of their bet.
+
+The function should return a dictionary with keys 'result' and 'balance'. The value for 'result' should be a string indicating whether the player wins ('win') or loses ('lose'). The value for 'balance' should represent the net gain or loss of the player after the bet is resolved based on a 50% chance of winning.
+
+To simulate the outcome of the roulette, assume an equal 50% chance for 'win' and 'lose'. Use the length of keys in `strategy` modulo 2 to determine the outcome (even for 'win', odd for 'lose'). Note that other than calculating the modulus, the actual implementation of random number generation or random module usage is not required.
+
+Example:
+```python
+strategy = {'win': 100, 'lose': 50}
+result = play_game_of_chance(strategy)
+# The result could be {'result': 'win', 'balance': 100} or {'result': 'lose', 'balance': -50} depending on the calculated outcome.
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import play_game_of_chance
+
+@pytest.mark.parametrize("strategy,expected_outcomes", [
+    ({'win': 100, 'lose': 50}, [{'result': 'win', 'balance': 100}, {'result': 'lose', 'balance': -50}]),
+    ({'win': 200, 'lose': 150}, [{'result': 'win', 'balance': 200}, {'result': 'lose', 'balance': -150}]),
+    ({'win': 0, 'lose': 0}, [{'result': 'win', 'balance': 0}, {'result': 'lose', 'balance': 0}]),
+    ({'win': 500, 'lose': 100}, [{'result': 'win', 'balance': 500}, {'result': 'lose', 'balance': -100}]),
+    ({'win': 75, 'lose': 25}, [{'result': 'win', 'balance': 75}, {'result': 'lose', 'balance': -25}]),
+])
+def test_play_game_of_chance(strategy, expected_outcomes):
+    result = play_game_of_chance(strategy)
+    assert result in expected_outcomes
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

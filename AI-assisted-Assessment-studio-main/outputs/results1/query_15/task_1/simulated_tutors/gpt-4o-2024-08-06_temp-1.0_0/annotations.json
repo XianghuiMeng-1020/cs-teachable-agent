@@ -1,0 +1,4 @@
+{
+    "program": "def is_all_ids_unique(file_path):\n    unique_ids = set()  # Use a set to store unique IDs, leverages fast lookup times\n    with open(file_path, 'r') as file:\n        for line in file:\n            id = line.strip()  # Strip newline character from each line\n            if id in unique_ids:\n                return False\n            unique_ids.add(id)\n    return True\n\n# The program uses file reading, set for uniqueness check, and a for-loop to iterate.\n# No selection statements are required beyond the context of the for loop.",
+    "context_relevance": 0.0
+}

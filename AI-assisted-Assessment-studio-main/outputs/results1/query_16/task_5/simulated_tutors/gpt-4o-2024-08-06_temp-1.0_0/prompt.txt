@@ -1,0 +1,84 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In a distant future, on a space station orbiting a distant planet, a new form of literature is born. "Sci-Fi Haikus" have become a popular art form, combining mathematical precision with creative storytelling. Your task is to create a class called `SciFiHaiku` that will generate these haikus based on a given input.
+
+A Sci-Fi Haiku consists of three lines where the first and third lines have 5 characters each, and the second line has 7 characters. Due to the limitations of technology in space, certain characters are used in specific arrangements as mathematical expressions.
+
+Your `SciFiHaiku` class should include:
+
+- A constructor that initializes the haiku text. This text must be a combination of expressions and words.
+- A method `generate_haiku()` that will split the raw text into three lines according to the 5-7-5 pattern and evaluate any simple arithmetic expressions. Ensure that lines maintain their character counts of 5, 7, and 5.
+- A method `evaluate_expressions()` that evaluates and replaces any arithmetic expressions in the haiku lines with their result. Handle invalid expressions gracefully using exception handling, and replace them with the string "Err".
+
+An example input to initialize a `SciFiHaiku` object could be: `"3+2_in_space 8-1_SN 2*2=5 where stars shine"`.
+
+The output for the haiku should be:
+```
+3+2_
+in_space
+8-1_
+SN
+2x2=
+Err
+where stars
+shine
+```
+
+Implement the `SciFiHaiku` class and ensure it passes the given test suite.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import SciFiHaiku
+
+def setup_module(module):
+    with open('test_input.txt', 'w') as f:
+        f.write('3+2_in_space 8-1_SN 2*2=5 where stars shine')
+
+def teardown_module(module):
+    os.remove('test_input.txt')
+
+def test_sci_fi_haiku_import_input():
+    with open('test_input.txt', 'r') as f:
+        text = f.read()
+    haiku = SciFiHaiku(text)
+    result = haiku.generate_haiku()
+    expected = ['3+2_', 'in_space', '8-1_', 'SN', '2x2=', 'Err', 'where', 'stars', 'shine']
+    assert result == expected
+
+
+def test_sci_fi_haiku_invalid_expression():
+    haiku = SciFiHaiku("5-6+in 7+1_space 1/0_Sun 2*3Stars ray9*+3")
+    result = haiku.generate_haiku()
+    expected = ['5-6+', 'in', '7+1_', 'space', '1/0_', 'Err', 'Sun', '2x3', 'Stars', 'ray9*', 'Err']
+    assert result == expected
+
+
+def test_sci_fi_haiku_no_expression_errors():
+    haiku = SciFiHaiku("2+3_5star 3+4light 6/3_Moons Venus" )
+    result = haiku.generate_haiku()
+    expected = ['2+3_', '5', 'star', '3+4_', 'light', '6/3_', 'Moons', 'Venus']
+    assert result == expected
+
+
+def test_sci_fi_haiku_single_line():
+    haiku = SciFiHaiku("1000_%")
+    result = haiku.generate_haiku()
+    expected = ['1000_', 'Err']
+    assert result == expected
+
+
+def test_sci_fi_haiku_expression_only():
+    haiku = SciFiHaiku("3+2 4*1 5/5")
+    result = haiku.evaluate_expressions()
+    expected = ['5', '4', '1']
+    assert result == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

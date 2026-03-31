@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py E [ 20%]
+EEEE                                                                     [100%]
+
+==================================== ERRORS ====================================
+_____________________ ERROR at setup of test_load_recipes ______________________
+E   NameError: name 'file_path' is not defined
+______________________ ERROR at setup of test_add_recipe _______________________
+E   NameError: name 'file_path' is not defined
+_________________ ERROR at setup of test_find_recipe_existing __________________
+E   NameError: name 'file_path' is not defined
+________________ ERROR at setup of test_find_recipe_nonexistent ________________
+E   NameError: name 'file_path' is not defined
+____________________ ERROR at setup of test_file_not_found _____________________
+E   NameError: name 'file_path' is not defined
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_load_recipes
+ERROR outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_add_recipe
+ERROR outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_find_recipe_existing
+ERROR outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_find_recipe_nonexistent
+ERROR outputs/results1/query_10/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_file_not_found
+============================== 5 errors in 0.05s ===============================

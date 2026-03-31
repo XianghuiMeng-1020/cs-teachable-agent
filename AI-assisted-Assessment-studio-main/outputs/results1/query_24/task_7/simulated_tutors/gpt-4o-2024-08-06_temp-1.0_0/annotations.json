@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_score(moves):\n    total_score = 0\n    for move in moves:\n        try:\n            if move.isdigit() and 1 <= int(move) <= 6:\n                total_score += int(move)\n        except:\n            continue\n    return total_score",
+    "context_relevance": 0.0
+}

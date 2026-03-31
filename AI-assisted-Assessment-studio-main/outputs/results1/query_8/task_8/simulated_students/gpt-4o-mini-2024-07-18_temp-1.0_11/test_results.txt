@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 8 items
+
+outputs/results1/query_8/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py . [ 12%]
+....F..                                                                  [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:17: AssertionError: assert 'Unsung Hero' == 'Warrior'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_8/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_8/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_classify_hero[traits5-Warrior]
+========================= 1 failed, 7 passed in 0.12s ==========================

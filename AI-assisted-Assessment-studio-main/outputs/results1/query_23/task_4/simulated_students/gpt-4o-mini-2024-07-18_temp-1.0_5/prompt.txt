@@ -1,0 +1,27 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+A local board game club wants to catalog their board games collection. You are tasked with creating a simple application to track board games and perform specific operations on them.
+
+Create a class `BoardGame` with the following attributes:
+- `title`: a string representing the title of the board game.
+- `min_players`: an integer representing the minimum number of players required.
+- `max_players`: an integer representing the maximum number of players allowed.
+
+Additionally, implement the following methods:
+1. `add_game(title, min_players, max_players)`: a class method that creates an instance of `BoardGame` and adds it to a class-level list of games.
+2. `games_with_min_players(num)`: a class method that returns a list of titles of games which can be played with at least `num` players.
+3. `games_with_max_players(num)`: a class method that returns a list of titles of games which can be played with at most `num` players.
+
+Provide functionality to list games that can be played with at least or at most a certain number of players. The method signatures should look like this:
+- `@classmethod def add_game(cls, title, min_players, max_players):`
+- `@classmethod def games_with_min_players(cls, num):`
+- `@classmethod def games_with_max_players(cls, num):`
+
+The `add_game` method should store board games in a class-level list. Assume that player numbers are always positive and the number of max players is always equal to or greater than the number of min players.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

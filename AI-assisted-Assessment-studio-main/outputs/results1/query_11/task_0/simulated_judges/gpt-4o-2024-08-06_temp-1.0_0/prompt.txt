@@ -1,0 +1,87 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task Description
+
+You are a chef who needs to manage multiple recipes in your cookbook. Each recipe contains ingredients and the quantity required for a specific dish. You want to create a Python program to keep track of the ingredients and calculate total quantities required for any given recipe. Here is what you need to do:
+
+1. Define a function `calculate_ingredients(recipe_list, recipe_name)` that accepts a list of multiple recipes and the name of the recipe you want to calculate.
+   - Each recipe in the list is a tuple of the form: `("Recipe Name", [("Ingredient1", quantity1), ("Ingredient2", quantity2), ...])`.
+   - The `quantity` in the tuple will represent the amount needed for that specific ingredient.
+   
+2. The function should return a list of tuples containing each ingredient needed and its total quantity for the specified `recipe_name`. If the recipe does not exist in the `recipe_list`, return an empty list.
+
+### Example
+
+```python
+recipe_list = [ 
+    ("Pasta", [("Flour", 100), ("Egg", 2), ("Salt", 1)]),
+    ("Omelette", [("Egg", 3), ("Salt", 1), ("Oil", 1)]),
+    ("Cake", [("Flour", 200), ("Egg", 3), ("Sugar", 100), ("Salt", 1)])
+]
+
+print(calculate_ingredients(recipe_list, "Cake"))  
+# Output: [('Flour', 200), ('Egg', 3), ('Sugar', 100), ('Salt', 1)]
+```
+
+### Notes:
+- You must iterate through the `recipe_list` and search for the specific recipe.
+- Ensure that your solution handles cases where the requested recipe is not found by returning an empty list.
+- Assume the `recipe_list` is not empty, but consider that the requested recipe might be absent.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_ingredients
+
+def test_known_recipe():
+    recipes = [
+        ("Pasta", [("Flour", 100), ("Egg", 2), ("Salt", 1)]),
+        ("Omelette", [("Egg", 3), ("Salt", 1), ("Oil", 1)]),
+        ("Cake", [("Flour", 200), ("Egg", 3), ("Sugar", 100), ("Salt", 1)])
+    ]
+    
+    result = calculate_ingredients(recipes, "Cake")
+    assert result == [("Flour", 200), ("Egg", 3), ("Sugar", 100), ("Salt", 1)]
+
+def test_nonexistent_recipe():
+    recipes = [
+        ("Pasta", [("Flour", 100), ("Egg", 2), ("Salt", 1)]),
+        ("Omelette", [("Egg", 3), ("Salt", 1), ("Oil", 1)])
+    ]
+    
+    result = calculate_ingredients(recipes, "Bread")
+    assert result == []
+
+def test_empty_result_for_empty_list():
+    recipes = []
+    
+    result = calculate_ingredients(recipes, "Cake")
+    assert result == []
+
+def test_case_sensitivity():
+    recipes = [
+        ("cake", [("Flour", 200), ("Egg", 3), ("Sugar", 100), ("Salt", 1)])
+    ]
+    
+    result = calculate_ingredients(recipes, "Cake")
+    assert result == []
+
+def test_multiple_same_ingredient():
+    recipes = [
+        ("Omlette Special", [("Egg", 3), ("Salt", 1), ("Salt", 2)])
+    ]
+    
+    result = calculate_ingredients(recipes, "Omlette Special")
+    assert result == [("Egg", 3), ("Salt", 3)]
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

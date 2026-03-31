@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:13: assert "[' carrot=3'..., 'tomato=1']" == "['carrot=3',..., 'tomato=3']"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:13: assert "[' carrot=2'..., 'tomato=1']" == "['basil=2', ..., 'tomato=5']"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:13: assert "[' mushroom=...', 'onion=3']" == "['mushroom=6', 'onion=5']"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:13: assert "[' pea=3', '..., 'potato=1']" == "['carrot=2',..., 'potato=4']"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:13: assert "[' egg=3', '...', 'onion=1']" == "['egg=3', 'l...', 'onion=1']"
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_vegetable_counter[order0-['carrot=3', 'cucumber=1', 'tomato=3']]
+FAILED outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_vegetable_counter[order1-['basil=2', 'carrot=2', 'tomato=5']]
+FAILED outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_vegetable_counter[order2-['mushroom=6', 'onion=5']]
+FAILED outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_vegetable_counter[order3-['carrot=2', 'pea=5', 'potato=4']]
+FAILED outputs/results1/query_11/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_vegetable_counter[order4-['egg=3', 'lettuce=3', 'onion=1']]
+============================== 5 failed in 0.10s ===============================

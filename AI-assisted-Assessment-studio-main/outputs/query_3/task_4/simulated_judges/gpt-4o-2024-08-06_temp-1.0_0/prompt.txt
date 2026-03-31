@@ -1,0 +1,103 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+**Task Description:**
+
+In the distant future, the Galactic Institute of Astronomical Studies is classifying various planets in the galaxy based on their atmospheric density and the presence of alien lifeforms. You have been tasked to write a Python function, `classify_planets(data)`, that takes a list of planets as its argument. Each planet is represented as a dictionary containing the following keys:
+
+- `name`: A string representing the planet's name.
+- `atmos_density`: A float value representing the planet's atmosphere density (in kg/m^3).
+- `alien_life`: A boolean representing whether alien life is detected on the planet.
+
+The function should classify each planet into one of three categories as follows:
+
+1. `Habitable`: A planet with a density between 1.0 and 3.0 (inclusive) and alien life present.
+2. `Potentially Habitable`: A planet with a density between 1.0 and 3.0 (inclusive) and no alien life detected.
+3. `Uninhabitable`: Any planet with a density outside the 1.0 to 3.0 range.
+
+The function should return a dictionary where the keys are the categories (`Habitable`, `Potentially Habitable`, `Uninhabitable`) and the values are lists of planet names that fall into each category. 
+
+**Example:**
+
+```python
+planets = [
+    {'name': 'Zorgon', 'atmos_density': 2.5, 'alien_life': True},
+    {'name': 'Arion', 'atmos_density': 3.1, 'alien_life': False},
+    {'name': 'Lorca', 'atmos_density': 1.8, 'alien_life': False},
+    {'name': 'Blip', 'atmos_density': 0.9, 'alien_life': True},
+]
+
+result = classify_planets(planets)
+# Expected output:
+# {
+#     'Habitable': ['Zorgon'],
+#     'Potentially Habitable': ['Lorca'],
+#     'Uninhabitable': ['Arion', 'Blip']
+# }
+```
+
+**Function Signature:**
+
+```python
+def classify_planets(data):
+    pass
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import classify_planets
+
+def test_habitable_planet():
+    result = classify_planets([
+        {'name': 'Zorgon', 'atmos_density': 2.5, 'alien_life': True},
+    ])
+    assert result['Habitable'] == ['Zorgon']
+    assert result['Potentially Habitable'] == []
+    assert result['Uninhabitable'] == []
+
+def test_potentially_habitable_planet():
+    result = classify_planets([
+        {'name': 'Lorca', 'atmos_density': 2.0, 'alien_life': False},
+    ])
+    assert result['Potentially Habitable'] == ['Lorca']
+    assert result['Habitable'] == []
+    assert result['Uninhabitable'] == []
+
+def test_uninhabitable_planet_high_density():
+    result = classify_planets([
+        {'name': 'Arion', 'atmos_density': 3.1, 'alien_life': False},
+    ])
+    assert result['Uninhabitable'] == ['Arion']
+    assert result['Potentially Habitable'] == []
+    assert result['Habitable'] == []
+
+def test_uninhabitable_planet_low_density():
+    result = classify_planets([
+        {'name': 'Blip', 'atmos_density': 0.9, 'alien_life': True},
+    ])
+    assert result['Uninhabitable'] == ['Blip']
+    assert result['Potentially Habitable'] == []
+    assert result['Habitable'] == []
+
+def test_multiple_planet_classification():
+    result = classify_planets([
+        {'name': 'Zadok', 'atmos_density': 2.6, 'alien_life': True},
+        {'name': 'Blorp', 'atmos_density': 1.5, 'alien_life': False},
+        {'name': 'Sulek', 'atmos_density': 3.5, 'alien_life': False},
+    ])
+    assert result['Habitable'] == ['Zadok']
+    assert result['Potentially Habitable'] == ['Blorp']
+    assert result['Uninhabitable'] == ['Sulek']
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

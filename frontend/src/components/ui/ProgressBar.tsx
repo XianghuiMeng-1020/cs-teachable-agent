@@ -22,11 +22,11 @@ export function ProgressBar({
     success: "bg-emerald-500",
     warning: "bg-amber-500",
     error: "bg-rose-500",
-    slate: "bg-slate-500",
+    slate: "bg-stone-500",
   };
 
   return (
-    <div className={cn("w-full bg-slate-200 rounded-full overflow-hidden", className)}>
+    <div className={cn("w-full bg-stone-200 rounded-full overflow-hidden", className)}>
       <div
         className={cn("h-full transition-all duration-300 ease-out", colorClasses[color])}
         style={{ width: `${percentage}%` }}
@@ -36,7 +36,7 @@ export function ProgressBar({
         aria-valuemax={max}
       />
       {showLabel && (
-        <span className="text-xs text-slate-500 mt-1">
+        <span className="text-xs text-stone-500 mt-1">
           {Math.round(percentage)}%
         </span>
       )}

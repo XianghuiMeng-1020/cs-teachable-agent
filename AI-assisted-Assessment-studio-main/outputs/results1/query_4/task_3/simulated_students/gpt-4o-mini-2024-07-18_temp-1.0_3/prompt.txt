@@ -1,0 +1,36 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+In the mystical land of Fortuna, games of chance are a way of life. You have been tasked to create a simple game simulator where a player rolls a set of dice, each with a variable number of sides, and the outcomes determine their fate. You need to write a function named `simulate_game` that takes in a dictionary where the keys represent the player names and the values are lists representing the number of sides on each die that player will roll.
+
+For each player:
+- Simulate the rolling of each die by generating a random number between 1 and the number of sides on the die (inclusive).
+- Calculate the sum of the outcomes for each player.
+- The player with the highest total sum wins. In case of a tie, return 'Tie'.
+
+The function should return the name of the winning player or 'Tie' if there's a tie.
+
+### Example
+Suppose the input dictionary is:
+```python
+{
+    "Alice": [6, 8, 10],
+    "Bob": [12, 6],
+    "Charlie": [4, 4, 4, 4]
+}
+```
+
+- "Alice" rolls a 6-sided, an 8-sided, and a 10-sided die.
+- "Bob" rolls a 12-sided and a 6-sided die.
+- "Charlie" rolls four 4-sided dice.
+
+If the outcomes were such that Alice's sum is 18, Bob's sum is 19, and Charlie's sum is 16, the function should return `'Bob'` as the winner.
+
+Your solution must use randomness to simulate dice rolls for each player using the sides given. Be sure to account for any ties when figuring out the winner.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

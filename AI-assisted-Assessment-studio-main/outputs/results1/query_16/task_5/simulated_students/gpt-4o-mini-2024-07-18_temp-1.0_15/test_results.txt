@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____________ ERROR at teardown of test_sci_fi_haiku_expression_only ____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_input.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:19: AssertionError: assert None == ['3+2_', 'in_space', '8-1_', 'SN', '2x2=', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:26: AssertionError: assert None == ['5-6+', 'in', '7+1_', 'space', '1/0_', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:33: AssertionError: assert None == ['2+3_', '5', 'star', '3+4_', 'light', '6/3_', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:40: AssertionError: assert None == ['1000_', 'Err']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:45: TypeError: SciFiHaiku.evaluate_expressions() missing 1 required positional argument: 'expression'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_import_input
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_invalid_expression
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_no_expression_errors
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_single_line
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_expression_only
+ERROR outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_sci_fi_haiku_expression_only
+========================== 5 failed, 1 error in 0.19s ==========================

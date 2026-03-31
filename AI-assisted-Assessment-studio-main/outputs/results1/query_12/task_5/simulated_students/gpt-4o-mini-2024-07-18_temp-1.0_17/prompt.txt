@@ -1,0 +1,46 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+You are asked to develop a Python program to help manage a cooking recipe file. The program will read from a file, process the content to perform certain operations, and then handle user queries interactively.
+
+Create a program with a function called `recipe_manager(filename)` where **`filename`** is the name of a text file containing recipes. Each recipe and its details are stored sequentially and have the following format:
+
+```
+RecipeName
+Ingredients: Ingredient1, Ingredient2, Ingredient3
+Steps:
+Step 1: Description 1.
+Step 2: Description 2.
+...
+```
+
+Each recipe ends after an empty newline following the steps. The recipe file may contain any number of recipes. Your task is to:
+
+1. Read and display all the recipes found in the file.
+2. Answer queries to check if a specific ingredient is used in any recipe. If the ingredient is found, display the name of recipes containing that ingredient, otherwise, output that the ingredient is not found.
+3. Allow the user to query interactively which recipes use a certain ingredient by inputting the ingredient name. Continue allowing ingredient queries until the user inputs "EXIT" to terminate the program.
+
+### Input
+- A file with names and contents of recipes
+- User inputs for ingredients to search
+
+### Output
+- Display of all recipes at the start
+- Message for each query whether an ingredient is used and in which recipes
+
+### Instructions
+- Implement the function `recipe_manager(filename)`.
+- Ensure the program handles reading a file and managing user input properly.
+- Use basic file handling to read the recipe content.
+- Interactive user queries should execute correctly until "EXIT" is entered.
+- Ingredients and recipe names are case-sensitive.
+- Do not use dictionaries or other programming constructs beyond file handling, loops, selection statements, and variables.
+- Avoid handling errors or exceptions. Assume proper input format.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,32 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked to create a simple Python application to manage cooking recipes. Each recipe will consist of a name and a set of ingredients. Your application should be able to save recipes to a file and read recipes from a file.
+
+To solve this task, you will:
+1. Implement a `Recipe` class with the following properties and methods:
+   - Attributes:
+     - `name`: Name of the recipe.
+     - `ingredients`: A list of ingredients required for the recipe.
+   - Method `to_string`: Returns a string representation of the recipe in the format "name:ingredient1,ingredient2,...".
+   - Method `from_string`: A class method that takes a string in the format "name:ingredient1,ingredient2,..." and returns an instance of `Recipe`.
+
+2. Implement a function `save_recipe_to_file(recipe, file_name)` that saves a `Recipe` object to a specified file.
+
+3. Implement a function `load_recipes_from_file(file_name)` that reads recipes from a file and returns a list of `Recipe` objects.
+
+If the file doesn't exist or an error occurs during file handling, the function should handle exceptions gracefully and return an empty list.
+
+Example:
+Considering the file "recipes.txt" contains:
+```
+Pasta:tomato,basil,garlic
+Sandwich:bread,ham,cheese
+```
+- Calling `load_recipes_from_file("recipes.txt")` should return a list containing corresponding `Recipe` objects.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

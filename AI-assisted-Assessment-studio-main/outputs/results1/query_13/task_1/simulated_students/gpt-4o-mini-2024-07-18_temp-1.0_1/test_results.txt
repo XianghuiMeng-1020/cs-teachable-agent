@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+..F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:7: AssertionError: assert 45 == 55
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:20: AssertionError: assert 105 == 115
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_estimate_cooking_time_valid_dishes
+FAILED outputs/results1/query_13/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_estimate_cooking_time_all_valid
+========================= 2 failed, 3 passed in 0.06s ==========================

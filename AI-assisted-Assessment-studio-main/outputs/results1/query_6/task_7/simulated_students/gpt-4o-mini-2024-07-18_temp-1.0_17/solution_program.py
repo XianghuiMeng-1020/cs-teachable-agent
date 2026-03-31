@@ -1,0 +1,31 @@
+import os
+
+class MythArchive:
+    def __init__(self):
+        self.archive_dir = 'myth_archive'
+        if not os.path.exists(self.archive_dir):
+            os.makedirs(self.archive_dir)
+
+    def add_tale(self, file_path):
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            tale_name = lines[0].strip()
+            tale_content = ''.join(lines[1:])
+            with open(os.path.join(self.archive_dir, tale_name), 'w') as new_file:
+                new_file.write(tale_content)
+
+    def get_tale(self, name):
+        try:
+            with open(os.path.join(self.archive_dir, name), 'r') as file:
+                return file.read()
+        except FileNotFoundError:
+            return ''
+
+    def remove_tale(self, name):
+        try:
+            os.remove(os.path.join(self.archive_dir, name))
+        except FileNotFoundError:
+            pass
+
+    def list_tales(self):
+        return os.listdir(self.archive_dir)

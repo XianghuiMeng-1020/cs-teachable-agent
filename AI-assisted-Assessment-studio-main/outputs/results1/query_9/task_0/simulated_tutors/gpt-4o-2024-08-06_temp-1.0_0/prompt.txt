@@ -1,0 +1,129 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Lists', 'Dictionaries', 'Loops']:
+
+### Beginning of task description
+### Task Description
+
+Create a function called `mythical_population_info` that receives a list of dictionaries. Each dictionary in the list represents a mythical creature and contains the following key-value pairs:
+
+- `name`: A string indicating the name of the creature.
+- `kingdom`: A string indicating the realm or domain where the creature is ruler or prominently dwells.
+- `power`: An integer indicating the power level of the creature.
+
+The function should return another dictionary which contains the following information:
+
+- `total_creatures`: The total number of creatures.
+- `average_power`: The average power of all creatures, rounded down to the nearest integer.
+- `kingdom_distribution`: A dictionary that maps each unique kingdom to the number of creatures belonging to that kingdom.
+
+#### Function Signature
+```python
+def mythical_population_info(creatures):
+    pass
+```
+
+#### Example
+```python
+creatures = [
+    {'name': 'Zeus', 'kingdom': 'Olympus', 'power': 100},
+    {'name': 'Hades', 'kingdom': 'Underworld', 'power': 95},
+    {'name': 'Poseidon', 'kingdom': 'Ocean', 'power': 90},
+    {'name': 'Athena', 'kingdom': 'Olympus', 'power': 85}
+]
+
+result = mythical_population_info(creatures)
+
+# Expected Output
+# {
+#     'total_creatures': 4,
+#     'average_power': 92,
+#     'kingdom_distribution': {
+#         'Olympus': 2,
+#         'Underworld': 1,
+#         'Ocean': 1
+#     }
+# }
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import mythical_population_info
+
+
+def test_mythical_population_info_case_1():
+    creatures = [
+        {'name': 'Zeus', 'kingdom': 'Olympus', 'power': 100},
+        {'name': 'Hades', 'kingdom': 'Underworld', 'power': 95},
+        {'name': 'Poseidon', 'kingdom': 'Ocean', 'power': 90},
+        {'name': 'Athena', 'kingdom': 'Olympus', 'power': 85}
+    ]
+    result = mythical_population_info(creatures)
+    assert result == {
+        'total_creatures': 4,
+        'average_power': 92,
+        'kingdom_distribution': {
+            'Olympus': 2,
+            'Underworld': 1,
+            'Ocean': 1
+        }
+    }
+
+def test_mythical_population_info_case_2():
+    creatures = [
+        {'name': 'Odin', 'kingdom': 'Asgard', 'power': 95},
+        {'name': 'Thor', 'kingdom': 'Asgard', 'power': 90},
+        {'name': 'Loki', 'kingdom': 'Jotunheim', 'power': 85}
+    ]
+    result = mythical_population_info(creatures)
+    assert result == {
+        'total_creatures': 3,
+        'average_power': 90,
+        'kingdom_distribution': {
+            'Asgard': 2,
+            'Jotunheim': 1
+        }
+    }
+
+def test_mythical_population_info_case_3():
+    creatures = [
+        {'name': 'Anubis', 'kingdom': 'Duot', 'power': 80},
+        {'name': 'Ra', 'kingdom': 'Sky', 'power': 100}
+    ]
+    result = mythical_population_info(creatures)
+    assert result == {
+        'total_creatures': 2,
+        'average_power': 90,
+        'kingdom_distribution': {
+            'Duot': 1,
+            'Sky': 1
+        }
+    }
+
+def test_mythical_population_info_case_4():
+    creatures = []
+    result = mythical_population_info(creatures)
+    assert result == {
+        'total_creatures': 0,
+        'average_power': 0,
+        'kingdom_distribution': {}
+    }
+
+def test_mythical_population_info_case_5():
+    creatures = [
+        {'name': 'Hercules', 'kingdom': 'Earth', 'power': 88}
+    ]
+    result = mythical_population_info(creatures)
+    assert result == {
+        'total_creatures': 1,
+        'average_power': 88,
+        'kingdom_distribution': {
+            'Earth': 1
+        }
+    }
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

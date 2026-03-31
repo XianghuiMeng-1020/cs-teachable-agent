@@ -1,0 +1,51 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+In the year 3050, the Galaxy Alliance monitors more than 100 starships undertaking various missions across the universe. Each starship reports its status back to the central command. The command center maintains a log of the operational starships, listing them by their names and their fuel levels.
+
+You are tasked with developing a Python function `active_starships(log_lines)`. This function processes a list of strings where each string contains the name of the starship and its fuel level separated by a space. A starship is considered operational if its fuel level is greater than 50. The function should return a list of names of these operational starships in alphabetical order.
+
+Function signature: `def active_starships(log_lines):`
+
+**Parameters:**
+- `log_lines`: A list of strings. Each string is in the format `"<starship_name> <fuel_level>"` where `<starship_name>` is a non-empty string and `<fuel_level>` is an integer.
+
+**Returns:**
+- Return a list of names of the starships that have a fuel level greater than 50, sorted in alphabetical order.
+
+Example:
+```python
+active_starships(["Enterprise 75", "Discovery 35", "Voyager 60"])
+# Output: ["Enterprise", "Voyager"]
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import active_starships
+
+def test_all_operational():
+    log_lines = ["Aegis 70", "Colossus 80", "Vanguard 90"]
+    assert active_starships(log_lines) == ["Aegis", "Colossus", "Vanguard"]
+
+def test_some_operational():
+    log_lines = ["Hyperion 50", "Phoenix 40", "Nova 60"]
+    assert active_starships(log_lines) == ["Nova"]
+
+def test_none_operational():
+    log_lines = ["Pioneer 30", "Odyssey 40", "Endurance 50"]
+    assert active_starships(log_lines) == []
+
+def test_mixed_order():
+    log_lines = ["Falcon 55", "Ranger 45", "Eclipse 60", "Galaxy 70"]
+    assert active_starships(log_lines) == ["Eclipse", "Falcon", "Galaxy"]
+
+def test_single_entry():
+    log_lines = ["Voyager 55"]
+    assert active_starships(log_lines) == ["Voyager"]
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

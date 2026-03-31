@@ -1,0 +1,82 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+Imagine a futuristic world where space travelers need to manage their space cargo efficiently. You are tasked with creating a simple inventory management system for a space cargo ship. 
+
+Implement a class `SpaceCargo` that allows you to manage items in the cargo. Each item should have a name and a quantity, and the inventory should be represented by a dictionary where keys are item names and values are quantities.
+
+Your task is to implement the following methods:
+
+1. `add_item(name, quantity)`: Adds a specified quantity of an item to the inventory. If the item already exists, it should increase its quantity. If quantity is not a positive integer, raise a ValueError.
+
+2. `remove_item(name, quantity)`: Removes a specified quantity of an item from the inventory. If the item does not exist or there is insufficient quantity, raise a KeyError.
+
+3. `get_item_quantity(name)`: Returns the current quantity of the specified item. If the item is not found, return 0.
+
+4. `list_items()`: Returns a list of all item names in the inventory sorted alphabetically.
+
+Your solution should handle exceptions properly, ensuring the program does not crash during invalid operations.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import SpaceCargo
+
+def setup_module(module):
+    module.ship_cargo = SpaceCargo()
+    ship_cargo.add_item("Oxygen", 50)
+    ship_cargo.add_item("Food", 20)
+
+
+def teardown_module(module):
+    del module.ship_cargo
+
+
+def test_add_item_new():
+    cargo = SpaceCargo()
+    cargo.add_item("Fuel", 100)
+    assert cargo.get_item_quantity("Fuel") == 100
+
+
+def test_add_item_existing():
+    ship_cargo.add_item("Oxygen", 30)
+    assert ship_cargo.get_item_quantity("Oxygen") == 80
+
+
+def test_add_item_invalid_quantity():
+    with pytest.raises(ValueError):
+        ship_cargo.add_item("Helium", -10)
+
+
+def test_remove_item_sufficient():
+    ship_cargo.remove_item("Food", 10)
+    assert ship_cargo.get_item_quantity("Food") == 10
+
+
+def test_remove_item_insufficient():
+    with pytest.raises(KeyError):
+        ship_cargo.remove_item("Food", 30)
+
+
+def test_remove_item_nonexistent():
+    with pytest.raises(KeyError):
+        ship_cargo.remove_item("Water", 10)
+
+
+def test_get_item_quantity_nonexistent():
+    assert ship_cargo.get_item_quantity("Water") == 0
+
+
+def test_list_items():
+    expected_items = sorted(["Food", "Oxygen"])
+    assert ship_cargo.list_items() == expected_items
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

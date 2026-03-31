@@ -1,0 +1,71 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py E [ 20%]
+EEEE                                                                     [100%]
+
+==================================== ERRORS ====================================
+_____________________ ERROR at setup of test_add_creature ______________________
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 19
+  def test_add_creature():
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 6
+  @pytest.fixture(scope='module', autouse=True)
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:6
+_______________________ ERROR at setup of test_save_file _______________________
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 26
+  def test_save_file():
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 6
+  @pytest.fixture(scope='module', autouse=True)
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:6
+_______________________ ERROR at setup of test_load_file _______________________
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 38
+  def test_load_file():
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 6
+  @pytest.fixture(scope='module', autouse=True)
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:6
+________________ ERROR at setup of test_save_and_load_combined _________________
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 46
+  def test_save_and_load_combined():
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 6
+  @pytest.fixture(scope='module', autouse=True)
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:6
+____________________ ERROR at setup of test_empty_file_load ____________________
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 58
+  def test_empty_file_load():
+file /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py, line 6
+  @pytest.fixture(scope='module', autouse=True)
+  def setup_module(module):
+E       fixture 'module' not found
+>       available fixtures: anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, cov, doctest_namespace, include_metadata_in_junit_xml, json_metadata, metadata, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, setup_module, teardown_module, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:6
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_add_creature
+ERROR outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_save_file
+ERROR outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_load_file
+ERROR outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_save_and_load_combined
+ERROR outputs/results1/query_6/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_empty_file_load
+============================== 5 errors in 0.14s ===============================

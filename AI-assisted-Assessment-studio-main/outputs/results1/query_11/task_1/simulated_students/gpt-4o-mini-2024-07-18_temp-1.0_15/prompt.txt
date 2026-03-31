@@ -1,0 +1,17 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+As an aspiring chef, you decide to create a simple program to help you manage inventory in your kitchen. The inventory consists of various types of ingredients. Your task is to write a function `check_ingredient_availability(ingredients, required_item, required_quantity)` that will help you determine if there are enough ingredients to prepare a dish.
+
+The function accepts the following parameters:
+- `ingredients`: A list of strings where each string represents the name of an ingredient, followed by a space and its available quantity (as an integer). For example: `['Flour 500', 'Sugar 200', 'Eggs 12']`.
+- `required_item`: A string representing the name of the required ingredient.
+- `required_quantity`: An integer representing the quantity needed for the dish.
+
+The function should return `'Available'` if the ingredient `required_item` is available in the required quantity or more. If the `required_item` is not available in sufficient quantity or does not exist in the inventory, return '`Not Available`'.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,29 @@
+### Task: Chess Piece Movement Validation
+
+You are to design a class to represent a chessboard that can validate moves for specific pieces. In this task, you will focus on two chess pieces: the Rook and the Bishop. Your class should be capable of determining if a move is valid based on the piece's movement abilities.
+
+#### Chess Rules:
+- A **Rook** can move horizontally or vertically across the board any number of squares, but cannot jump over other pieces.
+- A **Bishop** can move diagonally any number of squares, but similarly cannot jump over other pieces.
+
+### Specifications
+
+1. Implement a class `ChessBoard` that can:
+   - Check if a move from one position to another is valid for a given piece.
+   - Account only for moves within an 8x8 board where rows are numbered 1 to 8 and columns are lettered 'a' to 'h'.
+
+2. Implement the following methods inside your class:
+   - `__init__(self)`: Initializes the board.
+   - `is_valid_move(self, piece, start, end)`: Takes a piece type ('Rook' or 'Bishop'), a start position (e.g. 'a1'), and an end position (e.g. 'h1'), and returns a boolean indicating if the move is valid.
+
+#### Example:
+- `is_valid_move('Rook', 'a1', 'a8')` should return `True` as the Rook can move vertically across the board.
+- `is_valid_move('Bishop', 'a1', 'b2')` should return `True` since the Bishop can move diagonally.
+- `is_valid_move('Rook', 'a1', 'b2')` should return `False` because a Rook cannot move diagonally.
+
+### Constraints:
+- The board is empty with no other pieces to consider blocking moves.
+- Input positions will be valid (strings in the format 'a1' to 'h8').
+- Do not consider any obstacles or ongoing rules like 'check' or 'checkmate'.
+
+Write the function inside a module named `chess_module.py`. Your solution should pass the provided test suite.

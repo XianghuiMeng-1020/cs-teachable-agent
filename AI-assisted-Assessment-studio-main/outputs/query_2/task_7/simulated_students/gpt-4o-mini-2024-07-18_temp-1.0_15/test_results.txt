@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py F [ 20%]
+F.FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_no_ingredients ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:58: FileNotFoundError: [Errno 2] No such file or directory: 'single_recipe.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:75: FileNotFoundError: [Errno 2] No such file or directory: 'different_structure.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'large_recipe.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:144: FileNotFoundError: [Errno 2] No such file or directory: 'no_ingredients.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_single_recipe
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_different_structure_order
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_large_recipe
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_no_ingredients
+ERROR outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_no_ingredients
+===================== 4 failed, 1 passed, 1 error in 0.12s =====================

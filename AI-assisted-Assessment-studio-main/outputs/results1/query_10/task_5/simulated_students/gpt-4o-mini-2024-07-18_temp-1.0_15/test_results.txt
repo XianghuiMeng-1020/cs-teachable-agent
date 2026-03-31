@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 7 items
+
+outputs/results1/query_10/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py . [ 14%]
+....F.                                                                   [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:67: AssertionError: assert '' == 'Boil pasta. Add sauce.'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_load_from_file
+========================= 1 failed, 6 passed in 0.10s ==========================

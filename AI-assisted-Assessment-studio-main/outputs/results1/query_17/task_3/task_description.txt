@@ -1,0 +1,22 @@
+You are tasked with creating a system for managing a fleet of spaceships. Each spaceship is commanded by a captain and can perform various missions such as reconnaissance, transport, or combat. Your task is to implement a class `Spaceship` that manages these attributes and actions.
+
+The class `Spaceship` should have the following functionalities:
+
+- **Attributes**:
+  - `name`: A string representing the name of the spaceship, which is required during instantiation.
+  - `captain`: A string representing the name of the spaceship's captain, which is optional during instantiation. If not provided, it defaults to 'Unknown'.
+  - `missions`: A list to store completed missions. It is initially empty.
+
+- **Methods**:
+  - `add_mission(mission_type)`: This method takes a mission type as argument (a string) and adds it to the missions list. Valid mission types are "Reconnaissance", "Transport", and "Combat". If the mission type is invalid, raise a `ValueError` with the message "Invalid mission type".
+  - `get_missions_summary()`: This method returns a dictionary summarizing completed missions. The keys should be "Reconnaissance", "Transport", and "Combat", and the values should be the counts of each corresponding mission completed by the spaceship.
+
+Implement this class and ensure it performs as described.
+
+The class should support the following operations:
+
+- Instantiating a spaceship with or without a captain.
+- Adding missions and handling invalid inputs using exception handling.
+- Retrieving a summary of all missions completed by the spaceship.
+
+Your class will be tested using automated tests that will check the functionality as described.

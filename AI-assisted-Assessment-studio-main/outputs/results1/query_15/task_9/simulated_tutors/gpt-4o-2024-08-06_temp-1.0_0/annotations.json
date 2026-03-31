@@ -1,0 +1,4 @@
+{
+    "program": "def count_creature_types(creatures):\n    # Create an empty dictionary to hold counts of each creature type\n    creature_counts = {}\n    \n    # Loop over each creature in the list\n    for creature in creatures:\n        # If the creature type is already in the dictionary, increment its count\n        if creature in creature_counts:\n            creature_counts[creature] += 1\n        # If it's not already in the dictionary, add it with an initial count of 1\n        else:\n            creature_counts[creature] = 1\n    \n    # Return the dictionary with creature types and counts\n    return creature_counts",
+    "context_relevance": 1.0
+}

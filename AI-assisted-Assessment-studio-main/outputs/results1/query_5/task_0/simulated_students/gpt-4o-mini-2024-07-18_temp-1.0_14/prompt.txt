@@ -1,0 +1,23 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Poseidon has decided to conduct a race among his sea creatures, and he wants to calculate the winner based on the fastest time recorded in seconds. You are tasked to create a Python script to read a file containing the race results and determine the winner.
+
+The input file will be named 'race_results.txt', and each line of the file will contain the name of a creature followed by its time in seconds, separated by a comma, like this:
+
+```
+Hydra,1200
+Kraken,1100
+Nereid,1150
+Sirens,1250
+```
+
+Your task is to implement a function `find_winner(filename)` which takes the filename as an input (the file will always be named 'race_results.txt'). The function should return the name of the creature with the fastest time. If two or more creatures have the same fastest time, return the first one that appears in the file.
+
+You must handle file input/output as part of your solution. Will be tested by creating several such files and asserting the output of the function against the expected winner.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

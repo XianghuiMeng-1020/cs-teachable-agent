@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py F [ 20%]
+EF.FEF                                                                   [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at teardown of test_immortal_creature __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+__________________ ERROR at teardown of test_case_sensitivity __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py:42: AssertionError: assert [] == ['Sphinx']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_immortal_creature
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_colossal_creatures
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_case_sensitivity
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_human_creature
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_immortal_creature
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_15/test_suite_stu.py::test_case_sensitivity
+==================== 4 failed, 1 passed, 2 errors in 0.15s =====================

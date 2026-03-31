@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 20%]
+FF..                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:70: AssertionError: assert '\name: Veggi...rs, soy sauce' == '\nName: Vegg..., soy sauce\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:70: AssertionError: assert 'Name: Mushro...oconut milk\n' == '\nName: Mush...oconut milk\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:70: AssertionError: assert 'Name: Salad\... coconut milk' == '\nName: Sala...o, cucumber\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Chicken Curry\nIngredients: chicken, curry powder, onions, garlic\n\nName: Veggie Stir Fry\nIngredients: broccoli, bell peppers, soy sauce\n\nName: Beef Stroganoff\nIngredients: beef, mushrooms, sour cream\n-\nName: Veggie Stir Fry\nIngredients: broccoli, bell peppers, soy sauce\n]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Chicken Salad\nIngredients: chicken, lettuce, mayonnaise\n\nName: Mushroom Risotto\nIngredients: rice, mushrooms, parmesan\n\nName: BBQ Pork Ribs\nIngredients: pork, bbq sauce, spices\n\nName: Tofu Curry\nIngredients: tofu, curry powder, coconut milk\n-\nName: Mushroom Risotto\nIngredients: rice, mushrooms, parmesan\n\nName: Tofu Curry\nIngredients: tofu, curry powder, coconut milk\n]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Salad\nIngredients: lettuce, tomato, cucumber\n-\nName: Salad\nIngredients: lettuce, tomato, cucumber\n]
+========================= 3 failed, 2 passed in 0.12s ==========================

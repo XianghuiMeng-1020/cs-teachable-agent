@@ -6,7 +6,7 @@ interface MasteryRadialProps {
   className?: string;
 }
 
-const LEARNED_COLOR = "#06B6D4"; // accent-500
+const LEARNED_COLOR = "#0D9488"; // accent-500
 const REMAINING_COLOR = "#e2e8f0"; // slate-200
 
 export function MasteryRadial({ learnedCount, totalCount, className = "" }: MasteryRadialProps) {
@@ -45,10 +45,10 @@ export function MasteryRadial({ learnedCount, totalCount, className = "" }: Mast
         </ResponsiveContainer>
       </div>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-2xl font-bold text-slate-900">{percent}%</span>
-        <span className="text-xs text-slate-500">mastery</span>
+        <span className="text-2xl font-bold text-stone-900">{percent}%</span>
+        <span className="text-xs text-stone-500">mastery</span>
       </div>
-      <p className="mt-2 text-center text-xs text-slate-500">
+      <p className="mt-2 text-center text-xs text-stone-500">
         {learnedCount}/{totalCount} concepts learned
       </p>
     </div>

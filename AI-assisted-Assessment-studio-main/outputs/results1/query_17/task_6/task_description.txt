@@ -1,0 +1,18 @@
+### Science Fiction Adventure Management System
+
+In this programming task, you are required to implement a simple adventure management system that caters to science fiction enthusiasts. In this world, there exist various alien races, each with unique abilities and characteristics. Your task is to model an adventure management system that helps manage missions involving these aliens.
+
+#### Structure
+- **Alien Class**: You need to implement a class `Alien` that encapsulates information and functionalities related to an alien character. Each `Alien` instance has a `name` (string), `species` (string), and a `skills` dictionary where keys are skill names and values are the proficiency levels.
+
+- **Mission Management**: Implement a function `assign_mission(aliens, mission_requirements)` where `aliens` is a list of `Alien` objects, and `mission_requirements` is a dictionary with skill names as keys and minimum skill levels required as values.
+  - The `assign_mission` function should return a list of aliens who meet or exceed the skills listed in `mission_requirements`. If an alien does not have a required skill, assume its proficiency is 0.
+  - If no aliens can be assigned to a mission, the function should raise a `ValueError` with the message "No suitable aliens found".
+
+#### Requirements
+- **Selection**: Use condition checks to determine if an alien satisfies the mission requirements.
+- **Exception Handling**: Raise an exception if no appropriate aliens can be assigned to the mission.
+- **Objects and Classes**: Use classes to encapsulate the alien data and functionalities.
+
+#### Example
+Suppose there is a mission that requires 'hacking' skill level of at least 5 and 'flying' skill level of at least 7. You should implement the `assign_mission` function such that it correctly identifies which aliens can be assigned to this mission, based on their skill levels in those areas. The solution should be robust and handle cases where no aliens are suitable for the mission.

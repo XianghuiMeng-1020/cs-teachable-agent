@@ -1,0 +1,10 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+As a software engineer in a science fiction research lab, your task is to develop a Python function `analyze_data(filename)` that processes text files containing information about various alien species discovered in the galaxy. Each line in the file consists of a species name, followed by their estimated population, separated by a comma. Your function should perform the following tasks:\n\n1. Read the data from the provided file.\n2. Compute the total number of species and the total population from the data.\n3. Output the results as a tuple: (total_species, total_population).\n4. In the event of any file errors, such as the file not existing or being unreadable, your function should return the tuple (0, 0).\n\nTest your implementation thoroughly using the test cases provided.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_cost(recipe_data, cost_data):\n    total_costs = {}\n    \n    for dish, ingredients in recipe_data.items():\n        cost = 0.0\n        for ingredient, quantity in ingredients:\n            if ingredient not in cost_data:\n                raise ValueError(f\"Cost information missing for: {ingredient}\")\n            cost += cost_data[ingredient] * quantity\n        total_costs[dish] = cost\n    \n    return total_costs\n\n# Example usage\nrecipe_data = {\n    \"Pancake\": [(\"Flour\", 2), (\"Egg\", 3), (\"Milk\", 1)],\n    \"Omelette\": [(\"Egg\", 4), (\"Milk\", 2)]\n}\ncost_data = {\n    \"Flour\": 0.5,\n    \"Egg\": 0.2,\n    \"Milk\": 1.0\n}\n\nresult = calculate_total_cost(recipe_data, cost_data)\nprint(result)  # Output should be: {'Pancake': 2.6, 'Omelette': 1.4}",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py . [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:43: assert 'Dragon draw' == "It's a draw"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:50: assert '' == "It's a draw"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:57: assert "It's a draw" == 'Kraken'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:64: assert 'Kraken draw' == "It's a draw"
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_determine_ultimate_being_2
+FAILED outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_determine_ultimate_being_3
+FAILED outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_determine_ultimate_being_4
+FAILED outputs/results1/query_5/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_determine_ultimate_being_5
+========================= 4 failed, 1 passed in 0.06s ==========================

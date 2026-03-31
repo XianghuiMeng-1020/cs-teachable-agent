@@ -1,0 +1,4 @@
+{
+    "program": "def process_planet_data(file_name):\n    habitable_planets = []\n    try:\n        with open(file_name, 'r') as file:\n            for line in file:\n                try:\n                    # Splitting the line into parts\n                    parts = line.strip().split()\n                    if len(parts) != 3:\n                        return \"File Error\"\n\n                    planet_name = parts[0]\n                    distance = float(parts[1])  # It might be useful in more advanced tasks\n                    temperature = float(parts[2])\n\n                    # Check if planet is habitable\n                    if -50 <= temperature <= 50:\n                        habitable_planets.append(planet_name)\n                except ValueError:\n                    return \"File Error\"\n    except (FileNotFoundError, IOError):\n        return \"File Error\"\n\n    return habitable_planets",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,16 @@
+Create a function `get_ingredient_quantity(recipe, ingredient)` that takes in two parameters:
+1. `recipe`: a dictionary where keys are ingredient names (strings) and values are the quantities needed (strings), e.g., `{"flour": "2 cups", "sugar": "1 cup"}`.
+2. `ingredient`: a string representing the name of an ingredient.
+
+The function should return a string representing the quantity of the given ingredient in the recipe. If the ingredient is not present in the recipe, the function should return "Ingredient not found".
+
+Function Signature:
+```python
+def get_ingredient_quantity(recipe, ingredient):
+```
+
+### Example
+```python
+get_ingredient_quantity({"flour": "2 cups", "sugar": "1 cup"}, "sugar")  # should return "1 cup"
+get_ingredient_quantity({"flour": "2 cups", "sugar": "1 cup"}, "butter")  # should return "Ingredient not found"
+```

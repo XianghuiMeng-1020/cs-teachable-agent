@@ -1,0 +1,4 @@
+{
+    "program": "def can_qualify(dish_ingredients, mandatory_ingredients):\n    # Check if all mandatory ingredients are in the dish ingredients\n    for ingredient in mandatory_ingredients:\n        if ingredient not in dish_ingredients:\n            return False\n    return True",
+    "context_relevance": 0.0
+}

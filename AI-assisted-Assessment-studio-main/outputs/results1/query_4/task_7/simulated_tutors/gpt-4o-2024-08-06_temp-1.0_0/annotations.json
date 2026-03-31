@@ -1,0 +1,4 @@
+{
+    "program": "def dice_probability(target_score):\n    # Define the total number of possible outcomes when rolling two dice\n    total_outcomes = 36\n    \n    # Check if the target score is out of bounds\n    if target_score < 2 or target_score > 12:\n        return 0\n\n    # Define a dictionary to count the number of favorable outcomes for each possible score\n    score_counts = {i: 0 for i in range(2, 13)}\n    \n    # Use nested loops to simulate rolling two dice\n    for die1 in range(1, 7):\n        for die2 in range(1, 7):\n            score = die1 + die2\n            if score in score_counts:\n                score_counts[score] += 1\n\n    # Calculate the probability for the target score\n    favorable_outcomes = score_counts[target_score]\n    probability = favorable_outcomes / total_outcomes\n    \n    return round(probability, 4)\n\n# The function should be tested with the provided test suite to ensure correctness.",
+    "context_relevance": 1.0
+}

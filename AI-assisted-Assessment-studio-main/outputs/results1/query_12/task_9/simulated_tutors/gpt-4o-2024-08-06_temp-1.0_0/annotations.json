@@ -1,0 +1,4 @@
+{
+    "program": "def find_low_cal_recipes(threshold):\n    low_cal_recipes = []\n    try:\n        with open('recipe_calories.txt', 'r') as file:\n            for line in file:\n                if line.strip():  # Ensure line is not empty\n                    # Split line into recipe name and calorie count\n                    recipe, calories_str = line.split(':')\n                    recipe = recipe.strip()\n                    calories = int(calories_str.strip())\n\n                    # Check if the calories are below the threshold\n                    if calories <= threshold:\n                        low_cal_recipes.append(recipe)\n    except FileNotFoundError:\n        print(\"The file recipe_calories.txt was not found.\")\n    return low_cal_recipes\n\n# Include this main section for testing the function\nif __name__ == \"__main__\":\n    # Example test\n    print(find_low_cal_recipes(250))\n    # Add more tests if needed",
+    "context_relevance": 1.0
+}

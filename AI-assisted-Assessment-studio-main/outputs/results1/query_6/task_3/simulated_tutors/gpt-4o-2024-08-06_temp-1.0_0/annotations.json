@@ -1,0 +1,4 @@
+{
+    "program": "class MythicalCreature:\n    def __init__(self, name, creature_type, origin, powers):\n        self.name = name\n        self.creature_type = creature_type\n        self.origin = origin\n        self.powers = powers\n\n    def describe(self):\n        powers_list = ', '.join(self.powers)\n        return f'{self.name} is a {self.creature_type} from {self.origin}. Powers: {powers_list}'\n\n    def save_to_file(self, filename):\n        with open(filename, 'w') as f:\n            powers_str = ','.join(self.powers)\n            f.write(f'{self.name},{self.creature_type},{self.origin},{powers_str}\\n')\n\n    @classmethod\n    def load_from_file(cls, filename):\n        with open(filename, 'r') as f:\n            line = f.readline()\n            name, creature_type, origin, *powers = line.strip().split(',')\n            return cls(name, creature_type, origin, powers)",
+    "context_relevance": 1.0
+}

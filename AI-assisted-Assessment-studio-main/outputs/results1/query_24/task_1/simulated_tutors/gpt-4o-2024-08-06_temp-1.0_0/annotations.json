@@ -1,0 +1,4 @@
+{
+    "program": "def simulate_turn(board_state, roll):\n    # Exception handling for invalid inputs\n    try:\n        if not (isinstance(board_state, list) and all(isinstance(x, int) and x >= 0 for x in board_state)):\n            return 0\n        if not isinstance(roll, int) or roll < 1 or roll > 6:\n            return 0\n        \n        # Variables\n        collected_tokens = 0\n        max_idx = min(len(board_state) - 1, roll)\n\n        # Loops\n        for i in range(max_idx + 1):\n            collected_tokens += board_state[i]\n            board_state[i] = 0\n\n        return collected_tokens\n\n    except Exception as e:\n        # Handle unexpected exceptions\n        return 0",
+    "context_relevance": 1.0
+}

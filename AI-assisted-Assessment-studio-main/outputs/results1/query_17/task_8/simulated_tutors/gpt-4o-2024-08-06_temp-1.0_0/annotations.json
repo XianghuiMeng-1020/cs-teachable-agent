@@ -1,0 +1,4 @@
+{
+    "program": "class AlienRegistry:\n    def __init__(self):\n        self.registry = {}\n\n    def add_species(self, species_name, characteristics):\n        if species_name not in self.registry:\n            self.registry[species_name] = characteristics\n        # else, we do nothing as we don't want duplicates\n\n    def get_species_info(self, species_name):\n        if species_name in self.registry:\n            return self.registry[species_name]\n        else:\n            raise ValueError(\"Species not found\")\n\n    def get_all_species(self):\n        return sorted(self.registry.keys())",
+    "context_relevance": 1.0
+}

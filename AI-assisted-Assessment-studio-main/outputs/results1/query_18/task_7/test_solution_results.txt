@@ -1,0 +1,8 @@
+F...F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/test_suite_sol.py:31: AssertionError: assert 1594 == 1595
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_7/test_suite_sol.py:47: AssertionError: assert 16 == 17
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_7/test_suite_sol.py::test_calculate_total_distance_file1
+FAILED outputs/results1/query_18/task_7/test_suite_sol.py::test_calculate_total_distance_single_line
+2 failed, 3 passed in 0.05s

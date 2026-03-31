@@ -1,0 +1,38 @@
+You are tasked to create a function `mythological_creatures_info(creatures)` that processes a list of mythical creatures. Each mythical creature comes with a description that describes its attributes in a dictionary format. The keys in this dictionary can include 'type', 'origin', and 'strength'.
+
+The function should return a dictionary where the keys are the names of the creatures, and the values are another dictionary containing two keys:
+1. 'origin': the origin location of the creature.
+2. 'type_strength': a list where each element is a formatted string combining the type and strength of the creature, in the format "{type}: {strength}".
+
+If a creature does not have the 'strength' key, it should be assumed to have the strength "unknown".
+
+The list of creatures can be represented as follows:
+- creatures: A list of dictionaries, each with the following format:
+  ```
+  {
+    'name': <creature_name>,
+    'attributes': {
+      'type': <type>,
+      'origin': <origin>,
+      'strength': <strength>  # optional
+    }
+  }
+  ```
+
+- Example input:
+```python
+creatures = [
+  {'name': 'Minotaur', 'attributes': {'type': 'Beast', 'origin': 'Greece', 'strength': 'High'}},
+  {'name': 'Dragon', 'attributes': {'type': 'Reptile', 'origin': 'China'}}
+]
+```
+
+- Expected output:
+```python
+{
+  'Minotaur': {'origin': 'Greece', 'type_strength': ['Beast: High']},
+  'Dragon': {'origin': 'China', 'type_strength': ['Reptile: unknown']}
+}
+```
+
+Write a function to solve the above task.

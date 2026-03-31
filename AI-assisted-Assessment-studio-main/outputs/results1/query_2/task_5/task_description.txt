@@ -1,0 +1,36 @@
+In the mystical land of Pymeric, a famous gambling game called "Lucky Strings" has taken over the taverns. In this game, players draw random strings of letters and win points based on certain lucky conditions. The game master needs a program to analyze the strings and tally points based on the following rules:
+
+1. A string containing 'xyz' earns 3 points.
+2. Each instance of the letter 'a' earns 1 point.
+3. A string with the length exactly equal to 7 gives additional 5 points, but only once per string.
+
+Each player's string results from separate draws are stored sequentially in a text file, one string per line. Your task is to write a function `calculate_points(input_file, output_file)` that reads strings from the `input_file`, processes each string according to the rules, cumulates the points for each string, and writes the total points of each string to the `output_file`, with one line per result.
+
+### Function Signature
+`calculate_points(input_file, output_file)`
+
+#### Input
+- `input_file`: Path to a text file containing strings, where each string is on a new line.
+- `output_file`: Path to the text file where the point results should be written.
+
+#### Output
+- The function doesn't return anything; however, it writes the points for each string in the `output_file`.
+
+#### Example
+If `input_file` contains:
+```
+abcaxyz
+zzzaaa
+abcdefgh
+xyz
+```
+, the `output_file` will contain:
+```
+6
+9
+6
+4
+```
+
+### Note
+- Ensure to handle the file I/O dynamically, closing the files properly after operations.

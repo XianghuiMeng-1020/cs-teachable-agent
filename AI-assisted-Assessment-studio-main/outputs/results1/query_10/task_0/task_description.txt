@@ -1,0 +1,17 @@
+Create a Python program to manage cooking recipes. Your task is to implement a class, `RecipeManager`, that supports the following functionality:
+
+1. **Add Recipe**: Add a new recipe. Store each recipe with a name, a list of ingredients, and preparation steps. Save recipes to a file named `recipes.txt`. Each recipe should be stored in the format:
+   - Name of the recipe on one line, followed by its ingredients and preparation steps on the following lines.
+   - Separate the recipe name, ingredients, and preparation steps by lines.
+
+2. **Get Recipe**: Retrieve a recipe by its name. If the recipe does not exist, return a string message saying "Recipe not found". Extract the recipe details from the `recipes.txt` file.
+
+3. **Exception Handling**: Handle any errors that might occur during file operations or when processing non-existing entries.
+
+Implement the following methods in the `RecipeManager` class:
+- `add_recipe(name, ingredients, steps)`: This method takes the recipe's name, a list of its ingredients, and its preparation steps, and writes them to the `recipes.txt` file.
+- `get_recipe(name)`: This method retrieves the recipe details by its name from `recipes.txt`.
+
+Your task is to ensure that the functionality above works correctly and handles potential exceptions. The names and ingredients should be strings, while the steps can be a multiline string.
+
+The `recipes.txt` file should be stored in the same directory where the program is executed.

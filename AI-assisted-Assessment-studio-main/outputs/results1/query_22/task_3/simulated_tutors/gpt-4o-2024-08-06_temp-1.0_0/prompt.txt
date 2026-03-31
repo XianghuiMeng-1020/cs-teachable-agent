@@ -1,0 +1,102 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+### Task: Calculate Player Scores from Board Game Logs
+
+You are given a task to calculate the scores of players participating in board games, based on logs recorded in a file format. Each line in the log file follows the format: `<player_name>,<game_name>,<score>` representing a player's score in a specific game.
+
+Your task is to create a function `calculate_scores(input_file, output_file)` that reads the player log entries from `input_file`, computes the total score for each player across all the games they played, and writes the total scores to `output_file`.
+
+The `output_file` should contain one line per player with the format: `<player_name>,<total_score>`, ordered by the player's name alphabetically. Players without any recorded games should not be included in the output.
+
+**Example:**
+If `input_file` contains:
+```
+Alice,Chess,15
+Bob,Checkers,20
+Alice,Monopoly,25
+Bob,Chess,30
+Charlie,Chess,10
+Charlie,Monopoly,5
+```
+
+The resulting `output_file` should be:
+```
+Alice,40
+Bob,50
+Charlie,15
+```
+
+**Note**: You only need to handle positive integer scores and player names will only consist of alphabetic characters.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_scores
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_and_teardown_module():
+    # Setup: Create input test files
+    with open('log1.txt', 'w') as f:
+        f.write('Alice,Chess,15\nBob,Checkers,20\nAlice,Monopoly,25\nBob,Chess,30\nCharlie,Chess,10\nCharlie,Monopoly,5\n')
+    with open('log2.txt', 'w') as f:
+        f.write('David,Checkers,44\nEve,Chess,55\n')
+    with open('log_empty.txt', 'w') as f:
+        pass
+    yield
+    # Teardown: Remove test files
+    os.remove('log1.txt')
+    os.remove('log2.txt')
+    os.remove('log_empty.txt')
+    os.remove('output1.txt')
+    os.remove('output2.txt')
+    os.remove('output_empty.txt')
+
+# Test cases
+
+def test_case_1():
+    calculate_scores('log1.txt', 'output1.txt')
+    with open('output1.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Alice,40\nBob,50\nCharlie,15\n'
+
+def test_case_2():
+    calculate_scores('log2.txt', 'output2.txt')
+    with open('output2.txt', 'r') as f:
+        result = f.read()
+    assert result == 'David,44\nEve,55\n'
+
+
+def test_case_3():
+    calculate_scores('log_empty.txt', 'output_empty.txt')
+    with open('output_empty.txt', 'r') as f:
+        result = f.read()
+    assert result == ''
+
+
+def test_case_4():
+    with open('log1.txt', 'w') as f:
+        f.write('Anna,Checkers,10\nAnna,Monopoly,25\nBen,Chess,15\n')
+
+    calculate_scores('log1.txt', 'output1.txt')
+    with open('output1.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Anna,35\nBen,15\n'
+
+
+def test_case_5():
+    with open('log2.txt', 'w') as f:
+        f.write('Carrie,Chess,50\nFrank,Checkers,40\n')
+
+    calculate_scores('log2.txt', 'output2.txt')
+    with open('output2.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Carrie,50\nFrank,40\n'
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

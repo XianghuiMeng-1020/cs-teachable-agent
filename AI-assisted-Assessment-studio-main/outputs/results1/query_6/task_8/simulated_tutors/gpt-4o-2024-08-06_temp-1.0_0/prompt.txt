@@ -1,0 +1,117 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+In the realm of mythology, there are countless heroic tales, mysterious creatures, and powerful gods. 
+
+Your task is to create a Python program that reads from a text file named `mythology_stories.txt`. This file contains different mythology stories in a specific format:
+```
+# Story Title: Zeus and the Thunderbolt
+Zeus, the king of the Greek gods, was known for many mythological exploits...
+# Story Title: The Odyssey
+Odysseus, the hero of The Odyssey, encountered many challenges...
+```
+
+Each story begins with a line that starts with `# Story Title:` followed by the title of the story. The subsequent lines contain the content of the story.
+
+Implement a class `Mythology` with the following specifications:
+- An instance variable `stories` that stores the stories in a dictionary where keys are story titles, and values are the story content.
+- A method `read_stories_from_file(filename)` that populates the `stories` dictionary by reading the given text file.
+- A method `get_story(titles)` that accepts a list of story titles and returns a list of story contents corresponding to the given titles.
+- A method `save_story_to_file(title, filename)` that writes the content of the story with the given title into a new file specified by `filename`.
+
+The method `read_stories_from_file` should be called automatically when an instance of the class is created.
+
+### Example:
+Suppose the file `mythology_stories.txt` contains the following:
+```
+# Story Title: Zeus and the Thunderbolt
+Zeus, the king of the Greek gods, was known for many mythological exploits...
+# Story Title: The Odyssey
+Odysseus, the hero of The Odyssey, encountered many challenges...
+```
+If you initiate `Mythology()` and call `get_story(['Zeus and the Thunderbolt'])`, it should return a list containing:
+```
+['Zeus, the king of the Greek gods, was known for many mythological exploits...']
+```
+Make sure to implement this class and its methods so that they can be tested with the test suite.
+
+**Note:** You may assume the `mythology_stories.txt` file is properly formatted (as shown above) and each title in the file is unique.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import Mythology
+
+
+def setup_module(module):
+    with open('mythology_stories.txt', 'w') as f:
+        f.write("""
+# Story Title: Zeus and the Thunderbolt
+Zeus, the king of the Greek gods, was known for many mythological exploits...
+# Story Title: The Odyssey
+Odysseus, the hero of The Odyssey, encountered many challenges...
+# Story Title: The Labors of Hercules
+Ever obliging, Hercules completed many impossible tasks...
+# Story Title: The Trickery of Loki
+Loki, the cunning trickster of Norse mythology, was infamous for his deceptions...
+# Story Title: The Phoenix's Rebirth
+The Phoenix, a symbol of renewal and rebirth, rises from its ashes every 500 years...
+""")
+
+
+def teardown_module(module):
+    try:
+        os.remove('mythology_stories.txt')
+        os.remove('zeus_story.txt')
+        os.remove('odyssey_story.txt')
+    except OSError:
+        pass
+
+
+def test_get_single_story():
+    mythology = Mythology()
+    result = mythology.get_story(['Zeus and the Thunderbolt'])
+    expected = ['Zeus, the king of the Greek gods, was known for many mythological exploits...']
+    assert result == expected
+
+
+def test_get_multiple_stories():
+    mythology = Mythology()
+    result = mythology.get_story(['Zeus and the Thunderbolt', 'The Trickery of Loki'])
+    expected = ['Zeus, the king of the Greek gods, was known for many mythological exploits...',
+                'Loki, the cunning trickster of Norse mythology, was infamous for his deceptions...']
+    assert result == expected
+
+
+def test_get_non_existing_story():
+    mythology = Mythology()
+    result = mythology.get_story(['Non-existent Story'])
+    expected = []
+    assert result == expected
+
+
+def test_save_story_to_file():
+    mythology = Mythology()
+    mythology.save_story_to_file('The Odyssey', 'odyssey_story.txt')
+    with open('odyssey_story.txt', 'r') as f:
+        content = f.read().strip()
+    expected = 'Odysseus, the hero of The Odyssey, encountered many challenges...'
+    assert content == expected
+
+
+def test_save_story_does_not_overwrite():
+    mythology = Mythology()
+    mythology.save_story_to_file('Zeus and the Thunderbolt', 'zeus_story.txt')
+    mythology.save_story_to_file('The Odyssey', 'zeus_story.txt')  # attempt to overwrite
+    with open('zeus_story.txt', 'r') as f:
+        content = f.read().strip()
+    expected = 'Zeus, the king of the Greek gods, was known for many mythological exploits...'
+    assert content == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

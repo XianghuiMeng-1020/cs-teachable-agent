@@ -1,0 +1,10 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+We are going to simulate a simple game of chance called 'Lucky Dice'. In this game, a player rolls two six-sided dice. The result of each roll is a number from 1 to 6. The player's score is calculated as follows: if the sum of the dice is 7 or 11, the player gains 10 points. If the sum is 2, 3, or 12, the player gains 5 points. Otherwise, the player gains no points. Create a function `lucky_dice(outcomes)` that takes a list of tuples as an argument. Each tuple contains two integers representing the results of dice rolls. Your function should return a dictionary with two keys: `total_score`, which is the sum of all scores from the dice rolls, and `rolls`, which is a list of scores for each roll calculated according to the rules above.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

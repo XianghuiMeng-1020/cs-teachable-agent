@@ -1,0 +1,12 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/test_suite_sol.py:42: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/test_suite_sol.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/test_suite_sol.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/test_suite_sol.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_5/test_suite_sol.py::test_process_bets[bets.txt-results.txt-results.txt-5]
+FAILED outputs/query_0/task_5/test_suite_sol.py::test_different_rolls[bets.txt-results.txt-results.txt-1]
+FAILED outputs/query_0/task_5/test_suite_sol.py::test_different_rolls[bets.txt-results.txt-results.txt-4]
+FAILED outputs/query_0/task_5/test_suite_sol.py::test_different_rolls[bets.txt-results.txt-results.txt-2]
+4 failed in 0.03s

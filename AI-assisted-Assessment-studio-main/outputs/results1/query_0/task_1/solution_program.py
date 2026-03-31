@@ -1,0 +1,1 @@
+def play_dice_game(dice1, dice2):\n    total = dice1 + dice2\n    if total == 7 or total == 11:\n        outcome = 'Win'\n    elif total in (2, 3, 12):\n        outcome = 'Lose'\n    else:\n        outcome = 'Tie'\n    with open('game_log.txt', 'a') as f:\n        f.write(f'{dice1}, {dice2} - {outcome}\n')

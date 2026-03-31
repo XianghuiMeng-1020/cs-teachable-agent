@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_run_lucky_number_game[41-Congratulations! You selected a lucky number!\n] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'lucky_numbers.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:28: AssertionError: assert 'Sorry! Bette... next time.\n' == 'Congratulati...cky number!\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'lucky_numbers.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'lucky_numbers.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_run_lucky_number_game[17-Congratulations! You selected a lucky number!\n]
+FAILED outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_run_lucky_number_game[23-Sorry! Better luck next time.\n]
+FAILED outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_run_lucky_number_game[41-Congratulations! You selected a lucky number!\n]
+ERROR outputs/query_0/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_run_lucky_number_game[41-Congratulations! You selected a lucky number!\n]
+===================== 3 failed, 2 passed, 1 error in 0.09s =====================

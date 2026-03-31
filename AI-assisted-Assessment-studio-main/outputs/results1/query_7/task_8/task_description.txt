@@ -1,0 +1,26 @@
+In mythology, many stories involve heroes, gods, and mythical creatures. You are tasked with creating a program involving these mythical entities.
+
+You will be provided with a text file named `mythology_stories.txt`. Each line in this file represents a mythical story described in the format: `"<story_title>: <hero_name>, <god_name>, <creature_name>"`.
+
+Your task is to implement a function `extract_entities(file_path)` that reads this file and returns a dictionary with the keys 'heroes', 'gods', and 'creatures'. Each key should map to a unique list of corresponding entity names found in the file. The list for each key should be sorted in alphabetical order.
+
+**Function Signature:**
+```python
+def extract_entities(file_path):
+```
+
+### Example:
+Suppose `mythology_stories.txt` contains the following lines:
+```
+The Battle of Troy: Achilles, Zeus, Hydra
+Olympus' Call: Hercules, Athena, Cerberus
+Underworld Saga: Persephone, Hades, Minotaur
+```
+Calling `extract_entities('mythology_stories.txt')` should return:
+```python
+{
+  'heroes': ['Achilles', 'Hercules'],
+  'gods': ['Athena', 'Hades', 'Zeus'],
+  'creatures': ['Cerberus', 'Hydra', 'Minotaur']
+}
+```

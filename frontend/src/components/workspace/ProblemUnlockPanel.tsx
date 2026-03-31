@@ -89,11 +89,11 @@ export function ProblemUnlockPanel({
         {/* Overall Progress */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-semibold text-slate-900 flex items-center gap-2">
+            <h3 className="font-semibold text-stone-900 flex items-center gap-2">
               <Target className="w-5 h-5 text-brand-500" />
               Problem Unlock Progress
             </h3>
-            <span className="text-sm font-medium text-slate-600">
+            <span className="text-sm font-medium text-stone-600">
               {unlockedCount} / {totalCount} unlocked
             </span>
           </div>
@@ -103,7 +103,7 @@ export function ProblemUnlockPanel({
             color={unlockedCount === totalCount ? "success" : "brand"}
           />
           <div className="mt-2 flex items-center justify-between">
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-stone-500">
               {learnedUnitIds.length} of {requiredKus.length} required concepts learned
             </p>
             {conceptsNeeded > 0 && (
@@ -127,19 +127,19 @@ export function ProblemUnlockPanel({
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-semibold text-slate-900">🎯 Closest to Unlock</h4>
+                  <h4 className="font-semibold text-stone-900">🎯 Closest to Unlock</h4>
                   <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full font-medium">
                     {Math.round(nearestUnlockable.progress * 100)}% Ready
                   </span>
                 </div>
-                <p className="text-sm text-slate-600 mt-1 line-clamp-2">
+                <p className="text-sm text-stone-600 mt-1 line-clamp-2">
                   {nearestUnlockable.problem_statement}
                 </p>
                 
                 {/* Progress Section */}
                 <div className="mt-3 bg-white/60 rounded-lg p-3">
                   <div className="flex items-center justify-between text-sm mb-2">
-                    <span className="text-slate-600 font-medium">
+                    <span className="text-stone-600 font-medium">
                       {nearestUnlockable.learnedCount} / {nearestUnlockable.requiredCount} prerequisites learned
                     </span>
                     <TrendingUp className="w-4 h-4 text-brand-500" />
@@ -154,7 +154,7 @@ export function ProblemUnlockPanel({
                 {/* Missing Concepts - Enhanced */}
                 {nearestUnlockable.missing.length > 0 && (
                   <div className="mt-3">
-                    <p className="text-xs font-medium text-slate-700 mb-2">
+                    <p className="text-xs font-medium text-stone-700 mb-2">
                       📖 Teach these concepts to unlock:
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -200,7 +200,7 @@ export function ProblemUnlockPanel({
         {/* Locked Problems Preview */}
         {lockedProblems.length > 0 && (
           <div>
-            <h4 className="text-sm font-medium text-slate-700 mb-3 flex items-center gap-2">
+            <h4 className="text-sm font-medium text-stone-700 mb-3 flex items-center gap-2">
               <Lock className="w-4 h-4" />
               Locked Problems ({lockedProblems.length})
             </h4>
@@ -213,21 +213,21 @@ export function ProblemUnlockPanel({
                 return (
                   <div 
                     key={problem.problem_id} 
-                    className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg opacity-75"
+                    className="flex items-center gap-3 p-3 bg-stone-50 rounded-lg opacity-75"
                   >
-                    <Lock className="w-4 h-4 text-slate-400 shrink-0" />
+                    <Lock className="w-4 h-4 text-stone-400 shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-slate-600 truncate">
+                      <p className="text-sm text-stone-600 truncate">
                         {problem.problem_statement.slice(0, 60)}...
                       </p>
                       <div className="flex items-center gap-2 mt-1">
-                        <div className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-slate-400 rounded-full"
+                            className="h-full bg-stone-400 rounded-full"
                             style={{ width: `${progress * 100}%` }}
                           />
                         </div>
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-stone-400">
                           {learned.length}/{required.length}
                         </span>
                       </div>
@@ -236,7 +236,7 @@ export function ProblemUnlockPanel({
                 );
               })}
               {lockedProblems.length > 5 && (
-                <p className="text-xs text-slate-400 text-center py-2">
+                <p className="text-xs text-stone-400 text-center py-2">
                   +{lockedProblems.length - 5} more locked problems
                 </p>
               )}

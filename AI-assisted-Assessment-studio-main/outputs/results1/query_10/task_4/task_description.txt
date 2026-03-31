@@ -1,0 +1,13 @@
+Create a Python program related to Cooking that manages a list of recipes. 
+
+Your task is to implement a class called `RecipeManager` that interacts with a file named `recipes.txt`. This class should support the following functionalities:
+
+1. **Initialization**: The constructor of the class should attempt to load recipes from `recipes.txt` where each line contains a recipe name. If the file does not exist, the class should handle the exception and start with an empty list of recipes.
+
+2. **Add a Recipe**: Implement a method `add_recipe(self, recipe_name)` that adds a new recipe to the list and writes it to `recipes.txt` if it doesn't already exist in the list (case sensitive check).
+
+3. **Remove a Recipe**: Implement a method `remove_recipe(self, recipe_name)` that removes a recipe from the list and updates `recipes.txt`. If the recipe does not exist, it should handle the situation gracefully without any changes to the file.
+
+4. **List Recipes**: Implement a method `list_recipes(self)` that returns the list of recipes.
+
+Your implementation should handle any exceptions that might occur during file operations.

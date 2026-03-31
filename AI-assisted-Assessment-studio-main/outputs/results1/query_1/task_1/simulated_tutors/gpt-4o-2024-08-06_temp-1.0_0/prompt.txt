@@ -1,0 +1,58 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+In this task, you will create a simple 'dice game', which simulates a game of chance. The game involves rolling two six-sided dice and calculating the score based on the sum of the rolled values. If the sum is 7 or 11, the player wins. If the sum is 2, 3, 12, the player loses. Any other sum results in a neutral outcome.
+
+You need to implement the following function:
+
+```python
+def dice_game(dice_rolls):
+    pass
+```
+
+This function takes a parameter `dice_rolls`, which is a list of tuples. Each tuple contains two integers representing the values rolled on two dice (e.g., (3, 4) represents rolling a 3 and a 4 with two dice).
+
+The function should return a list of strings, where each string represents the outcome of each roll based on the following rules:
+- "Win" if the sum of the dice is 7 or 11
+- "Lose" if the sum of the dice is 2, 3, or 12
+- "Neutral" for any other sum
+
+### Constraints:
+- Each dice face value will be between 1 and 6, inclusive.
+- No more than 100 dice rolls need to be evaluated.
+
+### Examples:
+- Given the input `[(3, 4), (1, 1), (5, 6), (2, 5)]`, the output should be `['Win', 'Lose', 'Win', 'Win']`.
+- For the input `[(2, 2), (4, 3), (6, 6), (4, 5)]`, the output should be `['Neutral', 'Win', 'Lose', 'Win']`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import dice_game
+
+def test_dice_game_win_conditions():
+    assert dice_game([(3, 4), (5, 6)]) == ['Win', 'Win']
+
+
+def test_dice_game_lose_conditions():
+    assert dice_game([(1, 1), (1, 2), (6, 6)]) == ['Lose', 'Lose', 'Lose']
+
+
+def test_dice_game_neutral_conditions():
+    assert dice_game([(2, 2), (3, 4), (4, 5)]) == ['Neutral', 'Win', 'Win']
+
+
+def test_dice_game_mixed_conditions():
+    assert dice_game([(3, 3), (2, 2), (5, 6), (1, 3)]) == ['Neutral', 'Neutral', 'Win', 'Neutral']
+
+
+def test_dice_game_edge_case_empty_list():
+    assert dice_game([]) == []
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

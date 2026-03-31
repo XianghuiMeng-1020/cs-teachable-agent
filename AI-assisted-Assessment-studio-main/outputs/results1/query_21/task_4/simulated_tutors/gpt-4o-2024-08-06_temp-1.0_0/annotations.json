@@ -1,0 +1,4 @@
+{
+    "program": "# Solution to the task:\n\nclass Player:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def add_score(self, points):\n        self.score += points\n\n    def get_details(self):\n        return f\"Name: {self.name}, Score: {self.score}\"\n\n\ndef read_players_from_file(filename):\n    players = []\n    with open(filename, \"r\") as file:\n        for line in file:\n            name, score = line.strip().split(\",\")\n            score = int(score) + 2  # Increment score by 2 during creation\n            player = Player(name, score)\n            players.append(player)\n    return players\n",
+    "context_relevance": 1.0
+}

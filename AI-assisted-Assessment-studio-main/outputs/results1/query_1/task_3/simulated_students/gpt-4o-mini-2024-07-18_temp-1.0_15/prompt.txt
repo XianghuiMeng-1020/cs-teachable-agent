@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In this task, you'll implement a simplified game called 'Dice-A-Roll', where one player rolls a virtual six-sided die and attempts to reach a target score. The game involves simulating the roll of a die and checking if the player reaches or surpasses a target score with a series of dice rolls. You will write a function `dice_game(target_score, rolls)` that determines if the player reached or exceeded the target score based on a list of dice rolls. The outcome is 'WIN' if the player reaches or surpasses the target score and 'LOSE' otherwise.
+
+### Function Signature
+```python
+def dice_game(target_score, rolls):
+    pass
+```
+
+### Parameters
+- `target_score` (int): The score the player needs to reach or exceed to win.
+- `rolls` (list of int): A list representing the result of each die roll.
+
+### Returns
+- A string: 'WIN' if the player reaches or exceeds the target score, 'LOSE' otherwise.
+
+### Constraints
+- You may assume that `target_score` is a positive integer and `rolls` contains integers between 1 and 6 inclusive.
+- `rolls` will contain at least one roll.
+
+### Test Cases
+You will write test cases using Pytest to validate the implementation of the function. The goal is to ensure the function correctly determines the outcome of the game based on different roll scenarios and target scores.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,22 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Design a simple Python program to track and manage scores for players of a board game. The board game tracks player scores through a system of rounds, each consisting of 2 scores per player. You are required to implement a class called `GameBoard` with the following functionalities:
+
+1. Initialize the game board using a file input. The file will contain the names of all players, one per line.
+
+2. Implement a method `add_round_scores(player_name, round1_score, round2_score)` that allows adding two scores for a player. If the player does not exist, the method should ignore the scores.
+
+3. Implement a method `get_total_score(player_name)` that returns the total score of the given player.
+
+4. Implement a method `get_winner()` which returns the name of the player with the highest total score. If there is a tie, return any one of the players with the highest score.
+
+5. Implement a method `write_scores_to_file(output_file)` which saves each player's total score in the specified output file, with each line formatted as "{player_name}: {total_score}".
+
+Feel free to test your program with different test cases to verify that all functionalities are working as expected.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

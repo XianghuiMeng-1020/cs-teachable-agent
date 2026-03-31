@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_multiple_recipes_same_name _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:25: AssertionError: assert 'Pasta\nTomat...Tomato\n2\n\n' == 'Pasta\nTomat...\nTomato\n2\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:41: AssertionError: assert '\n\n\n' == ''
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:51: AssertionError: assert '' == 'Bread\nFlour\n2\nWater\n1\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:61: AssertionError: assert 'Pie\nApple\n...nSugar\n2\n\n' == 'Pie\nApple\n...4\nSugar\n2\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_basic_sorting
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_empty_file
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_single_recipe
+FAILED outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_multiple_recipes_same_name
+ERROR outputs/results1/query_12/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_multiple_recipes_same_name
+===================== 4 failed, 1 passed, 1 error in 0.16s =====================

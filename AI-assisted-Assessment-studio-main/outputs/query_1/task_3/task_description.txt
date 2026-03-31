@@ -1,0 +1,24 @@
+**Task: Valhalla Warriors Calculation**
+
+In Norse mythology, warriors who die in combat are taken to Valhalla, where they become einherjar and train for the events of Ragnarok. We're interested in creating a program to keep track of these warriors and award them based on their achievements.
+
+Write a function `calculate_awards(warrior_achievements)` that takes a list of integers, `warrior_achievements`, where each integer represents the number of successful combats a warrior has won. You need to determine the award tier for each warrior based on their achievements.
+
+Tier Calculation:
+- If a warrior has won 0 combats, they receive the title 'Novice'.
+- If a warrior has won between 1 to 5 combats, they receive the title 'Adept'.
+- If a warrior has won between 6 to 10 combats, they receive the title 'Veteran'.
+- If a warrior has won more than 10 combats, they receive the title 'Elite'.
+
+The function should return a list of strings representing these titles corresponding to each input element.
+
+**Example:**
+
+```python
+warrior_achievements = [0, 2, 7, 4, 11]
+
+calculate_awards(warrior_achievements)
+# Output: ['Novice', 'Adept', 'Veteran', 'Adept', 'Elite']
+```
+
+Ensure your solution handles empty lists and odd distributions of achievements test cases.

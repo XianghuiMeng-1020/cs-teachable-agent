@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py . [ 10%]
+.F..F...FE                                                               [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_remove_nonexistent_tale[test_myths/phoenix_tale.txt-Phoenix Tale] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'myth_archive/Dragon Tale'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:36: AssertionError: assert 'Minotaur Tal... labyrinth...' == 'In the winding labyrinth...'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:51: AssertionError: assert 'Minotaur Tale' not in ['Minotaur Tale', 'Phoenix Tale', '._Phoenix Tale']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:69: AssertionError: assert 'Phoenix Tale' in ['Dragon Tale', '._Dragon Tale']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_add_and_get_tale[test_myths/minotaur_tale.txt-Minotaur Tale-In the winding labyrinth...]
+FAILED outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_remove_tale
+FAILED outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_remove_nonexistent_tale[test_myths/phoenix_tale.txt-Phoenix Tale]
+ERROR outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_remove_nonexistent_tale[test_myths/phoenix_tale.txt-Phoenix Tale]
+===================== 3 failed, 7 passed, 1 error in 0.20s =====================

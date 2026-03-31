@@ -1,0 +1,52 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+In this task, you will create a program that simulates a simple 'Game of Chance'. The task is to calculate the total score for several rounds of a guessing game based on input from a file. Each line in the file represents a round of the game and consists of two values separated by a comma: the player's guess and the actual outcome of the game. The score for each round is determined as follows:
+
+- For each round:
+  - If the player's guess matches the actual outcome, award 100 points.
+  - If the player's guess is off by 1, award 50 points.
+  - If the player's guess is off by 2, award 20 points.
+  - Otherwise, award 0 points.
+
+You need to implement the following function:
+
+`calculate_total_score(filename)`
+
+- **Parameters:**
+  - `filename`: A string representing the name of the file containing the game rounds.
+- **Returns:**
+  - An integer representing the total score across all rounds in the file.
+
+### Input File Format
+The input file may contain several lines, each in the format:
+```
+5,6
+3,3
+2,1
+7,9
+```
+Each line includes a player's guess (an integer from 0 to 9) and the actual outcome (an integer from 0 to 9).
+
+### Examples
+1. Given a file `game_scores.txt` with lines:
+  ```
+  5,6
+  3,3
+  2,1
+  7,9
+  ```
+  - The function call `calculate_total_score('game_scores.txt')` should return `170` because:
+    - First line score: 50 (off by 1)
+    - Second line score: 100 (exact match)
+    - Third line score: 50 (off by 1)
+    - Fourth line score: 20 (off by 2)
+
+Ensure your solution properly handles file I/O and adheres to the given specifications.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,5 @@
+In a distant future, humanity is exploring the galaxy and has developed a system to communicate with extraterrestrial species using a universal identification code called the "Galactic ID". Each Galactic ID is a string of characters containing numbers and letters. The goal is to check the uniqueness of these IDs as new IDs are encountered in communication logs.
+
+Write a function `is_all_ids_unique(file_path)` that takes a string `file_path` which is the path to a text file. Each line in the text file contains one Galactic ID. The function should read the Galactic IDs from the file, check if all IDs are unique, and return True if they are unique, or False otherwise.
+
+File reading is involved, so the function should be able to handle large files efficiently. Assume the given file will be well-formatted with each line containing a single ID.

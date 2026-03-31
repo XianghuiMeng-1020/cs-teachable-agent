@@ -1,0 +1,36 @@
+You are a student solving a Parsons problem in a Python programming course.
+Return only a JSON object with key `solution_order`.
+The value of `solution_order` must be a list of block indexes in the order you would arrange them.
+Select exactly 4 blocks.
+Some indexed blocks are distractors and must be excluded from your answer.
+
+Title: Decoding Alien Messages
+Prompt: Rearrange the code blocks to form a function that decodes alien messages using a codebook. Words not found in the codebook should be replaced with 'UNKNOWN'. The decoded message should have words separated by a single space.
+
+Available blocks:
+0:
+decoded_words = ''
+
+1:
+def decode_message(galactic_message, codebook):
+
+2:
+words = galactic_message.split()
+decoded_words = [''] * 0
+
+3:
+return ' '.join(decoded_words)
+
+4:
+for word in words:
+        if word in codebook:
+            decoded_words.append(codebook[word])
+        else:
+            decoded_words.append('UNKNOWN')
+
+5:
+for word in words:
+        if word in codebook:
+            decoded_words.extend(codebook[word])
+        else:
+            decoded_words.append('UNKNOWN')

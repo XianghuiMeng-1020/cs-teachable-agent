@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_no_ingredients ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:18: UnboundLocalError: local variable 'ingredients' referenced before assignment
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'different_structure.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:18: UnboundLocalError: local variable 'ingredients' referenced before assignment
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:122: AssertionError: assert {} == {'Big Feast':... and pepper']}
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:18: UnboundLocalError: local variable 'ingredients' referenced before assignment
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_single_recipe
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_different_structure_order
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_multiple_recipes
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_large_recipe
+FAILED outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_no_ingredients
+ERROR outputs/query_2/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_no_ingredients
+========================== 5 failed, 1 error in 0.11s ==========================

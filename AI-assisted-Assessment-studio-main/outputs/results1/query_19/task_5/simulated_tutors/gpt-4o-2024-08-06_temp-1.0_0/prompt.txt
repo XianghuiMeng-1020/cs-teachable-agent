@@ -1,0 +1,14 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+As a software engineer in a science fiction research lab, your task is to develop a Python function `analyze_data(filename)` that processes text files containing information about various alien species discovered in the galaxy. Each line in the file consists of a species name, followed by their estimated population, separated by a comma. Your function should perform the following tasks:\n\n1. Read the data from the provided file.\n2. Compute the total number of species and the total population from the data.\n3. Output the results as a tuple: (total_species, total_population).\n4. In the event of any file errors, such as the file not existing or being unreadable, your function should return the tuple (0, 0).\n\nTest your implementation thoroughly using the test cases provided.
+### End of task description
+
+### Beginning of test suite
+import pytest\nimport os\nfrom solution import analyze_data\n\n\ndef setup_module(module):\n    with open('test1.txt', 'w') as f:\n        f.write('Martians,1000\nVenusians,2000\nPlutonians,3000')\n    with open('test2.txt', 'w') as f:\n        f.write('Klingons,500\nFerengi,800\nVulcans,1200\nBorg,5000')\n    with open('empty.txt', 'w') as f:\n        pass\n\ndef teardown_module(module):\n    os.remove('test1.txt')\n    os.remove('test2.txt')\n    os.remove('empty.txt')\n\n\ndef test_file_with_species():\n    assert analyze_data('test1.txt') == (3, 6000)\n\ndef test_another_file_with_species():\n    assert analyze_data('test2.txt') == (4, 7500)\n\ndef test_empty_file():\n    assert analyze_data('empty.txt') == (0, 0)\n\ndef test_missing_file():\n    assert analyze_data('nonexistent.txt') == (0, 0)\n\ndef test_corrupt_file():\n    with open('corrupt.txt', 'w') as f:\n        f.write('This is not a valid data format')\n    try:\n        assert analyze_data('corrupt.txt') == (0, 0)\n    finally:\n        os.remove('corrupt.txt')\n
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

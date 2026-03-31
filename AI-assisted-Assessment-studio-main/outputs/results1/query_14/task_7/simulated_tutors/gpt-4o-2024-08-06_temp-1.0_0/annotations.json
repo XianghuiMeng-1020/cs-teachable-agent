@@ -1,0 +1,4 @@
+{
+    "program": "def recipe_calculator(recipe, multiplier):\n    updated_recipe = {}\n    for ingredient, quantity in recipe.items():\n        # Split quantity from unit\n        parts = quantity.split(\" \", 1)\n        numerical_quantity, unit = parts[0], parts[1]\n        # Multiply and round\n        new_quantity = round(int(numerical_quantity) * multiplier)\n        # Formulate new entry\n        updated_recipe[ingredient] = f\"{new_quantity} {unit}\"\n    return updated_recipe\n",
+    "context_relevance": 1.0
+}

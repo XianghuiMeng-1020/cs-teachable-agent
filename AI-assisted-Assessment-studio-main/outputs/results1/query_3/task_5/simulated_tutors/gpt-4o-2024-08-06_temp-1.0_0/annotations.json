@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\n\ndef balance_predictor(bets, initial_balance, outcome_probabilities):\n    balance = initial_balance\n    for bet in bets:\n        probability, multiplier = outcome_probabilities[bet]\n        # Simulate outcome\n        dice_roll = random.randint(1, 100)\n        if dice_roll <= probability:  # Player wins\n            balance += 100 * multiplier\n        else:  # Player loses\n            balance -= 100\n    return balance\n\n# Example Usage\nif __name__ == \"__main__\":\n    bets = ['A', 'B', 'D']\n    initial_balance = 1000\n    probabilities = {\n        'A': (50, 2),\n        'B': (25, 3),\n        'C': (75, 1.5),\n        'D': (10, 5)\n    }\n    result = balance_predictor(bets, initial_balance, probabilities)\n    print(\"Final balance:\", result)",
+    "context_relevance": 1.0
+}

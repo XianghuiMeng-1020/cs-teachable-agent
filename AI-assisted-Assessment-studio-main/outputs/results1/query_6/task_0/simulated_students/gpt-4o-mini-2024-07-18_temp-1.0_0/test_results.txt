@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+________________ ERROR at teardown of test_append_after_loading ________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:40: FileNotFoundError: [Errno 2] No such file or directory: 'output_creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/solution_program.py:27: FileNotFoundError: [Errno 2] No such file or directory: 'test_creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/solution_program.py:27: FileNotFoundError: [Errno 2] No such file or directory: 'test_creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_save_to_file
+FAILED outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_load_from_file
+FAILED outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_append_after_loading
+ERROR outputs/results1/query_6/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_append_after_loading
+===================== 3 failed, 2 passed, 1 error in 0.16s =====================

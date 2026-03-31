@@ -1,0 +1,17 @@
+class ScoreCard:
+    def __init__(self, players):
+        self.scores = {player: 0 for player in players}
+        self.order = list(players)
+
+    def add_score(self, player, points):
+        if player in self.scores:
+            self.scores[player] += points
+
+    def get_score(self, player):
+        return self.scores.get(player, None)
+
+    def get_winner(self):
+        max_score = max(self.scores.values())
+        for player in self.order:
+            if self.scores[player] == max_score:
+                return player

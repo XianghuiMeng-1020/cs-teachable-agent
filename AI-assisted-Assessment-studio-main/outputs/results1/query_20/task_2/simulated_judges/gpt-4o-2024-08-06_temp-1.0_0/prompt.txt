@@ -1,0 +1,51 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Strings']:
+
+### Beginning of task description
+Create a function `chess_game_outcome(score_player1, score_player2, player1_name, player2_name)` that determines the outcome of a chess match given the scores of two players and their names. The function will take four arguments:
+
+1. `score_player1`: an integer representing the score of player1.
+2. `score_player2`: an integer representing the score of player2.
+3. `player1_name`: a string containing the name of player1.
+4. `player2_name`: a string containing the name of player2.
+
+The function should return a string as follows:
+- If player1's score is greater than player2's, return "[player1_name] is victorious!"
+- If player2's score is greater than player1's, return "[player2_name] is victorious!"
+- If both scores are equal, return "The game is a draw!"
+
+Ensure only standard arithmetic operations and comparisons are used to determine the outcome, and concatenation is used to form the result strings.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import chess_game_outcome
+
+@pytest.mark.parametrize("score_player1, score_player2, player1_name, player2_name, expected", [
+    (3, 2, "Alice", "Bob", "Alice is victorious!"),
+    (1, 4, "Carlos", "Diana", "Diana is victorious!"),
+    (5, 5, "Eve", "Frank", "The game is a draw!"),
+    (0, 0, "George", "Helen", "The game is a draw!"),
+    (10, 9, "Ian", "Judy", "Ian is victorious!")
+])
+def test_chess_game_outcome(score_player1, score_player2, player1_name, player2_name, expected):
+    assert chess_game_outcome(score_player1, score_player2, player1_name, player2_name) == expected
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_module():
+    print("Setup for module executed.")
+    
+@pytest.fixture(scope="module", autouse=True)
+def teardown_module():
+    print("Teardown for module executed.")
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

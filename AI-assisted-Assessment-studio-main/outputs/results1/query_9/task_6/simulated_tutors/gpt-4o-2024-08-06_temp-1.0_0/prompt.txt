@@ -1,0 +1,97 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Lists', 'Dictionaries', 'Loops']:
+
+### Beginning of task description
+You are tasked to create a function `mythological_creatures_info(creatures)` that processes a list of mythical creatures. Each mythical creature comes with a description that describes its attributes in a dictionary format. The keys in this dictionary can include 'type', 'origin', and 'strength'.
+
+The function should return a dictionary where the keys are the names of the creatures, and the values are another dictionary containing two keys:
+1. 'origin': the origin location of the creature.
+2. 'type_strength': a list where each element is a formatted string combining the type and strength of the creature, in the format "{type}: {strength}".
+
+If a creature does not have the 'strength' key, it should be assumed to have the strength "unknown".
+
+The list of creatures can be represented as follows:
+- creatures: A list of dictionaries, each with the following format:
+  ```
+  {
+    'name': <creature_name>,
+    'attributes': {
+      'type': <type>,
+      'origin': <origin>,
+      'strength': <strength>  # optional
+    }
+  }
+  ```
+
+- Example input:
+```python
+creatures = [
+  {'name': 'Minotaur', 'attributes': {'type': 'Beast', 'origin': 'Greece', 'strength': 'High'}},
+  {'name': 'Dragon', 'attributes': {'type': 'Reptile', 'origin': 'China'}}
+]
+```
+
+- Expected output:
+```python
+{
+  'Minotaur': {'origin': 'Greece', 'type_strength': ['Beast: High']},
+  'Dragon': {'origin': 'China', 'type_strength': ['Reptile: unknown']}
+}
+```
+
+Write a function to solve the above task.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import mythological_creatures_info
+
+def test_single_creature_with_strength():
+    creatures = [
+        {'name': 'Sphinx', 'attributes': {'type': 'Mystic', 'origin': 'Egypt', 'strength': 'Intelligent'}}
+    ]
+    result = mythological_creatures_info(creatures)
+    assert result == {
+        'Sphinx': {'origin': 'Egypt', 'type_strength': ['Mystic: Intelligent']}
+    }
+
+def test_single_creature_without_strength():
+    creatures = [
+        {'name': 'Phoenix', 'attributes': {'type': 'Bird', 'origin': 'Egypt'}}
+    ]
+    result = mythological_creatures_info(creatures)
+    assert result == {
+        'Phoenix': {'origin': 'Egypt', 'type_strength': ['Bird: unknown']}
+    }
+
+def test_multiple_creatures_mixed_strengths():
+    creatures = [
+        {'name': 'Cyclops', 'attributes': {'type': 'Giant', 'origin': 'Greece', 'strength': 'Very Strong'}},
+        {'name': 'Hydra', 'attributes': {'type': 'Serpent', 'origin': 'Greece'}}
+    ]
+    result = mythological_creatures_info(creatures)
+    assert result == {
+        'Cyclops': {'origin': 'Greece', 'type_strength': ['Giant: Very Strong']},
+        'Hydra': {'origin': 'Greece', 'type_strength': ['Serpent: unknown']}
+    }
+
+def test_empty_list_of_creatures():
+    creatures = []
+    result = mythological_creatures_info(creatures)
+    assert result == {}
+
+def test_no_attributes_key_creature():
+    creatures = [
+        {'name': 'Harpy', 'attributes': {}}
+    ]
+    result = mythological_creatures_info(creatures)
+    assert result == {
+        'Harpy': {'origin': None, 'type_strength': [None]}
+    }
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

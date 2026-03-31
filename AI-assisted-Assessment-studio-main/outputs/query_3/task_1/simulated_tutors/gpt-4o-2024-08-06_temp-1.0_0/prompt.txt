@@ -1,0 +1,87 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+### Task Description
+In a futuristic interstellar society, space stations are assigned numbers indicating their position along the cosmic trail. The numbers are sequenced such that `Even` numbered stations belong to the alien Teklar species, while `Odd` numbered stations are inhabited by humans. The task is to create a function `sort_space_stations(stations)` that takes a dictionary of space stations and sorts them based on their numbering.
+
+#### Input:
+- A dictionary `stations` where keys are integers representing the station numbers, and values are strings that specify the station names.
+
+#### Output:
+- A dictionary sorted in ascending order of station numbers, with an additional key component: each station number should be prefixed with `"Human"` or `"Teklar"` based on the even/odd nature of the number.
+
+### Constraints:
+- Station numbers are unique and in the range of 1 to 999.
+
+### Examples
+```python
+example_stations = {3: "Alpha Base", 14: "Gamma Outpost", 1: "Earth Station"}
+
+sort_space_stations(example_stations)
+# Output:
+# {'Human 1': 'Earth Station', 
+#  'Human 3': 'Alpha Base', 
+#  'Teklar 14': 'Gamma Outpost'}
+```
+
+Note:
+- Prefix is `Human` if the station number is odd 
+- Prefix is `Teklar` if the station number is even
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import sort_space_stations
+
+def test_sort_space_stations_basic():
+    example_stations = {3: "Alpha Base", 14: "Gamma Outpost", 1: "Earth Station"}
+    expected_output = {
+        'Human 1': 'Earth Station',
+        'Human 3': 'Alpha Base',
+        'Teklar 14': 'Gamma Outpost'
+    }
+    assert sort_space_stations(example_stations) == expected_output
+
+
+def test_sort_space_stations_cupholder_empty():
+    example_stations = {}
+    expected_output = {}
+    assert sort_space_stations(example_stations) == expected_output
+
+
+def test_sort_space_stations_edge_case():
+    example_stations = {999: "Omega", 2: "Beta"}
+    expected_output = {
+        'Teklar 2': 'Beta',
+        'Human 999': 'Omega'
+    }
+    assert sort_space_stations(example_stations) == expected_output
+
+
+def test_sort_space_stations_same_letter():
+    example_stations = {8: "Alpha", 7: "Beta", 6: "Gamma", 5: "Omega"}
+    expected_output = {
+        'Human 5': 'Omega',
+        'Human 7': 'Beta',
+        'Teklar 6': 'Gamma',
+        'Teklar 8': 'Alpha'
+    }
+    assert sort_space_stations(example_stations) == expected_output
+
+
+def test_sort_space_stations_large_order():
+    example_stations = {101: "Xerxes", 202: "Lunar", 303: "Venus", 404: "Olympus"}
+    expected_output = {
+        'Human 101': 'Xerxes',
+        'Human 303': 'Venus',
+        'Teklar 202': 'Lunar',
+        'Teklar 404': 'Olympus'
+    }
+    assert sort_space_stations(example_stations) == expected_output
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,4 @@
+{
+    "program": "def manage_cookbook(cookbook, operation, recipe):\n    recipe_name, ingredients = recipe\n    if operation == 'add':\n        # Add the recipe only if it doesn't exist\n        if recipe_name not in cookbook:\n            cookbook[recipe_name] = ingredients\n    elif operation == 'update':\n        # Update the recipe if it exists\n        if recipe_name in cookbook:\n            cookbook[recipe_name] = ingredients\n    elif operation == 'delete':\n        # Delete the recipe if it exists\n        if recipe_name in cookbook:\n            del cookbook[recipe_name]\n    return cookbook",
+    "context_relevance": 1.0
+}

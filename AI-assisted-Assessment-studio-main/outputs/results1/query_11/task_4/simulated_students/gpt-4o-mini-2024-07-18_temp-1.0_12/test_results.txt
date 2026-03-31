@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:15: AssertionError: assert ['Sugar:3000g'] == ['Sugar:300g']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:22: AssertionError: assert ['Butter:2000...', 'Eggs:8cs'] == ['Butter:200g..., 'Eggs:8pcs']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:29: AssertionError: assert ['Flour:00g'] == ['Flour:0g']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:36: AssertionError: assert ['Rice:1000000g'] == ['Rice:100000g']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:43: AssertionError: assert ['Yeast:11g'] == ['Yeast:1g']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_single_ingredient_single_serving
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_multiple_ingredients_multiple_servings
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_no_servings
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_large_numbers
+FAILED outputs/results1/query_11/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_single_ingredient_edge_case
+============================== 5 failed in 0.14s ===============================

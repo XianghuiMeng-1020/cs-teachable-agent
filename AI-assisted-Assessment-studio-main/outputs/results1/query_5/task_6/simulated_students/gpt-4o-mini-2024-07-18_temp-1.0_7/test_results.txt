@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py F [ 20%]
+..F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:24: FileNotFoundError: [Errno 2] No such file or directory: 'longest_legend.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:46: AssertionError: assert 1 == 3
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_longest_legend
+FAILED outputs/results1/query_5/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_correct_handling_of_lines
+========================= 2 failed, 3 passed in 0.06s ==========================

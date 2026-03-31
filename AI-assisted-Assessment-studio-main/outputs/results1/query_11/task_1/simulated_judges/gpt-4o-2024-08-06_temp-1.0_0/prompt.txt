@@ -1,0 +1,62 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+As an aspiring chef, you decide to create a simple program to help you manage inventory in your kitchen. The inventory consists of various types of ingredients. Your task is to write a function `check_ingredient_availability(ingredients, required_item, required_quantity)` that will help you determine if there are enough ingredients to prepare a dish.
+
+The function accepts the following parameters:
+- `ingredients`: A list of strings where each string represents the name of an ingredient, followed by a space and its available quantity (as an integer). For example: `['Flour 500', 'Sugar 200', 'Eggs 12']`.
+- `required_item`: A string representing the name of the required ingredient.
+- `required_quantity`: An integer representing the quantity needed for the dish.
+
+The function should return `'Available'` if the ingredient `required_item` is available in the required quantity or more. If the `required_item` is not available in sufficient quantity or does not exist in the inventory, return '`Not Available`'.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import check_ingredient_availability
+
+def test_available_case():
+    ingredients = ['Flour 1000', 'Sugar 500', 'Eggs 24']
+    required_item = 'Sugar'
+    required_quantity = 400
+    result = check_ingredient_availability(ingredients, required_item, required_quantity)
+    assert result == 'Available'
+
+def test_not_enough_quantity():
+    ingredients = ['Flour 1000', 'Sugar 500', 'Eggs 24']
+    required_item = 'Sugar'
+    required_quantity = 600
+    result = check_ingredient_availability(ingredients, required_item, required_quantity)
+    assert result == 'Not Available'
+
+def test_item_not_in_list():
+    ingredients = ['Flour 1000', 'Sugar 500', 'Eggs 24']
+    required_item = 'Milk'
+    required_quantity = 2
+    result = check_ingredient_availability(ingredients, required_item, required_quantity)
+    assert result == 'Not Available'
+
+def test_exact_quantity():
+    ingredients = ['Flour 1000', 'Sugar 500', 'Eggs 24']
+    required_item = 'Eggs'
+    required_quantity = 24
+    result = check_ingredient_availability(ingredients, required_item, required_quantity)
+    assert result == 'Available'
+
+def test_zero_quantity_needed():
+    ingredients = ['Flour 1000', 'Sugar 500', 'Eggs 24']
+    required_item = 'Flour'
+    required_quantity = 0
+    result = check_ingredient_availability(ingredients, required_item, required_quantity)
+    assert result == 'Available'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

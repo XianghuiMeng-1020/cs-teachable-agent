@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with writing a Python function to help a chef prepare for dinner by determining the total cost of the ingredients needed for a list of recipes. 
+
+Write a function `calculate_total_cost(recipe_ingredients, ingredient_prices)` that takes in two parameters:
+- `recipe_ingredients`: a list of strings, where each string contains the ingredients for one recipe separated by commas. Each ingredient is in the format `ingredient_name:quantity`, where `quantity` is an integer denoting how many units of that ingredient are needed.
+- `ingredient_prices`: a list of strings, where each string is in the format `ingredient_name:price`, where `price` is a float indicating the price per unit of that ingredient.
+
+The function should return the total cost as a float, which is the sum of the cost of all ingredients for all recipes.
+
+You can expect the `ingredient_prices` list to include an entry for every ingredient mentioned in `recipe_ingredients`. Ingredients will not appear multiple times in a single recipe entry, and all quantities and prices will be positive.
+
+The function should handle the following:
+- Calculate the cost of ingredients for each recipe.
+- Accumulate the costs into a total sum.
+
+The costs should be calculated using basic arithmetic, string manipulation, and list operations. No additional libraries are allowed.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

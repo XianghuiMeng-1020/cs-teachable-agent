@@ -1,0 +1,4 @@
+{
+    "program": "import os\n\ndef calculate_score(input_file):\n    total_score = 0\n    with open(input_file, 'r') as file:\n        for line in file:\n            roll = int(line.strip())\n            if roll == 6:\n                score = 0\n            elif roll % 2 == 0:  # Even number\n                score = roll * 2\n            else:  # Odd number\n                score = roll * 3\n            total_score += score\n    with open('score.txt', 'w') as file:\n        file.write(f\"{total_score}\")\n\n# The main execution does not need to be invoked explicitly here,\n# as this code setup is for the function to be imported and tested separately.",
+    "context_relevance": 1.0
+}

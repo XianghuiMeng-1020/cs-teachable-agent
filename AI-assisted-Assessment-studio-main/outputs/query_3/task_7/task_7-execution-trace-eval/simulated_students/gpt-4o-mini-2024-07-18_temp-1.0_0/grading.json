@@ -1,0 +1,15 @@
+{
+  "answers": {
+    "checkpoint_1": "['QXZ', 'BFO', 'GAO']",
+    "checkpoint_2": "[]",
+    "checkpoint_3": "'QXZ'",
+    "checkpoint_4": "['hello']"
+  },
+  "is_correct": true,
+  "correct_answers": {
+    "checkpoint_1": "['QXZ', 'BFO', 'GAO']",
+    "checkpoint_2": "[]",
+    "checkpoint_3": "'QXZ'",
+    "checkpoint_4": "['hello']"
+  }
+}

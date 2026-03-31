@@ -127,7 +127,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
 
   const getEdgeColor = (type: string) => {
     const colors: Record<string, string> = {
-      prerequisite: "#6366f1",
+      prerequisite: "#0D9488",
       dependent: "#8b5cf6",
       similar: "#10b981",
       contrast: "#ef4444",
@@ -140,21 +140,21 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
   return (
     <Card padding="none" className={className}>
       {/* Header */}
-      <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+      <div className="p-4 border-b border-stone-200 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-indigo-100 rounded-lg">
             <Network className="w-5 h-5 text-indigo-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900">概念关系图谱</h3>
-            <p className="text-sm text-slate-500">AI自动发现的概念联系</p>
+            <h3 className="font-semibold text-stone-900">概念关系图谱</h3>
+            <p className="text-sm text-stone-500">AI自动发现的概念联系</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={handleZoomOut}>
             <ZoomOut className="w-4 h-4" />
           </Button>
-          <span className="text-sm text-slate-600 min-w-[3rem] text-center">
+          <span className="text-sm text-stone-600 min-w-[3rem] text-center">
             {Math.round(zoom * 100)}%
           </span>
           <Button variant="ghost" size="sm" onClick={handleZoomIn}>
@@ -168,7 +168,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
 
       {/* Graph Area */}
       <div 
-        className="relative h-96 bg-slate-50 overflow-hidden cursor-grab active:cursor-grabbing"
+        className="relative h-96 bg-stone-50 overflow-hidden cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -182,7 +182,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
             >
               <GitBranch className="w-8 h-8 text-indigo-500" />
             </motion.div>
-            <span className="ml-3 text-slate-600">构建概念图谱中...</span>
+            <span className="ml-3 text-stone-600">构建概念图谱中...</span>
           </div>
         ) : graphData ? (
           <svg
@@ -225,7 +225,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
                 refY="3.5"
                 orient="auto"
               >
-                <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" opacity="0.6" />
+                <polygon points="0 0, 10 3.5, 0 7" fill="#0D9488" opacity="0.6" />
               </marker>
             </defs>
 
@@ -239,7 +239,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
               >
                 <circle
                   r={20 + node.centrality * 3}
-                  fill={selectedNode === node.id ? "#6366f1" : "#fff"}
+                  fill={selectedNode === node.id ? "#0D9488" : "#fff"}
                   stroke={selectedNode === node.id ? "#4f46e5" : "#cbd5e1"}
                   strokeWidth={2}
                   className="transition-all duration-200"
@@ -270,10 +270,10 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
 
         {/* Legend */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur rounded-lg p-3 shadow-lg">
-          <p className="text-xs font-medium text-slate-700 mb-2">关系类型</p>
+          <p className="text-xs font-medium text-stone-700 mb-2">关系类型</p>
           <div className="space-y-1">
             {[
-              { type: "prerequisite", label: "前置知识", color: "#6366f1" },
+              { type: "prerequisite", label: "前置知识", color: "#0D9488" },
               { type: "similar", label: "相似概念", color: "#10b981" },
               { type: "part_of", label: "组成部分", color: "#f59e0b" },
               { type: "extends", label: "扩展关系", color: "#3b82f6" },
@@ -283,7 +283,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
                   className="w-4 h-0.5 rounded" 
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-xs text-slate-600">{label}</span>
+                <span className="text-xs text-stone-600">{label}</span>
               </div>
             ))}
           </div>
@@ -301,9 +301,9 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
               if (!node) return null;
               return (
                 <>
-                  <h4 className="font-semibold text-slate-900">{node.name}</h4>
-                  <p className="text-sm text-slate-500 mb-2">层级: {node.level}</p>
-                  <div className="text-xs text-slate-600 space-y-1">
+                  <h4 className="font-semibold text-stone-900">{node.name}</h4>
+                  <p className="text-sm text-stone-500 mb-2">层级: {node.level}</p>
+                  <div className="text-xs text-stone-600 space-y-1">
                     <p>连接数: {node.centrality}</p>
                     <p>关联概念:</p>
                     <ul className="pl-4 space-y-0.5">
@@ -313,7 +313,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
                           const otherId = e.source === selectedNode ? e.target : e.source;
                           const other = graphData.nodes.find((n) => n.id === otherId);
                           return (
-                            <li key={i} className="text-slate-500">
+                            <li key={i} className="text-stone-500">
                               • {other?.name} ({e.type === "prerequisite" ? "前置" : "相关"})
                             </li>
                           );
@@ -329,22 +329,22 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
 
       {/* Stats */}
       {!isLoading && graphData && (
-        <div className="grid grid-cols-4 gap-4 p-4 border-t border-slate-200">
+        <div className="grid grid-cols-4 gap-4 p-4 border-t border-stone-200">
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{graphData.nodes.length}</p>
-            <p className="text-xs text-slate-500">概念节点</p>
+            <p className="text-2xl font-bold text-stone-900">{graphData.nodes.length}</p>
+            <p className="text-xs text-stone-500">概念节点</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{graphData.edges.length}</p>
-            <p className="text-xs text-slate-500">关系连接</p>
+            <p className="text-2xl font-bold text-stone-900">{graphData.edges.length}</p>
+            <p className="text-xs text-stone-500">关系连接</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{data?.clusters.length || 2}</p>
-            <p className="text-xs text-slate-500">概念群组</p>
+            <p className="text-2xl font-bold text-stone-900">{data?.clusters.length || 2}</p>
+            <p className="text-xs text-stone-500">概念群组</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-slate-900">{data?.critical_paths.length || 2}</p>
-            <p className="text-xs text-slate-500">关键路径</p>
+            <p className="text-2xl font-bold text-stone-900">{data?.critical_paths.length || 2}</p>
+            <p className="text-xs text-stone-500">关键路径</p>
           </div>
         </div>
       )}

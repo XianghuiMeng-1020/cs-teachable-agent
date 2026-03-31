@@ -1,0 +1,41 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+Write a Python function named `calculate_ingredients` that calculates the total quantity of each ingredient required based on a given list of recipes. Each recipe is a string consisting of ingredient quantities separated by spaces, formatted as `<quantity>:<ingredient>`. For example, a recipe could look like `"2:egg 3:flour 1:sugar"`.
+
+The function should take a single list of such recipe strings as an input. The output should be a dictionary where the keys are ingredient names and the values are the total quantities required across all recipes.
+
+The function signature is:
+
+```python
+def calculate_ingredients(recipes):
+```
+
+### Constraints
+- Each recipe string is well-formed.
+- Ingredient quantities are positive integers.
+- Any ingredient may appear multiple times in different recipes.
+
+### Example
+If the input is:
+```python
+["2:egg 3:flour 1:sugar", "1:egg 2:sugar 1:flour"]
+```
+
+the output should be:
+```python
+{'egg': 3, 'flour': 4, 'sugar': 3}
+```
+
+The program should only use basic data types and constructs, loops, and exception handling mechanisms where necessary.
+
+### How the program will be tested:
+The function will be tested with a variety of input lists containing different compositions of recipes and ingredients.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

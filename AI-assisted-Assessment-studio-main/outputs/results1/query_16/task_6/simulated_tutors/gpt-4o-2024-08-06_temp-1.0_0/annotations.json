@@ -1,0 +1,4 @@
+{
+    "program": "class Spaceship:\n    def __init__(self, fuel_level=100.0, hyperdrive_multiplier=1.0):\n        if fuel_level < 0:\n            raise ValueError(\"Fuel level must be non-negative\")\n        if hyperdrive_multiplier <= 0:\n            raise ValueError(\"Hyperdrive multiplier must be positive\")\n        self.fuel_level = fuel_level\n        self.hyperdrive_multiplier = hyperdrive_multiplier\n\n    def calculate_travel_time(self, distance):\n        if distance <= 0:\n            raise ValueError(\"Distance must be positive\")\n        fuel_efficiency = self.fuel_level / 100.0\n        time = distance / (self.hyperdrive_multiplier * fuel_efficiency)\n        return time\n\n# Example usage\n# ship = Spaceship(100.0, 2.0)\n# travel_time = ship.calculate_travel_time(100.0)\n# print(travel_time)  # Should output: 50.0",
+    "context_relevance": 0.0
+}

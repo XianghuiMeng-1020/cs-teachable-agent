@@ -1,0 +1,4 @@
+{
+    "program": "def lottery_stub_generator(input_file, output_file):\n    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:\n        for line in infile:\n            line = line.strip()\n            if not line:\n                continue\n\n            parts = line.split(',')\n            if len(parts) != 3:\n                continue\n\n            name, chosen_number, age = parts\n            try:\n                chosen_number = int(chosen_number)\n                age = int(age)\n            except ValueError:\n                continue\n\n            total = (chosen_number + age) * 2\n            result = \"WIN\" if total % 5 == 0 else \"LOSE\"\n            \n            outfile.write(f\"{name},{chosen_number},{age},{result}\\n\")",
+    "context_relevance": 1.0
+}

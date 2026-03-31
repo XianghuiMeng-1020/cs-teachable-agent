@@ -1,0 +1,4 @@
+{
+    "program": "def game_of_chance(input_file, ticket_number, draw_number):\n    with open(input_file, 'r') as file:\n        tickets = file.read().splitlines()\n    \n    if ticket_number in tickets:\n        if len(ticket_number) > len(draw_number):\n            return \"JACKPOT\"\n        elif len(ticket_number) == len(draw_number):\n            return \"WIN\"\n        else:\n            return \"NO WIN\"\n    else:\n        return \"TICKET NOT FOUND\"",
+    "context_relevance": 0.0
+}

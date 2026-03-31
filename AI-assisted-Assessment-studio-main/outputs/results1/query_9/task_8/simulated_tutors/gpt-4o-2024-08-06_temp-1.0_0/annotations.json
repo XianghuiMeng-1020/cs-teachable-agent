@@ -1,0 +1,4 @@
+{
+    "program": "def filter_deities(deities, criteria):\n    min_strength = criteria.get('min_strength', -1)\n    domain = criteria.get('domain', None)\n\n    filtered_names = []\n    for deity in deities:\n        if deity['strength'] >= min_strength:\n            if domain is None or deity['domain'] == domain:\n                filtered_names.append(deity['name'])\n\n    return filtered_names",
+    "context_relevance": 1.0
+}

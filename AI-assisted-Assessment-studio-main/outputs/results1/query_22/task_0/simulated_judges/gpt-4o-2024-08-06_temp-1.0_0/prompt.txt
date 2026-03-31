@@ -1,0 +1,60 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Loops', 'Variables', 'File Handling and I/O', 'Lists']:
+
+### Beginning of task description
+You need to write a Python program for a fictional board game tournament where each game result is recorded in a file. Each line in the file contains the names of two players separated by a space, followed by the result of that game: either 'win' for the first player or 'lose' for the first player (which implies a win for the second player).
+
+Your task is to define a function `calculate_scores(filename)` that reads the game results from this file, calculates the total number of wins for each player, and returns a list of players who have won at least one game, sorted by the number of wins in descending order. If two players have the same number of wins, their names should be sorted alphabetically.
+
+Function signature: `def calculate_scores(filename):`
+
+Here's how the program will be tested:
+1. A file named `tournament.txt` will be provided with multiple lines representing game results.
+2. The `calculate_scores` function will be called with `'tournament.txt'` as the argument.
+3. Your function should return a list of tuples. Each tuple should contain a player's name and their win count.
+
+Here is the format of the file content:
+```
+Alice Bob win
+Charlie Alice lose
+Bob Charlie win
+```
+
+In this example, the function should return `[('Alice', 2), ('Bob', 1), ('Charlie', 0)]`. Players with zero wins should be excluded from the result.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import calculate_scores
+
+filename = "tournament.txt"
+
+def setup_module(module):
+    with open(filename, 'w') as file:
+        file.write("")
+
+def teardown_module(module):
+    os.remove(filename)
+
+@pytest.mark.parametrize("file_contents, expected_result", [
+    ("Alice Bob win\nBob Charlie win\n", [("Alice", 1), ("Bob", 1)]),
+    ("Alice Bob win\nAlice Charlie win\nCharlie Alice lose\n", [("Alice", 3)]),
+    ("Bob Alice win\nAlice Bob win\nCharlie Bob lose\n", [("Bob", 2), ("Alice", 1)]),
+    ("", []),
+    ("Alice Bob win\nBob Alice lose\nCharlie Bob win\n", [("Alice", 2), ("Bob", 1)])
+])
+def test_calculate_scores(file_contents, expected_result):
+    with open(filename, 'w') as file:
+        file.write(file_contents)
+
+    assert calculate_scores(filename) == expected_result
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

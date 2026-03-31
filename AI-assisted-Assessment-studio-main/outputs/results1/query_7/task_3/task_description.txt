@@ -1,0 +1,38 @@
+### Task Description
+
+Create a Python program that reads and processes information from a text file related to Mythology. The file, `mythology.txt`, contains a list of mythical creatures, each on a new line. Each line has the following format: `creature_name:legendary_status` where `creature_name` is the name of the creature and `legendary_status` indicates its status as either 'legendary', 'myth', or 'folklore'.
+
+Your task is to write a function `filter_mythical_creatures(input_filename, output_filename, status)` which will:
+1. Read the content of `mythology.txt`.
+2. Filter out the creatures based on the specified `status`, keeping only those that match the given `status`.
+3. Write the names of these filtered creatures to an output text file specified by `output_filename`, each name on a new line.
+
+**Function Signature**: 
+```python
+filter_mythical_creatures(input_filename, output_filename, status)
+```
+
+**Input:**
+- `input_filename`: A string that is the name of the input file, `mythology.txt`.
+- `output_filename`: A string that will be the name of the output file where results are written.
+- `status`: A string that specifies the status to filter by, which can be either 'legendary', 'myth', or 'folklore'.
+
+**Output:**
+- The function writes the filtered creature names to the specified output file, `output_filename` with each name on a new line.
+
+**Example:**
+Suppose `mythology.txt` contains the following content:
+```
+Minotaur:legendary
+Nessie:myth
+Kraken:legendary
+Bigfoot:folklore
+Phoenix:legendary
+```
+
+Calling `filter_mythical_creatures('mythology.txt', 'filtered_myths.txt', 'legendary')` should result in `filtered_myths.txt` containing:
+```
+Minotaur
+Kraken
+Phoenix
+```

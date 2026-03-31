@@ -1,0 +1,4 @@
+{
+    "program": "def maximize_favor(challenges):\n    # Initialize DP table\n    dp = [0] * 11  # As max difficulty the hero can face is 10\n\n    # Process each challenge\n    for reward, difficulty in challenges:\n        # Update DP table in reverse to prevent reuse of the same challenge\n        for current_difficulty in range(10, difficulty - 1, -1):\n            dp[current_difficulty] = max(dp[current_difficulty], dp[current_difficulty - difficulty] + reward)\n\n    # The maximum achievable reward with the allowed difficulty\n    return dp[10]",
+    "context_relevance": 0.0
+}

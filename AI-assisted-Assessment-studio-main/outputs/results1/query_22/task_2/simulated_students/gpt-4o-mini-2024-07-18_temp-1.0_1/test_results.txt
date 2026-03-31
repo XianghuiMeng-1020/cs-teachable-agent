@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_count_games_with_letter_R ______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:28: AssertionError: assert 5 == 4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_C
+FAILED outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_B
+FAILED outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_M
+FAILED outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_D
+FAILED outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_R
+ERROR outputs/results1/query_22/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_count_games_with_letter_R
+========================== 5 failed, 1 error in 0.14s ==========================

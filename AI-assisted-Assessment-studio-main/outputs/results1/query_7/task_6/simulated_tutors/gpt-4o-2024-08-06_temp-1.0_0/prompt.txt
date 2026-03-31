@@ -1,0 +1,102 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+You have been given a dataset representing mythical creatures from various mythologies. Each record in the dataset is stored in a separate line in the file. Each line contains information in the following format:
+
+`<Name>:<Origin>:<Classification>:<Description>`
+
+- **Name**: The name of the mythical creature (string, no spaces)
+- **Origin**: The culture or mythology that the creature belongs to (string, no spaces)
+- **Classification**: The type or class of the creature (e.g., god, monster, hero) (string, no spaces)
+- **Description**: A brief description of the creature (string, may contain spaces)
+
+Your task is to write a function `filter_mythical_creatures(input_file, output_file, origin)` that reads the given `input_file`, filters the mythical creatures based on the specified `origin`, and writes the result to the `output_file`. The filtered content should maintain the same format and order it was originally in the `input_file` but contain only entries with the specified `Origin`.
+
+#### Example
+Consider the following content in the `input_file`:
+```
+Cerberus:Greek:Monster:A three-headed dog guarding Hades
+Fenrir:Norse:Monster:A giant wolf
+Achilles:Greek:Hero:A hero of the Trojan War
+Thor:Norse:God:The god of thunder
+```
+If the `origin` is `'Greek'`, the resulting content in the `output_file` should be:
+```
+Cerberus:Greek:Monster:A three-headed dog guarding Hades
+Achilles:Greek:Hero:A hero of the Trojan War
+```
+
+### Constraints
+- It is guaranteed that the `input_file` is a text file with each line following the above format.
+- The `origin` parameter is case-sensitive.
+- The `output_file` should only contain lines from the `input_file` that match the specified `origin`.
+- If no creatures match the `origin`, the `output_file` should be empty.
+
+Implement the solution in the function `filter_mythical_creatures(input_file, output_file, origin)`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import filter_mythical_creatures
+
+INPUT_FILE = 'mythical_creatures.txt'
+OUTPUT_FILE = 'filtered_creatures.txt'
+
+
+def setup_module(module):
+    with open(INPUT_FILE, 'w') as file:
+        file.write("""Cerberus:Greek:Monster:A three-headed dog guarding Hades
+Fenrir:Norse:Monster:A giant wolf
+Achilles:Greek:Hero:A hero of the Trojan War
+Thor:Norse:God:The god of thunder
+Rama:Hindu:Hero:The king of Ayodhya
+""")
+
+def teardown_module(module):
+    os.remove(INPUT_FILE)
+    if os.path.exists(OUTPUT_FILE):
+        os.remove(OUTPUT_FILE)
+
+
+def test_filter_by_greek_origin():
+    filter_mythical_creatures(INPUT_FILE, OUTPUT_FILE, 'Greek')
+    with open(OUTPUT_FILE, 'r') as f:
+        content = f.read().strip()
+    assert content == "Cerberus:Greek:Monster:A three-headed dog guarding Hades\nAchilles:Greek:Hero:A hero of the Trojan War"
+
+
+def test_filter_by_norse_origin():
+    filter_mythical_creatures(INPUT_FILE, OUTPUT_FILE, 'Norse')
+    with open(OUTPUT_FILE, 'r') as f:
+        content = f.read().strip()
+    assert content == "Fenrir:Norse:Monster:A giant wolf\nThor:Norse:God:The god of thunder"
+
+
+def test_filter_by_hindu_origin():
+    filter_mythical_creatures(INPUT_FILE, OUTPUT_FILE, 'Hindu')
+    with open(OUTPUT_FILE, 'r') as f:
+        content = f.read().strip()
+    assert content == "Rama:Hindu:Hero:The king of Ayodhya"
+
+
+def test_filter_with_no_match():
+    filter_mythical_creatures(INPUT_FILE, OUTPUT_FILE, 'Egyptian')
+    with open(OUTPUT_FILE, 'r') as f:
+        content = f.read().strip()
+    assert content == ""
+
+
+def test_filter_case_sensitivity():
+    filter_mythical_creatures(INPUT_FILE, OUTPUT_FILE, 'greek')
+    with open(OUTPUT_FILE, 'r') as f:
+        content = f.read().strip()
+    assert content == ""
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

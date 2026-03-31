@@ -1,0 +1,18 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that simulates a basic game of chance lottery drawing. In this game, users have a list of numbers as their ticket, and the program will randomly select a winning set of numbers from a list of possible numbers in a text file. 
+
+You need to write a function `find_winning_tickets(filename, user_tickets)` where:
+- `filename` is a string representing the path to a text file that contains 10 sets of possible winning numbers, each separated by a newline. Each set is a string of 5 space-separated integers ranging from 1 to 50.
+- `user_tickets` is a list of strings, with each string representing a user's ticket and containing 5 space-separated integers ranging from 1 to 50.
+
+The function should return a list of strings where each string is a user's ticket that matches any of the winning sets from the file. If no tickets match, return an empty list.
+
+Make sure to handle file input/output appropriately.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

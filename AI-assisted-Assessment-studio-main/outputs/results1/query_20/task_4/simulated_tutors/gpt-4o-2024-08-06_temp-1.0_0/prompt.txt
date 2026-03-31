@@ -1,0 +1,50 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Strings']:
+
+### Beginning of task description
+Design a function named `board_game_feedback(score)` that takes an integer `score`, representing the player's score in a board game, and returns a string with feedback on their performance. The feedback should be structured as follows:
+
+- If the score is 90 or above, return "You're a board game master!"
+- If the score is between 75 and 89 (inclusive), return "Great job! You're on the way to mastery."
+- If the score is between 50 and 74 (inclusive), return "Good effort. Keep practicing!"
+- If the score is between 25 and 49 (inclusive), return "Not bad, but there's room for improvement."
+- If the score is below 25, return "Needs more practice to improve."
+
+Write clean and efficient code using variables, arithmetic operators, and basic selection statements to implement this functionality.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution_program import board_game_feedback
+
+
+def test_board_game_master():
+    assert board_game_feedback(90) == "You're a board game master!"
+    assert board_game_feedback(95) == "You're a board game master!"
+
+
+def test_great_job():
+    assert board_game_feedback(75) == "Great job! You're on the way to mastery."
+    assert board_game_feedback(80) == "Great job! You're on the way to mastery."
+
+
+def test_good_effort():
+    assert board_game_feedback(50) == "Good effort. Keep practicing!"
+    assert board_game_feedback(60) == "Good effort. Keep practicing!"
+
+
+def test_room_for_improvement():
+    assert board_game_feedback(25) == "Not bad, but there's room for improvement."
+    assert board_game_feedback(40) == "Not bad, but there's room for improvement."
+
+
+def test_needs_more_practice():
+    assert board_game_feedback(0) == "Needs more practice to improve."
+    assert board_game_feedback(20) == "Needs more practice to improve."
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

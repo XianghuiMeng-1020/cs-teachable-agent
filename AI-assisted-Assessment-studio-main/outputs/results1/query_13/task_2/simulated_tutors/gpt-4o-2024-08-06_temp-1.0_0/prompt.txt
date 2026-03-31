@@ -1,0 +1,90 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+Create a function `calculate_total_cost(recipe_data, cost_data)` that accepts two dictionaries `recipe_data` and `cost_data`. The `recipe_data` dictionary contains various recipes, where the key is the name of the dish and the value is a list of ingredients needed with their respective quantities as tuples `(ingredient, quantity)`. The `cost_data` dictionary provides the cost per unit of each ingredient, where the key is the ingredient's name and the value is the cost per unit.
+
+The function should return a new dictionary where each key is the name of a dish from `recipe_data` and the value is the total cost to prepare that dish, according to the ingredients' cost in `cost_data`. If any ingredient in a recipe is not present in `cost_data`, raise a `ValueError` indicating that the cost information is missing for that specific ingredient.
+
+Example:
+```python
+recipe_data = {
+    "Pancake": [("Flour", 2), ("Egg", 3), ("Milk", 1)],
+    "Omelette": [("Egg", 4), ("Milk", 2)]
+}
+cost_data = {
+    "Flour": 0.5,
+    "Egg": 0.2,
+    "Milk": 1.0
+}
+
+result = calculate_total_cost(recipe_data, cost_data)
+# result should be: {'Pancake': 2.6, 'Omelette': 1.4}
+```
+
+Write appropriate exception handling for missing cost data to ensure that the function returns informative error messages.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import calculate_total_cost
+
+setup_module = lambda module: None
+teardown_module = lambda module: None
+
+def test_calculate_total_cost_basic():
+    recipe_data = {
+        "Pancake": [("Flour", 2), ("Egg", 3), ("Milk", 1)],
+        "Omelette": [("Egg", 4), ("Milk", 2)]
+    }
+    cost_data = {
+        "Flour": 0.5,
+        "Egg": 0.2,
+        "Milk": 1.0
+    }
+    expected = {'Pancake': 2.6, 'Omelette': 1.4}
+    assert calculate_total_cost(recipe_data, cost_data) == expected
+
+def test_missing_cost_data_raises_error():
+    recipe_data = {
+        "Salad": [("Lettuce", 1), ("Tomato", 2), ("Cucumber", 1)]
+    }
+    cost_data = {
+        "Lettuce": 1.5,
+        "Tomato": 0.8
+    }
+    with pytest.raises(ValueError, match="Cost information missing for: Cucumber"):
+        calculate_total_cost(recipe_data, cost_data)
+
+def test_partial_cost_data():
+    recipe_data = {
+        "Burger": [("Bun", 2), ("Patty", 1), ("Cheese", 1)]
+    }
+    cost_data = {
+        "Bun": 0.3,
+        "Cheese": 0.5
+    }
+    with pytest.raises(ValueError, match="Cost information missing for: Patty"):
+        calculate_total_cost(recipe_data, cost_data)
+
+def test_empty_recipe_data():
+    recipe_data = {}
+    cost_data = {
+        "Flour": 0.5,
+        "Egg": 0.2,
+        "Milk": 1.0
+    }
+    assert calculate_total_cost(recipe_data, cost_data) == {}
+
+def test_empty_cost_data():
+    recipe_data = {
+        "Bread": [("Flour", 1), ("Water", 1)]
+    }
+    cost_data = {}
+    with pytest.raises(ValueError, match="Cost information missing for: Flour"):
+        calculate_total_cost(recipe_data, cost_data)
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

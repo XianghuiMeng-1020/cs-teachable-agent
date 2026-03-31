@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______ ERROR at teardown of test_another_ticket_match_and_ticket_longer _______
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery_tickets.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery_tickets.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery_tickets.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery_tickets.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery_tickets.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_ticket_match_and_ticket_longer
+FAILED outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_ticket_not_found
+FAILED outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_ticket_match_and_draw_longer
+FAILED outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_another_ticket_match_and_ticket_longer
+ERROR outputs/results1/query_0/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_another_ticket_match_and_ticket_longer
+===================== 4 failed, 1 passed, 1 error in 0.04s =====================

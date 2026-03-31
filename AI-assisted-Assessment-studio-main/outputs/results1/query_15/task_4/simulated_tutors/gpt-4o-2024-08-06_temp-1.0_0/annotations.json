@@ -1,0 +1,4 @@
+{
+    "program": "def count_danger_messages(logs):\n    count = 0\n    for log in logs:  # Loop through each log\n        count += log.count(\"DANGER\")  # Count occurrences of \"DANGER\" in each log string\n    return count\n",
+    "context_relevance": 0.0
+}

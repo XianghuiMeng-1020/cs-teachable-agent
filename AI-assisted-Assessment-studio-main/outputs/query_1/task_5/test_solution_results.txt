@@ -1,0 +1,12 @@
+F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/test_suite_sol.py:8: assert [6] == [8]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/test_suite_sol.py:20: assert [13, 8] == [16, 8]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/test_suite_sol.py:26: assert [25, 17, 18] == [30, 19, 14]
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_5/test_suite_sol.py:32: assert [3] == [6]
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_5/test_suite_sol.py::test_hydra_heads_basic - ass...
+FAILED outputs/query_1/task_5/test_suite_sol.py::test_hydra_heads_multiple_hydras
+FAILED outputs/query_1/task_5/test_suite_sol.py::test_hydra_heads_large_heads_list
+FAILED outputs/query_1/task_5/test_suite_sol.py::test_hydra_heads_no_heads_case
+4 failed, 1 passed in 0.04s

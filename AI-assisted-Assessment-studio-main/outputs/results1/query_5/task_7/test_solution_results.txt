@@ -1,0 +1,6 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_7/test_suite_sol.py:75: AssertionError: assert 'Dragon,14,150.00\n' in ['Dragon,14,278.57\n']
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_7/test_suite_sol.py::test_mythical_creature_stats_4
+1 failed, 4 passed in 0.04s

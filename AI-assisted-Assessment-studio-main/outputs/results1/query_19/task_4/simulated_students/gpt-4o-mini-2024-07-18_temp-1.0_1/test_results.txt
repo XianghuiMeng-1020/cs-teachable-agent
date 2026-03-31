@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:38: assert 3 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:48: assert 3 == 2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:75: FileNotFoundError: [Errno 2] No such file or directory: 'test_output_empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:84: FileNotFoundError: [Errno 2] No such file or directory: 'test_output_no_valid.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_process_records_valid_cases
+FAILED outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_process_records_invalid_dates
+FAILED outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_empty_file
+FAILED outputs/results1/query_19/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_no_valid_records
+========================= 4 failed, 1 passed in 0.16s ==========================

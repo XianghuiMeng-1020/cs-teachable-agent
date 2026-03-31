@@ -1,0 +1,95 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Strings', 'Loops', 'Selection Statements (if/else, etc.)', 'Classes and Objects']:
+
+### Beginning of task description
+You are tasked with simulating part of a board game involving players and their scores. Each player can accumulate points based on their game performance, but only their highest score will be recorded.
+
+Create a Python class called `PlayerScore` that maintains each player's highest score. The class should have the following specification:
+
+1. **Attributes**:
+   - `name`: A string, indicating the player's name.
+   - `highest_score`: An integer that starts at 0, indicating the highest score the player has achieved.
+
+2. **Methods**:
+   - `add_score(score)`: Accepts an integer `score`. If this score is higher than the current `highest_score`, update `highest_score` with this new score.
+   - `get_score()`: Returns the current `highest_score` for the player.
+
+3. **String Representation**:
+   - Implement the `__str__` method, which returns a string containing the player's name and highest score in the format `"Player: <name>, Highest Score: <highest_score>"`.
+
+Write a function `parse_scores(data)` that accepts a string `data` with scores in the format `"Name1:5,Name2:3,Name1:10,Name2:6"`. Use this function to create `PlayerScore` objects for each player and update their highest scores according to the scores in the input string.
+
+Returns a list of `PlayerScore` objects representing each player and their highest score.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import PlayerScore, parse_scores
+
+@pytest.fixture
+def setup_module():
+    # Setup resources needed for test if any
+    yield
+    # Teardown resources if any
+    
+@pytest.fixture
+def teardown_module():
+    # Teardown resources
+    yield
+
+# Test Suite
+
+def test_single_player_multiple_scores():
+    data = "Alice:5,Alice:10,Alice:3"
+    players = parse_scores(data)
+    assert len(players) == 1
+    assert players[0].name == "Alice"
+    assert players[0].get_score() == 10
+
+
+def test_multiple_players_one_score_each():
+    data = "Alice:5,Bob:7,Charlie:3"
+    players = parse_scores(data)
+    assert len(players) == 3
+    alice = next(player for player in players if player.name == "Alice")
+    bob = next(player for player in players if player.name == "Bob")
+    charlie = next(player for player in players if player.name == "Charlie")
+    assert alice.get_score() == 5
+    assert bob.get_score() == 7
+    assert charlie.get_score() == 3
+
+
+def test_multiple_players_with_varying_scores():
+    data = "Alice:5,Bob:7,Alice:15,Bob:3,Charlie:3,Bob:10"
+    players = parse_scores(data)
+    assert len(players) == 3
+    alice = next(player for player in players if player.name == "Alice")
+    bob = next(player for player in players if player.name == "Bob")
+    charlie = next(player for player in players if player.name == "Charlie")
+    assert alice.get_score() == 15
+    assert bob.get_score() == 10
+    assert charlie.get_score() == 3
+
+
+def test_single_player_single_score():
+    data = "Charlie:12"
+    players = parse_scores(data)
+    assert len(players) == 1
+    assert players[0].name == "Charlie"
+    assert players[0].get_score() == 12
+
+
+def test_no_scores():
+    data = ""
+    players = parse_scores(data)
+    assert len(players) == 0
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

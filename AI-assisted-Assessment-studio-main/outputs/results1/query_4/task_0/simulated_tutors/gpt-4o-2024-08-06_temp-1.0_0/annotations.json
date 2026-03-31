@@ -1,0 +1,4 @@
+{
+    "program": "def lucky_dice(outcomes):\n    # Initialize total score and list to hold individual roll scores\n    total_score = 0\n    roll_scores = []\n    \n    # Loop over each outcome tuple in the outcomes list\n    for roll in outcomes:\n        # Calculate the sum of the two dice\n        dice_sum = roll[0] + roll[1]\n\n        # Determine the score based on the sum of the dice\n        if dice_sum in [7, 11]:\n            score = 10\n        elif dice_sum in [2, 3, 12]:\n            score = 5\n        else:\n            score = 0\n\n        # Append the score to the roll_scores list\n        roll_scores.append(score)\n        # Add the score to the total score\n        total_score += score\n\n    # Return the results as a dictionary\n    return {\n        'total_score': total_score,\n        'rolls': roll_scores\n    }",
+    "context_relevance": 1.0
+}

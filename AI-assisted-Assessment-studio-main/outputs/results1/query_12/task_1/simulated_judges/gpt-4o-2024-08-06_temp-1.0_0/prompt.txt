@@ -1,0 +1,133 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['File Handling and I/O', 'Selection Statements (if/else, etc.)', 'Variables', 'Loops']:
+
+### Beginning of task description
+## Task: Recipe Cooking Time Estimator
+
+You have been tasked with creating a Python program that estimates the total cooking time for a list of recipes. Each recipe is stored in a separate text file and contains multiple cooking steps. Each step specifies an action and the time (in minutes) it takes to complete that action. 
+
+Your program should:
+- Read multiple recipe files from the 'recipes/' directory. Each recipe file will be named 'recipeX.txt', where X is a unique integer.
+- Calculate the total cooking time for each recipe, which is the sum of all the step durations in the file.
+- Write the estimated total cooking time of each recipe into 'cooking_times.txt'. Each line of this file should be in the format: 'Recipe X: Y minutes', where X is the recipe number and Y is the total time.
+
+### File Format
+Each recipe file in 'recipes/' directory will have lines formatted as follows:
+```
+Step description - T minutes
+```
+The program should only be concerned with extracting the time 'T'.
+
+### Function Signature
+- `def estimate_cooking_times() -> None`
+
+The function does not take any parameters and should write the results to 'cooking_times.txt'. The output order should match the order of files processed, and your function should be able to handle any number of files in the 'recipes/' directory.
+
+### Example
+Assume 'recipes/recipe1.txt' contains:
+```
+Chop vegetables - 10 minutes
+Boil water - 5 minutes
+Cook pasta - 15 minutes
+```
+
+And 'recipes/recipe2.txt' contains:
+```
+Mix ingredients - 5 minutes
+Bake - 20 minutes
+Cool - 10 minutes
+```
+
+Your program should create 'cooking_times.txt' with:
+```
+Recipe 1: 30 minutes
+Recipe 2: 35 minutes
+```
+
+Note: You may assume the directory and files exist when your program runs.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+
+def setup_module(module):
+    os.makedirs('recipes', exist_ok=True)
+    with open('recipes/recipe1.txt', 'w') as f:
+        f.write("Chop vegetables - 10 minutes\nBoil water - 5 minutes\nCook pasta - 15 minutes\n")
+    with open('recipes/recipe2.txt', 'w') as f:
+        f.write("Mix ingredients - 5 minutes\nBake - 20 minutes\nCool - 10 minutes\n")
+    with open('recipes/recipe3.txt', 'w') as f:
+        f.write("Prepare sauce - 10 minutes\nGrill chicken - 25 minutes\n")
+    with open('recipes/recipe4.txt', 'w') as f:
+        f.write("Steam rice - 15 minutes\nFry vegetables - 10 minutes\n")
+    with open('recipes/recipe5.txt', 'w') as f:
+        f.write("Season soup - 5 minutes\nSimmer - 30 minutes\n")
+
+def teardown_module(module):
+    try:
+        os.remove('cooking_times.txt')
+        os.remove('recipes/recipe1.txt')
+        os.remove('recipes/recipe2.txt')
+        os.remove('recipes/recipe3.txt')
+        os.remove('recipes/recipe4.txt')
+        os.remove('recipes/recipe5.txt')
+        os.rmdir('recipes')
+    except FileNotFoundError:
+        pass
+
+from solution import estimate_cooking_times
+
+def test_estimate_cooking_times():
+    estimate_cooking_times()
+    with open('cooking_times.txt', 'r') as f:
+        lines = f.readlines()
+    assert lines[0].strip() == 'Recipe 1: 30 minutes'
+    assert lines[1].strip() == 'Recipe 2: 35 minutes'
+    assert lines[2].strip() == 'Recipe 3: 35 minutes'
+    assert lines[3].strip() == 'Recipe 4: 25 minutes'
+    assert lines[4].strip() == 'Recipe 5: 35 minutes'
+
+def test_no_recipes_directory():
+    os.rmdir('recipes')
+    estimate_cooking_times()
+    assert os.path.isfile('cooking_times.txt') == False
+    os.makedirs('recipes', exist_ok=True)
+
+def test_empty_recipe_file():
+    with open('recipes/recipe6.txt', 'w') as f:
+        pass
+    estimate_cooking_times()
+    with open('cooking_times.txt', 'r') as f:
+        lines = f.readlines()
+    assert lines[5].strip() == 'Recipe 6: 0 minutes'
+
+    os.remove('recipes/recipe6.txt')
+
+def test_inconsistent_file_names():
+    with open('recipes/my_special_recipe.txt', 'w') as f:
+        f.write("Grill fish - 20 minutes\n")
+    try:
+        estimate_cooking_times()
+        with open('cooking_times.txt', 'r') as f:
+            lines = f.readlines()
+        len_recipes = len([l for l in lines if l.startswith('Recipe')])
+        assert len_recipes == 5  # The count should remain 5 as non-sequential names should be ignored
+    finally:
+        os.remove('recipes/my_special_recipe.txt')
+
+def test_multiple_sessions():
+    estimate_cooking_times()
+    estimate_cooking_times()
+    with open('cooking_times.txt', 'r') as f:
+        lines = f.readlines()
+    assert len(lines) == 5  # Verify no duplication
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

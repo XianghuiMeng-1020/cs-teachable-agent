@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:61: AssertionError: assert 'Quincy' == 'Peter'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+========================= 1 failed, 4 passed in 0.15s ==========================

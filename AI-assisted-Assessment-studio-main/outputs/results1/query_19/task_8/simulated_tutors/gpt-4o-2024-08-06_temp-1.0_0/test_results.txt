@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py _
+ImportError while importing test module '/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:4: in <module>
+    from spaceship_log import log_position, retrieve_positions
+E   ModuleNotFoundError: No module named 'spaceship_log'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+ERROR outputs/results1/query_19/task_8/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.11s ===============================

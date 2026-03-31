@@ -1,0 +1,27 @@
+### Theme: Board Games
+
+**Task**
+
+You are tasked with creating a simplified tracking system for a two-player board game involving points. Players gain various amounts of points as they progress on the board and can also lose some points through specific hurdles.
+
+**Functional Requirements**
+
+Create a function named `calculate_final_scores(game_log)` that takes a dictionary `game_log` as input. This dictionary contains player names as keys and a list of integers representing the player's point changes throughout the game.
+
+- The function should return a dictionary with the players' names as keys and their final scores as values.
+- Calculate the final score of each player by summing up their point changes in the provided list.
+- If a player's score drops below zero at any step, it should be reset to zero for that step and continue to accumulate from there.
+
+**For example:**
+```python
+calculate_final_scores({'Alice': [10, -5, 20, -30, 5], 'Bob': [-10, 20, 15, -5, 10]})
+```
+
+- Result: `{'Alice': 5, 'Bob': 30}`
+
+**Constraints:**
+- The point change integers in the input dictionary can be positive or negative and will be between -100 to 100.
+- Input will always have two players.
+
+### Notes
+- You should not worry about handling any special cases like non-integer values or empty lists, as all inputs will follow the format above.

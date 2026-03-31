@@ -1,0 +1,13 @@
+In the year 2303, humans have discovered a plethora of alien species across the galaxy, each with unique characteristics. Your task is to design a system to manage and access information about these species efficiently using Python.
+
+You will implement a class `AlienRegistry` that has the following methods:
+
+1. `add_species(species_name, characteristics)`: Adds a new alien species with the given name and characteristics to the registry. The `characteristics` parameter is a dictionary where keys are strings representing trait names, and values are the corresponding traits which are also strings.
+
+2. `get_species_info(species_name)`: Returns the characteristics of the given species as a dictionary. If the species does not exist, it should raise a `ValueError` with the message `"Species not found"`.
+
+3. `get_all_species()`: Returns a list of all species names in the registry, sorted in ascending order.
+
+Design your class and methods to manage the existence checks for the species efficiently. The registry should not accept duplicate species names.
+
+To complete this task, you will use lists to manage species names and dictionaries to manage the characteristics of each species. Implement any selection statements and exception handling as necessary to ensure the functionality and robustness of the system.

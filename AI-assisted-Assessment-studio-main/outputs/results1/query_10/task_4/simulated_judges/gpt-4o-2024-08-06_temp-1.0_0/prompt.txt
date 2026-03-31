@@ -1,0 +1,78 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+Create a Python program related to Cooking that manages a list of recipes. 
+
+Your task is to implement a class called `RecipeManager` that interacts with a file named `recipes.txt`. This class should support the following functionalities:
+
+1. **Initialization**: The constructor of the class should attempt to load recipes from `recipes.txt` where each line contains a recipe name. If the file does not exist, the class should handle the exception and start with an empty list of recipes.
+
+2. **Add a Recipe**: Implement a method `add_recipe(self, recipe_name)` that adds a new recipe to the list and writes it to `recipes.txt` if it doesn't already exist in the list (case sensitive check).
+
+3. **Remove a Recipe**: Implement a method `remove_recipe(self, recipe_name)` that removes a recipe from the list and updates `recipes.txt`. If the recipe does not exist, it should handle the situation gracefully without any changes to the file.
+
+4. **List Recipes**: Implement a method `list_recipes(self)` that returns the list of recipes.
+
+Your implementation should handle any exceptions that might occur during file operations.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import RecipeManager
+
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as f:
+        f.write("Pancakes\n" "Omelette\n" "Salad\n")
+
+def teardown_module(module):
+    if os.path.exists('recipes.txt'):
+        os.remove('recipes.txt')
+
+
+def test_initialization_from_file():
+    manager = RecipeManager()
+    assert sorted(manager.list_recipes()) == ['Omelette', 'Pancakes', 'Salad']
+
+
+def test_add_recipe_successful():
+    manager = RecipeManager()
+    manager.add_recipe('Soup')
+    assert sorted(manager.list_recipes()) == ['Omelette', 'Pancakes', 'Salad', 'Soup']
+
+
+def test_add_duplicate_recipe():
+    manager = RecipeManager()
+    manager.add_recipe('Pancakes')
+    assert sorted(manager.list_recipes()) == ['Omelette', 'Pancakes', 'Salad']
+
+
+def test_remove_existing_recipe():
+    manager = RecipeManager()
+    manager.remove_recipe('Salad')
+    assert sorted(manager.list_recipes()) == ['Omelette', 'Pancakes']
+
+
+def test_remove_non_existent_recipe():
+    manager = RecipeManager()
+    manager.remove_recipe('Pizza')
+    assert sorted(manager.list_recipes()) == ['Omelette', 'Pancakes', 'Salad']
+
+
+def test_recipe_persistence():
+    manager = RecipeManager()
+    manager.add_recipe('Pie')
+    manager.remove_recipe('Omelette')
+    manager2 = RecipeManager()  # Re-initialize to see if changes persist
+    assert sorted(manager2.list_recipes()) == ['Pancakes', 'Pie', 'Salad']
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

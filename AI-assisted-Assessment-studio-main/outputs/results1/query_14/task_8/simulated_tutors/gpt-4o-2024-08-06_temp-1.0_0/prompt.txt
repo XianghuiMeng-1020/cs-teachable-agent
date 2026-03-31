@@ -1,0 +1,44 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+Create a function `get_ingredient_quantity(recipe, ingredient)` that takes in two parameters:
+1. `recipe`: a dictionary where keys are ingredient names (strings) and values are the quantities needed (strings), e.g., `{"flour": "2 cups", "sugar": "1 cup"}`.
+2. `ingredient`: a string representing the name of an ingredient.
+
+The function should return a string representing the quantity of the given ingredient in the recipe. If the ingredient is not present in the recipe, the function should return "Ingredient not found".
+
+Function Signature:
+```python
+def get_ingredient_quantity(recipe, ingredient):
+```
+
+### Example
+```python
+get_ingredient_quantity({"flour": "2 cups", "sugar": "1 cup"}, "sugar")  # should return "1 cup"
+get_ingredient_quantity({"flour": "2 cups", "sugar": "1 cup"}, "butter")  # should return "Ingredient not found"
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution_program import get_ingredient_quantity
+
+def test_get_ingredient_quantity():
+    recipe = {"flour": "2 cups", "sugar": "1 cup", "butter": "100g"}
+    assert get_ingredient_quantity(recipe, "sugar") == "1 cup"
+
+    assert get_ingredient_quantity(recipe, "flour") == "2 cups"
+    
+    assert get_ingredient_quantity(recipe, "butter") == "100g"
+
+    assert get_ingredient_quantity(recipe, "salt") == "Ingredient not found"
+
+    assert get_ingredient_quantity({}, "sugar") == "Ingredient not found"
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

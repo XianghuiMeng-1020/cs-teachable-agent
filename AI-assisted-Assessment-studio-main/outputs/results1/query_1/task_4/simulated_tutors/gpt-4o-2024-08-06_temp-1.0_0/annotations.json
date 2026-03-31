@@ -1,0 +1,4 @@
+{
+    "program": "def dice_game(num_rolls, dice_pairs):\n    score = 0\n    scores = []\n    for i in range(num_rolls):\n        d1, d2 = dice_pairs[i]\n        roll_sum = d1 + d2\n        if roll_sum in [7, 11]:\n            score += 10\n        elif roll_sum in [2, 3, 12]:\n            score -= 5\n        # No score change for other sums\n        scores.append(score)\n    return scores\n\n# Example usage:\ndice_pairs = [(1, 6), (6, 6), (1, 1), (6, 5)]\nresult = dice_game(4, dice_pairs)\nprint(result)  # Output should be [10, 5, 0, 10]",
+    "context_relevance": 1.0
+}

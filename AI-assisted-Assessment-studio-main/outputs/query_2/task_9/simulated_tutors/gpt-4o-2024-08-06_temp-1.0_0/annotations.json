@@ -1,0 +1,4 @@
+{
+    "program": "def recipe_ingredients_calculator(file_path):\n    # Read the file and get all lines\n    with open(file_path, 'r') as file:\n        recipes = file.readlines()\n    \n    ingredients_set = set()\n    \n    # Process each line to extract ingredients\n    for recipe in recipes:\n        # Split the recipe name from the ingredients\n        name, ingredients = recipe.split(':')\n        \n        # Split the ingredients by comma and add them to the set\n        ingredients_list = ingredients.strip().split(',')\n        for ingredient in ingredients_list:\n            ingredients_set.add(ingredient.strip())\n    \n    # Convert the set to a sorted list\n    sorted_ingredients = sorted(ingredients_set)\n    \n    return sorted_ingredients",
+    "context_relevance": 1.0
+}

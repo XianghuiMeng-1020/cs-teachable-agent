@@ -1,0 +1,18 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function `recipe_value(recipe, prices)` that calculates the total cost of a cooking recipe based on the amounts of different ingredients and their prices per unit. The function should take two arguments:
+
+1. `recipe`: A list of strings where each string is in the format 'ingredient_name:amount'. Each `ingredient_name` is a string and `amount` is an integer representing the quantity required.
+2. `prices`: A list of strings where each string is in the format 'ingredient_name:price_per_unit'. Each `ingredient_name` is a string and `price_per_unit` is a float representing the price per unit of the ingredient. The `ingredient_name` in `prices` may or may not match the ones in `recipe`.
+
+The function should return a float representing the total cost of the recipe. If any ingredient in the recipe does not have a price listed, its cost should be considered 0.
+
+### Example
+If the `recipe` is ['flour:2', 'sugar:1', 'milk:3'] and `prices` is ['flour:0.5', 'sugar:0.8'], the function should return 1.8 (since milk's cost is considered 0).
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

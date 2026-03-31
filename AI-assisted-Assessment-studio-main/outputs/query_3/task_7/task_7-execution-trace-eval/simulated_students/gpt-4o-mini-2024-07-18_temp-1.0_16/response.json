@@ -1,0 +1,20 @@
+{
+  "answers": [
+    {
+      "checkpoint_id": "checkpoint_1",
+      "observed_value": "['QXZ', 'BFO', 'GAO']"
+    },
+    {
+      "checkpoint_id": "checkpoint_2",
+      "observed_value": "[]"
+    },
+    {
+      "checkpoint_id": "checkpoint_3",
+      "observed_value": "'QXZ'"
+    },
+    {
+      "checkpoint_id": "checkpoint_4",
+      "observed_value": "['hello']"
+    }
+  ]
+}

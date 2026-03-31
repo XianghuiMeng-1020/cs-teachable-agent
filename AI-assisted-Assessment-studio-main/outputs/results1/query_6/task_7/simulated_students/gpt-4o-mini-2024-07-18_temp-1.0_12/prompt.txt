@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python class `MythArchive` that manages a collection of mythological tales stored as text files. Each tale is represented by a file that contains its name on the first line and the tale's content on subsequent lines. Implement the following methods:
+
+1. `add_tale(file_path)` - Adds a new tale from a file specified by `file_path` to the archive. The file's first line contains the name of the tale, and the rest is the tale content.
+
+2. `get_tale(name)` - Returns the content of the tale with the given name as a string. If the tale is not found, return an empty string.
+
+3. `remove_tale(name)` - Removes the tale with the given name from the archive. If the tale is not found, it should have no effect.
+
+4. `list_tales()` - Returns a list of all tale names currently in the archive.
+
+The class should internally manage file storage for these tales in a directory (folder) named `myth_archive`. Ensure that operations correctly reflect changes by interacting with the file system.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

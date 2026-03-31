@@ -1,0 +1,4 @@
+{
+    "program": "def record_scores(filename, players_scores):\n    with open(filename, 'a') as file:\n        current_round = len(get_scores(filename)) + 1\n        for scores in players_scores:\n            scores_str = ' '.join(map(str, scores))\n            file.write(f\"Round {current_round}: {scores_str}\\n\")\n            current_round += 1\n\n\ndef get_scores(filename):\n    with open(filename, 'r') as file:\n        return [line.strip() for line in file.readlines()]",
+    "context_relevance": 1.0
+}

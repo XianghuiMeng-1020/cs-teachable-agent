@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_manage_high_scores[new_scores4-Alice 101\nBob 90\nCharlie 80\n] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'high_scores.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:26: AssertionError: assert '' == 'Alice 100\nB...nCharlie 80\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:7: ValueError: not enough values to unpack (expected 2, got 0)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:26: AssertionError: assert '' == 'Alice 100\nC...90\nDave 85\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:24: FileNotFoundError: [Errno 2] No such file or directory: 'high_scores.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'high_scores.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores0-Alice 100\nBob 95\nCharlie 80\n]
+FAILED outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores1-Alice 100\nBob 90\nCharlie 80\nDave 85\n]
+FAILED outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores2-Alice 100\nCharlie 82\nBob 90\nDave 85\n]
+FAILED outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores3-Alice 100\nBob 90\nCharlie 80\n]
+FAILED outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores4-Alice 101\nBob 90\nCharlie 80\n]
+ERROR outputs/results1/query_22/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_manage_high_scores[new_scores4-Alice 101\nBob 90\nCharlie 80\n]
+========================== 5 failed, 1 error in 0.15s ==========================

@@ -1,0 +1,4 @@
+{
+    "program": "def get_ingredient_quantity(recipe, ingredient):\n    # Check if the ingredient is present in the recipe dictionary\n    if ingredient in recipe:\n        return recipe[ingredient]\n    else:\n        return \"Ingredient not found\"",
+    "context_relevance": 1.0
+}

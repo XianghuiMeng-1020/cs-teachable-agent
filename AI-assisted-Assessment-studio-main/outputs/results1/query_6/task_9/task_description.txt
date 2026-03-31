@@ -1,0 +1,11 @@
+Create a Python class `MythicalLibrary` for managing information about various mythical creatures. The class should provide functionality to:
+
+1. Initialize the class with `mythical_creatures.txt`, a file containing information about mythical creatures in the following format (one creature per line): `CreatureName, Origin, Description`. For example: `Phoenix, Greek, A long-lived bird that cyclically regenerates or is otherwise born again.`
+
+2. Implement a method `get_description(creature_name)` that returns the description of a creature with the given name. If the creature is not found, return "Creature not found".
+
+3. Implement a method `add_creature(creature_name, origin, description)` that adds a new creature to the file and ensures each creature is unique by name (case-insensitive). If a creature with the same name exists, the method should not add it but rather return "Creature already exists".
+
+4. Implement a method `get_creatures_by_origin(origin)` that returns a list of all creature names from the given origin.
+
+Consider that creature names and origins are case-insensitive during lookup and addition. Your implementation should read from and write to `mythical_creatures.txt`. Make sure each function handles file I/O properly.

@@ -1,0 +1,19 @@
+EEEEE                                                                    [100%]
+==================================== ERRORS ====================================
+_____________________ ERROR at setup of test_load_recipes ______________________
+E   NameError: name 'file_path' is not defined
+______________________ ERROR at setup of test_add_recipe _______________________
+E   NameError: name 'file_path' is not defined
+_________________ ERROR at setup of test_find_recipe_existing __________________
+E   NameError: name 'file_path' is not defined
+________________ ERROR at setup of test_find_recipe_nonexistent ________________
+E   NameError: name 'file_path' is not defined
+____________________ ERROR at setup of test_file_not_found _____________________
+E   NameError: name 'file_path' is not defined
+=========================== short test summary info ============================
+ERROR outputs/results1/query_10/task_1/test_suite_sol.py::test_load_recipes
+ERROR outputs/results1/query_10/task_1/test_suite_sol.py::test_add_recipe - N...
+ERROR outputs/results1/query_10/task_1/test_suite_sol.py::test_find_recipe_existing
+ERROR outputs/results1/query_10/task_1/test_suite_sol.py::test_find_recipe_nonexistent
+ERROR outputs/results1/query_10/task_1/test_suite_sol.py::test_file_not_found
+5 errors in 0.03s

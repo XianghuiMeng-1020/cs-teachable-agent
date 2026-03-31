@@ -1,0 +1,45 @@
+## Task Description
+
+Create a function `parse_recipe_ingredients(file_path)` that processes a file containing a list of recipes. Each recipe contains its name and its ingredients, formatted as shown below:
+
+```
+Recipe: Pancakes
+Ingredients:
+- 1 cup flour
+- 2 tablespoons sugar
+- 1 teaspoon baking powder
+- 1/2 teaspoon salt
+- 1 egg
+- 1 cup milk
+- 2 tablespoons melted butter
+
+Recipe: Omelette
+Ingredients:
+- 2 eggs
+- 1/4 cup milk
+- Salt and pepper to taste
+- 1 tablespoon butter
+
+```
+
+The input to the function `parse_recipe_ingredients` is the path to the text file containing the above structure. The function should read the file and return a dictionary where keys are recipe names and values are lists of ingredient strings, like this:
+
+```python
+{
+    "Pancakes": ["1 cup flour", "2 tablespoons sugar", "1 teaspoon baking powder", "1/2 teaspoon salt", "1 egg", "1 cup milk", "2 tablespoons melted butter"],
+    "Omelette": ["2 eggs", "1/4 cup milk", "Salt and pepper to taste", "1 tablespoon butter"]
+}
+```
+
+## Function Signature
+```
+def parse_recipe_ingredients(file_path):
+    pass
+```
+
+The text file will:
+- Always follow the structure shown.
+- Have at least one recipe.
+- End with a new line after the last ingredient of the last recipe.
+
+The program should only use strings, lists, and file handling to accomplish the task.

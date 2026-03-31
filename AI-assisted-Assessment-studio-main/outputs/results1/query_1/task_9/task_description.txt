@@ -1,0 +1,7 @@
+You have been invited to play a simple game of chance called "Lucky Cubes" at a virtual casino. In this game, you roll three dice, each having six sides numbered from 1 to 6. Your task is to write a function `calculate_prize(roll1, roll2, roll3)` that calculates the winnings based on the combination of numbers rolled. The rules for the prize calculation are as follows:
+
+1. If all three dice show the same number (a triple), your prize is the number shown multiplied by 10.
+2. If any two dice show the same number (a double), your prize is the number shown multiplied by 5.
+3. If all numbers are different, your prize is the sum of the numbers rolled.
+
+Your function should return an integer representing the prize. The input to the function consists of three integers `roll1`, `roll2`, and `roll3`, each between 1 and 6 inclusive.

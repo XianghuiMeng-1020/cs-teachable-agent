@@ -1,0 +1,16 @@
+In a distant future, humans have allied with intergalactic robots who speak a unique language. This language is composed of coded messages, each represented by a string of letters. Each character in the message represents a different star system's position, given as an integer coordinate. The language decoder for the robots involves a translation rule, where characters are mapped to predefined integer values signifying these positions. The goal is to create a program that can decode a coded message and calculate the total sum of the coordinate values for any given message.
+
+Create a function `decode_message(code, translation_rules)` that takes two arguments:
+1. `code`: A string representing the coded message.
+2. `translation_rules`: A dictionary where each key is a character from the code and each value is an integer representing the corresponding star system's coordinate.
+
+The function should return an integer representing the total sum of all coordinate values when each character in the `code` is replaced by its corresponding coordinate from the `translation_rules`.
+
+**Example**:
+If the `code` is "ABCAAA" and `translation_rules` is `{'A': 10, 'B': 5, 'C': 2}`, the function should return `39` (i.e., `10 + 5 + 2 + 10 + 10 + 10`). 
+
+**Requirements**:
+- If a character in the `code` does not exist in the `translation_rules`, consider its coordinate as `0`.
+- Assume the input code and translation_rules are both valid and non-empty.
+
+Test your solution with multiple scenarios to ensure reliability.

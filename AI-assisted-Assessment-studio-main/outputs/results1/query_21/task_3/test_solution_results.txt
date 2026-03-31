@@ -1,0 +1,8 @@
+...FF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/test_suite_sol.py:41: AssertionError: assert 'Charlie' == 'Bob'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/test_suite_sol.py:47: AssertionError: assert 'Charlie' == 'Bob'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_3/test_suite_sol.py::test_non_existent_player_update
+FAILED outputs/results1/query_21/task_3/test_suite_sol.py::test_adding_existing_player_ignored
+2 failed, 3 passed in 0.04s

@@ -1,0 +1,10 @@
+FF..F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/test_suite_sol.py:35: AssertionError: assert 'House of Art... Drachmaroons' == 'House of Art... Drachmaroons'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/test_suite_sol.py:48: AssertionError: assert 'House of Pos... Drachmaroons' == 'House of Pos... Drachmaroons'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_8/test_suite_sol.py:84: AssertionError: assert 'House of Tit... Drachmaroons' == 'House of Tit... Drachmaroons'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_8/test_suite_sol.py::test_calculate_wealth_basic
+FAILED outputs/results1/query_5/task_8/test_suite_sol.py::test_calculate_wealth_single_house
+FAILED outputs/results1/query_5/task_8/test_suite_sol.py::test_calculate_wealth_large_numbers
+3 failed, 2 passed in 0.03s

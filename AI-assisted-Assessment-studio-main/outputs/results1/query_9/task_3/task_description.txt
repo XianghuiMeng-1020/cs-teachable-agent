@@ -1,0 +1,30 @@
+In ancient mythology, each god is associated with a collection of items representing their power. You are tasked with writing a function `merge_god_items(gods_list)` that takes a list of dictionaries, where each dictionary represents a god, with the god's name being the key and a list of items as the value.
+
+Your function should return a single dictionary where the keys are item names and the values are lists of all the gods who possess that item. If two or more gods share the same item, the god names should be sorted alphabetically in the list. The input list is guaranteed to contain no duplicate item names within each god's dictionary.
+
+Example:
+
+```python
+input_gods = [
+    {'Zeus': ['thunderbolt', 'eagle']},
+    {'Athena': ['owl', 'shield', 'thunderbolt']},
+    {'Ares': ['spear', 'shield']}
+]
+
+result = merge_god_items(input_gods)
+print(result)
+```
+
+Output:
+
+```
+{
+    'thunderbolt': ['Athena', 'Zeus'],
+    'eagle': ['Zeus'],
+    'owl': ['Athena'],
+    'shield': ['Ares', 'Athena'],
+    'spear': ['Ares']
+}
+```
+
+Your function should handle cases where gods have no items and where some god's items overlap with others.

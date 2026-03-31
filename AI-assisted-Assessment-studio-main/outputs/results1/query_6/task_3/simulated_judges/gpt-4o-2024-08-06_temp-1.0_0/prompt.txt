@@ -1,0 +1,66 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Create a Python class `MythicalCreature` where each instance represents a creature from mythology. Each creature has name, type, origin, and a list of powers. Implement the following methods in this class:
+
+1. `__init__(self, name, creature_type, origin, powers)`: Initializes the creature's name, type, origin, and list of powers.
+2. `describe(self)`: Returns a string description of the creature in the format `'{name} is a {creature_type} from {origin}. Powers: {powers_list}'`. The powers should be formatted as a comma-separated list.
+3. `save_to_file(self, filename)`: Saves the creature's data to a file in the format `name,creature_type,origin,powers`.
+4. `load_from_file(filename)`: Loads creature data from a file and returns a new `MythicalCreature` instance created from the file content. Assume each file contains data for only one creature.
+
+Write test cases to ensure your class and methods are functioning correctly. These tests should include creating instances, describing them, saving to and loading from files. Ensure the naming and format are consistently tested.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythicalCreature
+
+def setup_module(module):
+    with open('test_creature.txt', 'w') as f:
+        f.write('Minotaur,Beast,Greek,Maze Navigation,Immense Strength\n')
+
+def teardown_module(module):
+    os.remove('test_creature.txt')
+
+class TestMythicalCreature:
+    def test_describe(self):
+        creature = MythicalCreature('Pegasus','Horse','Greek',['Flight'])
+        assert creature.describe() == 'Pegasus is a Horse from Greek. Powers: Flight'
+
+    def test_save_to_file(self):
+        creature = MythicalCreature('Cerberus','Beast','Greek',['Guarding','Multiple Heads'])
+        creature.save_to_file('cerberus.txt')
+        with open('cerberus.txt', 'r') as f:
+            data = f.read()
+        assert data == 'Cerberus,Beast,Greek,Guarding,Multiple Heads\n'
+        os.remove('cerberus.txt')
+
+    def test_load_from_file(self):
+        creature = MythicalCreature.load_from_file('test_creature.txt')
+        assert creature.name == 'Minotaur'
+        assert creature.creature_type == 'Beast'
+        assert creature.origin == 'Greek'
+        assert creature.powers == ['Maze Navigation', 'Immense Strength']
+
+    def test_end_to_end(self):
+        creature = MythicalCreature('Fenrir','Wolf','Norse',['Enormous Size','Great Strength'])
+        creature.save_to_file('fenrir.txt')
+        loaded_creature = MythicalCreature.load_from_file('fenrir.txt')
+        assert loaded_creature.describe() == 'Fenrir is a Wolf from Norse. Powers: Enormous Size, Great Strength'
+        os.remove('fenrir.txt')
+
+    def test_empty_powers(self):
+        creature = MythicalCreature('Sphinx','Creature','Egypt',[])
+        assert creature.describe() == 'Sphinx is a Creature from Egypt. Powers: '
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

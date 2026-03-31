@@ -1,0 +1,61 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Create a function `game_of_chance` which simulates a simple dice game between a Player and the Computer. The function takes a dictionary `player_score` as input, where the keys are the player's name (string) and the values are their respective total scores (integer) from previous games.
+
+In this game, both the Player and the Computer roll a 6-sided dice 5 times. For each roll, a random number between 1 and 6 (inclusive) is generated. The sums of each player's rolls (including the Computer's) are calculated. If the Player's total is higher, increment their current score in the `player_score` dictionary by 1. If the Computer wins, append a key-value pair to the dictionary using the key `Computer` and set its score to the number of times it has won (incrementing if it existed from previous games). In case of a tie, no score is changed.
+
+Finally, the function should return the updated `player_score` dictionary.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import game_of_chance
+
+def test_game_of_chance_player_wins():
+    initial_scores = {'Alice': 2, 'Computer': 1}
+    final_scores = game_of_chance(dict(initial_scores))
+    assert 'Alice' in final_scores
+    assert final_scores['Alice'] > initial_scores['Alice']
+
+
+def test_game_of_chance_computer_wins():
+    initial_scores = {'Bob': 0}
+    final_scores = game_of_chance(dict(initial_scores))
+    assert 'Computer' in final_scores
+    assert final_scores['Computer'] > initial_scores.get('Computer', 0)
+
+
+def test_game_of_chance_tie():
+    initial_scores = {'Tom': 5, 'Computer': 3}
+    for _ in range(100):  # Increase chance to detect tie
+        trial_scores = game_of_chance(dict(initial_scores))
+        if trial_scores == initial_scores:
+            assert trial_scores == initial_scores
+            return
+    assert False, "A tie was never detected"
+
+
+def test_game_of_chance_no_previous_computer_score():
+    initial_scores = {'Carol': 3}
+    final_scores = game_of_chance(dict(initial_scores))
+    assert 'Computer' in final_scores
+
+
+def test_game_of_chance_no_previous_scores():
+    initial_scores = {}
+    final_scores = game_of_chance(dict(initial_scores))
+    assert 'Computer' in final_scores or any(
+        score > 0 for score in final_scores.values()
+    )
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

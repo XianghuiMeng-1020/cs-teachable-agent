@@ -1,0 +1,122 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+You are tasked with creating a program named `lottery_draw.py` that simulates a Game of Chance for a fictional lottery. The program will read participant names and their lottery numbers from an input file, perform a random draw, and output the winning participant. 
+
+### Requirements:
+
+1. **Input File Format:** 
+    - The input file, `participants.txt`, consists of multiple lines, each representing one participant.
+    - Each line contains a participant name followed by a space and then a string of exactly 6 space-separated integers (e.g., `Alice 12 34 22 55 17 9`).
+
+2. **Output File:**
+    - The program should output the winner to a file named `winner.txt`.
+    - If there are multiple participants with the same lottery numbers, the program should output the first occurrence.
+
+3. **Lottery Draw Simulation:**
+    - Simulate a random lottery draw by selecting one line (participant) at random from the input file.
+
+4. **Function Signature:**
+    - Implement this functionality using a function named `select_winner(input_filename, output_filename)`. This function will:
+      - Read from the input file specified by `input_filename`.
+      - Write the winner's name to the output file specified by `output_filename`.
+
+### Example:
+For a file `participants.txt`:
+```
+Alice 12 34 22 55 17 9
+Bob 11 22 33 44 55 66
+Charlie 12 34 22 55 17 9
+```
+A possible output file `winner.txt` after running the program could be:
+```
+Alice
+```
+(Note: Since the draw is random, `Bob` or `Charlie` could also be chosen.)
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from winner_selection import select_winner
+
+participants_content = """
+Alice 12 34 22 55 17 9
+Bob 11 22 33 44 55 66
+Charlie 12 34 22 55 17 9
+Dave 10 20 30 40 50 60
+Eve 11 22 33 44 55 66
+"""
+
+single_participant_content = """
+Alice 12 34 22 55 17 9
+"""
+
+empty_content = """"""
+
+def setup_module(module):
+    with open('participants.txt', 'w') as file:
+        file.write(participants_content)
+
+    with open('single_participant.txt', 'w') as file:
+        file.write(single_participant_content)
+
+    with open('empty.txt', 'w') as file:
+        file.write(empty_content)
+
+
+def teardown_module(module):
+    os.remove('participants.txt')
+    os.remove('single_participant.txt')
+    os.remove('empty.txt')
+    if os.path.exists('winner.txt'):
+        os.remove('winner.txt')
+
+
+def test_random_winner_selection():
+    select_winner('participants.txt', 'winner.txt')
+    assert os.path.exists('winner.txt')
+    with open('winner.txt', 'r') as file:
+        winner = file.read().strip()
+    assert winner in {'Alice', 'Bob', 'Charlie', 'Dave', 'Eve'}
+
+
+def test_single_participant():
+    select_winner('single_participant.txt', 'winner.txt')
+    assert os.path.exists('winner.txt')
+    with open('winner.txt', 'r') as file:
+        winner = file.read().strip()
+    assert winner == 'Alice'
+
+
+def test_no_participants():
+    select_winner('empty.txt', 'winner.txt')
+    assert os.path.exists('winner.txt')
+    with open('winner.txt', 'r') as file:
+        winner = file.read().strip()
+    assert winner == ''
+
+
+def test_consistency_with_no_change():
+    select_winner('participants.txt', 'winner.txt')
+    with open('winner.txt', 'r') as file:
+        first_winner = file.read().strip()
+
+    select_winner('participants.txt', 'winner.txt')
+    with open('winner.txt', 'r') as file:
+        second_winner = file.read().strip()
+    # In case of handling state, ensure a reset doesn't cause persistent state
+    assert first_winner == second_winner
+
+
+def test_fresh_run_after_delete():
+    select_winner('participants.txt', 'winner.txt')
+    os.remove('winner.txt')
+    select_winner('participants.txt', 'winner.txt')
+    assert os.path.exists('winner.txt')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

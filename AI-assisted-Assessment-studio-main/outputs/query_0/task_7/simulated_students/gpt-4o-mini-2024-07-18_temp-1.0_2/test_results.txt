@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+collected 3 items
+
+outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 33%]
+EFE.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_lucky_numbers_base[John,25\nAlice,5\nBob,15\nSue,10\n-5,10,25,40-John: 1\nAlice: 1\nBob: 1\nSue: 1\n] _
+Fixture "teardown_module" called directly. Fixtures are not meant to be called directly,
+but are created automatically when test functions request them as parameters.
+See https://docs.pytest.org/en/stable/explanation/fixtures.html for more information about fixtures, and
+https://docs.pytest.org/en/stable/deprecations.html#calling-fixtures-directly about how to update your code.
+______________ ERROR at teardown of test_lucky_numbers_edges[--] _______________
+Fixture "teardown_module" called directly. Fixtures are not meant to be called directly,
+but are created automatically when test functions request them as parameters.
+See https://docs.pytest.org/en/stable/explanation/fixtures.html for more information about fixtures, and
+https://docs.pytest.org/en/stable/deprecations.html#calling-fixtures-directly about how to update your code.
+_ ERROR at teardown of test_lucky_numbers_edges[Anna,3\nMike,11\nSam,20\n-99,100,101-Anna: 0\nMike: 0\nSam: 0\n] _
+Fixture "teardown_module" called directly. Fixtures are not meant to be called directly,
+but are created automatically when test functions request them as parameters.
+See https://docs.pytest.org/en/stable/explanation/fixtures.html for more information about fixtures, and
+https://docs.pytest.org/en/stable/deprecations.html#calling-fixtures-directly about how to update your code.
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:48: AssertionError: assert 'John: 1\nAli...: 0\nSue: 1\n' == 'John: 1\nAli...: 1\nSue: 1\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:65: AssertionError: assert 'John: 0\nAli...: 0\nSue: 0\n' == ''
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_lucky_numbers_base[John,25\nAlice,5\nBob,15\nSue,10\n-5,10,25,40-John: 1\nAlice: 1\nBob: 1\nSue: 1\n]
+FAILED outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_lucky_numbers_edges[--]
+ERROR outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_lucky_numbers_base[John,25\nAlice,5\nBob,15\nSue,10\n-5,10,25,40-John: 1\nAlice: 1\nBob: 1\nSue: 1\n]
+ERROR outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_lucky_numbers_edges[--]
+ERROR outputs/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_lucky_numbers_edges[Anna,3\nMike,11\nSam,20\n-99,100,101-Anna: 0\nMike: 0\nSam: 0\n]
+==================== 2 failed, 1 passed, 3 errors in 0.16s =====================

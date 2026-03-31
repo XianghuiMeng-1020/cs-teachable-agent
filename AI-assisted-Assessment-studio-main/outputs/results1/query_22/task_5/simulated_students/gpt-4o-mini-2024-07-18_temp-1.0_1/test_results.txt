@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+...FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____ ERROR at teardown of test_calculate_winner_board_game[test5.txt-Peter] ____
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:61: AssertionError: assert 'Quincy' == 'Peter'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+ERROR outputs/results1/query_22/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_winner_board_game[test5.txt-Peter]
+===================== 1 failed, 4 passed, 1 error in 0.13s =====================

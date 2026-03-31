@@ -1,0 +1,20 @@
+{
+  "raw_answers": {
+    "__BLANK_1__": "1.0",
+    "__BLANK_2__": "'Habitable'",
+    "__BLANK_3__": "'Potentially Habitable'",
+    "__BLANK_4__": ""
+  },
+  "answers": {
+    "blank_1": "1.0",
+    "blank_2": "'Habitable'",
+    "blank_3": "'Potentially Habitable'",
+    "__BLANK_4__": ""
+  },
+  "is_correct": false,
+  "correct_answers": {
+    "blank_1": "1.0",
+    "blank_2": "'Habitable'",
+    "blank_3": "'Potentially Habitable'"
+  }
+}

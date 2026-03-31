@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:12: AssertionError: assert {'egg': '1', ...'salt': '1/2'} == {'egg': '1', ...1/2 teaspoon'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:29: AssertionError: assert {'egg': '', '... 'sugar': '2'} == {'egg': '', '... tablespoons'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:37: AssertionError: assert {'100g': 'Flo... 'water': '1'} == {'flour': '',...r': '1 liter'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:46: AssertionError: assert {'basil': '',...il': '100 ml'} == {'basil': '',...il': '100 ml'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_ingredients_with_quantities_and_units
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_mixed_format_ingredients
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_case_insensitivity
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_complex_ingredient_names
+========================= 4 failed, 1 passed in 0.10s ==========================

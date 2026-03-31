@@ -45,18 +45,18 @@ export function MessageBubble({ role, content, timestamp, metadata, onRetry }: M
             "rounded-2xl px-4 py-2.5 overflow-hidden",
             isStudent
               ? "rounded-br-md bg-brand-500 text-white"
-              : "rounded-bl-md bg-slate-100 text-slate-800"
+              : "rounded-bl-md bg-stone-100 text-stone-800"
           )}
         >
           <MessageContent content={content} isStudent={isStudent} />
         </div>
         {timestamp && (
-          <p className={cn("mt-1 text-[11px] text-slate-400", isStudent && "text-right")}>
+          <p className={cn("mt-1 text-[11px] text-stone-400", isStudent && "text-right")}>
             {timestamp}
           </p>
         )}
         {!isStudent && metadata?.interpreted_units?.length && !metadata?.failed && (
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 text-xs text-stone-400">
             Learned: {metadata.interpreted_units.join(", ")}
             {metadata.quality_score != null && ` · quality ${metadata.quality_score}`}
           </p>

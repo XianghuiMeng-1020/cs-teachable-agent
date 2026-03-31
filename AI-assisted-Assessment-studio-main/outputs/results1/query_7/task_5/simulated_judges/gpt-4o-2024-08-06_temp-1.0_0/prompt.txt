@@ -1,0 +1,104 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+You are a software engineer tasked with helping the Museum of Ancient Mythologies create a digital catalog of their collection through file handling. The museum has a list of artifacts, sorted by the name of mythological figures associated with them. Each figure is followed by the specific artifacts attributed to them.
+
+The museum provides these lists in a text file format. Each line of the file contains the name of a mythological figure followed by their associated artifacts separated by semicolons. For example:
+
+```
+Zeus;Thunderbolt;Eagle;Aegis
+Hera;Peacock Feather;Diadem
+Athena;Spear;Shield;Owl
+```
+
+Your task is to write a function `extract_artifacts(file_path)` that processes the given file and writes out a new file, 'artifacts.txt', containing only the artifacts organized in alphabetical order, one artifact per line. Each artifact should appear only once, even if it is attributed to multiple figures. 
+
+- The function `extract_artifacts(file_path)` takes one argument, the path to the input text file.
+- The output file 'artifacts.txt' should be located in the same directory as the input file.
+
+### Example
+
+Given the input text file content:
+
+```
+Apollo;Lyre;Laurel
+Zeus;Thunderbolt;Eagle;Aegis
+Athena;Sword;Shield;Owl
+```
+
+The file 'artifacts.txt' should contain:
+
+```
+Aegis
+Eagle
+Laurel
+Lyre
+Owl
+Shield
+Sword
+Thunderbolt
+```
+
+Your solution should efficiently handle the list, removing duplicates and sorting them, ready for the museum's digital archive. The input file will contain valid data following the specified format.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import extract_artifacts
+
+input_file = 'mythology_data.txt'
+output_file = 'artifacts.txt'
+
+def setup_module(module):
+    with open(input_file, 'w') as f:
+        f.write("Zeus;Thunderbolt;Eagle;Aegis\n")
+        f.write("Hera;Peacock Feather;Diadem\n")
+        f.write("Athena;Spear;Shield;Owl\n")
+        f.write("Apollo;Lyre;Laurel\n")
+        f.write("Hades;Bident;Cerberus;Helm of Darkness\n")
+
+def teardown_module(module):
+    if os.path.exists(input_file):
+        os.remove(input_file)
+    if os.path.exists(output_file):
+        os.remove(output_file)
+
+@pytest.mark.parametrize("expected_content", [
+    ["Aegis", "Bident", "Cerberus", "Diadem", "Eagle", "Helm of Darkness", "Laurel", "Lyre", "Owl", "Peacock Feather", "Spear", "Shield", "Thunderbolt"],
+])
+def test_extract_artifacts(expected_content):
+    extract_artifacts(input_file)
+    with open(output_file, 'r') as f:
+        lines = f.readlines()
+        assert lines == [line + "\n" for line in expected_content]
+
+@pytest.mark.parametrize("new_data, expected_content", [
+    ("Athena;Helmet\n", 
+     ["Aegis", "Bident", "Cerberus", "Diadem", "Eagle", "Helmet", "Helm of Darkness", "Laurel", "Lyre", "Owl", "Peacock Feather", "Spear", "Shield", "Thunderbolt"]),
+    ("Hermes;Caduceus\n", 
+     ["Aegis", "Bident", "Caduceus", "Cerberus", "Diadem", "Eagle", "Helm of Darkness", "Laurel", "Lyre", "Owl", "Peacock Feather", "Spear", "Shield", "Thunderbolt"]),
+    ("Aphrodite;Girdle;Dove\n", 
+     ["Aegis", "Bident", "Cerberus", "Diadem", "Dove", "Eagle", "Girdle", "Helm of Darkness", "Laurel", "Lyre", "Owl", "Peacock Feather", "Spear", "Shield", "Thunderbolt"]),
+    ("Poseidon;Trident\n", 
+     ["Aegis", "Bident", "Cerberus", "Diadem", "Eagle", "Helm of Darkness", "Laurel", "Lyre", "Owl", "Peacock Feather", "Spear", "Shield", "Thunderbolt", "Trident"]),
+])
+def test_extract_artifacts_with_new_data(new_data, expected_content):
+    with open(input_file, 'a') as f:
+        f.write(new_data)
+    extract_artifacts(input_file)
+    with open(output_file, 'r') as f:
+        lines = f.readlines()
+        assert lines == [line + "\n" for line in expected_content]
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

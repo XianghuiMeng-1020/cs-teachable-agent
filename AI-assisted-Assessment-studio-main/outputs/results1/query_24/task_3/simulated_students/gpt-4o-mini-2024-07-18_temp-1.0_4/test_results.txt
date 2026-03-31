@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py . [ 20%]
+.FF.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:20: AssertionError: assert {'1': 2, 'A': 2, 'B': 5} == {'A': 2, 'B': 5}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:26: AssertionError: assert {'A': 2, 'B': 5} == {'A': 1, 'B': 5}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_invalid_winner
+FAILED outputs/results1/query_24/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_negative_scores
+========================= 2 failed, 3 passed in 0.13s ==========================

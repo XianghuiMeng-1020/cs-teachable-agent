@@ -107,7 +107,7 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
       high: "bg-orange-500",
       overload: "bg-red-500",
     };
-    return colors[level] || "bg-slate-500";
+    return colors[level] || "bg-stone-500";
   };
 
   const getLoadStatus = (level: string) => {
@@ -141,10 +141,10 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
               <div className="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mx-auto mb-4">
                 <Coffee className="w-8 h-8 text-red-500" />
               </div>
-              <h3 className="text-xl font-semibold text-center text-slate-900 mb-2">
+              <h3 className="text-xl font-semibold text-center text-stone-900 mb-2">
                 建议休息一下
               </h3>
-              <p className="text-center text-slate-600 mb-6">
+              <p className="text-center text-stone-600 mb-6">
                 检测到认知负荷过高，建议休息 5 分钟后再继续学习。
               </p>
               <div className="flex gap-3">
@@ -174,13 +174,13 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
               <Brain className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">认知负荷监测</h3>
-              <p className="text-sm text-slate-500">实时追踪脑力消耗，防止过载</p>
+              <h3 className="font-semibold text-stone-900">认知负荷监测</h3>
+              <p className="text-sm text-stone-500">实时追踪脑力消耗，防止过载</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${isMonitoring ? "bg-green-500 animate-pulse" : "bg-slate-300"}`} />
-            <span className="text-sm text-slate-500">
+            <span className={`w-2 h-2 rounded-full ${isMonitoring ? "bg-green-500 animate-pulse" : "bg-stone-300"}`} />
+            <span className="text-sm text-stone-500">
               {isMonitoring ? "监测中" : "已暂停"}
             </span>
           </div>
@@ -206,32 +206,32 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
                   }
                 />
               </div>
-              <p className="text-2xl font-bold text-slate-900 mt-2">
+              <p className="text-2xl font-bold text-stone-900 mt-2">
                 {loadData.load_score}%
               </p>
             </div>
 
             {/* Load Breakdown */}
             <div className="space-y-3">
-              <h4 className="text-sm font-medium text-slate-700">负荷分解</h4>
+              <h4 className="text-sm font-medium text-stone-700">负荷分解</h4>
               <div className="space-y-2">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-600">内在负荷 (内容复杂度)</span>
+                    <span className="text-stone-600">内在负荷 (内容复杂度)</span>
                     <span className="font-medium">{loadData.load_breakdown.intrinsic.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.intrinsic} color="brand" />
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-600">外在负荷 (干扰因素)</span>
+                    <span className="text-stone-600">外在负荷 (干扰因素)</span>
                     <span className="font-medium">{loadData.load_breakdown.extraneous.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.extraneous} color="warning" />
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-600">关联负荷 (深度学习)</span>
+                    <span className="text-stone-600">关联负荷 (深度学习)</span>
                     <span className="font-medium">{loadData.load_breakdown.germane.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.germane} color="success" />
@@ -268,12 +268,12 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
 
             {/* Reduction Suggestions */}
             {loadData.reduction_suggestions.length > 0 && (
-              <div className="bg-slate-50 rounded-lg p-4">
-                <h4 className="font-medium text-slate-900 mb-2">降低负荷建议</h4>
+              <div className="bg-stone-50 rounded-lg p-4">
+                <h4 className="font-medium text-stone-900 mb-2">降低负荷建议</h4>
                 <ul className="space-y-1">
                   {loadData.reduction_suggestions.map((suggestion, i) => (
-                    <li key={i} className="text-sm text-slate-700 flex items-start gap-2">
-                      <span className="text-slate-400">•</span>
+                    <li key={i} className="text-sm text-stone-700 flex items-start gap-2">
+                      <span className="text-stone-400">•</span>
                       {suggestion}
                     </li>
                   ))}
@@ -283,8 +283,8 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
           </div>
         ) : (
           <div className="text-center py-8">
-            <Brain className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-            <p className="text-slate-500">开始监测以查看认知负荷数据</p>
+            <Brain className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+            <p className="text-stone-500">开始监测以查看认知负荷数据</p>
             <Button 
               className="mt-4" 
               onClick={() => setIsMonitoring(true)}
@@ -295,7 +295,7 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
         )}
 
         {loadData && (
-          <div className="mt-4 pt-4 border-t border-slate-200">
+          <div className="mt-4 pt-4 border-t border-stone-200">
             <Button
               variant={isMonitoring ? "outline" : "default"}
               size="sm"

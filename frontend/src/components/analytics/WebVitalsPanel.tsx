@@ -105,7 +105,7 @@ export function WebVitalsPanel({ className }: { className?: string }) {
       case "poor":
         return "text-red-600 bg-red-50 border-red-200";
       default:
-        return "text-slate-600 bg-slate-50 border-slate-200";
+        return "text-stone-600 bg-stone-50 border-stone-200";
     }
   };
 
@@ -127,11 +127,11 @@ export function WebVitalsPanel({ className }: { className?: string }) {
       <Card padding="lg" className={className}>
         <div className="flex items-center gap-2 mb-4">
           <Activity className="w-5 h-5 text-brand-500" />
-          <h3 className="font-semibold text-slate-900">Web Vitals</h3>
+          <h3 className="font-semibold text-stone-900">Web Vitals</h3>
         </div>
         <div className="space-y-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-16 bg-slate-100 rounded-lg animate-pulse" />
+            <div key={i} className="h-16 bg-stone-100 rounded-lg animate-pulse" />
           ))}
         </div>
       </Card>
@@ -143,9 +143,9 @@ export function WebVitalsPanel({ className }: { className?: string }) {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Activity className="w-5 h-5 text-brand-500" />
-          <h3 className="font-semibold text-slate-900">Web Vitals</h3>
+          <h3 className="font-semibold text-stone-900">Web Vitals</h3>
         </div>
-        <span className="text-xs text-slate-500">Real-time Performance</span>
+        <span className="text-xs text-stone-500">Real-time Performance</span>
       </div>
 
       <div className="space-y-3">
@@ -178,8 +178,8 @@ export function WebVitalsPanel({ className }: { className?: string }) {
         })}
       </div>
 
-      <div className="mt-4 pt-4 border-t border-slate-200">
-        <p className="text-xs text-slate-500">
+      <div className="mt-4 pt-4 border-t border-stone-200">
+        <p className="text-xs text-stone-500">
           Web Vitals are Google&apos;s initiative to provide unified guidance for quality signals
           essential to delivering a great user experience.
         </p>

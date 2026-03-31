@@ -4,22 +4,23 @@ import { Loader2, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 focus-visible:ring-offset-2 active:scale-[0.97] active:duration-75",
+  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600/30 focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
-        primary: "bg-brand-500 text-white shadow-sm hover:bg-brand-600 hover:shadow-md active:bg-brand-700",
-        secondary: "bg-slate-100 text-slate-700 hover:bg-slate-200 hover:shadow-sm active:bg-slate-300",
-        ghost: "bg-transparent text-slate-600 hover:bg-slate-100 active:bg-slate-200",
-        danger: "bg-danger text-white hover:bg-red-600 hover:shadow-md active:bg-red-700",
-        success: "bg-success text-white hover:bg-emerald-600 hover:shadow-md active:bg-emerald-700",
-        outline: "border border-slate-300 bg-transparent text-slate-700 hover:bg-slate-50 hover:border-slate-400 active:bg-slate-100",
-        link: "bg-transparent text-brand-500 underline-offset-4 hover:underline active:text-brand-600",
+        primary: "bg-brand-700 text-white shadow-sm hover:bg-brand-800 active:bg-brand-900",
+        secondary: "bg-stone-100 text-stone-700 hover:bg-stone-200 active:bg-stone-300",
+        ghost: "bg-transparent text-stone-600 hover:bg-stone-100 active:bg-stone-200",
+        danger: "bg-danger text-white hover:bg-red-700 active:bg-red-800",
+        success: "bg-success text-white hover:bg-emerald-700 active:bg-emerald-800",
+        outline: "border border-stone-300 bg-transparent text-stone-700 hover:bg-stone-50 hover:border-stone-400 active:bg-stone-100",
+        link: "bg-transparent text-brand-700 underline-offset-4 hover:underline active:text-brand-800 p-0 h-auto",
       },
       size: {
         sm: "h-8 px-3 text-xs",
         md: "h-9 px-4 text-sm",
-        lg: "h-11 px-6 text-base",
+        lg: "h-11 px-6 text-sm",
+        xl: "h-12 px-8 text-base",
       },
     },
     defaultVariants: {

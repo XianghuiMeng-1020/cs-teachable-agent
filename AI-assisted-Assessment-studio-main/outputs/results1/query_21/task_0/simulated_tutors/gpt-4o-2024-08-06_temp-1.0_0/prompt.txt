@@ -1,0 +1,103 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Classes and Objects', 'File Handling and I/O', 'Strings', 'Arithmetic Operators']:
+
+### Beginning of task description
+Design a Python program to manage scores for a board game tournament. You need to implement a class `BoardGameTournament` to record and compute participants' scores. 
+
+### Class Definition
+
+**Class**: `BoardGameTournament`
+
+- **Attributes**:
+  - `participants`: a dictionary where keys are participant names (strings) and values are scores (integers).
+
+- **Methods**:
+  1. `add_participant(name)`: Adds a participant with the given name to the tournament with an initial score of 0.
+  2. `record_score(name, score)`: Updates the score for the specified participant. If the participant doesn't exist, raise a `ValueError`.
+  3. `get_score(name)`: Returns the current score of the specified participant. If the participant doesn’t exist, raise a `ValueError`.
+  4. `save_scores(filename)`: Saves all participants and their scores to a file. Each line in the file should have format `participant: score`.
+  5. `load_scores(filename)`: Loads participants and scores from a file. It should replace the current participants with those in the file. The file is assumed to have lines in the format `participant: score`.
+
+### Task
+
+Implement the `BoardGameTournament` class and all its methods. The scores are stored as integers and can be negative. The filename in `save_scores` and `load_scores` is a string.
+
+#### Example
+
+```python
+# Create a new tournament instance
+bg = BoardGameTournament()
+
+# Add participants
+tournament.add_participant("Alice")
+tournament.add_participant("Bob")
+
+# Record score
+tournament.record_score("Alice", 10)
+tournament.record_score("Bob", 15)
+
+# Save to a file
+tournament.save_scores("scores.txt")
+
+# Load from a file
+tournament.load_scores("scores.txt")
+
+# Get score record
+print(tournament.get_score("Alice"))  # Output should be 10
+```
+
+Follow these instructions to implement the class and pass the test suite.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import BoardGameTournament
+
+def setup_module(module):
+    with open('test_scores.txt', 'w') as f:
+        f.write('Alice: 30\nBob: 45\n')
+
+def teardown_module(module):
+    os.remove('test_scores.txt')
+    if os.path.exists('output_scores.txt'):
+        os.remove('output_scores.txt')
+
+def test_add_participant():
+    tournament = BoardGameTournament()
+    tournament.add_participant('Charlie')
+    assert tournament.get_score('Charlie') == 0
+
+
+def test_record_score():
+    tournament = BoardGameTournament()
+    tournament.add_participant('Alice')
+    tournament.record_score('Alice', 5)
+    assert tournament.get_score('Alice') == 5
+
+
+def test_get_score_non_existent():
+    tournament = BoardGameTournament()
+    with pytest.raises(ValueError):
+        tournament.get_score('NonExistent')
+
+def test_save_scores():
+    tournament = BoardGameTournament()
+    tournament.add_participant('Charlie')
+    tournament.record_score('Charlie', 10)
+    tournament.save_scores('output_scores.txt')
+    with open('output_scores.txt', 'r') as f:
+        content = f.read()
+    assert content.strip() == 'Charlie: 10'
+
+
+def test_load_scores():
+    tournament = BoardGameTournament()
+    tournament.load_scores('test_scores.txt')
+    assert tournament.get_score('Alice') == 30
+    assert tournament.get_score('Bob') == 45
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

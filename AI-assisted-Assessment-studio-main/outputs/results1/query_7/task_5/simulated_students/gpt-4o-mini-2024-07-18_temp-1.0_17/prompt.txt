@@ -1,0 +1,50 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+You are a software engineer tasked with helping the Museum of Ancient Mythologies create a digital catalog of their collection through file handling. The museum has a list of artifacts, sorted by the name of mythological figures associated with them. Each figure is followed by the specific artifacts attributed to them.
+
+The museum provides these lists in a text file format. Each line of the file contains the name of a mythological figure followed by their associated artifacts separated by semicolons. For example:
+
+```
+Zeus;Thunderbolt;Eagle;Aegis
+Hera;Peacock Feather;Diadem
+Athena;Spear;Shield;Owl
+```
+
+Your task is to write a function `extract_artifacts(file_path)` that processes the given file and writes out a new file, 'artifacts.txt', containing only the artifacts organized in alphabetical order, one artifact per line. Each artifact should appear only once, even if it is attributed to multiple figures. 
+
+- The function `extract_artifacts(file_path)` takes one argument, the path to the input text file.
+- The output file 'artifacts.txt' should be located in the same directory as the input file.
+
+### Example
+
+Given the input text file content:
+
+```
+Apollo;Lyre;Laurel
+Zeus;Thunderbolt;Eagle;Aegis
+Athena;Sword;Shield;Owl
+```
+
+The file 'artifacts.txt' should contain:
+
+```
+Aegis
+Eagle
+Laurel
+Lyre
+Owl
+Shield
+Sword
+Thunderbolt
+```
+
+Your solution should efficiently handle the list, removing duplicates and sorting them, ready for the museum's digital archive. The input file will contain valid data following the specified format.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -30,7 +30,7 @@ export function MisconceptionCard({
   return (
     <Card padding="md" className={cn("border-l-4", statusBorder[status])}>
       <div className="flex items-start justify-between gap-2">
-        <h4 className="text-sm font-semibold text-slate-800">{title}</h4>
+        <h4 className="text-sm font-semibold text-stone-800">{title}</h4>
         <Badge
           variant={status === "active" ? "danger" : status === "resolved" ? "success" : "warning"}
           size="sm"
@@ -38,7 +38,7 @@ export function MisconceptionCard({
           {status}
         </Badge>
       </div>
-      <p className="mt-2 text-sm text-slate-600">{description}</p>
+      <p className="mt-2 text-sm text-stone-600">{description}</p>
       {affectedUnits.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-1">
           {affectedUnits.map((u) => (
@@ -58,11 +58,11 @@ export function MisconceptionCard({
 
 export function MisconceptionCardEmpty() {
   return (
-    <Card padding="md" className="border border-slate-200">
+    <Card padding="md" className="border border-stone-200">
       <div className="flex flex-col items-center justify-center py-4 text-center">
         <CheckCircle className="h-10 w-10 text-success" />
-        <p className="mt-2 text-sm font-medium text-slate-700">No active misconceptions</p>
-        <p className="mt-1 text-xs text-slate-500">TA knowledge state is consistent.</p>
+        <p className="mt-2 text-sm font-medium text-stone-700">No active misconceptions</p>
+        <p className="mt-1 text-xs text-stone-500">TA knowledge state is consistent.</p>
       </div>
     </Card>
   );

@@ -1,0 +1,6 @@
+F....                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_2/test_suite_sol.py:28: AssertionError: assert 5 == 4
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_2/test_suite_sol.py::test_count_games_with_letter_C
+1 failed, 4 passed in 0.03s

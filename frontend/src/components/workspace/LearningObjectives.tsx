@@ -34,13 +34,13 @@ export function LearningObjectives({
 
   if (compact) {
     return (
-      <div className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
+      <div className="flex items-center gap-3 text-xs text-stone-600 dark:text-stone-400">
         {LEVELS.map((level, i) => {
           const done = level.id === "understand" ? understandDone : level.id === "apply" ? applyDone : analyzeDone;
           return (
             <span key={level.id} className="flex items-center gap-1">
-              {done ? <CheckCircle className="h-3.5 w-3.5 text-green-600" /> : <Circle className="h-3.5 w-3.5 text-slate-300" />}
-              <span className={done ? "font-medium text-slate-800 dark:text-slate-200" : ""}>{level.label}</span>
+              {done ? <CheckCircle className="h-3.5 w-3.5 text-green-600" /> : <Circle className="h-3.5 w-3.5 text-stone-300" />}
+              <span className={done ? "font-medium text-stone-800 dark:text-stone-200" : ""}>{level.label}</span>
             </span>
           );
         })}
@@ -49,8 +49,8 @@ export function LearningObjectives({
   }
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50/50 p-3 dark:border-slate-700 dark:bg-slate-900/30">
-      <p className="mb-2 text-xs font-medium text-slate-600 dark:text-slate-400">Session learning objectives</p>
+    <div className="rounded-lg border border-stone-200 bg-stone-50/50 p-3 dark:border-stone-700 dark:bg-stone-900/30">
+      <p className="mb-2 text-xs font-medium text-stone-600 dark:text-stone-400">Session learning objectives</p>
       <ul className="space-y-2">
         {LEVELS.map((level) => {
           const done = level.id === "understand" ? understandDone : level.id === "apply" ? applyDone : analyzeDone;
@@ -59,13 +59,13 @@ export function LearningObjectives({
               {done ? (
                 <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-600 dark:text-green-400" />
               ) : (
-                <Circle className="mt-0.5 h-4 w-4 shrink-0 text-slate-300 dark:text-slate-600" />
+                <Circle className="mt-0.5 h-4 w-4 shrink-0 text-stone-300 dark:text-stone-600" />
               )}
               <div>
-                <p className={`text-sm font-medium ${done ? "text-slate-800 dark:text-slate-200" : "text-slate-500 dark:text-slate-400"}`}>
+                <p className={`text-sm font-medium ${done ? "text-stone-800 dark:text-stone-200" : "text-stone-500 dark:text-stone-400"}`}>
                   {level.label}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{level.description}</p>
+                <p className="text-xs text-stone-500 dark:text-stone-400">{level.description}</p>
               </div>
             </li>
           );

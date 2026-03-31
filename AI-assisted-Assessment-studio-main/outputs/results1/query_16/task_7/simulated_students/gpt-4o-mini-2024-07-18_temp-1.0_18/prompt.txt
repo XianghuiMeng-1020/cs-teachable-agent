@@ -1,0 +1,33 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a futuristic world of space travel, interstellar communication relies on encoded messages sent between ships and bases. Your task is to create a Python class `InterstellarMessage` that can encode and decode these messages using a simple numeric offset technique. 
+
+The message encoding works as follows:
+1. For each character in the message, convert it to its ASCII value using `ord()`.
+2. Add a fixed offset to this ASCII value.
+3. Convert the resulting value back to a character using `chr()`.
+
+To decode a message, simply reverse this process by subtracting the offset.
+
+Create the `InterstellarMessage` class with the following methods:
+- `__init__(self, message, offset)`: Initializes the object with a string message and an integer offset for encoding/decoding.
+- `encode(self)`: Returns the encoded message as a string.
+- `decode(self, encoded_message)`: Takes a string `encoded_message` and returns the decoded original message using the object's offset.
+
+If the message or encoded message includes any non-printable ASCII characters (those outside the range of 32 to 126 inclusive), raise a `ValueError`.
+
+**Example Usage**:
+```python
+msg = InterstellarMessage("HELLO", 3)
+encoded = msg.encode()  # Encodes with the offset, e.g., "KHOOR"
+decoded = msg.decode(encoded)  # Decodes back to "HELLO"
+```
+
+The program will be tested by creating `InterstellarMessage` objects with various messages and offsets, and checking the output of `encode()` and `decode()` against expected values.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

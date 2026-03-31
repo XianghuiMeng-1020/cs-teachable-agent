@@ -1,0 +1,54 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+In ancient Greek mythology, there are various characters, each with distinct powers and domains. Create a function `mythical_character_power(character_name)` that determines the power or domain of a mythical character. You will use a dictionary to store the mapping of character names to their respective powers/domains. The function should return the power/domain if the character exists in the dictionary or return the string 'Unknown' if the character is not in the dictionary.
+
+Your function will be tested with a variety of character names to ensure it returns the correct power or domain, or 'Unknown' for characters not present in your dictionary.
+
+Example: 
+- `mythical_character_power('Zeus')` should return `'Thunder'`
+- `mythical_character_power('Apollo')` should return `'Sun'`
+- `mythical_character_power('UnknownCharacter')` should return `'Unknown'`
+
+The dictionary you create inside the function must contain at least the following character mappings:
+- `'Zeus': 'Thunder'`
+- `'Poseidon': 'Sea'`
+- `'Hades': 'Underworld'`
+- `'Athena': 'Wisdom'`
+- `'Apollo': 'Sun'`
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import mythical_character_power
+
+def test_known_character_zeus():
+    assert mythical_character_power('Zeus') == 'Thunder'
+
+def test_known_character_poseidon():
+    assert mythical_character_power('Poseidon') == 'Sea'
+
+def test_known_character_athena():
+    assert mythical_character_power('Athena') == 'Wisdom'
+
+def test_known_character_hades():
+    assert mythical_character_power('Hades') == 'Underworld'
+
+def test_unknown_character():
+    assert mythical_character_power('UnknownCharacter') == 'Unknown'
+
+def test_known_character_apollo():
+    assert mythical_character_power('Apollo') == 'Sun'
+
+def test_uppercase_character():
+    assert mythical_character_power('zeus') == 'Unknown'
+
+def test_empty_string():
+    assert mythical_character_power('') == 'Unknown'
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

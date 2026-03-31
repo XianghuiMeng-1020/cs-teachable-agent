@@ -1,0 +1,5 @@
+Create a function `game_of_chance` which simulates a simple dice game between a Player and the Computer. The function takes a dictionary `player_score` as input, where the keys are the player's name (string) and the values are their respective total scores (integer) from previous games.
+
+In this game, both the Player and the Computer roll a 6-sided dice 5 times. For each roll, a random number between 1 and 6 (inclusive) is generated. The sums of each player's rolls (including the Computer's) are calculated. If the Player's total is higher, increment their current score in the `player_score` dictionary by 1. If the Computer wins, append a key-value pair to the dictionary using the key `Computer` and set its score to the number of times it has won (incrementing if it existed from previous games). In case of a tie, no score is changed.
+
+Finally, the function should return the updated `player_score` dictionary.

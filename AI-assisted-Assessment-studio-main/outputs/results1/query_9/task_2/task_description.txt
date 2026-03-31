@@ -1,0 +1,36 @@
+In the realm of Mythology, legends speak of an enchanted library that holds the wisdom of ancient deities. Within this library, there exists a special scroll that lists every known mythical creature and their respective realms.
+
+Your task is to write a function `sort_creatures_by_realm(creature_data)` which takes in a dictionary `creature_data`. This dictionary contains mythical creatures as keys and their respective realms as values. Your task is to return a new dictionary where each key is a realm and the value is a sorted list of creatures that belong to that realm.
+
+**Function Signature:**
+`def sort_creatures_by_realm(creature_data):`
+
+**Arguments:**
+- `creature_data`: a dictionary where keys are strings representing the names of mythical creatures and values are strings representing the realm it belongs to.
+
+**Returns:**
+- A dictionary where each key is a realm and the value is a sorted list of creatures that belong to that realm.
+
+**Example:**
+
+If the input is:
+```python
+{
+    'Phoenix': 'Fire',
+    'Kraken': 'Ocean',
+    'Dragon': 'Fire',
+    'Nymph': 'Forest',
+    'Mermaid': 'Ocean'
+}
+```
+
+The output should be:
+```python
+{
+    'Fire': ['Dragon', 'Phoenix'],
+    'Ocean': ['Kraken', 'Mermaid'],
+    'Forest': ['Nymph']
+}
+```
+
+Use **only** lists, dictionaries, and loops to solve the task.

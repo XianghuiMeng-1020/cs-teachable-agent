@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_crystal_weights(mining_data):\n    glimmer_total = 0\n    shadow_total = 0\n    \n    for weight in mining_data:\n        if weight % 2 == 0:\n            glimmer_total += weight\n        else:\n            shadow_total += weight\n    \n    return (glimmer_total, shadow_total)\n\n# Example usage:\n# print(calculate_crystal_weights([4, 9, 6, 3, 10, 15, 2]))  # Output: (22, 27)",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:52: AssertionError: assert 'Total Energy: 45.0 kWh' == 'Total Energy: 45 kWh'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:66: FileNotFoundError: [Errno 2] No such file or directory: 'energy_report.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:78: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:88: AssertionError: assert 'Total Energy: 45.0 kWh' == 'Total Energy: 45 kWh'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_energy_report_with_data
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_energy_report_with_zero_data
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_energy_report_not_written_if_energy_data_is_modified
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_energy_report_handles_perm_vari
+========================= 4 failed, 1 passed in 0.05s ==========================

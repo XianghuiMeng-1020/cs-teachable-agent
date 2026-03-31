@@ -1,0 +1,4 @@
+{
+    "program": "def classify_creature(creature):\n    # Dictionary categorizing creatures by their domains\n    creature_domains = {\n        'sky': ['Phoenix', 'Garuda', 'Thunderbird'],\n        'sea': ['Kraken', 'Leviathan', 'Mermaid'],\n        'earth': ['Golem', 'Satyr', 'Nymph'],\n    }\n\n    # Iterate through the dictionary to find the creature's domain\n    for domain, creatures in creature_domains.items():\n        if creature in creatures:\n            return domain\n    \n    # If the creature is not found in any domain, return 'other'\n    return 'other'",
+    "context_relevance": 1.0
+}

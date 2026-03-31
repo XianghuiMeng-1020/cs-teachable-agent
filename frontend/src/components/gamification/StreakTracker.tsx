@@ -128,7 +128,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
   if (loadingSummary || !summary) {
     return (
       <Card padding="md" className="animate-pulse">
-        <div className="h-20 bg-slate-100 rounded" />
+        <div className="h-20 bg-stone-100 rounded" />
       </Card>
     );
   }
@@ -144,19 +144,19 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
           <div className="flex items-center gap-3">
             <div className={cn(
               "w-12 h-12 rounded-full flex items-center justify-center",
-              is_active_today ? "bg-orange-100" : "bg-slate-100"
+              is_active_today ? "bg-orange-100" : "bg-stone-100"
             )}>
               <Flame className={cn(
                 "w-6 h-6",
-                is_active_today ? "text-orange-500" : "text-slate-400"
+                is_active_today ? "text-orange-500" : "text-stone-400"
               )} />
             </div>
             <div>
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-bold text-slate-900">{current_streak}</span>
-                <span className="text-sm text-slate-500">day streak</span>
+                <span className="text-2xl font-bold text-stone-900">{current_streak}</span>
+                <span className="text-sm text-stone-500">day streak</span>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-stone-500">
                 Best: {longest_streak} days
               </p>
             </div>
@@ -170,7 +170,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
               </div>
             )}
             {daysToNext > 0 ? (
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-stone-500">
                 {daysToNext} days to {next_milestone.name}
               </div>
             ) : next_milestone.name && (
@@ -184,7 +184,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
 
         {/* Mini calendar */}
         {calendar && (
-          <div className="mt-3 pt-3 border-t border-slate-100">
+          <div className="mt-3 pt-3 border-t border-stone-100">
             <div className="flex justify-between">
               {calendar[0]?.days.slice(-7).map((day, i) => (
                 <div
@@ -195,7 +195,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
                       ? "bg-brand-500 text-white ring-2 ring-brand-300"
                       : day.was_active
                       ? "bg-orange-100 text-orange-600"
-                      : "bg-slate-100 text-slate-400"
+                      : "bg-stone-100 text-stone-400"
                   )}
                   title={day.date}
                 >
@@ -230,19 +230,19 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
         <div className="flex items-center gap-4">
           <div className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center",
-            is_active_today ? "bg-gradient-to-br from-orange-400 to-red-500" : "bg-slate-100"
+            is_active_today ? "bg-gradient-to-br from-orange-400 to-red-500" : "bg-stone-100"
           )}>
             <Flame className={cn(
               "w-8 h-8",
-              is_active_today ? "text-white" : "text-slate-400"
+              is_active_today ? "text-white" : "text-stone-400"
             )} />
           </div>
           <div>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-bold text-slate-900">{current_streak}</span>
-              <span className="text-lg text-slate-500">day streak</span>
+              <span className="text-4xl font-bold text-stone-900">{current_streak}</span>
+              <span className="text-lg text-stone-500">day streak</span>
             </div>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-stone-500">
               Longest: {longest_streak} days
               {freezes_remaining > 0 && (
                 <span className="ml-2 text-blue-600">
@@ -255,12 +255,12 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
 
         {next_milestone.name && (
           <div className="text-right">
-            <p className="text-sm text-slate-500">Next milestone</p>
-            <p className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <p className="text-sm text-stone-500">Next milestone</p>
+            <p className="text-lg font-semibold text-stone-900 flex items-center gap-2">
               {MILESTONE_ICONS[next_milestone.name] || "🏆"} {next_milestone.name}
             </p>
             {daysToNext > 0 && (
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-stone-500">
                 {daysToNext} day{daysToNext > 1 ? "s" : ""} to go
               </p>
             )}
@@ -272,8 +272,8 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
       {next_milestone.days_required && next_milestone.days_required > current_streak && (
         <div className="mb-6">
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-slate-600">Progress to {next_milestone.name}</span>
-            <span className="font-medium text-slate-900">
+            <span className="text-stone-600">Progress to {next_milestone.name}</span>
+            <span className="font-medium text-stone-900">
               {current_streak} / {next_milestone.days_required} days
             </span>
           </div>
@@ -289,8 +289,8 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
       {calendar && (
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-3">
-            <Calendar className="w-4 h-4 text-slate-400" />
-            <span className="text-sm font-medium text-slate-700">Last 4 weeks</span>
+            <Calendar className="w-4 h-4 text-stone-400" />
+            <span className="text-sm font-medium text-stone-700">Last 4 weeks</span>
           </div>
           <div className="space-y-2">
             {calendar.map((week, widx) => (
@@ -304,7 +304,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
                         ? "bg-brand-500 text-white ring-2 ring-brand-300"
                         : day.was_active
                         ? "bg-gradient-to-br from-orange-400 to-orange-500 text-white"
-                        : "bg-slate-100 text-slate-400"
+                        : "bg-stone-100 text-stone-400"
                     )}
                     title={`${day.date}: ${day.was_active ? `${day.activity_count} activities, ${day.learning_time} min` : "No activity"}`}
                   >
@@ -314,7 +314,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
               </div>
             ))}
           </div>
-          <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+          <div className="flex items-center gap-4 mt-3 text-xs text-stone-500">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 bg-gradient-to-br from-orange-400 to-orange-500 rounded" />
               <span>Active</span>
@@ -324,7 +324,7 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
               <span>Today</span>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-slate-100 rounded" />
+              <div className="w-3 h-3 bg-stone-100 rounded" />
               <span>Inactive</span>
             </div>
           </div>
@@ -333,28 +333,28 @@ export function StreakTracker({ userId, compact = false }: StreakTrackerProps) {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="p-3 bg-slate-50 rounded-xl text-center">
-          <Clock className="w-5 h-5 text-slate-400 mx-auto mb-1" />
-          <p className="text-lg font-semibold text-slate-900">12.5h</p>
-          <p className="text-xs text-slate-500">Total learning time</p>
+        <div className="p-3 bg-stone-50 rounded-xl text-center">
+          <Clock className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+          <p className="text-lg font-semibold text-stone-900">12.5h</p>
+          <p className="text-xs text-stone-500">Total learning time</p>
         </div>
-        <div className="p-3 bg-slate-50 rounded-xl text-center">
-          <Zap className="w-5 h-5 text-slate-400 mx-auto mb-1" />
-          <p className="text-lg font-semibold text-slate-900">42</p>
-          <p className="text-xs text-slate-500">Activities completed</p>
+        <div className="p-3 bg-stone-50 rounded-xl text-center">
+          <Zap className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+          <p className="text-lg font-semibold text-stone-900">42</p>
+          <p className="text-xs text-stone-500">Activities completed</p>
         </div>
-        <div className="p-3 bg-slate-50 rounded-xl text-center">
-          <Target className="w-5 h-5 text-slate-400 mx-auto mb-1" />
-          <p className="text-lg font-semibold text-slate-900">85%</p>
-          <p className="text-xs text-slate-500">Consistency score</p>
+        <div className="p-3 bg-stone-50 rounded-xl text-center">
+          <Target className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+          <p className="text-lg font-semibold text-stone-900">85%</p>
+          <p className="text-xs text-stone-500">Consistency score</p>
         </div>
       </div>
 
       {/* Achieved Milestones */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <Award className="w-4 h-4 text-slate-400" />
-          <span className="text-sm font-medium text-slate-700">Milestones achieved</span>
+          <Award className="w-4 h-4 text-stone-400" />
+          <span className="text-sm font-medium text-stone-700">Milestones achieved</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {["Getting Started", "Week Warrior"].map((milestone) => (

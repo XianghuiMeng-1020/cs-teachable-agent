@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task
+You're tasked with developing a small Python utility for board game enthusiasts. Your program should process a file named `games.txt` that contains a list of board game names, one per line. 
+
+Your job is to write a function `count_games_with_letter(filepath, letter)` that reads this file and counts how many games have names starting with a specific letter. 
+
+- **Function Signature**: `def count_games_with_letter(filepath, letter):`
+- **Parameters**:
+  - `filepath`: A string that represents the path to the `games.txt` file.
+  - `letter`: A single character string that represents the letter to count games beginning with.
+- **Returns**: An integer representing the count of game names starting with the specified letter.
+
+### Constraints:
+- Assume that `filepath` will always be a valid path of a readable file.
+- Assume that the `games.txt` is properly formatted.
+- Do not differentiate between uppercase and lowercase letters when counting (e.g., 'Catan' and 'catan' should be counted together for 'C').
+- Consider only the first letter of each game name.
+
+### Example
+`
+# If the `games.txt` contains:
+# Chess\n
+# Checkers\n
+# Catan\n
+# Battleship\n
+# Carcassonne\n
+# The call to the function with parameters `count_games_with_letter('games.txt', 'C')` would return `3`.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

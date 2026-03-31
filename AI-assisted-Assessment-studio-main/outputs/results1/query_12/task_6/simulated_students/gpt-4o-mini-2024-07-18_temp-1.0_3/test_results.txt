@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____________ ERROR at teardown of test_organize_recipes_all_to_try _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes_test.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:31: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:45: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:65: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:79: AttributeError: 'dict' object has no attribute 'input'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py:99: AttributeError: 'dict' object has no attribute 'input'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_favorite
+FAILED outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_different_categories
+FAILED outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_all_disliked
+FAILED outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_invalid_then_valid
+FAILED outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_all_to_try
+ERROR outputs/results1/query_12/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_organize_recipes_all_to_try
+========================== 5 failed, 1 error in 0.11s ==========================

@@ -26,8 +26,8 @@ export class ErrorBoundary extends React.Component<
       if (this.props.fallback) return this.props.fallback;
       return (
         <Card padding="lg" className="mx-auto max-w-md text-center">
-          <h2 className="text-lg font-semibold text-slate-800">Something went wrong</h2>
-          <p className="mt-2 text-sm text-slate-600">{this.state.error.message}</p>
+          <h2 className="text-lg font-semibold text-stone-800">Something went wrong</h2>
+          <p className="mt-2 text-sm text-stone-600">{this.state.error.message}</p>
           <Button
             variant="primary"
             className="mt-4"

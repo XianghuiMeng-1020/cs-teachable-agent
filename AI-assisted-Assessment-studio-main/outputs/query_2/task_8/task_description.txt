@@ -1,0 +1,53 @@
+Create a Python program related to cooking that involves processing recipes stored in a text file. You will write a function `filter_ingredients(input_file, output_file, max_ingredients)` to help filter out recipes that have more ingredients than specified. Your function should perform the following steps:
+
+1. **Read the recipes** from the `input_file`. Each recipe is formatted with a name followed by a list of ingredients separated by commas:
+   - The first line of a recipe is the recipe name.
+   - Subsequent lines list the ingredients, each on a new line.
+   - An empty line signifies the end of the current recipe.
+
+2. **Filter recipes** based on the `max_ingredients` parameter. If a recipe has more ingredients than `max_ingredients`, it should be skipped.
+
+3. **Write the filtered recipes** to the `output_file`, maintaining the same format as in the input file.
+
+### Function Signature:
+The function signature should be:
+`def filter_ingredients(input_file, output_file, max_ingredients):`
+
+### Testing:
+- Function will be tested by reading from a sample input file. The specific file names and paths will be provided to your function during testing.
+- Ensure you write only the recipes that have equal to or fewer than `max_ingredients` and retain the original structure of the continuous ingredients list.
+- Note: Lines in the file should not be altered other than filtering based on length criteria.
+
+### Example:
+If an input file contains:
+```
+Pasta Carbonara
+Spaghetti
+Eggs
+Parmesan Cheese
+Pancetta
+
+Chocolate Cake
+Flour
+Cocoa Powder
+Eggs
+Milk
+Sugar
+Butter
+Baking Powder
+
+`
+And the function is called as:
+`filter_ingredients('recipes.txt', 'filtered_recipes.txt', 4)`
+
+The output file `filtered_recipes.txt` should contain:
+```
+Pasta Carbonara
+Spaghetti
+Eggs
+Parmesan Cheese
+Pancetta
+
+```
+
+This example demonstrates that only the recipe 'Pasta Carbonara', which has 4 ingredients, is retained.

@@ -1,0 +1,22 @@
+### Task: Spice Up Your Cooking Estimates
+
+You are tasked with creating a function to estimate the amount of spices needed for a cooking session. The function needs to calculate the total quantity of spices required based on the type of dish being prepared. The amount of spices varies based on the type and quantity of dishes being cooked. There are four spice categories: Mild, Medium, Hot, and Extra Hot.
+
+### How it Works
+Each dish type has a base spice requirement (using teaspoons as measurement):
+- **Salad**, requiring a base of 2 teaspoons of Mild spice.
+- **Soup**, requiring a base of 3 teaspoons of Medium spice.
+- **Curry**, requiring a base of 5 teaspoons of Hot spice.
+- **Grill**, requiring a base of 7 teaspoons of Extra Hot spice.
+
+You should implement a function called `calculate_spices(dishes)` that:
+- Takes a list of dish names as strings as input.
+- Calculates the total amount of each spice needed based on the number and type of dishes.
+- Returns a list of integers, representing the total amount of each spice required in teaspoons, in this order: [Mild, Medium, Hot, Extra Hot].
+
+### Example
+When the input is `['Salad', 'Soup', 'Curry', 'Grill', 'Salad']`, the function should return the list `[4, 3, 5, 7]`, indicating 4 teaspoons of Mild spice, 3 of Medium, 5 of Hot, and 7 of Extra Hot.
+
+### Constraints
+- The input list can contain between 1 to 100 elements.
+- Only the dish types mentioned (Salad, Soup, Curry, Grill) will appear in the list.

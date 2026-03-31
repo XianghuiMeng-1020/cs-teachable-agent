@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_1/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 10%]
+....F....                                                                [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:23: assert 1080 == 360
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_edge_cases[numbers0-bet_amounts0-360]
+========================= 1 failed, 9 passed in 0.03s ==========================

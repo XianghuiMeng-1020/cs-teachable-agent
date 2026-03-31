@@ -1,0 +1,81 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In the distant future aboard the starship 'Celestial Voyager', astrological data is constantly being collected and stored in data files. As the newly appointed software engineer, your first task is to analyze and compute the gravitational force between planets in a given dataset.
+
+The task is to write a function `calculate_gravitational_force(input_filepath, output_filepath)` that reads from a file named `input_filepath`, which contains information about several planets. Each line in the file describes a pair of planets and their properties in the following format:
+
+    `mass1,distance,mass2`
+
+Where:
+- `mass1` and `mass2` are the masses of two planets in kilograms (floats).
+- `distance` is the distance between the two planets in meters (float).
+
+Your function must compute the gravitational force between each pair of planets using the formula:
+
+    F = (G * mass1 * mass2) / (distance ** 2)
+
+Where:
+- `F` is the gravitational force in Newtons (float).
+- `G` is the gravity constant, which is approximately 6.67430 * 10^-11 N*(m^2)/kg^2.
+
+The function should write the computed gravitational forces to a file named `output_filepath`. Each line in the output file should correspond to the gravitational force of the planetary pair from the input file, formatted to two decimal places.
+
+Assume the input file is correctly formatted, and the file paths are valid. The function should handle reading from and writing to files independently.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_gravitational_force
+
+G_CONSTANT = 6.67430e-11
+
+def setup_module(module):
+    input_data = [
+        "5.97e24,1.496e11,6.39e23\n",
+        "6.39e23,5.789e10,5.97e24\n",
+        "1.898e27,7.785e11,5.97e24\n",
+        "3.302e23,57900000,5.97e24\n",
+        "5.68e26,1.429e12,5.97e24\n"
+    ]
+    with open('test_input.txt', 'w') as f:
+        f.writelines(input_data)
+
+
+def teardown_module(module):
+    os.remove('test_input.txt')
+    if os.path.exists('test_output.txt'):
+        os.remove("test_output.txt")
+
+
+def test_gravitational_force_calculation():
+    calculate_gravitational_force('test_input.txt', 'test_output.txt')
+
+    expected_forces = [
+        (G_CONSTANT * 5.97e24 * 6.39e23) / (1.496e11 ** 2),
+        (G_CONSTANT * 6.39e23 * 5.97e24) / (5.789e10 ** 2),
+        (G_CONSTANT * 1.898e27 * 5.97e24) / (7.785e11 ** 2),
+        (G_CONSTANT * 3.302e23 * 5.97e24) / (57900000 ** 2),
+        (G_CONSTANT * 5.68e26 * 5.97e24) / (1.429e12 ** 2)
+    ]
+    # Formatting expected values to two decimal places
+    formatted_expected_forces = ["{:.2f}".format(force) for force in expected_forces]
+
+    with open('test_output.txt', 'r') as f:
+        results = f.readlines()
+
+    assert len(results) == len(formatted_expected_forces)
+    for result, expected in zip(results, formatted_expected_forces):
+        assert result.strip() == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

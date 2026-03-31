@@ -1,0 +1,34 @@
+### Task Description
+
+You have been given a dataset representing mythical creatures from various mythologies. Each record in the dataset is stored in a separate line in the file. Each line contains information in the following format:
+
+`<Name>:<Origin>:<Classification>:<Description>`
+
+- **Name**: The name of the mythical creature (string, no spaces)
+- **Origin**: The culture or mythology that the creature belongs to (string, no spaces)
+- **Classification**: The type or class of the creature (e.g., god, monster, hero) (string, no spaces)
+- **Description**: A brief description of the creature (string, may contain spaces)
+
+Your task is to write a function `filter_mythical_creatures(input_file, output_file, origin)` that reads the given `input_file`, filters the mythical creatures based on the specified `origin`, and writes the result to the `output_file`. The filtered content should maintain the same format and order it was originally in the `input_file` but contain only entries with the specified `Origin`.
+
+#### Example
+Consider the following content in the `input_file`:
+```
+Cerberus:Greek:Monster:A three-headed dog guarding Hades
+Fenrir:Norse:Monster:A giant wolf
+Achilles:Greek:Hero:A hero of the Trojan War
+Thor:Norse:God:The god of thunder
+```
+If the `origin` is `'Greek'`, the resulting content in the `output_file` should be:
+```
+Cerberus:Greek:Monster:A three-headed dog guarding Hades
+Achilles:Greek:Hero:A hero of the Trojan War
+```
+
+### Constraints
+- It is guaranteed that the `input_file` is a text file with each line following the above format.
+- The `origin` parameter is case-sensitive.
+- The `output_file` should only contain lines from the `input_file` that match the specified `origin`.
+- If no creatures match the `origin`, the `output_file` should be empty.
+
+Implement the solution in the function `filter_mythical_creatures(input_file, output_file, origin)`.

@@ -1,0 +1,20 @@
+Your task is to write a Python program that simulates a simple "Mythological Creatures Repository". This repository will manage details about different mythological creatures.
+
+Implementation Requirements:
+
+1. Define a class `MythologicalCreature` with the following attributes:
+   - `name` (string): The name of the mythological creature.
+   - `origin` (string): The culture or mythology from which the creature originates.
+   - `description` (string): A short description of the creature.
+
+2. Create another class `CreaturesRepository` that manages a collection of `MythologicalCreature` objects. This class should have the following methods:
+   - `add_creature(creature)`: Adds a `MythologicalCreature` to the collection.
+   - `remove_creature(name)`: Removes a creature from the collection by its name. If no creature is found by the given name, do nothing.
+   - `load_from_file(file_path)`: Loads creatures from the specified text file and adds them to the collection. Each line in the file contains the details of a creature in the format `name;origin;description`.
+   - `save_to_file(file_path)`: Saves all creatures in the collection to the specified text file in the same format used for loading.
+
+3. Ensure the file handling is correctly managed for both reading from and writing to files.
+
+We expect the `save_to_file` and `load_from_file` methods to overwrite any existing data in the file, basing it on the current state of the repository.
+
+There are no specific constraints on the length of the `description`, but for string handling efficiency, it should be reasonable and descriptive.

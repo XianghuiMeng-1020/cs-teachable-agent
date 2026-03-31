@@ -1,0 +1,22 @@
+In the realm of Mythology, powerful artifacts determine the fate of gods and humans. You are to write a function `determine_wielder_power(artifacts, power_requirements)` which calculates the total power of mythological characters who can wield certain artifacts.
+
+The input consists of:
+- `artifacts`: A list of tuples, where each tuple contains the name of the artifact (a string) and its required power level (an integer).
+- `power_requirements`: A list of integers, representing the power levels of mythological characters.
+
+Your task is to iterate over each artifact and determine if there is at least one character who can wield it. A character can wield an artifact if their power level is greater than or equal to the artifact's required power level. Calculate the total number of characters capable of wielding artifacts and return this sum.
+
+Function Signature:
+```python
+def determine_wielder_power(artifacts, power_requirements):
+    pass
+```
+
+### Example
+```python
+determine_wielder_power([
+    ('Mjölnir', 90),
+    ('Excalibur', 75),
+    ('Trident', 85)
+], [80, 95, 70, 100]) # Should return 3 because 3 artifacts can be wielded by at least one character
+```

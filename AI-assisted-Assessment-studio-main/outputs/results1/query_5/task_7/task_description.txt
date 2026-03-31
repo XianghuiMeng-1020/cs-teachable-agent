@@ -1,0 +1,21 @@
+In the realm of ancient Mythology, explorers often needed to record their encounters with mythical creatures. You have been asked to write a Python program that computes essential statistics from recorded data on these encounters.
+
+You need to create a Python function `mythical_creature_stats(input_filename, output_filename)`. This function will read encounter data from a file, process it, and write computed statistics to another file. The input file will contain data about encounters with various mythical creatures in the following format:
+
+`creature_name,number_of_encounters,distance_traveled`
+
+Each line represents a separate encounter record.
+
+The program should: 
+1. Compute the total number of encounters for each unique creature.
+2. Compute the average distance traveled per encounter for each creature.
+3. Write the results to the output file in the following format:
+
+`creature_name,total_encounters,average_distance`
+
+Write each creature's results on a new line.
+
+**Note:**
+- The `average_distance` should be rounded to two decimal places.
+- Assume the input file and output file paths are valid and accessible.
+- The function should create the output file if it does not already exist.

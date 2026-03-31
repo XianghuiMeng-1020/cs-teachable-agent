@@ -1,0 +1,27 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a mystical world of Greek Mythology, each god and goddess has a corresponding power level. The pantheon has recorded these levels in a file called `pantheon.txt`, where each line contains a god's name, followed by their power level, all separated by a comma (e.g., 'Zeus, 85'). The power level is a positive integer.
+
+You are tasked with writing a program that performs the following operations:
+
+1. Read the power levels from the `pantheon.txt` file.
+2. Calculate and return the name of the god with the minimum power level and the god with the maximum power level. If there are multiple gods with the same min/max power level, return the first one in the file.
+3. Calculate and return the average power level of all the gods rounded down to the nearest integer.
+
+Implement the following function:
+
+```python
+def analyze_pantheon():
+    pass
+```
+
+The function should return a tuple: `(min_name, max_name, average_power)` where `min_name` is the name of the god with the minimum power, `max_name` is the name of the god with the maximum power, and `average_power` is the average power level of the gods.
+
+Assume the `pantheon.txt` file always exists in the same directory as your script and contains at least one line of valid data. Handle any I/O errors gracefully.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

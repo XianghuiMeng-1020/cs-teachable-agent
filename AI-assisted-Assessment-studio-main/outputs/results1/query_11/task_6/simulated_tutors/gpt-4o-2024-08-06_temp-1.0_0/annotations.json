@@ -1,0 +1,4 @@
+{
+    "program": "def recipe_value(recipe, prices):\n    # Convert prices list to a dictionary for quick lookup\n    price_dict = {}\n    for item in prices:\n        ingredient, price = item.split(\":\")\n        price_dict[ingredient] = float(price)\n\n    # Calculate total cost based on recipe ingredients and prices\n    total_cost = 0.0\n    for item in recipe:\n        ingredient, amount = item.split(\":\")\n        amount = int(amount)\n        # Get the price of the ingredient or 0 if not found\n        price_per_unit = price_dict.get(ingredient, 0)\n        total_cost += price_per_unit * amount\n\n    return total_cost\n",
+    "context_relevance": 0.0
+}

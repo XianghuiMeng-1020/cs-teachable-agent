@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a function called `parse_ingredient_list` to help manage a cookbook. The function will take a single argument, `ingredient_str`, which is expected to be a string representing a list of ingredients needed for a recipe. Each ingredient in this list will have its data separated by commas in the format `ingredient_name, quantity, unit`. Multiple ingredients in the string will be separated by semicolons.
+
+Your task is to parse the string and return a dictionary where the keys are the ingredient names and the values are another dictionary containing the 'quantity' and 'unit' as strings for each ingredient.
+
+Function signature:
+```
+def parse_ingredient_list(ingredient_str):
+```
+
+### Example:
+If the input string is:
+- `"flour,200,grams; sugar,100,grams; eggs,3,units"`
+
+The function should return the following dictionary:
+```
+{
+    'flour': {'quantity': '200', 'unit': 'grams'},
+    'sugar': {'quantity': '100', 'unit': 'grams'},
+    'eggs': {'quantity': '3', 'unit': 'units'}
+}
+```
+
+### Notes:
+- Ensure the function handles different quantities, unit types, and correct splitting of the input string.
+- Capitalization and extra spaces in the input string can be ignored.
+- Input can be assumed to be well-formed according to the above descriptions.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

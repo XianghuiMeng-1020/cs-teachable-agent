@@ -1,0 +1,77 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+You are tasked with developing a program that manages a fleet of science fiction spaceships. Each spaceship is represented as an object of the class `Spaceship`.
+
+Each `Spaceship` instance has the following properties:
+- `name`: The name of the spaceship (a string).
+- `energy_level`: A floating-point number representing the energy level of the spaceship. This should be a non-negative value, with a maximum of 100.
+- `crew_members`: A dictionary where the keys are crew member names (as strings) and the values are their roles (also strings).
+
+Implement a class `Spaceship` with the following methods:
+- `__init__(self, name, energy_level, crew_members)`: Initializes the spaceship with a name, an initial energy level, and a dictionary of crew members.
+- `refuel(self, amount)`: Increases the spaceship's energy level by `amount`. If the resulting energy level exceeds 100, set it to 100.
+- `assign_crew_member(self, name, role)`: Assigns a crew member to the spaceship with the specified name and role. Add them to the `crew_members` dictionary.
+- `remove_crew_member(self, name)`: Removes a crew member by their name from the `crew_members` dictionary. Raise a `ValueError` if the crew member does not exist.
+- `status_report(self)`: Returns a dictionary containing the spaceship's name, current energy level, and list of crew members with their roles.
+
+Your task is to correctly implement the `Spaceship` class and the methods specified. The program will be tested using a series of unit tests to verify its correctness and reliability.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import Spaceship
+
+@pytest.fixture
+def spaceship():
+    return Spaceship('Odyssey', 50.0, {'Alice': 'Pilot', 'Bob': 'Engineer'})
+
+def test_initial_status(spaceship):
+    report = spaceship.status_report()
+    assert report['name'] == 'Odyssey'
+    assert report['energy_level'] == 50.0
+    assert report['crew_members'] == {'Alice': 'Pilot', 'Bob': 'Engineer'}
+
+def test_refuel(spaceship):
+    spaceship.refuel(30.0)
+    assert spaceship.energy_level == 80.0
+    spaceship.refuel(30.0)
+    assert spaceship.energy_level == 100.0
+
+def test_assign_crew_member(spaceship):
+    spaceship.assign_crew_member('Charlie', 'Navigator')
+    assert 'Charlie' in spaceship.crew_members
+    assert spaceship.crew_members['Charlie'] == 'Navigator'
+
+def test_remove_crew_member(spaceship):
+    spaceship.remove_crew_member('Alice')
+    assert 'Alice' not in spaceship.crew_members
+
+    with pytest.raises(ValueError):
+        spaceship.remove_crew_member('Nonexistent')
+
+    # Ensure Bob still exists
+    assert 'Bob' in spaceship.crew_members
+
+    spaceship.remove_crew_member('Bob')
+    assert 'Bob' not in spaceship.crew_members
+
+    # Now all crew should be removed
+    assert spaceship.crew_members == {}
+
+def test_maximum_energy_level(spaceship):
+    spaceship.refuel(1000)
+    assert spaceship.energy_level == 100.0
+
+    spaceship.refuel(-150)
+    assert spaceship.energy_level == 0
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

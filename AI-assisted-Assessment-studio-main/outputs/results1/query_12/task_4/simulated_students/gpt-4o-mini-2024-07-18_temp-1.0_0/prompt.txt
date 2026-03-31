@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked to create a program that helps manage a simple cookbook, focusing on input/output operations with text files. Your program should read from an input file called `recipes.txt` and output to a file called `sorted_recipes.txt`. 
+
+The input file `recipes.txt` contains a list of recipes, each starting with the recipe name, followed by ingredients and their quantity. Each piece of information is on a new line, and recipes are separated by an empty line. Each recipe name and its ingredients should take exactly one line, and the quantity information follows right after its respective ingredient. 
+
+Example of `recipes.txt` content:
+```
+Pasta
+Tomato
+2
+Garlic
+1
+
+Soup
+Water
+1
+Carrot
+3
+Tomato
+2
+```
+
+Your program should read `recipes.txt`, sort the recipes alphabetically by their names, and write them into `sorted_recipes.txt` maintaining the input format, where each piece of information is on a new line and recipes are separated by an empty line.
+
+Write a function `sort_recipes(input_file, output_file)`, which takes the input and output file names as arguments. The function should perform the tasks as described to produce the required output.
+
+Make sure that your program handles the input and output files appropriately and ensures that the output is in the specified format.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

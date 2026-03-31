@@ -1,0 +1,45 @@
+**Problem Description**:
+
+You are tasked with creating a program that processes a text file containing the names of mythological creatures and their associated characteristics. Your program should read the information from a file, parse it, and return a list of unique mythological creature names that have a specific characteristic.
+
+**File Format**:
+
+The file 'creatures.txt' will contain several lines, each describing a unique mythological creature in the following format:
+
+`<CreatureName>: <Characteristic1>, <Characteristic2>, ..., <CharacteristicN>`
+
+- `<CreatureName>` is the name of the mythological creature (e.g., "Phoenix").
+- `<Characteristic>` is a descriptive attribute of the creature (e.g., "fire", "immortal").
+
+Each line is structured such that the creature name is followed by a colon, then a comma-separated list of its characteristics.
+
+**Function Signature**:
+
+```python
+find_creatures_by_characteristic(filename, characteristic) -> list
+```
+
+**Parameters**:
+- `filename` (str): The name of the file containing the creature data.
+- `characteristic` (str): The characteristic to filter creatures by.
+
+**Returns**:
+- A list of strings, each being the name of a creature that has the given characteristic.
+
+**Example**:
+
+Suppose the `creatures.txt` file contains:
+```
+Phoenix: fire, rebirth, immortal
+Kraken: sea, colossal, tentacles
+Sphinx: riddle, lion, human
+Unicorn: magic, horse, horn
+```
+
+With `find_creatures_by_characteristic('creatures.txt', 'immortal')`, the function should return `['Phoenix']`.
+
+**Assumptions**:
+- The input file will always have a proper format as described above.
+- Creature names and characteristics in the file are case-sensitive.
+- A characteristic can be listed multiple times for different creatures but not for the same creature.
+- The order of creatures in the returned list should match the order in the file.

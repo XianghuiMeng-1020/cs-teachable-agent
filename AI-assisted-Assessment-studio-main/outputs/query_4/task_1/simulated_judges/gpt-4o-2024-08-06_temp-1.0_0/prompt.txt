@@ -1,0 +1,65 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Your task is to create a Python program that simulates a simple leaderboard for a board game tournament. The tournament consists of games where players earn points. You need to implement a function `update_leaderboard(rounds)` that accepts a list of dictionaries, each representing a game and containing player names as keys and their respective points as values for that round.
+
+The program should maintain a cumulative leaderboard where each player's total score accumulates across all rounds. The leaderboard should be stored as a dictionary, with player names as keys and their total scores as values. The function should return the final leaderboard sorted in descending order based on total scores.
+
+Assume each round always contains contributions from the same set of players. If two players have the same score, sort them alphabetically by their name.
+
+Function signature:
+
+```python
+def update_leaderboard(rounds):
+    pass
+```
+
+Example:
+
+```python
+rounds = [
+    {'Alice': 10, 'Bob': 15, 'Charlie': 5},
+    {'Alice': 20, 'Bob': 10, 'Charlie': 15},
+    {'Alice': 5, 'Bob': 25, 'Charlie': 10}
+]
+
+# The cumulative leaderboard after all rounds should be:
+# {'Bob': 50, 'Alice': 35, 'Charlie': 30}
+# Bob has the highest score, followed by Alice and Charlie.
+
+assert update_leaderboard(rounds) == {'Bob': 50, 'Alice': 35, 'Charlie': 30}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import update_leaderboard
+
+# Test case 1: Basic input with three rounds
+@pytest.mark.parametrize("rounds, expected", [
+    ([{'Alice': 10, 'Bob': 15, 'Charlie': 5}, {'Alice': 20, 'Bob': 10, 'Charlie': 15}, {'Alice': 5, 'Bob': 25, 'Charlie': 10}], {'Bob': 50, 'Alice': 35, 'Charlie': 30}),
+
+    # Test case 2: All players score the same
+    ([{'Alice': 10, 'Bob': 10, 'Charlie': 10}, {'Alice': 10, 'Bob': 10, 'Charlie': 10}], {'Alice': 20, 'Bob': 20, 'Charlie': 20}),
+
+    # Test case 3: A single player dominates
+    ([{'Alice': 30, 'Bob': 0, 'Charlie': 0}, {'Alice': 20, 'Bob': 0, 'Charlie': 0}], {'Alice': 50, 'Bob': 0, 'Charlie': 0}),
+
+    # Test case 4: Two players tie and should sort alphabetically by name
+    ([{'Alice': 10, 'Bob': 10, 'Charlie': 0}, {'Alice': 0, 'Bob': 0, 'Charlie': 0}], {'Alice': 10, 'Bob': 10, 'Charlie': 0}),
+
+    # Test case 5: Incremental increase for all players each round
+    ([{'Alice': 1, 'Bob': 1, 'Charlie': 1}, {'Alice': 2, 'Bob': 2, 'Charlie': 2}], {'Alice': 3, 'Bob': 3, 'Charlie': 3})
+])
+def test_update_leaderboard(rounds, expected):
+    assert update_leaderboard(rounds) == expected
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,49 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In a distant future, scientists have developed a simulation to explore the effects of various celestial phenomena on time passage. Your task is to create a Python program that simulates a starship's journey through a wormhole, which can alter the perception of time based on different conditions.
+
+Implement a class named `Starship` that simulates this journey. Your class should have the following methods:
+
+1. **`__init__(self, initial_time_travelled, velocity_factor)`**: Initializes the starship with an initial time traveled (in years) and a velocity factor. The velocity factor is a floating-point number that affects time dilation due to relativistic effects.
+
+2. **`travel_through_wormhole(self, wormhole_intensity)`**: Computes the effective time traveled after passing through a wormhole. The intensity of a wormhole (`wormhole_intensity`) multiplies the `velocity_factor` and affects the `initial_time_travelled` as `effective_time = initial_time_travelled * wormhole_intensity * velocity_factor`.
+
+3. **`get_effective_time(self)`**: Returns the calculated effective time as a formatted string with two decimal places (e.g., `'123.45 years'`).
+
+4. **`handle_exception_test(self)`**: A method meant for testing exception handling that performs a division operation to raise and catch a `ZeroDivisionError`. It should return the string `'Handled Exception: Division by zero.'` upon catching the exception.
+
+Write test cases to ensure your program computes the effective time correctly based on the given parameters, and that it properly handles exceptions raised in `handle_exception_test()` method.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import Starship
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_teardown_module():
+    yield
+
+@pytest.mark.parametrize("initial_time, velocity, intensity, expected", [
+    (10, 1.0, 2, "20.00 years"),
+    (15, 0.5, 4, "30.00 years"),
+    (5, 2.0, 3, "30.00 years"),
+    (0, 1.5, 3, "0.00 years"),
+    (10, 1.1, 0, "0.00 years")
+])
+def test_travel_through_wormhole(initial_time, velocity, intensity, expected):
+    ship = Starship(initial_time, velocity)
+    ship.travel_through_wormhole(intensity)
+    assert ship.get_effective_time() == expected
+
+
+def test_handle_exception_test():
+    ship = Starship(0, 0)
+    assert ship.handle_exception_test() == 'Handled Exception: Division by zero.'
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_total_score_5 ____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'scores.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:27: assert 252 == 277
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:39: assert 1004 == 12
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'scores.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_total_score_1
+FAILED outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_total_score_3
+FAILED outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_total_score_4
+FAILED outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_total_score_5
+ERROR outputs/results1/query_22/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_total_score_5
+===================== 4 failed, 1 passed, 1 error in 0.18s =====================

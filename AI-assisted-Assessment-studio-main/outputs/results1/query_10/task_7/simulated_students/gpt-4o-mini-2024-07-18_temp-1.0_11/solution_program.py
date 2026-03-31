@@ -1,0 +1,22 @@
+class Recipe:
+    def __init__(self, name, ingredients, instructions):
+        self.name = name
+        self.ingredients = ingredients
+        self.instructions = instructions
+
+    def save_to_file(self, filename):
+        with open(filename, 'w') as f:
+            f.write(self.name + '\n')
+            f.write(','.join(self.ingredients) + '\n')
+            f.write(self.instructions)
+
+    @staticmethod
+    def load_from_file(filename):
+        try:
+            with open(filename, 'r') as f:
+                name = f.readline().strip()
+                ingredients = f.readline().strip().split(',')
+                instructions = f.readline().strip()
+                return Recipe(name, ingredients, instructions)
+        except (FileNotFoundError, ValueError):
+            return None

@@ -1,0 +1,205 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+## Task Description
+
+Create a function `parse_recipe_ingredients(file_path)` that processes a file containing a list of recipes. Each recipe contains its name and its ingredients, formatted as shown below:
+
+```
+Recipe: Pancakes
+Ingredients:
+- 1 cup flour
+- 2 tablespoons sugar
+- 1 teaspoon baking powder
+- 1/2 teaspoon salt
+- 1 egg
+- 1 cup milk
+- 2 tablespoons melted butter
+
+Recipe: Omelette
+Ingredients:
+- 2 eggs
+- 1/4 cup milk
+- Salt and pepper to taste
+- 1 tablespoon butter
+
+```
+
+The input to the function `parse_recipe_ingredients` is the path to the text file containing the above structure. The function should read the file and return a dictionary where keys are recipe names and values are lists of ingredient strings, like this:
+
+```python
+{
+    "Pancakes": ["1 cup flour", "2 tablespoons sugar", "1 teaspoon baking powder", "1/2 teaspoon salt", "1 egg", "1 cup milk", "2 tablespoons melted butter"],
+    "Omelette": ["2 eggs", "1/4 cup milk", "Salt and pepper to taste", "1 tablespoon butter"]
+}
+```
+
+## Function Signature
+```
+def parse_recipe_ingredients(file_path):
+    pass
+```
+
+The text file will:
+- Always follow the structure shown.
+- Have at least one recipe.
+- End with a new line after the last ingredient of the last recipe.
+
+The program should only use strings, lists, and file handling to accomplish the task.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import parse_recipe_ingredients
+
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as f:
+        f.write("""
+Recipe: Pancakes
+Ingredients:
+- 1 cup flour
+- 2 tablespoons sugar
+- 1 teaspoon baking powder
+- 1/2 teaspoon salt
+- 1 egg
+- 1 cup milk
+- 2 tablespoons melted butter
+
+Recipe: Omelette
+Ingredients:
+- 2 eggs
+- 1/4 cup milk
+- Salt and pepper to taste
+- 1 tablespoon butter
+
+Recipe: Pizza
+Ingredients:
+- 2 cups flour
+- 1 teaspoon yeast
+- 1 cup water
+- 1/4 cup tomato sauce
+- 100g mozzarella cheese
+- 10 slices pepperoni
+
+""")
+
+
+def teardown_module(module):
+    os.remove('recipes.txt')
+
+
+def test_single_recipe():
+    with open('single_recipe.txt', 'w') as f:
+        f.write("""
+Recipe: Cookies
+Ingredients:
+- 2 cups flour
+- 1 cup sugar
+- 1 teaspoon vanilla extract
+- 1/2 teaspoon baking soda
+- 1 egg
+- 1/2 cup butter
+
+""")
+    result = parse_recipe_ingredients('single_recipe.txt')
+    assert result == {"Cookies": ["2 cups flour", "1 cup sugar", "1 teaspoon vanilla extract", "1/2 teaspoon baking soda", "1 egg", "1/2 cup butter"]}
+    os.remove('single_recipe.txt')
+
+
+def test_different_structure_order():
+    with open('different_structure.txt', 'w') as f:
+        f.write("""
+Recipe: Salad
+Ingredients:
+- 1 cup lettuce
+- 1/2 cup tomato
+- 1/4 cup cucumber
+- 2 tablespoons olive oil
+- Salt to taste
+
+""")
+    result = parse_recipe_ingredients('different_structure.txt')
+    assert result == {"Salad": ["1 cup lettuce", "1/2 cup tomato", "1/4 cup cucumber", "2 tablespoons olive oil", "Salt to taste"]}
+    os.remove('different_structure.txt')
+
+
+def test_multiple_recipes():
+    result = parse_recipe_ingredients('recipes.txt')
+    expected = {
+        "Pancakes": [
+            "1 cup flour",
+            "2 tablespoons sugar",
+            "1 teaspoon baking powder",
+            "1/2 teaspoon salt",
+            "1 egg",
+            "1 cup milk",
+            "2 tablespoons melted butter"
+        ],
+        "Omelette": [
+            "2 eggs",
+            "1/4 cup milk",
+            "Salt and pepper to taste",
+            "1 tablespoon butter"
+        ],
+        "Pizza": [
+            "2 cups flour",
+            "1 teaspoon yeast",
+            "1 cup water",
+            "1/4 cup tomato sauce",
+            "100g mozzarella cheese",
+            "10 slices pepperoni"
+        ]
+    }
+    assert result == expected
+
+
+def test_large_recipe():
+    with open('large_recipe.txt', 'w') as f:
+        f.write("""
+Recipe: Big Feast
+Ingredients:
+- 5 lbs chicken
+- 4 cups rice
+- 3 cups vegetables
+- 2 liters broth
+- ½ cup soy sauce
+- Salt and pepper
+
+""")
+    result = parse_recipe_ingredients('large_recipe.txt')
+    assert result == {
+        "Big Feast": [
+            "5 lbs chicken",
+            "4 cups rice",
+            "3 cups vegetables",
+            "2 liters broth",
+            "½ cup soy sauce",
+            "Salt and pepper"
+        ]
+    }
+    os.remove('large_recipe.txt')
+
+
+def test_no_ingredients():
+    with open('no_ingredients.txt', 'w') as f:
+        f.write("""
+Recipe: Empty Dish
+Ingredients:
+
+""")
+    result = parse_recipe_ingredients('no_ingredients.txt')
+    assert result == {"Empty Dish": []}
+    os.remove('no_ingredients.txt')
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

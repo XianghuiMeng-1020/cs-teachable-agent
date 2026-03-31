@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with writing a function `vegetable_counter(order)` that helps a chef count the necessary quantities of each type of vegetable for preparing dishes based on customer orders. The orders are provided as a list of strings, where each string represents a dish and specifies vegetables and their quantities.
+
+Each dish string is formatted as follows: `"dish_name: vegetable1=quantity1, vegetable2=quantity2, ..."` where everything is separated by colons or commas and followed by equal signs with their respective quantities. Dish names and vegetables are always strings, and quantities are positive integers.
+
+The function should return a dictionary-like string representation (to ensure it remains relevant with the theme) with the total quantity required for each vegetable across all dishes. The output should be a sorted list of strings in a format resembling a dictionary that includes vegetables and their total quantities, sorted alphabetically by vegetable name.
+
+For example:
+- Input: `["salad: tomato=2, cucumber=1", "stir_fry: carrot=3, tomato=1"]`
+- Output: `"['carrot=3', 'cucumber=1', 'tomato=3']"`
+
+You can assume the input list will not be empty and each dish will contain at least one vegetable.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

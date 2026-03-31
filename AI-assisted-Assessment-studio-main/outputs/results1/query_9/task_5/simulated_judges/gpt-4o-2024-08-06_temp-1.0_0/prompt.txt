@@ -1,0 +1,95 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Lists', 'Dictionaries', 'Loops']:
+
+### Beginning of task description
+You are an assistant to a museum curator interested in cataloguing artifacts related to Greek mythology. As part of this effort, you need to create a simple program that processes a collection of mythical artifacts, categorizes them by their mythological origins, and provides some summary statistics.
+
+Your task is to implement a function, `process_myth_artifacts(artifacts)`, where `artifacts` is a list of dictionaries, each containing information about an artifact. Each dictionary has the following keys:
+- 'name': a string representing the name of the artifact
+- 'myth': a string representing which mythology the artifact originates from (e.g., 'Greek', 'Norse', etc.)
+
+The function should return a dictionary with each key representing a unique mythological category found in the input, and the value being a list of artifact names that belong to that mythology. Additionally, the dictionary should include an entry with the key 'totals', which should itself be a dictionary containing the total number of artifacts for each mythology and the total number of artifacts overall.
+
+For example, if given the following input:
+```python
+artifacts = [
+    {'name': 'Mjolnir', 'myth': 'Norse'},
+    {'name': 'Aegis', 'myth': 'Greek'},
+    {'name': 'Excalibur', 'myth': 'Arthurian'},
+    {'name': 'Olympus', 'myth': 'Greek'},
+    {'name': 'Gungnir', 'myth': 'Norse'}
+]
+```
+The function should return:
+```python
+{
+    'Norse': ['Mjolnir', 'Gungnir'],
+    'Greek': ['Aegis', 'Olympus'],
+    'Arthurian': ['Excalibur'],
+    'totals': {'Norse': 2, 'Greek': 2, 'Arthurian': 1, 'total': 5}
+}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import process_myth_artifacts
+
+@pytest.mark.parametrize("artifacts, expected", [
+    ([{'name': 'Mjolnir', 'myth': 'Norse'},
+      {'name': 'Aegis', 'myth': 'Greek'},
+      {'name': 'Excalibur', 'myth': 'Arthurian'},
+      {'name': 'Olympus', 'myth': 'Greek'},
+      {'name': 'Gungnir', 'myth': 'Norse'}],
+     {
+        'Norse': ['Mjolnir', 'Gungnir'],
+        'Greek': ['Aegis', 'Olympus'],
+        'Arthurian': ['Excalibur'],
+        'totals': {'Norse': 2, 'Greek': 2, 'Arthurian': 1, 'total': 5}
+     }),
+
+    ([{'name': 'Pandora', 'myth': 'Greek'},
+      {'name': 'Avalon', 'myth': 'Arthurian'},
+      {'name': 'Fenrir', 'myth': 'Norse'}],
+     {
+        'Greek': ['Pandora'],
+        'Arthurian': ['Avalon'],
+        'Norse': ['Fenrir'],
+        'totals': {'Greek': 1, 'Arthurian': 1, 'Norse': 1, 'total': 3}
+     }),
+
+    ([{'name': 'Fenrir', 'myth': 'Norse'}],
+     {
+        'Norse': ['Fenrir'],
+        'totals': {'Norse': 1, 'total': 1}
+     }),
+
+    ([],
+     {
+        'totals': {'total': 0}
+     }),
+
+    ([{'name': 'Thor', 'myth': 'Norse'},
+      {'name': 'Odin', 'myth': 'Norse'},
+      {'name': 'Zeus', 'myth': 'Greek'},
+      {'name': 'Ra', 'myth': 'Egyptian'},
+      {'name': 'Horus', 'myth': 'Egyptian'},
+      {'name': 'Anubis', 'myth': 'Egyptian'}],
+     {
+        'Norse': ['Thor', 'Odin'],
+        'Greek': ['Zeus'],
+        'Egyptian': ['Ra', 'Horus', 'Anubis'],
+        'totals': {'Norse': 2, 'Greek': 1, 'Egyptian': 3, 'total': 6}
+     })
+])
+def test_process_myth_artifacts(artifacts, expected):
+    assert process_myth_artifacts(artifacts) == expected
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

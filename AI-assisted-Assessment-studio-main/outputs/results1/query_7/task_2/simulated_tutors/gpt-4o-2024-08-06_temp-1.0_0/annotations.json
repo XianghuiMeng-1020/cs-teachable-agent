@@ -1,0 +1,4 @@
+{
+    "program": "def generate_hero_list(input_file):\n    heroes_by_mythology = {}\n    with open(input_file, 'r') as file:\n        for line in file:\n            hero, mythology = line.strip().split(';')\n            if mythology not in heroes_by_mythology:\n                heroes_by_mythology[mythology] = []\n            heroes_by_mythology[mythology].append(hero)\n    # Sort hero names for each mythology\n    for heroes in heroes_by_mythology.values():\n        heroes.sort()\n    return heroes_by_mythology",
+    "context_relevance": 1.0
+}

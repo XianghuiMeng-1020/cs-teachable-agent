@@ -1,0 +1,4 @@
+{
+    "program": "def hydra_heads(heads_list, cuts_list):\n    final_heads_list = []\n    for original_heads, cuts in zip(heads_list, cuts_list):\n        # Each cut results in two more heads\n        heads_lost = cuts\n        heads_grown = cuts * 2\n        final_heads = original_heads - heads_lost + heads_grown\n        final_heads_list.append(final_heads)\n    return final_heads_list\n\n# Example usage\nif __name__ == \"__main__\":\n    print(hydra_heads([4, 3], [2, 0]))  # Output should be [8, 3]\n    print(hydra_heads([10, 6], [3, 2]))  # Output should be [16, 8]\n",
+    "context_relevance": 1.0
+}

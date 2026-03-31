@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_unsorted_input ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:54: FileNotFoundError: [Errno 2] No such file or directory: 'empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'noblock.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'incomplete.txt'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'unsorted.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_empty_file
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_no_recipes_block
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_incomplete_recipe
+FAILED outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_unsorted_input
+ERROR outputs/query_2/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_unsorted_input
+===================== 4 failed, 1 passed, 1 error in 0.12s =====================

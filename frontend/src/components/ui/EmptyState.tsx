@@ -20,9 +20,9 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  default: "border border-dashed border-slate-200 bg-slate-50/50",
+  default: "border border-dashed border-stone-200 bg-stone-50/50",
   compact: "border-0 bg-transparent",
-  card: "border border-slate-200 bg-white shadow-sm",
+  card: "border border-stone-200 bg-white shadow-sm",
 };
 
 export function EmptyState({ 
@@ -52,8 +52,8 @@ export function EmptyState({
         <div className="absolute inset-0 bg-brand-100 rounded-full blur-xl opacity-50" aria-hidden />
         <Icon className={cn("relative text-brand-400", sizes.icon)} aria-hidden />
       </div>
-      <h3 className={cn("mt-4 font-semibold text-slate-700", sizes.title)}>{title}</h3>
-      <p className={cn("mt-2 max-w-sm text-slate-500", sizes.desc)}>{description}</p>
+      <h3 className={cn("mt-4 font-semibold text-stone-700", sizes.title)}>{title}</h3>
+      <p className={cn("mt-2 max-w-sm text-stone-500", sizes.desc)}>{description}</p>
       {(action || secondaryAction) && (
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           {action && (

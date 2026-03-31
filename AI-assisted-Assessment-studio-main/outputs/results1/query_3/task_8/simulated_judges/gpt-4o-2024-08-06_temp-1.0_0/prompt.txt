@@ -1,0 +1,71 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+You are going to create a simulated board game based on the concept of a "Game of Chance". In this board game, players will take turns rolling a die, and based on the result of their roll, they will move forward on the board. The board is circular, and once a player reaches or passes the last position on the board, they loop back to the start.
+
+Your task is to implement a function `play_game_of_chance(board_positions, rolls)` that simulates this board game. The function will take the following parameters:
+
+- `board_positions`: an integer indicating the number of positions on the board.
+- `rolls`: a dictionary where the keys are player names (strings) and the values are lists of integers representing the rolls each player makes during their turn.
+
+Each player starts at position 0 on the board. For each roll in the list, update the player's position and continue to the next roll. If a player's current position + roll exceeds `board_positions`, the player should wrap around to the start of the board. After processing all rolls for all players, return a dictionary that maps each player's name to their final position on the board.
+
+Constraints:
+- `board_positions` will be at least 1.
+- Each player's list of rolls will contain at least one roll.
+- Assume a roll will always result in moving at least 1 position forward.
+
+Example:
+```python
+result = play_game_of_chance(10, {'Alice': [3, 4, 2], 'Bob': [5, 2]})
+# Example output: {'Alice': 9, 'Bob': 7}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution_program import play_game_of_chance
+
+
+def setup_module(module):
+    pass  # No setup required for this test case scenario
+
+
+def teardown_module(module):
+    pass  # No teardown required for this test case scenario
+
+
+def test_single_roll_per_player():
+    result = play_game_of_chance(5, {'Player1': [1], 'Player2': [2]})
+    assert result == {'Player1': 1, 'Player2': 2}
+
+
+def test_multiple_rolls_no_wrap():
+    result = play_game_of_chance(10, {'Alice': [3, 4], 'Bob': [2, 3]})
+    assert result == {'Alice': 7, 'Bob': 5}
+    
+
+def test_wrap_around():
+    result = play_game_of_chance(4, {'Charlie': [5, 2], 'Delta': [3, 2, 1]})
+    assert result == {'Charlie': 3, 'Delta': 2}
+
+
+def test_exact_wrap_around():
+    result = play_game_of_chance(6, {'Echo': [2, 4], 'Foxtrot': [1, 1, 4]})
+    assert result == {'Echo': 0, 'Foxtrot': 0}
+
+
+def test_large_number_of_rolls():
+    result = play_game_of_chance(10, {'Gina': [5, 5, 5, 5], 'Harry': [3, 3, 3, 3]})
+    assert result == {'Gina': 0, 'Harry': 2}
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

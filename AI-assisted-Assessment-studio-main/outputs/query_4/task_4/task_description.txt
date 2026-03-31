@@ -1,0 +1,37 @@
+Create a Python function `score_board_games(players, games)` that computes the final scores for a winning board game. 
+
+You will be given a dictionary `players` where the keys are player names and the values are their scores in a board game. The variable `games` is a list of results, with each result dictating a game round involving two players and indicating the winner of that game round.
+
+The `score_board_games` function should process and update the scores as follows:
+- The winner of each game round should receive 10 points added to their current score.
+
+### Function Signature
+```python
+def score_board_games(players, games):
+    # your code here
+```
+
+### Parameters
+- `players`: A dictionary where keys are player names (strings) and values are integers representing their current scores.
+- `games`: A list of dictionaries. Each dictionary contains one game round, with keys `"round"`, `"player1"`, `"player2"`, `"winner"`.
+   - `"round"`: The round number.
+   - `"player1"`, `"player2"`: The names of the two players competing in this round.
+   - `"winner"`: The name of the player who won the round, and should match one of `player1` or `player2`.
+
+### Returns
+- Nothing. The `players` dictionary should be updated in-place with the new scores.
+
+### Example
+```python
+players = {"Alice": 100, "Bob": 90, "Charlie": 120}
+games = [
+    {"round": 1, "player1": "Alice", "player2": "Bob", "winner": "Alice"},
+    {"round": 2, "player1": "Charlie", "player2": "Alice", "winner": "Alice"},
+    {"round": 3, "player1": "Bob", "player2": "Charlie", "winner": "Charlie"}
+]
+score_board_games(players, games)
+# After this, players should be: {"Alice": 120, "Bob": 90, "Charlie": 130}
+```
+
+### Note
+- You are guaranteed that the `players` dictionary will contain all the player entries specified in the `games` list.

@@ -1,0 +1,39 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+## Task Description
+
+You are tasked to build a program that processes stories from various mythical texts. The input will be a text file named `myth_stories.txt`, which may contain multiple lines with each line representing a different mythical story. Your goal is to analyze these stories and extract specific information based on certain keywords.
+
+The program must define a function `analyze_myths(input_filename, output_filename)` that reads the input file `myth_stories.txt` and writes to an output file with the name specified by `output_filename`. The output file should list for each line, the word that appears most frequently, followed by its frequency.
+
+If two or more words have the same highest frequency, the first one that appears based on line order should be selected.
+
+### Input
+- A text file named `myth_stories.txt` with each line containing a separate mythical story. Each story is a string of space-separated words and includes no punctuation or special characters.
+
+### Output
+- Write to an output file, one line per story, the most frequent word followed by a space and its frequency.
+
+### Example
+Given the file `myth_stories.txt` contains:
+```
+Zeus thundered his command in Olympus
+Athena the wise goddess assisted Zeus
+The mighty Thor wielded his hammer
+The legend of the phoenix rises from ashes
+```
+
+The output file should be:
+```
+Zeus 1
+Zeus 2
+The 1
+The 1
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

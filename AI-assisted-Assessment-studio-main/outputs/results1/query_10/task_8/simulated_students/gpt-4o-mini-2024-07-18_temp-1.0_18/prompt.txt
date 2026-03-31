@@ -1,0 +1,19 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that manages recipes. The program should include a class named `Recipe` with attributes `name`, `ingredients`, and `instructions`. Implement methods within the class to read from and write to a file named `recipes.txt`. Each recipe is stored with a format where the first line is the recipe name, followed by a list of ingredients (one per line), and ending with the instructions (a single line).
+
+The program should provide the following functionalities:
+1. Add a new recipe to the file. If a recipe with the same name already exists, an exception should be raised.
+2. Retrieve a recipe by name.
+3. Handle errors gracefully, such as when attempting to retrieve a non-existent recipe.
+
+To add a new recipe, use the method `add_recipe(name, ingredients, instructions)`. To retrieve a recipe, use the method `get_recipe(name)`, which returns a dictionary with keys `ingredients` and `instructions`.
+
+Ensure to handle exceptions where necessary and document those exceptions as part of the methods.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

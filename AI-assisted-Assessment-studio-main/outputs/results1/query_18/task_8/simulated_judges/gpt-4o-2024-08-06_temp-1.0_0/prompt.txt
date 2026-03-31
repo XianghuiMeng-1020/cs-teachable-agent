@@ -1,0 +1,136 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+### Task Description
+
+In a distant future, scientists have developed a system to monitor the energy consumption of various units on a space station. You are tasked with writing a Python program to help with this monitoring system. The program will analyze energy consumption data and generate reports based on input files.
+
+The input file, named `energy_data.txt`, will contain multiple lines, where each line represents the energy consumption of a unit measured in kilowatts per hour (kWh). Each line in the file will have two parts separated by a comma: the unit's ID and the energy consumed.
+
+Your task is to:
+1. Read the file `energy_data.txt`.
+2. Calculate the total energy consumed by all units.
+3. Calculate the average energy consumption per unit.
+4. Write a report to a file named `energy_report.txt` containing two lines:
+   - The first line should state `Total Energy: X kWh` where X is the total energy consumed.
+   - The second line should state `Average Energy: Y kWh` where Y is the average energy consumed per unit, rounded to two decimal places.
+
+Ensure your program handles the cases where the file is empty or all the units consume 0 kWh without errors. 
+
+Write a function `generate_energy_report(input_file, output_file)` that takes the name of the input file and the name of the output file as arguments to accomplish this task.
+
+### Example
+
+Suppose `energy_data.txt` contains the following lines:
+```
+Unit1,10
+Unit2,20
+Unit3,15
+```
+The generated `energy_report.txt` should contain:
+```
+Total Energy: 45 kWh
+Average Energy: 15.00 kWh
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import generate_energy_report
+
+setup_data = """
+Unit1,10
+Unit2,20
+Unit3,15
+"""
+
+empty_data = """
+"""
+
+zero_data = """
+Unit1,0
+Unit2,0
+Unit3,0
+"""
+
+@pytest.fixture
+def setup_module():
+    with open('energy_data.txt', 'w') as file:
+        file.write(setup_data.strip())
+    yield
+    teardown_module()
+
+@pytest.fixture
+def setup_empty_module():
+    with open('energy_data.txt', 'w') as file:
+        file.write(empty_data.strip())
+    yield
+    teardown_module()
+
+@pytest.fixture
+def setup_zero_module():
+    with open('energy_data.txt', 'w') as file:
+        file.write(zero_data.strip())
+    yield
+    teardown_module()
+
+def teardown_module():
+    os.remove('energy_data.txt')
+    if os.path.exists('energy_report.txt'):
+        os.remove('energy_report.txt')
+
+
+def test_energy_report_with_data(setup_module):
+    generate_energy_report('energy_data.txt', 'energy_report.txt')
+    with open('energy_report.txt', 'r') as file:
+        content = file.read().splitlines()
+    assert content[0] == 'Total Energy: 45 kWh'
+    assert content[1] == 'Average Energy: 15.00 kWh'
+
+
+def test_energy_report_with_empty_data(setup_empty_module):
+    generate_energy_report('energy_data.txt', 'energy_report.txt')
+    with open('energy_report.txt', 'r') as file:
+        content = file.read().splitlines()
+    assert content[0] == 'Total Energy: 0 kWh'
+    assert content[1] == 'Average Energy: 0.00 kWh'
+
+
+def test_energy_report_with_zero_data(setup_zero_module):
+    generate_energy_report('energy_data.txt', 'energy_report.txt')
+    with open('energy_report.txt', 'r') as file:
+        content = file.read().splitlines()
+    assert content[0] == 'Total Energy: 0 kWh'
+    assert content[1] == 'Average Energy: 0.00 kWh'
+
+
+def test_energy_report_not_written_if_energy_data_is_modified():
+    with open('energy_data.txt', 'w') as file:
+        file.write("Unit1,10\nUnit2,20\nUnit3,-15\n")
+    generate_energy_report('energy_data.txt', 'energy_report.txt')
+    with open('energy_report.txt', 'r') as file:
+        content = file.read().splitlines()
+    assert content[0] == 'Total Energy: 15 kWh'
+    assert content[1] == 'Average Energy: 5.00 kWh'
+
+
+def test_energy_report_handles_perm_vari():
+    with open('energy_data.txt', 'w') as file:
+        file.write("Unit1,10\nUnit,20\nUnit3,15\n")
+    generate_energy_report('energy_data.txt', 'energy_report.txt')
+    with open('energy_report.txt', 'r') as file:
+        content = file.read().splitlines()
+    assert content[0] == 'Total Energy: 45 kWh'
+    assert content[1] == 'Average Energy: 15.00 kWh'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

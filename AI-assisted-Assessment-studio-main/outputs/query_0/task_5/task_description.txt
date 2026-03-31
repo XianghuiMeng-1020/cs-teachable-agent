@@ -1,0 +1,9 @@
+Create a Python program that simulates a simple Game of Chance using dice rolls. The program should read input from a file named `bets.txt` and produce output into another file named `results.txt`. The `bets.txt` file consists of multiple lines, each containing a bet on a six-sided die roll. Each line in the `bets.txt` will have a string with two parts: a player's name and their bet on a number between 1 and 6 inclusive.
+
+Your task is to implement a function `process_bets(input_file, output_file)` that reads the file `bets.txt`, simulates a dice roll for each bet, and outputs the result in `results.txt`. For each player, the program should note whether the player won or lost the bet based on a random dice roll.
+
+The results should be written in `results.txt` with each line showing the player's name, their bet, the actual roll result, and whether they won or lost the bet, formatted as follows:
+
+`Player: {PlayerName}, Bet: {PlayerBet}, Roll: {DiceRoll}, Result: {WinOrLose}`
+
+Please assume a fair six-sided die for the random roll. Input and output should follow the exact format as specified in this description. The function will be tested with various `bets.txt` scenarios to ensure that it performs correctly.

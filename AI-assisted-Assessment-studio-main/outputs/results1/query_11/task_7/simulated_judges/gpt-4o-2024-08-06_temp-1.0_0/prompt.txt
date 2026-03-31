@@ -1,0 +1,66 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+### Task: Spice Up Your Cooking Estimates
+
+You are tasked with creating a function to estimate the amount of spices needed for a cooking session. The function needs to calculate the total quantity of spices required based on the type of dish being prepared. The amount of spices varies based on the type and quantity of dishes being cooked. There are four spice categories: Mild, Medium, Hot, and Extra Hot.
+
+### How it Works
+Each dish type has a base spice requirement (using teaspoons as measurement):
+- **Salad**, requiring a base of 2 teaspoons of Mild spice.
+- **Soup**, requiring a base of 3 teaspoons of Medium spice.
+- **Curry**, requiring a base of 5 teaspoons of Hot spice.
+- **Grill**, requiring a base of 7 teaspoons of Extra Hot spice.
+
+You should implement a function called `calculate_spices(dishes)` that:
+- Takes a list of dish names as strings as input.
+- Calculates the total amount of each spice needed based on the number and type of dishes.
+- Returns a list of integers, representing the total amount of each spice required in teaspoons, in this order: [Mild, Medium, Hot, Extra Hot].
+
+### Example
+When the input is `['Salad', 'Soup', 'Curry', 'Grill', 'Salad']`, the function should return the list `[4, 3, 5, 7]`, indicating 4 teaspoons of Mild spice, 3 of Medium, 5 of Hot, and 7 of Extra Hot.
+
+### Constraints
+- The input list can contain between 1 to 100 elements.
+- Only the dish types mentioned (Salad, Soup, Curry, Grill) will appear in the list.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_spices
+
+def test_spices_basic_case():
+    dishes = ['Salad', 'Soup', 'Curry', 'Grill', 'Salad']
+    assert calculate_spices(dishes) == [4, 3, 5, 7]
+
+
+def test_multiple_dishes_of_same_type():
+    dishes = ['Salad', 'Salad', 'Salad']
+    assert calculate_spices(dishes) == [6, 0, 0, 0]
+
+
+def test_no_dishes():
+    dishes = []
+    assert calculate_spices(dishes) == [0, 0, 0, 0]
+
+
+def test_different_dishes():
+    dishes = ['Soup', 'Soup', 'Curry']
+    assert calculate_spices(dishes) == [0, 6, 5, 0]
+
+
+def test_maximum_different_dishes():
+    dishes = ['Salad', 'Soup', 'Curry', 'Grill'] * 25
+    assert calculate_spices(dishes) == [50, 75, 125, 175]
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

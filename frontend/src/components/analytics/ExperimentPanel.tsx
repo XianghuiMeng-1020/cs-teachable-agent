@@ -32,8 +32,8 @@ export function ExperimentPanel({ className }: { className?: string }) {
             <FlaskConical className="w-5 h-5 text-purple-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900">A/B Testing</h3>
-            <p className="text-sm text-slate-500">Experiment Configuration</p>
+            <h3 className="font-semibold text-stone-900">A/B Testing</h3>
+            <p className="text-sm text-stone-500">Experiment Configuration</p>
           </div>
         </div>
         <Button
@@ -56,8 +56,8 @@ export function ExperimentPanel({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="mt-6 p-4 bg-slate-50 rounded-lg">
-        <p className="text-xs text-slate-600">
+      <div className="mt-6 p-4 bg-stone-50 rounded-lg">
+        <p className="text-xs text-stone-600">
           <strong>How it works:</strong> Experiments randomly assign users to different variants.
           Changes take effect after page reload. Use &quot;Reset All&quot; to clear all assignments.
         </p>
@@ -77,16 +77,16 @@ function ExperimentItem({
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="border border-slate-200 rounded-lg overflow-hidden">
+    <div className="border border-stone-200 rounded-lg overflow-hidden">
       <button
         onClick={() => setShowDetails(!showDetails)}
-        className="w-full p-4 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+        className="w-full p-4 flex items-center justify-between bg-white hover:bg-stone-50 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Target className="w-5 h-5 text-slate-400" />
+          <Target className="w-5 h-5 text-stone-400" />
           <div className="text-left">
-            <p className="font-medium text-slate-900">{experiment.name}</p>
-            <p className="text-xs text-slate-500">{experiment.description}</p>
+            <p className="font-medium text-stone-900">{experiment.name}</p>
+            <p className="text-xs text-stone-500">{experiment.description}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -95,7 +95,7 @@ function ExperimentItem({
               {variant.name}
             </span>
           )}
-          <BarChart3 className="w-4 h-4 text-slate-400" />
+          <BarChart3 className="w-4 h-4 text-stone-400" />
         </div>
       </button>
 
@@ -105,10 +105,10 @@ function ExperimentItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="border-t border-slate-200 bg-slate-50/50"
+            className="border-t border-stone-200 bg-stone-50/50"
           >
             <div className="p-4 space-y-3">
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+              <p className="text-xs font-medium text-stone-500 uppercase tracking-wide">
                 Variants
               </p>
               <div className="grid gap-2">
@@ -120,21 +120,21 @@ function ExperimentItem({
                       className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${
                         isActive
                           ? "bg-brand-50 border-brand-200"
-                          : "bg-white border-slate-200 hover:border-slate-300"
+                          : "bg-white border-stone-200 hover:border-stone-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         {isActive ? (
                           <CheckCircle className="w-4 h-4 text-brand-500" />
                         ) : (
-                          <div className="w-4 h-4 rounded-full border-2 border-slate-300" />
+                          <div className="w-4 h-4 rounded-full border-2 border-stone-300" />
                         )}
-                        <span className={`text-sm ${isActive ? "font-medium text-slate-900" : "text-slate-600"}`}>
+                        <span className={`text-sm ${isActive ? "font-medium text-stone-900" : "text-stone-600"}`}>
                           {v.name}
                         </span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-xs text-slate-400">{v.weight}%</span>
+                        <span className="text-xs text-stone-400">{v.weight}%</span>
                         {!isActive && (
                           <Button
                             variant="ghost"

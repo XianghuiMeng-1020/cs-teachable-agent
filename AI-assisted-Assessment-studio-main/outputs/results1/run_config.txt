@@ -1,0 +1,14 @@
+# Paper-style full run configuration
+num_themes=5
+num_concept_lists_per_theme=5
+num_tasks_per_pair=10
+output_path=${OUT_DIR}
+
+# Run command (requires OPENAI_API_KEY in current shell)
+# export OPENAI_API_KEY='...'
+# export ON_HEROKU=False
+# /Volumes/T7/idea/pytasksyn/pytask/bin/python -m code.main \
+#   --num_themes 5 \
+#   --num_concept_lists_per_theme 5 \
+#   --num_tasks_per_pair 10 \
+#   --output_path ${OUT_DIR}

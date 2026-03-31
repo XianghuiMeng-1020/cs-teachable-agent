@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py F [ 20%]
+F.FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_human_creature ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:26: AssertionError: assert [] == ['Phoenix']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:30: AssertionError: assert [] == ['Kraken', 'Jormungandr']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:42: AssertionError: assert [] == ['Sphinx']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_immortal_creature
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_colossal_creatures
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_case_sensitivity
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_human_creature
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_human_creature
+===================== 4 failed, 1 passed, 1 error in 0.15s =====================

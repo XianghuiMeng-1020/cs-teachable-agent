@@ -1,0 +1,8 @@
+Create a Python program to manage a scoreboard for a board game tournament. The task is to implement a class `BoardGameScoreboard` that allows recording and retrieving scores of players from a file. The scoreboard will have the following functionality:
+
+1. **Initialization**: Provide a method to create a new scoreboard and save it to a file. The file should start empty.
+2. **Add Scores**: Provide a method `add_score(player_name, score)` which adds a score for a player. If the player already exists, add the score to their existing score. Each entry in the file must be in the format: `player_name:score`.
+3. **Get Score**: Provide a method `get_score(player_name)` which returns the total score of the given player. If the player does not exist, return 0.
+4. **Save and Load**: Ensure that the scoreboard can save to and load from a file correctly.
+
+To test this functionality, you will need to execute specific scenarios using this class such as adding scores, checking scores, and ensuring that scores persist after saving and loading.

@@ -1,0 +1,73 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In a futuristic world, a group of astronauts are collecting data from various planets. The data is stored in text files where each line contains the name of a planet followed by the distance in light-years from Earth, separated by a space.
+
+Your task is to create a Python function `calculate_total_distance(filename)` that reads the data from a specified file and calculates the total distance (in light-years) of all the planets listed. The function should return this total distance as an integer.
+
+The format of the file is as follows:
+- Each line contains: `"PlanetName Distance"`. For example: `"AlphaCentauri 4.37"`.
+- The distance is a floating-point number, but the total distance should be returned as an integer.
+
+Here's what your program needs to do:
+1. Open and read the specified file.
+2. Sum the distances (converted to integers) of all planets listed in the file.
+3. Return the total distance.
+
+You may assume that the input file is correct and has entries in the given format.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_total_distance
+
+def setup_module(module):
+    with open('test_file1.txt', 'w') as f:
+        f.write("Mars 225.0\nJupiter 483.8\nSaturn 886.7\n")
+        
+    with open('test_file2.txt', 'w') as f:
+        f.write("AlphaCentauri 4.37\nBetelgeuse 642.5\nProximaCentauri 4.24\n")
+        
+    with open('test_file3.txt', 'w') as f:
+        f.write("Andromeda 2537000.0\nMilkyWay 0.0\n")
+    
+    with open('test_empty.txt', 'w') as f:
+        f.write("")
+        
+    with open('test_single_line.txt', 'w') as f:
+        f.write("Vulcan 16.5\n")
+
+def teardown_module(module):
+    os.remove('test_file1.txt')
+    os.remove('test_file2.txt')
+    os.remove('test_file3.txt')
+    os.remove('test_empty.txt')
+    os.remove('test_single_line.txt')
+
+
+def test_calculate_total_distance_file1():
+    assert calculate_total_distance('test_file1.txt') == 1595
+
+
+def test_calculate_total_distance_file2():
+    assert calculate_total_distance('test_file2.txt') == 650
+
+
+def test_calculate_total_distance_file3():
+    assert calculate_total_distance('test_file3.txt') == 2537000
+
+
+def test_calculate_total_distance_empty():
+    assert calculate_total_distance('test_empty.txt') == 0
+
+
+def test_calculate_total_distance_single_line():
+    assert calculate_total_distance('test_single_line.txt') == 17
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

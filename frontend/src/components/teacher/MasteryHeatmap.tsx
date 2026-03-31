@@ -24,14 +24,14 @@ interface MasteryHeatmapProps {
 
 export function MasteryHeatmap({ rows, columns, getCell, className = "" }: MasteryHeatmapProps) {
   return (
-    <div className={`overflow-auto rounded-xl border border-slate-200 bg-white p-4 ${className}`}>
+    <div className={`overflow-auto rounded-xl border border-stone-200 bg-white p-4 ${className}`}>
       <div className="inline-block min-w-full">
         <table className="w-full text-xs">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 border-b border-r border-slate-200 bg-slate-50 px-2 py-2 text-left font-medium text-slate-600">Student</th>
+              <th className="sticky left-0 z-10 border-b border-r border-stone-200 bg-stone-50 px-2 py-2 text-left font-medium text-stone-600">Student</th>
               {columns.map((col) => (
-                <th key={col} className="border-b border-slate-200 px-1 py-2 font-medium text-slate-600" style={{ transform: "rotate(-45deg)", whiteSpace: "nowrap", width: 24 }}>
+                <th key={col} className="border-b border-stone-200 px-1 py-2 font-medium text-stone-600" style={{ transform: "rotate(-45deg)", whiteSpace: "nowrap", width: 24 }}>
                   {col.length > 8 ? col.slice(0, 7) + "…" : col}
                 </th>
               ))}
@@ -40,11 +40,11 @@ export function MasteryHeatmap({ rows, columns, getCell, className = "" }: Maste
           <tbody>
             {rows.map((row) => (
               <tr key={row.studentId}>
-                <td className="sticky left-0 z-10 border-r border-slate-100 bg-white py-1 font-medium text-slate-700">{row.studentName}</td>
+                <td className="sticky left-0 z-10 border-r border-stone-100 bg-white py-1 font-medium text-stone-700">{row.studentName}</td>
                 {columns.map((unitId) => {
                   const status = getCell(row.studentId, unitId);
                   return (
-                    <td key={unitId} className="border-b border-slate-100 p-0.5">
+                    <td key={unitId} className="border-b border-stone-100 p-0.5">
                       <div
                         className="h-5 w-5 rounded-sm"
                         style={{ backgroundColor: statusColors[status] }}

@@ -1,0 +1,4 @@
+{
+    "program": "def decode_alien_message(message):\n    decoded_values = []\n    for char in message:\n        # Convert each character to its corresponding alphabet position\n        decoded_value = ord(char) - ord('a') + 1\n        decoded_values.append(decoded_value)\n    return decoded_values\n\n# Example usage:\n# message = \"abc\"\n# print(decode_alien_message(message))  # Output: [1, 2, 3]",
+    "context_relevance": 1.0
+}

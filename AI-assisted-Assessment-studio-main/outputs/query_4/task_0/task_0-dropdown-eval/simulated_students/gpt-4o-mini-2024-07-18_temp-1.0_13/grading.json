@@ -1,0 +1,18 @@
+{
+  "raw_answers": {
+    "__BLANK_1__": "0",
+    "__BLANK_2__": "player_scores",
+    "__BLANK_3__": "total_scores"
+  },
+  "answers": {
+    "blank_1": "0",
+    "blank_2": "player_scores",
+    "blank_3": "total_scores"
+  },
+  "is_correct": true,
+  "correct_answers": {
+    "blank_1": "0",
+    "blank_2": "player_scores",
+    "blank_3": "total_scores"
+  }
+}

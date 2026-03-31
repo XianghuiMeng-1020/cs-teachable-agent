@@ -1,0 +1,4 @@
+{
+    "program": "def get_strengthiest_beast(filename):\n    # Initialize variables to track the strongest beast and its strength\n    max_strength = -1\n    strengthiest_beast = \"\"\n    \n    # Open the file in read mode\n    with open(filename, 'r') as file:\n        for line in file:\n            # Strip whitespace and split each line into name and strength\n            name, strength = line.strip().split(',')\n            \n            # Convert strength to an integer\n            strength = int(strength)\n\n            # Compare to find the highest strength beast\n            if strength > max_strength:\n                max_strength = strength\n                strengthiest_beast = name\n                \n    return strengthiest_beast\n",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+F.FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:15: AssertionError: assert 'Computer' in {'Bob': 1}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:32: AssertionError: assert 'Computer' in {'Carol': 4}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/solution_program.py:4: IndexError: list index out of range
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_game_of_chance_computer_wins
+FAILED outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_game_of_chance_no_previous_computer_score
+FAILED outputs/results1/query_4/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_game_of_chance_no_previous_scores
+========================= 3 failed, 2 passed in 0.14s ==========================

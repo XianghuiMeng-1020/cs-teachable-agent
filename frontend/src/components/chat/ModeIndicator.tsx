@@ -21,7 +21,7 @@ export function ModeIndicator({ taMessageCount, isQuestionerTurn, compact }: Mod
         className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium ${
           questioner
             ? "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200"
-            : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
         }`}
         title={questioner ? "Questioner mode: TA will ask a thought-provoking question" : "Help Receiver mode"}
       >
@@ -31,13 +31,13 @@ export function ModeIndicator({ taMessageCount, isQuestionerTurn, compact }: Mod
     );
   }
   return (
-    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+    <div className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400">
       <span>TA mode:</span>
       <span
         className={`inline-flex items-center gap-1 rounded px-2 py-0.5 font-medium ${
           questioner
             ? "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200"
-            : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
         }`}
       >
         {questioner ? <HelpCircle className="h-3.5 w-3.5" /> : <MessageCircle className="h-3.5 w-3.5" />}

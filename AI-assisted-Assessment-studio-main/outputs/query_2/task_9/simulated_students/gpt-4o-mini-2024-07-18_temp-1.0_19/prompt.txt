@@ -1,0 +1,28 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are creating a program to assist with cooking recipes. Your task is to write a function called `recipe_ingredients_calculator` that reads a file containing a list of recipes and their ingredients and outputs a list of ingredients sorted in alphabetical order, without duplicates, that are needed to make all the recipes in the file.
+
+The input file, named `recipes.txt`, contains one recipe per line. Each recipe has a name, followed by a colon (`:`), and then a comma-separated list of ingredients. Ensure you handle cases where multiple recipes might use the same ingredient. You need to read this file, extract all unique ingredients, and output them sorted alphabetically.
+
+For example, consider the following content of `recipes.txt`:
+```
+Pasta:tomato,basil,garlic,olive oil
+French Toast:egg,milk,butter,sugar
+Salad:lettuce,tomato,cucumber,olive oil
+```
+
+The function `recipe_ingredients_calculator` should return:
+```
+['basil', 'butter', 'cucumber', 'egg', 'garlic', 'lettuce', 'milk', 'olive oil', 'sugar', 'tomato']
+```
+
+Function Signature:
+`def recipe_ingredients_calculator(file_path):
+    # Implement your function`
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

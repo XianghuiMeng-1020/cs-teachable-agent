@@ -1,0 +1,98 @@
+{
+  "item_id": "task_1-dropdown",
+  "source_task_id": "task_1",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_1",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for sort_space_stations",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n### Task Description In a futuristic interstellar society, space stations are assigned numbers indicating their position along the cosmic trail. The numbers are sequenced such that `Even` numbered stations belong to the alien Teklar species, while `Odd` numbered stations are inhabited by humans. The task is to create a function `sort_space_stations(stations)` that takes a dictionary of space stations and sorts them based on their numbering. #### Input: - A dictionary `stations` where keys are...",
+  "interaction_content": {
+    "function_name": "sort_space_stations",
+    "prompt_template": "def sort_space_stations(stations):\n    sorted_stations = {}\n    for key in sorted(stations.keys()):\n        prefix = 'Teklar' if key __BLANK_1__ __BLANK_3__ __BLANK_2__ 0 else 'Human'\n        new_key = f\"{prefix} {key}\"\n        sorted_stations[new_key] = stations[key]\n    return sorted_stations",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "%",
+          "//",
+          "+",
+          "-"
+        ],
+        "correct_answer": "%",
+        "misconception_tags": {
+          "//": "operator_confusion",
+          "+": "operator_confusion",
+          "-": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "==",
+          "!=",
+          "<",
+          ">"
+        ],
+        "correct_answer": "==",
+        "misconception_tags": {
+          "!=": "operator_confusion",
+          "<": "operator_confusion",
+          ">": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "2",
+          "3",
+          "1",
+          "0"
+        ],
+        "correct_answer": "2",
+        "misconception_tags": {
+          "3": "off_by_one_or_default_value",
+          "1": "off_by_one_or_default_value",
+          "0": "off_by_one_or_default_value"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "%",
+      "blank_2": "==",
+      "blank_3": "2"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_1",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

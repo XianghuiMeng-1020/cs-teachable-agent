@@ -1,0 +1,4 @@
+{
+    "program": "def score_board_games(players, games):\n    \"\"\"\n    Updates the `players` dictionary in-place to compute the final scores based on the games provided.\n    \"\"\"\n    for game in games:\n        winner = game.get(\"winner\")\n        \n        # Only update if there is a valid winner\n        if winner in players:\n            players[winner] += 10\n\n# Example usage\nplayers = {\"Alice\": 100, \"Bob\": 90, \"Charlie\": 120}\ngames = [\n    {\"round\": 1, \"player1\": \"Alice\", \"player2\": \"Bob\", \"winner\": \"Alice\"},\n    {\"round\": 2, \"player1\": \"Charlie\", \"player2\": \"Alice\", \"winner\": \"Alice\"},\n    {\"round\": 3, \"player1\": \"Bob\", \"player2\": \"Charlie\", \"winner\": \"Charlie\"}\n]\nscore_board_games(players, games)\nprint(players)  # Output should be {\"Alice\": 120, \"Bob\": 90, \"Charlie\": 130}",
+    "context_relevance": 1.0
+}

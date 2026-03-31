@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\n\ndef select_winner(input_filename, output_filename):\n    with open(input_filename, 'r') as infile:\n        lines = infile.readlines()\n\n    if not lines:  # Handle case when there are no participants\n        with open(output_filename, 'w') as outfile:\n            outfile.write('')\n            return\n\n    winner_line = random.choice(lines).strip()\n    winner_name = winner_line.split(' ')[0]  # The participant's name is the first word\n\n    with open(output_filename, 'w') as outfile:\n        outfile.write(winner_name)\n",
+    "context_relevance": 1.0
+}

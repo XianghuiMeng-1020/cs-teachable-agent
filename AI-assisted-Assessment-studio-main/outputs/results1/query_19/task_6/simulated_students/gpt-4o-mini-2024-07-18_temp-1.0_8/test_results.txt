@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:29: AssertionError: assert 'average impa...3333333333335' == 'average impa...orce: 3333.33'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:41: AssertionError: assert 'average impact force: 2500.0' == 'average impa...orce: 2500.00'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:47: AssertionError: assert 'average impact force: 5000.0' == 'average impa...orce: 5000.00'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:53: AssertionError: assert 'No data avai...ata available' == 'No data available'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_normal_case
+FAILED outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_multiple_asteroids
+FAILED outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_single_asteroid
+FAILED outputs/results1/query_19/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_nonexistent_file
+========================= 4 failed, 1 passed in 0.07s ==========================

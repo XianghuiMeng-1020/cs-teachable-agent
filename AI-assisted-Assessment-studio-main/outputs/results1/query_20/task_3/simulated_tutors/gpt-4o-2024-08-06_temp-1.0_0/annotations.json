@@ -1,0 +1,4 @@
+{
+    "program": "def determine_winner(alice_rolls, bob_rolls):\n    alice_score = sum(2 * int(roll) for roll in alice_rolls)\n    bob_score = sum(2 * int(roll) for roll in bob_rolls)\n    \n    if alice_score > bob_score:\n        return \"Alice\"\n    elif bob_score > alice_score:\n        return \"Bob\"\n    else:\n        return \"Draw\"",
+    "context_relevance": 0.0
+}

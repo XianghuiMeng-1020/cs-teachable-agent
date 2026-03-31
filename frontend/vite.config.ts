@@ -62,12 +62,17 @@ export default defineConfig({
     // Asset optimization
     assetsInlineLimit: 4096,
   },
-  // Development optimizations
   server: {
     port: 3000,
     open: true,
     hmr: {
       overlay: false,
+    },
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+      },
     },
   },
   // Preview server

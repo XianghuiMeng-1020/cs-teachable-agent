@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with developing a Python function for a cooking application. The function, `ingredient_converter(recipe, conversion_factor)`, takes two arguments:
+
+1. `recipe`: a list of strings, where each string represents an ingredient and its quantity in the format 'quantity unit ingredient_name'. For example: ['2 cups flour', '1.5 liters milk', '3 tbsp sugar'].
+
+2. `conversion_factor`: a float value representing a multiplier to scale the recipe. This value is used to adjust the quantities of each ingredient.
+
+The function should return a new list of strings with the quantities adjusted by the conversion factor, maintaining the same format.
+
+For instance, if the conversion factor is 0.5, the function should reduce each quantity by half. If the factor is 2, the function should double each quantity.
+
+You should assume that the quantity in the string is a valid number that can include a decimal and the rest of the string is well-formed (i.e., a valid unit and ingredient name).
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

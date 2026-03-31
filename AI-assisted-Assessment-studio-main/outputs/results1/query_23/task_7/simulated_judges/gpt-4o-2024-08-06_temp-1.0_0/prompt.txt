@@ -1,0 +1,76 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Strings', 'Loops', 'Selection Statements (if/else, etc.)', 'Classes and Objects']:
+
+### Beginning of task description
+In the realm of board games, players often keep track of their scores using scoreboards. Your task is to design and implement a simple scoreboard system for a board game. The system will store player scores and allow players to update their scores after each game round.
+
+Create a class named `Scoreboard` that will manage the scores of players. The `Scoreboard` class should fulfill the following requirements:
+
+1. **Initialization**: The class should be initialized with a list of player names. The scores for all players should be initialized to zero.
+
+2. **Update Score**: Implement a method `update_score(self, player_name, score_change)` where `player_name` is the name of the player whose score will be updated. `score_change` is an integer indicating the score change (positive for winning points, negative for losing points).
+
+3. **Player Score**: Implement a method `get_score(self, player_name)` that retrieves the current score of the specified player.
+
+4. **Winner**: Implement a method `get_winner(self)` that returns the name of the player with the highest score. If there is a tie, return all the players with the highest score in a comma-separated string, sorted alphabetically.
+
+5. **All Scores**: Implement a method `get_all_scores(self)` that returns a string representation of all players' scores in alphabetical order of their names, in the format `"name1:score1, name2:score2"`.
+
+Your program should pass the provided test suite to ensure correctness.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import Scoreboard
+
+@pytest.fixture
+def setup_module():
+    global players
+    players = ['Alice', 'Bob', 'Charlie']
+
+def teardown_module(module):
+    pass
+
+def test_initial_scores(setup_module):
+    scoreboard = Scoreboard(players)
+    assert scoreboard.get_score('Alice') == 0
+    assert scoreboard.get_score('Bob') == 0
+    assert scoreboard.get_score('Charlie') == 0
+
+def test_update_scores(setup_module):
+    scoreboard = Scoreboard(players)
+    scoreboard.update_score('Alice', 10)
+    scoreboard.update_score('Bob', 5)
+    assert scoreboard.get_score('Alice') == 10
+    assert scoreboard.get_score('Bob') == 5
+    assert scoreboard.get_score('Charlie') == 0
+
+def test_get_winner(setup_module):
+    scoreboard = Scoreboard(players)
+    scoreboard.update_score('Alice', 10)
+    scoreboard.update_score('Bob', 10)
+    scoreboard.update_score('Charlie', 5)
+    winner = scoreboard.get_winner()
+    assert winner == 'Alice, Bob'
+
+def test_update_and_retrieve_all_scores(setup_module):
+    scoreboard = Scoreboard(players)
+    scoreboard.update_score('Charlie', 3)
+    scoreboard.update_score('Alice', 5)
+    assert scoreboard.get_all_scores() == "Alice:5, Bob:0, Charlie:3"
+
+def test_score_ties(setup_module):
+    scoreboard = Scoreboard(players)
+    scoreboard.update_score('Alice', 7)
+    scoreboard.update_score('Bob', 7)
+    assert scoreboard.get_winner() == 'Alice, Bob'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

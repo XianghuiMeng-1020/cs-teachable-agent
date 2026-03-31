@@ -49,20 +49,26 @@ export function TeachPage() {
   const misconceptions = misconceptionsData?.misconceptions ?? [];
 
   return (
-    <div
-      className="grid h-[calc(100vh-var(--topbar-height)-40px)] gap-4 grid-cols-1 lg:grid-cols-[1fr_380px]"
-    >
-      <div className="min-h-0 overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-card order-2 lg:order-1">
+    <div className="grid h-[calc(100vh-var(--topbar-height)-48px)] gap-5 grid-cols-1 lg:grid-cols-[1fr_360px]">
+      {/* Chat panel */}
+      <div className="min-h-0 overflow-hidden rounded-xl border border-stone-200/80 bg-white shadow-card order-2 lg:order-1">
         <ChatPanel taId={currentTaId} />
       </div>
-      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto order-1 lg:order-2">
+
+      {/* Sidebar panel */}
+      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto order-1 lg:order-2 pr-1">
         <KnowledgeGraph
           units={units}
           knowledgeUnitDefinitions={(state as { knowledge_unit_definitions?: unknown })?.knowledge_unit_definitions ?? undefined}
           className="min-h-[200px] flex-shrink-0"
         />
-        <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
+
+        <div className="rounded-xl border border-stone-200/80 bg-white p-4">
+          <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
+        </div>
+
         <LearningObjectives learnedUnitIds={state?.learned_unit_ids ?? []} compact />
+
         {misconceptions.length > 0 ? (
           misconceptions.map((m) => (
             <MisconceptionCard
@@ -77,24 +83,26 @@ export function TeachPage() {
         ) : (
           <MisconceptionCardEmpty />
         )}
-        <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+
+        <div className="rounded-xl border border-stone-200/80 bg-white overflow-hidden">
           <button
             type="button"
             onClick={() => setPlaygroundOpen((o) => !o)}
-            className="flex w-full items-center justify-between px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors"
           >
             <span className="flex items-center gap-2">
-              <Code className="h-4 w-4 text-brand-500" />
-              Code playground
+              <Code className="h-4 w-4 text-brand-600" />
+              Code Playground
             </span>
-            {playgroundOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {playgroundOpen ? <ChevronUp className="h-4 w-4 text-stone-400" /> : <ChevronDown className="h-4 w-4 text-stone-400" />}
           </button>
           {playgroundOpen && (
-            <div className="border-t border-slate-100 p-2">
+            <div className="border-t border-stone-100 p-3">
               <LiveCodeEditor maxHeight="200px" />
             </div>
           )}
         </div>
+
         {domainId === "ai_literacy" && (
           <div className="space-y-4">
             <PromptLab taId={currentTaId} />

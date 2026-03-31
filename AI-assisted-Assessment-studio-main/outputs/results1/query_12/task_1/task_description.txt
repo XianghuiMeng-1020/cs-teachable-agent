@@ -1,0 +1,43 @@
+## Task: Recipe Cooking Time Estimator
+
+You have been tasked with creating a Python program that estimates the total cooking time for a list of recipes. Each recipe is stored in a separate text file and contains multiple cooking steps. Each step specifies an action and the time (in minutes) it takes to complete that action. 
+
+Your program should:
+- Read multiple recipe files from the 'recipes/' directory. Each recipe file will be named 'recipeX.txt', where X is a unique integer.
+- Calculate the total cooking time for each recipe, which is the sum of all the step durations in the file.
+- Write the estimated total cooking time of each recipe into 'cooking_times.txt'. Each line of this file should be in the format: 'Recipe X: Y minutes', where X is the recipe number and Y is the total time.
+
+### File Format
+Each recipe file in 'recipes/' directory will have lines formatted as follows:
+```
+Step description - T minutes
+```
+The program should only be concerned with extracting the time 'T'.
+
+### Function Signature
+- `def estimate_cooking_times() -> None`
+
+The function does not take any parameters and should write the results to 'cooking_times.txt'. The output order should match the order of files processed, and your function should be able to handle any number of files in the 'recipes/' directory.
+
+### Example
+Assume 'recipes/recipe1.txt' contains:
+```
+Chop vegetables - 10 minutes
+Boil water - 5 minutes
+Cook pasta - 15 minutes
+```
+
+And 'recipes/recipe2.txt' contains:
+```
+Mix ingredients - 5 minutes
+Bake - 20 minutes
+Cool - 10 minutes
+```
+
+Your program should create 'cooking_times.txt' with:
+```
+Recipe 1: 30 minutes
+Recipe 2: 35 minutes
+```
+
+Note: You may assume the directory and files exist when your program runs.

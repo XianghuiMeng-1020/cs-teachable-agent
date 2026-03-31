@@ -1,0 +1,25 @@
+### Dice Game of Chance
+
+Create a function `dice_game(num_rolls)` that simulates a simple dice game where two six-sided dice are rolled `num_rolls` times. The function returns a list, where each element corresponds to the outcome of a roll. For each roll, check the sum of the two dice:
+
+- If the sum is 7 or 11, add 10 points.
+- If the sum is 2, 3, or 12, subtract 5 points.
+- Otherwise, add 0 points.
+
+The function should return a list of integers, where each element represents the cumulative score after each roll.
+
+The dice rolls should be simulated using a predetermined list of integer pairs, where each pair represents a roll of two dice. This is to eliminate the need for random number generation, which is outside the scope of this task. This list will be in the format `dice_pairs` with each pair as `(d1, d2)`, and should be used in order of appearance during the rolls.
+
+### Example
+
+```
+dice_pairs = [(1,6), (6,6), (1,1), (6,5)]
+result = dice_game(4, dice_pairs)
+assert result == [10, 10, 5, 5]
+```
+
+In this example:
+- First roll (1+6): 7 => 10 points
+- Second roll (6+6): 12 => -5 points (cumulative 5)
+- Third roll (1+1): 2 => -5 points (cumulative 0)
+- Fourth roll (6+5): 11 => 10 points (cumulative 10)

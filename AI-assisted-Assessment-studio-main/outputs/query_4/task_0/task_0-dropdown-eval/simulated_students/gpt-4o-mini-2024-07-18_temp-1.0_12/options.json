@@ -1,0 +1,20 @@
+{
+  "blank_1": [
+    "-1",
+    "1",
+    "2",
+    "0"
+  ],
+  "blank_2": [
+    "player",
+    "player_scores",
+    "total_scores",
+    "calculate_scores"
+  ],
+  "blank_3": [
+    "total_scores",
+    "calculate_scores",
+    "player_scores",
+    "player"
+  ]
+}

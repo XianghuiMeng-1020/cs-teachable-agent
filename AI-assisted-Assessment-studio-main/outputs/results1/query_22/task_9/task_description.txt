@@ -1,0 +1,12 @@
+Create a Python program to simulate a board game high scores management system called `manage_high_scores`. The function `manage_high_scores(records_file, new_scores)` takes two arguments:
+
+1. `records_file`: A string representing the name of a text file containing the current high scores. Each line in the file contains a player's name followed by their high score, separated by a space. The initial file keeps scores in descending order.
+
+2. `new_scores`: A list of tuples with each tuple containing a player's name and their latest score.
+
+The function should update the high scores file with the new scores provided. Ensure that:
+- If a player in `new_scores` already exists in the file, update their score only if the new score is higher than their current score.
+- If a player in `new_scores` does not exist in the file, add their name and score.
+- Keep the records sorted in descending order based on scores after all updates.
+
+The program should modify the original file in-place. Your solution should not use additional data structures like dictionaries.

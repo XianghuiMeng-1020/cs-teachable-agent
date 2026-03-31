@@ -1,0 +1,20 @@
+{
+  "raw_answers": {
+    "BLANK_1": " < ",
+    "BLANK_2": " 1 ",
+    "BLANK_3": " 1 ",
+    "NULL": ""
+  },
+  "answers": {
+    "BLANK_1": " < ",
+    "BLANK_2": " 1 ",
+    "BLANK_3": " 1 ",
+    "NULL": ""
+  },
+  "is_correct": false,
+  "correct_answers": {
+    "blank_1": "==",
+    "blank_2": "1",
+    "blank_3": "6"
+  }
+}

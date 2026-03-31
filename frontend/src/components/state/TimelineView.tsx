@@ -27,7 +27,7 @@ interface TimelineViewProps {
 export function TimelineView({ events, className }: TimelineViewProps) {
   return (
     <div className={cn("space-y-0", className)}>
-      <div className="border-l-2 border-slate-200 pl-4">
+      <div className="border-l-2 border-stone-200 pl-4">
         {events.map((evt) => (
           <div key={evt.id} className="relative pb-6 last:pb-0">
             <div
@@ -36,10 +36,10 @@ export function TimelineView({ events, className }: TimelineViewProps) {
                 typeDotColors[evt.type]
               )}
             />
-            <div className="rounded-lg border border-slate-100 bg-white p-3">
-              <p className="text-sm font-medium text-slate-800">{evt.title}</p>
-              <p className="mt-1 text-xs text-slate-500">{evt.description}</p>
-              <p className="mt-1 text-xs text-slate-400">{evt.timestamp}</p>
+            <div className="rounded-lg border border-stone-100 bg-white p-3">
+              <p className="text-sm font-medium text-stone-800">{evt.title}</p>
+              <p className="mt-1 text-xs text-stone-500">{evt.description}</p>
+              <p className="mt-1 text-xs text-stone-400">{evt.timestamp}</p>
               {evt.type.startsWith("test_") && evt.metadata?.ta_code && (
                 <div className="mt-2">
                   <CodeEditor

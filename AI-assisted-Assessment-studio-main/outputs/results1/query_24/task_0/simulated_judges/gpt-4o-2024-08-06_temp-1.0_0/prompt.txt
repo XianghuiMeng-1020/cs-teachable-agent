@@ -1,0 +1,53 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+You are tasked with creating a function called `board_game_summary` that analyzes a string representing the results of a multiplayer board game. In this game, the players are identified by single uppercase letters ('A' to 'Z'), and each player's score is represented by positive integers. The results string is formatted as pairs of character and number, indicating the player's award received multiple times during the game.
+
+For example `"A12B4A3B10C1"` translates to Player 'A' getting two awards of 12 and 3 points, Player 'B' getting awards of 4 and 10 points, and Player 'C' getting an award of 1 point.
+
+Your task is to implement the `board_game_summary(results)` function, where `results` is a `string`, and the function returns a dictionary where each key is a player and the corresponding value is the player's total score (sum of all awards received by that player).
+
+The function should handle invalid data gracefully. If the results string is improperly formatted or if a player's score cannot be determined, the function should raise a `ValueError` with a descriptive message indicating the issue.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import board_game_summary
+
+class InvalidFormatError(Exception):
+    pass
+
+def test_board_game_summary_valid_input():
+    assert board_game_summary("A12B4A3B10C1") == {'A': 15, 'B': 14, 'C': 1}
+
+
+def test_board_game_summary_single_player():
+    assert board_game_summary("Z50") == {'Z': 50}
+
+
+def test_board_game_summary_multiple_awards_per_player():
+    assert board_game_summary("D2D3D5") == {'D': 10}
+
+
+def test_board_game_summary_invalid_input_non_numeric():
+    try:
+        board_game_summary("E3F2GZ")
+    except ValueError as e:
+        assert str(e) == "Invalid format in results string"
+
+
+def test_board_game_summary_invalid_input_empty_string():
+    try:
+        board_game_summary("")
+    except ValueError as e:
+        assert str(e) == "Invalid format in results string"
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

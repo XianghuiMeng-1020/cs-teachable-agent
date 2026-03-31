@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 4 items
+
+outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 25%]
+FFFE                                                                     [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_different_rolls[bets.txt-results.txt-results.txt-2] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'bets.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:42: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+/Volumes/T7/idea/pytasksyn/outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:57: AttributeError: 'builtin_function_or_method' object has no attribute 'raw'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_process_bets[bets.txt-results.txt-results.txt-5]
+FAILED outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_different_rolls[bets.txt-results.txt-results.txt-1]
+FAILED outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_different_rolls[bets.txt-results.txt-results.txt-4]
+FAILED outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_different_rolls[bets.txt-results.txt-results.txt-2]
+ERROR outputs/query_0/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_different_rolls[bets.txt-results.txt-results.txt-2]
+========================== 4 failed, 1 error in 0.12s ==========================

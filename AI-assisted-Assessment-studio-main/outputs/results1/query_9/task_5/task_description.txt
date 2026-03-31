@@ -1,0 +1,27 @@
+You are an assistant to a museum curator interested in cataloguing artifacts related to Greek mythology. As part of this effort, you need to create a simple program that processes a collection of mythical artifacts, categorizes them by their mythological origins, and provides some summary statistics.
+
+Your task is to implement a function, `process_myth_artifacts(artifacts)`, where `artifacts` is a list of dictionaries, each containing information about an artifact. Each dictionary has the following keys:
+- 'name': a string representing the name of the artifact
+- 'myth': a string representing which mythology the artifact originates from (e.g., 'Greek', 'Norse', etc.)
+
+The function should return a dictionary with each key representing a unique mythological category found in the input, and the value being a list of artifact names that belong to that mythology. Additionally, the dictionary should include an entry with the key 'totals', which should itself be a dictionary containing the total number of artifacts for each mythology and the total number of artifacts overall.
+
+For example, if given the following input:
+```python
+artifacts = [
+    {'name': 'Mjolnir', 'myth': 'Norse'},
+    {'name': 'Aegis', 'myth': 'Greek'},
+    {'name': 'Excalibur', 'myth': 'Arthurian'},
+    {'name': 'Olympus', 'myth': 'Greek'},
+    {'name': 'Gungnir', 'myth': 'Norse'}
+]
+```
+The function should return:
+```python
+{
+    'Norse': ['Mjolnir', 'Gungnir'],
+    'Greek': ['Aegis', 'Olympus'],
+    'Arthurian': ['Excalibur'],
+    'totals': {'Norse': 2, 'Greek': 2, 'Arthurian': 1, 'total': 5}
+}
+```

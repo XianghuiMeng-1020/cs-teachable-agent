@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_extract_artifacts_with_new_data[Poseidon;Trident\n-expected_content3] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'artifacts.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:30: AssertionError: assert [] == ['Aegis\n', '...kness\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:48: AssertionError: assert ['Aegis\n', '...kness\n', ...] == ['Aegis\n', '...elmet\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:48: AssertionError: assert ['Aegis\n', '...kness\n', ...] == ['Aegis\n', '...Eagle\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:48: AssertionError: assert ['Aegis\n', '...'Dove\n', ...] == ['Aegis\n', '...Eagle\n', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'mythology_data.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts[expected_content0]
+FAILED outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts_with_new_data[Athena;Helmet\n-expected_content0]
+FAILED outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts_with_new_data[Hermes;Caduceus\n-expected_content1]
+FAILED outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts_with_new_data[Aphrodite;Girdle;Dove\n-expected_content2]
+FAILED outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts_with_new_data[Poseidon;Trident\n-expected_content3]
+ERROR outputs/results1/query_7/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_extract_artifacts_with_new_data[Poseidon;Trident\n-expected_content3]
+========================== 5 failed, 1 error in 0.20s ==========================

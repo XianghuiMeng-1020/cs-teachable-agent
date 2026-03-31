@@ -1,0 +1,42 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Strings']:
+
+### Beginning of task description
+In the board game "Kingdom Builder", players aim to connect as many of their settlements to special location tiles as possible. Each player builds their kingdom by placing different settlements on a game board, scored according to specific rules.
+
+Your task is to write a Python function `calculate_score(settlementsA, settlementsB, specialLocations)` that calculates and compares the scores of two players, Player A and Player B, based on their settlements' proximity to three special location tiles.
+
+- `settlementsA` and `settlementsB` are strings representing the settlements for Player A and Player B, respectively. Each character in the string corresponds to a location on the board, and is either '0' (no settlement) or '1' (a settlement).
+- `specialLocations` is a string of the same length indicating the location of three special tiles on the board. Each character is either '0' (no special tile) or 'S' (special tile).
+
+A player's score is the number of settlements adjacent to special locations. Two locations are considered adjacent if they differ by exactly 1 index (either left or right).
+
+Return a string with 'A', 'B', or 'Tie' indicating which player has the higher score or if it's a tie.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_score
+
+
+def test_player_a_wins():
+    assert calculate_score("101010", "010101", "0S0S0S") == "A"
+
+def test_player_b_wins():
+    assert calculate_score("010000", "001010", "S0S0S0") == "B"
+
+def test_tie_game():
+    assert calculate_score("1100", "1100", "00S0") == "Tie"
+
+def test_no_special_locations():
+    assert calculate_score("1111", "0000", "0000") == "Tie"
+
+def test_special_locations_without_settlements():
+    assert calculate_score("0000", "0000", "SSSS") == "Tie"
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

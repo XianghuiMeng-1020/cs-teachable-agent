@@ -1,0 +1,53 @@
+You are a student solving a Python dropdown question.
+Return only a JSON object with key `answers`.
+The value of `answers` must be a list of objects.
+Each object must contain `blank_id` and `selected_option`.
+Return exactly one answer object for every blank.
+Copy every selected option exactly as written in the choices.
+
+Title: Dropdown Question for classify_planets
+Prompt: Fill each blank in the Python code with the single best option so the program matches the canonical source solution.
+
+Source task summary:
+**Task Description:** In the distant future, the Galactic Institute of Astronomical Studies is classifying various planets in the galaxy based on their atmospheric density and the presence of alien lifeforms. You have been tasked to write a Python function, `classify_planets(data)`, that takes a list of planets as its argument. Each planet is represented as a dictionary containing the following keys: - `name`: A string representing the planet's name. - `atmos_density`: A float value represent...
+
+Code template:
+```python
+def classify_planets(data):
+    categories = {
+        __BLANK_2__: [],
+        __BLANK_3__: [],
+        'Uninhabitable': []
+    }
+    for planet in data:
+        density = planet['atmos_density']
+        life = planet['alien_life']
+        name = planet['name']
+        if __BLANK_1__ <= density <= 3.0:
+            if life:
+                categories['Habitable'].append(name)
+            else:
+                categories['Potentially Habitable'].append(name)
+        else:
+            categories['Uninhabitable'].append(name)
+    return categories
+```
+
+Choices by blank:
+blank_1 (__BLANK_1__):
+- 2
+- 1.0
+- 3
+- 0
+
+blank_2 (__BLANK_2__):
+- 'TODO'
+- ''
+- 'Habitable'
+- 'UNKNOWN'
+
+blank_3 (__BLANK_3__):
+- 'UNKNOWN'
+- 'Potentially Habitable'
+- 'TODO'
+- ''

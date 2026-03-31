@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 20%]
+F.FFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+____________________ ERROR at teardown of test_tie_handling ____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'players_input.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:27: AssertionError: assert None == 0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:44: FileNotFoundError: [Errno 2] No such file or directory: 'scores_output.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/solution_program.py:4: FileNotFoundError: [Errno 2] No such file or directory: 'players_input.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_non_existent_player
+FAILED outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_empty_scores_file
+FAILED outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_tie_handling
+ERROR outputs/results1/query_21/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_tie_handling
+===================== 3 failed, 2 passed, 1 error in 0.20s =====================

@@ -1,0 +1,34 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task: Board Game Score Tracker
+
+You are required to implement a simple Python program to manage and update scores from a board game tournament.
+
+The game results are stored in a text file named `scores.txt`, each line representing the scores of a game in the format:
+
+```
+player1, player2, player3, player4  # score1, score2, score3, score4
+```
+
+Each `scoreX` is an integer representing the score achieved by `playerX` in that game. Players always appear in this order, and there are always four players. Your goal is to read this file and output the total score of all four players combined over all games.
+
+Your task is to implement the following function:
+
+```python
+def calculate_total_score() -> int:
+    """
+    Reads the scores from 'scores.txt', calculates the total score for all players combined.
+
+    Returns:
+        int: The total score of all players.
+    """
+```
+
+You do not need to handle any edge cases related to the existence of the file or its correctness. You can assume that the file is always present and follows the given format.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

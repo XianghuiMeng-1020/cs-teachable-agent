@@ -1,0 +1,45 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In the world of ancient mythology, mythical creatures play a pivotal role in various stories across different cultures. Your task is to create a Python function that processes a list of legendary creatures by counting their occurrences in various stories and identifying their origins.
+
+You need to implement a function `analyze_mythical_creatures(creatures)` that takes a parameter `creatures`, which is a list of dictionaries. Each dictionary represents a mythical creature entry and includes the following keys:
+- `name`: a string representing the creature's name.
+- `story_count`: an integer representing how many stories feature this creature.
+- `origin`: a string indicating the mythological origin of the creature (e.g., 'Greek', 'Norse').
+
+The function should return a dictionary that includes:
+- `total_stories`: the total number of stories featuring all creatures combined.
+- `creature_count`: a dictionary where the keys are creature names and the values are the number of stories they appear in.
+- `origin_count`: a dictionary where the keys are mythological origins and the values are the number of times creatures from this origin appear in stories.
+
+### Example
+Suppose the input list is:
+
+```python
+creatures = [
+    {'name': 'Cerberus', 'story_count': 3, 'origin': 'Greek'},
+    {'name': 'Fenrir', 'story_count': 2, 'origin': 'Norse'},
+    {'name': 'Phoenix', 'story_count': 4, 'origin': 'Greek'},
+    {'name': 'Jormungandr', 'story_count': 1, 'origin': 'Norse'},
+]
+```
+
+The function should return:
+
+```python
+{
+    'total_stories': 10,
+    'creature_count': {'Cerberus': 3, 'Fenrir': 2, 'Phoenix': 4, 'Jormungandr': 1},
+    'origin_count': {'Greek': 7, 'Norse': 3}
+}
+```
+
+### Note
+- Each `origin` appears only once per creature in the origin_count even if the creature appears in multiple stories.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

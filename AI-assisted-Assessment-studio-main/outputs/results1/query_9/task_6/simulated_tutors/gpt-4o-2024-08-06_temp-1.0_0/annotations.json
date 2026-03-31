@@ -1,0 +1,4 @@
+{
+    "program": "def mythological_creatures_info(creatures):\n    result = {}\n    for creature in creatures:\n        name = creature['name']\n        attributes = creature.get('attributes', {})\n        origin = attributes.get('origin', None)\n        type_ = attributes.get('type', None)\n        strength = attributes.get('strength', 'unknown')\n        \n        type_strength = None\n        if type_ is not None:\n            type_strength = f\"{type_}: {strength}\"\n        \n        result[name] = {\n            'origin': origin,\n            'type_strength': [type_strength]\n        }\n    \n    return result\n\n# Example usage\ncreatures = [\n    {'name': 'Minotaur', 'attributes': {'type': 'Beast', 'origin': 'Greece', 'strength': 'High'}},\n    {'name': 'Dragon', 'attributes': {'type': 'Reptile', 'origin': 'China'}}\n]\nprint(mythological_creatures_info(creatures))",
+    "context_relevance": 1.0
+}

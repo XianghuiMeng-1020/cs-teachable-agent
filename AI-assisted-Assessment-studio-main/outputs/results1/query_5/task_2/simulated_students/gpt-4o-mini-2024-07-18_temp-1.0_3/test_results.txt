@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at teardown of test_ignore_empty_lines _________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'tasks.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:10: FileNotFoundError: [Errno 2] No such file or directory: 'tasks_empty.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:10: FileNotFoundError: [Errno 2] No such file or directory: 'tasks_no_mortal.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:10: FileNotFoundError: [Errno 2] No such file or directory: 'tasks_no_divine.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/solution_program.py:10: FileNotFoundError: [Errno 2] No such file or directory: 'tasks_with_empty_lines.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_empty_file
+FAILED outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_no_mortal_tasks
+FAILED outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_no_divine_tasks
+FAILED outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_ignore_empty_lines
+ERROR outputs/results1/query_5/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_3/test_suite_stu.py::test_ignore_empty_lines
+===================== 4 failed, 1 passed, 1 error in 0.18s =====================

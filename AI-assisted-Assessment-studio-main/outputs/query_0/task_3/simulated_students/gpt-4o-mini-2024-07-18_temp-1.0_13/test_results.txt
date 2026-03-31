@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'rolls.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.33s ===============================

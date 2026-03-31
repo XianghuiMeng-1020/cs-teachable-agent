@@ -1,0 +1,69 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+Create a Python program that manages recipes. The program should include a class named `Recipe` with attributes `name`, `ingredients`, and `instructions`. Implement methods within the class to read from and write to a file named `recipes.txt`. Each recipe is stored with a format where the first line is the recipe name, followed by a list of ingredients (one per line), and ending with the instructions (a single line).
+
+The program should provide the following functionalities:
+1. Add a new recipe to the file. If a recipe with the same name already exists, an exception should be raised.
+2. Retrieve a recipe by name.
+3. Handle errors gracefully, such as when attempting to retrieve a non-existent recipe.
+
+To add a new recipe, use the method `add_recipe(name, ingredients, instructions)`. To retrieve a recipe, use the method `get_recipe(name)`, which returns a dictionary with keys `ingredients` and `instructions`.
+
+Ensure to handle exceptions where necessary and document those exceptions as part of the methods.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import Recipe
+
+def setup_module(module):
+    with open('recipes.txt', 'w') as f:
+        f.write('Pasta\nTomato Sauce\nPasta\nCheese\nBoil pasta and mix with sauce.\n')
+        f.write('Salad\nLettuce\nTomato\nOlive Oil\nMix all ingredients.\n')
+
+def teardown_module(module):
+    os.remove('recipes.txt')
+
+def test_add_recipe():
+    recipe = Recipe()
+    recipe.add_recipe('Sandwich', ['Bread', 'Ham', 'Cheese', 'Lettuce'], 'Stack ingredients between bread slices.')
+    result = recipe.get_recipe('Sandwich')
+    assert result == {'ingredients': ['Bread', 'Ham', 'Cheese', 'Lettuce'], 'instructions': 'Stack ingredients between bread slices.'}
+
+
+def test_add_existing_recipe():
+    recipe = Recipe()
+    with pytest.raises(Exception):
+        recipe.add_recipe('Pasta', ['Pasta', 'Tomato Sauce'], 'Boil pasta and mix with sauce.')
+
+
+def test_get_existing_recipe():
+    recipe = Recipe()
+    result = recipe.get_recipe('Salad')
+    assert result['ingredients'] == ['Lettuce', 'Tomato', 'Olive Oil']
+    assert result['instructions'] == 'Mix all ingredients.'
+
+
+def test_get_nonexistent_recipe():
+    recipe = Recipe()
+    with pytest.raises(Exception):
+        recipe.get_recipe('Pizza')
+
+
+def test_file_persistence():
+    recipe = Recipe()
+    result_before = recipe.get_recipe('Pasta')
+    assert result_before['ingredients'] == ['Tomato Sauce', 'Pasta', 'Cheese']
+    assert result_before['instructions'] == 'Boil pasta and mix with sauce.'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

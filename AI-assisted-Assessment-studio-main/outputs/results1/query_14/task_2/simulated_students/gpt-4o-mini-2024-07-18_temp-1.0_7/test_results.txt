@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 20%]
+..FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:37: AssertionError: assert {'100g': 'Flo...r': '1 liter'} == {'flour': '',...r': '1 liter'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:46: AssertionError: assert {'basil': '',...100 ml olive'} == {'basil': '',...il': '100 ml'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_case_insensitivity
+FAILED outputs/results1/query_14/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_complex_ingredient_names
+========================= 2 failed, 3 passed in 0.03s ==========================

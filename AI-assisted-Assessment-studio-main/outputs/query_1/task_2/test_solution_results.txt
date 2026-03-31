@@ -1,0 +1,6 @@
+..F..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_2/test_suite_sol.py:16: AssertionError: assert 'Side B' == 'Side A'
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_2/test_suite_sol.py::test_greater_side_b - Assert...
+1 failed, 4 passed in 0.03s

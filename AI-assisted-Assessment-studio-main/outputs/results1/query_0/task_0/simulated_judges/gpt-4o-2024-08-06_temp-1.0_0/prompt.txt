@@ -1,0 +1,109 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+## Task: Lottery Number Evaluation
+
+You are to create a Python program that simulates a simple lottery number evaluation system for a 'Game of Chance'. The game works as follows:
+
+- Each player picks a 3-digit number (e.g., 579), where each digit is between 0 and 9 inclusive.
+- A winning 3-digit number will be randomly drawn at the end of each week.
+
+Your task is to write a function `evaluate_lottery_tickets(input_file, output_file, winning_number)` that evaluates a file containing multiple picked numbers, determines the number of winners, and writes them into an output file along with additional information.
+
+### Constraints:
+1. The function will read from `input_file`, a text file where each line contains a single 3-digit picked number as a string (e.g., '579'), and it contains no empty lines.
+2. The `winning_number` is a string representing the winning 3-digit number (e.g., '632').
+3. The output should be written into `output_file`, which includes:
+   - The total number of tickets evaluated.
+   - The number of winners.
+   - Each winning ticket number on a new line, prefixed with 'Winner'.
+   - If there are no winners, write 'No winners' instead.
+4. You must handle only valid 3-digit numbers, no additional validations are required.
+5. The function does not need to return any value.
+
+### Example
+
+Suppose `input_file` content is:
+```
+123
+456
+579
+632
+```
+
+And the `winning_number` is '632'. The output file should look like:
+```
+Tickets evaluated: 4
+Winners: 1
+Winner: 632
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import evaluate_lottery_tickets
+
+def setup_module(module):
+    with open('input.txt', 'w') as f:
+        f.write('123\n456\n579\n632\n')
+    with open('input_case2.txt', 'w') as f:
+        f.write('111\n222\n333\n444\n')
+    with open('input_case3.txt', 'w') as f:
+        f.write('777\n888\n999\n513\n666\n')
+    with open('input_case4.txt', 'w') as f:
+        f.write('080\n143\n379\n632\n000\n')
+
+
+def teardown_module(module):
+    files = ['output.txt', 'input.txt', 'input_case2.txt', 'input_case3.txt', 'input_case4.txt']
+    for file in files:
+        try:
+            os.remove(file)
+        except OSError:
+            pass
+
+
+def test_winning_ticket():
+    evaluate_lottery_tickets('input.txt', 'output.txt', '632')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Tickets evaluated: 4\nWinners: 1\nWinner: 632\n'
+
+
+def test_no_winners():
+    evaluate_lottery_tickets('input_case2.txt', 'output.txt', '800')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Tickets evaluated: 4\nNo winners\n'
+
+
+def test_multiple_winners():
+    evaluate_lottery_tickets('input_case3.txt', 'output.txt', '888')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Tickets evaluated: 5\nWinners: 1\nWinner: 888\n'
+
+
+def test_all_same_number_no_winners():
+    evaluate_lottery_tickets('input_case4.txt', 'output.txt', '999')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Tickets evaluated: 5\nNo winners\n'
+
+
+def test_non_sequential_winning_number():
+    evaluate_lottery_tickets('input.txt', 'output.txt', '579')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    assert result == 'Tickets evaluated: 4\nWinners: 1\nWinner: 579\n'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,4 @@
+{
+    "program": "def check_maintenance(distances):\n    results = []  # Initialize an empty list to store results\n    for distance in distances:\n        if distance % 1000 == 0:\n            results.append(\"Check required\")  # Add \"Check required\" if distance is a multiple of 1000\n        else:\n            results.append(\"No check needed\")  # Add \"No check needed\" otherwise\n    return results\n\n# Testing the function\nprint(check_maintenance([1000, 1450, 3000, 3200]))  # [\"Check required\", \"No check needed\", \"Check required\", \"No check needed\"]",
+    "context_relevance": 1.0
+}

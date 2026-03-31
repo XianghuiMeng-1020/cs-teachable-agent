@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef game_of_chance(player_score):\n    # Variables to hold game results\n    player_total = 0\n    computer_total = 0\n\n    # Roll dice 5 times for both Player and Computer\n    for _ in range(5):\n        player_roll = random.randint(1, 6)\n        computer_roll = random.randint(1, 6)\n        player_total += player_roll\n        computer_total += computer_roll\n\n    # Determine winner and update scores in player_score dictionary\n    if player_total > computer_total:\n        # Assuming player's name is known, here taken as first key for simplicity\n        player_name = list(player_score.keys())[0]\n        player_score[player_name] += 1\n    elif computer_total > player_total:\n        if 'Computer' in player_score:\n            player_score['Computer'] += 1\n        else:\n            player_score['Computer'] = 1\n    # In case of tie, no operation needed\n\n    return player_score\n",
+    "context_relevance": 1.0
+}

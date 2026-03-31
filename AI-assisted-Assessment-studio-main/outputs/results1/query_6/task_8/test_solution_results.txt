@@ -1,0 +1,10 @@
+FF..F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/test_suite_sol.py:36: AssertionError: assert [' Zeus, the ... exploits...'] == ['Zeus, the k... exploits...']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/test_suite_sol.py:44: AssertionError: assert [' Zeus, the ...eceptions...'] == ['Zeus, the k...eceptions...']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/test_suite_sol.py:70: AssertionError: assert 'Odysseus, th...challenges...' == 'Zeus, the ki...l exploits...'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_8/test_suite_sol.py::test_get_single_story
+FAILED outputs/results1/query_6/task_8/test_suite_sol.py::test_get_multiple_stories
+FAILED outputs/results1/query_6/task_8/test_suite_sol.py::test_save_story_does_not_overwrite
+3 failed, 2 passed in 0.03s

@@ -1,0 +1,26 @@
+### Task Description
+In a futuristic interstellar society, space stations are assigned numbers indicating their position along the cosmic trail. The numbers are sequenced such that `Even` numbered stations belong to the alien Teklar species, while `Odd` numbered stations are inhabited by humans. The task is to create a function `sort_space_stations(stations)` that takes a dictionary of space stations and sorts them based on their numbering.
+
+#### Input:
+- A dictionary `stations` where keys are integers representing the station numbers, and values are strings that specify the station names.
+
+#### Output:
+- A dictionary sorted in ascending order of station numbers, with an additional key component: each station number should be prefixed with `"Human"` or `"Teklar"` based on the even/odd nature of the number.
+
+### Constraints:
+- Station numbers are unique and in the range of 1 to 999.
+
+### Examples
+```python
+example_stations = {3: "Alpha Base", 14: "Gamma Outpost", 1: "Earth Station"}
+
+sort_space_stations(example_stations)
+# Output:
+# {'Human 1': 'Earth Station', 
+#  'Human 3': 'Alpha Base', 
+#  'Teklar 14': 'Gamma Outpost'}
+```
+
+Note:
+- Prefix is `Human` if the station number is odd 
+- Prefix is `Teklar` if the station number is even

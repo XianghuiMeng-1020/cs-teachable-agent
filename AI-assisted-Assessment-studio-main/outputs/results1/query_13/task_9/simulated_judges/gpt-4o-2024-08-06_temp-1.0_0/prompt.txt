@@ -1,0 +1,72 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+You are asked to write a Python function named `calculate_ingredient_costs` to help with managing cooking ingredient costs in a recipe. This function will read ingredient costs from a text file and calculate the total cost of required ingredients for a dish. The file will be formatted such that each line contains an ingredient name and its cost separated by a colon (e.g., `sugar:1.50`).
+
+The function signature should be:
+
+`calculate_ingredient_costs(filename, quantities)`
+
+- `filename`: a string representing the name of the text file that contains the ingredient prices.
+- `quantities`: a dictionary where keys are ingredient names (strings) and values are the amount needed (integers or floats) of each ingredient.
+
+The function should return the total cost of the ingredients, calculated by multiplying the cost from the file by the quantity specified in the `quantities` dictionary. If an ingredient in the quantities dictionary does not appear in the file, it should be ignored. In case the file cannot be opened, the function should return `None` without raising an exception.
+
+Example:
+If the file `ingredients.txt` contains:
+```
+sugar:1.50
+flour:0.75
+eggs:0.50
+```
+And `quantities` is `{'sugar': 2, 'flour': 5, 'eggs': 1}`, the function would return `9.25`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_ingredient_costs
+
+def setup_module(module):
+    with open('test_ingredients.txt', 'w') as file:
+        file.write('sugar:1.50\n')
+        file.write('flour:0.75\n')
+        file.write('eggs:0.50\n')
+        file.write('butter:1.00\n')
+
+    with open('empty_ingredients.txt', 'w') as file:
+        pass
+
+def teardown_module(module):
+    os.remove('test_ingredients.txt')
+    os.remove('empty_ingredients.txt')
+
+def test_valid_file_full_use():
+    quantities = {'sugar': 2, 'flour': 5, 'eggs': 1}
+    assert calculate_ingredient_costs('test_ingredients.txt', quantities) == 9.25
+
+def test_missing_ingredient_in_file():
+    quantities = {'sugar': 2, 'flour': 2, 'honey': 1}
+    assert calculate_ingredient_costs('test_ingredients.txt', quantities) == 4.50
+
+def test_file_not_found():
+    quantities = {'sugar': 2, 'flour': 5}
+    assert calculate_ingredient_costs('missing_file.txt', quantities) is None
+
+def test_empty_file():
+    quantities = {'sugar': 2, 'flour': 5}
+    assert calculate_ingredient_costs('empty_ingredients.txt', quantities) == 0
+
+def test_empty_quantities():
+    quantities = {}
+    assert calculate_ingredient_costs('test_ingredients.txt', quantities) == 0
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,4 @@
+{
+    "program": "def suggest_recipe(budget, recipes):\n    closest_recipe = \"No recipe available\"\n    closest_cost = -1\n\n    for recipe in recipes:\n        name, ingredients = recipe.split(':')\n        ingredient_costs = map(int, ingredients.split(','))\n        total_cost = sum(ingredient_costs)\n\n        if total_cost <= budget and total_cost > closest_cost:\n            closest_cost = total_cost\n            closest_recipe = name\n\n    return closest_recipe\n\n# Example test\nprint(suggest_recipe(10, [\"Pasta:5,5\", \"Salad:3,2,1,4\", \"Soup:6,3\", \"Sandwich:5,5\"]))",
+    "context_relevance": 1.0
+}

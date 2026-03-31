@@ -1,0 +1,28 @@
+### Game of Chance: Lottery Results Checker
+
+You've been tasked to create a program that manages a basic 'Game of Chance' - a lottery results checker system where participants can check if they have won.
+
+#### Program Requirements
+
+1. **Data Management**:
+    - Write a function `save_lottery_results(file_name, results)` that takes a file name (`file_name`) and a list of strings (`results`). Each string in the list represents a winning ticket number (7-digit alphanumeric). The function should write these results to a text file, one per line.
+
+2. **Result Checking**:
+    - Write a function `check_ticket(file_name, ticket_number)` that takes a file name (`file_name`) where the winning results are stored and a single ticket number (`ticket_number`). The function should return `True` if the ticket number is in the winning results, and `False` otherwise.
+
+#### Constraints and Assumptions
+- Assume ticket numbers are always strings of 7 alphanumeric characters.
+- Do not assume the results list is sorted.
+- The function signatures must be exactly as specified.
+- When writing to a file, overwrite existing content.
+
+#### Implementation
+- Implement the `save_lottery_results` and `check_ticket` functions.
+
+#### Testing
+To validate the implementation, the functions will be tested using a separate suite which ensures:
+- Results are correctly saved to the file.
+- Ticket checking correctly identifies winning numbers.
+- Handles ticket numbers correctly in different scenarios.
+
+Your implementation should be able to pass all provided test cases.

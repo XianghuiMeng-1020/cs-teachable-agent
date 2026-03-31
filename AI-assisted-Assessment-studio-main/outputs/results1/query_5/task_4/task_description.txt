@@ -1,0 +1,5 @@
+Create a Python program called `mythology_challenge.py`. This program will read data from a file named `mythological_beasts.txt`. Each line in this file represents a mythological creature's name followed by its strength value, separated by a comma (e.g., "Dragon,300"). Your task is to determine the strengthiest mythological creature.
+
+The program should implement a function `get_strengthiest_beast(filename)`, which returns the name of the creature with the highest strength. If there are multiple creatures with the same maximum strength, return the first one encountered in the file. If the file is empty, return an empty string.
+
+Ensure that the file `mythological_beasts.txt` always contains valid data according to the format described above. Each creature will have a unique name and strength values are positive integers.

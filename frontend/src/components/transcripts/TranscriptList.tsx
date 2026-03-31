@@ -56,7 +56,7 @@ export function TranscriptList({ onSelectSession }: TranscriptListProps) {
           {(r.kus_covered.slice(0, 3) || []).map((ku) => (
             <Badge key={ku} variant="outline" size="sm">{ku}</Badge>
           ))}
-          {r.kus_covered.length > 3 && <span className="text-xs text-slate-500">+{r.kus_covered.length - 3} more</span>}
+          {r.kus_covered.length > 3 && <span className="text-xs text-stone-500">+{r.kus_covered.length - 3} more</span>}
         </div>
       ),
     },
@@ -73,7 +73,7 @@ export function TranscriptList({ onSelectSession }: TranscriptListProps) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-slate-900">Teaching Sessions</h1>
+        <h1 className="text-2xl font-bold text-stone-900">Teaching Sessions</h1>
         <ExportCSVButton />
       </div>
       <div className="flex flex-wrap items-center gap-3">
@@ -84,23 +84,23 @@ export function TranscriptList({ onSelectSession }: TranscriptListProps) {
           className="max-w-[200px]"
           aria-label="Search transcripts by student"
         />
-        <label className="flex items-center gap-2 text-sm text-slate-600">
+        <label className="flex items-center gap-2 text-sm text-stone-600">
           From
           <input
             type="date"
             value={dateFrom}
             onChange={(e) => setDateFrom(e.target.value)}
-            className="rounded border border-slate-300 px-2 py-1.5 text-sm"
+            className="rounded border border-stone-300 px-2 py-1.5 text-sm"
             aria-label="Filter from date"
           />
         </label>
-        <label className="flex items-center gap-2 text-sm text-slate-600">
+        <label className="flex items-center gap-2 text-sm text-stone-600">
           To
           <input
             type="date"
             value={dateTo}
             onChange={(e) => setDateTo(e.target.value)}
-            className="rounded border border-slate-300 px-2 py-1.5 text-sm"
+            className="rounded border border-stone-300 px-2 py-1.5 text-sm"
             aria-label="Filter to date"
           />
         </label>

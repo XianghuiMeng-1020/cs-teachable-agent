@@ -1,0 +1,102 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+### Task Description: 
+
+You are part of a team developing a board game scoring system. Each player in the board game has both positive and negative scores collected during gameplay. You need to write a Python program that calculates and returns the total score of each player.
+
+Your program should define a function `calculate_scores(player_scores)` that takes in a dictionary, `player_scores`, where the keys are strings representing player names, and the values are lists of integers representing their scores.
+
+Your task is to:
+- Calculate the total score for each player by summing up all the integers in the list for each player.
+- Return a new dictionary where the keys are player names, and the values are their corresponding total scores.
+
+**Example Input:**
+```python
+player_scores = {
+    "Alice": [10, -5, 7],
+    "Bob": [20, -10, 5],
+    "Charlie": [5, 0, -2, 4]
+}
+```
+**Example Output:**
+```python
+{
+    "Alice": 12,
+    "Bob": 15,
+    "Charlie": 7
+}
+```
+
+### Constraints:
+- You can assume that the input dictionary will always contain at least one player.
+- Each player's score list will contain at least one score entry.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_scores
+
+# Setup Module (Optional, Structure Add-on if needed)
+def setup_module(module):
+    pass
+
+def teardown_module(module):
+    pass
+
+def test_base_case1():
+    player_scores = {
+        "Alice": [10, -5, 7],
+        "Bob": [20, -10, 5],
+        "Charlie": [5, 0, -2, 4]
+    }
+    expected = {
+        "Alice": 12,
+        "Bob": 15,
+        "Charlie": 7
+    }
+    assert calculate_scores(player_scores) == expected
+
+def test_base_case2():
+    player_scores = {
+        "Dave": [3, 3, 3],
+        "Eva": [-2, 2, -1, 1]
+    }
+    expected = {
+        "Dave": 9,
+        "Eva": 0
+    }
+    assert calculate_scores(player_scores) == expected
+
+def test_mixed_scores():
+    player_scores = {
+        "Frank": [-1, -2, -3]
+    }
+    expected = {
+        "Frank": -6
+    }
+    assert calculate_scores(player_scores) == expected
+
+def test_single_player_single_score():
+    player_scores = {
+        "George": [10]
+    }
+    expected = {
+        "George": 10
+    }
+    assert calculate_scores(player_scores) == expected
+
+def test_no_scores():
+    player_scores = {
+        "Helen": []
+    }
+    expected = {
+        "Helen": 0
+    }
+    assert calculate_scores(player_scores) == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

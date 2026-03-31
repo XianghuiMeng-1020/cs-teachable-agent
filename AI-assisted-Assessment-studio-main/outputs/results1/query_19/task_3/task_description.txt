@@ -1,0 +1,34 @@
+### Task Description
+In this Science Fiction themed task, you are working on a data analysis engine for the Galactic Space Expedition Records (GSER). Your task is to create a Python program that processes a file containing records of space expeditions and generates a summary report.
+
+The file titled `expedition_records.txt` is structured such that each line consists of an expedition record with the following format:
+- Expedition ID (an integer)
+- Captain name (a string)
+- Year (an integer)
+- Number of crew members (an integer)
+
+Each field is separated by a comma. For example:
+```
+101,John Doe,2120,25
+102,Mary Jane,2120,15
+103,Bob Smith,2121,10
+```
+
+The goal is to read this file and generate a summary report of all expeditions. The summary should include:
+1. Total number of expeditions.
+2. The total number of crew members across all expeditions.
+3. Average number of crew members per expedition, rounded to two decimal places.
+4. The total number of unique years in which expeditions took place.
+
+Your program should manage errors gracefully, particularly those related to file access or data parsing issues.
+
+Implement the function `generate_expedition_summary(input_file, output_file)` that takes as input the name of the file containing expedition records and the name of the output file where the summary will be written.
+
+### Example Usage
+```python
+generate_expedition_summary("expedition_records.txt", "summary_report.txt")
+```
+
+Upon execution, the function should write the summary report as specified above.
+
+If there is an issue accessing the input file or if the file contains any data errors, the program should handle these errors by writing an appropriate error message to the output file instead. Make sure to handle invalid or partial data gracefully without crashing.

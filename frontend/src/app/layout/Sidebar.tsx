@@ -4,19 +4,21 @@ import {
   MessageSquare,
   Play,
   BookOpen,
+  BookOpenCheck,
   History,
   Brain,
   LayoutGrid,
   Users,
   FileText,
   BarChart3,
+  ClipboardList,
+  Activity,
+  Shield,
   ChevronLeft,
   ChevronRight,
-  Bot,
 } from "lucide-react";
 import { useAppStore } from "@/stores/appStore";
 import { useAuthStore } from "@/stores/authStore";
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
 
@@ -24,6 +26,7 @@ const studentNav = [
   { to: ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
   { to: ROUTES.teach, label: "Teach TA", icon: MessageSquare },
   { to: ROUTES.test, label: "Test TA", icon: Play },
+  { to: ROUTES.practice, label: "Practice", icon: BookOpenCheck },
   { to: ROUTES.mastery, label: "Mastery", icon: BookOpen },
   { to: "/learning-analytics", label: "Analytics", icon: Brain },
   { to: ROUTES.history, label: "History", icon: History },
@@ -34,6 +37,9 @@ const teacherNav = [
   { to: ROUTES.teacher.students, label: "Students", icon: Users },
   { to: ROUTES.teacher.transcripts, label: "Transcripts", icon: FileText },
   { to: ROUTES.teacher.analytics, label: "Analytics", icon: BarChart3 },
+  { to: ROUTES.teacher.assessments, label: "Assessments", icon: ClipboardList },
+  { to: ROUTES.teacher.metrics, label: "Metrics", icon: Activity },
+  { to: ROUTES.teacher.proctoring, label: "Proctoring", icon: Shield },
 ];
 
 export function Sidebar() {
@@ -45,28 +51,34 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 flex h-full flex-col bg-brand-950 text-white shadow-sidebar transition-all duration-300",
+        "fixed inset-y-0 left-0 z-40 flex h-full flex-col border-r border-stone-200/80 bg-white transition-all duration-300",
         "lg:relative lg:z-auto",
         sidebarCollapsed ? "w-[68px]" : "w-[260px]",
         mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}
-      style={{ width: sidebarCollapsed ? "var(--sidebar-collapsed)" : "var(--sidebar-width)" }}
       aria-label="Main navigation"
     >
-      <div className="flex h-14 shrink-0 items-center gap-2 px-3">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10">
-          <Bot className="h-5 w-5 text-white" />
+      {/* Logo */}
+      <div className="flex h-14 shrink-0 items-center gap-2.5 border-b border-stone-200/80 px-4">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-700">
+          <BookOpen className="h-4 w-4 text-white" />
         </div>
         {!sidebarCollapsed && (
-          <>
-            <span className="font-semibold text-white">CS TA</span>
-            <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-medium text-white/80">
-              v1
-            </span>
-          </>
+          <span className="text-[15px] font-semibold text-stone-900">TeachAgent</span>
         )}
       </div>
-      <nav className="flex-1 space-y-0.5 px-2 py-3">
+
+      {/* Section label */}
+      {!sidebarCollapsed && (
+        <div className="px-4 pt-5 pb-2">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-stone-400">
+            {isTeacher ? "Instructor" : "Learning"}
+          </p>
+        </div>
+      )}
+
+      {/* Navigation */}
+      <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-1">
         {nav.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
@@ -74,26 +86,38 @@ export function Sidebar() {
             onClick={() => setMobileMenuOpen(false)}
             className={({ isActive }) =>
               cn(
-                "flex h-10 items-center gap-3 rounded-lg px-3 text-brand-300 transition-colors hover:bg-white/10 hover:text-white",
-                isActive && "border-l-[3px] border-accent-500 bg-white/10 font-medium text-white"
+                "flex h-10 items-center gap-3 rounded-lg px-3 text-sm font-medium text-stone-500 transition-all duration-150",
+                "hover:bg-stone-100 hover:text-stone-900",
+                isActive && "bg-brand-50 text-brand-800 hover:bg-brand-100",
+                sidebarCollapsed && "justify-center px-0"
               )
             }
           >
-            <Icon className="h-5 w-5 shrink-0" aria-hidden />
+            <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />
             {!sidebarCollapsed && <span>{label}</span>}
           </NavLink>
         ))}
       </nav>
-      <div className="border-t border-white/10 p-2">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-10 w-full justify-center text-brand-300 hover:bg-white/10 hover:text-white"
-          icon={sidebarCollapsed ? ChevronRight : ChevronLeft}
+
+      {/* Collapse toggle */}
+      <div className="border-t border-stone-200/80 p-2">
+        <button
+          type="button"
           onClick={toggleSidebar}
+          className={cn(
+            "flex h-9 w-full items-center gap-2 rounded-lg px-3 text-sm text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-600",
+            sidebarCollapsed && "justify-center px-0"
+          )}
         >
-          {!sidebarCollapsed && "Collapse"}
-        </Button>
+          {sidebarCollapsed ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <>
+              <ChevronLeft className="h-4 w-4" />
+              <span>Collapse</span>
+            </>
+          )}
+        </button>
       </div>
     </aside>
   );

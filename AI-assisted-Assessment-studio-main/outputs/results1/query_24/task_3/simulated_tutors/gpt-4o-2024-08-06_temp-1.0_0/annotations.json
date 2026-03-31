@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_board_game_score(game_results):\n    scores = {}\n    for result in game_results:\n        try:\n            winner, score_part = result.split(\":\")\n            score1, score2 = map(int, score_part.split(\",\"))\n            if winner.isalpha() and len(winner) == 1:\n                # Calculate the score difference\n                score_diff = score1 - score2\n                # Add the score difference to the respective winner\n                if winner in scores:\n                    scores[winner] += score_diff\n                else:\n                    scores[winner] = score_diff\n        except (ValueError, IndexError):\n            # Ignore entries that cause errors\n            continue\n    return scores\n",
+    "context_relevance": 1.0
+}

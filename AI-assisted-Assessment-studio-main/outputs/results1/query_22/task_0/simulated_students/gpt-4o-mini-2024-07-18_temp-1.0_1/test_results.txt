@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:26: AssertionError: assert [] == [('Alice', 3)]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:26: AssertionError: assert [] == [('Bob', 2), ('Alice', 1)]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:26: AssertionError: assert [('Bob', 2), ('Alice', 1)] == []
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:26: AssertionError: assert [('Alice', 2), ('Charlie', 1)] == [('Alice', 2), ('Bob', 1)]
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_scores[Alice Bob win\nAlice Charlie win\nCharlie Alice lose\n-expected_result1]
+FAILED outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_scores[Bob Alice win\nAlice Bob win\nCharlie Bob lose\n-expected_result2]
+FAILED outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_scores[-expected_result3]
+FAILED outputs/results1/query_22/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_calculate_scores[Alice Bob win\nBob Alice lose\nCharlie Bob win\n-expected_result4]
+========================= 4 failed, 1 passed in 0.13s ==========================

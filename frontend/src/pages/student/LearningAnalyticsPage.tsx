@@ -36,18 +36,18 @@ export function LearningAnalyticsPage() {
   const mockTaId = 1;
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-12">
+    <div className="min-h-screen bg-stone-50 pb-12">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <div className="bg-white border-b border-stone-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl">
+              <div className="p-2 bg-gradient-to-br from-brand-700 to-brand-600 rounded-xl">
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">学习分析中心</h1>
-                <p className="text-sm text-slate-500">AI驱动的学习洞察与个性化建议</p>
+                <h1 className="text-xl font-bold text-stone-900">学习分析中心</h1>
+                <p className="text-sm text-stone-500">AI驱动的学习洞察与个性化建议</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -67,7 +67,7 @@ export function LearningAnalyticsPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-white p-1 border border-slate-200 rounded-xl flex-wrap">
+          <TabsList className="bg-white p-1 border border-stone-200 rounded-xl flex-wrap">
             <TabsTrigger value="overview" className="rounded-lg">
               <Activity className="w-4 h-4 mr-2" />
               总览
@@ -120,8 +120,8 @@ export function LearningAnalyticsPage() {
                     <Activity className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-900">87%</p>
-                    <p className="text-sm text-slate-500">学习效率</p>
+                    <p className="text-2xl font-bold text-stone-900">87%</p>
+                    <p className="text-sm text-stone-500">学习效率</p>
                   </div>
                 </div>
               </Card>
@@ -131,8 +131,8 @@ export function LearningAnalyticsPage() {
                     <Brain className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-900">适中</p>
-                    <p className="text-sm text-slate-500">认知负荷</p>
+                    <p className="text-2xl font-bold text-stone-900">适中</p>
+                    <p className="text-sm text-stone-500">认知负荷</p>
                   </div>
                 </div>
               </Card>
@@ -142,8 +142,8 @@ export function LearningAnalyticsPage() {
                     <Network className="w-5 h-5 text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-900">23</p>
-                    <p className="text-sm text-slate-500">概念掌握</p>
+                    <p className="text-2xl font-bold text-stone-900">23</p>
+                    <p className="text-sm text-stone-500">概念掌握</p>
                   </div>
                 </div>
               </Card>
@@ -153,8 +153,8 @@ export function LearningAnalyticsPage() {
                     <Flame className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-900">12</p>
-                    <p className="text-sm text-slate-500">学习天数</p>
+                    <p className="text-2xl font-bold text-stone-900">12</p>
+                    <p className="text-sm text-stone-500">学习天数</p>
                   </div>
                 </div>
               </Card>
@@ -183,7 +183,7 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <LearningPacePanel studentId={mockUserId} />
               <Card padding="lg">
-                <h3 className="font-semibold text-slate-900 mb-4">节奏历史</h3>
+                <h3 className="font-semibold text-stone-900 mb-4">节奏历史</h3>
                 <div className="space-y-4">
                   {[
                     { date: "今天", pace: "适中", change: "稳定" },
@@ -191,13 +191,13 @@ export function LearningAnalyticsPage() {
                     { date: "前天", pace: "较慢", change: "-20%" },
                     { date: "3天前", pace: "适中", change: "稳定" },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0">
+                    <div key={i} className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0">
                       <div>
-                        <p className="font-medium text-slate-900">{item.date}</p>
-                        <p className="text-sm text-slate-500">{item.pace}</p>
+                        <p className="font-medium text-stone-900">{item.date}</p>
+                        <p className="text-sm text-stone-500">{item.pace}</p>
                       </div>
                       <span className={`text-sm font-medium ${
-                        item.change === "稳定" ? "text-slate-500" :
+                        item.change === "稳定" ? "text-stone-500" :
                         item.change.startsWith("+") ? "text-emerald-600" : "text-amber-600"
                       }`}>
                         {item.change}
@@ -214,41 +214,41 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <CognitiveLoadPanel studentId={mockUserId} />
               <Card padding="lg">
-                <h3 className="font-semibold text-slate-900 mb-4">负荷分布</h3>
+                <h3 className="font-semibold text-stone-900 mb-4">负荷分布</h3>
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-slate-600">最佳学习区</span>
+                      <span className="text-stone-600">最佳学习区</span>
                       <span className="font-medium text-emerald-600">45%</span>
                     </div>
-                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-emerald-500 rounded-full" style={{ width: "45%" }} />
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-slate-600">高负荷区</span>
+                      <span className="text-stone-600">高负荷区</span>
                       <span className="font-medium text-orange-500">30%</span>
                     </div>
-                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-orange-500 rounded-full" style={{ width: "30%" }} />
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-slate-600">认知过载</span>
+                      <span className="text-stone-600">认知过载</span>
                       <span className="font-medium text-red-500">10%</span>
                     </div>
-                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-red-500 rounded-full" style={{ width: "10%" }} />
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-slate-600">低负荷区</span>
+                      <span className="text-stone-600">低负荷区</span>
                       <span className="font-medium text-blue-500">15%</span>
                     </div>
-                    <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-blue-500 rounded-full" style={{ width: "15%" }} />
                     </div>
                   </div>
@@ -262,24 +262,24 @@ export function LearningAnalyticsPage() {
             <ConceptRelationGraph className="h-[600px]" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card padding="md">
-                <h4 className="font-medium text-slate-900 mb-2">关键前置概念</h4>
-                <ul className="text-sm text-slate-600 space-y-1">
+                <h4 className="font-medium text-stone-900 mb-2">关键前置概念</h4>
+                <ul className="text-sm text-stone-600 space-y-1">
                   <li>• 变量与数据类型</li>
                   <li>• 控制流基础</li>
                   <li>• 函数定义</li>
                 </ul>
               </Card>
               <Card padding="md">
-                <h4 className="font-medium text-slate-900 mb-2">相似概念簇</h4>
-                <ul className="text-sm text-slate-600 space-y-1">
+                <h4 className="font-medium text-stone-900 mb-2">相似概念簇</h4>
+                <ul className="text-sm text-stone-600 space-y-1">
                   <li>• 列表与字典</li>
                   <li>• 循环与迭代</li>
                   <li>• 类与对象</li>
                 </ul>
               </Card>
               <Card padding="md">
-                <h4 className="font-medium text-slate-900 mb-2">建议学习顺序</h4>
-                <ol className="text-sm text-slate-600 space-y-1">
+                <h4 className="font-medium text-stone-900 mb-2">建议学习顺序</h4>
+                <ol className="text-sm text-stone-600 space-y-1">
                   <li>1. 变量 → 数据类型</li>
                   <li>2. 运算符 → 表达式</li>
                   <li>3. 条件 → 循环</li>
@@ -313,8 +313,8 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <WebVitalsPanel />
               <Card padding="lg">
-                <h3 className="font-semibold text-slate-900 mb-4">Performance Tips</h3>
-                <ul className="space-y-3 text-sm text-slate-600">
+                <h3 className="font-semibold text-stone-900 mb-4">Performance Tips</h3>
+                <ul className="space-y-3 text-sm text-stone-600">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500">✓</span>
                     Use 3D knowledge graph sparingly on mobile devices

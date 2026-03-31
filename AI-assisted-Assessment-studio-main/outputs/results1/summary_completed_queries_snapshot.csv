@@ -1,0 +1,26 @@
+query,theme,n_tasks,gen_n,qtests_n,qctx_n,stu50_n,py50_n_formula,py50_n_json,avg_stu_pct
+query_0,Game of Chance,10,3,1,8,1,0,0,9.0
+query_1,Game of Chance,10,5,3,7,5,2,2,47.5
+query_2,Game of Chance,10,5,4,10,1,1,1,15.0
+query_3,Game of Chance,10,5,3,9,4,3,3,40.0
+query_4,Game of Chance,10,2,2,9,2,1,1,20.0
+query_5,Mythology,10,6,4,10,1,1,1,10.0
+query_6,Mythology,10,7,4,10,1,1,1,13.5
+query_7,Mythology,10,4,3,10,0,0,0,2.5
+query_8,Mythology,10,8,8,10,7,7,7,69.0
+query_9,Mythology,10,9,8,10,8,7,7,80.0
+query_10,Cooking,10,5,1,9,0,0,0,6.0
+query_11,Cooking,10,7,8,8,7,4,4,59.5
+query_12,Cooking,10,2,2,10,0,0,0,4.5
+query_13,Cooking,10,5,2,8,2,0,0,24.5
+query_14,Cooking,10,7,6,10,4,4,4,40.5
+query_15,Science Fiction,10,8,8,7,8,6,6,75.0
+query_16,Science Fiction,10,4,3,8,4,2,2,40.0
+query_17,Science Fiction,10,9,7,9,6,4,4,57.0
+query_18,Science Fiction,10,8,6,9,1,0,0,17.0
+query_19,Science Fiction,10,3,0,10,1,0,0,9.0
+query_20,Board Games,10,7,6,3,7,1,1,65.0
+query_21,Board Games,10,8,2,9,1,0,0,18.5
+query_22,Board Games,10,4,5,10,0,0,0,5.5
+query_23,Board Games,10,6,4,10,4,3,3,41.5
+query_24,Board Games,10,8,6,8,5,2,2,50.5

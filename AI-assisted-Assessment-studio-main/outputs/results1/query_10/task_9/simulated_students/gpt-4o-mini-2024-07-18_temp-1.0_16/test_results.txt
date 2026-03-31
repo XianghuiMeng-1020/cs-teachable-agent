@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py . [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:72: FileNotFoundError: [Errno 2] No such file or directory: 'non_existing_inventory.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_non_existing_file_handling
+========================= 1 failed, 4 passed in 0.16s ==========================

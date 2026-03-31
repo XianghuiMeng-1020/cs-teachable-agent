@@ -1,0 +1,42 @@
+### Task Description
+
+Create a function called `mythical_population_info` that receives a list of dictionaries. Each dictionary in the list represents a mythical creature and contains the following key-value pairs:
+
+- `name`: A string indicating the name of the creature.
+- `kingdom`: A string indicating the realm or domain where the creature is ruler or prominently dwells.
+- `power`: An integer indicating the power level of the creature.
+
+The function should return another dictionary which contains the following information:
+
+- `total_creatures`: The total number of creatures.
+- `average_power`: The average power of all creatures, rounded down to the nearest integer.
+- `kingdom_distribution`: A dictionary that maps each unique kingdom to the number of creatures belonging to that kingdom.
+
+#### Function Signature
+```python
+def mythical_population_info(creatures):
+    pass
+```
+
+#### Example
+```python
+creatures = [
+    {'name': 'Zeus', 'kingdom': 'Olympus', 'power': 100},
+    {'name': 'Hades', 'kingdom': 'Underworld', 'power': 95},
+    {'name': 'Poseidon', 'kingdom': 'Ocean', 'power': 90},
+    {'name': 'Athena', 'kingdom': 'Olympus', 'power': 85}
+]
+
+result = mythical_population_info(creatures)
+
+# Expected Output
+# {
+#     'total_creatures': 4,
+#     'average_power': 92,
+#     'kingdom_distribution': {
+#         'Olympus': 2,
+#         'Underworld': 1,
+#         'Ocean': 1
+#     }
+# }
+```

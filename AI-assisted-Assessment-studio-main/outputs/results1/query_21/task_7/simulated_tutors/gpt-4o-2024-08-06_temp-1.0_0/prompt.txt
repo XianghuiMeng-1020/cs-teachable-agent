@@ -1,0 +1,94 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Classes and Objects', 'File Handling and I/O', 'Strings', 'Arithmetic Operators']:
+
+### Beginning of task description
+You are to create a simple Python program that manages a collection of board games. Your program should manage board game information and store it persistently in a file. The following are the details of the task:
+
+1. **Class Definition**: Create a class named `BoardGame` with the following attributes:
+   - `name`: a string representing the name of the board game.
+   - `min_players`: an integer representing the minimum number of players required.
+   - `max_players`: an integer representing the maximum number of players allowed.
+
+2. **Class Methods**:
+   - A method `__str__` that returns a string representation of the board game in the format: `"name (min:max players)"`.
+
+3. **File Handling**:
+   - Write a function `save_board_games` that takes a list of `BoardGame` objects and saves them into a file named `board_games.txt`. Each board game should be stored on a new line in the file following the format: "name,min_players,max_players".
+   - Write another function `load_board_games` that reads from `board_games.txt` and returns a list of `BoardGame` objects.
+
+4. **Function Signatures**:
+   - `save_board_games(board_games)`: Save the list of board games to a file.
+   - `load_board_games() -> list`: Load and return the list of board games from a file.
+
+Ensure that all file I/O operations handle relevant exceptions gracefully. You should not implement the main method or code to initiate execution, just the classes and functions.
+
+This program will be tested with specific inputs and the correctness will be determined by comparing the output to expected outcomes based on these inputs.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import BoardGame, save_board_games, load_board_games
+
+
+def setup_module(module):
+    games_data = [
+        "Chess,2,2\n",
+        "Monopoly,2,6\n",
+        "Pandemic,2,4\n",
+        "Catan,3,4\n"
+    ]
+    with open('board_games.txt', 'w') as f:
+        f.writelines(games_data)
+
+
+def teardown_module(module):
+    if os.path.exists('board_games.txt'):
+        os.remove('board_games.txt')
+
+
+def test_board_game_str_method():
+    game = BoardGame("Chess", 2, 2)
+    assert str(game) == "Chess (2:2 players)"
+
+
+def test_load_board_games():
+    games = load_board_games()
+    assert len(games) == 4
+    assert str(games[0]) == "Chess (2:2 players)"
+    assert str(games[1]) == "Monopoly (2:6 players)"
+
+
+def test_save_board_games():
+    new_games = [
+        BoardGame("Risk", 2, 6),
+        BoardGame("Scrabble", 2, 4)
+    ]
+    save_board_games(new_games)
+    with open('board_games.txt') as f:
+        lines = f.readlines()
+    assert lines[0].strip() == "Risk,2,6"
+    assert lines[1].strip() == "Scrabble,2,4"
+
+
+def test_save_and_load_board_games():
+    new_games = [
+        BoardGame("Ticket to Ride", 2, 5),
+        BoardGame("Azul", 2, 4)
+    ]
+    save_board_games(new_games)
+    loaded_games = load_board_games()
+    assert len(loaded_games) == 2
+    assert str(loaded_games[0]) == "Ticket to Ride (2:5 players)"
+    assert str(loaded_games[1]) == "Azul (2:4 players)"
+
+
+def test_file_not_found_exception_handling():
+    os.remove('board_games.txt')
+    games = load_board_games()
+    assert games == []
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

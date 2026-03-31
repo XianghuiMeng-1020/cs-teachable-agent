@@ -1,0 +1,4 @@
+{
+    "program": "def organize_recipes(file_path):\n    with open(file_path, 'r') as file:\n        data = file.read()\n\n    # Split the content by delimiting with the recipe blocks\n    recipes_blocks = data.split('/****')\n\n    recipe_names = []\n\n    for block in recipes_blocks:\n        if 'NAME' in block:\n            # Find the POSITION of NAME section\n            name_index_start = block.find('NAME') + len('NAME')\n            name_index_end = block.find('---', name_index_start)\n\n            # Extract and clean the NAME\n            recipe_name = block[name_index_start:name_index_end].strip()\n            if recipe_name:\n                recipe_names.append(recipe_name)\n\n    # Sort the names alphabetically\n    recipe_names.sort()\n    \n    return recipe_names\n",
+    "context_relevance": 1.0
+}

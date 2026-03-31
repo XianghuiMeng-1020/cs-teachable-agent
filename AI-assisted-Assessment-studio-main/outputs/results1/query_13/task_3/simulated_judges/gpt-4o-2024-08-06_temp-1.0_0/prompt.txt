@@ -1,0 +1,63 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+Create a function `cook_recipe` that simulates preparing a simple dish given a list of ingredients. Each ingredient should be processed one by one using a loop.
+
+The `cook_recipe` function should take:
+- a list of ingredient tuples where each tuple contains a string (ingredient name) and an integer (required quantity in grams).
+- a dictionary representing available ingredients in the format `{ingredient_name: available_weight_in_grams}`.
+
+The function should return a list of strings indicating the status of each ingredient. The status should be one of the following:
+- "{ingredient_name}: Enough"
+- "{ingredient_name}: Not Enough, {required - available} grams more needed"
+
+If an ingredient from the recipe is not present in the available ingredients dictionary, handle the situation gracefully and report "{ingredient_name}: Missing".
+Use exception handling to catch any unforeseen issues during processing and return 'Error'.
+
+The task will be tested using the given list of ingredients and available ingredients dictionary. Your implementation will be checked against multiple scenarios including abundant, insufficient, and missing ingredients scenarios.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import cook_recipe
+
+def test_enough_ingredients():
+    ingredients = [('flour', 200), ('sugar', 100)]
+    available = {'flour': 300, 'sugar': 100}
+    result = cook_recipe(ingredients, available)
+    assert result == ['flour: Enough', 'sugar: Enough']
+
+def test_not_enough_ingredients():
+    ingredients = [('flour', 200), ('sugar', 150)]
+    available = {'flour': 150, 'sugar': 100}
+    result = cook_recipe(ingredients, available)
+    assert result == ['flour: Not Enough, 50 grams more needed', 'sugar: Not Enough, 50 grams more needed']
+
+def test_some_missing_ingredients():
+    ingredients = [('flour', 200), ('sugar', 100), ('eggs', 2)]
+    available = {'flour': 250, 'sugar': 100}
+    result = cook_recipe(ingredients, available)
+    assert result == ['flour: Enough', 'sugar: Enough', 'eggs: Missing']
+
+def test_all_missing_ingredients():
+    ingredients = [('butter', 50), ('milk', 200)]
+    available = {'flour': 200, 'sugar': 100}
+    result = cook_recipe(ingredients, available)
+    assert result == ['butter: Missing', 'milk: Missing']
+
+def test_catch_general_exceptions():
+    ingredients = [('flour', '200g'), ('sugar', 100)]
+    available = {'flour': 300, 'sugar': 100}
+    result = cook_recipe(ingredients, available)
+    assert result == 'Error'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

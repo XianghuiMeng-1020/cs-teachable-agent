@@ -1,0 +1,4 @@
+{
+    "program": "def count_games_with_letter(filepath, letter):\n    count = 0\n    letter = letter.lower()  # Normalize the compare letter to lowercase\n    with open(filepath, 'r') as file:\n        for line in file:\n            game_name = line.strip()  # Remove leading/trailing whitespace\n            if game_name.lower().startswith(letter):  # Check if game name starts with the given letter\n                count += 1\n    return count\n\ndef main():\n    print(count_games_with_letter('games.txt', 'C'))  # Example call\n\nif __name__ == \"__main__\":\n    main()",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,4 @@
+{
+    "program": "def decode_message(galactic_message, codebook):\n    # Splitting the galactic message into individual words (codes)\n    message_words = galactic_message.split()\n    \n    # Decoding each word using the codebook\n    decoded_words = []\n    for word in message_words:\n        # Use .get() to provide 'UNKNOWN' as the default if word is not found\n        decoded_word = codebook.get(word, 'UNKNOWN')\n        decoded_words.append(decoded_word)\n    \n    # Concatenating the decoded words into a full message\n    decoded_message = ' '.join(decoded_words)\n    return decoded_message\n\n# Example usage\ncodebook = {'QXZ':'hello', 'BFO':'world', 'DZT':'alien'}\ngalactic_message = 'QXZ BFO GAO'\nprint(decode_message(galactic_message, codebook))  # Output: 'hello world UNKNOWN'",
+    "context_relevance": 1.0
+}

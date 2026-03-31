@@ -1,5 +1,1 @@
-# API 代理: 所有 /api/* 请求转发到 Railway 后端
-/api/*  https://cs-teachable-agent-production.up.railway.app/api/:splat  200
-
-# SPA fallback: 其他路径返回 index.html，由前端路由处理
 /*    /index.html   200

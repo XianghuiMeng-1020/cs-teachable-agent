@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_scores(player_scores):\n    total_scores = {}\n    for player, scores in player_scores.items():\n        total_scores[player] = sum(scores)\n    return total_scores\n\n# Example usage\nplayer_scores = {\n    \"Alice\": [10, -5, 7],\n    \"Bob\": [20, -10, 5],\n    \"Charlie\": [5, 0, -2, 4]\n}\n\nprint(calculate_scores(player_scores))",
+    "context_relevance": 1.0
+}

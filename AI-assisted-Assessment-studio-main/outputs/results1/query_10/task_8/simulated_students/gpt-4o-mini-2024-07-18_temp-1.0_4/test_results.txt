@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:18: AssertionError: assert {'ingredients...ons': 'Bread'} == {'ingredients...read slices.'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:23: Failed: DID NOT RAISE <class 'Exception'>
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:39: Exception: Recipe 'Salad' not found.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:43: AssertionError: assert ['Boil pasta ... with sauce.'] == ['Tomato Sauc...ta', 'Cheese']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_add_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_add_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_get_existing_recipe
+FAILED outputs/results1/query_10/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_file_persistence
+========================= 4 failed, 1 passed in 0.17s ==========================

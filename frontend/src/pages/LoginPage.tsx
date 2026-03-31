@@ -1,8 +1,7 @@
 import { useState, useMemo } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import * as Tabs from "@radix-ui/react-tabs";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import { CheckCircle2, Bot, Eye, EyeOff, Info, GraduationCap, User, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, BookOpen, GraduationCap, User } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuthStore } from "@/stores/authStore";
@@ -27,12 +26,12 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
   }, [password]);
 
   const levels = [
-    { label: "Too weak", color: "bg-rose-500", textColor: "text-rose-600" },
+    { label: "Too weak", color: "bg-red-500", textColor: "text-red-600" },
     { label: "Weak", color: "bg-orange-500", textColor: "text-orange-600" },
     { label: "Fair", color: "bg-amber-500", textColor: "text-amber-600" },
-    { label: "Good", color: "bg-brand-500", textColor: "text-brand-600" },
+    { label: "Good", color: "bg-brand-600", textColor: "text-brand-700" },
     { label: "Strong", color: "bg-emerald-500", textColor: "text-emerald-600" },
-    { label: "Very Strong", color: "bg-emerald-600", textColor: "text-emerald-700" },
+    { label: "Very strong", color: "bg-emerald-600", textColor: "text-emerald-700" },
   ];
 
   if (password.length === 0) return null;
@@ -41,43 +40,20 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
   const width = Math.min(100, (strength / 5) * 100);
 
   return (
-    <div className="mt-2 space-y-1">
-      <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+    <div className="mt-2.5 space-y-1.5">
+      <div className="h-1 w-full overflow-hidden rounded-full bg-stone-200">
         <div
           className={`h-full ${level.color} transition-all duration-300`}
           style={{ width: `${width}%` }}
         />
       </div>
       <div className="flex items-center justify-between">
-        <span className={`text-xs ${level.textColor}`}>{level.label}</span>
-        <span className="text-xs text-slate-400">{password.length} chars</span>
-      </div>
-      <div className="flex flex-wrap gap-1 mt-1">
-        {[
-          { met: password.length >= MIN_PASSWORD_LENGTH, text: `${MIN_PASSWORD_LENGTH}+ chars` },
-          { met: /[a-z]/.test(password) && /[A-Z]/.test(password), text: "Mixed case" },
-          { met: /\d/.test(password), text: "Number" },
-          { met: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password), text: "Special char" },
-        ].map((req, idx) => (
-          <span
-            key={idx}
-            className={`text-[10px] px-1.5 py-0.5 rounded ${
-              req.met ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
-            }`}
-          >
-            {req.met ? "✓" : "○"} {req.text}
-          </span>
-        ))}
+        <span className={`text-xs font-medium ${level.textColor}`}>{level.label}</span>
+        <span className="text-xs text-stone-400">{password.length} chars</span>
       </div>
     </div>
   );
 }
-
-const bullets = [
-  "Knowledge-state-driven TA behavior",
-  "Teach and test in one flow",
-  "Research-ready trace data",
-];
 
 export function LoginPage() {
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
@@ -97,15 +73,9 @@ export function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const userError = validateUsername(username);
-    if (userError) {
-      toast.error(userError);
-      return;
-    }
+    if (userError) { toast.error(userError); return; }
     const pwdError = validatePassword(password);
-    if (pwdError) {
-      toast.error(pwdError);
-      return;
-    }
+    if (pwdError) { toast.error(pwdError); return; }
     setLoading(true);
     try {
       await login(username.trim(), password);
@@ -121,19 +91,10 @@ export function LoginPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     const userError = validateUsername(username);
-    if (userError) {
-      toast.error(userError);
-      return;
-    }
+    if (userError) { toast.error(userError); return; }
     const pwdError = validatePassword(password);
-    if (pwdError) {
-      toast.error(pwdError);
-      return;
-    }
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
+    if (pwdError) { toast.error(pwdError); return; }
+    if (password !== confirmPassword) { toast.error("Passwords do not match"); return; }
     setLoading(true);
     try {
       await register(username.trim(), password, role);
@@ -147,63 +108,91 @@ export function LoginPage() {
   };
 
   return (
-    <div className="grid min-h-screen md:grid-cols-2">
-      <div className="flex flex-col justify-center bg-brand-950 p-12">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
-            <Bot className="h-6 w-6 text-white" />
+    <div className="grid min-h-screen lg:grid-cols-2">
+      {/* Left panel */}
+      <div className="hidden lg:flex flex-col justify-between bg-stone-900 p-12">
+        <div>
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
+              <BookOpen className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-lg font-semibold text-white">TeachAgent</span>
+          </Link>
+        </div>
+
+        <div className="max-w-sm">
+          <h2 className="font-serif text-3xl font-bold leading-tight text-white">
+            The best way to learn is to teach.
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-stone-400">
+            Explain concepts to your virtual agent, test its understanding with
+            real code challenges, and watch your own mastery grow through the
+            act of teaching.
+          </p>
+          <div className="mt-10 space-y-4">
+            {[
+              "Teach concepts in natural language",
+              "Test the agent with real coding problems",
+              "Track your knowledge mastery in real time",
+            ].map((text) => (
+              <div key={text} className="flex items-center gap-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-900/50">
+                  <div className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                </div>
+                <span className="text-sm text-stone-300">{text}</span>
+              </div>
+            ))}
           </div>
-          <span className="text-xl font-semibold text-white">CS Teachable Agent</span>
         </div>
-        <ul className="mt-10 space-y-4">
-          {bullets.map((text) => (
-            <li key={text} className="flex items-center gap-3 text-brand-200">
-              <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-400" />
-              <span>{text}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-16 opacity-30">
-          <svg viewBox="0 0 200 100" className="h-24 w-full text-white">
-            <circle cx="40" cy="50" r="8" fill="currentColor" />
-            <circle cx="100" cy="50" r="8" fill="currentColor" />
-            <circle cx="160" cy="50" r="8" fill="currentColor" />
-            <path d="M0 50 Q50 20 100 50 T200 50" stroke="currentColor" strokeWidth="1" fill="none" />
-          </svg>
-        </div>
+
+        <p className="text-xs text-stone-600">HKU CS Education Research</p>
       </div>
 
-      <div className="flex items-center justify-center bg-white p-12">
-        <div className="w-full max-w-sm">
+      {/* Right panel */}
+      <div className="flex items-center justify-center bg-surface p-6 sm:p-12">
+        <div className="w-full max-w-[400px]">
+          {/* Mobile logo */}
+          <Link to="/" className="mb-8 flex items-center gap-2.5 lg:hidden">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700">
+              <BookOpen className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-lg font-semibold text-stone-900">TeachAgent</span>
+          </Link>
+
           <Tabs.Root value={activeTab} onValueChange={(v) => setActiveTab(v as "login" | "register")}>
-            <Tabs.List className="mb-6 flex gap-2 border-b border-slate-200">
+            <Tabs.List className="mb-8 flex rounded-lg bg-stone-100 p-1">
               <Tabs.Trigger
                 value="login"
-                className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-600 data-[state=active]:border-brand-500 data-[state=active]:text-brand-600"
+                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
               >
                 Sign in
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="register"
-                className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-600 data-[state=active]:border-brand-500 data-[state=active]:text-brand-600"
+                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
               >
-                Sign up
+                Create account
               </Tabs.Trigger>
             </Tabs.List>
 
             <Tabs.Content value="login">
-              <h2 className="text-xl font-semibold text-slate-900">Welcome back</h2>
-              <form onSubmit={handleLogin} className="mt-6 space-y-4">
+              <div className="mb-6">
+                <h2 className="font-serif text-2xl font-bold text-stone-900">Welcome back</h2>
+                <p className="mt-1 text-sm text-stone-500">Sign in to continue teaching your agent.</p>
+              </div>
+              <form onSubmit={handleLogin} className="space-y-4">
                 <Input
-                  placeholder="Username (letters, numbers, underscore)"
+                  label="Username"
+                  placeholder="Enter your username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
                   maxLength={32}
                 />
                 <Input
+                  label="Password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Password (min 6 characters)"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
@@ -211,113 +200,69 @@ export function LoginPage() {
                     <button
                       type="button"
                       onClick={() => setShowPassword((s) => !s)}
-                      className="text-slate-400 hover:text-slate-600"
+                      className="text-stone-400 hover:text-stone-600"
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   }
                 />
-                <Button type="submit" fullWidth loading={loading}>
+                <Button type="submit" fullWidth size="lg" loading={loading}>
                   Sign in
                 </Button>
               </form>
             </Tabs.Content>
 
             <Tabs.Content value="register">
-              <h2 className="text-xl font-semibold text-slate-900">Create your account</h2>
-              <form onSubmit={handleRegister} className="mt-6 space-y-4">
+              <div className="mb-6">
+                <h2 className="font-serif text-2xl font-bold text-stone-900">Create your account</h2>
+                <p className="mt-1 text-sm text-stone-500">Choose a role and get started in seconds.</p>
+              </div>
+              <form onSubmit={handleRegister} className="space-y-4">
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-sm font-medium text-slate-700">Select your role</span>
-                    <Tooltip.Provider delayDuration={100}>
-                      <Tooltip.Root>
-                        <Tooltip.Trigger asChild>
-                          <button type="button" className="text-slate-400 hover:text-slate-600">
-                            <Info className="w-4 h-4" />
-                          </button>
-                        </Tooltip.Trigger>
-                        <Tooltip.Portal>
-                          <Tooltip.Content
-                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
-                            sideOffset={4}
-                          >
-                            <p className="font-medium mb-1">Student:</p>
-                            <p className="text-slate-300 mb-2">Teach the TA concepts and test its understanding</p>
-                            <p className="font-medium mb-1">Teacher:</p>
-                            <p className="text-slate-300">View student progress and analytics</p>
-                            <Tooltip.Arrow className="fill-slate-900" />
-                          </Tooltip.Content>
-                        </Tooltip.Portal>
-                      </Tooltip.Root>
-                    </Tooltip.Provider>
-                  </div>
+                  <label className="mb-1.5 block text-sm font-medium text-stone-700">
+                    I am a...
+                  </label>
                   <div className="grid grid-cols-2 gap-3">
-                    <Tooltip.Provider delayDuration={100}>
-                      <Tooltip.Root>
-                        <Tooltip.Trigger asChild>
-                          <button
-                            type="button"
-                            onClick={() => setRole("student")}
-                            className={`flex items-center gap-2 rounded-lg border p-3 text-left transition-colors ${
-                              role === "student"
-                                ? "border-brand-500 bg-brand-50 text-brand-700"
-                                : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                            }`}
-                          >
-                            <User className={`w-5 h-5 ${role === "student" ? "text-brand-600" : "text-slate-400"}`} />
-                            <div>
-                              <div className="text-sm font-medium">Student</div>
-                              <div className="text-xs opacity-75">Teach & Test</div>
-                            </div>
-                          </button>
-                        </Tooltip.Trigger>
-                        <Tooltip.Portal>
-                          <Tooltip.Content
-                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
-                            sideOffset={4}
-                          >
-                            <p>Learn by teaching! You explain concepts to the TA, then run tests to see how well it learned.</p>
-                            <Tooltip.Arrow className="fill-slate-900" />
-                          </Tooltip.Content>
-                        </Tooltip.Portal>
-                      </Tooltip.Root>
-                    </Tooltip.Provider>
-
-                    <Tooltip.Provider delayDuration={100}>
-                      <Tooltip.Root>
-                        <Tooltip.Trigger asChild>
-                          <button
-                            type="button"
-                            onClick={() => setRole("teacher")}
-                            className={`flex items-center gap-2 rounded-lg border p-3 text-left transition-colors ${
-                              role === "teacher"
-                                ? "border-brand-500 bg-brand-50 text-brand-700"
-                                : "border-slate-200 text-slate-600 hover:bg-slate-50"
-                            }`}
-                          >
-                            <GraduationCap className={`w-5 h-5 ${role === "teacher" ? "text-brand-600" : "text-slate-400"}`} />
-                            <div>
-                              <div className="text-sm font-medium">Teacher</div>
-                              <div className="text-xs opacity-75">Monitor & Analyze</div>
-                            </div>
-                          </button>
-                        </Tooltip.Trigger>
-                        <Tooltip.Portal>
-                          <Tooltip.Content
-                            className="z-50 max-w-xs rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
-                            sideOffset={4}
-                          >
-                            <p>View student progress, analyze learning patterns, and export teaching transcripts.</p>
-                            <Tooltip.Arrow className="fill-slate-900" />
-                          </Tooltip.Content>
-                        </Tooltip.Portal>
-                      </Tooltip.Root>
-                    </Tooltip.Provider>
+                    <button
+                      type="button"
+                      onClick={() => setRole("student")}
+                      className={`flex items-center gap-3 rounded-lg border-2 p-3.5 text-left transition-all ${
+                        role === "student"
+                          ? "border-brand-600 bg-brand-50"
+                          : "border-stone-200 bg-white hover:border-stone-300"
+                      }`}
+                    >
+                      <User className={`h-5 w-5 ${role === "student" ? "text-brand-700" : "text-stone-400"}`} />
+                      <div>
+                        <div className={`text-sm font-semibold ${role === "student" ? "text-brand-900" : "text-stone-700"}`}>
+                          Student
+                        </div>
+                        <div className="text-xs text-stone-500">Teach & Learn</div>
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRole("teacher")}
+                      className={`flex items-center gap-3 rounded-lg border-2 p-3.5 text-left transition-all ${
+                        role === "teacher"
+                          ? "border-brand-600 bg-brand-50"
+                          : "border-stone-200 bg-white hover:border-stone-300"
+                      }`}
+                    >
+                      <GraduationCap className={`h-5 w-5 ${role === "teacher" ? "text-brand-700" : "text-stone-400"}`} />
+                      <div>
+                        <div className={`text-sm font-semibold ${role === "teacher" ? "text-brand-900" : "text-stone-700"}`}>
+                          Teacher
+                        </div>
+                        <div className="text-xs text-stone-500">Monitor & Analyze</div>
+                      </div>
+                    </button>
                   </div>
                 </div>
                 <Input
-                  placeholder="Username (3–32 chars, letters, numbers, _)"
+                  label="Username"
+                  placeholder="Choose a username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
@@ -325,8 +270,9 @@ export function LoginPage() {
                 />
                 <div>
                   <Input
+                    label="Password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Password"
+                    placeholder="Create a password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="new-password"
@@ -334,7 +280,7 @@ export function LoginPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword((s) => !s)}
-                        className="text-slate-400 hover:text-slate-600"
+                        className="text-stone-400 hover:text-stone-600"
                         aria-label={showPassword ? "Hide password" : "Show password"}
                       >
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -344,8 +290,9 @@ export function LoginPage() {
                   <PasswordStrengthIndicator password={password} />
                 </div>
                 <Input
+                  label="Confirm Password"
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm password"
+                  placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   autoComplete="new-password"
@@ -353,27 +300,27 @@ export function LoginPage() {
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword((s) => !s)}
-                      className="text-slate-400 hover:text-slate-600"
+                      className="text-stone-400 hover:text-stone-600"
                       aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   }
                 />
-                <Button type="submit" fullWidth loading={loading}>
+                <Button type="submit" fullWidth size="lg" loading={loading}>
                   Create account
                 </Button>
               </form>
             </Tabs.Content>
           </Tabs.Root>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-6 text-center text-sm text-stone-500">
             {activeTab === "login" ? (
               <>
                 Don&apos;t have an account?{" "}
                 <button
                   type="button"
-                  className="font-medium text-brand-600 hover:underline"
+                  className="font-semibold text-brand-700 hover:text-brand-800"
                   onClick={() => setActiveTab("register")}
                 >
                   Sign up
@@ -384,7 +331,7 @@ export function LoginPage() {
                 Already have an account?{" "}
                 <button
                   type="button"
-                  className="font-medium text-brand-600 hover:underline"
+                  className="font-semibold text-brand-700 hover:text-brand-800"
                   onClick={() => setActiveTab("login")}
                 >
                   Sign in

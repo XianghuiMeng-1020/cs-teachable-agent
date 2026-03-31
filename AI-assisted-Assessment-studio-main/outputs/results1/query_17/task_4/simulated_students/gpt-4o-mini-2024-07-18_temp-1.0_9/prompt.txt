@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with developing a program that manages a fleet of science fiction spaceships. Each spaceship is represented as an object of the class `Spaceship`.
+
+Each `Spaceship` instance has the following properties:
+- `name`: The name of the spaceship (a string).
+- `energy_level`: A floating-point number representing the energy level of the spaceship. This should be a non-negative value, with a maximum of 100.
+- `crew_members`: A dictionary where the keys are crew member names (as strings) and the values are their roles (also strings).
+
+Implement a class `Spaceship` with the following methods:
+- `__init__(self, name, energy_level, crew_members)`: Initializes the spaceship with a name, an initial energy level, and a dictionary of crew members.
+- `refuel(self, amount)`: Increases the spaceship's energy level by `amount`. If the resulting energy level exceeds 100, set it to 100.
+- `assign_crew_member(self, name, role)`: Assigns a crew member to the spaceship with the specified name and role. Add them to the `crew_members` dictionary.
+- `remove_crew_member(self, name)`: Removes a crew member by their name from the `crew_members` dictionary. Raise a `ValueError` if the crew member does not exist.
+- `status_report(self)`: Returns a dictionary containing the spaceship's name, current energy level, and list of crew members with their roles.
+
+Your task is to correctly implement the `Spaceship` class and the methods specified. The program will be tested using a series of unit tests to verify its correctness and reliability.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

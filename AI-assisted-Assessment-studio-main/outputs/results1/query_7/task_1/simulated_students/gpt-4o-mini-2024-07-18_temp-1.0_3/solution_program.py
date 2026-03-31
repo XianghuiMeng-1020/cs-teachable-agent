@@ -1,0 +1,12 @@
+def find_creatures_by_attribute(file_path, attribute):
+    creatures = []
+    with open(file_path, 'r') as file:
+        entries = file.read().strip().split('\n\n')
+        for entry in entries:
+            lines = entry.split('\n')
+            creature_name = lines[0].split(':')[0].strip()
+            attributes_line = lines[1]
+            attributes = attributes_line.split(':')[1].strip().split(', ')
+            if attribute in attributes:
+                creatures.append(creature_name)
+    return creatures

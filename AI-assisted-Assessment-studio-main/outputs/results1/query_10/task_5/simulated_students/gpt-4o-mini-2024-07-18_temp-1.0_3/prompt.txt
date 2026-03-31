@@ -1,0 +1,34 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python class `Recipe` that can be used to manage cooking recipes. Each recipe has a name, a list of ingredients, and a cooking method. Implement the following methods in the `Recipe` class:
+
+1. `__init__(self, name, ingredients, cooking_method)`: Initializes a new recipe with the given name, list of ingredients, and cooking method.
+2. `add_ingredient(self, ingredient)`: Adds a new ingredient to the recipe.
+3. `remove_ingredient(self, ingredient)`: Removes an ingredient from the recipe. If the ingredient is not in the list, it should raise a `ValueError` exception with a message "Ingredient not found".
+4. `save_to_file(self, filename)`: Saves the recipe's details to a file. The file should be formatted as follows:
+
+   ```
+   Recipe: <name>
+   Ingredients:
+   - Ingredient 1
+   - Ingredient 2
+   ...
+   Cooking Method:
+   <cooking_method>
+   ```
+5. `load_from_file(self, filename)`: Loads the recipe details from a file and updates the current recipe object's attributes accordingly. If the file does not exist, it should handle the exception appropriately.
+
+Implement exception handling where appropriate for file operations and ensure only valid data is used.
+
+The program will be tested by:
+- Creating recipe objects and verifying their properties
+- Adding and removing ingredients
+- Saving and loading recipes from files
+- Handling invalid operations such as removing non-existent ingredients and loading from non-existent files.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

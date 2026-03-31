@@ -1,0 +1,4 @@
+{
+    "program": "def interpret_omens(omens):\n    # Initialize counters for each omen type\n    victory_count = 0\n    defeat_count = 0\n    \n    # Iterate over the dictionary of omens\n    for omen in omens.values():\n        if omen == 'Victory':\n            victory_count += 1\n        elif omen == 'Defeat':\n            defeat_count += 1\n\n    # Determine the overall outcome based on the omens\n    if victory_count > defeat_count:\n        return \"Triumph approaches!\"\n    elif defeat_count > victory_count:\n        return \"Danger looms ahead!\"\n    else:\n        return \"Path is uncertain\"",
+    "context_relevance": 1.0
+}

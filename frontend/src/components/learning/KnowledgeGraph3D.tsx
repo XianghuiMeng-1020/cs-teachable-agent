@@ -41,7 +41,7 @@ interface Edge3D {
 }
 
 const mockNodes: Node3D[] = [
-  { id: "variables", name: "变量", x: 0, y: 0, z: 0, size: 1.5, color: "#6366f1", mastery: 0.9, level: 1, connections: ["data_types", "operators"] },
+  { id: "variables", name: "变量", x: 0, y: 0, z: 0, size: 1.5, color: "#0D9488", mastery: 0.9, level: 1, connections: ["data_types", "operators"] },
   { id: "data_types", name: "数据类型", x: 3, y: 2, z: 1, size: 1.3, color: "#8b5cf6", mastery: 0.85, level: 2, connections: ["variables", "lists", "dicts"] },
   { id: "operators", name: "运算符", x: -2, y: 3, z: -1, size: 1.2, color: "#ec4899", mastery: 0.8, level: 2, connections: ["variables", "expressions"] },
   { id: "control_flow", name: "控制流", x: 1, y: 5, z: 2, size: 1.6, color: "#10b981", mastery: 0.7, level: 3, connections: ["if_else", "loops", "functions"] },
@@ -384,7 +384,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             <h3 className="font-semibold text-white">
               {viewMode === "3d" ? "3D知识图谱" : "2D知识图谱"}
             </h3>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-stone-400">
               {viewMode === "3d" ? "沉浸式概念探索" : "清晰的概念关系视图"}
               {(isMobile || isLowEnd) && viewMode === "3d" && " (性能模式推荐2D)"}
             </p>
@@ -395,7 +395,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             variant="ghost"
             size="sm"
             onClick={() => setAutoRotate(!autoRotate)}
-            className="text-slate-300 hover:text-white hover:bg-white/10"
+            className="text-stone-300 hover:text-white hover:bg-white/10"
           >
             <RotateCw className={`w-4 h-4 ${autoRotate ? "animate-spin" : ""}`} />
           </Button>
@@ -403,7 +403,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             variant="ghost"
             size="sm"
             onClick={() => setZoom((z) => Math.min(z * 1.2, 3))}
-            className="text-slate-300 hover:text-white hover:bg-white/10"
+            className="text-stone-300 hover:text-white hover:bg-white/10"
           >
             <ZoomIn className="w-4 h-4" />
           </Button>
@@ -411,7 +411,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             variant="ghost"
             size="sm"
             onClick={() => setZoom((z) => Math.max(z / 1.2, 0.3))}
-            className="text-slate-300 hover:text-white hover:bg-white/10"
+            className="text-stone-300 hover:text-white hover:bg-white/10"
           >
             <ZoomOut className="w-4 h-4" />
           </Button>
@@ -419,7 +419,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             variant="ghost"
             size="sm"
             onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
-            className="text-slate-300 hover:text-white hover:bg-white/10 hidden sm:flex"
+            className="text-stone-300 hover:text-white hover:bg-white/10 hidden sm:flex"
             title={viewMode === "3d" ? "Switch to 2D View" : "Switch to 3D View"}
           >
             {viewMode === "3d" ? <Grid3X3 className="w-4 h-4" /> : <Box className="w-4 h-4" />}
@@ -428,7 +428,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             variant="ghost"
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-slate-300 hover:text-white hover:bg-white/10"
+            className="text-stone-300 hover:text-white hover:bg-white/10"
           >
             {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </Button>
@@ -437,7 +437,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
 
       {/* Content Area */}
       {viewMode === "2d" && units ? (
-        <div className="h-full bg-slate-50 p-4 overflow-auto">
+        <div className="h-full bg-stone-50 p-4 overflow-auto">
           <KnowledgeGraph 
             units={units} 
             knowledgeUnitDefinitions={knowledgeUnitDefinitions}
@@ -460,34 +460,34 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
       )}
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur rounded-lg p-3">
-        <p className="text-xs text-slate-400 mb-2">关系类型</p>
+      <div className="absolute bottom-4 left-4 bg-stone-900/80 backdrop-blur rounded-lg p-3">
+        <p className="text-xs text-stone-400 mb-2">关系类型</p>
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-indigo-500 rounded" />
-            <span className="text-xs text-slate-300">前置知识</span>
+            <span className="text-xs text-stone-300">前置知识</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-emerald-500 rounded" />
-            <span className="text-xs text-slate-300">依赖关系</span>
+            <span className="text-xs text-stone-300">依赖关系</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-amber-500 rounded" />
-            <span className="text-xs text-slate-300">相似概念</span>
+            <span className="text-xs text-stone-300">相似概念</span>
           </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur rounded-lg p-3">
+      <div className="absolute bottom-4 right-4 bg-stone-900/80 backdrop-blur rounded-lg p-3">
         <div className="grid grid-cols-2 gap-4 text-center">
           <div>
             <p className="text-xl font-bold text-white">{mockNodes.length}</p>
-            <p className="text-xs text-slate-400">概念节点</p>
+            <p className="text-xs text-stone-400">概念节点</p>
           </div>
           <div>
             <p className="text-xl font-bold text-white">{mockEdges.length}</p>
-            <p className="text-xs text-slate-400">知识连接</p>
+            <p className="text-xs text-stone-400">知识连接</p>
           </div>
         </div>
       </div>
@@ -499,7 +499,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="absolute top-20 right-4 w-64 bg-slate-900/95 backdrop-blur-xl rounded-xl p-4 border border-slate-700"
+            className="absolute top-20 right-4 w-64 bg-stone-900/95 backdrop-blur-xl rounded-xl p-4 border border-stone-700"
           >
             <div className="flex items-center gap-3 mb-3">
               <div 
@@ -510,15 +510,15 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-slate-400">难度等级</span>
+                <span className="text-stone-400">难度等级</span>
                 <span className="text-white">L{selectedNode.level}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">掌握程度</span>
+                <span className="text-stone-400">掌握程度</span>
                 <span className="text-emerald-400">{Math.round(selectedNode.mastery * 100)}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">关联概念</span>
+                <span className="text-stone-400">关联概念</span>
                 <span className="text-white">{selectedNode.connections.length}个</span>
               </div>
             </div>
@@ -535,7 +535,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
       </AnimatePresence>
 
       {/* Instructions */}
-      <div className="absolute bottom-16 left-4 text-xs text-slate-500">
+      <div className="absolute bottom-16 left-4 text-xs text-stone-500">
         <p>拖拽旋转 • 滚轮缩放 • 点击查看详情</p>
       </div>
     </Card>

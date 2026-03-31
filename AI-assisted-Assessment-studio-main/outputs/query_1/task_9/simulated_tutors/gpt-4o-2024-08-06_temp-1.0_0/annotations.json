@@ -1,0 +1,4 @@
+{
+    "program": "def guard_treasure(guards):\n    # Initialize a list to hold names of guards in odd corridors\n    odd_corridor_guards = []\n    \n    # Iterate over each guard and their corridor number\n    for guard, corridor in guards:\n        # Check if the corridor number is odd\n        if corridor % 2 != 0:\n            # If it's odd, add the guard's name to the list\n            odd_corridor_guards.append(guard)\n    \n    # Return the list of guards blocking odd-numbered corridors\n    return odd_corridor_guards\n\n# Example usage\nif __name__ == \"__main__\":\n    guards = [(\"Athena\", 1), (\"Hermes\", 2), (\"Apollo\", 3), (\"Artemis\", 4)]\n    print(guard_treasure(guards))",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,105 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['File Handling and I/O', 'Strings', 'Lists']:
+
+### Beginning of task description
+You are tasked with creating a Python program that explores Greek mythology by reading details about various mythological creatures from a text file and extracting specific information. You will be given a text file containing entries of mythological creatures, where each entry has the following format:
+
+```
+CreatureName: Description
+Attributes: Attribute1, Attribute2, ..., AttributeN
+```
+
+The entries in the file are separated by a blank line. Your program should read the file 'mythical_creatures.txt' and extract the names of all creatures that have a specific attribute provided as input. The results should be returned as a list of creature names. If no creature with the given attribute is found, return an empty list.
+
+### Function Signature
+
+```python
+def find_creatures_by_attribute(file_path, attribute):
+    # Your code here
+```
+
+### Input
+- `file_path`: a string representing the path to the text file 'mythical_creatures.txt'.
+- `attribute`: a string representing the attribute to search for among the creatures.
+
+### Output
+- A list of strings, where each string is the name of a creature with the specified attribute.
+
+### Example
+Suppose the content of 'mythical_creatures.txt' is as follows:
+```
+Minotaur: A creature with the body of a man and the head of a bull.
+Attributes: labyrinth, beast, angry
+
+Medusa: A Gorgon with snakes for hair.
+Attributes: petrifying, snake
+
+Hydra: A many-headed serpent.
+Attributes: regenerating, water
+```
+
+Calling `find_creatures_by_attribute('mythical_creatures.txt', 'snake')` should return `['Medusa']` because Medusa is the only creature with the attribute 'snake'.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import find_creatures_by_attribute
+
+MYTHICAL_CREATURES_CONTENT = '''
+Minotaur: A creature with the body of a man and the head of a bull.
+Attributes: labyrinth, beast, angry
+
+Medusa: A Gorgon with snakes for hair.
+Attributes: petrifying, snake
+
+Hydra: A many-headed serpent.
+Attributes: regenerating, water
+
+Phoenix: The immortal bird that regenerates from ashes.
+Attributes: fire, immortal
+
+Cerberus: The multi-headed dog guarding the underworld.
+Attributes: dog, underworld, watchful
+'''
+
+FILE_NAME = 'mythical_creatures.txt'
+
+
+def setup_module(module):
+    with open(FILE_NAME, 'w') as file:
+        file.write(MYTHICAL_CREATURES_CONTENT)
+
+
+def teardown_module(module):
+    os.remove(FILE_NAME)
+
+
+def test_find_creatures_by_attribute_snake():
+    result = find_creatures_by_attribute(FILE_NAME, 'snake')
+    assert result == ['Medusa']
+
+
+def test_find_creatures_by_attribute_water():
+    result = find_creatures_by_attribute(FILE_NAME, 'water')
+    assert result == ['Hydra']
+
+
+def test_find_creatures_by_attribute_immortal():
+    result = find_creatures_by_attribute(FILE_NAME, 'immortal')
+    assert result == ['Phoenix']
+
+
+def test_find_creatures_by_attribute_dog():
+    result = find_creatures_by_attribute(FILE_NAME, 'dog')
+    assert result == ['Cerberus']
+
+
+def test_find_creatures_by_attribute_nonexistent():
+    result = find_creatures_by_attribute(FILE_NAME, 'flying')
+    assert result == []
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

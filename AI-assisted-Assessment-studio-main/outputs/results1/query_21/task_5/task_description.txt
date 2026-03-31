@@ -1,0 +1,16 @@
+Create a Python program that manages a simple board game leaderboard. The leaderboard stores the scores of different players from multiple games in a file named `leaderboard.txt`. Each line in the file represents a player's score in the format: `<player_name>:<score>`. The program should define a class `BoardGameLeaderboard` with the following functionalities:
+
+1. **Add Score:** Add a new player's score to the leaderboard, or update an existing player's score. If the player already exists, add the new score to their existing score.
+2. **Get Score:** Retrieve the total score for a given player.
+3. **Get Top Player:** Determine the player with the highest score.
+4. **Load From File:** Read `leaderboard.txt` to initialize the `BoardGameLeaderboard` object with existing scores.
+5. **Save To File:** Write the current leaderboard data back to `leaderboard.txt`.
+
+The methods to be implemented are:
+- `add_score(player_name, score)`: Accepts a player's name and a score.
+- `get_score(player_name)`: Returns the total score for the given player.
+- `get_top_player()`: Returns the name of the player with the highest score.
+- `load_from_file()`: Initializes the object from the file.
+- `save_to_file()`: Saves the current leaderboard to the file.
+
+The file should be formatted such that each line represents a player and their score. Ensure that the program correctly handles file I/O for reading and writing. Design your file reading and writing so that it can deal with multiple appends and updates accurately.

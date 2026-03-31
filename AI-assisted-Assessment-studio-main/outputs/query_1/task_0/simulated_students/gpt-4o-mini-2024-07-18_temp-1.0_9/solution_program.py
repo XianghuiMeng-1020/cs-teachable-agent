@@ -1,0 +1,7 @@
+def determine_wielder_power(artifacts, power_requirements):
+    capable_artifacts = 0
+    for artifact in artifacts:
+        artifact_name, required_power = artifact
+        if any(power >= required_power for power in power_requirements):
+            capable_artifacts += 1
+    return capable_artifacts

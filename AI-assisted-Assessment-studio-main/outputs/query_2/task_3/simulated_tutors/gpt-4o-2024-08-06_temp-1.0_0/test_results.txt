@@ -1,0 +1,53 @@
+/Volumes/T7/idea/pytasksyn/pytask/lib/python3.10/site-packages/coverage/inorout.py:504: CoverageWarning: Module program was never imported. (module-not-imported)
+  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")
+/Volumes/T7/idea/pytasksyn/pytask/lib/python3.10/site-packages/coverage/control.py:894: CoverageWarning: No data was collected. (no-data-collected)
+  self._warn("No data was collected.", slug="no-data-collected")
+/Volumes/T7/idea/pytasksyn/pytask/lib/python3.10/site-packages/pytest_cov/plugin.py:352: CovReportWarning: Failed to generate report: No data to report.
+
+  warnings.warn(CovReportWarning(message), stacklevel=1)
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 0 items / 1 error
+WARNING: Failed to generate report: No data to report.
+
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/query_2/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py _
+pytask/lib/python3.10/site-packages/_pytest/python.py:493: in importtestmodule
+    mod = import_path(
+pytask/lib/python3.10/site-packages/_pytest/pathlib.py:582: in import_path
+    importlib.import_module(module_name)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:1050: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1027: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1006: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:688: in _load_unlocked
+    ???
+pytask/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:165: in exec_module
+    source_stat, co = _rewrite_test(fn, self.config)
+pytask/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:345: in _rewrite_test
+    tree = ast.parse(source, filename=strfn)
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/ast.py:50: in parse
+    return compile(source, filename, mode, flags,
+E     File "/Volumes/T7/idea/pytasksyn/outputs/query_2/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py", line 12
+E       "
+E       ^
+E   SyntaxError: unterminated string literal (detected at line 12)
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+
+=========================== short test summary info ============================
+ERROR outputs/query_2/task_3/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.12s ===============================

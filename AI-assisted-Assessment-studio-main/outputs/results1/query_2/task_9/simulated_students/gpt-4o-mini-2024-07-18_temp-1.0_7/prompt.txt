@@ -1,0 +1,29 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+Imagine you are creating a digital lottery simulation, called "MegaLuck Lottery". Your task is to implement a system that manages lottery game entries for players and determines winners based on random text draws from a file.
+
+You need to perform the following tasks:
+1. Write a function `register_entries(file_path, entries)` that takes two parameters - a string `file_path` representing the path to a text file that stores all lottery entries and a list `entries` containing strings of player names. The function should write each name in `entries` to the file specified by `file_path`, one entry (name) per line. If the file already exists, new entries should append to the existing file without overwriting.
+
+2. Write a function `draw_winner(file_path)` that takes one parameter - a string `file_path` which is the path to the file used to store lottery entries. The function should read all entries from the file and return a list of strings with all the entries and the name of a randomly drawn winner from these entries. If there are no entries, return an empty list.
+
+Ensure that the file handling is correctly implemented to accommodate multiple operations.
+
+### Example
+Suppose the content of `lottery.txt` is as follows prior to running `register_entries`:
+
+```
+Alice
+Bob
+```
+
+- Calling `register_entries('lottery.txt', ['Charlie', 'Diana'])` should add `Charlie` and `Diana` to `lottery.txt`.
+- Calling `draw_winner('lottery.txt')` should return content from `lottery.txt` (i.e., `['Alice', 'Bob', 'Charlie', 'Diana']`) as a list and also return a winner (in this case it could be "Charlie"), thus the output could be: `(['Alice', 'Bob', 'Charlie', 'Diana'], 'Charlie')`. However, the winner is chosen randomly, so any of the names could be the winner.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

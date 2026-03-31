@@ -1,0 +1,42 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+You are tasked with writing a Python function for a cooking assistant application. The function is called `calculate_total_ingredients` and it takes a list of ingredients used in multiple recipes for a week. Your function should sum up the total quantity needed for each distinct ingredient and return a dictionary showing the ingredient as the key and the total quantity needed as the value. The list will contain strings in the format `<ingredient>:<quantity>`, where `<ingredient>` is a string that does not contain a colon, and `<quantity>` is a positive integer. 
+
+Your function should handle exceptions where:
+- An ingredient does not follow the prescribed format (e.g., missing a quantity or using an improper separator).
+- The quantity is not a valid positive integer.
+
+The function signature is `def calculate_total_ingredients(ingredient_list):`.
+
+The function should ignore any entries that don't match the format due to exceptions and process only the valid ones.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_total_ingredients
+
+def test_basic_case():
+    assert calculate_total_ingredients(['flour:500', 'sugar:300', 'flour:200', 'eggs:12']) == {'flour': 700, 'sugar': 300, 'eggs': 12}
+
+def test_with_invalid_entries():
+    assert calculate_total_ingredients(['flour:500', 'sugar:300g', 'flour:200', 'eggs:12']) == {'flour': 700, 'eggs': 12}
+
+def test_no_valid_entries():
+    assert calculate_total_ingredients(['flour-', 'sugar:30g', 'flour', 'eggs:']) == {}
+
+def test_mixed_entries():
+    assert calculate_total_ingredients(['salt:50', ':100', 'pepper:30', 'salt:50g', 'pepper:20']) == {'salt': 50, 'pepper': 50}
+
+def test_empty_list():
+    assert calculate_total_ingredients([]) == {}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

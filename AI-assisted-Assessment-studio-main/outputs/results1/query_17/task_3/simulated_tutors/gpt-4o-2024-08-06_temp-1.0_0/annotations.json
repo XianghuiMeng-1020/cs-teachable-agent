@@ -1,0 +1,4 @@
+{
+    "program": "class Spaceship:\n    def __init__(self, name, captain='Unknown'):\n        self.name = name\n        self.captain = captain\n        self.missions = []\n\n    def add_mission(self, mission_type):\n        valid_missions = [\"Reconnaissance\", \"Transport\", \"Combat\"]\n        if mission_type not in valid_missions:\n            raise ValueError(\"Invalid mission type\")\n        self.missions.append(mission_type)\n\n    def get_missions_summary(self):\n        summary = {\"Reconnaissance\": 0, \"Transport\": 0, \"Combat\": 0}\n        for mission in self.missions:\n            summary[mission] += 1\n        return summary\n\n# The class can be tested using the given pytest suite.",
+    "context_relevance": 1.0
+}

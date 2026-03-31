@@ -1,0 +1,33 @@
+You are tasked to create a function `pantheon_summary(gods_list)` that will return a summary of god data from a list of mythological figures.
+
+Each element in the `gods_list` is a dictionary where:
+- 'name': a string, the name of the god.
+- 'pantheon': a string, the pantheon they belong to (e.g., 'Greek', 'Norse').
+- 'realm': a string, the realm or domain of the god (e.g., 'Thunder', 'Ocean').
+
+The function should return a dictionary summarizing the count of gods per pantheon and realms per pantheon. The keys in the summary dictionary should be the pantheon names, and the value associated with each key should itself be a dictionary with two keys:
+- 'count': the integer count of gods in that pantheon.
+- 'realms': a list of unique realms found in that pantheon, sorted in ascending order.
+
+### Example
+If the input to the function is:
+```
+gods_list = [
+    {'name': 'Zeus', 'pantheon': 'Greek', 'realm': 'Sky'},
+    {'name': 'Thor', 'pantheon': 'Norse', 'realm': 'Thunder'},
+    {'name': 'Hades', 'pantheon': 'Greek', 'realm': 'Underworld'},
+    {'name': 'Loki', 'pantheon': 'Norse', 'realm': 'Mischief'},
+    {'name': 'Poseidon', 'pantheon': 'Greek', 'realm': 'Sea'}
+]
+```
+Then `pantheon_summary(gods_list)` should return:
+```
+{
+    'Greek': {'count': 3, 'realms': ['Sea', 'Sky', 'Underworld']},
+    'Norse': {'count': 2, 'realms': ['Mischief', 'Thunder']}
+}
+```
+
+### Constraints:
+- All dictionaries within `gods_list` will have the keys in the exact format specified and all values will be non-empty strings.
+- No two gods within the same pantheon will have the same realm.

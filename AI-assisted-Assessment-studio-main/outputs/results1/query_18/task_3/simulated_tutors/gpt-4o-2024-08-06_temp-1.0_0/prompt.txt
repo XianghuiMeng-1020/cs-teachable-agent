@@ -1,0 +1,97 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In the distant future, intergalactic trade is thriving due to advanced space travel capabilities. As a software engineer aboard the trading spaceship 'Argonaut', you are tasked with calculating the total fuel requirements for various trade missions.
+
+Write a Python function `calculate_fuel_for_mission(filename)` which reads trade mission data from a file specified by `filename`. Each line in the file represents a mission and contains the distance to the destination planet (in light years) as an integer.
+
+The fuel required for a mission is determined by the formula:
+- fuel = distance * 2 (since 2 units of fuel are required per light year traveled)
+
+Your task is to compute the total fuel required for all listed missions in the file. The total fuel should be written to a new file named `total_fuel.txt`. This file will contain a single integer - the total fuel required for all missions.
+
+You are not required to validate the contents of the file. Assume the distance values provided are valid non-negative integers.
+
+Example:
+If the file 'missions.txt' contains:
+```
+10
+20
+15
+```
+Then 'total_fuel.txt' should contain:
+```
+90
+``` 
+
+Your solution will be tested using various test files with different sets of missions.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_fuel_for_mission
+
+def setup_module(module):
+    with open('missions1.txt', 'w') as f:
+        f.write("10\n20\n15\n")
+    with open('missions2.txt', 'w') as f:
+        f.write("5\n50\n25\n10\n")
+    with open('missions3.txt', 'w') as f:
+        f.write("100\n200\n300\n")
+    with open('missions4.txt', 'w') as f:
+        f.write("0\n0\n0\n0\n0\n")
+    with open('missions5.txt', 'w') as f:
+        f.write("1\n1\n1\n1\n")
+
+
+def teardown_module(module):
+    os.remove('missions1.txt')
+    os.remove('missions2.txt')
+    os.remove('missions3.txt')
+    os.remove('missions4.txt')
+    os.remove('missions5.txt')
+    if os.path.exists('total_fuel.txt'):
+        os.remove('total_fuel.txt')
+
+
+def test_calculate_fuel_for_mission_case1():
+    calculate_fuel_for_mission('missions1.txt')
+    assert os.path.exists('total_fuel.txt')
+    with open('total_fuel.txt', 'r') as f:
+        assert int(f.read().strip()) == 90
+
+
+def test_calculate_fuel_for_mission_case2():
+    calculate_fuel_for_mission('missions2.txt')
+    assert os.path.exists('total_fuel.txt')
+    with open('total_fuel.txt', 'r') as f:
+        assert int(f.read().strip()) == 180
+
+
+def test_calculate_fuel_for_mission_case3():
+    calculate_fuel_for_mission('missions3.txt')
+    assert os.path.exists('total_fuel.txt')
+    with open('total_fuel.txt', 'r') as f:
+        assert int(f.read().strip()) == 1200
+
+
+def test_calculate_fuel_for_mission_case4():
+    calculate_fuel_for_mission('missions4.txt')
+    assert os.path.exists('total_fuel.txt')
+    with open('total_fuel.txt', 'r') as f:
+        assert int(f.read().strip()) == 0
+
+
+def test_calculate_fuel_for_mission_case5():
+    calculate_fuel_for_mission('missions5.txt')
+    assert os.path.exists('total_fuel.txt')
+    with open('total_fuel.txt', 'r') as f:
+        assert int(f.read().strip()) == 8
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

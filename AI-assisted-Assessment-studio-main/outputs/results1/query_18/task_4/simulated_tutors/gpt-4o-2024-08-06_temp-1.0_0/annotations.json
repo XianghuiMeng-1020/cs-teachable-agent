@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_power(filename):\n    try:\n        with open(filename, 'r') as file:\n            content = file.read().strip()\n            if not content:  # Handle empty file\n                return 1000\n            # Split the content based on commas and strip any whitespace\n            changes = map(int, content.split(','))\n            # Sum the changes and add to initial power level\n            final_power = 1000 + sum(changes)\n            return final_power\n    except FileNotFoundError:\n        print(\"Error: The file was not found.\")\n        return None\n    except ValueError:\n        print(\"Error: File contains invalid data.\")\n        return None",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,16 @@
+### Task Description
+You are given the task of creating a program that determines the outcome of a round in a simple board game called "Block & Win". The board game involves two players who earn points for successful moves. A player wins a round if they have more points than the other player.
+
+You need to implement a function `find_winner(score_a, score_b)` that takes two integer inputs `score_a` and `score_b`, which represent the scores of Player A and Player B respectively.
+
+The function should return:
+- "Player A wins" if Player A's score is greater than Player B's score.
+- "Player B wins" if Player B's score is greater than Player A's score.
+- "Tie" if both players have the same score.
+
+### Constraints
+- The scores (score_a and score_b) are integers in the range of -10,000 to 10,000.
+
+### Example
+`find_winner(250, 150)` should return "Player A wins".
+`find_winner(100, 100)` should return "Tie".

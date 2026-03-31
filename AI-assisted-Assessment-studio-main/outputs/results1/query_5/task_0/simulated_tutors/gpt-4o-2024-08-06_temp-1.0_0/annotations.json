@@ -1,0 +1,4 @@
+{
+    "program": "def find_winner(filename):\n    # Read the race results from the file\n    with open(filename, 'r') as file:\n        lines = file.readlines()\n    \n    # Initialize variables to hold the winner's name and time\n    winner_name = None\n    fastest_time = float('inf')\n\n    # Process each line of the file\n    for line in lines:\n        # Strip any whitespace and split the line by comma\n        parts = line.strip().split(',')\n        name = parts[0]\n        time = int(parts[1])\n        \n        # Check if this creature has the fastest time\n        if time < fastest_time:\n            fastest_time = time\n            winner_name = name\n\n    return winner_name\n",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,18 @@
+You are required to write a function `calculate_average_ingredient_weight(filename)` that takes in a single argument:
+- `filename`: the name of a text file which contains ingredient names and their corresponding weights (in grams) in a rotating sequence of `3` elements, as pairs, and may contain some erroneous data which should be handled gracefully.
+
+The text file is structured as follows:
+- Each row contains multiple pieces of information, each ingredient is mentioned with its weight in grams followed by the next ingredient. The sequence is: `ingredient`, `weight`, `next ingredient`.
+- If a line has an incorrect format or missing elements, you need to skip that line to avoid errors.
+
+Your task is to calculate the average weight of all correctly formatted ingredient weights in the file and return it as a float rounded to 2 decimal places. If there is an issue opening the file, the function should return `None`.
+
+Example file content:
+```
+Sugar 500 Flour 1000 Salt
+Salt 20 Pepper 500
+OliveOil 400 Sugar 100
+```
+In this example, the second line contains only two elements, hence it should be skipped.
+
+You can assume the weights are always valid numerical values if the format is correct, and weights are always on odd indices of the line. A weight not followed by the next ingredient name should be ignored.

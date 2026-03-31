@@ -1,0 +1,82 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['File Handling and I/O', 'Selection Statements (if/else, etc.)', 'Variables', 'Loops']:
+
+### Beginning of task description
+Create a program in Python to analyze the calorie content of recipes stored in a text file. Each line in the file contains the name of a recipe, followed by the number of calories it contains. Your program should read from a file named `recipe_calories.txt` and create a single function `find_low_cal_recipes(threshold)`. This function should:
+
+1. Accept a single integer `threshold` as an argument.
+2. Read the `recipe_calories.txt` file.
+3. Identify and return a list of recipe names whose calorie count is less than or equal to the provided `threshold`.
+
+The program should handle the following scenarios:
+- If the file is empty, the function should return an empty list.
+- Ensure that the file can have any number of recipes, with one recipe per line.
+- If no recipes are under the threshold, return an empty list.
+
+Remember, each line in `recipe_calories.txt` is structured as:
+```
+recipe_name: calories
+```
+where `recipe_name` is the name of the recipe and `calories` is an integer value representing its calorie content.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import find_low_cal_recipes
+
+recipe_data = """Pasta: 300
+Salad: 150
+Burger: 500
+Fries: 450
+Soup: 200
+Curry: 400
+"""
+
+recipe_empty_data = """"""
+
+recipe_no_match = """Apple Pie: 400
+Brownie: 350
+Cheesecake: 250
+"""
+
+def setup_module(module):
+    with open('recipe_calories.txt', 'w') as f:
+        f.write(recipe_data)
+
+    with open('recipe_empty.txt', 'w') as f:
+        f.write(recipe_empty_data)
+
+    with open('recipe_no_match.txt', 'w') as f:
+        f.write(recipe_no_match)
+
+
+def teardown_module(module):
+    os.remove('recipe_calories.txt')
+    os.remove('recipe_empty.txt')
+    os.remove('recipe_no_match.txt')
+
+
+def test_find_low_cal_recipes_normal_case():
+    assert find_low_cal_recipes(250) == ['Salad', 'Soup']
+
+def test_find_low_cal_recipes_no_match():
+    with open('recipe_calories.txt', 'w') as f:
+        f.write(recipe_no_match)
+    assert find_low_cal_recipes(200) == []
+
+def test_find_low_cal_recipes_exact_match():
+    assert set(find_low_cal_recipes(400)) == set(['Salad', 'Soup', 'Pasta', 'Curry'])
+
+def test_find_low_cal_recipes_empty_file():
+    with open('recipe_calories.txt', 'w') as f:
+        f.write(recipe_empty_data)
+    assert find_low_cal_recipes(100) == []
+
+def test_find_low_cal_recipes_all_match():
+    assert set(find_low_cal_recipes(500)) == set(['Pasta', 'Salad', 'Burger', 'Fries', 'Soup', 'Curry'])
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

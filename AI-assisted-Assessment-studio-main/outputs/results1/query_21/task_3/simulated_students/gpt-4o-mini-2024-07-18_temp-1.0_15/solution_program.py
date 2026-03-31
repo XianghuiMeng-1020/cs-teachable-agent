@@ -1,0 +1,39 @@
+class BoardGame:
+    def __init__(self):
+        self.players = {}
+        self.load_players()
+
+    def load_players(self):
+        try:
+            with open('players.txt', 'r') as file:
+                for line in file:
+                    name, score = line.strip().split(',')
+                    self.players[name] = int(score)
+        except FileNotFoundError:
+            pass
+
+    def save_players(self):
+        with open('players.txt', 'w') as file:
+            for name, score in self.players.items():
+                file.write(f'{name},{score}\n')
+
+    def add_player(self, name, initial_score):
+        if name not in self.players:
+            self.players[name] = initial_score
+            self.save_players()
+
+    def update_score(self, name, points):
+        if name in self.players:
+            self.players[name] += points
+            self.save_players()
+
+    def get_highest_score(self):
+        if not self.players:
+            return None
+        highest_name = None
+        highest_score = -1
+        for name, score in self.players.items():
+            if score > highest_score:
+                highest_score = score
+                highest_name = name
+        return highest_name

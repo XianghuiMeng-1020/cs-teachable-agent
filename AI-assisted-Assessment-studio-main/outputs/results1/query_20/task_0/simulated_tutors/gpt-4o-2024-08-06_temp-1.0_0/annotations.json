@@ -1,0 +1,4 @@
+{
+    "program": "def determine_turn_winner(player_1_name, player_1_score, player_2_name, player_2_score):\n    if player_1_score > player_2_score:\n        return player_1_name\n    elif player_2_score > player_1_score:\n        return player_2_name\n    else:\n        return \"Draw\"\n\n# Example usage of the function:\nprint(determine_turn_winner(\"Alice\", 85, \"Bob\", 90))  # Output \"Bob\"\nprint(determine_turn_winner(\"Alice\", 50, \"Bob\", 50))  # Output \"Draw\"",
+    "context_relevance": 0.0
+}

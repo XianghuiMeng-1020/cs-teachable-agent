@@ -1,0 +1,7 @@
+In a distant future, humans have discovered a system of sending messages between planets using quantum entangled particles. Each message needs to be sent with a precise energy level, calculated by manipulating code from a received 'quantum energy file'. Your task is to create a program to aid in this process by calculating the total energy level required based on data in a given file.
+
+The 'quantum energy file' will contain a series of integers separated by spaces, representing quantum energy packets received from space. Your program should read the integers from a file named `quantum_energy.txt`, calculate the total sum of these energy packets, and then write this total back to a file named `total_energy.txt`.
+
+Implement the function `calculate_total_energy()`. This function must read from `quantum_energy.txt`, calculate the sum of all integers, and write the result into `total_energy.txt`.
+
+Ensure that your program handles the input and output files correctly, and that it operates with integer values only.

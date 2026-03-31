@@ -1,0 +1,4 @@
+{
+    "program": "class Scoreboard:\n    def __init__(self, player_names):\n        self.scores = {name: 0 for name in player_names}\n\n    def update_score(self, player_name, score_change):\n        if player_name in self.scores:\n            self.scores[player_name] += score_change\n\n    def get_score(self, player_name):\n        return self.scores.get(player_name, 0)\n\n    def get_winner(self):\n        max_score = max(self.scores.values())\n        winners = [name for name, score in self.scores.items() if score == max_score]\n        return ', '.join(sorted(winners))\n\n    def get_all_scores(self):\n        scores_sorted = sorted(self.scores.items())\n        return ', '.join(f\"{name}:{score}\" for name, score in scores_sorted)",
+    "context_relevance": 1.0
+}

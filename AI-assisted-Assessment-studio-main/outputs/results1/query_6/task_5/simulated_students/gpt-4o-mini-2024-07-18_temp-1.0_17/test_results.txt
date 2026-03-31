@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py . [ 20%]
+..F.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at teardown of test_empty_removal_handling _______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:43: AssertionError: assert 'Dragon;European;' in ''
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_save_to_file
+ERROR outputs/results1/query_6/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_empty_removal_handling
+===================== 1 failed, 4 passed, 1 error in 0.16s =====================

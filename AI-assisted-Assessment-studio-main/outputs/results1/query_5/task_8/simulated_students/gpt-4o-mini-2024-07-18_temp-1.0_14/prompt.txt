@@ -1,0 +1,40 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+**Task**
+
+You have been tasked with developing a Python program to simulate a part of an ancient Greek mythological ledger system. This ledger system records noble houses (such as "House of Zeus") and tracks their assets, represented by a mythical currency called "Drachmaroon". Each house has a unique number of precious metals, which can be converted into Drachmaroon at given exchange rates.
+
+Your program must read from an input text file named `mythology_ledger.txt`, which lists these houses and their assets in the following format:
+```
+House of Zeus: Gold=1000, Silver=5000, Bronze=20000
+House of Artemis: Gold=750, Silver=3000, Bronze=15000
+House of Athena: Gold=1500, Silver=4500, Bronze=10000
+```
+
+The conversion rates are:
+- Gold = 10 Drachmaroons
+- Silver = 5 Drachmaroons
+- Bronze = 1 Drachmaroon
+
+The program should compute the total wealth in Drachmaroons for each house and write this data to an output file named `mythology_wealth.txt`. The output file should contain each house and its total wealth, formatted like:
+```
+House of Zeus: 55000 Drachmaroons
+House of Artemis: 38250 Drachmaroons
+House of Athena: 57500 Drachmaroons
+```
+
+**Requirements:**
+- Read from `mythology_ledger.txt`
+- Calculate each house's total value in Drachmaroons
+- Write results to `mythology_wealth.txt` in the specified format
+
+**Implementation Details:**
+- Assume the input file exists and is correctly formatted.
+- You do not need to handle empty input or incorrect formats.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

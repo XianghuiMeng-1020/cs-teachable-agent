@@ -1,0 +1,28 @@
+### Luckiest Player of the Day
+
+In a casino themed on Games of Chance, players enjoy slot machines. Each day, the casino logs the wins of players in a text file named `daily_wins.txt`. Your task is to determine the 'Luckiest Player of the Day', meaning the player with the highest total winnings on that day.
+
+The log file, `daily_wins.txt`, will have the following format:
+- Each line contains a player's name followed by a space, and then their winnings as an integer. A player can appear multiple times, for instance:
+  ```
+  Alice 100
+  Bob 50
+  Alice 200
+  Charlie 300
+  Bob 150
+  ```
+
+Write a Python program in a function `luckiest_player(filename)` that takes the name of the log file as input and returns the name of the player with the highest total winnings. In case of a tie (more than one player having the same total winnings), return the name of the player who appears first alphabetically.
+
+### Constraints:
+- The file `daily_wins.txt` will contain at least one entry.
+- Player's names are case-sensitive.
+- Only valid winnings (integers) are provided in the file.
+
+### Function Signature:
+```python
+def luckiest_player(filename):
+    pass
+```
+
+The program will be evaluated based on its correctness and adherence to the problem requirements.

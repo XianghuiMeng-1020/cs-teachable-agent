@@ -1,0 +1,4 @@
+{
+    "program": "def recipe_summary(recipe):\n    # Initialize an empty dictionary to store the summary\n    summary = {}\n    \n    # Split the input string into lines\n    lines = recipe.strip().split('\\n')\n    \n    # Process each line\n    for line in lines:\n        # Split each line by the first occurrence of ':' to get ingredient, quantity and unit\n        ingredient, rest = line.split(':')\n        quantity, unit = rest.strip().split(' ', 1)\n        \n        # Add the parsed ingredient information to the dictionary\n        summary[ingredient.strip()] = {\n            'quantity': quantity,\n            'unit': unit\n        }\n    \n    return summary",
+    "context_relevance": 1.0
+}

@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:19: AssertionError: assert ['Err', 'n_sp...s', 'tarsshi'] == ['3+2_', 'in_...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:26: AssertionError: assert ['Err', 'Err'... 'Err', 'Err'] == ['5-6+', 'in'...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:33: AssertionError: assert ['37', 'Err',...Err', 'nsVen'] == ['2+3_', '5',..., '6/3_', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:40: AssertionError: assert ['Err'] == ['1000_', 'Err']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:47: AssertionError: assert ['5', '4', '1.0'] == ['5', '4', '1']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_sci_fi_haiku_import_input
+FAILED outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_sci_fi_haiku_invalid_expression
+FAILED outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_sci_fi_haiku_no_expression_errors
+FAILED outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_sci_fi_haiku_single_line
+FAILED outputs/results1/query_16/task_5/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_sci_fi_haiku_expression_only
+============================== 5 failed in 0.09s ===============================

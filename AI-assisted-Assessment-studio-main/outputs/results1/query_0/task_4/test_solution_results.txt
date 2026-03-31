@@ -1,0 +1,10 @@
+FF..F                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_4/test_suite_sol.py:28: AssertionError: assert 220 == 170
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_4/test_suite_sol.py:32: AssertionError: assert 190 == 220
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_4/test_suite_sol.py:44: AssertionError: assert 80 == 60
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_4/test_suite_sol.py::test_calculate_total_score_1
+FAILED outputs/results1/query_0/task_4/test_suite_sol.py::test_calculate_total_score_2
+FAILED outputs/results1/query_0/task_4/test_suite_sol.py::test_calculate_total_score_5
+3 failed, 2 passed in 0.05s

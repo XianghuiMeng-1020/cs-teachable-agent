@@ -1,0 +1,67 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+### Task Description
+
+Write a Python function named `calculate_ingredients` that calculates the total quantity of each ingredient required based on a given list of recipes. Each recipe is a string consisting of ingredient quantities separated by spaces, formatted as `<quantity>:<ingredient>`. For example, a recipe could look like `"2:egg 3:flour 1:sugar"`.
+
+The function should take a single list of such recipe strings as an input. The output should be a dictionary where the keys are ingredient names and the values are the total quantities required across all recipes.
+
+The function signature is:
+
+```python
+def calculate_ingredients(recipes):
+```
+
+### Constraints
+- Each recipe string is well-formed.
+- Ingredient quantities are positive integers.
+- Any ingredient may appear multiple times in different recipes.
+
+### Example
+If the input is:
+```python
+["2:egg 3:flour 1:sugar", "1:egg 2:sugar 1:flour"]
+```
+
+the output should be:
+```python
+{'egg': 3, 'flour': 4, 'sugar': 3}
+```
+
+The program should only use basic data types and constructs, loops, and exception handling mechanisms where necessary.
+
+### How the program will be tested:
+The function will be tested with a variety of input lists containing different compositions of recipes and ingredients.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_ingredients
+
+def test_multiple_ingredients():
+    recipes = ["2:egg 3:flour 1:sugar", "1:egg 2:sugar 1:flour"]
+    assert calculate_ingredients(recipes) == {'egg': 3, 'flour': 4, 'sugar': 3}
+
+def test_single_recipe():
+    recipes = ["4:flour 2:milk"]
+    assert calculate_ingredients(recipes) == {'flour': 4, 'milk': 2}
+
+def test_no_recipes():
+    recipes = []
+    assert calculate_ingredients(recipes) == {}
+
+def test_single_ingredient_many_recipes():
+    recipes = ["1:milk", "2:milk", "3:milk"]
+    assert calculate_ingredients(recipes) == {'milk': 6}
+
+def test_varied_recipes():
+    recipes = ["1:egg 1:milk", "2:egg 2:milk 3:sugar", "1:flour"]
+    assert calculate_ingredients(recipes) == {'egg': 3, 'milk': 3, 'sugar': 3, 'flour': 1}
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

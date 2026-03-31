@@ -1,0 +1,4 @@
+{
+    "program": "def play_game_of_chance(file_name, bet_amount, bet_guess):\n    # Initialize winnings\n    total_winnings = 0\n    \n    # Open the file and process each line\n    with open(file_name, 'r') as file:\n        for line in file:\n            winning_number = int(line.strip())  # Convert line to integer\n            \n            # Check if the bet_guess matches the winning number\n            if bet_guess == winning_number:\n                # Player wins double the bet_amount for each match\n                total_winnings += bet_amount * 2\n\n    # Calculate net balance (subtract the initial bet_amount)\n    balance = total_winnings - bet_amount\n\n    return balance",
+    "context_relevance": 1.0
+}

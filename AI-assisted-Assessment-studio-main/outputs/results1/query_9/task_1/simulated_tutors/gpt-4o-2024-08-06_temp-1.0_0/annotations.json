@@ -1,0 +1,4 @@
+{
+    "program": "def count_gods_attributes(gods_list):\n    attribute_count = {}\n    for god in gods_list:\n        for attribute in god['attributes']:\n            if attribute in attribute_count:\n                attribute_count[attribute] += 1\n            else:\n                attribute_count[attribute] = 1\n    return attribute_count\n\ngods_list = [\n    {\"name\": \"zeus\", \"attributes\": [\"thunder\", \"sky\", \"justice\"]},\n    {\"name\": \"hera\", \"attributes\": [\"marriage\", \"sky\", \"womanhood\"]},\n    {\"name\": \"poseidon\", \"attributes\": [\"sea\", \"horses\", \"earthquake\"]},\n    {\"name\": \"athena\", \"attributes\": [\"wisdom\", \"war\", \"justice\"]},\n]\n\n# Example call\ngods_attributes_count = count_gods_attributes(gods_list)\nprint(gods_attributes_count)",
+    "context_relevance": 1.0
+}

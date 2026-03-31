@@ -1,0 +1,4 @@
+{
+    "program": "```python\ndef find_creatures_by_characteristic(filename, characteristic):\n    creatures = []\n    \n    # Open the file to read data\n    with open(filename, 'r') as file:\n        for line in file:\n            # Split each line into creature name and characteristics\n            name, characteristics = line.strip().split(': ')\n            # Convert the characteristics into a list\n            character_list = characteristics.split(', ')\n            # Check if the desired characteristic is in the list\n            if characteristic in character_list:\n                creatures.append(name)\n    \n    return creatures\n```\n",
+    "context_relevance": 1.0
+}

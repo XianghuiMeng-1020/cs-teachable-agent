@@ -1,0 +1,64 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Strings', 'Loops', 'Selection Statements (if/else, etc.)', 'Classes and Objects']:
+
+### Beginning of task description
+You are tasked with creating a simple board game scoring system in Python. The board game involves multiple rounds, and each player keeps track of their cumulative score. The players' scores are stored in a list associated with each player. You need to implement a `BoardGame` class with the following requirements:
+
+1. The class should have a constructor that initializes the game with an empty list of player's scores.
+2. Implement a method `add_player(self, player_name)` that adds a player to the game with an initial score of an empty list.
+3. Implement a method `record_score(self, player_name, score)` that appends the `score` to the list of scores for the specified `player_name`.
+4. Implement a method `get_player_total_score(self, player_name)` that returns the total score across all rounds for the specified `player_name`.
+5. Implement a method `get_winner(self)` that returns the name of the player with the highest total score. In the event of a tie, return the name of the winner sorted alphabetically.
+
+You can assume that all player names are unique and are always added before their scores are recorded. Functions will only be created for existent players. You will create a game object, add players, record their scores for different rounds, compute total scores, and determine the current winner based on the provided player scores.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import BoardGame
+
+def setup_module(module):
+    pass
+
+def teardown_module(module):
+    pass
+
+class TestBoardGame:
+    def test_add_player_and_get_player_total_score(self):
+        game = BoardGame()
+        game.add_player("Alice")
+        assert game.get_player_total_score("Alice") == 0
+        
+    def test_record_score_single_player(self):
+        game = BoardGame()
+        game.add_player("Bob")
+        game.record_score("Bob", 10)
+        assert game.get_player_total_score("Bob") == 10
+
+    def test_multiple_scores_single_player(self):
+        game = BoardGame()
+        game.add_player("Charlie")
+        game.record_score("Charlie", 5)
+        game.record_score("Charlie", 15)
+        assert game.get_player_total_score("Charlie") == 20
+
+    def test_get_winner_single_winner(self):
+        game = BoardGame()
+        game.add_player("Dave")
+        game.add_player("Eve")
+        game.record_score("Dave", 30)
+        game.record_score("Eve", 25)
+        assert game.get_winner() == "Dave"
+
+    def test_get_winner_tie(self):
+        game = BoardGame()
+        game.add_player("Frank")
+        game.add_player("Grace")
+        game.record_score("Frank", 25)
+        game.record_score("Grace", 25)
+        assert game.get_winner() == "Frank"
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

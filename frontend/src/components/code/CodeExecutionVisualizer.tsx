@@ -151,7 +151,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
   if (steps.length === 0) {
     return (
       <Card padding="md" className={className}>
-        <p className="text-slate-500">No executable code to visualize.</p>
+        <p className="text-stone-500">No executable code to visualize.</p>
       </Card>
     );
   }
@@ -159,13 +159,13 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
   return (
     <Card padding="none" className={cn("overflow-hidden", className)}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
+      <div className="flex items-center justify-between p-4 border-b border-stone-200 bg-stone-50">
         <div className="flex items-center gap-2">
           <Terminal className="w-5 h-5 text-brand-600" />
-          <span className="font-semibold text-slate-900">Code Execution Visualizer</span>
+          <span className="font-semibold text-stone-900">Code Execution Visualizer</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-stone-500">
             Step {currentStep + 1} of {steps.length}
           </span>
         </div>
@@ -173,10 +173,10 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* Code Panel */}
-        <div className="border-r border-slate-200">
+        <div className="border-r border-stone-200">
           <div className="relative">
             {/* Line numbers with highlighting */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-slate-100 border-r border-slate-200">
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-stone-100 border-r border-stone-200">
               {code.split("\n").map((_, i) => (
                 <div
                   key={i}
@@ -184,7 +184,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
                     "h-6 flex items-center justify-center text-xs",
                     current?.highlight_lines?.includes(i)
                       ? "bg-brand-100 text-brand-700 font-bold"
-                      : "text-slate-400"
+                      : "text-stone-400"
                   )}
                 >
                   {i + 1}
@@ -220,7 +220,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-2 p-4 border-t border-slate-200 bg-slate-50">
+          <div className="flex items-center gap-2 p-4 border-t border-stone-200 bg-stone-50">
             <Button
               size="sm"
               variant="outline"
@@ -258,7 +258,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
             <select
               value={speed}
               onChange={(e) => setSpeed(Number(e.target.value))}
-              className="text-sm border border-slate-200 rounded px-2 py-1"
+              className="text-sm border border-stone-200 rounded px-2 py-1"
             >
               <option value={2000}>Slow</option>
               <option value={1000}>Normal</option>
@@ -267,7 +267,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
           </div>
 
           {/* Progress bar */}
-          <div className="h-1 bg-slate-200">
+          <div className="h-1 bg-stone-200">
             <div
               className="h-full bg-brand-500 transition-all"
               style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
@@ -289,7 +289,7 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
 
           {/* Variables */}
           <div>
-            <h4 className="text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+            <h4 className="text-sm font-medium text-stone-700 mb-2 flex items-center gap-2">
               <Variable className="w-4 h-4" />
               Variables
             </h4>
@@ -298,39 +298,39 @@ export function CodeExecutionVisualizer({ code, className }: CodeExecutionVisual
                 {Object.entries(current.variables).map(([name, value]) => (
                   <div
                     key={name}
-                    className="flex items-center justify-between p-2 bg-slate-50 rounded-lg"
+                    className="flex items-center justify-between p-2 bg-stone-50 rounded-lg"
                   >
                     <code className="text-sm font-mono text-brand-600">{name}</code>
-                    <code className="text-sm font-mono text-slate-700">
+                    <code className="text-sm font-mono text-stone-700">
                       {typeof value === "string" ? `"${value}"` : String(value)}
                     </code>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-slate-400">No variables defined yet</p>
+              <p className="text-sm text-stone-400">No variables defined yet</p>
             )}
           </div>
 
           {/* Output */}
           <div>
-            <h4 className="text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+            <h4 className="text-sm font-medium text-stone-700 mb-2 flex items-center gap-2">
               <Terminal className="w-4 h-4" />
               Console Output
             </h4>
-            <div className="p-3 bg-slate-900 rounded-lg min-h-[100px]">
+            <div className="p-3 bg-stone-900 rounded-lg min-h-[100px]">
               {current?.output ? (
                 <pre className="text-sm font-mono text-emerald-400 whitespace-pre-wrap">
                   {current.output}
                 </pre>
               ) : (
-                <span className="text-sm text-slate-500">(no output yet)</span>
+                <span className="text-sm text-stone-500">(no output yet)</span>
               )}
             </div>
           </div>
 
           {/* Step info */}
-          <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-200">
+          <div className="flex items-center justify-between text-xs text-stone-500 pt-2 border-t border-stone-200">
             <span>Line {current ? current.line + 1 : 0}</span>
             <span className={cn(
               currentStep === steps.length - 1 ? "text-emerald-600 font-medium" : ""

@@ -1,0 +1,4 @@
+{
+    "program": "def extract_artifacts(file_path):\n    # Use a set to store unique artifacts\n    artifacts_set = set()\n    \n    # Open the input file and read its contents\n    with open(file_path, 'r') as file:\n        for line in file:\n            # Split the line by semicolon and ignore the first item (figure's name)\n            items = line.strip().split(';')[1:]\n            # Add each artifact to the set\n            artifacts_set.update(items)\n    \n    # Convert the set to a sorted list\n    sorted_artifacts = sorted(artifacts_set)\n    \n    # Write the sorted artifacts to 'artifacts.txt' file\n    with open('artifacts.txt', 'w') as file:\n        for artifact in sorted_artifacts:\n            file.write(artifact + '\\n')",
+    "context_relevance": 1.0
+}

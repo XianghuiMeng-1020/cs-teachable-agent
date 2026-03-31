@@ -1,0 +1,4 @@
+{
+    "program": "def creature_balance(creature_weights_A, creature_weights_B):\n    # Calculate the total weights on side A and B using arithmetic operators and list functions.\n    total_A = sum(creature_weights_A)  # sum up list A\n    total_B = sum(creature_weights_B)  # sum up list B\n    \n    # Use selection statements to determine which side is heavier or if balanced.\n    if total_A > total_B:\n        return 'Side A'\n    elif total_B > total_A:\n        return 'Side B'\n    else:\n        return 'Balanced'\n\n# Examples to test the function\nprint(creature_balance([5, 10, 5], [7, 13]))  # 'Balanced'\nprint(creature_balance([10, 20], [5, 5]))     # 'Side A'\nprint(creature_balance([5, 8], [10, 5]))     # 'Side A'\nprint(creature_balance([12, 15], [25, 3]))   # 'Side B'\nprint(creature_balance([7, 8], [9, 6]))      # 'Balanced'",
+    "context_relevance": 0.0
+}

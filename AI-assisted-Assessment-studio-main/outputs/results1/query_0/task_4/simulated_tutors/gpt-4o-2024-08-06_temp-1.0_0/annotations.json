@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_score(filename):\n    total_score = 0\n    with open(filename, 'r') as file:\n        for line in file:\n            guess_str, actual_str = line.strip().split(',')\n            guess = int(guess_str)\n            actual = int(actual_str)\n            difference = abs(guess - actual)\n            if difference == 0:\n                total_score += 100\n            elif difference == 1:\n                total_score += 50\n            elif difference == 2:\n                total_score += 20\n    return total_score\n\n# Test the function manually\n# print(calculate_total_score('game_scores.txt'))",
+    "context_relevance": 1.0
+}

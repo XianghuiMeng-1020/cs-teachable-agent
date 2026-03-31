@@ -1,0 +1,4 @@
+{
+    "program": "def parse_ingredient_list(ingredient_string):\n    # Initialize an empty dictionary to store ingredient name and quantity pairs\n    ingredients_dict = {}\n    \n    # Split the input string on semicolons to separate each ingredient-quantity pair\n    if ingredient_string:\n        ingredient_entries = ingredient_string.split(';')\n\n        # Iterate over each ingredient-quantity pair\n        for entry in ingredient_entries:\n            # Split each entry on colon to separate the ingredient name and quantity\n            if ':' in entry:\n                name, quantity = entry.split(':', 1)\n                # Add the name and quantity to the dictionary\n                ingredients_dict[name] = quantity\n\n    return ingredients_dict",
+    "context_relevance": 1.0
+}

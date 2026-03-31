@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py . [ 20%]
+....E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_analyze_game_results_empty _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test1.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_0/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_analyze_game_results_empty
+========================== 5 passed, 1 error in 0.04s ==========================

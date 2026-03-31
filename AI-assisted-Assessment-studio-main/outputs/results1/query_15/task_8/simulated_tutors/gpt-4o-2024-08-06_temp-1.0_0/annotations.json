@@ -1,0 +1,4 @@
+{
+    "program": "def encode_message(message):\n    vowel_shift = {'a': 'e', 'e': 'i', 'i': 'o', 'o': 'u', 'u': 'a'}\n    encoded_message = []\n    \n    for char in message:\n        if char in vowel_shift:\n            encoded_message.append(vowel_shift[char])\n        else:\n            encoded_message.append(char)\n    \n    return ''.join(encoded_message)\n\n# Example test\nprint(encode_message(\"hello world\"))  # Output should be \"hillu wurld\"",
+    "context_relevance": 0.0
+}

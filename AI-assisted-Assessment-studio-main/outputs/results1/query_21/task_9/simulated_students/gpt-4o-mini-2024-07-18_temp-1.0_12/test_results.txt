@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py . [ 20%]
+.FF.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_game_to_string ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'games.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:36: FileNotFoundError: [Errno 2] No such file or directory: 'output.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/solution_program.py:27: FileNotFoundError: [Errno 2] No such file or directory: 'games_with_dupes.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_to_file
+FAILED outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_from_file_with_duplicates
+ERROR outputs/results1/query_21/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_game_to_string
+===================== 2 failed, 3 passed, 1 error in 0.15s =====================

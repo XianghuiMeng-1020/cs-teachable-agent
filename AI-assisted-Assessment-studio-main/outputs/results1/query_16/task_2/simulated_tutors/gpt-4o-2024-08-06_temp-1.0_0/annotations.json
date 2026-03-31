@@ -1,0 +1,4 @@
+{
+    "program": "class Lasergun:\n    def __init__(self, total_energy):\n        if total_energy <= 0:\n            raise ValueError(\"Invalid energy value.\")\n        self.total_energy = total_energy\n        self.current_energy = total_energy\n\n    def shoot(self):\n        if self.current_energy < 10:\n            return \"Out of energy!\"\n        else:\n            self.current_energy -= 10\n            return \"Pew! Pew!\"\n\n    def reload(self):\n        self.current_energy = self.total_energy\n\n    def remaining_energy(self):\n        return f\"Remaining energy: {self.current_energy}\"\n\n# Example usage:\n# lasergun = Lasergun(100)\n# print(lasergun.shoot())  # Expected: Pew! Pew!\n# print(lasergun.remaining_energy())  # Expected: Remaining energy: 90\n# lasergun.reload()\n# print(lasergun.remaining_energy())  # Expected: Remaining energy: 100",
+    "context_relevance": 1.0
+}

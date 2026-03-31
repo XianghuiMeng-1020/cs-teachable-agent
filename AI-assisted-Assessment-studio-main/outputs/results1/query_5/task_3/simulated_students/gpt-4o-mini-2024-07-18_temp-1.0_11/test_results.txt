@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:25: AssertionError: assert ('Hephaestus', 'Artemis', 82) == ('Hades', 'Athena', 80)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:32: AssertionError: assert None == ('Hephaestus', 'Artemis', 83)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:39: AssertionError: assert None == ('Hermes', 'Hermes', 50)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:46: AssertionError: assert None == ('Hera', 'Ares', 74)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:53: AssertionError: assert None == ('Iris', 'Helios', 65)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_analyze_pantheon_common_case
+FAILED outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_analyze_pantheon_unique_min_max
+FAILED outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_analyze_pantheon_single_entry
+FAILED outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_analyze_pantheon_multiple_same_min_max
+FAILED outputs/results1/query_5/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_analyze_pantheon_rounding_down_average
+============================== 5 failed in 0.23s ===============================

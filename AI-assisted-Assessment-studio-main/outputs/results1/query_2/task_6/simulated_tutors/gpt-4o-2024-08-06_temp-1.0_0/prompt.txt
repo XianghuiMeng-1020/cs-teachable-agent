@@ -1,0 +1,92 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+**Game of Chance: Lucky Slot Machine**
+
+You're tasked with creating a simulation of a simple slot machine game. The slot machine displays three slots, each choosing a random word from a predefined list of words. Players win if all three slots display the same word.
+
+### Task
+Implement the following functions to simulate and determine outcomes of a slot machine game:
+
+1. **`generate_slots(num_slots, word_list)`**
+    - **Parameters**: 
+      - `num_slots` (integer): The number of slots the machine has.
+      - `word_list` (list): A list of words to choose from.
+    - **Returns**: A string representing the outcome of the spun slots, with each slot result separated by a space.
+
+2. **`determine_outcome(slot_str)`**
+    - **Parameters**:
+      - `slot_str` (string): The result of the slots game as returned by `generate_slots`.
+    - **Returns**: A string 'WIN' if all slots display the same word, otherwise 'LOSE'.
+
+3. **`read_words_from_file(filename)`**
+    - **Parameters**:
+      - `filename` (string): The name of the file containing words to be used in the slot machine, one per line.
+    - **Returns**: A list of words extracted from the file.
+
+4. **`spin_and_check(filename, num_slots)`**
+    - **Parameters**:
+      - `filename` (string): The name of the file containing words.
+      - `num_slots` (integer): The number of slots on the machine.
+    - **Returns**: A string, 'WIN' or 'LOSE', indicating the game's outcome after spinning the slots.
+
+### Constraints
+- The `filename` will refer to a text file where each line contains a single word.
+- The number of slots (`num_slots`) will be a positive integer.
+- The list of words read from the file will contain at least one word.
+
+### Note
+- `random.choice` is used implicitly when selecting words from the list, which is part of file handling and I/O operations.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import generate_slots, determine_outcome, read_words_from_file, spin_and_check
+
+file_content = """apple
+banana
+cherry
+grape
+orange"""
+
+def setup_module(module):
+    with open('words.txt', 'w') as file:
+        file.write(file_content)
+
+def teardown_module(module):
+    os.remove('words.txt')
+
+# Test cases
+
+def test_read_words_from_file():
+    result = read_words_from_file('words.txt')
+    expected = ['apple', 'banana', 'cherry', 'grape', 'orange']
+    assert result == expected
+
+# Since generate_slots gives random outcomes, we focus on testing its results with determine_outcome
+
+def test_determine_outcome_win():
+    assert determine_outcome('apple apple apple') == 'WIN'
+
+def test_determine_outcome_lose():
+    assert determine_outcome('apple banana apple') == 'LOSE'
+
+def test_spin_and_check_win():
+    for _ in range(100):
+        result = spin_and_check('words.txt', 1)  # If num_slots is 1, it's always a win
+        assert result == 'WIN'
+
+def test_spin_and_check_lose_with_multiple_slots():
+    lose = False
+    for _ in range(100):
+        if spin_and_check('words.txt', 3) == 'LOSE':
+            lose = True
+            break
+    assert lose
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

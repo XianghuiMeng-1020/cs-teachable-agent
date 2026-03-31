@@ -1,0 +1,22 @@
+You have been tasked to create a game of chance called 'LuckyGuess'. The objective of the game is to guess a random number between 1 and 100 (inclusive) selected by the program. The player is required to guess numbers until they find the correct number. For each guess, the game should provide a hint that indicates whether the guessed number is too low or too high.
+
+The solution should be implemented in a Python function named `play_lucky_guess(input_file, output_file)`. The `input_file` will contain a list of guesses made by the player and the `output_file` will store the results of each guess.
+
+The random number will be read from a file named `secret_number.txt`, which contains a single integer between 1 and 100. Your program should read this number and process the player's guesses as follows:
+- If the guess is lower than the secret number, write "too low" to the output file.
+- If the guess is higher than the secret number, write "too high" to the output file.
+- If the guess is correct, write "correct" to the output file and stop processing further guesses. 
+
+The input and output between the files should be handled such that:
+- `input_file`: A text file containing one guess per line.
+- `output_file`: A text file where each line corresponds to the result of the player's guess based on the criteria above.
+
+### Function Signature
+```python
+def play_lucky_guess(input_file, output_file):
+ pass
+```
+### Example:
+Suppose `secret_number.txt` contains 50.
+- If `input_file` contains: "40\n50\n55", then the `output_file` after running the function will contain: "too low\ncorrect".
+- If `input_file` contains: "60\n45\n50", then the `output_file` will contain: "too high\ntoo low\ncorrect".

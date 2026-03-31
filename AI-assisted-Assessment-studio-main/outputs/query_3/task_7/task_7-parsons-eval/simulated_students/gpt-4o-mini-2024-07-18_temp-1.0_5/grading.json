@@ -1,0 +1,15 @@
+{
+  "solution_order": [
+    1,
+    2,
+    4,
+    3
+  ],
+  "selected_blocks": [
+    "def decode_message(galactic_message, codebook):",
+    "words = galactic_message.split()\ndecoded_words = [''] * 0",
+    "for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')",
+    "return ' '.join(decoded_words)"
+  ],
+  "is_correct": true
+}

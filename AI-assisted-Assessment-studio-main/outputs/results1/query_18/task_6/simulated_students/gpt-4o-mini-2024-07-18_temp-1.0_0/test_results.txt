@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 1 item
+
+outputs/results1/query_18/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py .E [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at teardown of test_gravitational_force_calculation ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_input.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_18/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_gravitational_force_calculation
+========================== 1 passed, 1 error in 0.13s ==========================

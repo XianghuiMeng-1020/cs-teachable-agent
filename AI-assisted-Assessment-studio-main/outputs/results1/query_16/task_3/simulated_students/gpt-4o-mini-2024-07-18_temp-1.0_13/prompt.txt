@@ -1,0 +1,28 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In the distant future, space tourists rent spaceships for a journey to distant stars. To ensure smooth travel, a spaceship rental company needs a Python program to manage spaceship reservations, calculate travel time, and handle booking errors.
+
+You are tasked with creating a `Spaceship` class that allows booking trips based on spaceship's speed and the distance to the target star. Here are the requirements:
+
+1. Create a `Spaceship` class with the following properties:
+   - `name`: a string representing the name of the spaceship.
+   - `max_speed`: an integer representing the maximum speed of the spaceship in lightyears per hour.
+
+2. Implement a method `book_trip(destination, distance)` that takes:
+   - `destination`: a string representing the name of the star destination.
+   - `distance`: an integer representing the distance to the destination in lightyears.
+
+   The method should calculate the travel time using the formula `time = distance / max_speed`. Return the result as a string in the format: "Trip to {destination} will take {time} hours."
+
+3. Implement error handling to manage the following:
+   - If `distance` is non-positive, throw a `ValueError` with the message "Distance must be a positive integer."
+   - If a `division by zero` occurs (e.g., if `max_speed` is zero), catch the error and return the message "Cannot book trip: spaceship speed is zero."
+
+Your program will be tested with multiple scenarios, including edge cases where distances might be zero or negative, or the spaceship speed is zero. Ensure your class and methods are robust to these scenarios.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

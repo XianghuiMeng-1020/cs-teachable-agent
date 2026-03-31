@@ -1,0 +1,4 @@
+{
+    "program": "def find_winner(player1, player2):\n    # Split the string and convert values to integers for player 1\n    p1_dice = player1.split()\n    p1_first_dice = int(p1_dice[0])\n    p1_second_dice = int(p1_dice[1])\n    # Calculate total for player 1\n    player1_total = p1_first_dice + p1_second_dice\n\n    # Split the string and convert values to integers for player 2\n    p2_dice = player2.split()\n    p2_first_dice = int(p2_dice[0])\n    p2_second_dice = int(p2_dice[1])\n    # Calculate total for player 2\n    player2_total = p2_first_dice + p2_second_dice\n\n    # Determine the winner by comparing the totals\n    if player1_total > player2_total:\n        return \"Player 1 Wins\"\n    elif player2_total > player1_total:\n        return \"Player 2 Wins\"\n    else:\n        return \"Draw\"",
+    "context_relevance": 1.0
+}

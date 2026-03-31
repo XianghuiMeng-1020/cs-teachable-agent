@@ -1,0 +1,4 @@
+{
+    "program": "def identify_god(domain):\n    gods = {\n        'war': 'Ares',\n        'wisdom': 'Athena',\n        'love': 'Aphrodite',\n        'underworld': 'Hades',\n        'thunder': 'Zeus'\n    }\n    return gods.get(domain, 'Unknown')\n\n# Test cases\nprint(identify_god('war'))       # Should print 'Ares'\nprint(identify_god('thunder'))   # Should print 'Zeus'\nprint(identify_god('water'))     # Should print 'Unknown'\nprint(identify_god('wisdom'))    # Should print 'Athena'\nprint(identify_god('underworld'))# Should print 'Hades'",
+    "context_relevance": 1.0
+}

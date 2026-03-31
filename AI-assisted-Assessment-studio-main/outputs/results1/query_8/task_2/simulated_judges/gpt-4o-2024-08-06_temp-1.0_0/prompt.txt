@@ -1,0 +1,62 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Selection Statements (if/else, etc.)', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+You are tasked with creating a function that categorizes legendary creatures based on their domain typical in various mythologies. Write a Python function `classify_creature(creature)` that accepts a string containing a creature's name and returns a string representing its domain: 'sky', 'sea', 'earth', or 'other'. Use the information provided in the categorized dictionary.
+
+The categories are as follows:
+
+- Sky creatures include: 'Phoenix', 'Garuda', 'Thunderbird'
+- Sea creatures include: 'Kraken', 'Leviathan', 'Mermaid'
+- Earth creatures include: 'Golem', 'Satyr', 'Nymph'
+- Any creature not listed falls under 'other'
+
+Your task involves utilizing variables and selection statements to access and categorize the creatures based on the information provided through a dictionary structure. Each creature classification should exactly match the given category strings.
+
+Here is an example of how the function is expected to work:
+
+```python
+print(classify_creature('Phoenix'))  # Output should be 'sky'
+print(classify_creature('Goblin'))   # Output should be 'other'
+```
+
+Ensure your function passes the test cases in the provided suite when integrated into the suitable testing environment.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import classify_creature
+
+def test_sky_creatures():
+    assert classify_creature('Phoenix') == 'sky'
+    assert classify_creature('Garuda') == 'sky'
+    assert classify_creature('Thunderbird') == 'sky'
+
+def test_sea_creatures():
+    assert classify_creature('Kraken') == 'sea'
+    assert classify_creature('Leviathan') == 'sea'
+    assert classify_creature('Mermaid') == 'sea'
+
+def test_earth_creatures():
+    assert classify_creature('Golem') == 'earth'
+    assert classify_creature('Satyr') == 'earth'
+    assert classify_creature('Nymph') == 'earth'
+
+def test_other_creatures():
+    assert classify_creature('Goblin') == 'other'
+    assert classify_creature('Unicorn') == 'other'
+    assert classify_creature('Dragon') == 'other'
+
+def test_edge_cases():
+    assert classify_creature('') == 'other'
+    assert classify_creature('Pixie') == 'other'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

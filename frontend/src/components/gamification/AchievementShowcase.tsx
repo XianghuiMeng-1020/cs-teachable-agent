@@ -69,7 +69,7 @@ const tierColors = {
 
 const tierBorders = {
   bronze: "border-amber-700",
-  silver: "border-slate-400",
+  silver: "border-stone-400",
   gold: "border-yellow-500",
   platinum: "border-cyan-500",
   diamond: "border-purple-500",
@@ -106,8 +106,8 @@ export function AchievementShowcase({ className }: { className?: string }) {
             <Trophy className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900">成就与徽章</h3>
-            <p className="text-sm text-slate-500">解锁成就，获得认可</p>
+            <h3 className="font-semibold text-stone-900">成就与徽章</h3>
+            <p className="text-sm text-stone-500">解锁成就，获得认可</p>
           </div>
         </div>
         <Button variant="outline" size="sm">
@@ -137,7 +137,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-        <TabsList className="bg-slate-100 p-1 rounded-lg">
+        <TabsList className="bg-stone-100 p-1 rounded-lg">
           <TabsTrigger value="badges" className="rounded-md">
             <Medal className="w-4 h-4 mr-2" />
             徽章
@@ -162,7 +162,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                   filter === cat
                     ? "bg-brand-500 text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
                 {cat === "all" ? "全部" : 
@@ -185,40 +185,40 @@ export function AchievementShowcase({ className }: { className?: string }) {
                 className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${
                   badge.unlocked 
                     ? `${tierBorders[badge.tier]} bg-gradient-to-br from-white to-slate-50` 
-                    : "border-slate-200 bg-slate-50"
+                    : "border-stone-200 bg-stone-50"
                 }`}
               >
                 {/* Badge Icon */}
                 <div className={`w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-3xl ${
                   badge.unlocked
                     ? `bg-gradient-to-br ${tierColors[badge.tier]} shadow-lg`
-                    : "bg-slate-200"
+                    : "bg-stone-200"
                 }`}>
                   {badge.unlocked ? (
                     badge.icon
                   ) : (
-                    <Lock className="w-6 h-6 text-slate-400" />
+                    <Lock className="w-6 h-6 text-stone-400" />
                   )}
                 </div>
 
                 {/* Badge Info */}
-                <h4 className={`font-medium text-center text-sm ${badge.unlocked ? "text-slate-900" : "text-slate-400"}`}>
+                <h4 className={`font-medium text-center text-sm ${badge.unlocked ? "text-stone-900" : "text-stone-400"}`}>
                   {badge.name}
                 </h4>
-                <p className="text-xs text-center text-slate-500 mt-1 line-clamp-2">
+                <p className="text-xs text-center text-stone-500 mt-1 line-clamp-2">
                   {badge.description}
                 </p>
 
                 {/* Progress Bar */}
                 {!badge.unlocked && (
                   <div className="mt-3">
-                    <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-stone-200 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-brand-500 rounded-full"
                         style={{ width: `${badge.progress}%` }}
                       />
                     </div>
-                    <p className="text-xs text-slate-400 text-center mt-1">{badge.progress}%</p>
+                    <p className="text-xs text-stone-400 text-center mt-1">{badge.progress}%</p>
                   </div>
                 )}
 
@@ -226,7 +226,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
                 {badge.unlocked && (
                   <div className="mt-2 flex items-center justify-center gap-1">
                     <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-                    <span className="text-xs font-medium text-slate-600">+{badge.points}</span>
+                    <span className="text-xs font-medium text-stone-600">+{badge.points}</span>
                   </div>
                 )}
               </motion.div>
@@ -241,8 +241,8 @@ export function AchievementShowcase({ className }: { className?: string }) {
                 key={title.id}
                 className={`p-4 rounded-xl border-2 ${
                   title.unlocked 
-                    ? "border-slate-200 bg-white" 
-                    : "border-slate-200 bg-slate-50 opacity-60"
+                    ? "border-stone-200 bg-white" 
+                    : "border-stone-200 bg-stone-50 opacity-60"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -253,7 +253,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
                     <Award className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-slate-500">
+                    <p className="text-sm text-stone-500">
                       {title.prefix ? "前缀称号" : "后缀称号"}
                     </p>
                     <p className="text-lg font-bold" style={{ color: title.unlocked ? title.color : "#94a3b8" }}>
@@ -270,7 +270,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
                   {title.unlocked ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                   ) : (
-                    <Lock className="w-5 h-5 text-slate-400" />
+                    <Lock className="w-5 h-5 text-stone-400" />
                   )}
                 </div>
               </div>
@@ -288,12 +288,12 @@ export function AchievementShowcase({ className }: { className?: string }) {
               { name: "挑战成就", total: 4, unlocked: 1, color: "bg-orange-500" },
               { name: "特殊成就", total: 3, unlocked: 0, color: "bg-pink-500" },
             ].map((cat) => (
-              <div key={cat.name} className="bg-slate-50 rounded-lg p-4">
+              <div key={cat.name} className="bg-stone-50 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium text-slate-700">{cat.name}</span>
-                  <span className="text-sm text-slate-500">{cat.unlocked}/{cat.total}</span>
+                  <span className="font-medium text-stone-700">{cat.name}</span>
+                  <span className="text-sm text-stone-500">{cat.unlocked}/{cat.total}</span>
                 </div>
-                <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
                   <div 
                     className={`h-full ${cat.color} rounded-full transition-all`}
                     style={{ width: `${(cat.unlocked / cat.total) * 100}%` }}
@@ -325,13 +325,13 @@ export function AchievementShowcase({ className }: { className?: string }) {
               <div className={`w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-5xl bg-gradient-to-br ${tierColors[selectedBadge.tier]} shadow-xl`}>
                 {selectedBadge.icon}
               </div>
-              <h3 className="text-xl font-bold text-center text-slate-900 mb-2">
+              <h3 className="text-xl font-bold text-center text-stone-900 mb-2">
                 {selectedBadge.name}
               </h3>
-              <p className="text-slate-600 text-center mb-4">
+              <p className="text-stone-600 text-center mb-4">
                 {selectedBadge.description}
               </p>
-              <div className="flex items-center justify-center gap-4 text-sm text-slate-500">
+              <div className="flex items-center justify-center gap-4 text-sm text-stone-500">
                 <span className="flex items-center gap-1">
                   <Sparkles className="w-4 h-4 text-yellow-500" />
                   {selectedBadge.points} 积分

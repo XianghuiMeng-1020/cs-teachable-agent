@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/test_suite_sol.py:19: AssertionError: assert ['Err', 'Err'... 'where', ...] == ['3+2_', 'in_...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/test_suite_sol.py:26: AssertionError: assert ['Err', 'Err'... 'Err', 'Err'] == ['5-6+', 'in'...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/test_suite_sol.py:33: AssertionError: assert ['Err', 'Err'...nus', 'Venus'] == ['2+3_', '5',..., '6/3_', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/test_suite_sol.py:40: AssertionError: assert ['1000_%'] == ['1000_', 'Err']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/test_suite_sol.py:47: AssertionError: assert ['5', '4', '1.0'] == ['5', '4', '1']
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_5/test_suite_sol.py::test_sci_fi_haiku_import_input
+FAILED outputs/results1/query_16/task_5/test_suite_sol.py::test_sci_fi_haiku_invalid_expression
+FAILED outputs/results1/query_16/task_5/test_suite_sol.py::test_sci_fi_haiku_no_expression_errors
+FAILED outputs/results1/query_16/task_5/test_suite_sol.py::test_sci_fi_haiku_single_line
+FAILED outputs/results1/query_16/task_5/test_suite_sol.py::test_sci_fi_haiku_expression_only
+5 failed in 0.03s

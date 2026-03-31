@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+F.F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:19: ValueError: Invalid format: Score '2' is not preceded by a player.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:19: ValueError: Invalid format: Score '0' is not preceded by a player.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:24: AssertionError: assert 'Invalid form...ciated score.' == 'Invalid form...esults string'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_board_game_summary_valid_input
+FAILED outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_board_game_summary_single_player
+FAILED outputs/results1/query_24/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_board_game_summary_invalid_input_non_numeric
+========================= 3 failed, 2 passed in 0.14s ==========================

@@ -1,0 +1,50 @@
+You are a student solving a Python dropdown question.
+Return only a JSON object with key `answers`.
+The value of `answers` must be a list of objects.
+Each object must contain `blank_id` and `selected_option`.
+Return exactly one answer object for every blank.
+Copy every selected option exactly as written in the choices.
+
+Title: Dropdown Question for sort_ingredients
+Prompt: Fill each blank in the Python code with the single best option so the program matches the canonical source solution.
+
+Source task summary:
+## Task: Recipe Ingredient Sorter Your task is to create a program that reads a text file containing ingredients of various recipes, sorts the ingredients alphabetically, and saves the sorted list back into a new file. ### File Format: - Each line in the file contains ingredients of one recipe separated by commas. - There are no headers or labels in the file. ### Program Requirements: 1. Implement a function `sort_ingredients(input_filename, output_filename)` where: - `input_filename` is the ...
+
+Code template:
+```python
+def sort_ingredients(input_filename, output_filename):
+    with open(input_filename, __BLANK_2__) as f:
+        lines = f.readlines()
+
+    sorted_lines = []
+    for line in lines:
+        ingredients = line.strip().split(__BLANK_3__)
+        ingredients = [ingredient.strip() for ingredient in ingredients]
+        ingredients.sort()
+        sorted_line = ', '.join(ingredients)
+        sorted_lines.append(sorted_line)
+
+    with open(output_filename, 'w') as f:
+        for sorted_line in sorted_lines:
+            f.write(sorted_line __BLANK_1__ '\n')
+```
+
+Choices by blank:
+blank_1 (__BLANK_1__):
+- *
+- %
+- +
+- -
+
+blank_2 (__BLANK_2__):
+- 'r'
+- ''
+- 'UNKNOWN'
+- 'TODO'
+
+blank_3 (__BLANK_3__):
+- ','
+- 'UNKNOWN'
+- 'TODO'
+- ''

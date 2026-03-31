@@ -1,0 +1,73 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+Create a Python function called `calculate_average_cooking_time(file_path)` that reads a text file containing cooking times for various dishes. Each line in the file contains a dish name followed by its cooking time in minutes, separated by a comma (e.g., `"Spaghetti,20"`). Your function should calculate and return the average cooking time for all the dishes. 
+
+The following conditions must be considered:
+1. The file may have empty lines or lines with incorrect format - these lines should be ignored.
+2. If there are no valid cooking times, the function should raise a `ValueError` with the message "No valid cooking times found".
+
+Your function should handle file not found errors by raising a `FileNotFoundError`. 
+
+Assume the file path is provided correctly as a string and the file only contains valid dish names and cooking times apart from the cases mentioned above. The function should return the average cooking time as a float rounded to two decimal places.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_average_cooking_time
+
+def setup_module(module):
+    with open('test_cooking_times.txt', 'w') as f:
+        f.write("Spaghetti,20\n")
+        f.write("Pizza,25\n")
+        f.write("\n")
+        f.write("Ice Cream\n")
+        f.write("Burger,15\n")
+    with open('empty_file.txt', 'w') as f:
+        pass
+    with open('invalid_lines.txt', 'w') as f:
+        f.write("Salt,\n")
+        f.write("Pepper,,10\n")
+
+
+def teardown_module(module):
+    os.remove('test_cooking_times.txt')
+    os.remove('empty_file.txt')
+    os.remove('invalid_lines.txt')
+
+
+def test_average_cooking_time():
+    assert calculate_average_cooking_time('test_cooking_times.txt') == 20.0
+
+def test_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        calculate_average_cooking_time('non_existent_file.txt')
+
+
+def test_empty_file():
+    with pytest.raises(ValueError, match="No valid cooking times found"):
+        calculate_average_cooking_time('empty_file.txt')
+
+
+def test_file_with_invalid_lines():
+    with open('mixed_lines.txt', 'w') as f:
+        f.write("Salt,\n")
+        f.write("Spaghetti,30\n")
+        f.write("Pepper,,10\n")
+        f.write("Soup,10\n")
+    try:
+        assert calculate_average_cooking_time('mixed_lines.txt') == 20.0
+    finally:
+        os.remove('mixed_lines.txt')
+
+
+def test_all_invalid_lines():
+    with pytest.raises(ValueError, match="No valid cooking times found"):
+        calculate_average_cooking_time('invalid_lines.txt')
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

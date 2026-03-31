@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/solution_program.py:13: ValueError: max() arg is an empty sequence
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:28: AssertionError: assert ['George', 'Hannah', 'Ian'] == ['Dan', 'Eve']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:34: AssertionError: assert ['Karen'] == ['George', 'Hannah', 'Ian']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:40: AssertionError: assert ['George', 'Hannah', 'Ian'] == []
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:46: AssertionError: assert ['George', 'Hannah', 'Ian'] == ['Karen']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_single_high_score
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_multiple_high_scores
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_tie_scores_same_order
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_no_score
+FAILED outputs/results1/query_22/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_all_unique_scores
+============================== 5 failed in 0.23s ===============================

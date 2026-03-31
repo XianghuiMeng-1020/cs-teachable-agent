@@ -1,0 +1,42 @@
+## Task Description
+
+You are tasked with creating a basic inventory tracking program for a board game store. The program needs to track the inventory of different board games, handle sales, and update stock levels.
+
+### Requirements:
+
+1. **Function Name**: `update_inventory`
+    - **Parameters**:
+        - `inventory`: A dictionary where each key is the name of a board game (string), and the value is the available stock (integer).
+        - `sales`: A list of tuples, where each tuple contains a board game name (string) and a quantity sold (integer).
+    - **Returns**: Updated dictionary with adjusted stock levels.
+
+2. If a game sale cannot be fulfilled due to insufficient stock, the stock should remain unchanged.
+
+3. Implement the solution only using variables, arithmetic operators, selection statements, loops, and dictionaries.
+
+4. The program will be tested with several sales scenarios to ensure proper stock adjustments and validity constraints.
+
+### Example
+
+**Input**:
+```python
+inventory = {
+    'Monopoly': 5,
+    'Risk': 7,
+    'Catan': 3
+}
+sales = [
+    ('Monopoly', 2),
+    ('Risk', 8),
+    ('Catan', 1)
+]
+```
+
+**Output**:
+```python
+{
+    'Monopoly': 3,
+    'Risk': 7,  # Sale could not be processed due to insufficient stock
+    'Catan': 2
+}
+```

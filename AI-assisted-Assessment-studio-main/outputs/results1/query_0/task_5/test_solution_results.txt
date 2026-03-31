@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/solution_program.py:7: TypeError: test_correct_guess.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/solution_program.py:7: TypeError: test_incorrect_guess.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/solution_program.py:7: TypeError: test_output_correct.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/solution_program.py:7: TypeError: test_output_incorrect.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_5/solution_program.py:7: TypeError: test_results_file_created.<locals>.<lambda>() takes 0 positional arguments but 1 was given
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_5/test_suite_sol.py::test_correct_guess
+FAILED outputs/results1/query_0/task_5/test_suite_sol.py::test_incorrect_guess
+FAILED outputs/results1/query_0/task_5/test_suite_sol.py::test_output_correct
+FAILED outputs/results1/query_0/task_5/test_suite_sol.py::test_output_incorrect
+FAILED outputs/results1/query_0/task_5/test_suite_sol.py::test_results_file_created
+5 failed in 0.04s

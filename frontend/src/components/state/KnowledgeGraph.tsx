@@ -51,7 +51,7 @@ const statusRectStyles: Record<UnitStatus, string> = {
 };
 
 const statusTextStyles: Record<UnitStatus, string> = {
-  unknown: "text-slate-400",
+  unknown: "text-stone-400",
   partially_learned: "text-amber-700",
   learned: "text-emerald-700",
   misconception: "text-red-700",
@@ -153,7 +153,7 @@ export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: K
   const selectedDef = selectedUnitId ? defsById[selectedUnitId] : null;
 
   return (
-    <div className={cn("flex flex-col rounded-xl border border-slate-200 bg-white overflow-hidden", className)}>
+    <div className={cn("flex flex-col rounded-xl border border-stone-200 bg-white overflow-hidden", className)}>
       <div
         ref={containerRef}
         className="overflow-hidden min-h-[200px] max-h-[400px] cursor-grab active:cursor-grabbing"
@@ -186,7 +186,7 @@ export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: K
                 stroke="currentColor"
                 strokeOpacity={isSelected ? 0.5 : 0.2}
                 strokeWidth={isSelected ? 2 : 1}
-                className="text-slate-300"
+                className="text-stone-300"
               />
             );
           })}
@@ -231,16 +231,16 @@ export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: K
         </svg>
       </div>
       {selectedDef && (
-        <div className="border-t border-slate-200 p-3 bg-slate-50 dark:bg-slate-900/30 text-sm">
-          <p className="font-medium text-slate-800 dark:text-slate-200">{selectedDef.name ?? selectedDef.id}</p>
+        <div className="border-t border-stone-200 p-3 bg-stone-50 dark:bg-stone-900/30 text-sm">
+          <p className="font-medium text-stone-800 dark:text-stone-200">{selectedDef.name ?? selectedDef.id}</p>
           {selectedDef.description && (
-            <p className="mt-1 text-slate-600 dark:text-slate-400">{selectedDef.description}</p>
+            <p className="mt-1 text-stone-600 dark:text-stone-400">{selectedDef.description}</p>
           )}
           {selectedDef.prerequisites?.length ? (
-            <p className="mt-1 text-xs text-slate-500">Prerequisites: {selectedDef.prerequisites.join(", ")}</p>
+            <p className="mt-1 text-xs text-stone-500">Prerequisites: {selectedDef.prerequisites.join(", ")}</p>
           ) : null}
           {selectedDef.example_correct_code && (
-            <pre className="mt-2 rounded bg-slate-100 dark:bg-slate-800 p-2 text-xs overflow-x-auto">
+            <pre className="mt-2 rounded bg-stone-100 dark:bg-stone-800 p-2 text-xs overflow-x-auto">
               {selectedDef.example_correct_code}
             </pre>
           )}

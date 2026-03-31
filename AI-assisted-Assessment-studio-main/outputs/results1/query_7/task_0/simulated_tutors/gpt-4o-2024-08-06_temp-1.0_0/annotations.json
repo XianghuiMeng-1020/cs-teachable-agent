@@ -1,0 +1,4 @@
+{
+    "program": "def analyze_myths(input_filename, output_filename):\n    with open(input_filename, 'r') as infile, open(output_filename, 'w') as outfile:\n        for line in infile:\n            if line.strip() == \"\":\n                outfile.write(\"\\n\")\n                continue\n            words = line.split()\n            word_count = {}\n            for word in words:\n                if word in word_count:\n                    word_count[word] += 1\n                else:\n                    word_count[word] = 1\n            # Find the word with the highest frequency\n            most_frequent_word = max(word_count, key=lambda word: (word_count[word], -words.index(word)))\n            frequency = word_count[most_frequent_word]\n            outfile.write(f\"{most_frequent_word} {frequency}\\n\")",
+    "context_relevance": 1.0
+}

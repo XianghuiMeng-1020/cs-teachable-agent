@@ -1,0 +1,54 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Strings']:
+
+### Beginning of task description
+You are tasked with writing a Python function to decide board game outcomes based on dice roll values. The game outcome is determined by comparing the total value of rolls from two players. Implement the function `find_winner(player1, player2)` where `player1` and `player2` are strings representing the dice outcomes for each player.
+
+Each player rolls two standard 6-sided dice, and their outcomes are given as strings in the format 'X Y', where X and Y are integers representing the numbers rolled on each die, for example '3 5'.
+
+The function should calculate the total score for each player by adding their respective dice values. The function should return the string:
+- "Player 1 Wins" if player 1's total score is greater than player 2's total score.
+- "Player 2 Wins" if player 2's total score is greater than player 1's total score.
+- "Draw" if both players have the same total score.
+
+**Examples:**
+- `find_winner('3 5', '4 2')` should return `'Player 1 Wins'`.
+- `find_winner('6 3', '5 4')` should return `'Draw'`.
+
+Write your implementation using basic operations like arithmetic computation and simple conditional statements.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+def test_find_winner():
+    from solution import find_winner
+    
+    # Case where Player 1 wins
+    result = find_winner('3 5', '4 2')
+    assert result == 'Player 1 Wins'
+    
+    # Case where Player 2 wins
+    result = find_winner('2 2', '5 1')
+    assert result == 'Player 2 Wins'
+    
+    # Case where both scores draw
+    result = find_winner('6 3', '5 4')
+    assert result == 'Draw'
+    
+    # Case with minimum scores
+    result = find_winner('1 1', '1 1')
+    assert result == 'Draw'
+    
+    # Case with maximum possible, Player 1 win
+    result = find_winner('6 6', '6 5')
+    assert result == 'Player 1 Wins'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

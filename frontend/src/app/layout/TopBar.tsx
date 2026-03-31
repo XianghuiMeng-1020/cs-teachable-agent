@@ -4,7 +4,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ChevronDown, Bell, User, LogOut, Menu, Plus } from "lucide-react";
+import { ChevronDown, User, LogOut, Menu, Plus, X } from "lucide-react";
 import { useAuthStore } from "@/stores/authStore";
 import { useAppStore } from "@/stores/appStore";
 import { Avatar } from "@/components/ui/Avatar";
@@ -14,9 +14,9 @@ import { cn } from "@/lib/utils";
 import type { TAInstance } from "@/lib/types";
 
 const DOMAINS = [
-  { id: "python", label: "Python" },
-  { id: "database", label: "Database (SQL)" },
-  { id: "ai_literacy", label: "AI Literacy" },
+  { id: "python", label: "Python", desc: "Introductory programming" },
+  { id: "database", label: "Database (SQL)", desc: "Relational databases" },
+  { id: "ai_literacy", label: "AI Literacy", desc: "Machine learning basics" },
 ] as const;
 
 interface TopBarProps {
@@ -46,61 +46,90 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
   });
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-4 sm:px-6">
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-stone-200/80 bg-white px-4 sm:px-6">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onMenuClick}
-          className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 lg:hidden"
+          className="rounded-lg p-2 text-stone-500 hover:bg-stone-100 lg:hidden"
           aria-label="Open menu"
         >
           <Menu className="h-5 w-5" />
         </button>
-        <p className="text-sm text-slate-500">{pageName}</p>
+        <h1 className="text-sm font-semibold text-stone-800">{pageName}</h1>
       </div>
-      <div className="flex items-center gap-4">
+
+      <div className="flex items-center gap-2">
+        {/* New TA Dialog */}
         <Dialog.Root open={newTADialogOpen} onOpenChange={setNewTADialogOpen}>
           <Dialog.Trigger asChild>
             <button
               type="button"
-              className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
-              aria-label="New TA"
+              className="flex h-8 items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-50"
             >
-              <Plus className="h-5 w-5" />
+              <Plus className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">New TA</span>
             </button>
           </Dialog.Trigger>
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40" />
-            <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border border-slate-200 bg-white p-6 shadow-card">
-              <Dialog.Title className="text-lg font-semibold text-slate-900">New Teachable Agent</Dialog.Title>
-              <Dialog.Description className="mt-1 text-sm text-slate-500">Choose a domain for this TA.</Dialog.Description>
-              <div className="mt-4 flex flex-col gap-2">
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm" />
+            <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border border-stone-200 bg-white p-6 shadow-elevated animate-scale-in">
+              <div className="flex items-center justify-between">
+                <Dialog.Title className="font-serif text-lg font-semibold text-stone-900">
+                  New Teachable Agent
+                </Dialog.Title>
+                <Dialog.Close className="rounded-lg p-1 text-stone-400 hover:bg-stone-100 hover:text-stone-600">
+                  <X className="h-4 w-4" />
+                </Dialog.Close>
+              </div>
+              <Dialog.Description className="mt-1 text-sm text-stone-500">
+                Choose a domain for your new agent.
+              </Dialog.Description>
+              <div className="mt-5 flex flex-col gap-2">
                 {DOMAINS.map((d) => (
-                  <label key={d.id} className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 p-3 hover:bg-slate-50">
+                  <label
+                    key={d.id}
+                    className={cn(
+                      "flex cursor-pointer items-center gap-3 rounded-lg border-2 p-3 transition-all",
+                      newTADomain === d.id
+                        ? "border-brand-600 bg-brand-50"
+                        : "border-stone-200 hover:border-stone-300"
+                    )}
+                  >
                     <input
                       type="radio"
                       name="domain"
                       value={d.id}
                       checked={newTADomain === d.id}
                       onChange={() => setNewTADomain(d.id)}
-                      className="h-4 w-4"
+                      className="sr-only"
                     />
-                    <span className="text-sm font-medium text-slate-800">{d.label}</span>
+                    <div>
+                      <div className={cn("text-sm font-semibold", newTADomain === d.id ? "text-brand-900" : "text-stone-700")}>
+                        {d.label}
+                      </div>
+                      <div className="text-xs text-stone-500">{d.desc}</div>
+                    </div>
                   </label>
                 ))}
               </div>
               <div className="mt-6 flex justify-end gap-2">
-                <Button variant="secondary" onClick={() => setNewTADialogOpen(false)}>Cancel</Button>
+                <Button variant="secondary" size="sm" onClick={() => setNewTADialogOpen(false)}>
+                  Cancel
+                </Button>
                 <Button
+                  size="sm"
                   loading={createTAMutation.isPending}
                   onClick={() => createTAMutation.mutate(newTADomain)}
                 >
-                  Create TA
+                  Create
                 </Button>
               </div>
             </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>
+
+        {/* TA Selector */}
         {taList.length > 0 && (
           <Select.Root
             value={currentTaId != null ? String(currentTaId) : ""}
@@ -108,18 +137,21 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
           >
             <Select.Trigger
               className={cn(
-                "flex h-9 min-w-[140px] items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700",
-                "hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                "flex h-8 min-w-[120px] items-center justify-between gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 text-xs font-medium text-stone-700",
+                "hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-600/20"
               )}
             >
               <span>
-                TA #{currentTa?.id ?? currentTaId} ({currentTa?.domain_id ?? "python"})
+                TA #{currentTa?.id ?? currentTaId}
+                <span className="ml-1 text-stone-400">
+                  {currentTa?.domain_id ?? "python"}
+                </span>
               </span>
-              <ChevronDown className="h-4 w-4 text-slate-400" />
+              <ChevronDown className="h-3.5 w-3.5 text-stone-400" />
             </Select.Trigger>
             <Select.Portal>
               <Select.Content
-                className="z-50 max-h-[280px] overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-card"
+                className="z-50 max-h-[280px] overflow-auto rounded-lg border border-stone-200 bg-white py-1 shadow-elevated"
                 position="popper"
                 sideOffset={4}
               >
@@ -127,54 +159,51 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                   <Select.Item
                     key={ta.id}
                     value={String(ta.id)}
-                    className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-slate-100 data-[highlighted]:bg-slate-100"
+                    className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-50 data-[highlighted]:bg-stone-50"
                   >
-                    TA #{ta.id} ({ta.domain_id})
+                    TA #{ta.id}
+                    <span className="ml-1.5 text-stone-400">{ta.domain_id}</span>
                   </Select.Item>
                 ))}
               </Select.Content>
             </Select.Portal>
           </Select.Root>
         )}
-        <button
-          type="button"
-          className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"
-          aria-label="Notifications"
-        >
-          <Bell className="h-5 w-5" />
-        </button>
+
+        {/* User menu */}
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button
               type="button"
-              className="rounded-full outline-none ring-2 ring-transparent focus:ring-brand-500/30"
+              className="rounded-full outline-none ring-2 ring-transparent transition-all focus:ring-brand-600/30"
             >
               <Avatar fallback={user?.username} size="sm" />
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content
-              className="z-50 min-w-[160px] rounded-lg border border-slate-200 bg-white py-1 shadow-card"
+              className="z-50 min-w-[180px] rounded-xl border border-stone-200 bg-white py-1.5 shadow-elevated"
               sideOffset={8}
               align="end"
             >
+              <div className="border-b border-stone-100 px-3 pb-2 pt-1">
+                <p className="text-sm font-semibold text-stone-900">{user?.username}</p>
+                <p className="text-xs text-stone-400 capitalize">{user?.role}</p>
+              </div>
               <DropdownMenu.Item
-                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-slate-700 outline-none hover:bg-slate-50"
+                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 outline-none hover:bg-stone-50"
                 onSelect={(e) => e.preventDefault()}
-                asChild
               >
-                <span>
-                  <User className="h-4 w-4" />
-                  Profile
-                </span>
+                <User className="h-4 w-4" />
+                Profile
               </DropdownMenu.Item>
-              <DropdownMenu.Separator className="my-1 h-px bg-slate-100" />
+              <DropdownMenu.Separator className="my-1 h-px bg-stone-100" />
               <DropdownMenu.Item
-                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-slate-700 outline-none hover:bg-slate-50"
+                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 outline-none hover:bg-stone-50"
                 onSelect={() => logout()}
               >
                 <LogOut className="h-4 w-4" />
-                Logout
+                Sign out
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>

@@ -1,0 +1,33 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Design a class called `ScrabbleScoreCalculator` which helps calculate the total score of a given word based on Scrabble rules. In Scrabble, each letter has a point value, with common letters having fewer points and less common letters having more points.
+
+Features to implement:
+1. **ScrabbleScoreCalculator** class with the following attributes:
+   - `letter_points` (dictionary storing letter scores):
+     - 1 point: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']
+     - 2 points: ['D', 'G']
+     - 3 points: ['B', 'C', 'M', 'P']
+     - 4 points: ['F', 'H', 'V', 'W', 'Y']
+     - 5 points: ['K']
+     - 8 points: ['J', 'X']
+     - 10 points: ['Q', 'Z']
+
+2. **Methods**:
+   - `calculate_score(word)`: Given a string `word`, calculate and return the total score based on the letter values as defined above.
+   - Ensure that the method converts the `word` to uppercase and ignores any non-alphabetic characters, only scoring valid letters.
+
+3. **Input**:
+   - A word consisting of alphabetic characters and/or any other characters.
+
+4. **Output**:
+   - An integer representing the total score of the word.
+
+Implement this class and provide a solution to compute scores of given words using it.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

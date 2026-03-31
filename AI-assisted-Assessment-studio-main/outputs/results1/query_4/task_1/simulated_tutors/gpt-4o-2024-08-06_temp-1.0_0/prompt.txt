@@ -1,0 +1,63 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+### Task
+
+You are tasked with creating a game simulation in Python that represents a simple coin-tossing game of chance. Your objective is to simulate a player tossing a coin several times and determine how much money the player wins or loses based on the results. The coin has two sides: heads (H) and tails (T).
+
+For each toss, the player:
+- Wins $2 if the result is heads.
+- Loses $1 if the result is tails.
+
+Given a sequence of toss outcomes represented as a string (e.g., 'HTHTTHH'), your program must calculate the total amount of money won or lost by the player at the end of the sequence.
+
+### Input
+- A string `tosses` containing only characters 'H' and 'T'.
+
+### Output
+- An integer which represents the net total of money won by the player (can be negative if the player loses more money than wins).
+
+### Constraints
+- The input string will always be valid and will only contain the characters 'H' and 'T'.
+- The length of the input string will be between 1 and 1000, inclusive.
+
+### Function Signature
+```python
+def calculate_winnings(tosses):
+    pass
+```
+
+Write the function `calculate_winnings` that processes the input and returns the correct net earnings.
+
+### Example
+- **Input:** 'HTHTTHH'
+- **Output:** 5
+
+Explanation: The player wins $2 for each 'H' and loses $1 for each 'T'. With the input 'HTHTTHH', the player wins $2, loses $1, wins $2, loses $1, loses $1, wins $2, and wins $2. The net total is $5.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import calculate_winnings
+
+@pytest.mark.parametrize("tosses, expected", [
+    ("HTHTTHH", 5),
+    ("HHH", 6),
+    ("TTTTT", -5),
+    ("THTHTH", -1),
+    ("HTHHTTT", 1),
+    ("", 0),
+    ("HTHTHTHTHTHTHTHTHTHT", -2),
+    ("HHHTTT", 0),
+    ("HHTHHTTTT", 0),
+    ("T" * 1000, -1000)
+])
+def test_calculate_winnings(tosses, expected):
+    assert calculate_winnings(tosses) == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,84 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Classes and Objects', 'File Handling and I/O', 'Strings', 'Arithmetic Operators']:
+
+### Beginning of task description
+You are tasked with designing a simplified library system to manage board games. The system stores game information and allows users to search and borrow games. Implement the following functionalities:
+
+1. **Game Class:** Create a class `Game` that represents a board game. Each game has a `title`, `author`, `year`, and `availability` status, where `availability` is a boolean value indicating whether the game is available for borrowing.
+
+2. **Library Class:** Implement a class called `Library` that maintains a collection of board games and provides the following methods:
+   - `add_game(title, author, year)`: Adds a new game to the library. The game is available for borrowing when first added.
+   - `borrow_game(title)`: Marks a game as borrowed (sets its availability to `False`) if it is available, and returns `True`. Otherwise, returns `False` if the game is not available.
+   - `return_game(title)`: Marks a game as returned (sets its availability to `True`) and is always successful.
+   - `load_games(file_path)`: Loads games from a text file specified by `file_path`. Each line in the file contains a game's details in the format `title,author,year,availability`. The `availability` is either `1` or `0` representing `True` or `False` respectively.
+   - `save_games(file_path)`: Saves the current list of games to a text file with each game on a new line in the format `title,author,year,availability`.
+
+3. **File Handling:** Utilize file handling to load games from and save games to a text file. 
+
+Implement the classes `Game` and `Library` following the described functionalities. The test suite will be used to ensure these functionalities are correctly implemented.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import Game, Library
+
+@pytest.fixture(scope="module")
+def setup_module():
+    games_file = 'test_games.txt'
+    with open(games_file, 'w') as f:
+        f.write("Catan,Settlers,1995,1\n")
+        f.write("Pandemic,Leacock,2008,0\n")
+        f.write("Chess,Unknown,1475,1\n")
+    yield games_file
+    os.remove(games_file)
+
+class TestLibrary:
+    def test_add_game(self):
+        library = Library()
+        library.add_game("Monopoly", "Fisher", 1935)
+        assert any(game.title == "Monopoly" for game in library.collection)
+
+    def test_borrow_game_success(self):
+        library = Library()
+        library.add_game("Mysterium", "Oleksandr", 2015)
+        result = library.borrow_game("Mysterium")
+        assert result is True
+        assert any(game.title == "Mysterium" and not game.availability for game in library.collection)
+
+    def test_borrow_game_failure(self):
+        library = Library()
+        library.add_game("Uno", "Merle", 1971)
+        library.borrow_game("Uno")
+        result = library.borrow_game("Uno")
+        assert result is False
+
+    def test_return_game(self):
+        library = Library()
+        library.add_game("Risk", "Parker", 1957)
+        library.borrow_game("Risk")
+        library.return_game("Risk")
+        assert any(game.title == "Risk" and game.availability for game in library.collection)
+
+    def test_load_games(self, setup_module):
+        library = Library()
+        library.load_games(setup_module)
+        assert any(game.title == "Catan" and game.availability for game in library.collection)
+        assert any(game.title == "Pandemic" and not game.availability for game in library.collection)
+        assert len(library.collection) == 3
+
+    def test_save_games(self, tmp_path, setup_module):
+        library = Library()
+        library.load_games(setup_module)
+        temp_file = tmp_path / "output_games.txt"
+        library.save_games(str(temp_file))
+        with open(temp_file, 'r') as file:
+            lines = file.readlines()
+        assert "Catan,Settlers,1995,1\n" in lines
+        assert "Pandemic,Leacock,2008,0\n" in lines
+        assert "Chess,Unknown,1475,1\n" in lines
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

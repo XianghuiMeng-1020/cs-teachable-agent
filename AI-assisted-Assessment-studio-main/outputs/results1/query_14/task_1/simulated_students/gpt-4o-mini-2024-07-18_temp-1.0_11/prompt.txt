@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a Python function that manages a cookbook which records recipes and their ingredients. Each recipe is associated with a list of ingredients, and you will manage this information using a dictionary. Your task is to implement the function `manage_cookbook` which will handle adding, updating, and deleting recipes.
+
+The function `manage_cookbook(cookbook, operation, recipe)` takes three parameters:
+1. `cookbook`: A dictionary where keys are recipe names (strings) and values are lists of ingredients (strings).
+2. `operation`: A string that can be either 'add', 'update', or 'delete'.
+   - 'add' : Adds a new recipe to the cookbook. If the recipe already exists, it will not modify it.
+   - 'update': Updates the ingredients of an existing recipe.
+   - 'delete': Removes a recipe from the cookbook.
+3. `recipe`: A tuple containing the recipe name and a list of its ingredients. For 'add' and 'update' operations, this will include the recipe name and a list of ingredients. For 'delete', this will include only the recipe name and an empty list.
+
+The function should return the updated cookbook after performing the specified operation.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

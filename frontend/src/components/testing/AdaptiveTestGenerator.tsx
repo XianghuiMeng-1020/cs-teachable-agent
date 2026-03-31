@@ -92,8 +92,8 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
           <Brain className="w-6 h-6 text-brand-600" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-slate-900">Adaptive Test Generator</h3>
-          <p className="text-slate-500 mt-1">
+          <h3 className="text-xl font-semibold text-stone-900">Adaptive Test Generator</h3>
+          <p className="text-stone-500 mt-1">
             AI-generated personalized tests based on your knowledge state, learning history, and identified gaps.
           </p>
         </div>
@@ -102,8 +102,8 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
       {!generatedTest ? (
         /* Configuration Panel */
         <div className="space-y-6">
-          <div className="p-4 bg-slate-50 rounded-xl">
-            <label className="text-sm font-medium text-slate-700 mb-3 block">
+          <div className="p-4 bg-stone-50 rounded-xl">
+            <label className="text-sm font-medium text-stone-700 mb-3 block">
               Number of Questions
             </label>
             <div className="flex gap-2">
@@ -115,7 +115,7 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
                     "px-4 py-2 rounded-lg font-medium transition-all",
                     numQuestions === n
                       ? "bg-brand-500 text-white"
-                      : "bg-white border border-slate-200 text-slate-600 hover:border-brand-300"
+                      : "bg-white border border-stone-200 text-stone-600 hover:border-brand-300"
                   )}
                 >
                   {n}
@@ -125,24 +125,24 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 border border-slate-200 rounded-xl">
+            <div className="p-4 border border-stone-200 rounded-xl">
               <Target className="w-5 h-5 text-brand-500 mb-2" />
-              <p className="font-medium text-slate-900">Gap-Focused</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-stone-900">Gap-Focused</p>
+              <p className="text-sm text-stone-500">
                 Targets your specific knowledge gaps identified by BKT analysis
               </p>
             </div>
-            <div className="p-4 border border-slate-200 rounded-xl">
+            <div className="p-4 border border-stone-200 rounded-xl">
               <TrendingUp className="w-5 h-5 text-emerald-500 mb-2" />
-              <p className="font-medium text-slate-900">Difficulty Adaptation</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-stone-900">Difficulty Adaptation</p>
+              <p className="text-sm text-stone-500">
                 Questions adapt to your mastery level using IRT-based selection
               </p>
             </div>
-            <div className="p-4 border border-slate-200 rounded-xl">
+            <div className="p-4 border border-stone-200 rounded-xl">
               <Zap className="w-5 h-5 text-amber-500 mb-2" />
-              <p className="font-medium text-slate-900">Misconception Detection</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-stone-900">Misconception Detection</p>
+              <p className="text-sm text-stone-500">
                 Special focus on concepts with active misconceptions
               </p>
             </div>
@@ -184,16 +184,16 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-stone-900">
                   {generatedTest.test_metadata.total_questions}
                 </p>
-                <p className="text-xs text-slate-500">Questions</p>
+                <p className="text-xs text-stone-500">Questions</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-stone-900">
                   {generatedTest.test_metadata.total_estimated_time}m
                 </p>
-                <p className="text-xs text-slate-500">Est. Time</p>
+                <p className="text-xs text-stone-500">Est. Time</p>
               </div>
               <div className="text-center">
                 <p className={cn(
@@ -205,13 +205,13 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
                 )}>
                   {generatedTest.test_metadata.average_difficulty.toFixed(1)}
                 </p>
-                <p className="text-xs text-slate-500">Avg Difficulty</p>
+                <p className="text-xs text-stone-500">Avg Difficulty</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-stone-900">
                   {generatedTest.test_metadata.knowledge_gaps_targeted.length}
                 </p>
-                <p className="text-xs text-slate-500">Gaps Targeted</p>
+                <p className="text-xs text-stone-500">Gaps Targeted</p>
               </div>
             </div>
           </div>
@@ -262,12 +262,12 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
                           <span className={cn("px-2 py-1 rounded text-xs font-medium", colors.bg, colors.text)}>
                             {question.difficulty}
                           </span>
-                          <span className="flex items-center gap-1 px-2 py-1 bg-slate-100 rounded text-xs text-slate-600">
+                          <span className="flex items-center gap-1 px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">
                             <TypeIcon className="w-3 h-3" />
                             {question.type}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 text-xs text-slate-500">
+                        <div className="flex items-center gap-1 text-xs text-stone-500">
                           <Clock className="w-3 h-3" />
                           {question.estimated_time} min
                         </div>
@@ -275,23 +275,23 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
 
                       {/* Question Text */}
                       <div className="prose prose-sm max-w-none mb-4">
-                        <p className="text-slate-800 text-base leading-relaxed whitespace-pre-wrap">
+                        <p className="text-stone-800 text-base leading-relaxed whitespace-pre-wrap">
                           {question.text}
                         </p>
                       </div>
 
                       {/* Target Unit */}
-                      <div className="flex items-center gap-2 text-sm text-slate-500 mb-4">
+                      <div className="flex items-center gap-2 text-sm text-stone-500 mb-4">
                         <Target className="w-4 h-4" />
                         <span>Testing: </span>
-                        <span className="font-medium text-slate-700">
+                        <span className="font-medium text-stone-700">
                           {question.target_unit.replace(/_/g, " ")}
                         </span>
                       </div>
 
                       {/* Hints */}
                       {question.hints.length > 0 && (
-                        <div className="border-t border-slate-100 pt-4">
+                        <div className="border-t border-stone-100 pt-4">
                           <button
                             onClick={() => setShowHint(showHint === idx ? null : idx)}
                             className="flex items-center gap-2 text-sm text-brand-600 hover:text-brand-700"
@@ -318,14 +318,14 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
 
                     {/* Answer Input */}
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">
+                      <label className="text-sm font-medium text-stone-700">
                         Your Answer
                       </label>
                       <textarea
                         value={answers[question.id] || ""}
                         onChange={(e) => setAnswers(prev => ({ ...prev, [question.id]: e.target.value }))}
                         placeholder="Type your answer here..."
-                        className="w-full p-3 border border-slate-200 rounded-lg min-h-[120px] text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                        className="w-full p-3 border border-stone-200 rounded-lg min-h-[120px] text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
                       />
                     </div>
 
@@ -357,10 +357,10 @@ export function AdaptiveTestGenerator({ taId }: AdaptiveTestGeneratorProps) {
           </Tabs>
 
           {/* Progress */}
-          <div className="p-4 bg-slate-50 rounded-lg">
+          <div className="p-4 bg-stone-50 rounded-lg">
             <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-slate-600">Progress</span>
-              <span className="font-medium text-slate-900">
+              <span className="text-stone-600">Progress</span>
+              <span className="font-medium text-stone-900">
                 {Object.keys(answers).length} / {generatedTest.questions.length} answered
               </span>
             </div>

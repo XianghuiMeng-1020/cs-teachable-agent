@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_count_creatures[Phoenix: 2\nDragon: 4\nGriffin: 3\n] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:37: AssertionError: assert 'Dragon: 4\nP...nGriffin: 3\n' == 'Griffin: 3\n...nPhoenix: 2\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:37: AssertionError: assert 'Dragon: 4\nP...nGriffin: 3\n' == 'Phoenix: 2\n...\nDragon: 4\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:37: AssertionError: assert 'Dragon: 4\nP...nGriffin: 3\n' == 'Dragon: 4\nG...nPhoenix: 2\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_count_creatures[Griffin: 3\nDragon: 4\nPhoenix: 2\n]
+FAILED outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_count_creatures[Phoenix: 2\nGriffin: 3\nDragon: 4\n]
+FAILED outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_count_creatures[Dragon: 4\nGriffin: 3\nPhoenix: 2\n]
+FAILED outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_count_creatures[Phoenix: 2\nDragon: 4\nGriffin: 3\n]
+ERROR outputs/results1/query_7/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_count_creatures[Phoenix: 2\nDragon: 4\nGriffin: 3\n]
+===================== 4 failed, 1 passed, 1 error in 0.17s =====================

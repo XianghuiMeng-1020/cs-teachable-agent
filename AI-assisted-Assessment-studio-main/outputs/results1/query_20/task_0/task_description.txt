@@ -1,0 +1,20 @@
+### Task Description
+
+You have been tasked with developing a simple Python function to determine the winner of a turn in a board game based on points accumulated during a turn. Each player can perform multiple actions, where each action gives or deducts points from the player's score. Your function should take in the scores and return the name of the player who wins the turn. If both players have the same score, return `"Draw"`.
+
+Your task is to create a function `determine_turn_winner(player_1_name, player_1_score, player_2_name, player_2_score)` that returns the name of the player with the highest score at the end of the turn. In the case of a tie, return the string `"Draw"`.
+
+#### Parameters:
+- `player_1_name`: A string representing the name of player 1.
+- `player_1_score`: An integer representing the points scored by player 1 this turn.
+- `player_2_name`: A string representing the name of player 2.
+- `player_2_score`: An integer representing the points scored by player 2 this turn.
+
+#### Returns:
+- A string: The name of the player with the higher score. If both players have the same score, return `"Draw"`.
+
+### Example
+```python
+assert determine_turn_winner("Alice", 85, "Bob", 90) == "Bob"
+assert determine_turn_winner("Alice", 50, "Bob", 50) == "Draw"
+```

@@ -1,0 +1,54 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+You are tasked with writing a Python function `calculate_winnings` that simulates a simple 'Game of Chance'.
+In this game, a player can place bets on the result of a dice roll. The rules of the game are as follows:
+
+- There are six possible outcomes for a dice roll, i.e., numbers from 1 to 6.
+- The player can bet any amount of currency on any of these numbers.
+- The player's total earnings or loss is calculated after one roll of the dice.
+- If the number rolled matches the number the player has bet on, the player earns triple the amount they bet for that number.
+- If the number does not match, the player loses the amount they bet on that number.
+
+The `calculate_winnings` function should take in two parameters:
+
+1. `bets`: A dictionary where keys are integers representing dice numbers (1 through 6), and the values are integers representing the amount of currency bet on each number.
+2. `roll`: An integer representing the result of the dice roll (1 through 6).
+
+The function should return an integer, the net winnings of the player after considering all placed bets.
+
+Example: 
+```python
+calculate_winnings({1: 10, 2: 20, 3: 0, 4: 15, 5: 5, 6: 0}, 3)
+```
+For the above function call, the dice roll results in a 3:
+- For numbers 1, 2, 4, and 5, the player loses the amount bet: -10, -20, -15, -5.
+- For number 3, the player wins three times their bet, which yields: +0 (since they bet 0 on 3).
+- Total net winnings = (-10) + (-20) + 0 + (-15) + (-5) + 0 = -50.
+
+The function should return -50 in this example.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_winnings
+
+@pytest.mark.parametrize("bets, roll, expected", [
+    ({1: 10, 2: 20, 3: 0, 4: 15, 5: 5, 6: 0}, 3, -50),
+    ({1: 0, 2: 0, 3: 20, 4: 0, 5: 0, 6: 0}, 3, 60),
+    ({1: 10, 2: 10, 3: 10, 4: 10, 5: 10, 6: 10}, 6, -40),
+    ({1: 0, 2: 0, 3: 0, 4: 0, 5: 100, 6: 0}, 5, 300),
+    ({1: 100, 2: 100, 3: 100, 4: 100, 5: 100, 6: 100}, 1, -400)
+])
+def test_calculate_winnings(bets, roll, expected):
+    assert calculate_winnings(bets, roll) == expected
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

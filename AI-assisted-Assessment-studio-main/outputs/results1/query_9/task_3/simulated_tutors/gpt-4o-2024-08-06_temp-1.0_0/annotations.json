@@ -1,0 +1,4 @@
+{
+    "program": "def merge_god_items(gods_list):\n    item_to_gods = {}\n    \n    for god_dict in gods_list:\n        for god, items in god_dict.items():\n            for item in items:\n                if item not in item_to_gods:\n                    item_to_gods[item] = []\n                item_to_gods[item].append(god)\n\n    # Sort the list of gods for each item alphabetically\n    for item in item_to_gods:\n        item_to_gods[item].sort()\n\n    return item_to_gods\n\n# Example usage\ninput_gods = [\n    {'Zeus': ['thunderbolt', 'eagle']},\n    {'Athena': ['owl', 'shield', 'thunderbolt']},\n    {'Ares': ['spear', 'shield']}\n]\n\nresult = merge_god_items(input_gods)\nprint(result)",
+    "context_relevance": 1.0
+}

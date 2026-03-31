@@ -1,0 +1,72 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+You are tasked with building a simple program that simulates a leaderboard for a board game competition. The leaderboard will track the scores of players as they play multiple rounds of a game. You are provided with a list of strings, where each string contains a player name followed by their score for a particular round, separated by a comma.
+
+Your task is to implement a function `update_leaderboard(score_entries)` that processes this list and updates the total scores of the players. If a player appears multiple times in the list, simply add their scores. If an entry in the list is malformed (i.e., it does not contain exactly one comma or the score is not a valid integer), that entry should be skipped without disrupting the processing of subsequent entries.
+
+The function should return a dictionary where the keys are player names and the values are their total scores.
+
+The function will be tested against a series of test cases. Any player name appearing in the input is case-sensitive and entries must be processed in the order they appear in `score_entries`. Player names are unique in each entry.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import update_leaderboard
+
+def test_update_leaderboard_basic():
+    entries = [
+        "Alice,10",
+        "Bob,15",
+        "Alice,5",
+        "Charlie,20"
+    ]
+    result = update_leaderboard(entries)
+    assert result == {"Alice": 15, "Bob": 15, "Charlie": 20}
+
+def test_update_leaderboard_with_malformed_entries():
+    entries = [
+        "Alice,10",
+        "Bob,15",
+        "Alice-5",
+        "Charlie,20a",
+        "David,30"
+    ]
+    result = update_leaderboard(entries)
+    assert result == {"Alice": 10, "Bob": 15, "David": 30}
+
+def test_update_leaderboard_empty_entries():
+    entries = []
+    result = update_leaderboard(entries)
+    assert result == {}
+
+def test_update_leaderboard_no_valid_scores():
+    entries = [
+        "Alice-Ten",
+        "Bob-Fifteen",
+        "AliceFifteen",
+        "Charlie:Twenty"
+    ]
+    result = update_leaderboard(entries)
+    assert result == {}
+
+def test_update_leaderboard_large_numbers():
+    entries = [
+        "Alice,1000000",
+        "Bob,-5000",
+        "Alice,2000000",
+        "Charlie,0"
+    ]
+    result = update_leaderboard(entries)
+    assert result == {"Alice": 3000000, "Bob": -5000, "Charlie": 0}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

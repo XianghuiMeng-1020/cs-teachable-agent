@@ -1,0 +1,24 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Imagine a futuristic world where space travelers need to manage their space cargo efficiently. You are tasked with creating a simple inventory management system for a space cargo ship. 
+
+Implement a class `SpaceCargo` that allows you to manage items in the cargo. Each item should have a name and a quantity, and the inventory should be represented by a dictionary where keys are item names and values are quantities.
+
+Your task is to implement the following methods:
+
+1. `add_item(name, quantity)`: Adds a specified quantity of an item to the inventory. If the item already exists, it should increase its quantity. If quantity is not a positive integer, raise a ValueError.
+
+2. `remove_item(name, quantity)`: Removes a specified quantity of an item from the inventory. If the item does not exist or there is insufficient quantity, raise a KeyError.
+
+3. `get_item_quantity(name)`: Returns the current quantity of the specified item. If the item is not found, return 0.
+
+4. `list_items()`: Returns a list of all item names in the inventory sorted alphabetically.
+
+Your solution should handle exceptions properly, ensuring the program does not crash during invalid operations.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

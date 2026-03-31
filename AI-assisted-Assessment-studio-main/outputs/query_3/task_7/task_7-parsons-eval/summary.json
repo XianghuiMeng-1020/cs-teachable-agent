@@ -1,0 +1,28 @@
+{
+  "item_id": "task_7-parsons",
+  "item_type": "parsons",
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 1.0,
+  "num_students": 20,
+  "num_passed": 15,
+  "pass_rate": 75.0,
+  "population_pass_threshold": 50.0,
+  "population_passed": true,
+  "passed_rollouts": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    17,
+    18,
+    19
+  ]
+}

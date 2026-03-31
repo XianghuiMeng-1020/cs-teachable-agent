@@ -1,0 +1,36 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task: Calculate Player Scores from Board Game Logs
+
+You are given a task to calculate the scores of players participating in board games, based on logs recorded in a file format. Each line in the log file follows the format: `<player_name>,<game_name>,<score>` representing a player's score in a specific game.
+
+Your task is to create a function `calculate_scores(input_file, output_file)` that reads the player log entries from `input_file`, computes the total score for each player across all the games they played, and writes the total scores to `output_file`.
+
+The `output_file` should contain one line per player with the format: `<player_name>,<total_score>`, ordered by the player's name alphabetically. Players without any recorded games should not be included in the output.
+
+**Example:**
+If `input_file` contains:
+```
+Alice,Chess,15
+Bob,Checkers,20
+Alice,Monopoly,25
+Bob,Chess,30
+Charlie,Chess,10
+Charlie,Monopoly,5
+```
+
+The resulting `output_file` should be:
+```
+Alice,40
+Bob,50
+Charlie,15
+```
+
+**Note**: You only need to handle positive integer scores and player names will only consist of alphabetic characters.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

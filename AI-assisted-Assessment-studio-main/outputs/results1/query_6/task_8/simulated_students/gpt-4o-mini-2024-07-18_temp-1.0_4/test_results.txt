@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py . [ 20%]
+..FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:60: AssertionError: assert '# Story Titl...challenges...' == 'Odysseus, th...challenges...'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py:67: FileNotFoundError: [Errno 2] No such file or directory: 'zeus_story.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_save_story_to_file
+FAILED outputs/results1/query_6/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_save_story_does_not_overwrite
+========================= 2 failed, 3 passed in 0.16s ==========================

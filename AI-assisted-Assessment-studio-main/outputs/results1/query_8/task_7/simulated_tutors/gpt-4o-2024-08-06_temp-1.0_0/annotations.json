@@ -1,0 +1,4 @@
+{
+    "program": "def describe_god(name):\n    # Define a dictionary mapping god names to their domains\n    gods = {\n        'zeus': \"God of the sky and thunder\",\n        'poseidon': \"God of the sea\",\n        'hades': \"God of the underworld\",\n        'athena': \"Goddess of wisdom and war\",\n        'apollo': \"God of the sun and music\",\n        'artemis': \"Goddess of the hunt and moon\",\n        'ares': \"God of war\",\n        'demeter': \"Goddess of the harvest\",\n        'hera': \"Goddess of marriage\"\n    }\n    \n    # Convert the input name to lowercase for case insensitive matching\n    name_lower = name.lower()\n    \n    # Use a selection statement to find the domain of the god\n    if name_lower in gods:\n        return gods[name_lower]\n    else:\n        return \"Unknown god\"",
+    "context_relevance": 1.0
+}

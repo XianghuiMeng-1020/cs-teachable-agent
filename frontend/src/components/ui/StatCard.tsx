@@ -38,13 +38,13 @@ export function StatCard({
           {loading ? (
             <Skeleton variant="line" className="mb-1 h-7 w-20" />
           ) : (
-            <p className="text-2xl font-bold text-slate-900">{value}</p>
+            <p className="text-2xl font-bold text-stone-900">{value}</p>
           )}
-          <p className="text-sm text-slate-500">{label}</p>
+          <p className="text-sm text-stone-500">{label}</p>
           {change != null && !loading && (
             <p
               className={cn(
-                "mt-1 flex items-center gap-1 text-xs",
+                "mt-1 flex items-center gap-1 text-xs font-medium",
                 change.value >= 0 ? "text-success" : "text-danger"
               )}
             >

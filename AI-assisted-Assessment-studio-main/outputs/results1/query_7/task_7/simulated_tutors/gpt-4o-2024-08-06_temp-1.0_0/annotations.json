@@ -1,0 +1,4 @@
+{
+    "program": "def count_creatures(input_file, output_file):\n    # Dictionary to hold the count of each category\n    creature_count = {}\n    \n    # Open the input file and process each line\n    with open(input_file, 'r') as file:\n        for line in file:\n            line = line.strip()  # Remove trailing whitespace and newline characters\n            if not line:\n                continue  # Skip any empty lines\n            \n            name, category = line.split(' - ')  # Split on ' - '\n            \n            # Increment the count of the category\n            if category in creature_count:\n                creature_count[category] += 1\n            else:\n                creature_count[category] = 1\n\n    # Write the results to the output file\n    with open(output_file, 'w') as file:\n        for category, count in creature_count.items():\n            file.write(f\"{category}: {count}\\n\")",
+    "context_relevance": 1.0
+}

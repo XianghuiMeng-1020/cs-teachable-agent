@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:10: KeyError: 'sugar:5'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:10: KeyError: 'sugar:5'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:3: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:10: KeyError: 'flour:3'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:10: KeyError: 'flour:7'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_example_case
+FAILED outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_decrease_to_zero
+FAILED outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_no_changes
+FAILED outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_increment_and_decrement
+FAILED outputs/results1/query_14/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_multiple_zero_results
+============================== 5 failed in 0.11s ===============================

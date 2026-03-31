@@ -1,0 +1,36 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+You are tasked with developing a Python function for a cooking application. The function, `ingredient_converter(recipe, conversion_factor)`, takes two arguments:
+
+1. `recipe`: a list of strings, where each string represents an ingredient and its quantity in the format 'quantity unit ingredient_name'. For example: ['2 cups flour', '1.5 liters milk', '3 tbsp sugar'].
+
+2. `conversion_factor`: a float value representing a multiplier to scale the recipe. This value is used to adjust the quantities of each ingredient.
+
+The function should return a new list of strings with the quantities adjusted by the conversion factor, maintaining the same format.
+
+For instance, if the conversion factor is 0.5, the function should reduce each quantity by half. If the factor is 2, the function should double each quantity.
+
+You should assume that the quantity in the string is a valid number that can include a decimal and the rest of the string is well-formed (i.e., a valid unit and ingredient name).
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import ingredient_converter
+
+@pytest.mark.parametrize("recipe, conversion_factor, expected", [
+    (['2 cups flour'], 2, ['4.0 cups flour']),
+    (['3 tbsp sugar', '1.5 liters milk'], 0.5, ['1.5 tbsp sugar', '0.75 liters milk']),
+    (['5 grams salt', '2 tsp vanilla'], 0.1, ['0.5 grams salt', '0.2 tsp vanilla']),
+    (['10 kg potatoes'], 3, ['30.0 kg potatoes']),
+    (['1.25 oz chocolate', '0.5 cups butter'], 10, ['12.5 oz chocolate', '5.0 cups butter'])
+])
+def test_ingredient_converter(recipe, conversion_factor, expected):
+    assert ingredient_converter(recipe, conversion_factor) == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

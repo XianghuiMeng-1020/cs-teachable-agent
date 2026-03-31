@@ -1,0 +1,79 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+In a distant future, science fiction has become reality with the rise of autonomous spaceships capable of interstellar travel. Your task is to create a simple simulation of a fleet of spaceships exploring a galaxy. Each spaceship can have a name, fuel level, and a list of destinations it needs to explore. These ships also rely on a central command system to pass or fail diagnostics based on their fuel levels.
+
+1. Implement a `Spaceship` class with the following:
+   - A constructor that initializes the name, fuel level, and a list of destinations for the spaceship.
+   - A method `add_fuel(amount)` that increases the fuel level by the specified amount.
+   - A method `travel(destination)` that attempts to travel to the given destination. If the destination exists on the spaceship's list, it removes it from the list and decreases the fuel level by 10 units. If not enough fuel is available, it should raise an exception.
+
+2. Implement a `Fleet` class with the following:
+   - A constructor that initializes an empty list of spaceships.
+   - A method `add_spaceship(spaceship)` that adds a spaceship object to the fleet.
+   - A method `diagnostic()` that returns a dictionary with spaceship names as keys. The values should be 'PASS' or 'FAIL' based on whether their fuel level is above 50 units.
+
+3. Handle exceptions gracefully using try-except blocks, particularly when trying to travel to a destination without enough fuel.
+
+Create these classes in a module named `galaxy_explorer`. The code will be tested using different scenarios to ensure that spaceships are correctly added to the fleet, fuel is added, travel can be attempted with proper exception handling, and the diagnostics system accurately reports the status of each spaceship.
+
+Function signatures to be implemented:
+- class `Spaceship`
+- def `__init__(self, name, fuel_level, destinations)`
+- def `add_fuel(self, amount)`
+- def `travel(self, destination)`
+- class `Fleet`
+- def `__init__(self)`
+- def `add_spaceship(self, spaceship)`
+- def `diagnostic(self)`
+### End of task description
+
+### Beginning of test suite
+import pytest
+from galaxy_explorer import Spaceship, Fleet
+
+
+def test_spaceship_creation():
+    ship = Spaceship("Voyager", 100, ["Mars", "Jupiter"])
+    assert ship.name == "Voyager"
+    assert ship.fuel_level == 100
+    assert ship.destinations == ["Mars", "Jupiter"]
+
+
+def test_add_fuel():
+    ship = Spaceship("Odyssey", 40, [])
+    ship.add_fuel(20)
+    assert ship.fuel_level == 60
+
+
+def test_travel_success():
+    ship = Spaceship("Endeavour", 100, ["Saturn", "Titan"])
+    ship.travel("Saturn")
+    assert ship.fuel_level == 90
+    assert ship.destinations == ["Titan"]
+
+
+def test_travel_insufficient_fuel():
+    ship = Spaceship("Curiosity", 5, ["Venus"])
+    with pytest.raises(Exception):
+        ship.travel("Venus")
+
+
+def test_diagnostic():
+    ship1 = Spaceship("Pioneer", 60, [])
+    ship2 = Spaceship("Explorer", 45, [])
+    fleet = Fleet()
+    fleet.add_spaceship(ship1)
+    fleet.add_spaceship(ship2)
+    result = fleet.diagnostic()
+    assert result == {"Pioneer": "PASS", "Explorer": "FAIL"}
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

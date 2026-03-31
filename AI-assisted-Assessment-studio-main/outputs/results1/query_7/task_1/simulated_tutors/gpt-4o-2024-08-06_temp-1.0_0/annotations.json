@@ -1,0 +1,4 @@
+{
+    "program": "```python\ndef find_creatures_by_attribute(file_path, attribute):\n    creature_names = []\n    with open(file_path, 'r') as f:\n        content = f.read().strip()\n    \n    entries = content.split('\\n\\n')\n    for entry in entries:\n        parts = entry.strip().split('\\n')\n        if len(parts) < 2:\n            continue\n        \n        name_line = parts[0]\n        attributes_line = parts[1]\n        \n        if not attributes_line.startswith('Attributes:'):\n            continue\n        \n        name = name_line.split(':')[0].strip()\n        attributes = attributes_line[len('Attributes:'):].strip()\n        attribute_list = [attr.strip() for attr in attributes.split(',')]\n        \n        if attribute in attribute_list:\n            creature_names.append(name)\n\n    return creature_names\n```\n",
+    "context_relevance": 1.0
+}

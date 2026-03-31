@@ -1,0 +1,6 @@
+..F..                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_7/test_suite_sol.py:25: AssertionError: assert 'KVIIXMRKW%' == 'KVIIZMKSR!'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_7/test_suite_sol.py::TestInterstellarMessage::test_encode_with_special_characters
+1 failed, 4 passed in 0.03s

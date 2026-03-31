@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_fuel_for_mission(filename):\n    total_fuel = 0\n    \n    with open(filename, 'r') as file:\n        for line in file:\n            distance = int(line.strip())\n            total_fuel += distance * 2\n    \n    with open('total_fuel.txt', 'w') as output_file:\n        output_file.write(str(total_fuel))",
+    "context_relevance": 1.0
+}

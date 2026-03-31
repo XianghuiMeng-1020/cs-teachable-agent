@@ -30,7 +30,7 @@ export function SQLVisualizer({ columns, rows, showChart = false, className }: S
 
   if (columns.length === 0) {
     return (
-      <div className={cn("rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500", className)}>
+      <div className={cn("rounded-lg border border-stone-200 bg-stone-50 p-4 text-sm text-stone-500", className)}>
         No result set to display.
       </div>
     );
@@ -38,12 +38,12 @@ export function SQLVisualizer({ columns, rows, showChart = false, className }: S
 
   return (
     <div className={cn("space-y-3", className)}>
-      <div className="overflow-x-auto rounded-lg border border-slate-200">
+      <div className="overflow-x-auto rounded-lg border border-stone-200">
         <table className="min-w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
+            <tr className="border-b border-stone-200 bg-stone-50">
               {columns.map((col) => (
-                <th key={col} className="px-3 py-2 font-medium text-slate-700">
+                <th key={col} className="px-3 py-2 font-medium text-stone-700">
                   {col}
                 </th>
               ))}
@@ -51,9 +51,9 @@ export function SQLVisualizer({ columns, rows, showChart = false, className }: S
           </thead>
           <tbody>
             {rows.slice(0, 50).map((row, i) => (
-              <tr key={i} className="border-b border-slate-100 last:border-0">
+              <tr key={i} className="border-b border-stone-100 last:border-0">
                 {columns.map((col) => (
-                  <td key={col} className="px-3 py-2 font-mono text-slate-800">
+                  <td key={col} className="px-3 py-2 font-mono text-stone-800">
                     {row[col] != null ? String(row[col]) : "NULL"}
                   </td>
                 ))}
@@ -62,7 +62,7 @@ export function SQLVisualizer({ columns, rows, showChart = false, className }: S
           </tbody>
         </table>
         {rows.length > 50 && (
-          <p className="px-3 py-2 text-xs text-slate-500">Showing first 50 of {rows.length} rows.</p>
+          <p className="px-3 py-2 text-xs text-stone-500">Showing first 50 of {rows.length} rows.</p>
         )}
       </div>
       {showChart && chartData.length > 0 && (
@@ -72,7 +72,7 @@ export function SQLVisualizer({ columns, rows, showChart = false, className }: S
               <XAxis dataKey="name" tick={{ fontSize: 10 }} />
               <YAxis tick={{ fontSize: 10 }} width={32} />
               <Tooltip />
-              <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

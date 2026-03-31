@@ -1,0 +1,97 @@
+{
+  "item_id": "task_4-dropdown",
+  "source_task_id": "task_4",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_0/task_4",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for luckiest_player",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n### Luckiest Player of the Day In a casino themed on Games of Chance, players enjoy slot machines. Each day, the casino logs the wins of players in a text file named `daily_wins.txt`. Your task is to determine the 'Luckiest Player of the Day', meaning the player with the highest total winnings on that day. The log file, `daily_wins.txt`, will have the following format: - Each line contains a player's name followed by a space, and then their winnings as an integer. A player can appear multiple...",
+  "interaction_content": {
+    "function_name": "luckiest_player",
+    "prompt_template": "def luckiest_player(filename):\n    with open(filename, 'r') as file:\n        player_totals = {}\n        for line in file:\n            name, winnings = line.rsplit(maxsplit=__BLANK_3__)\n            winnings = int(winnings)\n            if name in player_totals:\n                player_totals[name] += winnings\n            else:\n                player_totals[name] = winnings\n        max_winnings = __BLANK_1__float('inf')\n        luckiest = None\n        for player in sorted(player_totals):\n            if player_totals[player] __BLANK_2__ max_winnings:\n                max_winnings = player_totals[player]\n                luckiest = player\n        return luckiest",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "-",
+          "+",
+          "*",
+          "%"
+        ],
+        "correct_answer": "-",
+        "misconception_tags": {
+          "+": "operator_confusion",
+          "*": "operator_confusion",
+          "%": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          ">",
+          ">=",
+          "<",
+          "<="
+        ],
+        "correct_answer": ">",
+        "misconception_tags": {
+          ">=": "operator_confusion",
+          "<": "operator_confusion",
+          "<=": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "3"
+        ],
+        "correct_answer": "1",
+        "misconception_tags": {
+          "2": "off_by_one_or_default_value",
+          "0": "off_by_one_or_default_value",
+          "3": "off_by_one_or_default_value"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "-",
+      "blank_2": ">",
+      "blank_3": "1"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Game of Chance",
+    "concepts": [
+      "Strings",
+      "Selection Statements (if/else, etc.)",
+      "File Handling and I/O",
+      "Arithmetic Operators"
+    ],
+    "quality_metrics": {
+      "task": "task_4",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "8",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

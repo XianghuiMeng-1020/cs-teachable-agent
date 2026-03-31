@@ -1,0 +1,16 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a Python function to help manage a recipe collection for a digital cookbook. The function should be named `parse_ingredient_list` and it should take a single parameter `ingredient_string`. This parameter is a string where multiple ingredients are listed in a specific format: "`ingredient_name:quantity;ingredient_name2:quantity2;...`".
+
+In this format, each ingredient is separated by a semicolon, and each ingredient's name is separated from its quantity by a colon. You need to create and return a dictionary where the keys are the ingredient names and the values are the quantities. Both ingredient names and quantities are strings.
+
+For example, calling the function with the input `parse_ingredient_list("flour:200g;sugar:100g;butter:50g")` should return a dictionary: `{ "flour": "200g", "sugar": "100g", "butter": "50g" }`.
+
+Your task is to implement this function and ensure that it accurately creates the dictionary from the given string.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

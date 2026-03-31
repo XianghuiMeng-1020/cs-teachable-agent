@@ -1,0 +1,4 @@
+{
+    "program": "def best_fruits(apples, min_value):\n    # Filter the list to get all apples with a value greater than the min_value\n    eligible_apples = [value for value in apples if value > min_value]\n    \n    # If fewer than two apples are eligible, return 0\n    if len(eligible_apples) < 2:\n        return 0\n    \n    # Sort the eligible values in descending order to find the top two\n    eligible_apples.sort(reverse=True)\n    \n    # Return the sum of the top two age preservation values\n    return eligible_apples[0] + eligible_apples[1]",
+    "context_relevance": 0.0
+}

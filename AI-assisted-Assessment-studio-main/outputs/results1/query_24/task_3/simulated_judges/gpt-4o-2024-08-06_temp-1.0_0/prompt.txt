@@ -1,0 +1,58 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+Create a function `calculate_board_game_score(game_results)` that calculates total scores for a series of board game matches based on a given score list. The input `game_results` is a list of strings where each string represents the results of a game in the format `"<winner>:<score1>,<score2>"`. The `<winner>` is a single uppercase letter ('A' to 'Z') representing the winning player, and `<score1>` and `<score2>` are integer scores of the two players involved. The function should calculate the total score for the winning player by adding the difference `(score1 - score2)` to its current total score. If there is an invalid entry format in game_results, the function should ignore that entry without throwing an error.
+
+The function must return a dictionary where keys are player identifiers, and values are their total scores.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import calculate_board_game_score
+
+def test_calculate_board_game_score_valid_entries():
+    results = ["A:4,2", "B:10,5", "A:8,6"]
+    expected = {'A': 4, 'B': 5}
+    assert calculate_board_game_score(results) == expected
+
+
+def test_invalid_entries_ignored():
+    results = ["A:4,2", "X:3,3:5", "B:10,5", "A:8,6"]
+    expected = {'A': 4, 'B': 5}
+    assert calculate_board_game_score(results) == expected
+
+
+def test_invalid_winner():
+    results = ["A:4,2", "B:10,5", "1:8,6"]
+    expected = {'A': 2, 'B': 5}
+    assert calculate_board_game_score(results) == expected
+
+
+def test_negative_scores():
+    results = ["A:4,2", "B:10,5", "A:5,6"]
+    expected = {'A': 1, 'B': 5}
+    assert calculate_board_game_score(results) == expected
+
+
+def test_no_results():
+    results = []
+    expected = {}
+    assert calculate_board_game_score(results) == expected
+
+
+def setup_module(module):
+    print("Setup module")
+
+def teardown_module(module):
+    print("Teardown module")
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

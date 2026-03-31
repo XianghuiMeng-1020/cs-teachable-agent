@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:37: AssertionError: assert '5' == '9'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:44: AssertionError: assert '9' == '11'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:51: AssertionError: assert '110' == '15'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:65: AssertionError: assert '133' == '13'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_game_of_chance_case1
+FAILED outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_game_of_chance_case2
+FAILED outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_game_of_chance_case3
+FAILED outputs/results1/query_0/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_game_of_chance_case5
+========================= 4 failed, 1 passed in 0.06s ==========================

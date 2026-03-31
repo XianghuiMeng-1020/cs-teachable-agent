@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at teardown of test_get_scores_empty_file ________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_scores.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:24: AssertionError: assert ['Round 1: 10...40 25\n', ...] == ['Round 1: 10...: 30 40 25\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:31: AssertionError: assert ['Round 1: 10...40 25\n', ...] == ['Round 1: 10...: 50 60 70\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:9: FileNotFoundError: [Errno 2] No such file or directory: 'test_scores.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:44: AssertionError: assert ['Round 1: 10...20 30\n', ...] == ['Round 1: 10 20 30\n']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:49: AssertionError: assert ['Round 1: 10...20 30\n', ...] == ['Round 1: 10 20 30']
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_initial_file_content
+FAILED outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_append_score_to_existing_file
+FAILED outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_get_scores
+FAILED outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_append_to_empty_file
+FAILED outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_get_scores_empty_file
+ERROR outputs/results1/query_22/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_get_scores_empty_file
+========================== 5 failed, 1 error in 0.16s ==========================

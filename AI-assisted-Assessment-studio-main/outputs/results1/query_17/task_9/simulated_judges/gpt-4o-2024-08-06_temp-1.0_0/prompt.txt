@@ -1,0 +1,78 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Exception Handling', 'Selection Statements (if/else, etc.)', 'Classes and Objects', 'Dictionaries', 'Lists']:
+
+### Beginning of task description
+In a distant future, humans have developed a fleet of spaceships for intergalactic travel. You are tasked with creating a Python class `FleetManager` that manages a collection of spaceships, each having a name, a maximum speed, and a list of missions it has undertaken.
+
+Your implementation should include the following:
+
+- Implement a class `Ship` with attributes:
+  - `name`: a string representing the ship's name.
+  - `max_speed`: an integer representing the maximum speed of the ship.
+  - `missions`: a list of strings representing the missions the ship has undertaken.
+
+- Implement a class `FleetManager` that manages a collection of `Ship` objects. It should have the following methods:
+  
+  - `add_ship(name, max_speed)`: Adds a new `Ship` with the specified name and max_speed to the fleet. If a ship with the same name already exists, it should raise a `ValueError`.
+  
+  - `record_mission(ship_name, mission)`: Records a new mission for the specified ship. If the ship does not exist in the fleet, it should raise a `KeyError`.
+  
+  - `get_missions(ship_name)`: Returns the list of missions for the specified ship. If the ship does not exist, it should return an empty list.
+  
+  - `get_fleet_summary()`: Returns a dictionary where keys are the names of the ships and values are dictionaries with two keys: `max_speed` and `missions`.
+  
+Your program will be tested using various scenarios to ensure that the fleet manager can handle querying and updating ship information as required.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import FleetManager
+
+def test_add_ship_success():
+    fm = FleetManager()
+    fm.add_ship("Enterprise", 1000)
+    assert "Enterprise" in fm.get_fleet_summary()
+
+
+def test_add_ship_duplicate_error():
+    fm = FleetManager()
+    fm.add_ship("Enterprise", 1000)
+    with pytest.raises(ValueError):
+        fm.add_ship("Enterprise", 1200)
+
+
+def test_record_mission_success():
+    fm = FleetManager()
+    fm.add_ship("Falcon", 900)
+    fm.record_mission("Falcon", "Mars Exploration")
+    assert "Mars Exploration" in fm.get_missions("Falcon")
+
+
+def test_record_mission_no_ship_error():
+    fm = FleetManager()
+    with pytest.raises(KeyError):
+        fm.record_mission("Voyager", "Jupiter Flyby")
+
+
+def test_get_fleet_summary_structure():
+    fm = FleetManager()
+    fm.add_ship("Apollo", 800)
+    fm.record_mission("Apollo", "Moon Landing")
+    summary = fm.get_fleet_summary()
+    assert summary == {"Apollo": {"max_speed": 800, "missions": ["Moon Landing"]}}
+
+
+def test_get_missions_no_ship():
+    fm = FleetManager()
+    missions = fm.get_missions("NonExistent")
+    assert missions == []
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

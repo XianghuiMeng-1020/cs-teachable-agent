@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____ ERROR at teardown of test_calculate_average_ingredient_weight_case5 ______
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test2.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:34: assert 500.0 == 333.33
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:39: assert 200.0 == 150.0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:44: assert 0.0 is None
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:49: assert 0.0 == 216.67
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:54: assert 90.0 == 75.0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case1
+FAILED outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case2
+FAILED outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case3
+FAILED outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case4
+FAILED outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case5
+ERROR outputs/results1/query_13/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_calculate_average_ingredient_weight_case5
+========================== 5 failed, 1 error in 0.12s ==========================

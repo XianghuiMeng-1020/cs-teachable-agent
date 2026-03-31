@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
 import { NetworkStatus } from "@/components/ui/NetworkStatus";
-import { UserGuide } from "@/components/onboarding/UserGuide";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 
@@ -13,13 +12,17 @@ const PAGE_NAMES: Record<string, string> = {
   "/dashboard": "Dashboard",
   "/teach": "Teach TA",
   "/test": "Test TA",
+  "/practice": "Practice",
   "/mastery": "Mastery",
   "/history": "History",
-  "/learning-analytics": "Learning Analytics",
+  "/learning-analytics": "Analytics",
   "/teacher": "Overview",
   "/teacher/students": "Students",
   "/teacher/transcripts": "Transcripts",
   "/teacher/analytics": "Analytics",
+  "/teacher/assessments": "Assessments",
+  "/teacher/metrics": "Learning Analytics",
+  "/teacher/proctoring": "Proctoring Dashboard",
 };
 
 export function AppShell() {
@@ -27,7 +30,11 @@ export function AppShell() {
   const path = location.pathname;
   const pageName =
     PAGE_NAMES[path] ??
-    (path.startsWith("/teacher/students/") ? "Student detail" : "CS Teachable Agent");
+    (path.startsWith("/teacher/students/")
+      ? "Student Detail"
+      : path.startsWith("/practice/")
+        ? "Assessment"
+        : "TeachAgent");
   const queryClient = useQueryClient();
 
   const { data: taList = [], isSuccess: taListLoaded } = useQuery({
@@ -58,16 +65,13 @@ export function AppShell() {
     }
   }, [taListLoaded, taList.length, createTAMutation.isPending]);
 
-  const isStudentRoute = !path.startsWith("/teacher") && path !== "/login" && path !== "/";
-
   return (
     <div className="flex h-screen overflow-hidden bg-surface">
       <NetworkStatus />
-      {isStudentRoute && <UserGuide />}
       {mobileMenuOpen && (
         <button
           type="button"
-          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/30 backdrop-blur-sm lg:hidden"
           aria-label="Close menu"
           onClick={() => setMobileMenuOpen(false)}
         />
@@ -75,7 +79,7 @@ export function AppShell() {
       <Sidebar />
       <div className="flex flex-1 flex-col min-w-0">
         <TopBar pageName={pageName} taList={taList} onMenuClick={() => setMobileMenuOpen(true)} />
-        <main className="mx-auto flex-1 overflow-auto px-4 py-5 sm:px-6 max-w-[var(--content-max-width)] w-full">
+        <main className="mx-auto flex-1 overflow-auto px-4 py-6 sm:px-6 lg:px-8 max-w-[var(--content-max-width)] w-full">
           <Outlet />
         </main>
       </div>

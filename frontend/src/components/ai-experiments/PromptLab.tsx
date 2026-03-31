@@ -35,19 +35,19 @@ export function PromptLab({ taId, className }: PromptLabProps) {
   };
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 bg-white p-4", className)}>
-      <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+    <div className={cn("rounded-xl border border-stone-200 bg-white p-4", className)}>
+      <h3 className="flex items-center gap-2 text-sm font-semibold text-stone-800">
         <Lightbulb className="h-4 w-4 text-amber-500" />
         Prompt lab
       </h3>
-      <p className="mt-1 text-xs text-slate-500">
+      <p className="mt-1 text-xs text-stone-500">
         Try different prompts and see how the TA responds. Useful for AI literacy practice.
       </p>
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Enter a prompt for the TA..."
-        className="mt-3 w-full resize-y rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+        className="mt-3 w-full resize-y rounded-lg border border-stone-200 px-3 py-2 text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
         rows={3}
         disabled={!taId || loading}
       />
@@ -62,12 +62,12 @@ export function PromptLab({ taId, className }: PromptLabProps) {
         Run prompt
       </Button>
       {output && (
-        <div className="mt-3 rounded-lg border border-slate-100 bg-slate-50 p-3">
-          <p className="text-xs font-medium text-slate-500">Response</p>
-          <p className="mt-1 whitespace-pre-wrap text-sm text-slate-800">{output}</p>
+        <div className="mt-3 rounded-lg border border-stone-100 bg-stone-50 p-3">
+          <p className="text-xs font-medium text-stone-500">Response</p>
+          <p className="mt-1 whitespace-pre-wrap text-sm text-stone-800">{output}</p>
         </div>
       )}
-      <ul className="mt-3 space-y-1 text-xs text-slate-500">
+      <ul className="mt-3 space-y-1 text-xs text-stone-500">
         {TIPS.map((tip, i) => (
           <li key={i} className="flex gap-2">
             <span className="text-amber-500">•</span>

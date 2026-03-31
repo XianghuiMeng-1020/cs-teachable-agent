@@ -1,0 +1,77 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+## Task: Recipe Ingredient Sorter
+Your task is to create a program that reads a text file containing ingredients of various recipes, sorts the ingredients alphabetically, and saves the sorted list back into a new file.
+
+### File Format:
+- Each line in the file contains ingredients of one recipe separated by commas. 
+- There are no headers or labels in the file.
+
+### Program Requirements:
+1. Implement a function `sort_ingredients(input_filename, output_filename)` where:
+   - `input_filename` is the name of the text file containing unsorted ingredients.
+   - `output_filename` is the name of the text file where the sorted ingredients will be saved.
+
+2. For each line (recipe), you need to:
+   - Split the ingredients by commas.
+   - Trim extra spaces from each ingredient.
+   - Sort the ingredients alphabetically.
+   - Join the sorted ingredients back into a single string (comma-separated).
+   - Write the result to the output file, maintaining the same line order for different recipes.
+
+### Example:
+Given the input file `recipes.txt`:
+```
+flour, sugar, baking soda
+sugar, cocoa powder, butter, milk
+salt, pepper, garlic powder
+```
+Calling `sort_ingredients('recipes.txt', 'sorted_recipes.txt')` should create a file `sorted_recipes.txt`:
+```
+baking soda, flour, sugar
+butter, cocoa powder, milk, sugar
+garlic powder, pepper, salt
+```
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution import sort_ingredients
+
+def setup_module(module):
+    with open('test_recipes.txt', 'w') as f:
+        f.write('flour, sugar, baking soda\n')
+        f.write('salt, pepper, garlic powder\n')
+        f.write('sugar, cocoa powder, butter, milk\n')
+        f.write('honey\n')
+        f.write('zucchini, carrot, apple\n')
+
+def teardown_module(module):
+    os.remove('test_recipes.txt')
+    if os.path.exists('test_sorted_recipes.txt'):
+        os.remove('test_sorted_recipes.txt')
+
+@pytest.mark.parametrize("test_input, expected_output", [
+    ('test_recipes.txt', 'test_sorted_recipes.txt'),
+])
+def test_sort_ingredients(test_input, expected_output):
+    sort_ingredients(test_input, expected_output)
+    with open(expected_output, 'r') as f:
+        lines = f.readlines()
+    assert lines[0].strip() == 'baking soda, flour, sugar'
+    assert lines[1].strip() == 'garlic powder, pepper, salt'
+    assert lines[2].strip() == 'butter, cocoa powder, milk, sugar'
+    assert lines[3].strip() == 'honey'
+    assert lines[4].strip() == 'apple, carrot, zucchini'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

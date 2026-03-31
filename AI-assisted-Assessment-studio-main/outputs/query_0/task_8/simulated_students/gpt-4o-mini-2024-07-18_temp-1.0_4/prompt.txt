@@ -1,0 +1,35 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task: Lucky Number Game
+You are going to implement a simple text-based game of chance called "Lucky Number". In this game, players will select numbers in hopes of matching one of the randomly selected lucky numbers pre-written within a file. The game host will provide feedback on whether the player's choices result in a win or a loss.
+
+#### Requirements:
+
+1. **Game Setup:**
+   - Create a text file named `lucky_numbers.txt` which contains five newline-separated random numbers (these numbers should already exist in the file for testing purposes).
+   
+2. **Player Input:**
+   - Write a function `run_lucky_number_game()` which prompts the user to input a number between 1 and 50.
+   
+3. **Game Logic:**
+   - The program should read the `lucky_numbers.txt` file to retrieve the lucky numbers.
+   - Compare the user’s input with these numbers.
+   - If the input matches any of the numbers in the file, print "Congratulations! You selected a lucky number!"
+   - If there is no match, print "Sorry! Better luck next time."
+   
+4. **Output:**
+   - Ensure all outputs are user-friendly and convey if the user guessed a lucky number.
+
+#### Function Signature:
+
+- `run_lucky_number_game()`
+
+### Note:
+You may assume the file `lucky_numbers.txt` will be correctly formatted and contain valid numbers only.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,12 @@
+FFF..F                                                                   [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/test_suite_sol.py:17: AssertionError: assert [['D', 'C', '...X', 'D', 'X']] == [['D', 'O', '...X', 'X', 'X']]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/test_suite_sol.py:25: AssertionError: assert False is True
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/test_suite_sol.py:28: AssertionError: assert False is True
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/test_suite_sol.py:40: Failed: DID NOT RAISE <class 'ValueError'>
+=========================== short test summary info ============================
+FAILED outputs/results1/query_23/task_1/test_suite_sol.py::test_grid_initialization
+FAILED outputs/results1/query_23/task_1/test_suite_sol.py::test_word_exists_horizontally
+FAILED outputs/results1/query_23/task_1/test_suite_sol.py::test_word_exists_vertically
+FAILED outputs/results1/query_23/task_1/test_suite_sol.py::test_invalid_words_raise_exception[words0-ValueError]
+4 failed, 2 passed in 0.03s

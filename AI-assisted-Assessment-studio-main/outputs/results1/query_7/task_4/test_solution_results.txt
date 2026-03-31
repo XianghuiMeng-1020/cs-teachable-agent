@@ -1,0 +1,14 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/solution_program.py:6: ValueError: not enough values to unpack (expected 2, got 1)
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/test_suite_sol.py::test_immortal_creature
+FAILED outputs/results1/query_7/task_4/test_suite_sol.py::test_colossal_creatures
+FAILED outputs/results1/query_7/task_4/test_suite_sol.py::test_nonexistent_characteristic
+FAILED outputs/results1/query_7/task_4/test_suite_sol.py::test_case_sensitivity
+FAILED outputs/results1/query_7/task_4/test_suite_sol.py::test_human_creature
+5 failed in 0.05s

@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py . [ 16%]
+FFFFF                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:20: AssertionError: assert 'To make this...ms of butter.' == 'To make this...ams of butter'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:20: AssertionError: assert 'To make this...whole of egg.' == 'To make this... whole of egg'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:20: AssertionError: assert 'To make this...1 kg of rice.' == 'To make this... 1 kg of rice'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:20: AssertionError: assert 'To make this...oons of salt.' == 'To make this...poons of salt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:20: AssertionError: assert 'To make this...res of water.' == 'To make this...tres of water'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_ingredient_quantifier[recipe1-To make this recipe, you will need: 2 cups of flour, 1 cup of sugar, 250 grams of butter]
+FAILED outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_ingredient_quantifier[recipe2-To make this recipe, you will need: 500 ml of milk, 100 grams of cocoa, 200 grams of chocolate, 2 whole of egg]
+FAILED outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_ingredient_quantifier[recipe3-To make this recipe, you will need: 1 kg of rice]
+FAILED outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_ingredient_quantifier[recipe4-To make this recipe, you will need: 1 tablespoon of olive oil, 3 tablespoons of lemon juice, 2 teaspoons of salt]
+FAILED outputs/results1/query_14/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_ingredient_quantifier[recipe5-To make this recipe, you will need: litres of water]
+========================= 5 failed, 1 passed in 0.09s ==========================

@@ -1,0 +1,85 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Classes and Objects', 'Exception Handling']:
+
+### Beginning of task description
+You are tasked to create a simple Python application to manage cooking recipes. Each recipe will consist of a name and a set of ingredients. Your application should be able to save recipes to a file and read recipes from a file.
+
+To solve this task, you will:
+1. Implement a `Recipe` class with the following properties and methods:
+   - Attributes:
+     - `name`: Name of the recipe.
+     - `ingredients`: A list of ingredients required for the recipe.
+   - Method `to_string`: Returns a string representation of the recipe in the format "name:ingredient1,ingredient2,...".
+   - Method `from_string`: A class method that takes a string in the format "name:ingredient1,ingredient2,..." and returns an instance of `Recipe`.
+
+2. Implement a function `save_recipe_to_file(recipe, file_name)` that saves a `Recipe` object to a specified file.
+
+3. Implement a function `load_recipes_from_file(file_name)` that reads recipes from a file and returns a list of `Recipe` objects.
+
+If the file doesn't exist or an error occurs during file handling, the function should handle exceptions gracefully and return an empty list.
+
+Example:
+Considering the file "recipes.txt" contains:
+```
+Pasta:tomato,basil,garlic
+Sandwich:bread,ham,cheese
+```
+- Calling `load_recipes_from_file("recipes.txt")` should return a list containing corresponding `Recipe` objects.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import Recipe, save_recipe_to_file, load_recipes_from_file
+
+def setup_module(module):
+    with open('test_recipes.txt', 'w') as f:
+        f.write('Pasta:tomato,basil,garlic\n')
+        f.write('Sandwich:bread,ham,cheese\n')
+
+    # Create an empty file for tests
+    with open('empty_recipes.txt', 'w') as f:
+        pass
+
+def teardown_module(module):
+    os.remove('test_recipes.txt')
+    os.remove('empty_recipes.txt')
+    if os.path.exists('output_recipes.txt'):
+        os.remove('output_recipes.txt')
+
+def test_recipe_to_string():
+    recipe = Recipe("Soup", ["carrot", "celery", "onion"])
+    assert recipe.to_string() == "Soup:carrot,celery,onion"
+
+def test_recipe_from_string():
+    recipe_string = "Cake:flour,sugar,eggs"
+    recipe = Recipe.from_string(recipe_string)
+    assert recipe.name == "Cake"
+    assert recipe.ingredients == ["flour", "sugar", "eggs"]
+
+def test_save_recipe_to_file():
+    recipe = Recipe("Salad", ["lettuce", "tomato", "cucumber"])
+    save_recipe_to_file(recipe, 'output_recipes.txt')
+    with open('output_recipes.txt', 'r') as f:
+        assert f.read().strip() == "Salad:lettuce,tomato,cucumber"
+
+def test_load_recipes_from_file():
+    recipes = load_recipes_from_file('test_recipes.txt')
+    assert len(recipes) == 2
+    assert recipes[0].name == "Pasta"
+    assert recipes[0].ingredients == ["tomato", "basil", "garlic"]
+    assert recipes[1].name == "Sandwich"
+    assert recipes[1].ingredients == ["bread", "ham", "cheese"]
+
+def test_load_recipes_from_empty_file():
+    recipes = load_recipes_from_file('empty_recipes.txt')
+    assert recipes == []
+
+def test_load_recipes_from_nonexistent_file():
+    recipes = load_recipes_from_file('nonexistent_recipes.txt')
+    assert recipes == []
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

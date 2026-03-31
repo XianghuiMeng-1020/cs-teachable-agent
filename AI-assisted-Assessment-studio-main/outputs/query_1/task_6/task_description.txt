@@ -1,0 +1,19 @@
+### Task Description
+
+In the realm of Mythologia, various mythical creatures inhabit the Kingdom's great forests. Each creature has its own 'Mythical Power' which can be calculated based on their characteristics and affinities. Your task is to implement a function `calculate_mythical_power(affinities)` that takes a list of numbers representing the affinities of each mythical creature and returns the total 'Mythical Power'. 
+
+The Mythical Power is determined using the following rules:
+1. Affinities with a value greater than 10 are considered "Strong" and add twice their value to the total power.
+2. Affinities with a value between 5 and 10 (inclusive) are considered "Moderate" and add their value as is to the total power.
+3. Affinities with a value less than 5 are considered "Weak" and subtract twice their value from the total power.
+
+**Function Signature:**
+```python
+def calculate_mythical_power(affinities):
+    pass
+```
+
+**Constraints:**
+- The list `affinities` contains 0 to 100 integers where each integer is between -100 and 100 inclusive.
+
+Complete the function so that it returns the total 'Mythical Power'.

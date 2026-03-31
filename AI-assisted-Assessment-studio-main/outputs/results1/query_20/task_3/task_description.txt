@@ -1,0 +1,25 @@
+### Task Description
+You are tasked with creating a function that determines the winner of a fictional board game called "Numerical Conquest". In this game, two players, Alice and Bob, take turns to roll a die. The score each player gets for a roll is double the number rolled on the die. They roll the die a fixed number of times, and their scores for each roll are summed to get their total scores. 
+
+Your function `determine_winner(alice_rolls, bob_rolls)` must take two arguments:
+- `alice_rolls`: a string containing the results of Alice's rolls as a sequence of digits, where each digit represents a die roll.
+- `bob_rolls`: a string containing the results of Bob's rolls, each digit representing a die roll.
+
+The function should calculate the total score for each player and return a string: 
+- "Alice" if Alice has a higher total score,
+- "Bob" if Bob has a higher total score,
+- "Draw" if both players have the same total score.
+
+Note:
+- Each player rolls the same number of times.
+- Each die roll result is a single digit ('1' to '6').
+
+### Example
+```python
+determine_winner("123", "321")  # should return "Draw"
+determine_winner("456", "123")  # should return "Alice"
+```
+
+### Constraints
+- The length of `alice_rolls` and `bob_rolls` will be the same.
+- The strings will only contain characters '1' through '6'.

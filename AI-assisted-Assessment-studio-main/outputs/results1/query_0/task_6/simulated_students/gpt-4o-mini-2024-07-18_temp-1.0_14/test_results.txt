@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+F..FE                                                                    [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at teardown of test_all_entries_different_than_guess __________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'file_game.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:30: AssertionError: assert -50 == 50
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:34: AssertionError: assert 300 == 190
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:6: FileNotFoundError: [Errno 2] No such file or directory: 'file_game.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_single_match
+FAILED outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_multiple_match
+FAILED outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_all_entries_different_than_guess
+ERROR outputs/results1/query_0/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_all_entries_different_than_guess
+===================== 3 failed, 2 passed, 1 error in 0.13s =====================

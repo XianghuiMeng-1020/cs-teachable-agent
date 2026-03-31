@@ -1,0 +1,100 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+Welcome to the Intergalactic Space Station. Your mission is to develop a Python program, 'alien_communication', facilitating communication with alien species from different planets. Each planet has its own rules for computing the frequency of specific strange signals (strings) they communicate with. Your task is to create a function called `alien_signal_count` that processes a dataset of signal logs from different planets and computes how many times each signal appears.
+
+### Task Details:
+You're provided with a dictionary, `signal_logs`, where the keys are planet names (strings) and the values are lists of signals (strings) sent from the respective planets. Your function should return a nested dictionary of the same structure with the planet names as keys and a dictionary of signal frequencies as values.
+
+#### Function signature
+```python
+def alien_signal_count(signal_logs):
+    pass
+```
+
+#### Parameters
+- `signal_logs` (dict): A dictionary with planet names as keys and lists of signal strings as values.
+
+#### Returns
+- `dict`: A dictionary where each key is a planet name and its value is another dictionary with signal strings as keys and their corresponding frequency counts as values.
+
+#### Example
+```python
+signal_logs = {
+    'Mars': ['beep', 'boop', 'beep', 'beep', 'boop'],
+    'Venus': ['buzz', 'bop', 'buzz'],
+    'Jupiter': [],
+    'Saturn': ['zap', 'zip', 'zap', 'zip', 'zip']
+}
+
+expected_output = {
+    'Mars': {'beep': 3, 'boop': 2},
+    'Venus': {'buzz': 2, 'bop': 1},
+    'Jupiter': {},
+    'Saturn': {'zap': 2, 'zip': 3}
+}
+
+assert alien_signal_count(signal_logs) == expected_output
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import alien_signal_count
+
+signal_logs_1 = {
+    'Mars': ['beep', 'boop', 'beep', 'beep', 'boop'],
+    'Venus': ['buzz', 'bop', 'buzz'],
+    'Jupiter': [],
+    'Saturn': ['zap', 'zip', 'zap', 'zip', 'zip']
+}
+
+signal_logs_2 = {
+    'Earth': ['hello', 'hello'],
+    'Neptune': ['gurgle', 'glurp', 'gurgle'],
+    'Pluto': ['ping', 'pong']
+}
+
+signal_logs_3 = {
+    'AlphaCentauri': ['sing', 'song', 'ding', 'dong', 'sing', 'song'],
+}
+
+signal_logs_4 = {
+    'Tatooine': ['woosh', 'growl', 'woosh'],
+    'Hoth': []
+}
+
+@pytest.mark.parametrize("inputs, expected", [
+    (signal_logs_1, {
+        'Mars': {'beep': 3, 'boop': 2},
+        'Venus': {'buzz': 2, 'bop': 1},
+        'Jupiter': {},
+        'Saturn': {'zap': 2, 'zip': 3}
+    }),
+    (signal_logs_2, {
+        'Earth': {'hello': 2},
+        'Neptune': {'gurgle': 2, 'glurp': 1},
+        'Pluto': {'ping': 1, 'pong': 1}
+    }),
+    (signal_logs_3, {
+        'AlphaCentauri': {'sing': 2, 'song': 2, 'ding': 1, 'dong': 1}
+    }),
+    (signal_logs_4, {
+        'Tatooine': {'woosh': 2, 'growl': 1},
+        'Hoth': {}
+    }),
+    ({}, {}),
+])
+def test_alien_signal_count(inputs, expected):
+    assert alien_signal_count(inputs) == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

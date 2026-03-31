@@ -1,0 +1,4 @@
+{
+    "program": "def translate_astronyms(astronyms, dictionary):\n    translated = []\n    for astronym in astronyms:\n        if astronym in dictionary:\n            translated.append(dictionary[astronym])\n        else:\n            translated.append(\"Unknown\")\n    return translated\n\n# Example usage:\n# astronyms = ['xer', 'unknown', 'gicon', 'zuru']\n# dictionary = {'xer': 'Star', 'gicon': 'Nebula'}\n# print(translate_astronyms(astronyms, dictionary))",
+    "context_relevance": 0.0
+}

@@ -32,17 +32,17 @@ export function CodeEditor({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border border-slate-200 bg-slate-900",
+        "overflow-hidden rounded-lg border border-stone-200 bg-stone-900",
         className
       )}
     >
-      <div className="flex items-center justify-between border-b border-slate-700 bg-slate-800 px-3 py-1.5">
-        <span className="text-xs text-slate-400">{language}</span>
+      <div className="flex items-center justify-between border-b border-stone-700 bg-stone-800 px-3 py-1.5">
+        <span className="text-xs text-stone-400">{language}</span>
         {copyButton && (
           <button
             type="button"
             onClick={handleCopy}
-            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs text-slate-400 hover:bg-slate-700 hover:text-white"
+            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs text-stone-400 hover:bg-stone-700 hover:text-white"
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? "Copied" : "Copy"}

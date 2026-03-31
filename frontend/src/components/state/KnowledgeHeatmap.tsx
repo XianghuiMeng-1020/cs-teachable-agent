@@ -87,7 +87,7 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
     if (mastery >= 0.6) return "bg-brand-500";
     if (mastery >= 0.4) return "bg-amber-500";
     if (mastery >= 0.2) return "bg-orange-500";
-    return "bg-slate-300";
+    return "bg-stone-300";
   };
 
   // Group by topic
@@ -108,21 +108,21 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
     control_flow: "bg-amber-100 text-amber-800",
     functions: "bg-emerald-100 text-emerald-800",
     collections: "bg-rose-100 text-rose-800",
-    default: "bg-slate-100 text-slate-800",
+    default: "bg-stone-100 text-stone-800",
   };
 
   return (
     <Card padding="none" className={cn("overflow-hidden", className)}>
       {/* Header */}
-      <div className="p-4 border-b border-slate-200 bg-slate-50">
+      <div className="p-4 border-b border-stone-200 bg-stone-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-brand-100 rounded-lg">
               <Network className="w-5 h-5 text-brand-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">Knowledge Dependency Heatmap</h3>
-              <p className="text-sm text-slate-500">
+              <h3 className="font-semibold text-stone-900">Knowledge Dependency Heatmap</h3>
+              <p className="text-sm text-stone-500">
                 Visualize relationships and identify learning gaps
               </p>
             </div>
@@ -141,9 +141,9 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
 
         {/* Legend */}
         <div className="flex items-center gap-4 mt-3 text-xs">
-          <span className="text-slate-500">Mastery:</span>
+          <span className="text-stone-500">Mastery:</span>
           <div className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-slate-300 rounded" />
+            <div className="w-3 h-3 bg-stone-300 rounded" />
             <span>0-20%</span>
           </div>
           <div className="flex items-center gap-1">
@@ -214,9 +214,9 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
 
           {/* Connection visualization */}
           {selectedUnit && (
-            <div className="mt-6 p-4 bg-slate-50 rounded-xl">
+            <div className="mt-6 p-4 bg-stone-50 rounded-xl">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-medium text-slate-900 flex items-center gap-2">
+                <h4 className="font-medium text-stone-900 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-amber-500" />
                   Dependencies for {selectedUnit.name}
                 </h4>
@@ -227,7 +227,7 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
                       "px-3 py-1 rounded-full text-xs font-medium transition-colors",
                       viewMode === "dependencies"
                         ? "bg-brand-500 text-white"
-                        : "bg-slate-200 text-slate-600"
+                        : "bg-stone-200 text-stone-600"
                     )}
                   >
                     Prerequisites
@@ -238,7 +238,7 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
                       "px-3 py-1 rounded-full text-xs font-medium transition-colors",
                       viewMode === "dependents"
                         ? "bg-brand-500 text-white"
-                        : "bg-slate-200 text-slate-600"
+                        : "bg-stone-200 text-stone-600"
                     )}
                   >
                     Dependents
@@ -271,7 +271,7 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
                 })}
                 
                 {getRelatedUnits(selectedUnit).length === 0 && (
-                  <p className="text-sm text-slate-500">
+                  <p className="text-sm text-stone-500">
                     No {viewMode === "dependencies" ? "prerequisites" : "dependents"} found
                   </p>
                 )}
@@ -289,34 +289,34 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
 
         {/* Sidebar - Stats */}
         {expanded && (
-          <div className="border-l border-slate-200 p-4 bg-slate-50">
-            <h4 className="font-medium text-slate-900 mb-4 flex items-center gap-2">
+          <div className="border-l border-stone-200 p-4 bg-stone-50">
+            <h4 className="font-medium text-stone-900 mb-4 flex items-center gap-2">
               <Target className="w-4 h-4" />
               Network Statistics
             </h4>
 
             <div className="space-y-4">
               <div className="p-3 bg-white rounded-lg">
-                <p className="text-sm text-slate-500">Total Concepts</p>
-                <p className="text-2xl font-bold text-slate-900">{units.length}</p>
+                <p className="text-sm text-stone-500">Total Concepts</p>
+                <p className="text-2xl font-bold text-stone-900">{units.length}</p>
               </div>
 
               <div className="p-3 bg-white rounded-lg">
-                <p className="text-sm text-slate-500">Learned</p>
+                <p className="text-sm text-stone-500">Learned</p>
                 <p className="text-2xl font-bold text-emerald-600">
                   {units.filter(u => u.learned).length}
                 </p>
               </div>
 
               <div className="p-3 bg-white rounded-lg">
-                <p className="text-sm text-slate-500">Average Mastery</p>
+                <p className="text-sm text-stone-500">Average Mastery</p>
                 <p className="text-2xl font-bold text-brand-600">
                   {Math.round(units.reduce((a, b) => a + b.mastery_level, 0) / units.length * 100)}%
                 </p>
               </div>
 
               <div className="p-3 bg-white rounded-lg">
-                <p className="text-sm text-slate-500">Critical Path Length</p>
+                <p className="text-sm text-stone-500">Critical Path Length</p>
                 <p className="text-2xl font-bold text-amber-600">
                   {Math.max(...units.map(u => u.prerequisites.length)) + 1}
                 </p>
@@ -324,7 +324,7 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
 
               {/* Dependency counts */}
               <div>
-                <p className="text-sm font-medium text-slate-700 mb-2">Dependencies per Unit</p>
+                <p className="text-sm font-medium text-stone-700 mb-2">Dependencies per Unit</p>
                 <div className="space-y-1">
                   {[0, 1, 2, 3].map(count => {
                     const matching = units.filter(u => u.prerequisites.length === count).length;
@@ -332,14 +332,14 @@ export function KnowledgeHeatmap({ units, className }: KnowledgeHeatmapProps) {
                     
                     return (
                       <div key={count} className="flex items-center gap-2 text-sm">
-                        <div className="w-16 text-slate-500">{count} deps</div>
-                        <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="w-16 text-stone-500">{count} deps</div>
+                        <div className="flex-1 h-2 bg-stone-200 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-brand-500 rounded-full"
                             style={{ width: `${(matching / units.length) * 100}%` }}
                           />
                         </div>
-                        <div className="w-8 text-right text-slate-600">{matching}</div>
+                        <div className="w-8 text-right text-stone-600">{matching}</div>
                       </div>
                     );
                   })}

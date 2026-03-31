@@ -1,0 +1,4 @@
+{
+    "program": "def lottery_game(entries, winning_number):\n    results = {}\n    for participant, guess in entries.items():\n        if guess == winning_number:\n            results[participant] = 'Jackpot'\n        elif guess in (winning_number - 1, winning_number + 1):\n            results[participant] = 'Half-Pot'\n        elif guess in (winning_number - 2, winning_number + 2):\n            results[participant] = 'Quarter-Pot'\n        else:\n            results[participant] = 'No Winnings'\n    return results\n\n# Example usage\nentries = {'Alice': 5, 'Bob': 3, 'Charlie': 8}\nwinning_number = 4\nprint(lottery_game(entries, winning_number))",
+    "context_relevance": 1.0
+}

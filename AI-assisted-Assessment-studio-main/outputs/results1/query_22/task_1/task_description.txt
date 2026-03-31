@@ -1,0 +1,19 @@
+Create a function `process_scores(input_file, output_file)` which will read a series of board game scores from a file and output players with their average scores to another file. 
+
+Each line in the input file contains a player's name and their score in a particular game, separated by a comma. The `process_scores` function should read the contents of the input file, calculate the average score for each player, and write the averages to the output file. The output file should contain each player's name followed by their average score, sorted by name, each on a new line.
+
+For example, given an `input_file` containing
+```
+Alice,20
+Bob,15
+Alice,25
+Bob,20
+Charlie,10
+```
+The `output_file` should contain:
+```
+Alice,22.5
+Bob,17.5
+Charlie,10.0
+```
+Expect the input to be well-formed and do not handle any erroneous data.

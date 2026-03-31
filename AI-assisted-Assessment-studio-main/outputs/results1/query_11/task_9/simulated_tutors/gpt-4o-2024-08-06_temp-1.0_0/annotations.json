@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_total_cost(recipe_ingredients, ingredient_prices):\n    # Create a dictionary for ingredient prices\n    price_dict = {}\n    for item in ingredient_prices.split(','):\n        name, price = item.split(':')\n        price_dict[name] = float(price)\n    \n    total_cost = 0.0\n    \n    # Calculate total cost of ingredients\n    for recipe in recipe_ingredients:\n        for ingredient in recipe.split(','):\n            name, quantity = ingredient.split(':')\n            total_cost += price_dict[name] * int(quantity)\n    \n    return total_cost\n\n# Example usage\nrecipes = ['flour:2,sugar:1','milk:3']\nprices = 'flour:0.5,sugar:0.2,milk:1.0'\nprint(calculate_total_cost(recipes, prices))  # Should output 4.4",
+    "context_relevance": 1.0
+}

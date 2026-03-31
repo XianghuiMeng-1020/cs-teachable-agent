@@ -1,0 +1,4 @@
+{
+    "program": "def determine_weather(readings, threshold):\n    count_above_threshold = 0\n    total_readings = len(readings)\n    \n    for reading in readings:\n        if reading > threshold:\n            count_above_threshold += 1\n    \n    if count_above_threshold > total_readings / 2:\n        return \"Stormy\"\n    else:\n        return \"Calm\"",
+    "context_relevance": 1.0
+}

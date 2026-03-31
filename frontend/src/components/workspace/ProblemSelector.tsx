@@ -41,23 +41,23 @@ export function ProblemSelector({
     >
       <Select.Trigger
         className={cn(
-          "flex h-9 w-full min-w-0 items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700",
-          "hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:opacity-50",
+          "flex h-9 w-full min-w-0 items-center justify-between gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm text-stone-700",
+          "hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:opacity-50",
           className
         )}
       >
         <span className="truncate">{displayValue}</span>
-        <ChevronDown className="h-4 w-4 shrink-0 text-slate-400" />
+        <ChevronDown className="h-4 w-4 shrink-0 text-stone-400" />
       </Select.Trigger>
       <Select.Portal>
         <Select.Content
-          className="z-50 max-h-[280px] overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-card"
+          className="z-50 max-h-[280px] overflow-auto rounded-lg border border-stone-200 bg-white py-1 shadow-card"
           position="popper"
           sideOffset={4}
         >
           <Select.Item
             value={AUTO_ID}
-            className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-slate-100 data-[highlighted]:bg-slate-100"
+            className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-100 data-[highlighted]:bg-stone-100"
           >
             Auto-select
           </Select.Item>
@@ -65,9 +65,9 @@ export function ProblemSelector({
             <Select.Item
               key={p.problem_id}
               value={p.problem_id}
-              className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-slate-100 data-[highlighted]:bg-slate-100"
+              className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-100 data-[highlighted]:bg-stone-100"
             >
-              <span className="font-mono text-xs text-slate-500">{p.problem_id}</span>
+              <span className="font-mono text-xs text-stone-500">{p.problem_id}</span>
               <span className="ml-2">{p.problem_statement.slice(0, 40)}...</span>
             </Select.Item>
           ))}

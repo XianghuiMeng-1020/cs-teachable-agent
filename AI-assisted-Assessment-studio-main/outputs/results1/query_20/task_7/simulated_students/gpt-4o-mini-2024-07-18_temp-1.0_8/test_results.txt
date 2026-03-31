@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py . [ 10%]
+F.F...F.F                                                                [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: assert (8, 980) == (8, 1070)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: assert (3, 50) == (2, 120)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: assert (3, 120) == (3, 100)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: assert (6, -30) == (6, 0)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_move_player_on_board[5-3-1000-0 20 -50 30 40 10 0 -20 70 -30-expected1]
+FAILED outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_move_player_on_board[3-10-100-0 20 -50 30 40 10 0 -20 70 -30-expected3]
+FAILED outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_move_player_on_board[3-6-100-10 -10 20 -20 30 -30-expected7]
+FAILED outputs/results1/query_20/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_move_player_on_board[2-4-0-10 -10 20 -20 30 -30-expected9]
+========================= 4 failed, 6 passed in 0.04s ==========================

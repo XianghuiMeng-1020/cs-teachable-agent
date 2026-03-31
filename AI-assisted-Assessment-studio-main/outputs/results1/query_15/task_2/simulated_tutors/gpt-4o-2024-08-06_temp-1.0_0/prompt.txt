@@ -1,0 +1,53 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+In a distant future, humans have settled on various planets across the galaxy. Each planet has a specific algorithm to determine a planet's daily weather status based on a series of atmospheric readings. Your task is to implement the function `determine_weather(readings, threshold)`.
+
+The function takes two arguments:
+- `readings`: A list of integers representing atmospheric readings from low orbit scanners for a specific planet on a given day.
+- `threshold`: An integer value that determines the cutoff between 'Calm' and 'Stormy' weather.
+
+The function should return a string representing the day's weather:
+- If more than 50% of the reading values are above the `threshold`, the weather is considered 'Stormy'.
+- If 50% or less of the readings exceed the `threshold`, the weather is 'Calm'.
+
+Your solution will be tested against several sets of readings and thresholds to ensure correctness.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import determine_weather
+
+def test_determine_weather_sunny_day():
+    readings = [10, 20, 15, 18, 9, 12, 25, 11]
+    threshold = 15
+    assert determine_weather(readings, threshold) == 'Calm'
+
+def test_determine_weather_rainy_day():
+    readings = [30, 31, 25, 40, 35, 30, 29, 21]
+    threshold = 25
+    assert determine_weather(readings, threshold) == 'Stormy'
+
+
+def test_determine_weather_equal_threshold():
+    readings = [5, 5, 5, 10, 14, 15, 15, 15]
+    threshold = 14
+    assert determine_weather(readings, threshold) == 'Calm'
+
+
+def test_determine_weather_barely_stormy():
+    readings = [15, 20, 25, 30, 10, 5, 2, 1]
+    threshold = 5
+    assert determine_weather(readings, threshold) == 'Stormy'
+
+
+def test_determine_weather_no_storms():
+    readings = [1, 1, 1, 1, 1, 1, 1, 1]
+    threshold = 2
+    assert determine_weather(readings, threshold) == 'Calm'
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

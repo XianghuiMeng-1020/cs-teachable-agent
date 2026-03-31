@@ -1,0 +1,46 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Loops', 'Variables', 'Exception Handling']:
+
+### Beginning of task description
+As a chef at a bustling restaurant, you often face the challenge of estimating cooking times for various dishes. To automate this process, write a Python function `estimate_cooking_time(dish_list)` that calculates the total cooking time for a list of dishes. Each dish is represented by a string, and the cooking time for each dish in minutes is determined by the length of its name multiplied by 5.
+
+- Your task is to iterate over the `dish_list`, calculate the individual cooking time for each dish, and sum these times to get the total cooking time.
+- If an item in the list is not a string, raise a `ValueError` with the message "Invalid item in dish list"
+- The function should return the total cooking time in minutes.
+
+The `dish_list` will be tested using the following conditions: 
+1. The list may contain the names of various dishes.
+2. Dish names will be of varying lengths.
+3. The list may contain non-string elements which should raise a `ValueError`.
+4. An empty dish list should return a cooking time of 0.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import estimate_cooking_time
+
+
+def test_estimate_cooking_time_valid_dishes():
+    assert estimate_cooking_time(['Salad', 'Soup']) == 55
+
+
+def test_estimate_cooking_time_single_dish():
+    assert estimate_cooking_time(['Ratatouille']) == 55
+
+
+def test_estimate_cooking_time_mixed_strings_and_non_strings():
+    with pytest.raises(ValueError, match='Invalid item in dish list'):
+        estimate_cooking_time(['Pasta', 123, 'Steak'])
+
+
+def test_estimate_cooking_time_all_valid():
+    assert estimate_cooking_time(['Cake', 'Pie', 'Pudding', 'Brownie']) == 115
+
+
+def test_estimate_cooking_time_empty_list():
+    assert estimate_cooking_time([]) == 0
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

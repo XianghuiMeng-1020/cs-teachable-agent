@@ -1,0 +1,12 @@
+F.FFF                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/test_suite_sol.py:25: AssertionError: assert 'Pasta\nTomat...Tomato\n2\n\n' == 'Pasta\nTomat...\nTomato\n2\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/test_suite_sol.py:41: AssertionError: assert '\n\n' == ''
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/test_suite_sol.py:51: AssertionError: assert 'Bread\nFlour...nWater\n1\n\n' == 'Bread\nFlour\n2\nWater\n1\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_4/test_suite_sol.py:61: AssertionError: assert 'Pie\nApple\n...nSugar\n2\n\n' == 'Pie\nApple\n...4\nSugar\n2\n'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_4/test_suite_sol.py::test_basic_sorting
+FAILED outputs/results1/query_12/task_4/test_suite_sol.py::test_empty_file - ...
+FAILED outputs/results1/query_12/task_4/test_suite_sol.py::test_single_recipe
+FAILED outputs/results1/query_12/task_4/test_suite_sol.py::test_multiple_recipes_same_name
+4 failed, 1 passed in 0.03s

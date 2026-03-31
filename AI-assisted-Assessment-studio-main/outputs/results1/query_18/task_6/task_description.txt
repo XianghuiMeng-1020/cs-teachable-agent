@@ -1,0 +1,21 @@
+In the distant future aboard the starship 'Celestial Voyager', astrological data is constantly being collected and stored in data files. As the newly appointed software engineer, your first task is to analyze and compute the gravitational force between planets in a given dataset.
+
+The task is to write a function `calculate_gravitational_force(input_filepath, output_filepath)` that reads from a file named `input_filepath`, which contains information about several planets. Each line in the file describes a pair of planets and their properties in the following format:
+
+    `mass1,distance,mass2`
+
+Where:
+- `mass1` and `mass2` are the masses of two planets in kilograms (floats).
+- `distance` is the distance between the two planets in meters (float).
+
+Your function must compute the gravitational force between each pair of planets using the formula:
+
+    F = (G * mass1 * mass2) / (distance ** 2)
+
+Where:
+- `F` is the gravitational force in Newtons (float).
+- `G` is the gravity constant, which is approximately 6.67430 * 10^-11 N*(m^2)/kg^2.
+
+The function should write the computed gravitational forces to a file named `output_filepath`. Each line in the output file should correspond to the gravitational force of the planetary pair from the input file, formatted to two decimal places.
+
+Assume the input file is correctly formatted, and the file paths are valid. The function should handle reading from and writing to files independently.

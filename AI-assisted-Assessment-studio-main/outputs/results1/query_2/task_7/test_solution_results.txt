@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+______ ERROR collecting outputs/results1/query_2/task_7/test_suite_sol.py ______
+ImportError while importing test module '/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_7/test_suite_sol.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+outputs/results1/query_2/task_7/test_suite_sol.py:4: in <module>
+    from winner_selection import select_winner
+E   ModuleNotFoundError: No module named 'winner_selection'
+=========================== short test summary info ============================
+ERROR outputs/results1/query_2/task_7/test_suite_sol.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.06s

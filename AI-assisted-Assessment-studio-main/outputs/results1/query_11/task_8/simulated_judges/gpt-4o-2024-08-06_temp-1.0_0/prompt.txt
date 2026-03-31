@@ -1,0 +1,54 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+Create a Python function `suggest_recipe(budget, recipes)` that helps a user in selecting an optimal recipe based on their budget. The `budget` is an integer representing the amount of money the user has. The `recipes` is a list of strings, where each string is formatted as `'<recipe_name>:<ingredient_cost_1>,<ingredient_cost_2>,...,<ingredient_cost_n>'`. Each recipe will contain a non-zero number of ingredients with their respective costs, and costs are integers. The function should return the name of the recipe that the user can prepare with the closest cost to the budget without exceeding it. If no recipe can be made within the budget, return 'No recipe available'.
+
+Example format for `recipes` list:
+- `Doughnut:4,5,3` (Doughnut recipe requires ingredients costing 4, 5, and 3)
+- `Salad:2,1,3` (Salad recipe requires ingredients costing 2, 1, and 3)
+
+You need to consider all costs as non-negative integers. If there is a tie in cost, return the recipe that appears first in the list. The input will always be formatted correctly, so no need for input validation.
+
+Function signature: `def suggest_recipe(budget, recipes):`
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import suggest_recipe
+
+
+def test_exact_budget():
+    budget = 10
+    recipes = ["Pasta:5,5", "Salad:3,2,1,4", "Soup:6,3", "Sandwich:5,5"]
+    assert suggest_recipe(budget, recipes) == "Pasta"
+
+def test_no_recipe_within_budget():
+    budget = 3
+    recipes = ["Pizza:5,8", "Burger:6,9"]
+    assert suggest_recipe(budget, recipes) == "No recipe available"
+
+def test_one_recipe_within_budget():
+    budget = 18
+    recipes = ["Cake:5,9,6", "Pie:8,6,5", "Cookies:12,6"]
+    assert suggest_recipe(budget, recipes) == "Pie"
+
+def test_multiple_recipes_within_budget():
+    budget = 15
+    recipes = ["Ice Cream:7,7", "Brownies:5,5,5", "Pudding:6,4,2", "Fruit Salad:4,4,3,2"]
+    assert suggest_recipe(budget, recipes) == "Brownies"
+
+def test_tie_on_costs():
+    budget = 9
+    recipes = ["Chips:4,5", "Dip:3,3,3", "Biscotti:9"]
+    assert suggest_recipe(budget, recipes) == "Chips"
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 20%]
+....                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:9: AssertionError: assert 47 == 39
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_decode_message_case_1
+========================= 1 failed, 4 passed in 0.12s ==========================

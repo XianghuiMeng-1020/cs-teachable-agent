@@ -1,0 +1,27 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with simulating part of a board game involving players and their scores. Each player can accumulate points based on their game performance, but only their highest score will be recorded.
+
+Create a Python class called `PlayerScore` that maintains each player's highest score. The class should have the following specification:
+
+1. **Attributes**:
+   - `name`: A string, indicating the player's name.
+   - `highest_score`: An integer that starts at 0, indicating the highest score the player has achieved.
+
+2. **Methods**:
+   - `add_score(score)`: Accepts an integer `score`. If this score is higher than the current `highest_score`, update `highest_score` with this new score.
+   - `get_score()`: Returns the current `highest_score` for the player.
+
+3. **String Representation**:
+   - Implement the `__str__` method, which returns a string containing the player's name and highest score in the format `"Player: <name>, Highest Score: <highest_score>"`.
+
+Write a function `parse_scores(data)` that accepts a string `data` with scores in the format `"Name1:5,Name2:3,Name1:10,Name2:6"`. Use this function to create `PlayerScore` objects for each player and update their highest scores according to the scores in the input string.
+
+Returns a list of `PlayerScore` objects representing each player and their highest score.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

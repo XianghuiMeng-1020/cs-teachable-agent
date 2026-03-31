@@ -1,0 +1,4 @@
+{
+    "program": "import os\n\ndef categorize_recipes(input_folder, output_file):\n    with open(output_file, 'w') as output:\n        for filename in os.listdir(input_folder):\n            if filename.endswith(\".txt\"):\n                file_path = os.path.join(input_folder, filename)\n                with open(file_path, 'r') as file:\n                    ingredients = file.readlines()\n                    count = len(ingredients)\n                    if count > 7:\n                        category = 'complex'\n                    else:\n                        category = 'simple'\n                    output.write(f\"{filename}: {category}\\n\")",
+    "context_relevance": 1.0
+}

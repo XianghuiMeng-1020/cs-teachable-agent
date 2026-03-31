@@ -1,0 +1,4 @@
+{
+    "program": "def ingredient_substitutes(recipe, substitutes):\n    # Create a new dictionary to store the result\n    substituted_recipe = {}\n    \n    # Iterate over each ingredient in the recipe\n    for ingredient, quantity in recipe.items():\n        # Check if there is a substitute for this ingredient\n        if ingredient in substitutes:\n            # If there is a substitute, use it\n            substitute_ingredient = substitutes[ingredient]\n        else:\n            # If there is no substitute, keep the original ingredient\n            substitute_ingredient = ingredient\n        \n        # Add the ingredient and its quantity to the substituted recipe\n        substituted_recipe[substitute_ingredient] = quantity\n        \n    return substituted_recipe",
+    "context_relevance": 1.0
+}

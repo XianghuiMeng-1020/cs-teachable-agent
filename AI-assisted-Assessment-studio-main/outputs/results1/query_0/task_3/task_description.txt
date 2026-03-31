@@ -1,0 +1,30 @@
+### Task: Game of Chance Log Analyzer
+
+You are tasked with implementing a function `analyze_game_results(input_file)` that reads a text file containing the results of a game of chance. The file is structured such that each line represents a game round with the following format: `PlayerName,Outcome`. The `Outcome` is either "win" or "lose".
+
+Your function should:
+1. Calculate and return a string summarizing the game results in the format: `"PlayerName: Wins-Losses"` for each player who has played at least one round. The output should list each player's summary on a new line.
+2. If a player does not have any wins, the result should be represented as `"0"` and likewise `"0"` for losses.
+3. The function should ensure that the players’ names are sorted alphabetically in the output.
+
+### Example:
+Given a file 'game_results.txt' with the content:
+```
+Alice,win
+Bob,lose
+Alice,lose
+Bob,win
+Bob,lose
+Alice,win
+```
+
+Calling `analyze_game_results('game_results.txt')` should return the following string:
+```
+Alice: 2-1
+Bob: 1-2
+```
+
+### Constraints:
+- Each player's games are recorded on separate lines in the file.
+- Player names are case-sensitive and can contain spaces.
+- The file will have at least one line of valid data.

@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:19: AssertionError: assert ['', '', ''] == ['3+2_', 'in_...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:26: AssertionError: assert ['Err', 'Err', 'Err'] == ['5-6+', 'in'...', 'Err', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:33: AssertionError: assert ['37', 'Err', 'Err'] == ['2+3_', '5',..., '6/3_', ...]
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:40: AssertionError: assert ['Err', '', ''] == ['1000_', 'Err']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:45: TypeError: SciFiHaiku.evaluate_expressions() missing 3 required positional arguments: 'line1', 'line2', and 'line3'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_sci_fi_haiku_import_input
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_sci_fi_haiku_invalid_expression
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_sci_fi_haiku_no_expression_errors
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_sci_fi_haiku_single_line
+FAILED outputs/results1/query_16/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_sci_fi_haiku_expression_only
+============================== 5 failed in 0.06s ===============================

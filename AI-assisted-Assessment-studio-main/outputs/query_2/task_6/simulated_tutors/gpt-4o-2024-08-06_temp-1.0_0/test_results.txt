@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:38: AssertionError: assert 'onions\nspaghetti\nwater\n' == 'Spaghetti\nOnions\nWater\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:38: AssertionError: assert 'basil\ncucumber\ngarlic\n' == 'Basil\nGarlic\nCucumber\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:38: AssertionError: assert 'bread\ncheese\nham\n' == 'Bread\nHam\nCheese\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:38: AssertionError: assert '\n' == ''
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:38: AssertionError: assert 'basil\n' == 'Basil\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_generate_shopping_list[test_full_missing_ingredients-Pasta\nSpaghetti\nOnions\n\nSoup\nWater\n-Salt\nOil\n-Spaghetti\nOnions\nWater\n]
+FAILED outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_generate_shopping_list[test_some_ingredients_missing-Pasta\nTomato\nBasil\nGarlic\n\nSalad\nLettuce\nTomato\nCucumber\n-Tomato\nLettuce\nSalt\nOil\n-Basil\nGarlic\nCucumber\n]
+FAILED outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_generate_shopping_list[test_no_file_overlap-Sandwich\nBread\nHam\nCheese\n-Pepper\nSalt\n-Bread\nHam\nCheese\n]
+FAILED outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_generate_shopping_list[test_no_missing_ingredients-Soup\nWater\nSalt\n\nPasta\nTomato\nGarlic\n-Water\nSalt\nTomato\nGarlic\n-]
+FAILED outputs/query_2/task_6/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_generate_shopping_list[test_case_insensitive-Pizza\nTomato\nMozzarella\nBasil\n-tomato\nmozzarella\n-Basil\n]
+============================== 5 failed in 0.08s ===============================

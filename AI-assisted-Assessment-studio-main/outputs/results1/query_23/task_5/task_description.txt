@@ -1,0 +1,8 @@
+Create a Python class named `ScoreCard` for a board game that tracks the points of several players over multiple rounds. Your `ScoreCard` class should include the following methods:
+
+- `__init__(self, players)`: Initializes a score card where `players` is a list of player names. Each player starts with 0 points.
+- `add_score(self, player, points)`: Adds the specified number of `points` to the `player`'s total score. If the player does not exist in the score card, this method should not modify any scores and do nothing.
+- `get_score(self, player)`: Returns the score of the specified `player`. If the player does not exist, return `None`.
+- `get_winner(self)`: Returns the name of the player with the highest score. In case of a tie, return the player who achieved the score first.
+
+The `ScoreCard` class will be needed to manage scoring effectively in a complex board game and should be robust with handling players dynamically.

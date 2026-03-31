@@ -52,7 +52,7 @@ interface LearningBehaviorDashboardProps {
   userId?: number;
 }
 
-const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"];
+const COLORS = ["#0D9488", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"];
 
 // Mock data generator for demonstration
 const generateMockData = () => {
@@ -128,11 +128,11 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
             <Activity className="w-6 h-6 text-brand-600" />
             Learning Behavior Analytics
           </h2>
-          <p className="text-slate-500 mt-1">
+          <p className="text-stone-500 mt-1">
             Deep insights into your learning patterns and progress
           </p>
         </div>
@@ -141,7 +141,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value as any)}
-            className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
+            className="px-3 py-2 border border-stone-200 rounded-lg text-sm"
           >
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>
@@ -159,8 +159,8 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
         <Card padding="md" className="bg-gradient-to-br from-brand-50 to-brand-100">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-slate-600">Total Learning Time</p>
-              <p className="text-2xl font-bold text-slate-900">
+              <p className="text-sm text-stone-600">Total Learning Time</p>
+              <p className="text-2xl font-bold text-stone-900">
                 {Math.floor(summary.totalLearningTime / 60)}h {summary.totalLearningTime % 60}m
               </p>
             </div>
@@ -171,15 +171,15 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="flex items-center gap-1 mt-2 text-sm">
             <TrendingUp className="w-4 h-4 text-emerald-500" />
             <span className="text-emerald-600">+15%</span>
-            <span className="text-slate-500">vs last period</span>
+            <span className="text-stone-500">vs last period</span>
           </div>
         </Card>
         
         <Card padding="md" className="bg-gradient-to-br from-emerald-50 to-emerald-100">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-slate-600">Concepts Mastered</p>
-              <p className="text-2xl font-bold text-slate-900">{summary.totalConcepts}</p>
+              <p className="text-sm text-stone-600">Concepts Mastered</p>
+              <p className="text-2xl font-bold text-stone-900">{summary.totalConcepts}</p>
             </div>
             <div className="p-2 bg-white rounded-lg">
               <BookOpen className="w-5 h-5 text-emerald-600" />
@@ -188,15 +188,15 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="flex items-center gap-1 mt-2 text-sm">
             <TrendingUp className="w-4 h-4 text-emerald-500" />
             <span className="text-emerald-600">+8</span>
-            <span className="text-slate-500">new this week</span>
+            <span className="text-stone-500">new this week</span>
           </div>
         </Card>
         
         <Card padding="md" className="bg-gradient-to-br from-amber-50 to-amber-100">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-slate-600">Average Mastery</p>
-              <p className="text-2xl font-bold text-slate-900">{summary.avgMastery.toFixed(1)}%</p>
+              <p className="text-sm text-stone-600">Average Mastery</p>
+              <p className="text-2xl font-bold text-stone-900">{summary.avgMastery.toFixed(1)}%</p>
             </div>
             <div className="p-2 bg-white rounded-lg">
               <Target className="w-5 h-5 text-amber-600" />
@@ -205,15 +205,15 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="flex items-center gap-1 mt-2 text-sm">
             <TrendingUp className="w-4 h-4 text-emerald-500" />
             <span className="text-emerald-600">+5.2%</span>
-            <span className="text-slate-500">improvement</span>
+            <span className="text-stone-500">improvement</span>
           </div>
         </Card>
         
         <Card padding="md" className="bg-gradient-to-br from-purple-50 to-purple-100">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-slate-600">Current Streak</p>
-              <p className="text-2xl font-bold text-slate-900">{summary.streakDays} days</p>
+              <p className="text-sm text-stone-600">Current Streak</p>
+              <p className="text-2xl font-bold text-stone-900">{summary.streakDays} days</p>
             </div>
             <div className="p-2 bg-white rounded-lg">
               <Zap className="w-5 h-5 text-purple-600" />
@@ -222,7 +222,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="flex items-center gap-1 mt-2 text-sm">
             <CheckCircle className="w-4 h-4 text-purple-500" />
             <span className="text-purple-600">{Math.round(summary.consistency * 100)}%</span>
-            <span className="text-slate-500">consistency</span>
+            <span className="text-stone-500">consistency</span>
           </div>
         </Card>
       </div>
@@ -242,17 +242,17 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <Card padding="lg">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-lg font-semibold text-slate-900">Learning Progress Over Time</h3>
-                <p className="text-sm text-slate-500">Concepts learned and mastery progression</p>
+                <h3 className="text-lg font-semibold text-stone-900">Learning Progress Over Time</h3>
+                <p className="text-sm text-stone-500">Concepts learned and mastery progression</p>
               </div>
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-brand-500 rounded-full" />
-                  <span className="text-slate-600">Mastery Score</span>
+                  <span className="text-stone-600">Mastery Score</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-emerald-500 rounded-full" />
-                  <span className="text-slate-600">Concepts</span>
+                  <span className="text-stone-600">Concepts</span>
                 </div>
               </div>
             </div>
@@ -272,8 +272,8 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                     yAxisId="left"
                     type="monotone"
                     dataKey="masteryScore"
-                    stroke="#6366f1"
-                    fill="#6366f1"
+                    stroke="#0D9488"
+                    fill="#0D9488"
                     fillOpacity={0.2}
                     strokeWidth={2}
                     name="Mastery Score"
@@ -294,11 +294,11 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Engagement Trend */}
             <Card padding="lg">
-              <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-stone-900 mb-2 flex items-center gap-2">
                 <Activity className="w-5 h-5 text-brand-500" />
                 Engagement Trend
               </h3>
-              <p className="text-sm text-slate-500 mb-4">Daily engagement levels</p>
+              <p className="text-sm text-stone-500 mb-4">Daily engagement levels</p>
               
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -326,11 +326,11 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
             
             {/* Learning Time Distribution */}
             <Card padding="lg">
-              <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-stone-900 mb-2 flex items-center gap-2">
                 <Clock className="w-5 h-5 text-brand-500" />
                 Peak Learning Hours
               </h3>
-              <p className="text-sm text-slate-500 mb-4">When you're most active</p>
+              <p className="text-sm text-stone-500 mb-4">When you're most active</p>
               
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -338,7 +338,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                     <XAxis type="number" tick={{ fontSize: 12 }} />
                     <YAxis dataKey="hour" type="category" tick={{ fontSize: 12 }} width={70} />
                     <Tooltip />
-                    <Bar dataKey="sessions" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="sessions" fill="#0D9488" radius={[0, 4, 4, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -351,7 +351,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Concept Distribution */}
             <Card padding="lg">
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Concept Distribution</h3>
+              <h3 className="text-lg font-semibold text-stone-900 mb-4">Concept Distribution</h3>
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -380,9 +380,9 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                         className="w-3 h-3 rounded-full"
                         style={{ backgroundColor: COLORS[index % COLORS.length] }}
                       />
-                      <span className="text-slate-700">{concept.name}</span>
+                      <span className="text-stone-700">{concept.name}</span>
                     </div>
-                    <span className="text-slate-500">{concept.value}%</span>
+                    <span className="text-stone-500">{concept.value}%</span>
                   </div>
                 ))}
               </div>
@@ -390,7 +390,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
             
             {/* Concept Mastery Levels */}
             <Card padding="lg">
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Mastery by Concept</h3>
+              <h3 className="text-lg font-semibold text-stone-900 mb-4">Mastery by Concept</h3>
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={learningPatterns}>
@@ -400,9 +400,9 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                     <Radar
                       name="Your Performance"
                       dataKey="A"
-                      stroke="#6366f1"
+                      stroke="#0D9488"
                       strokeWidth={2}
-                      fill="#6366f1"
+                      fill="#0D9488"
                       fillOpacity={0.3}
                     />
                   </RadarChart>
@@ -415,46 +415,46 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
         {/* Patterns Tab */}
         <TabsContent value="patterns" className="space-y-6">
           <Card padding="lg">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">Learning Pattern Analysis</h3>
+            <h3 className="text-lg font-semibold text-stone-900 mb-4">Learning Pattern Analysis</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Pattern 1: Speed vs Accuracy */}
-              <div className="p-4 bg-slate-50 rounded-xl">
+              <div className="p-4 bg-stone-50 rounded-xl">
                 <div className="flex items-center gap-2 mb-3">
                   <Brain className="w-5 h-5 text-brand-500" />
-                  <span className="font-medium text-slate-900">Speed vs Accuracy</span>
+                  <span className="font-medium text-stone-900">Speed vs Accuracy</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-3">
+                <p className="text-sm text-stone-600 mb-3">
                   You tend to trade speed for accuracy. Consider slowing down on complex problems.
                 </p>
                 <div className="text-2xl font-bold text-brand-600">72%</div>
-                <div className="text-xs text-slate-500">accuracy at current speed</div>
+                <div className="text-xs text-stone-500">accuracy at current speed</div>
               </div>
               
               {/* Pattern 2: Learning Style */}
-              <div className="p-4 bg-slate-50 rounded-xl">
+              <div className="p-4 bg-stone-50 rounded-xl">
                 <div className="flex items-center gap-2 mb-3">
                   <BookOpen className="w-5 h-5 text-emerald-500" />
-                  <span className="font-medium text-slate-900">Learning Style</span>
+                  <span className="font-medium text-stone-900">Learning Style</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-3">
+                <p className="text-sm text-stone-600 mb-3">
                   You learn best through examples and practice rather than reading theory.
                 </p>
                 <div className="text-2xl font-bold text-emerald-600">Practical</div>
-                <div className="text-xs text-slate-500">preferred style</div>
+                <div className="text-xs text-stone-500">preferred style</div>
               </div>
               
               {/* Pattern 3: Peak Performance */}
-              <div className="p-4 bg-slate-50 rounded-xl">
+              <div className="p-4 bg-stone-50 rounded-xl">
                 <div className="flex items-center gap-2 mb-3">
                   <Zap className="w-5 h-5 text-amber-500" />
-                  <span className="font-medium text-slate-900">Peak Performance</span>
+                  <span className="font-medium text-stone-900">Peak Performance</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-3">
+                <p className="text-sm text-stone-600 mb-3">
                   Your best work happens between 3-6 PM. Schedule challenging tasks then.
                 </p>
                 <div className="text-2xl font-bold text-amber-600">3-6 PM</div>
-                <div className="text-xs text-slate-500">optimal time</div>
+                <div className="text-xs text-stone-500">optimal time</div>
               </div>
             </div>
           </Card>
@@ -467,20 +467,20 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
             <Card padding="lg" className="border-l-4 border-l-emerald-500">
               <div className="flex items-center gap-2 mb-4">
                 <CheckCircle className="w-5 h-5 text-emerald-500" />
-                <h3 className="text-lg font-semibold text-slate-900">Your Strengths</h3>
+                <h3 className="text-lg font-semibold text-stone-900">Your Strengths</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-1">✓</span>
-                  <span className="text-slate-700">Consistent daily engagement - you've maintained a strong study habit</span>
+                  <span className="text-stone-700">Consistent daily engagement - you've maintained a strong study habit</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-1">✓</span>
-                  <span className="text-slate-700">Quick learner on variable concepts - 85% mastery achieved</span>
+                  <span className="text-stone-700">Quick learner on variable concepts - 85% mastery achieved</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-1">✓</span>
-                  <span className="text-slate-700">Regular use of Teaching Helper for quality improvement</span>
+                  <span className="text-stone-700">Regular use of Teaching Helper for quality improvement</span>
                 </li>
               </ul>
             </Card>
@@ -489,20 +489,20 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
             <Card padding="lg" className="border-l-4 border-l-amber-500">
               <div className="flex items-center gap-2 mb-4">
                 <AlertCircle className="w-5 h-5 text-amber-500" />
-                <h3 className="text-lg font-semibold text-slate-900">Focus Areas</h3>
+                <h3 className="text-lg font-semibold text-stone-900">Focus Areas</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-amber-500 mt-1">!</span>
-                  <span className="text-slate-700">Functions and scope concepts need more practice (45% mastery)</span>
+                  <span className="text-stone-700">Functions and scope concepts need more practice (45% mastery)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-500 mt-1">!</span>
-                  <span className="text-slate-700">Consider reviewing loop concepts before moving to advanced topics</span>
+                  <span className="text-stone-700">Consider reviewing loop concepts before moving to advanced topics</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-500 mt-1">!</span>
-                  <span className="text-slate-700">Weekend study sessions could improve consistency</span>
+                  <span className="text-stone-700">Weekend study sessions could improve consistency</span>
                 </li>
               </ul>
             </Card>
@@ -510,7 +510,7 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
           
           {/* Personalized Recommendations */}
           <Card padding="lg" className="bg-gradient-to-r from-brand-50 to-purple-50">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-stone-900 mb-4 flex items-center gap-2">
               <Target className="w-5 h-5 text-brand-600" />
               Personalized Recommendations
             </h3>
@@ -520,8 +520,8 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                   <span className="text-brand-600 font-bold">1</span>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Focus on Functions</p>
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="font-medium text-stone-900">Focus on Functions</p>
+                  <p className="text-sm text-stone-600 mt-1">
                     Based on your data, function concepts are your current bottleneck. 
                     We recommend completing the "Function Basics" learning path this week.
                   </p>
@@ -533,8 +533,8 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                   <span className="text-brand-600 font-bold">2</span>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Optimal Study Schedule</p>
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="font-medium text-stone-900">Optimal Study Schedule</p>
+                  <p className="text-sm text-stone-600 mt-1">
                     Your peak performance is at 3-6 PM. Try to schedule challenging 
                     concepts during this window for better retention.
                   </p>
@@ -546,8 +546,8 @@ export function LearningBehaviorDashboard({ taId, userId }: LearningBehaviorDash
                   <span className="text-brand-600 font-bold">3</span>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">Spaced Repetition</p>
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="font-medium text-stone-900">Spaced Repetition</p>
+                  <p className="text-sm text-stone-600 mt-1">
                     You have 5 concepts due for review. Reviewing them now will 
                     strengthen your long-term retention.
                   </p>

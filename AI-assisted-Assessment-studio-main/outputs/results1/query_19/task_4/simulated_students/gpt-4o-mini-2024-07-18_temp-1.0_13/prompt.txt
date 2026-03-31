@@ -1,0 +1,20 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+**Task Description:**
+
+The inhabitants of the distant planet Zog have a peculiar way of encoding their historical records. They use a special file format where every line contains a record about an astronomical event. Each record consists of a date and a description, separated by a comma. Unfortunately, sometimes the records may contain errors such as missing dates or separators. Your task is to write a Python program that reads these records from a text file, validates them, and writes valid records to a new file.
+
+Create a function `process_records(input_file, output_file)` that takes the name of the input file and the output file as parameters. The input file will be a text file containing several lines, each representing a record. Your function should open the input file, read each line one by one, and check if it is a valid record. A record is considered valid if it:
+1. Contains exactly one comma.
+2. The text before the comma represents a valid date in the format 'YYYY-MM-DD'.
+
+If a line is a valid record, it should be written to the output file. If a line is invalid, it should be skipped. Handle any exceptions that may arise during file operations gracefully. Ensure that the program does not crash and any IOError is handled.
+
+The function should return the number of valid records written to the output file.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

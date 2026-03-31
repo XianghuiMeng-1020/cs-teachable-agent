@@ -1,0 +1,23 @@
+In the world of mythology, various gods are associated with different domains or aspects of life. Your task is to create a function named `identify_god(domain)` that accepts a string `domain` as an input and returns the name of the corresponding god from a predefined dictionary.
+
+The dictionary of gods maps domains to the names of gods as follows:
+- 'war': 'Ares'
+- 'wisdom': 'Athena'
+- 'love': 'Aphrodite'
+- 'underworld': 'Hades'
+- 'thunder': 'Zeus'
+
+The function should return 'Unknown' if the domain is not listed in the dictionary of gods.
+
+### Instructions
+- Implement the function `identify_god(domain)`, which will return the corresponding god's name.
+- Do not use any other data structures except a dictionary for this task.
+- The input will always be a lower-case string representing a valid potential domain.
+- Maintain the exact capitalization of the god names as provided in the dictionary.
+
+### Examples
+- `identify_god('war')` should return `'Ares'`
+- `identify_god('thunder')` should return `'Zeus'`
+- `identify_god('water')` should return `'Unknown'`
+
+The provided test suite will test various cases including typical, boundary, and edge cases.

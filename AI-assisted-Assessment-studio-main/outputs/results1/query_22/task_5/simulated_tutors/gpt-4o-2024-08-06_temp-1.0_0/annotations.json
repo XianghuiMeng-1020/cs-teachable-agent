@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_winner_board_game(file_path):\n    with open(file_path, 'r') as file:\n        players = []\n        for line in file:\n            # Parse each line\n            player_name, score, rounds = line.strip().split(':')\n            score = int(score)\n            rounds = int(rounds)\n            \n            # Calculate average score per round\n            average_score_per_round = score / rounds\n            players.append((player_name, average_score_per_round, rounds))\n\n    # Sort players first by highest average score, then by fewest rounds\n    players.sort(key=lambda x: (-x[1], x[2]))\n\n    # Return the player with the highest score\n    return players[0][0]",
+    "context_relevance": 1.0
+}

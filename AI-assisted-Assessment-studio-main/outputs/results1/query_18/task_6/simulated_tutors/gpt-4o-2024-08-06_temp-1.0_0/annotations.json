@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_gravitational_force(input_filepath, output_filepath):\n    G = 6.67430e-11  # Gravitational constant\n    \n    with open(input_filepath, 'r') as infile, open(output_filepath, 'w') as outfile:\n        for line in infile:\n            mass1, distance, mass2 = map(float, line.strip().split(','))\n            force = (G * mass1 * mass2) / (distance ** 2)\n            outfile.write(f\"{force:.2f}\\n\")",
+    "context_relevance": 0.0
+}

@@ -1,0 +1,14 @@
+Design a Python program that handles mythical creatures and their attributes from various mythologies. Implement a `Creature` class that includes the essential attributes of a creature such as `name`, `origin`, and `description`. The program should be able to read data from a file called `creatures.txt` where each line of the file contains a creature's details in the format: `name,origin,description`. Implement the following functionalities:
+
+1. **`Creature` Class**: 
+   - Initialize with `name`, `origin`, and `description`.
+   - Method `__str__` to return a formatted string representing the creature.
+
+2. **Function `read_creatures_from_file(file_path)`**:
+   - Reads creature data from the specified file.
+   - Returns a list of `Creature` objects.
+
+3. **Function `save_creatures_to_file(creatures, file_path)`**:
+   - Saves a list of `Creature` objects to a specified file in the same format as the input file (one creature per line).
+
+Write code to read the creatures from `creatures.txt`, create `Creature` objects, and save them back to a file named `output_creatures.txt`.

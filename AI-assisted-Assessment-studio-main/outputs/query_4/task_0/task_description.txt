@@ -1,0 +1,30 @@
+### Task Description: 
+
+You are part of a team developing a board game scoring system. Each player in the board game has both positive and negative scores collected during gameplay. You need to write a Python program that calculates and returns the total score of each player.
+
+Your program should define a function `calculate_scores(player_scores)` that takes in a dictionary, `player_scores`, where the keys are strings representing player names, and the values are lists of integers representing their scores.
+
+Your task is to:
+- Calculate the total score for each player by summing up all the integers in the list for each player.
+- Return a new dictionary where the keys are player names, and the values are their corresponding total scores.
+
+**Example Input:**
+```python
+player_scores = {
+    "Alice": [10, -5, 7],
+    "Bob": [20, -10, 5],
+    "Charlie": [5, 0, -2, 4]
+}
+```
+**Example Output:**
+```python
+{
+    "Alice": 12,
+    "Bob": 15,
+    "Charlie": 7
+}
+```
+
+### Constraints:
+- You can assume that the input dictionary will always contain at least one player.
+- Each player's score list will contain at least one score entry.

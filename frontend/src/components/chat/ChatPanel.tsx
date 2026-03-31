@@ -81,7 +81,7 @@ function QualityIndicator({
   }
   
   return (
-    <div className={`flex items-center gap-1 text-xs ${isNearLimit ? 'text-amber-600' : 'text-slate-400'}`}>
+    <div className={`flex items-center gap-1 text-xs ${isNearLimit ? 'text-amber-600' : 'text-stone-400'}`}>
       <BarChart3 className="w-3 h-3" />
       <span>{length}/{maxLength}</span>
     </div>
@@ -291,7 +291,7 @@ export function ChatPanel({ taId }: ChatPanelProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex flex-wrap items-center justify-end gap-2 border-b border-slate-200 px-3 py-2 dark:border-slate-700">
+      <div className="flex flex-wrap items-center justify-end gap-2 border-b border-stone-200 px-3 py-2 dark:border-stone-700">
         <ModeIndicator taMessageCount={taMessageCount} compact />
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
@@ -319,7 +319,7 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         {loading && <TypingIndicator />}
         <div ref={bottomRef} />
       </div>
-      <div className="border-t border-slate-200 p-3">
+      <div className="border-t border-stone-200 p-3">
         {teachingHelperResult && (
           <div className="mb-3">
             <TeachingHelper
@@ -335,7 +335,7 @@ export function ChatPanel({ taId }: ChatPanelProps) {
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              className="w-full min-h-[40px] max-h-32 resize-y rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-slate-50 disabled:text-slate-500"
+              className="w-full min-h-[40px] max-h-32 resize-y rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm placeholder:text-stone-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-stone-50 disabled:text-stone-500"
               disabled={!taId || loading}
               rows={2}
               maxLength={MAX_INPUT_LENGTH}

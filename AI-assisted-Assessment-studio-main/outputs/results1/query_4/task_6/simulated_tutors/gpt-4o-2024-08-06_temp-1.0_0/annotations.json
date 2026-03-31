@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\n# Function definition\ndef roulette_game(money, bets):\n    # Spin the roulette wheel, numbers from 1 to 36\n    spin_result = random.randint(1, 36)\n    \n    # Determine if the result number is odd or even\n    spin_type = \"even\" if spin_result % 2 == 0 else \"odd\"\n    \n    # Calculate winnings or losses\n    for bet_type, bet_amount in bets.items():\n        if bet_type == spin_type:\n            # Win: player receives double the bet\n            money += bet_amount\n        else:\n            # Lose: player loses the bet amount\n            money -= bet_amount\n\n    return money\n",
+    "context_relevance": 1.0
+}

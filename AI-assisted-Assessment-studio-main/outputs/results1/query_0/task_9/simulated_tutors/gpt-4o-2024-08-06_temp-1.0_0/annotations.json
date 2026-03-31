@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef lucky_draw():\n    # Read the player's chosen number from the file\n    with open('player_choice.txt', 'r') as file:\n        player_choice = int(file.readline().strip())\n\n    # Generate a random number between 1 and 10\n    generated_number = random.randint(1, 10)\n\n    # Compare the numbers and write the outcome to the file\n    with open('outcome.txt', 'w') as file:\n        if player_choice == generated_number:\n            file.write(f'Congratulations! You won! Lucky number: {generated_number}')\n        else:\n            file.write(f'Sorry! Better luck next time. Chosen number: {player_choice}, Generated number: {generated_number}')",
+    "context_relevance": 0.0
+}

@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py F [ 20%]
+.FFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+______ ERROR at teardown of test_compute_mythical_stats_high_power_levels ______
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:21: AssertionError: assert '0.00' == '177.50'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:43: AssertionError: assert '0.00' == '200.00'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:54: AssertionError: assert '0.00' == '100.00'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py:65: AssertionError: assert '0.00' == '4733.33'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_compute_mythical_stats_normal_case
+FAILED outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_compute_mythical_stats_single_entry
+FAILED outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_compute_mythical_stats_identical_power_levels
+FAILED outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_compute_mythical_stats_high_power_levels
+ERROR outputs/results1/query_5/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_18/test_suite_stu.py::test_compute_mythical_stats_high_power_levels
+===================== 4 failed, 1 passed, 1 error in 0.16s =====================

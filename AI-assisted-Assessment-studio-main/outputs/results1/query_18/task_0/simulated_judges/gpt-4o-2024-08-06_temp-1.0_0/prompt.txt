@@ -1,0 +1,77 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In a distant science fiction future, data on intergalactic travel between planets is stored in a text file called `intergalactic_travel.txt`. Each line of the file contains records of one journey in the format `planet_name,duration_in_hours`. Each planet name is unique in this context, but there may be multiple entries for a single planet, representing different journeys made to/from it.
+
+Your task is to write a function `calculate_avg_travel_time(input_file, output_file)` that reads the data from `input_file`, calculates the average travel duration for each planet, and writes this average duration to `output_file`. The output file should have each line formatted as `planet_name:average_duration`, where average_duration is a float rounded to one decimal place. You must ensure the records are processed accurately and the required average calculations are performed.
+
+Ensure your solution is efficient and handles the reading and writing of files properly. Here's how the program will be tested and what the `intergalactic_travel.txt` file will look like:
+
+1. The `input_file` will contain lines like "Mars,10" (meaning the journey to Mars took 10 hours). The file will include multiple such records.
+2. The `output_file` should reflect the average travel time for each planet as described.
+3. You have to handle cases where there are multiple records for multiple planets.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import calculate_avg_travel_time
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_module():
+    with open("intergalactic_travel_test.txt", "w") as f:
+        f.write("Mars,10\n")
+        f.write("Mars,20\n")
+        f.write("Venus,5\n")
+        f.write("Venus,15\n")
+        f.write("Jupiter,45\n")
+        f.write("Jupiter,55\n")
+    yield
+    os.remove("intergalactic_travel_test.txt")
+    if os.path.exists("output_test.txt"):
+        os.remove("output_test.txt")
+
+@pytest.fixture
+def run_test_calculate_avg_travel_time():
+    calculate_avg_travel_time("intergalactic_travel_test.txt", "output_test.txt")
+    return "output_test.txt"
+
+
+def test_avg_time_mars(run_test_calculate_avg_travel_time):
+    with open(run_test_calculate_avg_travel_time, "r") as f:
+        output = f.readlines()
+    assert "Mars:15.0\n" in output
+
+
+def test_avg_time_venus(run_test_calculate_avg_travel_time):
+    with open(run_test_calculate_avg_travel_time, "r") as f:
+        output = f.readlines()
+    assert "Venus:10.0\n" in output
+
+
+def test_avg_time_jupiter(run_test_calculate_avg_travel_time):
+    with open(run_test_calculate_avg_travel_time, "r") as f:
+        output = f.readlines()
+    assert "Jupiter:50.0\n" in output
+
+
+def test_total_lines(run_test_calculate_avg_travel_time):
+    with open(run_test_calculate_avg_travel_time, "r") as f:
+        lines = f.readlines()
+    assert len(lines) == 3
+
+
+def test_no_extra_entries(run_test_calculate_avg_travel_time):
+    with open(run_test_calculate_avg_travel_time, "r") as f:
+        content = f.read().strip()
+    assert content == "Mars:15.0\nVenus:10.0\nJupiter:50.0"
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

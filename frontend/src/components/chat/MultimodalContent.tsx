@@ -156,23 +156,23 @@ function CodeBlockView({ block, onRun }: { block: CodeBlock; onRun?: (code: stri
   const displayCode = shouldCollapse ? block.code.split("\n").slice(0, 15).join("\n") + "\n..." : block.code;
   
   return (
-    <div className="my-3 rounded-lg overflow-hidden border border-slate-700 bg-[#282c34]">
+    <div className="my-3 rounded-lg overflow-hidden border border-stone-700 bg-[#282c34]">
       {/* Header */}
-      <div className="flex items-center justify-between px-3 py-2 bg-[#21252b] border-b border-slate-700">
+      <div className="flex items-center justify-between px-3 py-2 bg-[#21252b] border-b border-stone-700">
         <div className="flex items-center gap-2">
-          <Code2 className="w-4 h-4 text-slate-400" />
-          <span className="text-xs text-slate-300 font-medium">
+          <Code2 className="w-4 h-4 text-stone-400" />
+          <span className="text-xs text-stone-300 font-medium">
             {block.language}
           </span>
           {block.filename && (
-            <span className="text-xs text-slate-500">{block.filename}</span>
+            <span className="text-xs text-stone-500">{block.filename}</span>
           )}
         </div>
         <div className="flex items-center gap-1">
           {onRun && block.language === "python" && (
             <button
               onClick={() => onRun(block.code)}
-              className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-emerald-400 transition-colors"
+              className="p-1.5 rounded hover:bg-stone-700 text-stone-400 hover:text-emerald-400 transition-colors"
               title="Run code"
             >
               <Play className="w-4 h-4" />
@@ -180,7 +180,7 @@ function CodeBlockView({ block, onRun }: { block: CodeBlock; onRun?: (code: stri
           )}
           <button
             onClick={handleCopy}
-            className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+            className="p-1.5 rounded hover:bg-stone-700 text-stone-400 hover:text-white transition-colors"
             title="Copy code"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -188,7 +188,7 @@ function CodeBlockView({ block, onRun }: { block: CodeBlock; onRun?: (code: stri
           {lineCount > 15 && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded hover:bg-stone-700 text-stone-400 hover:text-white transition-colors"
               title={isExpanded ? "Collapse" : "Expand"}
             >
               {isExpanded ? <X className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -216,10 +216,10 @@ function CodeBlockView({ block, onRun }: { block: CodeBlock; onRun?: (code: stri
       
       {/* Expand hint */}
       {shouldCollapse && (
-        <div className="px-3 py-2 bg-[#21252b] border-t border-slate-700 text-center">
+        <div className="px-3 py-2 bg-[#21252b] border-t border-stone-700 text-center">
           <button
             onClick={() => setIsExpanded(true)}
-            className="text-xs text-slate-400 hover:text-white transition-colors"
+            className="text-xs text-stone-400 hover:text-white transition-colors"
           >
             Show {lineCount - 15} more lines
           </button>
@@ -239,16 +239,16 @@ function ImageBlockView({ block }: { block: ImageBlock }) {
     <div className="my-3">
       <Card padding="none" className="overflow-hidden">
         {isLoading && !error && (
-          <div className="h-48 bg-slate-100 animate-pulse flex items-center justify-center">
-            <Image className="w-8 h-8 text-slate-300" />
+          <div className="h-48 bg-stone-100 animate-pulse flex items-center justify-center">
+            <Image className="w-8 h-8 text-stone-300" />
           </div>
         )}
         
         {error && (
-          <div className="h-48 bg-slate-50 flex items-center justify-center">
+          <div className="h-48 bg-stone-50 flex items-center justify-center">
             <div className="text-center">
-              <AlertCircle className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-              <p className="text-sm text-slate-500">Failed to load image</p>
+              <AlertCircle className="w-8 h-8 text-stone-300 mx-auto mb-2" />
+              <p className="text-sm text-stone-500">Failed to load image</p>
             </div>
           </div>
         )}
@@ -263,8 +263,8 @@ function ImageBlockView({ block }: { block: ImageBlock }) {
         />
         
         {(block.alt || block.caption) && (
-          <div className="px-3 py-2 bg-slate-50 border-t border-slate-100">
-            <p className="text-sm text-slate-600">{block.caption || block.alt}</p>
+          <div className="px-3 py-2 bg-stone-50 border-t border-stone-100">
+            <p className="text-sm text-stone-600">{block.caption || block.alt}</p>
           </div>
         )}
       </Card>
@@ -282,7 +282,7 @@ function ChartBlockView({ block }: { block: ChartBlock }) {
     <Card padding="md" className="my-3">
       <div className="flex items-center gap-2 mb-4">
         <BarChart3 className="w-5 h-5 text-brand-500" />
-        <span className="font-medium text-slate-900">{chartData.title || block.title || "Chart"}</span>
+        <span className="font-medium text-stone-900">{chartData.title || block.title || "Chart"}</span>
       </div>
       
       <div className="space-y-3">
@@ -293,10 +293,10 @@ function ChartBlockView({ block }: { block: ChartBlock }) {
           return (
             <div key={label}>
               <div className="flex items-center justify-between text-sm mb-1">
-                <span className="text-slate-700">{label}</span>
-                <span className="font-medium text-slate-900">{value}</span>
+                <span className="text-stone-700">{label}</span>
+                <span className="font-medium text-stone-900">{value}</span>
               </div>
-              <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-stone-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-brand-500 rounded-full transition-all duration-500"
                   style={{ width: `${percentage}%` }}
@@ -316,7 +316,7 @@ function TextBlockView({ content }: { content: string }) {
   const formatted = content
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/`(.+?)`/g, '<code class="px-1.5 py-0.5 bg-slate-100 rounded text-sm font-mono text-brand-600">$1</code>');
+    .replace(/`(.+?)`/g, '<code class="px-1.5 py-0.5 bg-stone-100 rounded text-sm font-mono text-brand-600">$1</code>');
   
   return (
     <div 
@@ -388,19 +388,19 @@ export function MultimodalContent({ content, className }: MultimodalContentProps
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <Card padding="lg" className="w-full max-w-2xl max-h-[80vh] overflow-auto">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-slate-900">Code Execution Result</h3>
+              <h3 className="font-semibold text-stone-900">Code Execution Result</h3>
               <button
                 onClick={() => setRunResult(null)}
-                className="p-1 hover:bg-slate-100 rounded"
+                className="p-1 hover:bg-stone-100 rounded"
               >
-                <X className="w-5 h-5 text-slate-500" />
+                <X className="w-5 h-5 text-stone-500" />
               </button>
             </div>
             
             <div className="space-y-4">
               <div>
-                <p className="text-xs text-slate-500 mb-1">Code:</p>
-                <pre className="p-3 bg-slate-100 rounded-lg text-sm font-mono overflow-x-auto">
+                <p className="text-xs text-stone-500 mb-1">Code:</p>
+                <pre className="p-3 bg-stone-100 rounded-lg text-sm font-mono overflow-x-auto">
                   {runResult.code}
                 </pre>
               </div>

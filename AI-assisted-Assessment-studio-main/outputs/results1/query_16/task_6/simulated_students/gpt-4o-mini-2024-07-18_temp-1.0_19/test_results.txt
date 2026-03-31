@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py . [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:19: AssertionError: Regex pattern did not match.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:23: AssertionError: Regex pattern did not match.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:27: AssertionError: Regex pattern did not match.
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:32: assert 200.0 == 2.0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::TestSpaceship::test_zero_distance
+FAILED outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::TestSpaceship::test_non_positive_fuel_multiplier
+FAILED outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::TestSpaceship::test_negative_fuel_level
+FAILED outputs/results1/query_16/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::TestSpaceship::test_valid_edge_case_large_distance
+========================= 4 failed, 1 passed in 0.16s ==========================

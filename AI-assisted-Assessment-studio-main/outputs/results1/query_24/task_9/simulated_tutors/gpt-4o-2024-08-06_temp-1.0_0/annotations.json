@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_score(position, rolls):\n    # Check for invalid initial position\n    if position < 0:\n        raise ValueError(\"Position cannot be negative\")\n    \n    # Verify all dice rolls are valid\n    for roll in rolls:\n        if roll < 1 or roll > 6:\n            raise ValueError(\"Rolls must be between 1 and 6\")\n    \n    # Calculate the sum of the dice rolls\n    sum_of_rolls = sum(rolls)\n    \n    # Determine the new position\n    new_position = position + sum_of_rolls\n    \n    # Calculate the score\n    score = new_position * 10\n    \n    return score",
+    "context_relevance": 1.0
+}

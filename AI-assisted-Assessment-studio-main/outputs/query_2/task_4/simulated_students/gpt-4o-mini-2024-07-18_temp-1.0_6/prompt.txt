@@ -1,0 +1,37 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Cooking Recipe Organizer
+
+Write a Python function `organize_recipes(file_path)` that organizes recipes from a file. Each recipe in the file is formatted within block comments. The function reads the recipes from the file and returns a list of recipe names alphabetically sorted.
+
+Each recipe is divided into sections: `NAME` and `INGREDIENTS`. Each section is labeled and separated by `---` lines. Here's an example of how recipes are represented in the file:
+
+```
+/****
+NAME
+Italian Pasta
+---
+INGREDIENTS
+Pasta, Tomatoes, Olive Oil, Basil
+****/
+```
+
+The input file can contain multiple recipes with the format above, separated by '
+' or empty lines.
+
+### Task:
+1. Read from a text file containing multiple recipes with the defined format.
+2. Extract the name of each recipe and store them in a list.
+3. Sort the recipe names alphabetically.
+4. Return the sorted list of recipe names.
+
+### Function Signature
+- Input: `organize_recipes(file_path)` - a string representing the path to the input text file.
+- Output: a list of strings, each representing a recipe name sorted alphabetically.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

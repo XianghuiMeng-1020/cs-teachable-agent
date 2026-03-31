@@ -1,0 +1,41 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+You are tasked with creating a simple game of chance simulator called `LuckyNumbers`. In this game, each player will draw a set of numbers and compare them to a predetermined set of winning numbers. 
+
+The program should:
+1. Read a file named `players.txt`, containing the names of participants. Each line contains a player's name and their chosen number, separated by a comma (e.g., `John,25`).
+2. Read a file named `winning_numbers.txt`, containing the winning numbers separated by commas on the first line (e.g., `5,15,25,35`).
+3. Calculate how many of the player's number matches the winning numbers.
+4. Write to a file named `results.txt`, and for each player append a line with their name and how many numbers matched (e.g., `John: 1`).
+5. The program should handle cases when no players or no winning numbers are provided.
+
+Implement the `lucky_numbers()` function which takes no arguments and performs the above steps. The function should not return any value, as the results should be written to the `results.txt` file.
+
+### Example
+Given a `players.txt` with the content:
+```
+John,25
+Alice,5
+Bob,15
+```
+
+And a `winning_numbers.txt` with the content:
+```
+5,10,25,40
+```
+
+The `results.txt` should contain:
+```
+John: 1
+Alice: 1
+Bob: 1
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

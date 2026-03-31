@@ -1,0 +1,20 @@
+{
+  "blank_1": [
+    "3",
+    "1.0",
+    "2",
+    "0"
+  ],
+  "blank_2": [
+    "'UNKNOWN'",
+    "'TODO'",
+    "'Habitable'",
+    "''"
+  ],
+  "blank_3": [
+    "'Potentially Habitable'",
+    "''",
+    "'UNKNOWN'",
+    "'TODO'"
+  ]
+}

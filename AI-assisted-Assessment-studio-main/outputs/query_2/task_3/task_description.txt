@@ -1,0 +1,39 @@
+## Task: Recipe Formatter
+
+Create a recipe formatting system that reads unformatted recipes from a text file and writes out a formatted recipe list to another text file. Each recipe consists of a title, a list of ingredients, and a method. 
+
+### Task Requirements:
+  
+- Write a Python function `format_recipe(file_input, file_output)` that reads an input file, formats the recipes, and writes them to an output file. 
+- Each recipe in the input file is a single line consisting of a title, ingredients, and method, separated by a `--`. For example:
+  
+  ```plaintext
+  Chocolate Cake--flour, sugar, cocoa, baking powder--mix ingredients, bake for 30m
+  Pasta--pasta, tomatoes, garlic--boil pasta, sauté tomatoes and garlic
+  ```
+- Format the recipes such that each recipe is written as:
+    
+    ```plaintext
+    Recipe Title: <Recipe Title>
+    Ingredients:
+    - <ingredient 1>
+    - <ingredient 2>
+    <...and so on>
+    Method:
+    <method>
+    ```
+
+- Each field should be separated by a newline.
+- The output file should have each recipe separated by two newlines.
+
+### Function Signature:
+```python
+format_recipe(file_input, file_output)
+```
+
+### Input:
+- `file_input`: the path of the file containing the unformatted recipes.
+- `file_output`: the path where the formatted recipes will be written.
+
+### Output:
+- None. The result will be written directly to the file_output.

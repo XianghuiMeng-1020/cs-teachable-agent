@@ -1,0 +1,32 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py F [ 20%]
+EFEFE.FE                                                                 [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at teardown of test_immortal_creature __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+_________________ ERROR at teardown of test_colossal_creatures _________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+_____________ ERROR at teardown of test_nonexistent_characteristic _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+___________________ ERROR at teardown of test_human_creature ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:5: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:30: AssertionError: assert [] == ['Kraken', 'Jormungandr']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'creatures.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_immortal_creature
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_colossal_creatures
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_nonexistent_characteristic
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_human_creature
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_immortal_creature
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_colossal_creatures
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_nonexistent_characteristic
+ERROR outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_human_creature
+==================== 4 failed, 1 passed, 4 errors in 0.15s =====================

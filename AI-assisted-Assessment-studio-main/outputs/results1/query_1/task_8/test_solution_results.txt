@@ -1,0 +1,6 @@
+.....F....                                                               [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_8/test_suite_sol.py:23: assert 1080 == 360
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_8/test_suite_sol.py::test_edge_cases[numbers0-bet_amounts0-360]
+1 failed, 9 passed in 0.03s

@@ -1,0 +1,20 @@
+def game_of_chance(filename):
+    score = 10
+    bet_amount = 0
+
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            line = line.strip()
+            if line.isdigit():
+                bet_amount = int(line)
+            elif line == 'win':
+                score += bet_amount
+            elif line == 'lose':
+                if bet_amount <= score:
+                    score -= bet_amount
+            elif line == 'draw':
+                continue
+
+    with open('result.txt', 'w') as result_file:
+        result_file.write(str(score))

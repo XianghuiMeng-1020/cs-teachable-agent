@@ -1,0 +1,30 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+**Task Description:**
+
+You are tasked with creating a Python program that helps manage recipes in a cooking application. The application should allow users to add new recipes, retrieve a recipe based on its name, and remove a recipe. Each recipe consists of a name, a list of ingredients, and instructions. All recipes should be saved to a file named `recipes.txt` and should be retrievable even after the program restarts.
+
+Implement a class called `RecipeManager` with the following methods:
+
+1. `add_recipe(name, ingredients, instructions)`: Adds a recipe to the collection. If a recipe with the given name already exists, raise an `Exception` with an appropriate message.
+
+2. `get_recipe(name)`: Retrieves the recipe with the given name. If the recipe is not found, return `None`.
+
+3. `remove_recipe(name)`: Removes the recipe with the given name. Return `True` if the recipe was successfully removed or `False` if the recipe was not found.
+
+The recipes should be stored in `recipes.txt` in the following format:
+```
+<Recipe Name>
+<Ingredient1, Ingredient2, ...>
+<Instructions>
+```
+Make sure your program handles the reading and writing of the `recipes.txt` file gracefully, including any exceptions that might occur if the file cannot be found or is corrupted.
+
+---
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

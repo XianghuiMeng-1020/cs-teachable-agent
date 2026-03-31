@@ -1,0 +1,4 @@
+{
+    "program": "def log_scores(filename, players, scores):\n    with open(filename, 'w') as file:\n        for player, score in zip(players, scores):\n            file.write(f\"{player}: {score}\\n\")\n\n\ndef top_score(filename):\n    scores_dict = {}\n    with open(filename, 'r') as file:\n        for line in file:\n            name, score = line.strip().split(': ')\n            scores_dict[name] = int(score)\n\n    if not scores_dict:\n        return []\n\n    max_score = max(scores_dict.values())\n    return [name for name, score in scores_dict.items() if score == max_score]",
+    "context_relevance": 1.0
+}

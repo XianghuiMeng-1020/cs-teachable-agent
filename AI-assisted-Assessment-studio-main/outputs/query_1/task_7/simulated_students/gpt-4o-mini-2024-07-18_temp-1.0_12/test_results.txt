@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:7: assert 12 == 8
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:24: assert 13 == 11
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_example_case
+FAILED outputs/query_1/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_multiple_combinations
+========================= 2 failed, 3 passed in 0.10s ==========================

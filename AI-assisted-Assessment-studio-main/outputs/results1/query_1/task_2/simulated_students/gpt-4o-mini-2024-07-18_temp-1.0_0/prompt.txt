@@ -1,0 +1,18 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a function `spin_wheel(bet_list, target_number)` that simulates a simple game of chance akin to a roulette wheel. 
+
+The function should accept two inputs:
+- `bet_list`: A list containing tuples where each tuple consists of two elements: a number (between 0 to 36, inclusive) a player bets on, and the amount of money bet on that number.
+- `target_number`: The winning number that was randomly generated.
+
+Your task is to determine the outcomes for each bet in the `bet_list`. A player wins if the number they bet on matches the `target_number`. For each winning bet, the payoff is calculated as `bet_amount * 10`. The function should return an integer which is the total amount of money won by all players.
+
+For simplicity, assume all input numbers are valid, `bet_list` only contains valid tuples, and the `target_number` is between 0 and 36, inclusive. If no players win, the function should return 0.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

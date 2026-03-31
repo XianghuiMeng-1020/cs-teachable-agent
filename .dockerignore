@@ -11,7 +11,7 @@ frontend/
 .venv/
 venv/
 docs/
-README.md
-DEPLOY.md
-DEPLOY_CF_RAILWAY.md
-PROPOSAL.md
+AI-assisted-Assessment-studio-main/
+*.docx
+*.md
+!requirements.txt

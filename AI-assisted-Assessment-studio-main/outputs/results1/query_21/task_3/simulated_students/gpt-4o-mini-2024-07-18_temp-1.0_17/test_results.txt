@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:13: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:29: AssertionError: assert None == 'Alice'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:35: AssertionError: assert None == 'Charlie'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:41: AssertionError: assert None == 'Bob'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:47: AssertionError: assert None == 'Bob'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_add_player
+FAILED outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_update_score
+FAILED outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_highest_score_tie_scenario
+FAILED outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_non_existent_player_update
+FAILED outputs/results1/query_21/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_adding_existing_player_ignored
+============================== 5 failed in 0.10s ===============================

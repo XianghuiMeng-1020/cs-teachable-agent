@@ -1,0 +1,97 @@
+{
+  "item_id": "task_3-dropdown",
+  "source_task_id": "task_3",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_1/task_3",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for calculate_awards",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n**Task: Valhalla Warriors Calculation** In Norse mythology, warriors who die in combat are taken to Valhalla, where they become einherjar and train for the events of Ragnarok. We're interested in creating a program to keep track of these warriors and award them based on their achievements. Write a function `calculate_awards(warrior_achievements)` that takes a list of integers, `warrior_achievements`, where each integer represents the number of successful combats a warrior has won. You need to...",
+  "interaction_content": {
+    "function_name": "calculate_awards",
+    "prompt_template": "def calculate_awards(warrior_achievements):\n    awards = []\n    for achievements in warrior_achievements:\n        if achievements __BLANK_1__ 0:\n            awards.append('Novice')\n        elif __BLANK_2__ <= achievements <= 5:\n            awards.append('Adept')\n        elif __BLANK_3__ <= achievements <= 10:\n            awards.append('Veteran')\n        else:\n            awards.append('Elite')\n    return awards",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "==",
+          "!=",
+          "<",
+          ">"
+        ],
+        "correct_answer": "==",
+        "misconception_tags": {
+          "!=": "operator_confusion",
+          "<": "operator_confusion",
+          ">": "operator_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "3"
+        ],
+        "correct_answer": "1",
+        "misconception_tags": {
+          "2": "off_by_one_or_default_value",
+          "0": "off_by_one_or_default_value",
+          "3": "off_by_one_or_default_value"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "6",
+          "7",
+          "5",
+          "8"
+        ],
+        "correct_answer": "6",
+        "misconception_tags": {
+          "7": "off_by_one_or_default_value",
+          "5": "off_by_one_or_default_value",
+          "8": "off_by_one_or_default_value"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "==",
+      "blank_2": "1",
+      "blank_3": "6"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Mythology",
+    "concepts": [
+      "Arithmetic Operators",
+      "Selection Statements (if/else, etc.)",
+      "Variables",
+      "Lists"
+    ],
+    "quality_metrics": {
+      "task": "task_3",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

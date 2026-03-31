@@ -1,0 +1,60 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+In this task, you'll implement a simplified game called 'Dice-A-Roll', where one player rolls a virtual six-sided die and attempts to reach a target score. The game involves simulating the roll of a die and checking if the player reaches or surpasses a target score with a series of dice rolls. You will write a function `dice_game(target_score, rolls)` that determines if the player reached or exceeded the target score based on a list of dice rolls. The outcome is 'WIN' if the player reaches or surpasses the target score and 'LOSE' otherwise.
+
+### Function Signature
+```python
+def dice_game(target_score, rolls):
+    pass
+```
+
+### Parameters
+- `target_score` (int): The score the player needs to reach or exceed to win.
+- `rolls` (list of int): A list representing the result of each die roll.
+
+### Returns
+- A string: 'WIN' if the player reaches or exceeds the target score, 'LOSE' otherwise.
+
+### Constraints
+- You may assume that `target_score` is a positive integer and `rolls` contains integers between 1 and 6 inclusive.
+- `rolls` will contain at least one roll.
+
+### Test Cases
+You will write test cases using Pytest to validate the implementation of the function. The goal is to ensure the function correctly determines the outcome of the game based on different roll scenarios and target scores.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import dice_game
+
+
+def test_reach_target_exactly():
+    assert dice_game(10, [3, 3, 4]) == 'WIN'
+
+
+def test_exceed_target_with_extra_rolls():
+    assert dice_game(15, [4, 5, 6, 1]) == 'WIN'
+
+
+def test_barely_exceed_target():
+    assert dice_game(7, [1, 2, 1, 3]) == 'WIN'
+
+
+def test_no_reaching_target():
+    assert dice_game(12, [1, 2, 3]) == 'LOSE'
+
+
+def test_single_roll_exact_target():
+    assert dice_game(4, [4]) == 'WIN'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

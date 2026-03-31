@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py F [ 10%]
+F........E                                                               [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_remove_nonexistent_tale[test_myths/phoenix_tale.txt-Phoenix Tale] _
+E   FileNotFoundError: [Errno 2] No such file or directory: 'myth_archive/._Dragon Tale.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:36: AssertionError: assert '' == 'Once upon a fiery time...'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:36: AssertionError: assert '' == 'Rising from the ashes...'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_add_and_get_tale[test_myths/dragon_tale.txt-Dragon Tale-Once upon a fiery time...]
+FAILED outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_add_and_get_tale[test_myths/phoenix_tale.txt-Phoenix Tale-Rising from the ashes...]
+ERROR outputs/results1/query_6/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py::test_remove_nonexistent_tale[test_myths/phoenix_tale.txt-Phoenix Tale]
+===================== 2 failed, 8 passed, 1 error in 0.16s =====================

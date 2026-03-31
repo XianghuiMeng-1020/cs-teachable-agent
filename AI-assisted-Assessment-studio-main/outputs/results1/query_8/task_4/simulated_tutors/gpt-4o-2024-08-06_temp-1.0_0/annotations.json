@@ -1,0 +1,4 @@
+{
+    "program": "def mythological_judgment(creature, action):\n    judgments = {\n        \"zeus\": {\n            \"help\": \"Blessing granted\",\n        },\n        \"cerberus\": {\n            \"steal\": \"Growling disapproval\",\n        },\n        \"aphrodite\": {\n            \"love\": \"Heart's desire fulfilled\",\n        }\n    }\n    \n    # Default judgments\n    default_judgments = {\n        \"zeus\": \"Storms befall you\",\n        \"cerberus\": \"Pass freely\",\n    }\n    \n    # Check for special judgments first\n    if creature in judgments and action in judgments[creature]:\n        return judgments[creature][action]\n    # Check for default judgments\n    elif creature in default_judgments:\n        return default_judgments[creature]\n    else:\n        return \"No judgment found\"\n",
+    "context_relevance": 1.0
+}

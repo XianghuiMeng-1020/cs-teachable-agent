@@ -1,0 +1,71 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Create a Python class `MythicalLibrary` for managing information about various mythical creatures. The class should provide functionality to:
+
+1. Initialize the class with `mythical_creatures.txt`, a file containing information about mythical creatures in the following format (one creature per line): `CreatureName, Origin, Description`. For example: `Phoenix, Greek, A long-lived bird that cyclically regenerates or is otherwise born again.`
+
+2. Implement a method `get_description(creature_name)` that returns the description of a creature with the given name. If the creature is not found, return "Creature not found".
+
+3. Implement a method `add_creature(creature_name, origin, description)` that adds a new creature to the file and ensures each creature is unique by name (case-insensitive). If a creature with the same name exists, the method should not add it but rather return "Creature already exists".
+
+4. Implement a method `get_creatures_by_origin(origin)` that returns a list of all creature names from the given origin.
+
+Consider that creature names and origins are case-insensitive during lookup and addition. Your implementation should read from and write to `mythical_creatures.txt`. Make sure each function handles file I/O properly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythicalLibrary
+
+def setup_module(module):
+    creatures_info = [
+        "Phoenix, Greek, A long-lived bird that regenerates or is reborn.",
+        "Dragon, Various, A large serpent-like monster.",
+        "Centaurs, Greek, Half-human, half-horse creatures.",
+        "Yeti, Himalayan, An ape-like entity.",
+        "Anubis, Egyptian, God of death associated with a dog.",
+    ]
+    with open('mythical_creatures.txt', 'w') as f:
+        f.write("\n".join(creatures_info) + "\n")
+
+def teardown_module(module):
+    try:
+        os.remove('mythical_creatures.txt')
+    except FileNotFoundError:
+        pass
+
+
+def test_get_description_existing_creature():
+    lib = MythicalLibrary()
+    assert lib.get_description("Phoenix") == "A long-lived bird that regenerates or is reborn."
+
+
+def test_get_description_non_existing_creature():
+    lib = MythicalLibrary()
+    assert lib.get_description("Unicorn") == "Creature not found"
+
+
+def test_add_creature_new():
+    lib = MythicalLibrary()
+    result = lib.add_creature("Unicorn", "Western", "A legendary horse with a horn.")
+    assert result is None
+    assert lib.get_description("Unicorn") == "A legendary horse with a horn."
+
+
+def test_add_creature_existing():
+    lib = MythicalLibrary()
+    result = lib.add_creature("Phoenix", "Greek", "Mystical bird.")
+    assert result == "Creature already exists"
+
+
+def test_get_creatures_by_origin():
+    lib = MythicalLibrary()
+    assert set(lib.get_creatures_by_origin("Greek")) == {"Phoenix", "Centaurs"}
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

@@ -1,0 +1,4 @@
+{
+    "program": "def alien_signal_count(signal_logs):\n    # Initialize an empty dictionary to store the result\n    signal_count_by_planet = {}\n    \n    # Iterate over each planet and its log of signals\n    for planet, signals in signal_logs.items():\n        # Initialize an empty dictionary for counting signals for this planet\n        signal_counts = {}\n        \n        # Iterate over each signal and count frequencies\n        for signal in signals:\n            if signal in signal_counts:\n                signal_counts[signal] += 1\n            else:\n                signal_counts[signal] = 1\n        \n        # Assign the count dictionary to the corresponding planet in the result\n        signal_count_by_planet[planet] = signal_counts\n    \n    return signal_count_by_planet",
+    "context_relevance": 1.0
+}

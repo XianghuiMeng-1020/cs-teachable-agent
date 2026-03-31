@@ -1,0 +1,36 @@
+### Astronym Translator
+
+In a far-reaching galaxy, languages have melded together, resulting in astronyms — unique identifiers for celestial objects based on a combination of alien dialects. Your mission is to create a program that translates these astronyms into descriptive labels.
+
+You will write a function `translate_astronyms(astronyms, dictionary)`, where:
+   - `astronyms`: A list of strings where each string is an astronym of a celestial object.
+   - `dictionary`: A dictionary mapping each unique astronym or part of the astronym to its corresponding descriptor.
+
+The function will return a list of translated strings, where each astronym is replaced by its corresponding descriptor based on the dictionary.
+
+If an astronym does not have a match in the dictionary, represent it with the string "Unknown".
+
+### Examples/Data
+
+Suppose you have:
+- Astronyms: `['xer', 'plethora', 'gicon']`
+- Dictionary: `{'xer': 'Star', 'plethora': 'Galaxy', 'gicon': 'Nebula'}`
+
+Your function should return:
+`['Star', 'Galaxy', 'Nebula']`
+
+If you have:
+- Astronyms: `['xer', 'unknown', 'gicon', 'zuru']`
+- Dictionary: `{'xer': 'Star', 'gicon': 'Nebula'}`
+
+Your function should return:
+`['Star', 'Unknown', 'Nebula', 'Unknown']`
+
+**Input:**
+- A list of astronyms to be translated.
+- A translation dictionary.
+
+**Output:**
+- A list of translated descriptions.
+
+**Note:** Only astronyms and their direct translations according to the dictionary are considered. If no translation is found, use "Unknown".

@@ -1,0 +1,92 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Loops', 'Exception Handling', 'File Handling and I/O']:
+
+### Beginning of task description
+**Task Description**: You are given the mission to create a log parser for a fictional intergalactic spaceship system called 'Star Voyager'. Your task is to review spaceship logs stored in text files to identify specific events for later analysis. Each log file will be named as `star_log_<number>.txt` and located in the `logs/` directory. Each file contains entries recording log messages from the ship's system with each entry on a new line. Logs are in the format: `YYYY-MM-DD EVENT_TYPE: message`. You need to implement a function `parse_logs(directory, event_type, output_file)` to perform the following:
+
+1. Iterate over each file in the specified `directory` and read lines from files that follow the naming pattern `star_log_<number>.txt`.
+2. Extract and collect all the lines that contain the specified `event_type`.
+3. Write these collected entries into an output file specified by `output_file`.
+4. If a file does not exist or an error occurs while reading a file, the function should gracefully handle this by skipping the file and continuing with the others.
+
+You can assume that the input files only contain valid log entries and ignore any files that do not match the `star_log_<number>.txt` naming scheme. Your implementation should handle possible I/O exceptions and other unforeseen errors gracefully to ensure robust execution.
+
+**Function Signature**: `parse_logs(directory, event_type, output_file)`
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import parse_logs
+
+def setup_module(module):
+    os.makedirs('logs', exist_ok=True)
+    log_contents = {
+        'star_log_1.txt': """2023-01-01 EVENT_A: First event occurred\n2023-01-01 EVENT_B: Second event occurred\n2023-01-02 EVENT_A: Another event A occurred\n""",
+        'star_log_2.txt': """2023-01-03 EVENT_C: Event C occurred\n2023-01-03 EVENT_A: Another event A\n""",
+        'star_log_3.txt': """2023-01-04 EVENT_B: Different event B occurred\n""",
+        'some_other_file.txt': """This should not be read\n2023-01-05 EVENT_A: Event A\n"""  # Should be ignored because of filename
+    }
+    for filename, content in log_contents.items():
+        with open(os.path.join('logs', filename), 'w') as f:
+            f.write(content)
+
+
+def teardown_module(module):
+    file_list = os.listdir('logs')
+    for filename in file_list:
+        file_path = os.path.join('logs', filename)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+    os.rmdir('logs')
+    if os.path.exists('output.txt'):
+        os.remove('output.txt')
+
+
+def test_parse_logs_event_a():
+    parse_logs('logs', 'EVENT_A', 'output.txt')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    expected = """2023-01-01 EVENT_A: First event occurred\n2023-01-02 EVENT_A: Another event A occurred\n2023-01-03 EVENT_A: Another event A\n"""
+    assert result == expected
+
+
+def test_parse_logs_event_b():
+    parse_logs('logs', 'EVENT_B', 'output.txt')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    expected = """2023-01-01 EVENT_B: Second event occurred\n2023-01-04 EVENT_B: Different event B occurred\n"""
+    assert result == expected
+
+
+def test_parse_logs_event_not_found():
+    parse_logs('logs', 'EVENT_X', 'output.txt')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    expected = """"
+    assert result == expected
+
+
+def test_parse_logs_nonexistent_file():
+    os.remove('logs/star_log_2.txt')  # Simulate file removal
+    parse_logs('logs', 'EVENT_A', 'output.txt')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    expected = """2023-01-01 EVENT_A: First event occurred\n2023-01-02 EVENT_A: Another event A occurred\n"""
+    assert result == expected
+
+
+def test_parse_logs_empty_directory():
+    for filename in os.listdir('logs'):
+        os.remove(os.path.join('logs', filename))
+    parse_logs('logs', 'EVENT_A', 'output.txt')
+    with open('output.txt', 'r') as f:
+        result = f.read()
+    expected = """"
+    assert result == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

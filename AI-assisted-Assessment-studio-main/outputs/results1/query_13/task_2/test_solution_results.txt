@@ -1,0 +1,6 @@
+F....                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_2/test_suite_sol.py:19: AssertionError: assert {'Omelette': ...Pancake': 2.6} == {'Omelette': ...Pancake': 2.6}
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_2/test_suite_sol.py::test_calculate_total_cost_basic
+1 failed, 4 passed in 0.02s

@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.8, pytest-8.3.2, pluggy-1.5.0
+rootdir: /Volumes/T7/idea/pytasksyn
+plugins: anyio-4.4.0, timeout-2.3.1, metadata-3.1.1, cov-5.0.0, json-report-1.5.0
+timeout: 5.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py . [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:26: AssertionError: assert 'Alice 100\nB...nCharlie 80\n' == 'Alice 100\nB...80\nDave 85\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:26: AssertionError: assert 'Alice 100\nB... 82\nEve 60\n' == 'Alice 100\nC...90\nDave 85\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:26: AssertionError: assert 'Alice 100\nB... 82\nEve 60\n' == 'Alice 100\nB...nCharlie 80\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py:26: AssertionError: assert 'Alice 101\nB... 82\nEve 60\n' == 'Alice 101\nB...nCharlie 80\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_report.json
+
+---------- coverage: platform darwin, python 3.10.8-final-0 ----------
+Coverage JSON written to file /Volumes/T7/idea/pytasksyn/outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/pytest_coverage_report.json
+
+=========================== short test summary info ============================
+FAILED outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_manage_high_scores[new_scores1-Alice 100\nBob 90\nCharlie 80\nDave 85\n]
+FAILED outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_manage_high_scores[new_scores2-Alice 100\nCharlie 82\nBob 90\nDave 85\n]
+FAILED outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_manage_high_scores[new_scores3-Alice 100\nBob 90\nCharlie 80\n]
+FAILED outputs/results1/query_22/task_9/simulated_tutors/gpt-4o-2024-08-06_temp-1.0_0/test_suite_ta.py::test_manage_high_scores[new_scores4-Alice 101\nBob 90\nCharlie 80\n]
+========================= 4 failed, 1 passed in 0.08s ==========================

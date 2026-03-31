@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+.FFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:10: assert 0 == 10
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:16: assert 40 == 30
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:19: assert 20 == 0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py:22: assert 0 == 40
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_lucky_draw_single_round_win
+FAILED outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_lucky_draw_multiple_rounds_mixed
+FAILED outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_lucky_draw_multiple_rounds_all_lose
+FAILED outputs/results1/query_4/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_lucky_draw_multiple_rounds_all_win
+========================= 4 failed, 1 passed in 0.14s ==========================

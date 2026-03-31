@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py . [ 20%]
+FFF.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at teardown of test_station5_corrupted_data _______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'Station1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:31: assert 30.233333333333334 == 30.23
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:35: AssertionError: assert 'Error: File Station3.txt not found' == 18.0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:39: AssertionError: assert 'Error: File Station4.txt not found' == 32.17
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_station2_average
+FAILED outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_station3_average
+FAILED outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_station4_average
+ERROR outputs/results1/query_19/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_station5_corrupted_data
+===================== 3 failed, 2 passed, 1 error in 0.19s =====================

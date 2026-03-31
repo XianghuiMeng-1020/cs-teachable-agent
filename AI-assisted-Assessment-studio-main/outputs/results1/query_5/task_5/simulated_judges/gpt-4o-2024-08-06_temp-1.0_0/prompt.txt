@@ -1,0 +1,104 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Variables', 'File Handling and I/O', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+You are a keeper of ancient mythology scrolls. Your task is to evaluate different mythical creatures based on their powers and skills documented in given text files and determine which creatures are deemed 'Legendary'.
+
+Create a Python function `identify_legendary_creatures(input_file, output_file)` that reads a list of mythical creatures from a text file (`input_file`). Each line in the `input_file` contains a creature's name followed by two integers separated by spaces. The first integer, 'power', indicates the creature's maximum power score, and the second integer, 'skill', represents the creature's skill level.
+
+A creature is classified as 'Legendary' if its power is greater than or equal to 90 and its skill level is greater than or equal to 75.
+
+Your program should:
+- Read from the `input_file`, where each line contains 'CreatureName Power Skill'.
+- Determine if each creature is 'Legendary'.
+- Write only the names of the 'Legendary' creatures, each on a new line, into the `output_file`.
+
+The function should not return anything, just read from the `input_file`, process the information, and write to the `output_file`. You can assume that the file is well-formed and that each creature's data is specified correctly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import identify_legendary_creatures
+
+def setup_module(module):
+    with open('creatures.txt', 'w') as file:
+        file.write('Minotaur 95 80\n')
+        file.write('Cerberus 88 85\n')
+        file.write('Phoenix 100 90\n')
+        file.write('Chimera 85 75\n')
+        file.write('Pegasus 70 65\n')
+        file.write('Dragon 90 75\n')
+
+
+def teardown_module(module):
+    if os.path.exists('creatures.txt'):
+        os.remove('creatures.txt')
+    if os.path.exists('legendary_creatures.txt'):
+        os.remove('legendary_creatures.txt')
+
+
+def test_identify_legendary_creatures_base_case():
+    identify_legendary_creatures('creatures.txt', 'legendary_creatures.txt')
+    with open('legendary_creatures.txt', 'r') as file:
+        lines = file.read().splitlines()
+    assert 'Minotaur' in lines
+    assert 'Phoenix' in lines
+    assert 'Dragon' in lines
+
+
+def test_identify_legendary_creatures_exclusion_case():
+    identify_legendary_creatures('creatures.txt', 'legendary_creatures.txt')
+    with open('legendary_creatures.txt', 'r') as file:
+        lines = file.read().splitlines()
+    assert 'Cerberus' not in lines
+    assert 'Chimera' not in lines
+    assert 'Pegasus' not in lines
+
+
+def test_identify_legendary_creatures_edge_case_min_power_skill():
+    with open('creatures_edge.txt', 'w') as file:
+        file.write('Hydra 90 75\n')
+    identify_legendary_creatures('creatures_edge.txt', 'legendary_creatures_2.txt')
+    with open('legendary_creatures_2.txt', 'r') as file:
+        lines = file.read().splitlines()
+    assert 'Hydra' in lines
+    os.remove('creatures_edge.txt')
+    os.remove('legendary_creatures_2.txt')
+
+
+def test_identify_legendary_creatures_no_legendary_case():
+    with open('creatures_none.txt', 'w') as file:
+        file.write('Goblin 60 40\n')
+        file.write('Wisp 55 30\n')
+    identify_legendary_creatures('creatures_none.txt', 'legendary_creatures_3.txt')
+    with open('legendary_creatures_3.txt', 'r') as file:
+        lines = file.read().splitlines()
+    assert lines == []
+    os.remove('creatures_none.txt')
+    os.remove('legendary_creatures_3.txt')
+
+
+def test_identify_legendary_creatures_all_legendary_case():
+    with open('creatures_all.txt', 'w') as file:
+        file.write('Zeus 99 90\n')
+        file.write('Hades 95 88\n')
+        file.write('Athena 94 81\n')
+    identify_legendary_creatures('creatures_all.txt', 'legendary_creatures_4.txt')
+    with open('legendary_creatures_4.txt', 'r') as file:
+        lines = file.read().splitlines()
+    assert 'Zeus' in lines
+    assert 'Hades' in lines
+    assert 'Athena' in lines
+    os.remove('creatures_all.txt')
+    os.remove('legendary_creatures_4.txt')
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

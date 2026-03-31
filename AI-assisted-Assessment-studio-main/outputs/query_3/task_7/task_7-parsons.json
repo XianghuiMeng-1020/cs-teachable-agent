@@ -1,0 +1,80 @@
+{
+  "item_id": "task_7-parsons",
+  "source_task_id": "task_7",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_7",
+  "item_type": "parsons",
+  "title": "Decoding Alien Messages",
+  "prompt": "Rearrange the code blocks to form a function that decodes alien messages using a codebook. Words not found in the codebook should be replaced with 'UNKNOWN'. The decoded message should have words separated by a single space.",
+  "interaction_content": {
+    "function_name": "decode_message",
+    "code_blocks": [
+      "def decode_message(galactic_message, codebook):",
+      "words = galactic_message.split()\ndecoded_words = [''] * 0",
+      "return ' '.join(decoded_words)",
+      "for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')"
+    ],
+    "solution_order": [
+      0,
+      1,
+      3,
+      2
+    ],
+    "distractors": [
+      "decoded_words = ''",
+      "for word in words:\n        if word in codebook:\n            decoded_words.extend(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')"
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "solution_order": [
+      0,
+      1,
+      3,
+      2
+    ],
+    "ordered_blocks": [
+      "def decode_message(galactic_message, codebook):",
+      "words = galactic_message.split()\ndecoded_words = [''] * 0",
+      "for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')",
+      "return ' '.join(decoded_words)"
+    ]
+  },
+  "grading_rule": "All blocks must be in the correct order to pass.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_7",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "llm_assisted_prompt_and_distractors",
+    "llm_model": "gpt-4o-2024-08-06",
+    "llm_candidate": {
+      "title": "Decoding Alien Messages",
+      "prompt": "Rearrange the code blocks to form a function that decodes alien messages using a codebook. Words not found in the codebook should be replaced with 'UNKNOWN'. The decoded message should have words separated by a single space.",
+      "distractors": [
+        "decoded_words = ''",
+        "for word in words:\n        if word in codebook:\n            decoded_words.extend(codebook[word])\n        else:\n            decoded_words.append('UNKNOWN')"
+      ],
+      "grading_rule": "All blocks must be in the correct order to pass."
+    },
+    "compiler_mode": "llm-assisted"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

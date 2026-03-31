@@ -1,0 +1,48 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description:
+In a distant galaxy known as "Galactica Prime," the inhabitants have developed a complex method of communication using encoded expressions of strings and multiple interstellar space-time operations that form the "Galactonian Language."
+
+Write a function `decrypt_message(message)` that decrypts a given encoded string `message` and returns the plain text form.
+
+The message is encrypted in the following way:
+- Each character in the message can be transformed to another character according to the `galactic_cipher` dictionary, which provides the mappings.
+- Use the string operator to divide the message into chunks of fixed size of 3.
+- For each substring (of length 3), check if the substring exists in the `galactic_protocols` dictionary that maps special 3-character codes to their corresponding decoded text.
+- If the substring exists in `galactic_protocols`, replace it with the decoded text from this dictionary. Otherwise, decode each character according to the `galactic_cipher` dictionary.
+
+### Example:
+If the dictionaries are defined as follows:
+
+```python
+    galactic_cipher = {
+        'A': 'Z',
+        'B': 'Y',
+        'C': 'X',
+        'D': 'W',
+        'E': 'V',
+        'F': 'U',
+        '1': '9'
+    }
+
+    galactic_protocols = {
+        'FOO': 'HELLO',
+        'BAR': 'WORLD',
+        '123': 'SPACE'
+    }
+```
+
+And the message is `"FOOBAAR123F1C"`, the decrypted output should be `"HELLOWORLDSPACEXUX"`.
+
+### Input:
+- `message`: An encrypted string consisting of uppercase characters and digits. The length of the message is at least 1 and can be divided by 3.
+
+### Output:
+- Return the decrypted text as a string.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

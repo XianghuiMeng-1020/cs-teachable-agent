@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py F [ 20%]
+EFEFEFF                                                                  [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at teardown of test_energy_report_with_data _______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'energy_data.txt'
+___________ ERROR at teardown of test_energy_report_with_empty_data ____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'energy_data.txt'
+____________ ERROR at teardown of test_energy_report_with_zero_data ____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'energy_data.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:52: AssertionError: assert 'Total Energy: 0 kWh' == 'Total Energy: 45 kWh'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:58: FileNotFoundError: [Errno 2] No such file or directory: 'energy_report.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:68: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:78: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py:86: FileNotFoundError: [Errno 2] No such file or directory: 'energy_report.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_data
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_empty_data
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_zero_data
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_not_written_if_energy_data_is_modified
+FAILED outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_handles_perm_vari
+ERROR outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_data
+ERROR outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_empty_data
+ERROR outputs/results1/query_18/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_11/test_suite_stu.py::test_energy_report_with_zero_data
+========================= 5 failed, 3 errors in 0.15s ==========================

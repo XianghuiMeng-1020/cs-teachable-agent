@@ -1,0 +1,116 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Board Games' and a list of programming concepts ['Variables', 'Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Loops', 'Dictionaries']:
+
+### Beginning of task description
+Create a Python function `score_board_games(players, games)` that computes the final scores for a winning board game. 
+
+You will be given a dictionary `players` where the keys are player names and the values are their scores in a board game. The variable `games` is a list of results, with each result dictating a game round involving two players and indicating the winner of that game round.
+
+The `score_board_games` function should process and update the scores as follows:
+- The winner of each game round should receive 10 points added to their current score.
+
+### Function Signature
+```python
+def score_board_games(players, games):
+    # your code here
+```
+
+### Parameters
+- `players`: A dictionary where keys are player names (strings) and values are integers representing their current scores.
+- `games`: A list of dictionaries. Each dictionary contains one game round, with keys `"round"`, `"player1"`, `"player2"`, `"winner"`.
+   - `"round"`: The round number.
+   - `"player1"`, `"player2"`: The names of the two players competing in this round.
+   - `"winner"`: The name of the player who won the round, and should match one of `player1` or `player2`.
+
+### Returns
+- Nothing. The `players` dictionary should be updated in-place with the new scores.
+
+### Example
+```python
+players = {"Alice": 100, "Bob": 90, "Charlie": 120}
+games = [
+    {"round": 1, "player1": "Alice", "player2": "Bob", "winner": "Alice"},
+    {"round": 2, "player1": "Charlie", "player2": "Alice", "winner": "Alice"},
+    {"round": 3, "player1": "Bob", "player2": "Charlie", "winner": "Charlie"}
+]
+score_board_games(players, games)
+# After this, players should be: {"Alice": 120, "Bob": 90, "Charlie": 130}
+```
+
+### Note
+- You are guaranteed that the `players` dictionary will contain all the player entries specified in the `games` list.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import score_board_games
+
+@pytest.fixture
+
+def setup_module(module):
+    module.player_scores = {
+        "Alice": 70,
+        "Bob": 50,
+        "Charlie": 80,
+        "Dana": 60
+    }
+    module.game_results = [
+        {"round": 1, "player1": "Alice", "player2": "Bob", "winner": "Alice"},
+        {"round": 2, "player1": "Charlie", "player2": "Dana", "winner": "Dana"},
+        {"round": 3, "player1": "Alice", "player2": "Dana", "winner": "Alice"},
+        {"round": 4, "player1": "Bob", "player2": "Charlie", "winner": "Charlie"},
+        {"round": 5, "player1": "Dana", "player2": "Charlie", "winner": "Dana"}
+    ]
+    module.expected_results = {
+        "Alice": 90,  
+        "Bob": 50,
+        "Charlie": 90,
+        "Dana": 80
+    }
+
+@pytest.fixture
+
+def teardown_module(module):
+    del module.player_scores
+    del module.game_results
+    del module.expected_results
+
+
+def test_basic(setup_module):
+    score_board_games(player_scores, game_results)
+    assert player_scores == expected_results
+
+
+def test_no_games(setup_module):
+    score_board_games(player_scores, [])
+    assert player_scores == {"Alice": 90, "Bob": 70, "Charlie": 80, "Dana": 60}
+
+
+def test_all_draws(setup_module):
+    draws_games = [
+        {"round": 1, "player1": "Alice", "player2": "Bob", "winner": ""},
+        {"round": 2, "player1": "Charlie", "player2": "Dana", "winner": ""}
+    ]
+    score_board_games(player_scores, draws_games)
+    assert player_scores == {"Alice": 70, "Bob": 50, "Charlie": 80, "Dana": 60}
+
+
+def test_one_winner(setup_module):
+    one_game = [
+        {"round": 1, "player1": "Alice", "player2": "Charlie", "winner": "Charlie"}
+    ]
+    score_board_games(player_scores, one_game)
+    assert player_scores == {"Alice": 70, "Bob": 50, "Charlie": 90, "Dana": 60}
+
+
+def test_no_winner(setup_module):
+    no_winner_games = [{"round": 1, "player1": "Alice", "player2": "Charlie", "winner": ""}]
+    score_board_games(player_scores, no_winner_games)
+    assert player_scores == {"Alice": 70, "Bob": 50, "Charlie": 80, "Dana": 60}
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

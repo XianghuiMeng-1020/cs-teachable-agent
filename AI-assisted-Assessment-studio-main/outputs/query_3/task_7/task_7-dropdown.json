@@ -1,0 +1,98 @@
+{
+  "item_id": "task_7-dropdown",
+  "source_task_id": "task_7",
+  "source_task_path": "/Volumes/T7/idea/pytasksyn/outputs/query_3/task_7",
+  "item_type": "dropdown",
+  "title": "Dropdown Question for decode_message",
+  "prompt": "Fill each blank in the Python code with the single best option so the program matches the canonical source solution.\n\nSource task summary:\n### Task Description The Galactic Federation requires your programming prowess to help them decipher alien messages. You have intercepted encoded messages sent from different planets in the Andromeda Galaxy to Earth. Each intercepted message is a string containing words that correspond to specific planetary codes. Your task is to create a function `decode_message(galactic_message, codebook)` that takes in: - `galactic_message`: a string representing an encoded message. The words in the messag...",
+  "interaction_content": {
+    "function_name": "decode_message",
+    "prompt_template": "def decode_message(__BLANK_3__, codebook):\n    words = galactic_message.split()\n    decoded_words = []\n    for word in words:\n        if word in codebook:\n            decoded_words.append(codebook[word])\n        else:\n            decoded_words.append(__BLANK_1__)\n    return __BLANK_2__.join(decoded_words)",
+    "blanks": [
+      {
+        "blank_id": "blank_1",
+        "placeholder": "__BLANK_1__",
+        "options": [
+          "'UNKNOWN'",
+          "'MISSING'",
+          "'ERROR'",
+          "'INVALID'"
+        ],
+        "correct_answer": "'UNKNOWN'",
+        "misconception_tags": {
+          "'MISSING'": "sentinel_or_literal_confusion",
+          "'ERROR'": "sentinel_or_literal_confusion",
+          "'INVALID'": "sentinel_or_literal_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_2",
+        "placeholder": "__BLANK_2__",
+        "options": [
+          "' '",
+          "'UNKNOWN'",
+          "''",
+          "'TODO'"
+        ],
+        "correct_answer": "' '",
+        "misconception_tags": {
+          "'UNKNOWN'": "sentinel_or_literal_confusion",
+          "''": "sentinel_or_literal_confusion",
+          "'TODO'": "sentinel_or_literal_confusion"
+        }
+      },
+      {
+        "blank_id": "blank_3",
+        "placeholder": "__BLANK_3__",
+        "options": [
+          "galactic_message",
+          "decode_message",
+          "codebook",
+          "words"
+        ],
+        "correct_answer": "galactic_message",
+        "misconception_tags": {
+          "decode_message": "variable_reference_confusion",
+          "codebook": "variable_reference_confusion",
+          "words": "variable_reference_confusion"
+        }
+      }
+    ],
+    "require_explanation": false
+  },
+  "answer_key": {
+    "correct_answers": {
+      "blank_1": "'UNKNOWN'",
+      "blank_2": "' '",
+      "blank_3": "galactic_message"
+    }
+  },
+  "grading_rule": "Each blank has exactly one credited option. Award full credit only if every blank is correct.",
+  "metadata": {
+    "theme": "Science Fiction",
+    "concepts": [
+      "Dictionaries",
+      "Loops",
+      "Arithmetic Operators",
+      "Strings",
+      "Selection Statements (if/else, etc.)"
+    ],
+    "quality_metrics": {
+      "task": "task_7",
+      "total_num_tc": "5",
+      "gen_consistency": "1",
+      "LLMJudge": "1",
+      "Q-Testsuite": "1.0",
+      "Q-Context": "1",
+      "total_num_stu": "20",
+      "num_passed_stu": "20",
+      "passed_stus": "['gpt-4o-mini-2024-07-18_temp-1.0_0', 'gpt-4o-mini-2024-07-18_temp-1.0_1', 'gpt-4o-mini-2024-07-18_temp-1.0_2', 'gpt-4o-mini-2024-07-18_temp-1.0_3', 'gpt-4o-mini-2024-07-18_temp-1.0_4', 'gpt-4o-mini-2024-07-18_temp-1.0_5', 'gpt-4o-mini-2024-07-18_temp-1.0_6', 'gpt-4o-mini-2024-07-18_temp-1.0_7', 'gpt-4o-mini-2024-07-18_temp-1.0_8', 'gpt-4o-mini-2024-07-18_temp-1.0_9', 'gpt-4o-mini-2024-07-18_temp-1.0_10', 'gpt-4o-mini-2024-07-18_temp-1.0_11', 'gpt-4o-mini-2024-07-18_temp-1.0_12', 'gpt-4o-mini-2024-07-18_temp-1.0_13', 'gpt-4o-mini-2024-07-18_temp-1.0_14', 'gpt-4o-mini-2024-07-18_temp-1.0_15', 'gpt-4o-mini-2024-07-18_temp-1.0_16', 'gpt-4o-mini-2024-07-18_temp-1.0_17', 'gpt-4o-mini-2024-07-18_temp-1.0_18', 'gpt-4o-mini-2024-07-18_temp-1.0_19']"
+    },
+    "compilation_strategy": "deterministic_token_blanking",
+    "compiler_mode": "rule"
+  },
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

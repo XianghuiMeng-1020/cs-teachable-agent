@@ -1,0 +1,36 @@
+**Game of Chance: Lucky Slot Machine**
+
+You're tasked with creating a simulation of a simple slot machine game. The slot machine displays three slots, each choosing a random word from a predefined list of words. Players win if all three slots display the same word.
+
+### Task
+Implement the following functions to simulate and determine outcomes of a slot machine game:
+
+1. **`generate_slots(num_slots, word_list)`**
+    - **Parameters**: 
+      - `num_slots` (integer): The number of slots the machine has.
+      - `word_list` (list): A list of words to choose from.
+    - **Returns**: A string representing the outcome of the spun slots, with each slot result separated by a space.
+
+2. **`determine_outcome(slot_str)`**
+    - **Parameters**:
+      - `slot_str` (string): The result of the slots game as returned by `generate_slots`.
+    - **Returns**: A string 'WIN' if all slots display the same word, otherwise 'LOSE'.
+
+3. **`read_words_from_file(filename)`**
+    - **Parameters**:
+      - `filename` (string): The name of the file containing words to be used in the slot machine, one per line.
+    - **Returns**: A list of words extracted from the file.
+
+4. **`spin_and_check(filename, num_slots)`**
+    - **Parameters**:
+      - `filename` (string): The name of the file containing words.
+      - `num_slots` (integer): The number of slots on the machine.
+    - **Returns**: A string, 'WIN' or 'LOSE', indicating the game's outcome after spinning the slots.
+
+### Constraints
+- The `filename` will refer to a text file where each line contains a single word.
+- The number of slots (`num_slots`) will be a positive integer.
+- The list of words read from the file will contain at least one word.
+
+### Note
+- `random.choice` is used implicitly when selecting words from the list, which is part of file handling and I/O operations.

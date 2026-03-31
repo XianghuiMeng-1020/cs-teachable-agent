@@ -1,0 +1,97 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+## Task: Recipe Formatter
+
+Create a recipe formatting system that reads unformatted recipes from a text file and writes out a formatted recipe list to another text file. Each recipe consists of a title, a list of ingredients, and a method. 
+
+### Task Requirements:
+  
+- Write a Python function `format_recipe(file_input, file_output)` that reads an input file, formats the recipes, and writes them to an output file. 
+- Each recipe in the input file is a single line consisting of a title, ingredients, and method, separated by a `--`. For example:
+  
+  ```plaintext
+  Chocolate Cake--flour, sugar, cocoa, baking powder--mix ingredients, bake for 30m
+  Pasta--pasta, tomatoes, garlic--boil pasta, sauté tomatoes and garlic
+  ```
+- Format the recipes such that each recipe is written as:
+    
+    ```plaintext
+    Recipe Title: <Recipe Title>
+    Ingredients:
+    - <ingredient 1>
+    - <ingredient 2>
+    <...and so on>
+    Method:
+    <method>
+    ```
+
+- Each field should be separated by a newline.
+- The output file should have each recipe separated by two newlines.
+
+### Function Signature:
+```python
+format_recipe(file_input, file_output)
+```
+
+### Input:
+- `file_input`: the path of the file containing the unformatted recipes.
+- `file_output`: the path where the formatted recipes will be written.
+
+### Output:
+- None. The result will be written directly to the file_output.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import format_recipe
+
+def setup_module(module):
+    with open('test_recipes.txt', 'w') as f:
+        f.write(
+            "Chocolate Cake--flour, sugar, cocoa, baking powder--mix ingredients, bake for 30m\n"
+            "Pasta--pasta, tomatoes, garlic--boil pasta, sauté tomatoes and garlic\n"
+            "Sandwich--bread, cheese, ham--assemble, grill\n"
+"
+        )
+
+def teardown_module(module):
+    os.remove('test_recipes.txt')
+    os.remove('formatted_recipes.txt')
+
+
+def test_format_recipe_1():
+    format_recipe('test_recipes.txt', 'formatted_recipes.txt')
+    with open('formatted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content.count("Recipe Title") == 3
+
+def test_format_recipe_2():
+    format_recipe('test_recipes.txt', 'formatted_recipes.txt')
+    with open('formatted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert "Ingredients:\n- flour\n- sugar\n- cocoa\n- baking powder" in content
+
+
+def test_format_recipe_3():
+    format_recipe('test_recipes.txt', 'formatted_recipes.txt')
+    with open('formatted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert "Method:\nboil pasta, sauté tomatoes and garlic" in content
+
+def test_format_recipe_4():
+    with open('formatted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content.startswith("Recipe Title: Chocolate Cake")
+
+def test_format_recipe_5():
+    with open('formatted_recipes.txt', 'r') as f:
+        content = f.read()
+    assert content.endswith("grill\n\n")
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

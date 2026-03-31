@@ -1,0 +1,38 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task Description
+
+In a science fiction universe, a fleet of spaceships is involved in an intergalactic race event. You are tasked with creating a program to manage the fleet of spaceships being tracked in this event. Each spaceship has specific attributes such as its name, speed, and current fuel level. You will implement a class `SpaceshipFleet` to handle the fleet operations.
+
+Create a class `Spaceship` with the following attributes:
+- `name`: the name of the spaceship (a string).
+- `speed`: speed of the spaceship in light-years per hour (an integer).
+- `fuel`: current fuel level in percentage (an integer).
+
+Implement the `SpaceshipFleet` class with the following methods:
+
+1. **add_spaceship(name, speed, fuel):**
+   - Adds a new spaceship to the fleet.
+   - Raises a `ValueError` if a spaceship with the same name already exists.
+
+2. **remove_spaceship(name):**
+   - Removes a spaceship with the given name from the fleet.
+   - Raises a `KeyError` if no spaceship with that name is found.
+
+3. **get_fastest_spaceship():**
+   - Returns the name of the spaceship with the highest speed.
+   - Raises a `RuntimeError` if no spaceships are in the fleet.
+
+4. **get_fuel_status():**
+   - Returns a list of dictionaries, each containing the name of the spaceship and its current fuel level, sorted by name.
+
+### Testing
+
+The class will be tested using the `pytest` framework, ensuring the functionality of the methods and the correct handling of exceptions.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

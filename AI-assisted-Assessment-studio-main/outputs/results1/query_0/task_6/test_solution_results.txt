@@ -1,0 +1,8 @@
+FF...                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/test_suite_sol.py:30: AssertionError: assert 150 == 50
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_6/test_suite_sol.py:34: AssertionError: assert 300 == 190
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_6/test_suite_sol.py::test_single_match
+FAILED outputs/results1/query_0/task_6/test_suite_sol.py::test_multiple_match
+2 failed, 3 passed in 0.02s

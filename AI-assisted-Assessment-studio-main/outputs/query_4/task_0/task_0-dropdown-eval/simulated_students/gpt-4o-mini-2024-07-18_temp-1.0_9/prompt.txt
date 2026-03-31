@@ -1,0 +1,43 @@
+You are a student solving a Python dropdown question.
+Return only a JSON object with key `answers`.
+The value of `answers` must be a list of objects.
+Each object must contain `blank_id` and `selected_option`.
+Return exactly one answer object for every blank.
+Copy every selected option exactly as written in the choices.
+
+Title: Dropdown Question for calculate_scores
+Prompt: Fill each blank in the Python code with the single best option so the program matches the canonical source solution.
+
+Source task summary:
+### Task Description: You are part of a team developing a board game scoring system. Each player in the board game has both positive and negative scores collected during gameplay. You need to write a Python program that calculates and returns the total score of each player. Your program should define a function `calculate_scores(player_scores)` that takes in a dictionary, `player_scores`, where the keys are strings representing player names, and the values are lists of integers representing t...
+
+Code template:
+```python
+def calculate_scores(__BLANK_2__):
+    __BLANK_3__ = {}
+    for player, scores in player_scores.items():
+        total = __BLANK_1__
+        for score in scores:
+            total += score
+        total_scores[player] = total
+    return total_scores
+```
+
+Choices by blank:
+blank_1 (__BLANK_1__):
+- 0
+- 1
+- 2
+- -1
+
+blank_2 (__BLANK_2__):
+- calculate_scores
+- total_scores
+- player
+- player_scores
+
+blank_3 (__BLANK_3__):
+- calculate_scores
+- player
+- total_scores
+- player_scores

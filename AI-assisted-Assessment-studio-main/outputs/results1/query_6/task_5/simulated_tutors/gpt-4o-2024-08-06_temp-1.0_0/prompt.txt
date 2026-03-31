@@ -1,0 +1,81 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Your task is to write a Python program that simulates a simple "Mythological Creatures Repository". This repository will manage details about different mythological creatures.
+
+Implementation Requirements:
+
+1. Define a class `MythologicalCreature` with the following attributes:
+   - `name` (string): The name of the mythological creature.
+   - `origin` (string): The culture or mythology from which the creature originates.
+   - `description` (string): A short description of the creature.
+
+2. Create another class `CreaturesRepository` that manages a collection of `MythologicalCreature` objects. This class should have the following methods:
+   - `add_creature(creature)`: Adds a `MythologicalCreature` to the collection.
+   - `remove_creature(name)`: Removes a creature from the collection by its name. If no creature is found by the given name, do nothing.
+   - `load_from_file(file_path)`: Loads creatures from the specified text file and adds them to the collection. Each line in the file contains the details of a creature in the format `name;origin;description`.
+   - `save_to_file(file_path)`: Saves all creatures in the collection to the specified text file in the same format used for loading.
+
+3. Ensure the file handling is correctly managed for both reading from and writing to files.
+
+We expect the `save_to_file` and `load_from_file` methods to overwrite any existing data in the file, basing it on the current state of the repository.
+
+There are no specific constraints on the length of the `description`, but for string handling efficiency, it should be reasonable and descriptive.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythologicalCreature, CreaturesRepository
+
+def setup_module(module):
+    with open('test_creatures.txt', 'w') as file:
+        file.write("Dragon;European;A large, serpentine legendary creature that appears in the folklore of many cultures worldwide.\n")
+        file.write("Phoenix;Egyptian;A long-lived bird that cyclically regenerates or is otherwise born again.\n")
+        file.write("Unicorn;Western;A legendary animal that has been described since antiquity as a beast with a single large, pointed, spiraling horn projecting from its forehead.\n")
+
+def teardown_module(module):
+    os.remove('test_creatures.txt')
+    if os.path.exists('output_creatures.txt'):
+        os.remove('output_creatures.txt')
+
+def test_add_creature():
+    repo = CreaturesRepository()
+    creature = MythologicalCreature("Cerberus", "Greek", "A multi-headed dog that guards the gates of the Underworld.")
+    repo.add_creature(creature)
+    assert any(c.name == "Cerberus" for c in repo.creatures)
+
+def test_remove_creature():
+    repo = CreaturesRepository()
+    creature = MythologicalCreature("Minotaur", "Greek", "A creature with the head of a bull and the body of a man.")
+    repo.add_creature(creature)
+    repo.remove_creature("Minotaur")
+    assert not any(c.name == "Minotaur" for c in repo.creatures)
+
+def test_load_from_file():
+    repo = CreaturesRepository()
+    repo.load_from_file('test_creatures.txt')
+    assert any(c.name == "Dragon" for c in repo.creatures)
+    assert any(c.name == "Phoenix" for c in repo.creatures)
+    assert any(c.name == "Unicorn" for c in repo.creatures)
+
+def test_save_to_file():
+    repo = CreaturesRepository()
+    repo.load_from_file('test_creatures.txt')
+    repo.save_to_file('output_creatures.txt')
+    with open('output_creatures.txt', 'r') as file:
+        content = file.read()
+    assert "Dragon;European;" in content
+    assert "Phoenix;Egyptian;" in content
+    assert "Unicorn;Western;" in content
+
+def test_empty_removal_handling():
+    repo = CreaturesRepository()
+    repo.remove_creature("NonExistent")  # Attempting to remove a non-existent creature
+    assert len(repo.creatures) == 0
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

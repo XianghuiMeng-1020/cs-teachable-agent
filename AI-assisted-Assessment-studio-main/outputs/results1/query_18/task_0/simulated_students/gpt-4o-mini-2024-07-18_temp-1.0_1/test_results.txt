@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py F [ 20%]
+...EE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_no_extra_entries ____________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'intergalactic_travel_test.txt'
+__________________ ERROR at teardown of test_no_extra_entries __________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'intergalactic_travel_test.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:29: AssertionError: assert 'Mars:15.0\n' in []
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_avg_time_mars
+ERROR outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_no_extra_entries
+ERROR outputs/results1/query_18/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_no_extra_entries
+==================== 1 failed, 3 passed, 2 errors in 0.16s =====================

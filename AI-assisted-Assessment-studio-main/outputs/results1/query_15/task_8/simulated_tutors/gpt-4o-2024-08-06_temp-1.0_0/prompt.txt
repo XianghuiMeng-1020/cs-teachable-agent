@@ -1,0 +1,44 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Variables', 'Selection Statements (if/else, etc.)', 'Loops']:
+
+### Beginning of task description
+Imagine a group of astronauts on an interplanetary exploration mission. They have a robotic assistant on board their spaceship that helps them communicate by encoding and decoding messages for secure transmission. The robot uses a basic encoding technique called 'vowel shift'. 
+
+Each vowel in the English alphabet (a, e, i, o, u) is shifted to the next vowel in the sequence (a->e, e->i, i->o, o->u, u->a), and consonants remain unchanged. Your task is to implement a function named `encode_message(message)` that takes a string, `message`, as input and returns a new string where each vowel is replaced according to this shift.
+
+The message will consist only of lowercase alphabetical characters and spaces. Spaces should be preserved in their original positions.
+
+The function should follow the signature:
+
+```
+encode_message(message)
+```
+
+Your function will be tested with multiple test cases and should handle words with varying lengths, as well as messages containing only vowels, only consonants, or a mixture of both.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution_program import encode_message
+
+@pytest.mark.parametrize("message, expected", [
+    ("hello world", "hillu wurld"),
+    ("space voyage", "spici vuyegi"),
+    ("science fiction", "sciinci ficoiun"),
+    ("universes collide", "anovirsis celluldi"),
+    ("aeiou", "eioua"),
+    ("cryptography", "cryptugrephy"),
+    ("all vowels", "ell vuwils"),
+    ("aaaaa", "eeeee"),
+    ("r q u", "r q a"),
+    ("xylophones and zithers", "xuluiphunis end zuthirs"),
+    ("", "")  # Test for an empty string
+])
+def test_encode_message(message, expected):
+    assert encode_message(message) == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

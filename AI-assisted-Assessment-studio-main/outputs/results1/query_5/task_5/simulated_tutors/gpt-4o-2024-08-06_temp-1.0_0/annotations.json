@@ -1,0 +1,4 @@
+{
+    "program": "def identify_legendary_creatures(input_file, output_file):\n    with open(input_file, 'r') as infile:\n        lines = infile.readlines()\n\n    legendary_creatures = []\n\n    for line in lines:\n        parts = line.split()\n        name = parts[0]\n        power = int(parts[1])\n        skill = int(parts[2])\n\n        # Check the conditions for being legendary\n        if power >= 90 and skill >= 75:\n            legendary_creatures.append(name)\n\n    with open(output_file, 'w') as outfile:\n        for creature in legendary_creatures:\n            outfile.write(creature + '\\n')",
+    "context_relevance": 1.0
+}

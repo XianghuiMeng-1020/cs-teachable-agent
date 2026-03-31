@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:38: AssertionError: assert '1020' == '1020\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:38: AssertionError: assert '800' == '800\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:38: AssertionError: assert '1200' == '1200\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:38: AssertionError: assert '1000' == '1000\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:38: AssertionError: assert '1050' == '1050\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_calculate_final_weight[test1.txt-1020\n]
+FAILED outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_calculate_final_weight[test2.txt-800\n]
+FAILED outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_calculate_final_weight[test3.txt-1200\n]
+FAILED outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_calculate_final_weight[test4.txt-1000\n]
+FAILED outputs/results1/query_18/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::test_calculate_final_weight[test5.txt-1050\n]
+============================== 5 failed in 0.05s ===============================

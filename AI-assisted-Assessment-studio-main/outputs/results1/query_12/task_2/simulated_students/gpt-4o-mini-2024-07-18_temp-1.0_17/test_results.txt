@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at teardown of test_read_vegetarian_recipes[-] _____________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:70: AssertionError: assert 'Name: Veggie...rs, soy sauce' == '\nName: Vegg..., soy sauce\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:70: AssertionError: assert 'Name: Mushro... coconut milk' == '\nName: Mush...oconut milk\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:70: AssertionError: assert 'Name: Veggie...rs, soy sauce' == '\nName: Sala...o, cucumber\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:72: AssertionError: assert (not True or 126 == 0)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:5: FileNotFoundError: [Errno 2] No such file or directory: 'recipes.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Chicken Curry\nIngredients: chicken, curry powder, onions, garlic\n\nName: Veggie Stir Fry\nIngredients: broccoli, bell peppers, soy sauce\n\nName: Beef Stroganoff\nIngredients: beef, mushrooms, sour cream\n-\nName: Veggie Stir Fry\nIngredients: broccoli, bell peppers, soy sauce\n]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Chicken Salad\nIngredients: chicken, lettuce, mayonnaise\n\nName: Mushroom Risotto\nIngredients: rice, mushrooms, parmesan\n\nName: BBQ Pork Ribs\nIngredients: pork, bbq sauce, spices\n\nName: Tofu Curry\nIngredients: tofu, curry powder, coconut milk\n-\nName: Mushroom Risotto\nIngredients: rice, mushrooms, parmesan\n\nName: Tofu Curry\nIngredients: tofu, curry powder, coconut milk\n]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Salad\nIngredients: lettuce, tomato, cucumber\n-\nName: Salad\nIngredients: lettuce, tomato, cucumber\n]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[\nName: Chicken Roast\nIngredients: chicken, spices\n-]
+FAILED outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[-]
+ERROR outputs/results1/query_12/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_read_vegetarian_recipes[-]
+========================== 5 failed, 1 error in 0.15s ==========================

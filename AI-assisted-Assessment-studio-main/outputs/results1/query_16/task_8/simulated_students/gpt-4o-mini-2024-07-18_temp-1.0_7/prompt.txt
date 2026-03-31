@@ -1,0 +1,25 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a futuristic world, a scientist has developed a remarkable machine capable of converting Martian units of distance into Earth-based units. However, the machine is currently unable to handle any errors or unexpected inputs gracefully. Your task is to improve the machine's code by creating a program that converts Martian distance units into Earth kilometers and handles errors appropriately.
+
+You need to implement a `MartianConverter` class with the following function:
+
+- `convert_to_kilometers(distance)`: This method takes a string `distance` which signifies the distance in Martian units. The Martian unit system defines 1 Martian unit as equivalent to 2.5 Earth kilometers. Your task is to return a string that represents the distance in Earth kilometers, rounded to 2 decimal places.
+
+Keep in mind:
+1. If the input string is not a valid number or is negative, the method should gracefully return the string "Error: Invalid input".
+2. If the input contains additional spaces or is formatted incorrectly (but still can be interpreted as a number), correct it and perform the conversion.
+
+__Examples:__
+- `convert_to_kilometers("10")` should return "25.00"
+- `convert_to_kilometers("10.5")` should return "26.25"
+- `convert_to_kilometers(" 12.3 ")` should return "30.75"
+- `convert_to_kilometers("abc")` should return "Error: Invalid input"
+- `convert_to_kilometers("-5")` should return "Error: Invalid input"
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

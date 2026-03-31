@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FFF.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:18: AssertionError: assert {'eggs': '6 u...gar': '2 cup'} == {'eggs': '6 u...ar': '2 cups'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:31: AssertionError: assert {'butter': '2...lk': '4 cups'} == {'butter': '2...lk': '5 cups'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:42: AssertionError: assert {'vanilla': '5 teaspoon'} == {'vanilla': '5 teaspoons'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:53: AssertionError: assert {'salt': '0 pinch'} == {'salt': '0 pinches'}
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_recipe_calculator_base_case
+FAILED outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_recipe_calculator_fractional_result
+FAILED outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_recipe_calculator_edge_case
+FAILED outputs/results1/query_14/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::test_recipe_calculator_single_ingredient_zero_multiplier
+========================= 4 failed, 1 passed in 0.04s ==========================

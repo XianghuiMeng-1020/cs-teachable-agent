@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py F [ 20%]
+FFF.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:23: AssertionError: assert 'Pasta Carbon...a\nOrange\n\n' == 'Pasta Carbon...nPancetta\n\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:29: AssertionError: assert 'Pasta Carbon...a\nOrange\n\n' == 'Pasta Carbon...ana\nOrange\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:37: AssertionError: assert '\n' == ''
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py:43: AssertionError: assert '\n' == ''
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestFilterIngredients::test_filter_ingredients_exceeding
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestFilterIngredients::test_filter_ingredients_no_exceed
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestFilterIngredients::test_filter_no_recipes
+FAILED outputs/query_2/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_8/test_suite_stu.py::TestFilterIngredients::test_filter_all_recipes_removed
+========================= 4 failed, 1 passed in 0.04s ==========================

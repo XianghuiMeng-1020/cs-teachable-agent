@@ -107,17 +107,17 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
           <ArrowRightLeft className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h3 className="font-semibold text-slate-900">跨领域知识迁移</h3>
-          <p className="text-sm text-slate-500">发现并利用你的知识储备加速学习</p>
+          <h3 className="font-semibold text-stone-900">跨领域知识迁移</h3>
+          <p className="text-sm text-stone-500">发现并利用你的知识储备加速学习</p>
         </div>
       </div>
 
       {/* Domain Selection */}
-      <div className="bg-slate-50 rounded-xl p-4 mb-6">
+      <div className="bg-stone-50 rounded-xl p-4 mb-6">
         <div className="flex flex-col md:flex-row items-center gap-4">
           {/* Source Domain */}
           <div className="flex-1 w-full">
-            <label className="text-sm font-medium text-slate-700 mb-2 block">已掌握领域</label>
+            <label className="text-sm font-medium text-stone-700 mb-2 block">已掌握领域</label>
             <div className="grid grid-cols-3 gap-2">
               {domains.map(domain => (
                 <button
@@ -126,11 +126,11 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
                   className={`p-3 rounded-lg border-2 text-center transition-all ${
                     sourceDomain === domain.id
                       ? `border-${domain.color.replace('bg-', '')} bg-white shadow-md`
-                      : "border-transparent bg-white hover:bg-slate-100"
+                      : "border-transparent bg-white hover:bg-stone-100"
                   }`}
                 >
                   <domain.icon className={`w-6 h-6 mx-auto mb-1 ${domain.color.replace('bg-', 'text-')}`} />
-                  <p className="text-xs font-medium text-slate-700">{domain.name}</p>
+                  <p className="text-xs font-medium text-stone-700">{domain.name}</p>
                 </button>
               ))}
             </div>
@@ -138,13 +138,13 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
 
           {/* Arrow */}
           <div className="flex items-center justify-center">
-            <ArrowRight className="w-6 h-6 text-slate-400 md:block hidden" />
-            <ArrowRight className="w-6 h-6 text-slate-400 md:hidden rotate-90" />
+            <ArrowRight className="w-6 h-6 text-stone-400 md:block hidden" />
+            <ArrowRight className="w-6 h-6 text-stone-400 md:hidden rotate-90" />
           </div>
 
           {/* Target Domain */}
           <div className="flex-1 w-full">
-            <label className="text-sm font-medium text-slate-700 mb-2 block">目标领域</label>
+            <label className="text-sm font-medium text-stone-700 mb-2 block">目标领域</label>
             <div className="grid grid-cols-3 gap-2">
               {domains.map(domain => (
                 <button
@@ -155,12 +155,12 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
                     targetDomain === domain.id
                       ? `border-${domain.color.replace('bg-', '')} bg-white shadow-md`
                       : domain.id === sourceDomain
-                      ? "border-transparent bg-slate-100 opacity-50 cursor-not-allowed"
-                      : "border-transparent bg-white hover:bg-slate-100"
+                      ? "border-transparent bg-stone-100 opacity-50 cursor-not-allowed"
+                      : "border-transparent bg-white hover:bg-stone-100"
                   }`}
                 >
-                  <domain.icon className={`w-6 h-6 mx-auto mb-1 ${domain.id === sourceDomain ? 'text-slate-400' : domain.color.replace('bg-', 'text-')}`} />
-                  <p className="text-xs font-medium text-slate-700">{domain.name}</p>
+                  <domain.icon className={`w-6 h-6 mx-auto mb-1 ${domain.id === sourceDomain ? 'text-stone-400' : domain.color.replace('bg-', 'text-')}`} />
+                  <p className="text-xs font-medium text-stone-700">{domain.name}</p>
                 </button>
               ))}
             </div>
@@ -239,7 +239,7 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
 
             {/* Transferable Concepts */}
             <div>
-              <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+              <h4 className="font-semibold text-stone-900 mb-3 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-yellow-500" />
                 可迁移概念 ({mockTransferData.transferable_concepts.length})
               </h4>
@@ -250,15 +250,15 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg"
+                    className="flex items-center gap-3 p-3 bg-stone-50 rounded-lg"
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-slate-900">{concept.source}</span>
-                        <ArrowRight className="w-4 h-4 text-slate-400" />
+                        <span className="font-medium text-stone-900">{concept.source}</span>
+                        <ArrowRight className="w-4 h-4 text-stone-400" />
                         <span className="font-medium text-brand-600">{concept.target}</span>
                       </div>
-                      <p className="text-xs text-slate-500">{concept.explanation}</p>
+                      <p className="text-xs text-stone-500">{concept.explanation}</p>
                     </div>
                     <div className="flex items-center gap-1">
                       {[...Array(concept.strength)].map((_, j) => (
@@ -272,14 +272,14 @@ export function CrossDomainTransfer({ className }: { className?: string }) {
 
             {/* Recommended Sequence */}
             <div>
-              <h4 className="font-semibold text-slate-900 mb-3">推荐学习路径</h4>
+              <h4 className="font-semibold text-stone-900 mb-3">推荐学习路径</h4>
               <ol className="space-y-2">
                 {mockTransferData.recommended_sequence.map((step, i) => (
                   <li key={i} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
                     <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-medium shrink-0">
                       {i + 1}
                     </span>
-                    <span className="text-sm text-slate-700">{step}</span>
+                    <span className="text-sm text-stone-700">{step}</span>
                   </li>
                 ))}
               </ol>

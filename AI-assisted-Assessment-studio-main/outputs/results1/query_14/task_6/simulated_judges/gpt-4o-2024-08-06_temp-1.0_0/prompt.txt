@@ -1,0 +1,61 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Dictionaries']:
+
+### Beginning of task description
+Write a function `recipe_summary` that takes a string representing a recipe and returns a dictionary summarizing the recipe's contents. The input string will contain multiple lines, each formatted as `'ingredient: quantity unit'`. Your task is to build a dictionary where each key is an ingredient and the value is a dictionary with keys 'quantity' and 'unit'. Each ingredient will appear only once in the input.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import recipe_summary
+
+# Test for basic functionality
+def test_single_ingredient():
+    recipe = "flour: 200 grams"
+    expected = {"flour": {"quantity": "200", "unit": "grams"}}
+    assert recipe_summary(recipe) == expected
+
+# Test multiple ingredients
+def test_multiple_ingredients():
+    recipe = "flour: 200 grams\nsugar: 100 grams\nbutter: 50 grams"
+    expected = {
+        "flour": {"quantity": "200", "unit": "grams"},
+        "sugar": {"quantity": "100", "unit": "grams"},
+        "butter": {"quantity": "50", "unit": "grams"}
+    }
+    assert recipe_summary(recipe) == expected
+
+# Test different units
+def test_different_units():
+    recipe = "milk: 1 liter\neggs: 2 units"
+    expected = {
+        "milk": {"quantity": "1", "unit": "liter"},
+        "eggs": {"quantity": "2", "unit": "units"}
+    }
+    assert recipe_summary(recipe) == expected
+
+# Test empty string
+def test_empty_string():
+    recipe = ""
+    expected = {}
+    assert recipe_summary(recipe) == expected
+
+# Test complex input
+def test_complex_input():
+    recipe = "vegetables: 500 grams\nwater: 2 liters\nmeat: 1 kilogram"
+    expected = {
+        "vegetables": {"quantity": "500", "unit": "grams"},
+        "water": {"quantity": "2", "unit": "liters"},
+        "meat": {"quantity": "1", "unit": "kilogram"}
+    }
+    assert recipe_summary(recipe) == expected
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

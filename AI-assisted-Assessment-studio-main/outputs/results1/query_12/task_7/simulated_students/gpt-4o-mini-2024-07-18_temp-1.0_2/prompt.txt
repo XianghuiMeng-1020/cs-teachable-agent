@@ -1,0 +1,29 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that reads a collection of cooking recipes from a text file and generates a summary report indicating how many recipes involve cooking on a stove, using an oven, or no cooking at all (e.g., salads). The program should define a function `summarize_recipes(filename)` that takes the name of a text file as its parameter. This file contains one recipe description per line. Each description lists ingredients and cooking methods. Only consider the keywords "stove", "oven", and "no_cook" to determine the cooking type. 
+
+Functionality:
+1. The file reading should handle all lines correctly.
+2. Your program should count recipes containing the keyword "stove" as stove recipes, "oven" as oven recipes, and "no_cook" for recipes involving no cooking.
+3. Recipes may belong to more than one category (e.g., "stove" and "oven" in one recipe).
+4. The function should return a dictionary object with counts for each type of recipe under the keys "stove", "oven", and "no_cook". If "stove", "oven", or "no_cook" are not found in any recipes, their counts should be 0.
+
+The input file will have the following format:
+- Each line represents a recipe.
+- Keywords will appear exactly as given (no variations like "stoves"). 
+
+Example: If the file contains:
+```
+Pasta with stove
+Cake with oven
+Salad with no_cook
+Roast with oven, stove
+```
+The function should return: `{'stove': 2, 'oven': 2, 'no_cook': 1}`
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

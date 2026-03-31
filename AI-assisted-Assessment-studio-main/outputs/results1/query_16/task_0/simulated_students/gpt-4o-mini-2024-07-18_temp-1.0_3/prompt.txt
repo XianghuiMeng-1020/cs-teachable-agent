@@ -1,0 +1,21 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+In a distant future, human civilization has spread across hundreds of planets, each requiring a different type of fuel for galactic travel. To facilitate efficient allocation of these fuels, you are required to construct a system simulating this scenario.
+
+Create a class `FuelStation` that has the following methods:
+1. **`__init__(self, planet_name, initial_fuel)`**: Initializes a fuel station with the specified `planet_name` and `initial_fuel` amount. Raise a `ValueError` if `initial_fuel` is negative.
+
+2. **`refuel(self, amount)`**: Adds `amount` of fuel to the station's current supply. A `ValueError` should be raised if `amount` is negative.
+
+3. **`consume(self, amount)`**: Consumes `amount` of fuel from the station's current supply. Raise an `Exception` with the message "Insufficient fuel" if `amount` exceeds the station's current fuel supply.
+
+4. **`get_fuel_report(self)`**: Returns a string report in the format: "Fuel station on [planet_name] has [current_fuel] gallons left."
+
+Your task is to implement this class and its methods so that they work as described. The program will be tested based on the functionality of these methods and the error handling implemented.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

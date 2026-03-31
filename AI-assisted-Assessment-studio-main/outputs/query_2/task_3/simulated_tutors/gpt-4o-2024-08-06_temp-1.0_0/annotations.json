@@ -1,0 +1,4 @@
+{
+    "program": "def format_recipe(file_input, file_output):\n    with open(file_input, 'r') as file_in:\n        lines = file_in.readlines()\n\n    formatted_recipes = []\n    for line in lines:\n        line = line.strip()\n        if line:  # Ignore empty lines\n            parts = line.split('--')\n            if len(parts) == 3:\n                title, ingredients, method = parts\n\n                # Split ingredients and format them\n                ingredients_list = ingredients.split(', ')\n                formatted_ingredients = '\\n'.join(['- ' + ing for ing in ingredients_list])\n\n                # Format the recipe\n                formatted_recipe = f\"Recipe Title: {title}\\nIngredients:\\n{formatted_ingredients}\\nMethod:\\n{method}\\n\"\n\n                formatted_recipes.append(formatted_recipe)\n\n    with open(file_output, 'w') as file_out:\n        file_out.write('\\n\\n'.join(formatted_recipes) + '\\n')",
+    "context_relevance": 1.0
+}

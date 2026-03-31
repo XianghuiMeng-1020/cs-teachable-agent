@@ -1,0 +1,52 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Mythology' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+### Task Description
+
+In Greek mythology, a labyrinth is a convoluted structure designed with many confusing paths and dead ends. Your task is to create a function named `guard_treasure` that simulates guarding a secret treasure within such a labyrinth.
+
+Given a list containing tuples of guards positioned along various corridors within this labyrinth, your task is to determine which guards prevent the treasure (located at the end of the labyrinth) from being stolen by blocking the thieves at the correct paths. Each tuple contains information about the guard's positioning. The guard stops the thieves if the corridor number is odd.
+
+Function Signature:
+```python
+def guard_treasure(guards):
+```
+
+#### Input
+- `guards`: A list containing non-empty tuples, where each tuple has the format `(name, corridor_number)`.
+
+#### Output
+- The function should return a list of strings containing names of guards positioned on odd-numbered corridors.
+
+#### Example
+```python
+guards = [("Athena", 1), ("Hermes", 2), ("Apollo", 3), ("Artemis", 4)]
+print(guard_treasure(guards))
+```
+
+#### Expected Output
+```python
+['Athena', 'Apollo']
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import guard_treasure
+
+@pytest.mark.parametrize("guards, expected", [
+    ([('Athena', 1), ('Hermes', 2), ('Apollo', 3), ('Artemis', 4)], ['Athena', 'Apollo']),
+    ([('Zeus', 7), ('Hera', 5)], ['Zeus', 'Hera']),
+    ([('Poseidon', 2), ('Demeter', 8)], []),
+    ([('Ares', 9), ('Athena', 13), ('Hephaestus', 18)], ['Ares', 'Athena']),
+    ([('Hermes', 100)], [])
+])
+def test_guard_treasure(guards, expected):
+    assert guard_treasure(guards) == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

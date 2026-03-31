@@ -166,10 +166,10 @@ export function UserGuide() {
                   <Icon className="w-8 h-8 text-brand-600" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-xl font-bold text-stone-900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-stone-600 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -197,7 +197,7 @@ export function UserGuide() {
                           ? "bg-brand-500"
                           : idx < currentStep
                           ? "bg-brand-300"
-                          : "bg-slate-200"
+                          : "bg-stone-200"
                       }`}
                     />
                   ))}
@@ -218,7 +218,7 @@ export function UserGuide() {
             <div className="px-6 pb-4 text-center">
               <button
                 onClick={handleSkip}
-                className="text-xs text-slate-400 hover:text-slate-600 transition-colors"
+                className="text-xs text-stone-400 hover:text-stone-600 transition-colors"
               >
                 Skip guide (you can restart it later)
               </button>

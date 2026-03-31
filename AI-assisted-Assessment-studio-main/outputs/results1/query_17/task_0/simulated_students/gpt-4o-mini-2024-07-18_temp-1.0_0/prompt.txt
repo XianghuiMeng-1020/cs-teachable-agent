@@ -1,0 +1,40 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Task: Spaceship Inventory Management
+
+In this Science Fiction themed task, you need to implement a `Spaceship` class that simulates an inventory management system for a spaceship. The spaceship has a cargo hold where items are stored, and the storage space is limited. Each item has a name, category, and weight.
+
+You must implement the following features:
+
+1. **Spaceship** Class:
+    - **Attributes**:
+      - `name`: a string representing the name of the spaceship.
+      - `capacity`: an integer for the maximum weight capacity of the cargo hold.
+      - `inventory`: a dictionary where keys are item names (strings) and values are dictionaries containing the `category` and `weight` of each item.
+
+2. **Methods**:
+    - `add_item(name, category, weight)`: Adds an item to the inventory. If adding the item exceeds the capacity, raise an `Exception` with the message "Insufficient capacity". If an item with the same name already exists, update its category and weight.
+    - `remove_item(name)`: Removes an item from the inventory by its name. If the item does not exist, raise an `Exception` with the message "Item not found".
+    - `total_weight()`: Returns the total weight of all items in the cargo hold.
+    - `list_items()`: Returns a list of tuples, each containing the name, category, and weight of each item in the inventory.
+
+### Testing
+
+The test suite will verify that your implementation correctly manages the spaceship's inventory as per the above requirements. Your methods will be tested for correct item addition, removal, updating, capacity enforcement, and accurate total weight calculations.
+
+### Example Usage
+
+```python
+ship = Spaceship("Galactic Falcon", 500)
+ship.add_item("Laser Cannon", "Weapon", 60)
+print(ship.total_weight()) # Output: 60
+ship.add_item("Laser Cannon", "Weapon Upgraded", 70)
+print(ship.list_items()) # Output: [("Laser Cannon", "Weapon Upgraded", 70)]
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

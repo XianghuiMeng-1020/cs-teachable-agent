@@ -1,0 +1,31 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with implementing a function that calculates the score from a string representing a series of moves in simplified "Snakes and Ladders." The board is numbered from 1 to 100. The player can roll a 1 to 6 and can land on positions represented by a string of comma-separated numbers. For simplicity, we will assume moving from square to square involves no additional game mechanics other than moving according to dice rolls until we potentially land beyond the 100th square. The function should return the final score which represents the highest reached position without exceeding 100. If a move lands the player beyond 100, the roll is discarded.
+
+Implement the following function:
+
+`def calculate_final_score(moves):`
+
+### Parameters:
+- `moves`: a string containing comma-separated dice rolls. Each roll is a number between 1 to 6.
+
+### Returns:
+- An integer representing the final highest position reached on the board (maximum 100).
+
+### Constraints:
+- You must handle cases where the input contains invalid numbers (not between 1 and 6) gracefully by ignoring those moves.
+
+### Example:
+
+`calculate_final_score("4,5,6,2,1,1")` should return 19.
+
+`calculate_final_score("3,6,6,8,5")` should return 20 (skips roll of 8).
+
+`calculate_final_score("1,1,3,4,50,60,1")` should return 9 (skips rolls of 50 and 60).
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

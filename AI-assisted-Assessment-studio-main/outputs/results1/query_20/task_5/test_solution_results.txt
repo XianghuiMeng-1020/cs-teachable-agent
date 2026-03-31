@@ -1,0 +1,6 @@
+.F...                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_20/task_5/test_suite_sol.py:11: AssertionError: assert 'A' == 'B'
+=========================== short test summary info ============================
+FAILED outputs/results1/query_20/task_5/test_suite_sol.py::test_player_b_wins
+1 failed, 4 passed in 0.02s

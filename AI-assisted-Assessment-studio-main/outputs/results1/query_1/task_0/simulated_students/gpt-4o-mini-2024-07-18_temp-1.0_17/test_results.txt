@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+..F.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:6: assert 105 == 130
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:15: assert 225 == 230
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_game_of_chance_basic_win_lose
+FAILED outputs/results1/query_1/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_game_of_chance_just_enough_balance
+========================= 2 failed, 3 passed in 0.12s ==========================

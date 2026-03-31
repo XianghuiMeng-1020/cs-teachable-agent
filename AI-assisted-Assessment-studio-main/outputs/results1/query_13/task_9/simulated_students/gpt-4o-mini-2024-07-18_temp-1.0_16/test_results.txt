@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 20%]
+..FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:22: AssertionError: assert 7.25 == 9.25
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:34: AssertionError: assert None == 0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:38: AssertionError: assert None == 0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_valid_file_full_use
+FAILED outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_empty_file
+FAILED outputs/results1/query_13/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_empty_quantities
+========================= 3 failed, 2 passed in 0.09s ==========================

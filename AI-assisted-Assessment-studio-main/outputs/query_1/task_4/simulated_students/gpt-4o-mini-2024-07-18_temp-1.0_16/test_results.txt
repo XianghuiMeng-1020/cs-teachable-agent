@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py . [ 20%]
+..FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:13: assert 0 == 70
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:13: assert 0 == 25
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_best_fruits[apples3-30-70]
+FAILED outputs/query_1/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_best_fruits[apples4-24-25]
+========================= 2 failed, 3 passed in 0.11s ==========================

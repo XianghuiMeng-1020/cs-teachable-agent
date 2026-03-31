@@ -1,0 +1,10 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python function `compute_total_calories(filename)` that reads a text file where each line contains the name of the dish and its associated calories separated by a comma. The function should return a string indicating the name of the dish with the highest calorie content and its respective calorie count in the format: 'DishName: Calories'. If the file is empty or if a line is not formatted correctly (i.e., doesn't contain exactly one comma), the function should return 'No valid data'.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

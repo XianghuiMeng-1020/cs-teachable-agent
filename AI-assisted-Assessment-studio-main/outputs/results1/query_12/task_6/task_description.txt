@@ -1,0 +1,11 @@
+You are required to build a simple Python script for organizing a cooking recipe list. The script should read a list of recipes from an input file, `recipes.txt`, where each line contains the name of a recipe. The program should then prompt the user to indicate if the recipe is 'Favorite', 'To Try', or 'Disliked'. Based on the user's response, the program will then write the recipe names into one of three different output files: `favorite_recipes.txt`, `to_try_recipes.txt`, or `disliked_recipes.txt`. If the user inputs any other response that is not 'Favorite', 'To Try', or 'Disliked', ask the user to input again for that specific recipe.
+
+To implement this program:
+- Create a function `organize_recipes(input_file)` which reads from the `input_file`.
+- For each recipe name read from `input_file`, ask the user to categorize it.
+- Direct each recipe into the specified output text file based on the user input.
+- Ensure the appropriate recipes are written into the corresponding files: `favorite_recipes.txt`, `to_try_recipes.txt`, and `disliked_recipes.txt` in the same folder.
+
+Implement the function in such a way that when it is called, it executes the outlined behavior. The output files will be checked for the correctness of the categorized recipe names.
+
+You are not required to handle exceptions or perform any input validation other than confirming valid user inputs ('Favorite', 'To Try', 'Disliked').

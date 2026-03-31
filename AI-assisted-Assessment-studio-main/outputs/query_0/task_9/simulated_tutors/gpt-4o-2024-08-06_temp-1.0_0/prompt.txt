@@ -1,0 +1,24 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Selection Statements (if/else, etc.)', 'File Handling and I/O', 'Arithmetic Operators']:
+
+### Beginning of task description
+In this task, you will create a simple game of chance simulator in Python. The program will simulate a series of coin flips and determine the winner based on a specified number of rounds. Each round consists of a single coin flip for which the result is randomly chosen: 'Heads' or 'Tails'. The results of each round will be stored and written to a text file called `flips_log.txt`. The program then determines the winner based on which side showed up more frequently.
+
+The program should define a function `coin_flip_game(rounds)` which takes an integer `rounds` as its parameter. The function will: 
+- Simulate the coin flips for the specified number of rounds.
+- Keep track of the number of 'Heads' and 'Tails' flips.
+- Write each flip's result to the `flips_log.txt` file, one result per line. 
+- Output the final winner of the game as a string: 'Heads' or 'Tails'.
+
+__Details to Consider:__
+- If both sides win an equal number of rounds, your program should return 'Draw'.
+- It should be noted that only the import of `random` is required for generating the randomized flips, and no other libraries or data structures should be used beyond strings and basic I/O operations.
+### End of task description
+
+### Beginning of test suite
+import pytest\nimport os\nfrom coin_flip_game import coin_flip_game\n\ndef setup_module(module):\n    with open("flips_log.txt", "w") as f:\n        f.close()\n\ndef teardown_module(module):\n    os.remove("flips_log.txt")\n\ndef test_heads_wins():\n    assert coin_flip_game(10) in ['Heads', 'Tails', 'Draw']\n    with open("flips_log.txt", "r") as f:\n        flips = f.readlines()\n    assert len(flips) == 10\n\ndef test_tails_wins():\n    assert coin_flip_game(5) in ['Heads', 'Tails', 'Draw']\n    with open("flips_log.txt", "r") as f:\n        flips = f.readlines()\n    assert len(flips) == 5\n\ndef test_draw_outcome():\n    for _ in range(100): # increased iterations for a plausible draw\n        result = coin_flip_game(200)\n        if result == 'Draw':\n            break\n    assert result == 'Draw'\n\ndef test_minimal_rounds():\n    assert coin_flip_game(1) in ['Heads', 'Tails', 'Draw']\n    with open("flips_log.txt", "r") as f:\n        flips = f.readlines()\n    assert len(flips) == 1\n\ndef test_large_number_of_rounds():\n    assert coin_flip_game(1000) in ['Heads', 'Tails', 'Draw']\n    with open("flips_log.txt", "r") as f:\n        flips = f.readlines()\n    assert len(flips) == 1000
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

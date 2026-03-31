@@ -1,0 +1,13 @@
+In the realm of Mythology, heroes often embark on legendary quests. One common challenge they face is the "Hydra Task." The Hydra is a mythical creature with multiple heads. For every head the hero cuts off, two more grow back in its place.
+
+Your task is to create a function `hydra_heads(heads_list, cuts_list)` that determines the final number of heads on the Hydra after a series of cuts. 
+
+- `heads_list`: A list of integers, where each integer represents the original number of heads on a different Hydra.
+- `cuts_list`: A list of integers, where each integer represents the number of cuts made to the corresponding Hydra in `heads_list`.
+
+For each corresponding pair of original heads and cuts in `heads_list` and `cuts_list`:
+1. Subtract the number of cuts from the original number of heads.
+2. For each cut made, add two heads.
+3. Calculate the final number of heads for each Hydra.
+
+The function should return a new list with the final number of heads for each original Hydra.

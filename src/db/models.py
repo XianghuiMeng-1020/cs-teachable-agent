@@ -93,3 +93,84 @@ class TraceEvent(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     session = relationship("TeachingSession", back_populates="trace_events")
+
+
+class AssessmentItem(Base):
+    __tablename__ = "assessment_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    item_id = Column(String(128), unique=True, index=True, nullable=False)
+    item_type = Column(String(32), nullable=False, index=True)  # parsons | dropdown | execution-trace
+    domain_id = Column(String(50), nullable=False, default="python")
+    source_query_id = Column(String(64), nullable=True)
+    source_task_id = Column(String(64), nullable=True)
+    title = Column(String(512), nullable=False)
+    prompt = Column(Text, nullable=False)
+    interaction_content = Column(JSON, nullable=False)
+    answer_key = Column(JSON, nullable=False)
+    grading_rule = Column(Text, nullable=True)
+    metadata_theme = Column(String(128), nullable=True)
+    metadata_concepts = Column(JSON, nullable=True)
+    ai_pass_rate = Column(Float, nullable=True)
+    difficulty = Column(Float, nullable=True)
+    validation_passed = Column(Boolean, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    attempts = relationship("AssessmentAttempt", back_populates="item")
+
+
+class AssessmentAttempt(Base):
+    __tablename__ = "assessment_attempts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    ta_instance_id = Column(Integer, ForeignKey("ta_instances.id"), nullable=True)
+    item_id = Column(Integer, ForeignKey("assessment_items.id"), nullable=False)
+    session_id = Column(Integer, ForeignKey("teaching_sessions.id"), nullable=True)
+    attempt_number = Column(Integer, nullable=False, default=1)
+    submission = Column(JSON, nullable=False)
+    is_correct = Column(Boolean, nullable=False)
+    score = Column(Float, nullable=True)
+    expected_count = Column(Integer, nullable=True)
+    selected_count = Column(Integer, nullable=True)
+    correct_count = Column(Integer, nullable=True)
+    duration_ms = Column(Integer, nullable=True)
+    hints_used = Column(Integer, nullable=False, default=0)
+    feedback = Column(JSON, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", backref="assessment_attempts")
+    item = relationship("AssessmentItem", back_populates="attempts")
+    ta_instance = relationship("TAInstance", backref="assessment_attempts")
+    session = relationship("TeachingSession", backref="assessment_attempts")
+
+
+class AdminConfig(Base):
+    """Key-value store for admin-controlled security and UI settings."""
+    __tablename__ = "admin_config"
+
+    id = Column(Integer, primary_key=True)
+    key = Column(String(64), unique=True, nullable=False, index=True)
+    value = Column(JSON, nullable=False)
+    updated_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+
+class StudentFlag(Base):
+    """Records of abnormal student behaviour detected automatically or flagged manually."""
+    __tablename__ = "student_flags"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    flag_type = Column(String(64), nullable=False, index=True)
+    severity = Column(String(16), nullable=False, default="warning")
+    detail = Column(JSON, nullable=True)
+    session_id = Column(String(128), nullable=True)
+    item_id = Column(Integer, nullable=True)
+    resolved = Column(Boolean, nullable=False, default=False)
+    resolved_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    resolved_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", foreign_keys=[user_id], backref="flags")
+    resolver = relationship("User", foreign_keys=[resolved_by])

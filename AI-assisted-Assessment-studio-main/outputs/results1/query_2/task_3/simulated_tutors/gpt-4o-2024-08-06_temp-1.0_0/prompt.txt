@@ -1,0 +1,95 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+### Task Description
+
+You are required to create a Python program relevant to the theme 'Game of Chance'. The task revolves around a simple file-based betting game that involves analyzing the outcomes of dice rolls. Your task is to develop a function and handle the input/output through files.
+
+#### Task Details:
+
+1. You need to write a function `analyse_dice_game(input_file, output_file)` that takes two file paths as input:
+   - `input_file`: A text file where each line represents a dice roll outcome of a game round, which is either "win", "lose", or "draw".
+   - `output_file`: This file should be used to store the analyzed result of the game.
+
+2. The function should read from the `input_file`, calculate the total number of 'win', 'lose', and 'draw' outcomes, and write these counts to the `output_file` in the following format:
+
+```
+Wins: <count_of_wins>
+Loses: <count_of_loses>
+Draws: <count_of_draws>
+```
+
+3. Ensure the output file ends with a newline character.
+
+4. Assume that each line of the `input_file` will contain only "win", "lose", or "draw".
+
+### Example
+
+#### Input file (`input.txt`):
+```
+win
+lose
+win
+draw
+win
+lose
+```
+
+#### Output file (`output.txt`) after running your function:
+```
+Wins: 3
+Loses: 2
+Draws: 1
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import analyse_dice_game
+
+def setup_module(module):
+    with open('test_input_1.txt', 'w') as f:
+        f.write('win\nlose\nwin\ndraw\nwin\nlose\n')
+    with open('test_input_2.txt', 'w') as f:
+        f.write('draw\n') 
+    with open('test_input_3.txt', 'w') as f:
+        f.write('lose\nwin\nlose\nwin\n')
+    with open('test_input_4.txt', 'w') as f:
+        f.write('')  # Empty input file
+    with open('test_input_5.txt', 'w') as f:
+        f.write('draw\ndraw\ndraw\n')
+
+def teardown_module(module):
+    try:
+        os.remove('test_input_1.txt')
+        os.remove('test_input_2.txt')
+        os.remove('test_input_3.txt')
+        os.remove('test_input_4.txt')
+        os.remove('test_input_5.txt')
+        os.remove('test_output_1.txt')
+        os.remove('test_output_2.txt')
+        os.remove('test_output_3.txt')
+        os.remove('test_output_4.txt')
+        os.remove('test_output_5.txt')
+    except FileNotFoundError:
+        pass
+
+@pytest.mark.parametrize("input_file,output_file,expected", [
+    ('test_input_1.txt', 'test_output_1.txt', "Wins: 3\nLoses: 2\nDraws: 1\n"),
+    ('test_input_2.txt', 'test_output_2.txt', "Wins: 0\nLoses: 0\nDraws: 1\n"),
+    ('test_input_3.txt', 'test_output_3.txt', "Wins: 2\nLoses: 2\nDraws: 0\n"),
+    ('test_input_4.txt', 'test_output_4.txt', "Wins: 0\nLoses: 0\nDraws: 0\n"),
+    ('test_input_5.txt', 'test_output_5.txt', "Wins: 0\nLoses: 0\nDraws: 3\n")
+])
+def test_analyse_dice_game(input_file, output_file, expected):
+    analyse_dice_game(input_file, output_file)
+    with open(output_file, 'r') as f:
+        result = f.read()
+    assert result == expected
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

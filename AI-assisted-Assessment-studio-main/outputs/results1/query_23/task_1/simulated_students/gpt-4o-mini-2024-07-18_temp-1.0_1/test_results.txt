@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_23/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py . [ 16%]
+....F                                                                    [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py:40: Failed: DID NOT RAISE <class 'ValueError'>
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_23/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_23/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_1/test_suite_stu.py::test_invalid_words_raise_exception[words0-ValueError]
+========================= 1 failed, 5 passed in 0.17s ==========================

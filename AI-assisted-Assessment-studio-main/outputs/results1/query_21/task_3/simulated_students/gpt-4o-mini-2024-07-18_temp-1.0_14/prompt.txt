@@ -1,0 +1,25 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a Python program that simulates scoring in a board game. You are required to implement a class called `BoardGame` to manage players' scores. Each player has a name (a string) and a score (an integer). The class should provide the following functionalities:
+
+1. **Add a Player**: Add a player with a given name and initial score.
+2. **Update Score**: Update the score of an existing player by adding (or subtracting) points.
+3. **Get Highest Score**: Return the name of the player with the highest score. If more than one player has the highest score, return the name of the first player who reached that score.
+
+All player data should be stored in a text file named `players.txt`, where each line contains a player's name followed by their score, separated by a comma. On initialization, the `BoardGame` class should load existing players from the `players.txt` file, if it exists. Each method that modifies player data should immediately update the file.
+
+Implement the following methods:
+- `add_player(name, initial_score)`: Adds a new player with an initial score.
+- `update_score(name, points)`: Updates an existing player's score by adding the specified number of points.
+- `get_highest_score()`: Returns the name of the player with the highest score.
+
+Assume that player names are unique. If an operation regarding a player who doesn't exist is attempted, ignore it.
+
+Your program will be tested using the `BoardGame` class, and the tests will reload the `BoardGame` object to read and update the `players.txt` file correctly.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

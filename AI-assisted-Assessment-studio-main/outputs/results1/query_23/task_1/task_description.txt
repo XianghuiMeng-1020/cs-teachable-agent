@@ -1,0 +1,15 @@
+Create a class `WordSearch` that represents a basic board game where players find words in a grid. You need to implement methods to initialize the grid with a given list of words and to check if a specific word exists in the grid. The grid only contains uppercase alphabets.
+
+Implement the following methods:
+
+1. `__init__(self, words: list)`: Initializes the grid using the provided list of words. Words can be in any direction: horizontally left to right or vertically top to bottom, but not backwards or diagonally. The grid should be a square where the size is the length of the longest word. Fill unused positions in the grid with the alphabet 'X'. If a word is longer than the grid size, raise a `ValueError`.
+
+2. `exists(self, word: str) -> bool`: Returns `True` if the word exists in the grid, `False` otherwise. The word must match exactly in one of the specified directions.
+
+Example operations:
+- Initialize a grid with words: ['DOG', 'CAT', 'BIRD']
+- Check if 'DOG' exists (True)
+- Check if 'DAG' exists (False)
+- Check if 'X' exists (False)
+
+Your solution should correctly form the grid and check the existence of words based on the criteria mentioned.

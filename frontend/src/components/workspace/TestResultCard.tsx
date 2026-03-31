@@ -41,38 +41,38 @@ export function TestResultCard({
       <Collapsible.Root open={open} onOpenChange={setOpen}>
         <button
           type="button"
-          className="flex w-full items-center justify-between gap-2 px-5 py-4 text-left hover:bg-slate-50/50"
+          className="flex w-full items-center justify-between gap-2 px-5 py-4 text-left hover:bg-stone-50/50"
           onClick={() => setOpen(!open)}
         >
           <div className="flex min-w-0 flex-1 items-center gap-2">
             <Badge variant={passed ? "success" : "danger"} size="md">
               {passed ? "PASS" : "FAIL"}
             </Badge>
-            <span className="truncate text-sm font-medium text-slate-800">
+            <span className="truncate text-sm font-medium text-stone-800">
               {problemId}: {problemStatement.slice(0, 60)}
               {problemStatement.length > 60 ? "..." : ""}
             </span>
           </div>
           {open ? (
-            <ChevronDown className="h-4 w-4 shrink-0 text-slate-400" />
+            <ChevronDown className="h-4 w-4 shrink-0 text-stone-400" />
           ) : (
-            <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+            <ChevronRight className="h-4 w-4 shrink-0 text-stone-400" />
           )}
         </button>
         <Collapsible.Content>
-          <div className="space-y-4 border-t border-slate-100 px-5 pb-5 pt-2">
+          <div className="space-y-4 border-t border-stone-100 px-5 pb-5 pt-2">
             <div>
-              <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-500">{outputLabel}</h4>
+              <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-stone-500">{outputLabel}</h4>
               <CodeEditor code={taCode} copyButton maxHeight="200px" />
             </div>
             {resultColumns && resultRows && (
               <div>
-                <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">Result set</h4>
+                <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-500">Result set</h4>
                 <SQLVisualizer columns={resultColumns} rows={resultRows} showChart />
               </div>
             )}
             <div>
-              <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">
+              <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-500">
                 Test cases
               </h4>
               <ul className="space-y-2">
@@ -86,7 +86,7 @@ export function TestResultCard({
                         : "border-red-200 bg-red-50/50"
                     )}
                   >
-                    {d.input != null && <span className="font-mono text-xs text-slate-500">input: {d.input}</span>}
+                    {d.input != null && <span className="font-mono text-xs text-stone-500">input: {d.input}</span>}
                     {d.input != null && <br />}
                     {d.expected != null && <span>expected: {d.expected}</span>}
                     {d.expected != null && <br />}

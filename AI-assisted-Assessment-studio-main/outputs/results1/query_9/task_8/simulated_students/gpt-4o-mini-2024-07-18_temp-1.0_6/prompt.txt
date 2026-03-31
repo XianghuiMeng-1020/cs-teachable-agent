@@ -1,0 +1,29 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a data processing function for a fictional mythology database. Your goal is to implement a function that can process a list of deities and their attributes, and return the names of deities based on specific filter criteria.
+
+The function `filter_deities` should take two arguments:
+
+1. `deities`: A list of dictionaries, where each dictionary represents a deity. Each dictionary contains the following key-value pairs:
+   - `'name'`: The name of the deity as a string.
+   - `'domain'`: A string representing the domain of the deity (e.g., 'sea', 'war', 'love').
+   - `'strength'`: An integer representing the strength level of the deity (e.g., 10, 15, 20).
+
+2. `criteria`: A dictionary specifying the filtering criteria with potential keys:
+   - `'min_strength'`: Minimum strength the deity should have (integer).
+   - `'domain'`: The domain the deity should belong to (string).
+
+The function should return a list of names of deities that match all the given criteria. If no criteria are provided, it should return the names of all deities. If no deities match the criteria, return an empty list.
+
+Examples:
+- Given a list of deities and no criteria, return all names.
+- Given criteria for `min_strength`, return names meeting the strength requirement.
+- Given criteria for a specific `domain`, return names within that domain.
+- Combine criteria to filter by both strength and domain.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

@@ -1,0 +1,27 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Create a simple menu management system for a cooking application. The system should store the recipes in a text file named `recipes.txt`, and each recipe will consist of a name and a list of ingredients, each ingredient on a new line. Implement a class `RecipeManager` with the following methods:
+
+1. `add_recipe(name, ingredients)`: This method should add a new recipe to the file. The `ingredients` should be a list of strings.
+2. `get_recipe(name)`: This method should retrieve and return the list of ingredients for the specified recipe name from the file. If the recipe doesn't exist, return `None`.
+3. `delete_recipe(name)`: This method should remove the recipe with the specified name from the file. Return `True` if the deletion was successful, or `False` if the recipe was not found.
+
+The file operations should handle any potential errors gracefully using exception handling, such as when a recipe to be deleted or retrieved doesn't exist.
+
+Assume that each recipe name is unique. The recipes in the file are saved in the format:
+```
+RecipeName1
+ingredient1
+ingredient2
+
+RecipeName2
+ingredient1
+```
+Recipes are separated by a blank line. Implement the `RecipeManager` such that it can interact with this file correctly.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

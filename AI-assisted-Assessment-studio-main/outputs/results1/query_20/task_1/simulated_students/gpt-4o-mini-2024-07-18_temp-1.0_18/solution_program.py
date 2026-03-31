@@ -1,0 +1,12 @@
+def find_winner(player1, player2):
+    p1_rolls = list(map(int, player1.split()))
+    p2_rolls = list(map(int, player2.split()))
+    p1_score = sum(p1_rolls)
+    p2_score = sum(p2_rolls)
+    
+    if p1_score > p2_score:
+        return 'Player 1 Wins'
+    elif p2_score > p1_score:
+        return 'Player 2 Wins'
+    else:
+        return 'Draw'

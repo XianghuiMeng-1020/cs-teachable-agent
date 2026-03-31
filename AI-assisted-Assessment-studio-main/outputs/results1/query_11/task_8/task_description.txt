@@ -1,0 +1,9 @@
+Create a Python function `suggest_recipe(budget, recipes)` that helps a user in selecting an optimal recipe based on their budget. The `budget` is an integer representing the amount of money the user has. The `recipes` is a list of strings, where each string is formatted as `'<recipe_name>:<ingredient_cost_1>,<ingredient_cost_2>,...,<ingredient_cost_n>'`. Each recipe will contain a non-zero number of ingredients with their respective costs, and costs are integers. The function should return the name of the recipe that the user can prepare with the closest cost to the budget without exceeding it. If no recipe can be made within the budget, return 'No recipe available'.
+
+Example format for `recipes` list:
+- `Doughnut:4,5,3` (Doughnut recipe requires ingredients costing 4, 5, and 3)
+- `Salad:2,1,3` (Salad recipe requires ingredients costing 2, 1, and 3)
+
+You need to consider all costs as non-negative integers. If there is a tie in cost, return the recipe that appears first in the list. The input will always be formatted correctly, so no need for input validation.
+
+Function signature: `def suggest_recipe(budget, recipes):`

@@ -1,0 +1,6 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_1/task_6/test_suite_sol.py:6: assert [True, True, ...e, True, True] == [True, True, ..., True, False]
+=========================== short test summary info ============================
+FAILED outputs/results1/query_1/task_6/test_suite_sol.py::test_check_dice_lottery_results
+1 failed in 0.03s

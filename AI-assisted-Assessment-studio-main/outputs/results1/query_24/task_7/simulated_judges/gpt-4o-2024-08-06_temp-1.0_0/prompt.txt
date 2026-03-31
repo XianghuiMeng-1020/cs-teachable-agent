@@ -1,0 +1,59 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Exception Handling', 'Loops']:
+
+### Beginning of task description
+You are to create a Python function to simulate a dice roll in a board game and calculate the cumulative score from multiple dice rolls. Implement a function `calculate_score(moves)` where the parameter `moves` is a list of strings representing dice rolls. Each string can be either a valid integer between '1' and '6' or the word 'skip' which indicates the player's turn was skipped and no dice was rolled.
+
+Your task is to:
+1. Compute the cumulative score by summing up the valid dice rolls. If a move is 'skip', it should be ignored.
+2. If any move contains invalid data (neither a number between '1' and '6', nor 'skip'), skip that move and continue processing the rest.
+3. Return the final cumulative score as an integer.
+
+Notes:
+- Do not assume the input list is restricted to a certain number of moves.
+- Handle exceptions that may arise from invalid inputs gracefully.
+
+Examples:
+- `calculate_score(['1', '3', 'skip', '5', '4'])` should return `13`.
+- `calculate_score(['2', 'skip', 'skip', '6', '4'])` should return `12`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+def test_calculate_score_valid_cases():
+    from solution_program import calculate_score
+    assert calculate_score(['1', '3', 'skip', '5', '4']) == 13
+    assert calculate_score(['2', 'skip', 'skip', '6', '4']) == 12
+    assert calculate_score(['1', '2', '3', '4', '5', '6']) == 21
+
+
+def test_calculate_score_with_invalid_moves():
+    from solution_program import calculate_score
+    assert calculate_score(['0', '3', '7', 'skip', '4']) == 7
+    assert calculate_score(['2', 'bob', 'skip', '6', 'x']) == 8
+
+
+def test_calculate_score_empty_list():
+    from solution_program import calculate_score
+    assert calculate_score([]) == 0
+
+
+def test_calculate_score_all_skips():
+    from solution_program import calculate_score
+    assert calculate_score(['skip', 'skip', 'skip']) == 0
+
+
+def test_calculate_score_mixed_invalid_and_valid():
+    from solution_program import calculate_score
+    assert calculate_score(['1', 'skip', '3', 'text', '4', '12']) == 8
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

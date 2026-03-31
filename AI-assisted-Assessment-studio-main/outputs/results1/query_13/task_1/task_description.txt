@@ -1,0 +1,11 @@
+As a chef at a bustling restaurant, you often face the challenge of estimating cooking times for various dishes. To automate this process, write a Python function `estimate_cooking_time(dish_list)` that calculates the total cooking time for a list of dishes. Each dish is represented by a string, and the cooking time for each dish in minutes is determined by the length of its name multiplied by 5.
+
+- Your task is to iterate over the `dish_list`, calculate the individual cooking time for each dish, and sum these times to get the total cooking time.
+- If an item in the list is not a string, raise a `ValueError` with the message "Invalid item in dish list"
+- The function should return the total cooking time in minutes.
+
+The `dish_list` will be tested using the following conditions: 
+1. The list may contain the names of various dishes.
+2. Dish names will be of varying lengths.
+3. The list may contain non-string elements which should raise a `ValueError`.
+4. An empty dish list should return a cooking time of 0.

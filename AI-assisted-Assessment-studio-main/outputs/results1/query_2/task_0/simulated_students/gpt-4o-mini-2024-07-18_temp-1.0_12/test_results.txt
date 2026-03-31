@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py F [ 20%]
+...F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:21: AssertionError: assert 'Alice' == 'Charlie'
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/random.py:353: ValueError: empty range for randrange() (0, 0, 0)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_winner_case1
+FAILED outputs/results1/query_2/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_empty_file
+========================= 2 failed, 3 passed in 0.12s ==========================

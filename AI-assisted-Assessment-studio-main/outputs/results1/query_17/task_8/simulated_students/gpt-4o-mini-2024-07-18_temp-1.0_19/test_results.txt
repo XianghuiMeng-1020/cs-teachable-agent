@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 4 items
+
+outputs/results1/query_17/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py . [ 25%]
+.F.                                                                      [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_17/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/solution_program.py:7: ValueError: Species already exists
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_17/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_17/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_add_duplicate_species
+========================= 1 failed, 3 passed in 0.13s ==========================

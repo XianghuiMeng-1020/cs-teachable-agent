@@ -1,0 +1,72 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'Strings', 'Exception Handling', 'Classes and Objects']:
+
+### Beginning of task description
+In a distant future, human civilization has spread across hundreds of planets, each requiring a different type of fuel for galactic travel. To facilitate efficient allocation of these fuels, you are required to construct a system simulating this scenario.
+
+Create a class `FuelStation` that has the following methods:
+1. **`__init__(self, planet_name, initial_fuel)`**: Initializes a fuel station with the specified `planet_name` and `initial_fuel` amount. Raise a `ValueError` if `initial_fuel` is negative.
+
+2. **`refuel(self, amount)`**: Adds `amount` of fuel to the station's current supply. A `ValueError` should be raised if `amount` is negative.
+
+3. **`consume(self, amount)`**: Consumes `amount` of fuel from the station's current supply. Raise an `Exception` with the message "Insufficient fuel" if `amount` exceeds the station's current fuel supply.
+
+4. **`get_fuel_report(self)`**: Returns a string report in the format: "Fuel station on [planet_name] has [current_fuel] gallons left."
+
+Your task is to implement this class and its methods so that they work as described. The program will be tested based on the functionality of these methods and the error handling implemented.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import FuelStation
+
+
+def test_initial_fuel_negative():
+    with pytest.raises(ValueError):
+        FuelStation("Mars", -10)
+
+
+def test_refuel_negative_amount():
+    station = FuelStation("Mars", 100)
+    with pytest.raises(ValueError):
+        station.refuel(-50)
+
+
+def test_consume_exact_amount():
+    station = FuelStation("Venus", 200)
+    station.consume(200)
+    assert station.get_fuel_report() == "Fuel station on Venus has 0 gallons left."
+
+
+def test_consume_excess_fuel():
+    station = FuelStation("Jupiter", 150)
+    with pytest.raises(Exception) as excinfo:
+        station.consume(200)
+    assert str(excinfo.value) == "Insufficient fuel"
+
+
+def test_fuel_report_after_operations():
+    station = FuelStation("Saturn", 300)
+    station.refuel(100)
+    station.consume(250)
+    assert station.get_fuel_report() == "Fuel station on Saturn has 150 gallons left."
+
+
+def test_refuel_and_consume_multiple():
+    station = FuelStation("Uranus", 50)
+    station.refuel(30)
+    assert station.get_fuel_report() == "Fuel station on Uranus has 80 gallons left."
+    station.consume(40)
+    assert station.get_fuel_report() == "Fuel station on Uranus has 40 gallons left."
+    with pytest.raises(Exception) as excinfo:
+        station.consume(50)
+    assert "Insufficient fuel" in str(excinfo.value)
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

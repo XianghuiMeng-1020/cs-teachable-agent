@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_6/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py . [ 20%]
+F...E                                                                    [100%]
+
+==================================== ERRORS ====================================
+_________ ERROR at teardown of TestMythicalCreature.test_empty_powers __________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_creature.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:23: AssertionError: assert 'Cerberus,Bea...ultiple Heads' == 'Cerberus,Bea...tiple Heads\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_6/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_6/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestMythicalCreature::test_save_to_file
+ERROR outputs/results1/query_6/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestMythicalCreature::test_empty_powers
+===================== 1 failed, 4 passed, 1 error in 0.04s =====================

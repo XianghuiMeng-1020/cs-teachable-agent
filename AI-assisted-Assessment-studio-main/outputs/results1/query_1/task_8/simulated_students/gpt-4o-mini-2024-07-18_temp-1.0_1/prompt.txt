@@ -1,0 +1,40 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+**Task: Roulette Number Prediction**
+
+You are tasked with simulating a simplified version of a roulette number prediction game. In this game, you will implement a function `predict_winnings(numbers, bet_amounts)` that calculates the total payout of a player based on their predictions for the roulette outcome.
+
+- The roulette wheel has 37 slots, numbered from 0 to 36.
+- A player makes predictions on one or more numbers on the roulette wheel.
+- For each chosen number, there is a corresponding bet amount placed.
+- When the roulette is spun, it lands on a number. For this task, you must assume the roulette always lands on a predetermined number, that is, 32.
+
+The function parameters are:
+
+- `numbers` (a list of integers) representing the player's predictions.
+- `bet_amounts` (a list of integers) with each element being the amount of money placed on the respective number in the `numbers` list.
+
+Both lists will be the same length and contain non-negative integers.
+
+- If the predicted number matches the roulette outcome, the player wins an amount equal to 36 times the bet amount on that number.
+- The function should return the total payout from all bets.
+
+**Example:**
+
+```python
+predict_winnings([5, 32, 10], [10, 20, 5])
+```
+
+This example should return 720, as the player wins 720 from betting on number 32 (36 * 20 = 720), and no payout from numbers 5 and 10.
+
+**Constraints:**
+- Both `numbers` and `bet_amounts` will have at least one element.
+- The numbers will be unique within `numbers` and range from 0 to 36.
+- Bet amounts will be non-negative integers.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

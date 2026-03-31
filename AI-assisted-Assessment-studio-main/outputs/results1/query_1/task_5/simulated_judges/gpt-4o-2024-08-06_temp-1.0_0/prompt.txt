@@ -1,0 +1,54 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+You are tasked with creating a small game named "High or Low" where the player attempts to guess if the next randomly drawn number will be higher or lower than the current one. However, for simplicity, the game will use a pre-defined list of numbers instead of generating them randomly.
+
+**Task:**
+
+Write a function `high_or_low_game(numbers: list, guesses: list) -> int` where:
+- `numbers` is a list of distinct integers representing the sequence of numbers in the game.
+- `guesses` is a list of strings where each element is either "high" or "low" representing the player's guess for each pair of consecutive numbers.
+
+The game starts with the first number in the list `numbers`. For each guess in `guesses`, compare the consecutive numbers in `numbers`:
+- If the guess is "high" and the next number is higher than the current number, increment the score by 1.
+- If the guess is "low" and the next number is lower than the current number, increment the score by 1.
+
+Return the final score after all guesses are processed.
+
+**Example:**
+```python
+high_or_low_game([3, 8, 4], ["high", "low"]) # returns 2
+```
+
+In this example:
+- Compare 3 and 8: the guess is "high" and 8 > 3, increment the score.
+- Compare 8 and 4: the guess is "low" and 4 < 8, increment the score.
+
+The function should return 2 for this case.
+
+**Constraints:**
+- Do not use any libraries or external functions.
+- The length of `guesses` will always be exactly one less than `numbers`.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import high_or_low_game
+
+def test_high_or_low_game():
+    assert high_or_low_game([3, 8, 4], ["high", "low"]) == 2
+    assert high_or_low_game([5, 1, 9, 3], ["low", "high", "low"]) == 3
+    assert high_or_low_game([7, 6, 5], ["low", "low"]) == 0
+    assert high_or_low_game([1, 2, 3, 4, 5], ["high", "high", "high", "high"]) == 4
+    assert high_or_low_game([9, 5, 3, 7], ["low", "low", "high"]) == 1
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

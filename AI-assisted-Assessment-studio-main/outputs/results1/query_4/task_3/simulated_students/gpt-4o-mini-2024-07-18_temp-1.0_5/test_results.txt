@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_ ERROR collecting outputs/results1/query_4/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py _
+ImportError while importing test module '/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+outputs/results1/query_4/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py:4: in <module>
+    from my_game_module import simulate_game
+E   ModuleNotFoundError: No module named 'my_game_module'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/pytest_report.json
+=========================== short test summary info ============================
+ERROR outputs/results1/query_4/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_5/test_suite_stu.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.35s ===============================

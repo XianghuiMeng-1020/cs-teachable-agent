@@ -1,0 +1,16 @@
+In a futuristic science fiction scenario, you are tasked with creating a standardized communication system for astronauts exploring alien worlds. Each astronaut uses a special device, called the "CommsHandler," to send and receive messages. This device automatically appends a special code to each message, known as the transmit code, which is calculated based on the message content.
+
+Your task is to implement the `CommsHandler` class in Python that can handle messages. The class should support the following operations:
+
+1. Initialize the object with a default transmit code factor.
+2. Send a message using the `send_message` method which takes a single string argument `message`, calculates the transmit code by determining the sum of all characters' ASCII values, multiplies this sum by the transmit code factor, and appends this code to the message separated by a '#'.
+3. Implement a `receive_message` method that takes one argument, a message string with its transmit code appended, and returns only the message content after validating the code. The method should return the original message if the extracted code matches the calculated transmit code, otherwise it should raise a `ValueError` indicating "Transmit code mismatch".
+
+Use exception handling to properly manage any errors that may arise when sending or receiving messages.
+
+Example usage:
+- Creating a `CommsHandler` with a factor of 2.
+- Sending "Hello" would result in "Hello#1048" if the transmit code is successfully calculated and appended.
+- Receiving "Hello#1048" should return "Hello", but receiving "Hello#999" should raise an exception with "Transmit code mismatch".
+
+Write the class `CommsHandler` and ensure it passes all provided tests.

@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at teardown of test_calculate_fuel_for_mission_case5 __________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'missions1.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:33: AssertionError: assert 180 == 90
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:40: AssertionError: assert 1200 == 180
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:47: AssertionError: assert 90 == 1200
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:54: AssertionError: assert 1200 == 0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/solution_program.py:3: FileNotFoundError: [Errno 2] No such file or directory: 'missions5.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case1
+FAILED outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case2
+FAILED outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case3
+FAILED outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case4
+FAILED outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case5
+ERROR outputs/results1/query_18/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_calculate_fuel_for_mission_case5
+========================== 5 failed, 1 error in 0.15s ==========================

@@ -1,0 +1,28 @@
+### Task Description
+
+You are tasked with creating a simple text-based data logger for a spaceship navigation system. The logger should be able to record and retrieve the positions of the spaceship at different times. The data is stored in a file named `navigation_log.txt`. Each entry in the file should be represented as follows:
+
+```
+<timestamp>, <x_coordinate>, <y_coordinate>
+```
+
+Your task is to implement a function `log_position(timestamp, x, y)` that logs the spaceship's position, and a function `retrieve_positions()` that returns all logged positions as a list of dictionaries. In each dictionary, keys should be 'timestamp', 'x', and 'y'. The `timestamp` should be a string, while `x` and `y` should be integers.
+
+#### Function Signatures:
+- `log_position(timestamp, x, y)`: Appends a new entry to the `navigation_log.txt` with the given `timestamp`, `x`, and `y` coordinates.
+  - `timestamp` is a string.
+  - `x` and `y` are integers.
+
+- `retrieve_positions()`: Reads the `navigation_log.txt` and returns a list of dictionaries, each representing a logged entry with keys 'timestamp', 'x', and 'y'. If the file does not exist, it should return an empty list.
+
+### Requirements
+- Use file handling to log positions into `navigation_log.txt`.
+- Implement proper exception handling to manage file operations.
+- If `navigation_log.txt` is missing during retrieval, handle the situation gracefully.
+
+### Constraints
+- Do not use any external libraries for parsing or data handling.
+- Each time a new position is logged, it is added to `navigation_log.txt` in a new line.
+- Ensure the retrieval function correctly converts `x` and `y` values back to integers when reading from the log.
+
+The test suite will check these functionalities extensively.

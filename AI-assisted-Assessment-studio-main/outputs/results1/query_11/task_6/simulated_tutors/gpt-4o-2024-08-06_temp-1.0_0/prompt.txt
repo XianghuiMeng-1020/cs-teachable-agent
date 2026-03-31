@@ -1,0 +1,39 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+Create a function `recipe_value(recipe, prices)` that calculates the total cost of a cooking recipe based on the amounts of different ingredients and their prices per unit. The function should take two arguments:
+
+1. `recipe`: A list of strings where each string is in the format 'ingredient_name:amount'. Each `ingredient_name` is a string and `amount` is an integer representing the quantity required.
+2. `prices`: A list of strings where each string is in the format 'ingredient_name:price_per_unit'. Each `ingredient_name` is a string and `price_per_unit` is a float representing the price per unit of the ingredient. The `ingredient_name` in `prices` may or may not match the ones in `recipe`.
+
+The function should return a float representing the total cost of the recipe. If any ingredient in the recipe does not have a price listed, its cost should be considered 0.
+
+### Example
+If the `recipe` is ['flour:2', 'sugar:1', 'milk:3'] and `prices` is ['flour:0.5', 'sugar:0.8'], the function should return 1.8 (since milk's cost is considered 0).
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import recipe_value
+
+def test_basic_recipe_value():
+    assert recipe_value(['flour:2', 'sugar:1'], ['flour:0.5', 'sugar:0.8']) == 1.8
+
+def test_recipe_with_missing_prices():
+    assert recipe_value(['flour:1', 'butter:2'], ['flour:0.5']) == 0.5
+
+def test_empty_recipe():
+    assert recipe_value([], ['flour:0.5', 'sugar:0.8']) == 0.0
+
+def test_empty_prices():
+    assert recipe_value(['flour:3', 'sugar:1'], []) == 0.0
+
+def test_recipe_and_prices_with_extra_items():
+    assert recipe_value(['flour:2', 'sugar:1', 'milk:1'], ['flour:0.5', 'sugar:0.8', 'butter:0.6']) == 1.8
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

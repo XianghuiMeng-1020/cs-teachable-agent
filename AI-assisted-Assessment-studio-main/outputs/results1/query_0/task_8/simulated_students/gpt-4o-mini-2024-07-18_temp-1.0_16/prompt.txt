@@ -1,0 +1,10 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+Develop a Python program named 'lottery_game' that simulates a simple lottery game. The program should read from a file named 'lottery_numbers.txt' which contains lottery numbers separated by commas on a single line. The user will be prompted to enter their chosen number. The program should then read from the file, compare the user's number with each of the lottery numbers in the file, and determine whether the user's number is a winning number. If the number matches one of the numbers in the file, display 'You Win!', otherwise, display 'Try Again next time!'. Implement this functionality using standard input for user number and handle file reading accordingly. The program should handle cases where the input or file content is invalid gracefully, displaying 'Invalid input or file content' when necessary. You are not required to validate the range or type of the numbers in the file or input.
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

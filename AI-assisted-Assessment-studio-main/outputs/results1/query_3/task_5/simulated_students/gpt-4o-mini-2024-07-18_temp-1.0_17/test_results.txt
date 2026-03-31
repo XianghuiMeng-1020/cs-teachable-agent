@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:13: AssertionError: assert 1000 == 950
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:22: AssertionError: assert 1250.0 == 1350
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:31: AssertionError: assert 880.0 == 540
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:40: AssertionError: assert 1320.0 == 715
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:49: AssertionError: assert 1150.0 == 915
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_balance_predictor_1
+FAILED outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_balance_predictor_2
+FAILED outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_balance_predictor_3
+FAILED outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_balance_predictor_4
+FAILED outputs/results1/query_3/task_5/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_balance_predictor_5
+============================== 5 failed in 0.13s ===============================

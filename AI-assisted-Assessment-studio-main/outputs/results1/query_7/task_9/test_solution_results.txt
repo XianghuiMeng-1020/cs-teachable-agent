@@ -1,0 +1,8 @@
+F..F.                                                                    [100%]
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/test_suite_sol.py:35: assert '- \nBOX PAND...AL MYSTICAL A' == "BOX PANDORA'...AL MYSTICAL A"
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_9/test_suite_sol.py:76: AssertionError: assert 'ISLAND. SUNK... A ATLANTIS -' == 'ATLANTIS A L...EN ISLAND. - '
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_9/test_suite_sol.py::test_process_mythology_data
+FAILED outputs/results1/query_7/task_9/test_suite_sol.py::test_no_hyphen_line
+2 failed, 3 passed in 0.04s

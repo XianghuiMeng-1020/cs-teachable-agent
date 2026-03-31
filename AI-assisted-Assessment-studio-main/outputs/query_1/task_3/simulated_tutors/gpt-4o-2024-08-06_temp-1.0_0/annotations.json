@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_awards(warrior_achievements):\n    awards = []\n    for achievements in warrior_achievements:\n        if achievements == 0:\n            awards.append('Novice')\n        elif 1 <= achievements <= 5:\n            awards.append('Adept')\n        elif 6 <= achievements <= 10:\n            awards.append('Veteran')\n        else:\n            awards.append('Elite')\n    return awards\n\n# Example usage\nwarrior_achievements = [0, 2, 7, 4, 11]\nprint(calculate_awards(warrior_achievements))  # Output: ['Novice', 'Adept', 'Veteran', 'Adept', 'Elite']",
+    "context_relevance": 1.0
+}

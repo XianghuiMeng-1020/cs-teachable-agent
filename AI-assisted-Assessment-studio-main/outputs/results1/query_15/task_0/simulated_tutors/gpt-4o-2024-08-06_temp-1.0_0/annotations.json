@@ -1,0 +1,4 @@
+{
+    "program": "def can_teleport_sequence(nodes, connections):\n    # Create a set of tuples for quick lookup of connections\n    connection_set = set(connections)\n    \n    # Iterate over the nodes list and check for each teleportation\n    for i in range(len(nodes) - 1):\n        source = nodes[i]\n        destination = nodes[i + 1]\n        \n        # If there's no direct connection between consecutive nodes, return False\n        if (source, destination) not in connection_set:\n            return False\n    \n    # If all connections are valid, return True\n    return True\n\n# Example tests:\nprint(can_teleport_sequence([1, 2, 3], [(1, 2), (2, 3)])) # True\nprint(can_teleport_sequence([1, 2, 3], [(1, 3), (3, 2)])) # False\n",
+    "context_relevance": 1.0
+}

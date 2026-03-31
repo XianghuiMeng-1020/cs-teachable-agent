@@ -1,0 +1,4 @@
+{
+    "program": "def generate_lucky_numbers(input_file, output_file):\n    try:\n        with open(input_file, 'r') as infile:\n            names = infile.readlines()\n        lucky_numbers = []\n        for name in names:\n            name = name.strip()  # Remove any trailing newline characters\n            length = len(name)\n            if length % 2 == 0:  # Even length\n                lucky_number = length * 3\n            else:  # Odd length\n                lucky_number = length * 5 - 2\n            lucky_numbers.append(f\"{name}: {lucky_number}\")\n        with open(output_file, 'w') as outfile:\n            for item in lucky_numbers:\n                outfile.write(item + \"\\n\")\n    except FileNotFoundError:\n        print(f\"Error: The file {input_file} was not found.\")",
+    "context_relevance": 1.0
+}

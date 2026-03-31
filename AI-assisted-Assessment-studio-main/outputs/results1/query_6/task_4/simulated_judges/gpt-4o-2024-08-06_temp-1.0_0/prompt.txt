@@ -1,0 +1,91 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Mythology' and a list of programming concepts ['Strings', 'Variables', 'File Handling and I/O', 'Classes and Objects']:
+
+### Beginning of task description
+Create a Python program to manage a text database of mythology gods. The database will store information about each god, specifically their 'name', 'domain', and 'origin' (e.g., Greek, Norse). Implement the following:
+
+1. A class `MythologyDatabase` with methods to:
+   - Add a new god to the database.
+   - Remove a god by name.
+   - Search for a god by name and return their details.
+   - Save the database to a file.
+   - Load the database from a file.
+
+2. A text file named `mythology_db.txt` should be used to store information about the gods, each entry on a new line in the format: "name;domain;origin".
+
+Ensure your program handles file I/O correctly and can deal with an empty database or file.
+
+Functions needed:
+- `add_god(self, name, domain, origin)`: Adds a new god with the specified name, domain, and origin to the database.
+- `remove_god(self, name)`: Removes the god with the given name from the database.
+- `search_god(self, name)`: Returns a string of the god's details if found, otherwise returns "Not Found".
+- `save_to_file(self, filename)`: Saves the current state of the database to the given filename.
+- `load_from_file(self, filename)`: Loads database entries from the given filename.
+
+Write tests using pytest to ensure that all functions work as expected, especially checking that the file handling works correctly.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import MythologyDatabase
+
+def setup_module(module):
+    with open('mythology_db.txt', 'w') as f:
+        f.write('Zeus;Sky;Greek\n')
+        f.write('Odin;Wisdom;Norse\n')
+        f.write('Ra;Sun;Egyptian\n')
+
+def teardown_module(module):
+    try:
+        os.remove('mythology_db.txt')
+    except FileNotFoundError:
+        pass
+
+# Test Cases
+
+def test_add_god():
+    db = MythologyDatabase()
+    db.load_from_file('mythology_db.txt')
+    db.add_god('Thor', 'Thunder', 'Norse')
+    assert db.search_god('Thor') == 'Thor;Thunder;Norse'
+
+
+def test_remove_god():
+    db = MythologyDatabase()
+    db.load_from_file('mythology_db.txt')
+    db.remove_god('Zeus')
+    assert db.search_god('Zeus') == 'Not Found'
+
+
+def test_search_god():
+    db = MythologyDatabase()
+    db.load_from_file('mythology_db.txt')
+    assert db.search_god('Odin') == 'Odin;Wisdom;Norse'
+    assert db.search_god('Apollo') == 'Not Found'
+
+
+def test_save_to_file():
+    db = MythologyDatabase()
+    db.add_god('Freya', 'Love', 'Norse')
+    db.save_to_file('test_mythology_db.txt')
+    with open('test_mythology_db.txt', 'r') as f:
+        data = f.read()
+    assert 'Freya;Love;Norse' in data
+    os.remove('test_mythology_db.txt')
+
+
+def test_load_from_file():
+    db = MythologyDatabase()
+    db.load_from_file('mythology_db.txt')
+    assert db.search_god('Ra') == 'Ra;Sun;Egyptian'
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

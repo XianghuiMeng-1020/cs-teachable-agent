@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 6 items
+
+outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 16%]
+.FFFFE                                                                   [100%]
+
+==================================== ERRORS ====================================
+___________ ERROR at teardown of test_edge_cases[<lambda>-expected4] ___________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'mythology_stories.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:67: AssertionError: assert {'Achilles', ... 'Prometheus'} == set()
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/solution_program.py:8: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:67: AssertionError: assert {'', 'Achille... 'Prometheus'} == {'Achilles', 'Hercules'}
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:67: AssertionError: assert {'Achilles', 'Hercules'} == set()
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_cases[<lambda>-expected1]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_cases[<lambda>-expected2]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_cases[<lambda>-expected3]
+FAILED outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+ERROR outputs/results1/query_7/task_8/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_edge_cases[<lambda>-expected4]
+===================== 4 failed, 2 passed, 1 error in 0.14s =====================

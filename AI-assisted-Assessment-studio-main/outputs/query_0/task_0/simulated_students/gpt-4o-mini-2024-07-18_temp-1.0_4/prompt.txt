@@ -1,0 +1,55 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+### Lottery Stub Generation
+
+Your task is to simulate a simple "Lottery Stub Generator" game. Participants can enter a lottery where each entry comprises three values (a name, a chosen number, and an age) from which a "lottery stub" is generated. 
+
+Based on a simple algorithm, your program will read a text file containing participants' information, write a new file with results indicating whether each stub is a winning stub or not.
+
+
+#### Game Rules:
+1. **Input File Structure**: Each line in the input text file will have the format:
+   ```
+   <name>,<chosen_number>,<age>
+   ```
+   - `<name>` : String of participant's name
+   - `<chosen_number>` : A number the participant chooses (between 1 and 99)
+   - `<age>` : The age of the participant
+
+2. **Winning Condition**:
+   - For any entry, if ((chosen_number + age) \* 2) is divisible by 5, it is considered a winning stub.
+
+3. **Output**:
+   - Write a text file with the same participant entries but appended with either "WIN" or "LOSE" based on the winning condition.
+
+
+#### Function Signature
+- Your program will define a function `lottery_stub_generator(input_file, output_file)`.
+- `input_file`: A string representing the path to the input file.
+- `output_file`: A string representing the path where the output file should be written. Expected output format for each line:
+  ```
+  <name>,<chosen_number>,<age>,<result>
+  ```
+  where `<result>` can be either "WIN" or "LOSE".
+
+
+#### Example
+Suppose `input.txt` contains:
+```
+Alice,17,25
+Bob,3,30
+Charlie,48,20
+```
+Then calling `lottery_stub_generator('input.txt', 'output.txt')` will result in `output.txt` containing:
+```
+Alice,17,25,LOSE
+Bob,3,30,WIN
+Charlie,48,20,WIN
+```
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

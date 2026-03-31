@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py F [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at teardown of TestLottery.test_draw_winner_single_entry ________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_lottery.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:19: AssertionError: assert ['Alice', 'Bo... 'Diana', ...] == ['Alice', 'Bo...lie', 'Diana']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:23: AssertionError: assert 10 == 4
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:31: FileNotFoundError: [Errno 2] No such file or directory: 'empty_lottery.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:39: AssertionError: assert ['Eve', 'Fran... 'Frank', ...] == ['Eve', 'Frank']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py:48: FileNotFoundError: [Errno 2] No such file or directory: 'single_lottery.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_register_entries_appends
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_draw_winner_with_entries
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_draw_winner_no_entries
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_register_entries_to_empty_file
+FAILED outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_draw_winner_single_entry
+ERROR outputs/results1/query_2/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_9/test_suite_stu.py::TestLottery::test_draw_winner_single_entry
+========================== 5 failed, 1 error in 0.05s ==========================

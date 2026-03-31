@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:7: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:7: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:7: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:7: IndexError: list index out of range
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/solution_program.py:7: IndexError: list index out of range
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_immortal_creature
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_colossal_creatures
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_nonexistent_characteristic
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_case_sensitivity
+FAILED outputs/results1/query_7/task_4/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_4/test_suite_stu.py::test_human_creature
+============================== 5 failed in 0.23s ===============================

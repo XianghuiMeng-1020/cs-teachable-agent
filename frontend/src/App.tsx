@@ -14,11 +14,16 @@ const TestPage = lazy(() => import("./pages/student/TestPage").then((m) => ({ de
 const HistoryPage = lazy(() => import("./pages/student/HistoryPage").then((m) => ({ default: m.HistoryPage })));
 const MasteryPage = lazy(() => import("./pages/student/MasteryPage").then((m) => ({ default: m.MasteryPage })));
 const LearningAnalyticsPage = lazy(() => import("./pages/student/LearningAnalyticsPage").then((m) => ({ default: m.LearningAnalyticsPage })));
+const PracticePage = lazy(() => import("./pages/student/PracticePage").then((m) => ({ default: m.PracticePage })));
+const AssessmentPage = lazy(() => import("./pages/student/AssessmentPage").then((m) => ({ default: m.AssessmentPage })));
 const OverviewPage = lazy(() => import("./pages/teacher/OverviewPage").then((m) => ({ default: m.OverviewPage })));
 const TranscriptsPage = lazy(() => import("./pages/teacher/TranscriptsPage").then((m) => ({ default: m.TranscriptsPage })));
 const StudentsPage = lazy(() => import("./pages/teacher/StudentsPage").then((m) => ({ default: m.StudentsPage })));
 const StudentDetailPage = lazy(() => import("./pages/teacher/StudentDetailPage").then((m) => ({ default: m.StudentDetailPage })));
 const AnalyticsPage = lazy(() => import("./pages/teacher/AnalyticsPage").then((m) => ({ default: m.AnalyticsPage })));
+const AssessmentManagePage = lazy(() => import("./pages/teacher/AssessmentManagePage").then((m) => ({ default: m.AssessmentManagePage })));
+const MetricsPage = lazy(() => import("./pages/teacher/MetricsPage").then((m) => ({ default: m.MetricsPage })));
+const ProctoringPage = lazy(() => import("./pages/teacher/ProctoringPage").then((m) => ({ default: m.ProctoringPage })));
 
 function PageFallback() {
   return (
@@ -65,6 +70,8 @@ function App() {
           <Route path={ROUTES.dashboard} element={<DashboardPage />} />
           <Route path={ROUTES.teach} element={<TeachPage />} />
           <Route path={ROUTES.test} element={<TestPage />} />
+          <Route path={ROUTES.practice} element={<PracticePage />} />
+          <Route path="/practice/:itemId" element={<AssessmentPage />} />
           <Route path={ROUTES.mastery} element={<MasteryPage />} />
           <Route path={ROUTES.history} element={<HistoryPage />} />
           <Route path="/learning-analytics" element={<LearningAnalyticsPage />} />
@@ -76,6 +83,9 @@ function App() {
           <Route path="students/:userId" element={<StudentDetailPage />} />
           <Route path="transcripts" element={<TranscriptsPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="assessments" element={<AssessmentManagePage />} />
+          <Route path="metrics" element={<MetricsPage />} />
+          <Route path="proctoring" element={<ProctoringPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to={ROUTES.home} replace />} />

@@ -1,0 +1,21 @@
+Create a function `mythical_quest` that simulates the distribution of mythical artifacts among a list of heroes. The function takes two arguments, a list of heroes and a total number of artifacts. The function returns a list where each hero receives an allocated number of artifacts based on their quest rank.
+
+The allocation of artifacts is as follows:
+- Each hero is categorized by their rank: Novice, Intermediate, or Advanced.
+  - Novice heroes receive 1 artifact each.
+  - Intermediate heroes receive 3 artifacts each.
+  - Advanced heroes receive 7 artifacts each.
+
+The total number of artifacts distributed should not exceed the available artifacts. The input list format is `[['hero_name', 'rank'], ... ]` where rank is one of 'Novice', 'Intermediate', or 'Advanced'.
+
+Assume the list of heroes is non-empty and that there will always be enough artifacts to distribute to at least the first hero with the minimum rank required. If all heroes cannot receive their maximum allocation due to an insufficient number of artifacts left, start distributing from the highest-ranked and cascade down. Return a list of tuples [(hero_name, number_of_artifacts)], sorted by original order of heroes.
+
+Example:
+```
+mythical_quest([['Ares', 'Advanced'], ['Perseus', 'Intermediate'], ['Hercules', 'Novice']], 10)
+```
+
+Expected output:
+```
+[('Ares', 7), ('Perseus', 3), ('Hercules', 0)]
+```

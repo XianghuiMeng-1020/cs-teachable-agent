@@ -1,0 +1,44 @@
+You are a student solving a Python dropdown question.
+Return only a JSON object with key `answers`.
+The value of `answers` must be a list of objects.
+Each object must contain `blank_id` and `selected_option`.
+Return exactly one answer object for every blank.
+Copy every selected option exactly as written in the choices.
+
+Title: Dropdown Question for decode_message
+Prompt: Fill each blank in the Python code with the single best option so the program matches the canonical source solution.
+
+Source task summary:
+### Task Description The Galactic Federation requires your programming prowess to help them decipher alien messages. You have intercepted encoded messages sent from different planets in the Andromeda Galaxy to Earth. Each intercepted message is a string containing words that correspond to specific planetary codes. Your task is to create a function `decode_message(galactic_message, codebook)` that takes in: - `galactic_message`: a string representing an encoded message. The words in the messag...
+
+Code template:
+```python
+def decode_message(__BLANK_3__, codebook):
+    words = galactic_message.split()
+    decoded_words = []
+    for word in words:
+        if word in codebook:
+            decoded_words.append(codebook[word])
+        else:
+            decoded_words.append(__BLANK_1__)
+    return __BLANK_2__.join(decoded_words)
+```
+
+Choices by blank:
+blank_1 (__BLANK_1__):
+- 'UNKNOWN'
+- 'INVALID'
+- 'MISSING'
+- 'ERROR'
+
+blank_2 (__BLANK_2__):
+- 'UNKNOWN'
+- ''
+- 'TODO'
+- ' '
+
+blank_3 (__BLANK_3__):
+- decode_message
+- galactic_message
+- codebook
+- words

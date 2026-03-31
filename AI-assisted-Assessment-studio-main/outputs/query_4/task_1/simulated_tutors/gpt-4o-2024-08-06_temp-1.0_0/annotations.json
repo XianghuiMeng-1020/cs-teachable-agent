@@ -1,0 +1,4 @@
+{
+    "program": "def update_leaderboard(rounds):\n    # Dictionary to maintain the cumulative scores of each player\n    leaderboard = {}\n    \n    # Accumulate scores over all rounds\n    for round in rounds:\n        for player, score in round.items():\n            if player in leaderboard:\n                leaderboard[player] += score\n            else:\n                leaderboard[player] = score\n                \n    # Sort the leaderboard by score in descending order, alphabetically for ties\n    sorted_leaderboard = dict(sorted(leaderboard.items(), key=lambda x: (-x[1], x[0])))\n    return sorted_leaderboard\n\n# Sample input for testing\nrounds = [\n    {'Alice': 10, 'Bob': 15, 'Charlie': 5},\n    {'Alice': 20, 'Bob': 10, 'Charlie': 15},\n    {'Alice': 5, 'Bob': 25, 'Charlie': 10}\n]\n\n# Testing the function\nprint(update_leaderboard(rounds))",
+    "context_relevance": 0.0
+}

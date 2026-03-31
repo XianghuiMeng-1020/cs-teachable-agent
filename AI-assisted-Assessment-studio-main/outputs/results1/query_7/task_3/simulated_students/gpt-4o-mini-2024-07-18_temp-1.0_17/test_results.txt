@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py F [ 20%]
+FF.F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'test_mythology.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:43: AssertionError: assert '' == 'Nessie\nGolem\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:50: AssertionError: assert 'Banshee\n' == 'Bigfoot\nYeti\nDragon\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py:66: FileNotFoundError: [Errno 2] No such file or directory: 'filtered_myths_test.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_filter_legendary
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_filter_myth
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_filter_folklore
+FAILED outputs/results1/query_7/task_3/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_17/test_suite_stu.py::test_filter_partial_content
+========================= 4 failed, 1 passed in 0.13s ==========================

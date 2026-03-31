@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 20%]
+FFFFE                                                                    [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at teardown of test_different_file ___________________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_scoreboard.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:22: AssertionError: assert 25 == 75
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:32: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/solution_program.py:32: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:39: AssertionError: assert 120 == 40
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_add_score_for_existing_player
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_get_score_for_nonexistent_player
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_persistence_after_save_and_load
+FAILED outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_different_file
+ERROR outputs/results1/query_21/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_different_file
+===================== 4 failed, 1 passed, 1 error in 0.04s =====================

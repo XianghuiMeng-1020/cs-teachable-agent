@@ -1,0 +1,20 @@
+In a distant future, humanity has established colonies on various planets across the galaxy. These colonies are connected via star gates and require frequent energy consumption reports to maintain the interstellar communication infrastructure. You have been tasked to develop a Python program that reads a file containing energy consumptions logged from different planets, calculates the total consumption, and writes the result to another file.
+
+The input file will have multiple lines, each line containing the name of the planet followed by its energy consumption separated by a space. For example:
+
+```
+Earth 15000
+Mars 12000
+Jupiter 30000
+```
+
+Your program should read this file, sum up all the energy consumptions, and write the total energy consumption to an output file.
+
+Implement the following function:
+
+`def calculate_total_consumption(input_file, output_file):`
+
+- `input_file`: a string representing the filepath to the input file containing energy consumption data.
+- `output_file`: a string representing the filepath to where the total energy consumption will be written.
+
+Your task is to ensure that the total energy consumption is calculated correctly and that it appears as a single number in the provided output file. You are guaranteed that the input file format is valid and does not have any empty lines or invalid data.

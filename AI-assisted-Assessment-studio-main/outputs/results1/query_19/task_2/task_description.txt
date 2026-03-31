@@ -1,0 +1,13 @@
+In a futuristic world where space travel is commonplace, you are tasked with developing a system to analyze the activity logs of spaceships. The logs are stored in text files where each log entry consists of a timestamp and a description of an event. Each entry is on a new line in the following format:
+
+    YYYY-MM-DD HH:MM:SS - EVENT_DESCRIPTION
+
+For example:
+
+    2149-07-13 23:45:01 - Engine power boosted
+    2149-07-14 00:00:01 - Entered warp speed
+    2149-07-14 00:03:20 - Exited warp speed
+
+You are to implement a function `read_log_file(file_path)` that reads a log file, extracts all entries, and returns a list of event descriptions sorted in chronological order. If the file does not exist or is unreadable, the function should return an empty list. The entries in the log can be completely unordered by time in the file.
+
+Implement this function considering possible exceptions and handle them appropriately. Ensure that any issues with file handling do not cause the program to crash. Additionally, assume that each event's timestamp is unique.

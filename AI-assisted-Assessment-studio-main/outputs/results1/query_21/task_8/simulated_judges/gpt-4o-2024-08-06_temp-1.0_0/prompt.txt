@@ -1,0 +1,83 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Board Games' and a list of programming concepts ['Variables', 'Classes and Objects', 'File Handling and I/O', 'Strings', 'Arithmetic Operators']:
+
+### Beginning of task description
+You are tasked with creating a Python program that simulates a leaderboard for a board game tournament. Your program should allow players to have their scores updated after each game they play. The data of player scores should persist across program runs using a file to store and retrieve data. 
+
+Implement a class `Leaderboard` with the following methods:
+
+- `add_player(self, player_name)`: Add a new player to the leaderboard with a default score of 0. If the player already exists, do nothing.
+- `update_score(self, player_name, score)`: Update the player's score by adding the given `score` to the player's current score. If the player does not exist, add them to the leaderboard with the provided score.
+- `get_score(self, player_name)`: Return the current score of the player. If the player does not exist, return `None`.
+- `save_scores(self, filepath)`: Save the current state of the leaderboard to a file specified by `filepath`. Each line in the file should contain `player_name:score`.
+- `load_scores(self, filepath)`: Load player scores from a file specified by `filepath`. If a player is already in the leaderboard, update their score with the one from the file.
+
+Your implementation should correctly maintain player data, update scores, and load from/save to files. The scores in the file should always reflect the state of the leaderboard at the last save operation. Use a colon `:` as the delimiter between player names and their scores in the file.
+
+The test suite will involve creating files to load scores from, checking player scores after updates, and ensuring file content reflects the leaderboard's state.
+### End of task description
+
+### Beginning of test suite
+import os
+import pytest
+from solution_program import Leaderboard
+
+def setup_module(module):
+    with open('load_test.txt', 'w') as f:
+        f.write('Alice:10\nBob:15\n')
+    with open('update_test.txt', 'w') as f:
+        f.write('Charlie:20\n')
+
+
+def teardown_module(module):
+    os.remove('load_test.txt')
+    os.remove('update_test.txt')
+    if os.path.exists('save_test.txt'):
+        os.remove('save_test.txt')
+
+
+def test_add_player():
+    leaderboard = Leaderboard()
+    leaderboard.add_player('Alice')
+    assert leaderboard.get_score('Alice') == 0
+
+
+def test_update_score_existing_player():
+    leaderboard = Leaderboard()
+    leaderboard.add_player('Alice')
+    leaderboard.update_score('Alice', 20)
+    assert leaderboard.get_score('Alice') == 20
+
+
+def test_get_score_non_existing_player():
+    leaderboard = Leaderboard()
+    assert leaderboard.get_score('Bob') is None
+
+
+def test_load_scores():
+    leaderboard = Leaderboard()
+    leaderboard.load_scores('load_test.txt')
+    assert leaderboard.get_score('Alice') == 10
+    assert leaderboard.get_score('Bob') == 15
+
+
+def test_save_scores():
+    leaderboard = Leaderboard()
+    leaderboard.add_player('Alice')
+    leaderboard.add_player('Bob')
+    leaderboard.update_score('Alice', 50)
+    leaderboard.update_score('Bob', 40)
+    leaderboard.save_scores('save_test.txt')
+    with open('save_test.txt', 'r') as f:
+        content = f.read()
+    assert 'Alice:50' in content
+    assert 'Bob:40' in content
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

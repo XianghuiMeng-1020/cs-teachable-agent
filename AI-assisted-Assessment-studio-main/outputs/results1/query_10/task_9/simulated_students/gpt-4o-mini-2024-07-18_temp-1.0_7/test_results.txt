@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py . [ 20%]
+..FF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:59: AssertionError: assert 'salt:2' in 'sugar:10\nflour:5\nbutter:2\nsalt:6\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py:74: AssertionError: assert 'sugar:5' in ''
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_save_inventory
+FAILED outputs/results1/query_10/task_9/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_7/test_suite_stu.py::test_non_existing_file_handling
+========================= 2 failed, 3 passed in 0.06s ==========================

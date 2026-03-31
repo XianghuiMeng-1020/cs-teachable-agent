@@ -1,0 +1,66 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Science Fiction' and a list of programming concepts ['Arithmetic Operators', 'File Handling and I/O', 'Variables']:
+
+### Beginning of task description
+In a science fiction universe, a spacecraft is designed to analyze energy readings from various cosmic structures. During each mission, the spacecraft records these energy readings in a file named `energy_readings.txt`. Each line in this file contains a single integer representing one energy measurement.
+
+You are required to write a Python function `average_energy(file_name)` that calculates and returns the average energy reading recorded by the spacecraft. The file name is passed as an argument to the function. If the file is empty or doesn't exist, the function should return 0.
+
+How your solution will be tested:
+1. The function `average_energy(file_name)` will be called with different file names corresponding to various test cases.
+2. The test suite will check if the output of your function matches the expected average value for each test case.
+3. It must handle any cases where the file may not exist or is empty gracefully by returning 0.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution import average_energy
+
+def setup_module(module):
+    with open('test1.txt', 'w') as f:
+        f.write('10\n20\n30\n40\n50')
+    with open('test2.txt', 'w') as f:
+        f.write('5\n10')
+    with open('test3.txt', 'w') as f:
+        f.write('')
+
+    # Create a file for a larger set of numbers
+    with open('test4.txt', 'w') as f:
+        for i in range(1, 101):  # Numbers from 1 to 100
+            f.write(f'{i}\n')
+    # Create a file for negative numbers
+    with open('test5.txt', 'w') as f:
+        f.write('-10\n-20\n-30')
+
+def teardown_module(module):
+    os.remove('test1.txt')
+    os.remove('test2.txt')
+    os.remove('test3.txt')
+    os.remove('test4.txt')
+    os.remove('test5.txt')
+
+
+def test_average_energy_case_1():
+    assert average_energy('test1.txt') == 30
+
+
+def test_average_energy_case_2():
+    assert average_energy('test2.txt') == 7.5
+
+
+def test_average_energy_case_3():
+    assert average_energy('test3.txt') == 0
+
+
+def test_average_energy_case_4():
+    assert average_energy('test4.txt') == 50.5
+
+
+def test_average_energy_case_5():
+    assert average_energy('test5.txt') == -20
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

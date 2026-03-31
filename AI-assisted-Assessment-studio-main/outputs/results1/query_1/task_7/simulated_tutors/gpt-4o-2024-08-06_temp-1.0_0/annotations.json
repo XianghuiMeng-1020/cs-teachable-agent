@@ -1,0 +1,4 @@
+{
+    "program": "import random\n\ndef lucky_draw(cards, player_choice):\n    # Shuffle the deck of cards\n    random.shuffle(cards)\n    \n    # Check if the deck has less than five cards\n    if len(cards) < 5:\n        return False\n    \n    # Check the first five cards of the shuffled deck\n    first_five = cards[:5]\n    \n    # Determine if player's choice is among the first five\n    return player_choice in first_five\n",
+    "context_relevance": 1.0
+}

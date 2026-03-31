@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 8 items
+
+outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 12%]
+FF.FFF.                                                                  [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 3} == {'leftover_ca...ith_cargo': 3}
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 2} == {'leftover_ca...ith_cargo': 2}
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 2} == {'leftover_ca...ith_cargo': 2}
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 1} == {'leftover_ca...ith_cargo': 1}
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 1} == {'leftover_ca...ith_cargo': 1}
+/Volumes/T7/idea/pytasksyn/outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:24: AssertionError: assert {'leftover_ca...ith_cargo': 3} == {'leftover_ca...ith_cargo': 3}
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests0-expected0]
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests1-expected1]
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests2-expected2]
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests4-expected4]
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests5-expected5]
+FAILED outputs/query_3/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_dispatch_cargo[cargo_requests6-expected6]
+========================= 6 failed, 2 passed in 0.15s ==========================

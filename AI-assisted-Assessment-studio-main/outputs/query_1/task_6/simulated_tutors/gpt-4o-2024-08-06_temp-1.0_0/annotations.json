@@ -1,0 +1,4 @@
+{
+    "program": "def calculate_mythical_power(affinities):\n    # Initialize total power to 0\n    total_power = 0\n    \n    # Iterate over each affinity to calculate its contribution to the mythical power\n    for affinity in affinities:\n        if affinity > 10:  # Strong affinities\n            total_power += 2 * affinity\n        elif 5 <= affinity <= 10:  # Moderate affinities\n            total_power += affinity\n        elif affinity < 5:  # Weak affinities\n            total_power -= 2 * affinity\n    \n    # Return the total calculated mythical power\n    return total_power",
+    "context_relevance": 1.0
+}

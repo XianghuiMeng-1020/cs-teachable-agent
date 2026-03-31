@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:6: ValueError: too many values to unpack (expected 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:6: ValueError: too many values to unpack (expected 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:6: ValueError: too many values to unpack (expected 2)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:5: ValueError: not enough values to unpack (expected 2, got 1)
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/solution_program.py:6: ValueError: too many values to unpack (expected 2)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_single_ingredient
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_multiple_ingredients
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_different_units
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_empty_string
+FAILED outputs/results1/query_14/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_14/test_suite_stu.py::test_complex_input
+============================== 5 failed in 0.11s ===============================

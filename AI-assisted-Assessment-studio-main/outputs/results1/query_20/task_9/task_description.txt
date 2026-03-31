@@ -1,0 +1,7 @@
+In a popular board game called 'Territory Conqueror', players score points based on the territories they control. A player's score is calculated by adding the points for each territory they control, but each territory also has a point deduction if it is not fully developed. 
+
+Your task is to create a function `calculate_score(controlled_territories, developed_territories)` that takes in two strings. The `controlled_territories` string represents the territories a player controls, and `developed_territories` indicates which of those territories are fully developed. Each character represents a territory, and each territory is worth 8 points if fully developed.
+
+A deduction of 3 points is applied for each territory that is not fully developed. This means if a territory in `controlled_territories` is present in `developed_territories`, it earns full 8 points; otherwise, it results in a net 5 points (8 points minus 3 deduction).
+
+Write a function to calculate the total score of the territories controlled by a player based on these rules. The function should return an integer representing this score.

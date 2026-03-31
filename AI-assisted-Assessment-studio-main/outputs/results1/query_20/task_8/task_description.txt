@@ -1,0 +1,9 @@
+Create a function `check_game_winner(player_one_score, player_two_score)` that determines the winner of a board game based on the players' scores. The function takes two arguments:
+
+- `player_one_score`: an integer representing the score of player one.
+- `player_two_score`: an integer representing the score of player two.
+
+The game rules are simple:
+- If player one has a higher score, the function should return the string "Player One wins!".
+- If player two has a higher score, the function should return the string "Player Two wins!".
+- If the scores are tied, the function should return "It's a tie!".

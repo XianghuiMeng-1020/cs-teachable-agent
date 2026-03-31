@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py F [ 20%]
+FFF.E                                                                    [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at teardown of test_calculate_total_energy_5 ______________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'quantum_energy.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:22: assert 0 == 122
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:31: assert 1520 == 15
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py:40: assert 35 == 1500
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/solution_program.py:2: FileNotFoundError: [Errno 2] No such file or directory: 'quantum_energy.txt'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_calculate_total_energy_1
+FAILED outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_calculate_total_energy_2
+FAILED outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_calculate_total_energy_3
+FAILED outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_calculate_total_energy_4
+ERROR outputs/results1/query_18/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_16/test_suite_stu.py::test_calculate_total_energy_5
+===================== 4 failed, 1 passed, 1 error in 0.13s =====================

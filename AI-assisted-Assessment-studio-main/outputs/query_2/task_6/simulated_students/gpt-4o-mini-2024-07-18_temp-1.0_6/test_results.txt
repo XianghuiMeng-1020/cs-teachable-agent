@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py F [ 20%]
+FFFF                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:38: AssertionError: assert 'Onions\nSpaghetti\nWater\n' == 'Spaghetti\nOnions\nWater\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:38: AssertionError: assert '\n' == 'Basil\nGarlic\nCucumber\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:38: AssertionError: assert 'bread\ncheese\nham\n' == 'Bread\nHam\nCheese\n'
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:38: AssertionError: assert 'ato\nbread\ncheese\nham\n' == ''
+/Volumes/T7/idea/pytasksyn/outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py:38: AssertionError: assert '\n' == 'Basil\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_generate_shopping_list[test_full_missing_ingredients-Pasta\nSpaghetti\nOnions\n\nSoup\nWater\n-Salt\nOil\n-Spaghetti\nOnions\nWater\n]
+FAILED outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_generate_shopping_list[test_some_ingredients_missing-Pasta\nTomato\nBasil\nGarlic\n\nSalad\nLettuce\nTomato\nCucumber\n-Tomato\nLettuce\nSalt\nOil\n-Basil\nGarlic\nCucumber\n]
+FAILED outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_generate_shopping_list[test_no_file_overlap-Sandwich\nBread\nHam\nCheese\n-Pepper\nSalt\n-Bread\nHam\nCheese\n]
+FAILED outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_generate_shopping_list[test_no_missing_ingredients-Soup\nWater\nSalt\n\nPasta\nTomato\nGarlic\n-Water\nSalt\nTomato\nGarlic\n-]
+FAILED outputs/query_2/task_6/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_6/test_suite_stu.py::test_generate_shopping_list[test_case_insensitive-Pizza\nTomato\nMozzarella\nBasil\n-tomato\nmozzarella\n-Basil\n]
+============================== 5 failed in 0.05s ===============================

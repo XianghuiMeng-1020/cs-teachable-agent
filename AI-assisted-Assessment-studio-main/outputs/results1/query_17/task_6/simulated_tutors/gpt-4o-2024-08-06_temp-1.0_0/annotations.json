@@ -1,0 +1,4 @@
+{
+    "program": "class Alien:\n    def __init__(self, name, species, skills):\n        self.name = name\n        self.species = species\n        self.skills = skills\n\n    def __repr__(self):\n        return f\"Alien(name={self.name}, species={self.species})\"\n\n\ndef assign_mission(aliens, mission_requirements):\n    suitable_aliens = []\n    for alien in aliens:\n        is_qualified = True\n        for skill, required_level in mission_requirements.items():\n            alien_skill_level = alien.skills.get(skill, 0)\n            if alien_skill_level < required_level:\n                is_qualified = False\n                break\n        if is_qualified:\n            suitable_aliens.append(alien)\n    if not suitable_aliens:\n        raise ValueError(\"No suitable aliens found\")\n    return suitable_aliens",
+    "context_relevance": 1.0
+}

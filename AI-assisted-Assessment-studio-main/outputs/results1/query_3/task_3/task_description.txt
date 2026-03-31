@@ -1,0 +1,17 @@
+You are to create a simple simulation for a betting game called 'Dice Game of Chance'. In this game, the player bets on the outcome of the roll of a pair of dice. 
+
+Your task is to implement a function `dice_game_of_chance(bet_config)` where `bet_config` is a dictionary with the following keys:
+- `'bet_on'`: a string representing what number the player is betting on (e.g., '7', '12'). This number represents the sum of the values shown on two dice.
+- `'amount'`: an integer representing the amount of money the player is betting.
+
+The game rules are as follows:
+1. Roll a pair of dice (simulated) and calculate the sum.
+2. If the sum equals the number the player bet on, the player wins and receives double their bet amount.
+3. If the sum does not match, the player loses their bet amount.
+4. The function should return a dictionary with two keys:
+   - `'result'`: a string that is either 'win' or 'lose' depending on the outcome.
+   - `'final_amount'`: an integer representing the total money player has after the round.
+
+The initial amount a player has at the beginning of the round is equal to the bet amount. 
+
+Don't use any form of randomness for simulating the dice rolls. Instead, generate numbers deterministically using a loop over fixed pairs, for example, (3, 4), (5, 2), etc., for testability in the test suite. Handle both valid and invalid inputs in the function (e.g., negative bet amounts or non-numeric betting numbers), and return a dictionary with an appropriate error message in such cases.

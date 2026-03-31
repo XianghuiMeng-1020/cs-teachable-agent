@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/query_1/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py . [ 20%]
+.F..                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/query_1/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py:16: AssertionError: assert 'Side B' == 'Side A'
+--------------------------------- JSON report ----------------------------------
+report saved to: outputs/query_1/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/query_1/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_13/test_suite_stu.py::test_greater_side_b
+========================= 1 failed, 4 passed in 0.09s ==========================

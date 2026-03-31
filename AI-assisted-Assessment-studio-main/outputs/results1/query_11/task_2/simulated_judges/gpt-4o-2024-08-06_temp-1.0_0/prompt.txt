@@ -1,0 +1,55 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Cooking' and a list of programming concepts ['Strings', 'Variables', 'Selection Statements (if/else, etc.)', 'Lists', 'Arithmetic Operators']:
+
+### Beginning of task description
+In a small cooking competition, each participant is required to bring a dish with specified ingredients. The competition judges have a list of mandatory ingredients for each round. Participants need to ensure they have the required ingredients to qualify for that round. 
+
+Write a Python function `can_qualify(dish_ingredients, mandatory_ingredients)` that takes two lists of strings: `dish_ingredients` and `mandatory_ingredients`. The list `dish_ingredients` contains ingredients that a participant has used in their dish. The list `mandatory_ingredients` contains ingredients that are required by the judges for the round.
+
+The function should return `True` if the participant's dish contains all mandatory ingredients, otherwise `False`.
+
+The function will be tested as follows:
+- It will be tested with a list of ingredients and a list of mandatory ingredients to check if all mandatory ingredients are present.
+- You should consider both lists will contain only lowercase alphabetic characters, without duplicates within each list.
+- Test cases will include scenarios where the dish contains: all mandatory ingredients, some grounds where no mandatory ingredients are included, and where some optional additional ingredients are present but mandatory ones are missing.
+### End of task description
+
+### Beginning of test suite
+import pytest
+
+from solution import can_qualify
+
+def test_all_mandatory_present():
+    dish_ingredients = ['flour', 'egg', 'milk', 'sugar']
+    mandatory_ingredients = ['flour', 'egg']
+    assert can_qualify(dish_ingredients, mandatory_ingredients) is True
+
+def test_some_mandatory_missing():
+    dish_ingredients = ['flour', 'milk', 'sugar']
+    mandatory_ingredients = ['flour', 'egg']
+    assert can_qualify(dish_ingredients, mandatory_ingredients) is False
+
+def test_no_mandatory_present():
+    dish_ingredients = ['milk', 'sugar']
+    mandatory_ingredients = ['flour', 'egg']
+    assert can_qualify(dish_ingredients, mandatory_ingredients) is False
+
+def test_exact_match():
+    dish_ingredients = ['flour', 'egg']
+    mandatory_ingredients = ['flour', 'egg']
+    assert can_qualify(dish_ingredients, mandatory_ingredients) is True
+
+def test_more_ingredients_than_needed():
+    dish_ingredients = ['flour', 'egg', 'milk', 'sugar', 'butter']
+    mandatory_ingredients = ['flour', 'egg', 'sugar']
+    assert can_qualify(dish_ingredients, mandatory_ingredients) is True
+
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

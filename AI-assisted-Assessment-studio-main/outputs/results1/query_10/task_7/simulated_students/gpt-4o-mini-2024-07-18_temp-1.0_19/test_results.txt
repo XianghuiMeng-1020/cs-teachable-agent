@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py F [ 20%]
+F..F                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:25: AssertionError: assert ['Eggs', ' Salt', ' Pepper'] == ['Eggs', 'Salt', 'Pepper']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:32: AssertionError: assert ['Pasta', ' Tomato Sauce'] == ['Pasta', 'Tomato Sauce']
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py:54: assert <solution_program.Recipe object at 0x1048448e0> is None
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_load_recipe_valid_file
+FAILED outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_load_recipe_another_valid_file
+FAILED outputs/results1/query_10/task_7/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_19/test_suite_stu.py::test_load_recipe_malformed_file
+========================= 3 failed, 2 passed in 0.16s ==========================

@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py . [ 20%]
+FF..E                                                                    [100%]
+
+==================================== ERRORS ====================================
+________ ERROR at teardown of test_calculate_winner_score_invalid_data _________
+E   FileNotFoundError: [Errno 2] No such file or directory: 'test_file.txt'
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:25: FileNotFoundError: [Errno 2] No such file or directory: 'temp_test_file.txt'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py:31: AssertionError: assert None == ('Frank', 40)
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_calculate_winner_score_different_file
+FAILED outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_calculate_winner_score_single_entry
+ERROR outputs/results1/query_24/task_2/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_2/test_suite_stu.py::test_calculate_winner_score_invalid_data
+===================== 2 failed, 3 passed, 1 error in 0.15s =====================

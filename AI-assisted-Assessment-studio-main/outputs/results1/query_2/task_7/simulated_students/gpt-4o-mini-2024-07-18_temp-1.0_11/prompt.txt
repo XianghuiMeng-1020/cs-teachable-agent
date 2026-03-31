@@ -1,0 +1,41 @@
+You are a student enrolled in a Python programming course.
+
+Write a program to solve the task below.
+
+### Beginning of task description
+You are tasked with creating a program named `lottery_draw.py` that simulates a Game of Chance for a fictional lottery. The program will read participant names and their lottery numbers from an input file, perform a random draw, and output the winning participant. 
+
+### Requirements:
+
+1. **Input File Format:** 
+    - The input file, `participants.txt`, consists of multiple lines, each representing one participant.
+    - Each line contains a participant name followed by a space and then a string of exactly 6 space-separated integers (e.g., `Alice 12 34 22 55 17 9`).
+
+2. **Output File:**
+    - The program should output the winner to a file named `winner.txt`.
+    - If there are multiple participants with the same lottery numbers, the program should output the first occurrence.
+
+3. **Lottery Draw Simulation:**
+    - Simulate a random lottery draw by selecting one line (participant) at random from the input file.
+
+4. **Function Signature:**
+    - Implement this functionality using a function named `select_winner(input_filename, output_filename)`. This function will:
+      - Read from the input file specified by `input_filename`.
+      - Write the winner's name to the output file specified by `output_filename`.
+
+### Example:
+For a file `participants.txt`:
+```
+Alice 12 34 22 55 17 9
+Bob 11 22 33 44 55 66
+Charlie 12 34 22 55 17 9
+```
+A possible output file `winner.txt` after running the program could be:
+```
+Alice
+```
+(Note: Since the draw is random, `Bob` or `Charlie` could also be chosen.)
+### End of task description
+
+Do not include example usages, comments, or tests.
+Output a JSON object with the following key: 'program'.

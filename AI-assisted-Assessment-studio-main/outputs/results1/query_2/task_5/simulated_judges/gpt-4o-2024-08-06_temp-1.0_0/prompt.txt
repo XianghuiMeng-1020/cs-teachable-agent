@@ -1,0 +1,102 @@
+You are an expert in Python programming.
+
+The following Python programming task was created given a context of 'Game of Chance' and a list of programming concepts ['Strings', 'Lists', 'File Handling and I/O']:
+
+### Beginning of task description
+In the mystical land of Pymeric, a famous gambling game called "Lucky Strings" has taken over the taverns. In this game, players draw random strings of letters and win points based on certain lucky conditions. The game master needs a program to analyze the strings and tally points based on the following rules:
+
+1. A string containing 'xyz' earns 3 points.
+2. Each instance of the letter 'a' earns 1 point.
+3. A string with the length exactly equal to 7 gives additional 5 points, but only once per string.
+
+Each player's string results from separate draws are stored sequentially in a text file, one string per line. Your task is to write a function `calculate_points(input_file, output_file)` that reads strings from the `input_file`, processes each string according to the rules, cumulates the points for each string, and writes the total points of each string to the `output_file`, with one line per result.
+
+### Function Signature
+`calculate_points(input_file, output_file)`
+
+#### Input
+- `input_file`: Path to a text file containing strings, where each string is on a new line.
+- `output_file`: Path to the text file where the point results should be written.
+
+#### Output
+- The function doesn't return anything; however, it writes the points for each string in the `output_file`.
+
+#### Example
+If `input_file` contains:
+```
+abcaxyz
+zzzaaa
+abcdefgh
+xyz
+```
+, the `output_file` will contain:
+```
+6
+9
+6
+4
+```
+
+### Note
+- Ensure to handle the file I/O dynamically, closing the files properly after operations.
+### End of task description
+
+### Beginning of test suite
+import pytest
+import os
+from solution_program import calculate_points
+
+def setup_module(module):
+    with open('test_input1.txt', 'w') as f:
+        f.write('abcaxyz\nzzzaaa\nabcdefgh\nxyz\n')
+    with open('test_input2.txt', 'w') as f:
+        f.write('aaaaaaa\nxyzaaa\n\nxyzabcaa\naaxyzaa\n')
+    with open('test_input3.txt', 'w') as f:
+        f.write('\n\n\n\n')
+    with open('test_input4.txt', 'w') as f:
+        f.write('abcdefg\na\nab\nabc\nabca\n')
+    with open('test_input5.txt', 'w') as f:
+        f.write('xyzxyz\nxyz\naaa\nxyz\nabcxyz\n')
+
+
+def teardown_module(module):
+    os.remove('test_input1.txt')
+    os.remove('test_input2.txt')
+    os.remove('test_input3.txt')
+    os.remove('test_input4.txt')
+    os.remove('test_input5.txt')
+    os.remove('output1.txt')
+    os.remove('output2.txt')
+    os.remove('output3.txt')
+    os.remove('output4.txt')
+    os.remove('output5.txt')
+
+
+def test_lucky_strings():
+    calculate_points('test_input1.txt', 'output1.txt')
+    with open('output1.txt', 'r') as f:
+        assert f.read().strip() == '6\n9\n6\n4'
+    
+    calculate_points('test_input2.txt', 'output2.txt')
+    with open('output2.txt', 'r') as f:
+        assert f.read().strip() == '12\n7\n0\n11'
+
+    calculate_points('test_input3.txt', 'output3.txt')
+    with open('output3.txt', 'r') as f:
+        assert f.read().strip() == '0\n0\n0\n0'
+
+    calculate_points('test_input4.txt', 'output4.txt')
+    with open('output4.txt', 'r') as f:
+        assert f.read().strip() == '5\n1\n1\n1\n2'
+
+    calculate_points('test_input5.txt', 'output5.txt')
+    with open('output5.txt', 'r') as f:
+        assert f.read().strip() == '8\n4\n3\n4\n7'
+### End of test suite
+
+Evaluate the quality of the task using the following rubric:
+- Q-Testsuite: 1 if the test suite is correct and covers both base cases and corner cases; 0 otherwise.
+- Q-Context: 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+- Q-Comprehensible: 1 if all information needed to solve the task (passing the test suite) is provided in the task description; 0 otherwise.
+- Q-Overall: 1 if all the individual quality metrics listed above are 1; 0 otherwise.
+Output a JSON object with the following keys: 'q_testsuite', 'q_context', 'q_comprehensible', and 'q_overall'.

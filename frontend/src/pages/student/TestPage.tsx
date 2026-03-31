@@ -8,7 +8,7 @@ import { ProblemSelector } from "@/components/workspace/ProblemSelector";
 import { TestResultCard } from "@/components/workspace/TestResultCard";
 import { ComprehensiveReport } from "@/components/workspace/ComprehensiveReport";
 import { ProblemUnlockPanel } from "@/components/workspace/ProblemUnlockPanel";
-import { Play, Lightbulb, GraduationCap, Trophy, Target } from "lucide-react";
+import { Play, Zap, FileText } from "lucide-react";
 import { toast } from "sonner";
 
 export function TestPage() {
@@ -82,17 +82,13 @@ export function TestPage() {
     onError: (err) => toast.error(err instanceof Error ? err.message : "Comprehensive test failed"),
   });
 
-  // Check if TA needs more teaching to unlock problems
-  const hasUnlockableProblems = problems.length > 0;
-  const learnedCount = (problemsData?.learned_unit_ids?.length ?? 0);
-  const requiredCount = (problemsData?.required_kus?.length ?? 0);
   const eligibleIds = problemsData?.eligible_ids ?? [];
   const learnedUnitIds = problemsData?.learned_unit_ids ?? [];
   const requiredKus = problemsData?.required_kus ?? [];
 
   return (
     <div className="space-y-6">
-      {/* Problem Unlock Progress Panel */}
+      {/* Unlock panel */}
       {currentTaId && (
         <ProblemUnlockPanel
           problems={problems}
@@ -103,15 +99,19 @@ export function TestPage() {
         />
       )}
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <ProblemSelector
-          problems={problems}
-          value={selectedProblemId}
-          onValueChange={setSelectedProblemId}
-          disabled={!currentTaId}
-          className="max-w-md"
-        />
-        <div className="flex gap-2">
+      {/* Controls */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex-1">
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">Problem</label>
+          <ProblemSelector
+            problems={problems}
+            value={selectedProblemId}
+            onValueChange={setSelectedProblemId}
+            disabled={!currentTaId}
+            className="max-w-md"
+          />
+        </div>
+        <div className="flex gap-2 shrink-0">
           <Button
             icon={Play}
             loading={runTestMutation.isPending}
@@ -121,25 +121,30 @@ export function TestPage() {
             Run Test
           </Button>
           <Button
-            variant="secondary"
-            icon={Play}
+            variant="outline"
+            icon={Zap}
             loading={runComprehensiveMutation.isPending}
             onClick={() => runComprehensiveMutation.mutate()}
             disabled={!currentTaId}
           >
-            Run Comprehensive
+            Run All
           </Button>
         </div>
       </div>
 
+      {/* Selected problem preview */}
       {selectedProblem && (
         <Card padding="md">
-          <h3 className="text-sm font-semibold text-slate-700">Selected problem</h3>
-          <p className="mt-2 text-sm text-slate-600">{selectedProblem.problem_statement}</p>
+          <div className="flex items-center gap-2 mb-2">
+            <FileText className="h-4 w-4 text-stone-400" />
+            <h3 className="text-sm font-semibold text-stone-800">Problem Description</h3>
+          </div>
+          <p className="text-sm leading-relaxed text-stone-600">{selectedProblem.problem_statement}</p>
         </Card>
       )}
 
-      <div className="grid gap-4 md:grid-cols-2">
+      {/* Results */}
+      <div className="grid gap-5 lg:grid-cols-2">
         <div>
           {singleResult && (
             <TestResultCard
@@ -164,10 +169,16 @@ export function TestPage() {
             </Card>
           )}
           {!singleResult && !comprehensiveResult && (
-            <Card padding="md">
-              <p className="text-sm text-slate-500">
-                Select a problem (or leave Auto-select) and click Run Test or Run Comprehensive.
-              </p>
+            <Card padding="lg" className="text-center">
+              <div className="py-8">
+                <Play className="mx-auto h-10 w-10 text-stone-300" />
+                <p className="mt-3 text-sm font-medium text-stone-500">
+                  Select a problem and run a test to see results
+                </p>
+                <p className="mt-1 text-xs text-stone-400">
+                  Or use "Run All" for a comprehensive evaluation
+                </p>
+              </div>
             </Card>
           )}
         </div>

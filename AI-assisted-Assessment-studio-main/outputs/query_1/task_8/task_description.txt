@@ -1,0 +1,23 @@
+## Mythology Task: The Pantheon Oracle
+
+In ancient mythology, there exists the Pantheon Oracle, a magical entity capable of summoning mystical fortunes for adventurous heroes based on specific patterns of mythical creature encounters. The Oracle bases these fortunes on a sequence of encounters from an adventure log.
+
+### Task
+Write a Python function named `pantheon_oracle` that accepts a list of strings `adventure_logs`. Each string in the list represents an encounter with a mythical creature. The Oracle has specific rules:
+
+1. If a hero encounters a creature exactly 3 times in a row, it is considered a "Summon." The Oracle toggles a fortune of +10 for every "Summon".
+2. If a creature is encountered 7 times sequentially, it becomes a "Divine Revelation." The Oracle toggles a fortune of +30 for every "Divine Revelation."
+3. Encountering any creature 2 times in a row reverses any ongoing sequential count for that particular creature. It's considered a "False Echo", and it toggles -5 from the fortune.
+
+Return the final fortune value calculated based on these rules.
+
+### Example
+```python
+pantheon_oracle(["phoenix", "phoenix", "phoenix", "hydra", "hydra", "hydra", "hydra", "hydra", "hydra", "hydra", "dragon", "dragon"])
+
+# Returns: 25
+```
+
+The list in this example contains one "Summon" for "phoenix" (+10), one "Divine Revelation" for "hydra" (+30), and a "False Echo" for "dragon" (-5).
+
+Ensure that your solution correctly handles any edge cases and is efficient with input lengths up to 10,000 creatures.

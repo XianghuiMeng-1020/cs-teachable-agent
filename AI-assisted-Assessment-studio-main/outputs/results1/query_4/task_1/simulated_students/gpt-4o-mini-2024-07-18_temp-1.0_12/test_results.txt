@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+collected 10 items
+
+outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py . [ 10%]
+..FF.FFF.                                                                [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:19: AssertionError: assert 3 == -1
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:19: AssertionError: assert 2 == 1
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:19: AssertionError: assert 10 == -2
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:19: AssertionError: assert 3 == 0
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py:19: AssertionError: assert 3 == 0
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_winnings[THTHTH--1]
+FAILED outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_winnings[HTHHTTT-1]
+FAILED outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_winnings[HTHTHTHTHTHTHTHTHTHT--2]
+FAILED outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_winnings[HHHTTT-0]
+FAILED outputs/results1/query_4/task_1/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_12/test_suite_stu.py::test_calculate_winnings[HHTHHTTTT-0]
+========================= 5 failed, 5 passed in 0.13s ==========================

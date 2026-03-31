@@ -1,0 +1,91 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Dictionaries', 'Loops', 'Arithmetic Operators', 'Strings', 'Selection Statements (if/else, etc.)']:
+
+### Beginning of task description
+Create a function `calculate_payout(bets, winning_number)` that simulates a simple roulette game.
+
+The function should take two arguments:
+1. `bets`: a list of dictionaries where each dictionary represents a player's bet. Each dictionary contains:
+   - `"player"`: the player's name (a string).
+   - `"bet_type"`: the type of the bet (either `"number"`, `"even"`, or `"odd"`).
+   - `"amount"`: the betting amount (an integer).
+
+2. `winning_number`: an integer (0-36) representing the winning number from the roulette spin.
+
+Your task is to calculate the payout for each player based on the following rules:
+- If `bet_type` is `"number"` and matches `winning_number`, payout is 35 times the amount bet.
+- If `bet_type` is `"even"` and `winning_number` is even (and not 0), payout is 2 times the amount bet.
+- If `bet_type` is `"odd"` and `winning_number` is odd, payout is also 2 times the amount bet.
+- Otherwise, the payout is 0.
+
+The function should return a dictionary where each key is a player's name and each value is the total payout for that player.
+
+Example:
+```python
+bets = [
+    {"player": "Alice", "bet_type": "number", "amount": 10},
+    {"player": "Bob", "bet_type": "even", "amount": 15},
+    {"player": "Charlie", "bet_type": "odd", "amount": 5}
+]
+winning_number = 2
+calculate_payout(bets, winning_number) 
+# should return {"Alice": 0, "Bob": 30, "Charlie": 0}
+```
+### End of task description
+
+### Beginning of test suite
+import pytest
+from roulette import calculate_payout
+
+def test_single_number_bet_wins():
+    bets = [
+        {"player": "Alice", "bet_type": "number", "amount": 10}
+    ]
+    winning_number = 7
+    result = calculate_payout(bets, winning_number)
+    assert result == {"Alice": 0}
+
+
+def test_single_even_bet_wins():
+    bets = [
+        {"player": "Bob", "bet_type": "even", "amount": 15}
+    ]
+    winning_number = 2
+    result = calculate_payout(bets, winning_number)
+    assert result == {"Bob": 30}
+
+
+def test_single_odd_bet_wins():
+    bets = [
+        {"player": "Charlie", "bet_type": "odd", "amount": 20}
+    ]
+    winning_number = 3
+    result = calculate_payout(bets, winning_number)
+    assert result == {"Charlie": 40}
+
+
+def test_multiple_bets_mixed_outcome():
+    bets = [
+        {"player": "Alice", "bet_type": "number", "amount": 10},
+        {"player": "Bob", "bet_type": "even", "amount": 15},
+        {"player": "Charlie", "bet_type": "odd", "amount": 5}
+    ]
+    winning_number = 2
+    result = calculate_payout(bets, winning_number)
+    assert result == {"Alice": 0, "Bob": 30, "Charlie": 0}
+
+
+def test_multiple_bets_winning_number():
+    bets = [
+        {"player": "Alice", "bet_type": "number", "amount": 5},
+        {"player": "Bob", "bet_type": "number", "amount": 20},
+        {"player": "Charlie", "bet_type": "number", "amount": 15}
+    ]
+    winning_number = 29
+    result = calculate_payout(bets, winning_number)
+    assert result == {"Alice": 0, "Bob": 700, "Charlie": 525}
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

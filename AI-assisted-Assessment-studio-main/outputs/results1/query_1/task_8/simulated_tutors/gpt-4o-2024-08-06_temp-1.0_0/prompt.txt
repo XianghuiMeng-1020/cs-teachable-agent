@@ -1,0 +1,66 @@
+You are a tutor in a Python programming course.
+
+The following Python programming task was created given a theme of 'Game of Chance' and a list of programming concepts ['Arithmetic Operators', 'Selection Statements (if/else, etc.)', 'Variables', 'Lists']:
+
+### Beginning of task description
+**Task: Roulette Number Prediction**
+
+You are tasked with simulating a simplified version of a roulette number prediction game. In this game, you will implement a function `predict_winnings(numbers, bet_amounts)` that calculates the total payout of a player based on their predictions for the roulette outcome.
+
+- The roulette wheel has 37 slots, numbered from 0 to 36.
+- A player makes predictions on one or more numbers on the roulette wheel.
+- For each chosen number, there is a corresponding bet amount placed.
+- When the roulette is spun, it lands on a number. For this task, you must assume the roulette always lands on a predetermined number, that is, 32.
+
+The function parameters are:
+
+- `numbers` (a list of integers) representing the player's predictions.
+- `bet_amounts` (a list of integers) with each element being the amount of money placed on the respective number in the `numbers` list.
+
+Both lists will be the same length and contain non-negative integers.
+
+- If the predicted number matches the roulette outcome, the player wins an amount equal to 36 times the bet amount on that number.
+- The function should return the total payout from all bets.
+
+**Example:**
+
+```python
+predict_winnings([5, 32, 10], [10, 20, 5])
+```
+
+This example should return 720, as the player wins 720 from betting on number 32 (36 * 20 = 720), and no payout from numbers 5 and 10.
+
+**Constraints:**
+- Both `numbers` and `bet_amounts` will have at least one element.
+- The numbers will be unique within `numbers` and range from 0 to 36.
+- Bet amounts will be non-negative integers.
+### End of task description
+
+### Beginning of test suite
+import pytest
+from solution import predict_winnings
+
+@pytest.mark.parametrize("numbers, bet_amounts, expected", [
+    ([32], [10], 360),
+    ([5, 32, 10], [10, 20, 5], 720),
+    ([1, 3, 5, 7, 9, 32], [5, 5, 5, 5, 5, 5], 180),
+    ([8, 15, 32, 16], [50, 50, 50, 50], 1800),
+    ([0, 1, 6, 10], [0, 0, 0, 0], 0)
+])
+def test_predict_winnings(numbers, bet_amounts, expected):
+    assert predict_winnings(numbers, bet_amounts) == expected
+
+@pytest.mark.parametrize("numbers, bet_amounts, expected", [
+    ([32, 32], [10, 20], 360),  # Tests edge case with 32 appearing twice
+    ([2], [45], 0),  # Tests case with no winning number
+    ([32], [0], 0),  # Tests case with zero bet amount
+    ([7, 12, 25, 13], [15, 20, 30, 50], 0),  # No win
+    ([32, 10, 25, 19], [1, 2, 3, 4], 36)   # Win with lowest bet amount
+])
+def test_edge_cases(numbers, bet_amounts, expected):
+    assert predict_winnings(numbers, bet_amounts) == expected
+
+### End of test suite
+
+Write a program to solve the task and evaluate the context relevance of the task. The context relevance is 1 if the task is clearly relevant to the given theme and the theme is explicitly used throughout, and all given programming concepts are strictly required to solve the task; 0 otherwise.
+Output a JSON object with the following keys: 'program', 'context_relevance'. Note that comparison operators are not arithmetic operators.

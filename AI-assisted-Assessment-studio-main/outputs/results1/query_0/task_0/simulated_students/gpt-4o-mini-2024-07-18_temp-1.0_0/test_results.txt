@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+collected 5 items
+
+outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py . [ 20%]
+FFF.                                                                     [100%]
+
+=================================== FAILURES ===================================
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:37: AssertionError: assert 'Tickets eval...nNo winners\n' == 'Tickets eval...nNo winners\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:44: AssertionError: assert '' == 'Tickets eval...Winner: 888\n'
+/Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py:51: AssertionError: assert 'Tickets eval...nNo winners\n' == 'Tickets eval...nNo winners\n'
+--------------------------------- JSON report ----------------------------------
+report saved to: /Volumes/T7/idea/pytasksyn/outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/pytest_report.json
+=========================== short test summary info ============================
+FAILED outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_no_winners
+FAILED outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_multiple_winners
+FAILED outputs/results1/query_0/task_0/simulated_students/gpt-4o-mini-2024-07-18_temp-1.0_0/test_suite_stu.py::test_all_same_number_no_winners
+========================= 3 failed, 2 passed in 0.16s ==========================

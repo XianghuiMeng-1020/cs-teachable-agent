@@ -1,0 +1,4 @@
+{
+    "program": "def active_starships(log_lines):\n    operational_starships = []\n    for log in log_lines:\n        name, fuel_level = log.rsplit(\" \", 1)\n        if int(fuel_level) > 50:\n            operational_starships.append(name)\n    return sorted(operational_starships)",
+    "context_relevance": 1.0
+}

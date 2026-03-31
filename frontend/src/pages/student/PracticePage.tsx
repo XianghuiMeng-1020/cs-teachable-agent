@@ -1,0 +1,199 @@
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { BookOpenCheck, Loader2, ChevronRight, Puzzle, ListChecks, ScanEye, ShieldAlert } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { listAssessmentItems, getAssessmentStats, type AssessmentItemSummary, type AssessmentStats } from "@/api/assessment";
+import { AssessmentProgress } from "@/components/assessment";
+import { QuickStartGuide } from "@/components/assessment/QuickStartGuide";
+import { emitTelemetry, setupSessionTelemetry } from "@/lib/telemetry";
+
+const ITEM_TYPE_LABELS: Record<string, string> = {
+  parsons: "Parsons Puzzle",
+  dropdown: "Fill Blanks",
+  "execution-trace": "Execution Trace",
+};
+
+const ITEM_TYPE_META: Record<string, { icon: typeof Puzzle; color: string; bg: string }> = {
+  parsons: { icon: Puzzle, color: "text-violet-700", bg: "bg-violet-50 border-violet-200" },
+  dropdown: { icon: ListChecks, color: "text-sky-700", bg: "bg-sky-50 border-sky-200" },
+  "execution-trace": { icon: ScanEye, color: "text-emerald-700", bg: "bg-emerald-50 border-emerald-200" },
+};
+
+export function PracticePage() {
+  const navigate = useNavigate();
+  const [items, setItems] = useState<AssessmentItemSummary[]>([]);
+  const [stats, setStats] = useState<AssessmentStats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [filterType, setFilterType] = useState<string>("");
+  const [maxAiPassRate, setMaxAiPassRate] = useState(75);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    return setupSessionTelemetry();
+  }, []);
+
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [itemsRes, statsRes] = await Promise.all([
+        listAssessmentItems({ item_type: filterType || undefined, limit: 100 }),
+        getAssessmentStats(),
+      ]);
+      const filtered = itemsRes.items.filter((item) => {
+        if (item.ai_pass_rate == null) return true;
+        return item.ai_pass_rate <= maxAiPassRate;
+      });
+      setItems(filtered);
+      setTotal(filtered.length);
+      setStats(statsRes);
+    } catch {
+      // silent
+    } finally {
+      setLoading(false);
+    }
+  }, [filterType, maxAiPassRate]);
+
+  useEffect(() => { loadData(); }, [loadData]);
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="font-serif text-display-sm text-stone-900">Practice</h1>
+        <p className="mt-1 text-stone-500">
+          Strengthen your understanding with structured exercises
+        </p>
+      </div>
+
+      {stats && (
+        <AssessmentProgress
+          totalAttempts={stats.total_attempts}
+          correctAttempts={stats.correct_attempts}
+          accuracy={stats.accuracy}
+          uniqueItemsSolved={stats.unique_items_solved}
+          totalItemsAvailable={stats.total_items_available}
+        />
+      )}
+
+      {/* Quick Start Guide */}
+      <QuickStartGuide />
+
+      {/* AI Resistance Filter */}
+      <div className="rounded-xl border border-stone-200/80 bg-white p-4 shadow-card">
+        <div className="flex items-center gap-2 mb-3">
+          <ShieldAlert className="h-4 w-4 text-brand-700" />
+          <span className="text-sm font-semibold text-stone-800">AI Resistance Filter</span>
+          <span className="ml-auto text-xs font-medium text-brand-700">
+            Max AI pass rate: {maxAiPassRate}%
+          </span>
+        </div>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          step={5}
+          value={maxAiPassRate}
+          onChange={(e) => setMaxAiPassRate(Number(e.target.value))}
+          className="w-full h-1.5 rounded-full appearance-none bg-stone-200 accent-brand-700 cursor-pointer"
+        />
+        <div className="mt-1.5 flex justify-between text-[10px] text-stone-400">
+          <span>Harder (low AI pass)</span>
+          <span>Easier (high AI pass)</span>
+        </div>
+      </div>
+
+      {/* Type Filters */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {[
+          { value: "", label: "All Types" },
+          { value: "parsons", label: "Parsons" },
+          { value: "dropdown", label: "Fill Blanks" },
+          { value: "execution-trace", label: "Trace" },
+        ].map((f) => (
+          <button
+            key={f.value}
+            onClick={() => setFilterType(f.value)}
+            className={cn(
+              "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all",
+              filterType === f.value
+                ? "border-brand-600 bg-brand-50 text-brand-800"
+                : "border-stone-200 bg-white text-stone-600 hover:border-stone-300"
+            )}
+          >
+            {f.label}
+          </button>
+        ))}
+        <span className="text-xs text-stone-400 ml-auto">{total} items</span>
+      </div>
+
+      {loading ? (
+        <div className="flex items-center justify-center py-16">
+          <Loader2 className="h-6 w-6 animate-spin text-brand-600" />
+        </div>
+      ) : items.length === 0 ? (
+        <div className="rounded-xl border-2 border-dashed border-stone-200 py-16 text-center">
+          <BookOpenCheck className="mx-auto h-10 w-10 text-stone-300" />
+          <p className="mt-3 text-sm font-medium text-stone-500">No items available</p>
+          <p className="mt-1 text-xs text-stone-400">Try changing your filter</p>
+        </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => {
+            const meta = ITEM_TYPE_META[item.item_type] ?? ITEM_TYPE_META.parsons;
+            const TypeIcon = meta.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => navigate(`/practice/${item.id}`)}
+                className="group relative rounded-xl border border-stone-200/80 bg-white p-5 text-left shadow-card transition-all hover:shadow-card-hover hover:-translate-y-0.5"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg border", meta.bg)}>
+                    <TypeIcon className={cn("h-4 w-4", meta.color)} />
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-stone-300 transition-colors group-hover:text-brand-500 mt-1" />
+                </div>
+                <h3 className="mt-3 text-sm font-semibold text-stone-900 group-hover:text-brand-800 line-clamp-2">
+                  {item.title}
+                </h3>
+                <div className="mt-2 flex items-center gap-2 flex-wrap">
+                  <span className={cn("rounded-md px-2 py-0.5 text-[11px] font-medium border", meta.bg, meta.color)}>
+                    {ITEM_TYPE_LABELS[item.item_type] || item.item_type}
+                  </span>
+                  {item.theme && (
+                    <span className="text-[11px] text-stone-400">{item.theme}</span>
+                  )}
+                </div>
+                {item.concepts && item.concepts.length > 0 && (
+                  <div className="mt-2.5 flex gap-1 flex-wrap">
+                    {item.concepts.slice(0, 3).map((c) => (
+                      <span key={c} className="rounded-md bg-stone-50 px-1.5 py-0.5 text-[10px] font-medium text-stone-500">
+                        {c}
+                      </span>
+                    ))}
+                    {item.concepts.length > 3 && (
+                      <span className="text-[10px] text-stone-400">+{item.concepts.length - 3}</span>
+                    )}
+                  </div>
+                )}
+                {item.ai_pass_rate != null && (
+                  <div className="mt-3">
+                    <div className="flex items-center justify-between text-[10px] text-stone-400">
+                      <span>Difficulty</span>
+                      <span>{Math.round((1 - item.ai_pass_rate / 100) * 100)}%</span>
+                    </div>
+                    <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-stone-100">
+                      <div
+                        className="h-full rounded-full bg-amber-400"
+                        style={{ width: `${Math.round((1 - item.ai_pass_rate / 100) * 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
