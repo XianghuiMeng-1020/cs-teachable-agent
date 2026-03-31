@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAppStore } from "@/stores/appStore";
 import { getProblems, getTA, runTest, runTestComprehensive } from "@/api/client";
 import { Button } from "@/components/ui/Button";
@@ -8,12 +9,36 @@ import { ProblemSelector } from "@/components/workspace/ProblemSelector";
 import { TestResultCard } from "@/components/workspace/TestResultCard";
 import { ComprehensiveReport } from "@/components/workspace/ComprehensiveReport";
 import { ProblemUnlockPanel } from "@/components/workspace/ProblemUnlockPanel";
-import { Play, Zap, FileText } from "lucide-react";
+import { 
+  Play, 
+  Zap, 
+  FileText, 
+  Target,
+  CheckCircle,
+  XCircle,
+  Trophy,
+  Sparkles,
+  BarChart3,
+  AlertCircle,
+  Clock,
+} from "lucide-react";
 import { toast } from "sonner";
+
+// Animation variants
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+};
 
 export function TestPage() {
   const currentTaId = useAppStore((s) => s.currentTaId);
   const [selectedProblemId, setSelectedProblemId] = useState<string | null>(null);
+  const [testMode, setTestMode] = useState<"single" | "comprehensive">("single");
   const [singleResult, setSingleResult] = useState<{
     problem_id: string;
     problem_statement: string;
@@ -63,9 +88,12 @@ export function TestPage() {
         reflection_prompt: data.reflection_prompt ?? null,
       });
       setComprehensiveResult(null);
+      setTestMode("single");
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "state"] });
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "mastery"] });
-      toast.success(data.passed ? "Test passed" : "Test failed");
+      toast.success(data.passed ? "🎉 Test passed!" : "❌ Test failed - review the output", {
+        duration: 3000,
+      });
     },
     onError: (err) => toast.error(err instanceof Error ? err.message : "Test failed"),
   });
@@ -75,9 +103,17 @@ export function TestPage() {
     onSuccess: (data) => {
       setComprehensiveResult(data);
       setSingleResult(null);
+      setTestMode("comprehensive");
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "state"] });
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "mastery"] });
-      toast.success(`Completed: ${data.total_passed}/${data.total_run} passed`);
+      const percentage = Math.round((data.total_passed / data.total_run) * 100);
+      toast.success(
+        <div>
+          <div className="font-semibold">Comprehensive Test Complete!</div>
+          <div className="text-sm">{data.total_passed}/{data.total_run} passed ({percentage}%)</div>
+        </div>,
+        { duration: 4000 }
+      );
     },
     onError: (err) => toast.error(err instanceof Error ? err.message : "Comprehensive test failed"),
   });
@@ -86,9 +122,57 @@ export function TestPage() {
   const learnedUnitIds = problemsData?.learned_unit_ids ?? [];
   const requiredKus = problemsData?.required_kus ?? [];
 
+  const passRate = comprehensiveResult 
+    ? Math.round((comprehensiveResult.total_passed / comprehensiveResult.total_run) * 100)
+    : singleResult?.passed ? 100 : 0;
+
   return (
-    <div className="space-y-6">
-      {/* Unlock panel */}
+    <motion.div 
+      variants={fadeIn}
+      initial="hidden"
+      animate="visible"
+      className="space-y-6 max-w-6xl mx-auto"
+    >
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+            <Target className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-stone-900">Test Your Agent</h1>
+            <p className="text-sm text-stone-500">
+              Verify what your TA has learned through programming challenges
+            </p>
+          </div>
+        </div>
+        
+        {/* Stats Badge */}
+        {(singleResult || comprehensiveResult) && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+              (comprehensiveResult?.total_passed === comprehensiveResult?.total_run) || singleResult?.passed
+                ? "bg-emerald-100 text-emerald-700"
+                : "bg-amber-100 text-amber-700"
+            }`}
+          >
+            {(comprehensiveResult?.total_passed === comprehensiveResult?.total_run) || singleResult?.passed
+              ? <CheckCircle className="w-5 h-5" />
+              : <AlertCircle className="w-5 h-5" />
+            }
+            <span className="font-semibold">
+              {comprehensiveResult 
+                ? `${passRate}% Pass Rate`
+                : singleResult?.passed ? "Test Passed" : "Test Failed"
+              }
+            </span>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Problem Unlock Panel */}
       {currentTaId && (
         <ProblemUnlockPanel
           problems={problems}
@@ -99,54 +183,76 @@ export function TestPage() {
         />
       )}
 
-      {/* Controls */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex-1">
-          <label className="mb-1.5 block text-sm font-medium text-stone-700">Problem</label>
-          <ProblemSelector
-            problems={problems}
-            value={selectedProblemId}
-            onValueChange={setSelectedProblemId}
-            disabled={!currentTaId}
-            className="max-w-md"
-          />
-        </div>
-        <div className="flex gap-2 shrink-0">
-          <Button
-            icon={Play}
-            loading={runTestMutation.isPending}
-            onClick={() => runTestMutation.mutate(selectedProblemId)}
-            disabled={!currentTaId}
-          >
-            Run Test
-          </Button>
-          <Button
-            variant="outline"
-            icon={Zap}
-            loading={runComprehensiveMutation.isPending}
-            onClick={() => runComprehensiveMutation.mutate()}
-            disabled={!currentTaId}
-          >
-            Run All
-          </Button>
-        </div>
-      </div>
-
-      {/* Selected problem preview */}
-      {selectedProblem && (
-        <Card padding="md">
-          <div className="flex items-center gap-2 mb-2">
-            <FileText className="h-4 w-4 text-stone-400" />
-            <h3 className="text-sm font-semibold text-stone-800">Problem Description</h3>
+      {/* Test Controls Card */}
+      <Card padding="lg" className="bg-gradient-to-br from-stone-50 to-white">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Problem Selection */}
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-stone-700 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-brand-600" />
+              Select Problem
+            </label>
+            <ProblemSelector
+              problems={problems}
+              value={selectedProblemId}
+              onValueChange={setSelectedProblemId}
+              disabled={!currentTaId}
+            />
+            {selectedProblem && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-3 p-3 bg-brand-50 rounded-lg border border-brand-100"
+              >
+                <p className="text-sm text-brand-800">{selectedProblem.problem_statement}</p>
+              </motion.div>
+            )}
           </div>
-          <p className="text-sm leading-relaxed text-stone-600">{selectedProblem.problem_statement}</p>
-        </Card>
-      )}
 
-      {/* Results */}
-      <div className="grid gap-5 lg:grid-cols-2">
-        <div>
-          {singleResult && (
+          {/* Action Buttons */}
+          <div className="flex flex-col justify-end">
+            <label className="mb-2 block text-sm font-semibold text-stone-700 flex items-center gap-2">
+              <Play className="w-4 h-4 text-brand-600" />
+              Run Test
+            </label>
+            <div className="flex gap-3">
+              <Button
+                icon={Play}
+                loading={runTestMutation.isPending}
+                onClick={() => runTestMutation.mutate(selectedProblemId)}
+                disabled={!currentTaId}
+                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+              >
+                Run Single Test
+              </Button>
+              <Button
+                variant="outline"
+                icon={Zap}
+                loading={runComprehensiveMutation.isPending}
+                onClick={() => runComprehensiveMutation.mutate()}
+                disabled={!currentTaId}
+                className="flex-1"
+              >
+                Run All
+              </Button>
+            </div>
+            <p className="mt-2 text-xs text-stone-500">
+              Single: Test one problem • All: Comprehensive evaluation across all unlocked problems
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Results Section */}
+      <AnimatePresence mode="wait">
+        {testMode === "single" && singleResult && (
+          <motion.div
+            key="single"
+            variants={scaleIn}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, scale: 0.95 }}
+          >
             <TestResultCard
               problemId={singleResult.problem_id}
               problemStatement={singleResult.problem_statement}
@@ -157,9 +263,69 @@ export function TestPage() {
               outputLabel={outputLabel}
               reflectionPrompt={singleResult.reflection_prompt}
             />
-          )}
-          {comprehensiveResult && (
-            <Card padding="md">
+          </motion.div>
+        )}
+
+        {testMode === "comprehensive" && comprehensiveResult && (
+          <motion.div
+            key="comprehensive"
+            variants={scaleIn}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="space-y-6"
+          >
+            {/* Summary Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl p-4 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <CheckCircle className="w-5 h-5" />
+                  <span className="text-sm font-medium text-emerald-100">Passed</span>
+                </div>
+                <div className="text-3xl font-bold">{comprehensiveResult.total_passed}</div>
+              </div>
+              <div className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl p-4 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <XCircle className="w-5 h-5" />
+                  <span className="text-sm font-medium text-rose-100">Failed</span>
+                </div>
+                <div className="text-3xl font-bold">
+                  {comprehensiveResult.total_run - comprehensiveResult.total_passed}
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-4 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <BarChart3 className="w-5 h-5" />
+                  <span className="text-sm font-medium text-blue-100">Total</span>
+                </div>
+                <div className="text-3xl font-bold">{comprehensiveResult.total_run}</div>
+              </div>
+              <div className={`rounded-xl p-4 text-white ${
+                passRate >= 80 
+                  ? "bg-gradient-to-br from-amber-400 to-orange-500"
+                  : passRate >= 50
+                  ? "bg-gradient-to-br from-violet-500 to-purple-600"
+                  : "bg-gradient-to-br from-stone-500 to-stone-600"
+              }`}>
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy className="w-5 h-5" />
+                  <span className="text-sm font-medium text-white/80">Pass Rate</span>
+                </div>
+                <div className="text-3xl font-bold">{passRate}%</div>
+              </div>
+            </div>
+
+            {/* Detailed Report */}
+            <Card padding="lg">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-brand-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-stone-900">Comprehensive Test Report</h3>
+                  <p className="text-sm text-stone-500">Detailed breakdown of all test cases</p>
+                </div>
+              </div>
               <ComprehensiveReport
                 totalRun={comprehensiveResult.total_run}
                 totalPassed={comprehensiveResult.total_passed}
@@ -167,22 +333,43 @@ export function TestPage() {
                 overallSummary={comprehensiveResult.overall_summary}
               />
             </Card>
-          )}
-          {!singleResult && !comprehensiveResult && (
-            <Card padding="lg" className="text-center">
-              <div className="py-8">
-                <Play className="mx-auto h-10 w-10 text-stone-300" />
-                <p className="mt-3 text-sm font-medium text-stone-500">
-                  Select a problem and run a test to see results
+          </motion.div>
+        )}
+
+        {!singleResult && !comprehensiveResult && (
+          <motion.div
+            key="empty"
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+          >
+            <Card padding="xl" className="text-center border-dashed border-2 border-stone-200">
+              <div className="py-12">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-stone-100 to-stone-50 flex items-center justify-center mx-auto mb-6">
+                  <Play className="w-10 h-10 text-stone-300" />
+                </div>
+                <h3 className="text-xl font-semibold text-stone-900 mb-2">Ready to Test?</h3>
+                <p className="text-stone-500 mb-2 max-w-md mx-auto">
+                  Select a problem from the dropdown above and run a test to see how well your TA has learned.
                 </p>
-                <p className="mt-1 text-xs text-stone-400">
-                  Or use "Run All" for a comprehensive evaluation
+                <p className="text-sm text-stone-400 mb-6">
+                  Or use "Run All" for a comprehensive evaluation across all unlocked problems
                 </p>
+                <div className="flex items-center justify-center gap-4 text-sm text-stone-500">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>Tests run in real-time</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Instant feedback</span>
+                  </div>
+                </div>
               </div>
             </Card>
-          )}
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
