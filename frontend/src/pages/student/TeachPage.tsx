@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ChevronDown, 
@@ -37,7 +39,10 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
+const TEACH_TIP_KEYS = ["teach.tips.1", "teach.tips.2", "teach.tips.3", "teach.tips.4"] as const;
+
 export function TeachPage() {
+  const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
   const [playgroundOpen, setPlaygroundOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"chat" | "playground" | "promptlab">("chat");
@@ -75,14 +80,6 @@ export function TeachPage() {
   
   const progressPercent = totalKus > 0 ? Math.round((learnedCount / totalKus) * 100) : 0;
 
-  // Sample teaching tips
-  const teachingTips = [
-    "Explain concepts as if teaching a beginner",
-    "Use specific examples to illustrate ideas",
-    "Ask the TA questions to check understanding",
-    "Connect new concepts to what TA already knows",
-  ];
-
   return (
     <div className="h-[calc(100vh-var(--topbar-height)-24px)] flex flex-col lg:flex-row gap-4">
       {/* Main Content Area */}
@@ -99,13 +96,13 @@ export function TeachPage() {
             </div>
             <div>
               <h1 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-                Teach Your AI Agent
+                {t("teach.title")}
                 <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">
                   {domainId}
                 </span>
               </h1>
               <p className="text-sm text-stone-500">
-                Explain concepts clearly — the agent starts with zero knowledge
+                {t("teach.desc")}
               </p>
             </div>
           </div>
@@ -113,9 +110,9 @@ export function TeachPage() {
           {/* Tab Switcher */}
           <div className="hidden sm:flex items-center gap-1 bg-stone-100 rounded-lg p-1">
             {[
-              { id: "chat", icon: MessageSquare, label: "Chat" },
-              { id: "playground", icon: Code, label: "Code" },
-              { id: "promptlab", icon: Sparkles, label: "AI Lab" },
+              { id: "chat", icon: MessageSquare, labelKey: "teach.chat" },
+              { id: "playground", icon: Code, labelKey: "teach.code" },
+              { id: "promptlab", icon: Sparkles, labelKey: "teach.aiLab" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -127,7 +124,7 @@ export function TeachPage() {
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
@@ -186,9 +183,9 @@ export function TeachPage() {
             <Lightbulb className="w-4 h-4 text-amber-600" />
           </div>
           <div className="flex-1">
-            <div className="text-sm font-medium text-amber-900">Teaching Tip</div>
+            <div className="text-sm font-medium text-amber-900">{t("teach.teachingTip")}</div>
             <div className="text-sm text-amber-700">
-              {teachingTips[Math.floor(Math.random() * teachingTips.length)]}
+              {t(TEACH_TIP_KEYS[Math.floor(Math.random() * TEACH_TIP_KEYS.length)])}
             </div>
           </div>
         </motion.div>
@@ -208,7 +205,7 @@ export function TeachPage() {
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <div className="text-sm text-brand-100">Learning Progress</div>
+              <div className="text-sm text-brand-100">{t("teach.learningProgress")}</div>
               <div className="text-2xl font-bold">{progressPercent}%</div>
             </div>
           </div>
@@ -221,8 +218,8 @@ export function TeachPage() {
             />
           </div>
           <div className="mt-3 flex justify-between text-sm text-brand-100">
-            <span>{learnedCount} concepts learned</span>
-            <span>{totalKus - learnedCount} remaining</span>
+            <span>{learnedCount} {t("teach.conceptsLearned")}</span>
+            <span>{totalKus - learnedCount} {t("teach.remaining")}</span>
           </div>
         </div>
 
@@ -230,7 +227,7 @@ export function TeachPage() {
         <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
             <Brain className="w-5 h-5 text-violet-600" />
-            <h3 className="font-semibold text-stone-900">Knowledge State</h3>
+            <h3 className="font-semibold text-stone-900">{t("teach.knowledgeState")}</h3>
           </div>
           <KnowledgeGraph
             units={units}
@@ -243,7 +240,7 @@ export function TeachPage() {
         <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
             <Target className="w-5 h-5 text-emerald-600" />
-            <h3 className="font-semibold text-stone-900">Mastery Status</h3>
+            <h3 className="font-semibold text-stone-900">{t("teach.masteryStatus")}</h3>
           </div>
           <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
         </div>
@@ -262,7 +259,7 @@ export function TeachPage() {
           <div className="flex items-center gap-2 mb-4">
             <Zap className="w-5 h-5 text-amber-600" />
             <h3 className="font-semibold text-stone-900">
-              Misconceptions
+              {t("teach.misconceptions")}
               {misconceptions.length > 0 && (
                 <span className="ml-2 px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
                   {misconceptions.length}
@@ -284,7 +281,7 @@ export function TeachPage() {
               ))}
               {misconceptions.length > 2 && (
                 <div className="text-center text-sm text-stone-500">
-                  +{misconceptions.length - 2} more misconceptions
+                  {t("teach.moreMisconceptions", { count: misconceptions.length - 2 })}
                 </div>
               )}
             </div>
@@ -293,6 +290,7 @@ export function TeachPage() {
           )}
         </div>
       </motion.div>
+      <ContextualHelp pageKey="teach" />
     </div>
   );
 }

@@ -17,32 +17,34 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAppStore } from "@/stores/appStore";
 import { useAuthStore } from "@/stores/authStore";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/lib/constants";
 
 const studentNav = [
-  { to: ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
-  { to: ROUTES.teach, label: "Teach TA", icon: MessageSquare },
-  { to: ROUTES.test, label: "Test TA", icon: Play },
-  { to: ROUTES.practice, label: "Practice", icon: BookOpenCheck },
-  { to: ROUTES.mastery, label: "Mastery", icon: BookOpen },
-  { to: "/learning-analytics", label: "Analytics", icon: Brain },
-  { to: ROUTES.history, label: "History", icon: History },
+  { to: ROUTES.dashboard, labelKey: "nav.dashboard", icon: LayoutDashboard },
+  { to: ROUTES.teach, labelKey: "nav.teach", icon: MessageSquare },
+  { to: ROUTES.test, labelKey: "nav.test", icon: Play },
+  { to: ROUTES.practice, labelKey: "nav.practice", icon: BookOpenCheck },
+  { to: ROUTES.mastery, labelKey: "nav.mastery", icon: BookOpen },
+  { to: "/learning-analytics", labelKey: "nav.analytics", icon: Brain },
+  { to: ROUTES.history, labelKey: "nav.history", icon: History },
 ];
 
 const teacherNav = [
-  { to: ROUTES.teacher.overview, label: "Overview", icon: LayoutGrid },
-  { to: ROUTES.teacher.students, label: "Students", icon: Users },
-  { to: ROUTES.teacher.transcripts, label: "Transcripts", icon: FileText },
-  { to: ROUTES.teacher.analytics, label: "Analytics", icon: BarChart3 },
-  { to: ROUTES.teacher.assessments, label: "Assessments", icon: ClipboardList },
-  { to: ROUTES.teacher.metrics, label: "Metrics", icon: Activity },
-  { to: ROUTES.teacher.proctoring, label: "Proctoring", icon: Shield },
+  { to: ROUTES.teacher.overview, labelKey: "nav.overview", icon: LayoutGrid },
+  { to: ROUTES.teacher.students, labelKey: "nav.students", icon: Users },
+  { to: ROUTES.teacher.transcripts, labelKey: "nav.transcripts", icon: FileText },
+  { to: ROUTES.teacher.analytics, labelKey: "nav.analytics", icon: BarChart3 },
+  { to: ROUTES.teacher.assessments, labelKey: "nav.assessments", icon: ClipboardList },
+  { to: ROUTES.teacher.metrics, labelKey: "nav.metrics", icon: Activity },
+  { to: ROUTES.teacher.proctoring, labelKey: "nav.proctoring", icon: Shield },
 ];
 
 export function Sidebar() {
+  const { t } = useTranslation();
   const { sidebarCollapsed, toggleSidebar, mobileMenuOpen, setMobileMenuOpen } = useAppStore();
   const user = useAuthStore((s) => s.user);
   const isTeacher = user?.role === "teacher";
@@ -75,14 +77,14 @@ export function Sidebar() {
       {!sidebarCollapsed && (
         <div className="px-4 pt-5 pb-2">
           <p className="text-[11px] font-semibold uppercase tracking-widest text-stone-400">
-            {isTeacher ? "Instructor" : "Learning"}
+            {isTeacher ? t("nav.instructor") : t("nav.learning")}
           </p>
         </div>
       )}
 
       {/* Navigation */}
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-1">
-        {nav.map(({ to, label, icon: Icon }) => (
+        {nav.map(({ to, labelKey, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}
@@ -97,7 +99,7 @@ export function Sidebar() {
             }
           >
             <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />
-            {!sidebarCollapsed && <span>{label}</span>}
+            {!sidebarCollapsed && <span>{t(labelKey)}</span>}
           </NavLink>
         ))}
       </nav>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Lightbulb, CheckCircle } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -25,7 +26,15 @@ export function MisconceptionCard({
   remediationHint,
   status,
 }: MisconceptionCardProps) {
+  const { t } = useTranslation();
   const title = MISCONCEPTION_DISPLAY[misconceptionId] ?? misconceptionId;
+
+  const statusLabel =
+    status === "active"
+      ? t("misconception.statusActive", { defaultValue: "active" })
+      : status === "resolved"
+        ? t("misconception.statusResolved", { defaultValue: "resolved" })
+        : t("misconception.statusCorrecting", { defaultValue: "correcting" });
 
   return (
     <Card padding="md" className={cn("border-l-4", statusBorder[status])}>
@@ -57,12 +66,15 @@ export function MisconceptionCard({
 }
 
 export function MisconceptionCardEmpty() {
+  const { t } = useTranslation();
   return (
     <Card padding="md" className="border border-stone-200">
       <div className="flex flex-col items-center justify-center py-4 text-center">
         <CheckCircle className="h-10 w-10 text-success" />
-        <p className="mt-2 text-sm font-medium text-stone-700">No active misconceptions</p>
-        <p className="mt-1 text-xs text-stone-500">TA knowledge state is consistent.</p>
+        <p className="mt-2 text-sm font-medium text-stone-700">
+          {t("misconception.noActive", { defaultValue: "No active misconceptions" })}
+        </p>
+        <p className="mt-1 text-xs text-stone-500">{t("misconception.consistent")}</p>
       </div>
     </Card>
   );

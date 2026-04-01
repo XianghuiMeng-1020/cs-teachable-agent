@@ -1,40 +1,44 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { listTA, createTA } from "@/api/client";
 import { useAppStore } from "@/stores/appStore";
 import { NetworkStatus } from "@/components/ui/NetworkStatus";
+import { UserGuide } from "@/components/onboarding/UserGuide";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 
-const PAGE_NAMES: Record<string, string> = {
-  "/dashboard": "Dashboard",
-  "/teach": "Teach TA",
-  "/test": "Test TA",
-  "/practice": "Practice",
-  "/mastery": "Mastery",
-  "/history": "History",
-  "/learning-analytics": "Analytics",
-  "/teacher": "Overview",
-  "/teacher/students": "Students",
-  "/teacher/transcripts": "Transcripts",
-  "/teacher/analytics": "Analytics",
-  "/teacher/assessments": "Assessments",
-  "/teacher/metrics": "Learning Analytics",
-  "/teacher/proctoring": "Proctoring Dashboard",
-};
-
 export function AppShell() {
+  const { t } = useTranslation();
   const location = useLocation();
   const path = location.pathname;
+
+  const PAGE_NAMES: Record<string, string> = {
+    "/dashboard": t("nav.dashboard"),
+    "/teach": `${t("nav.teach")} ${t("common.teachableAgent")}`,
+    "/test": `${t("nav.test")} ${t("common.teachableAgent")}`,
+    "/practice": t("nav.practice"),
+    "/mastery": t("nav.mastery"),
+    "/history": t("nav.history"),
+    "/learning-analytics": t("nav.analytics"),
+    "/teacher": t("nav.overview"),
+    "/teacher/students": t("nav.students"),
+    "/teacher/transcripts": t("nav.transcripts"),
+    "/teacher/analytics": t("nav.analytics"),
+    "/teacher/assessments": t("nav.assessments"),
+    "/teacher/metrics": t("nav.metrics"),
+    "/teacher/proctoring": t("nav.proctoring"),
+  };
+
   const pageName =
     PAGE_NAMES[path] ??
     (path.startsWith("/teacher/students/")
-      ? "Student Detail"
+      ? t("nav.studentDetail", { defaultValue: "Student Detail" })
       : path.startsWith("/practice/")
-        ? "Assessment"
-        : "TeachAgent");
+        ? t("nav.assessment", { defaultValue: "Assessment" })
+        : t("common.teachableAgent"));
   const queryClient = useQueryClient();
 
   const { data: taList = [], isSuccess: taListLoaded } = useQuery({
@@ -48,7 +52,7 @@ export function AppShell() {
       queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
     },
     onError: (err: Error) => {
-      toast.error(err?.message ?? "Failed to create TA. Please try again.");
+      toast.error(err?.message ?? t("topbar.failedCreateTA"));
     },
   });
 
@@ -68,11 +72,12 @@ export function AppShell() {
   return (
     <div className="flex h-screen overflow-hidden bg-surface">
       <NetworkStatus />
+      <UserGuide />
       {mobileMenuOpen && (
         <button
           type="button"
           className="fixed inset-0 z-30 bg-black/30 backdrop-blur-sm lg:hidden"
-          aria-label="Close menu"
+          aria-label={t("common.close")}
           onClick={() => setMobileMenuOpen(false)}
         />
       )}

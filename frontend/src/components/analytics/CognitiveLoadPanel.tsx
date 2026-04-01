@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -34,10 +35,10 @@ interface CognitiveLoadData {
     germane: number;
   };
   recommendations: {
-    action: string;
     difficulty_adjustment: number;
     break_recommended: boolean;
   };
+  /** i18n translation keys shown when overloaded */
   reduction_suggestions: string[];
 }
 
@@ -47,6 +48,7 @@ interface CognitiveLoadPanelProps {
 }
 
 export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelProps) {
+  const { t } = useTranslation();
   const [loadData, setLoadData] = useState<CognitiveLoadData | null>(null);
   const [isMonitoring, setIsMonitoring] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
@@ -76,20 +78,15 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
           germane: 20 + Math.random() * 30,
         },
         recommendations: {
-          action: level === "overload" ? "立即降低认知负荷 - 休息或简化" :
-                 level === "high" ? "密切监控 - 如需要请提供脚手架" :
-                 level === "optimal" ? "最佳学习区域 - 继续按计划进行" :
-                 level === "low" ? "保持当前节奏 - 学生感到舒适" :
-                 "增加挑战 - 学生可能感到无聊",
           difficulty_adjustment: level === "overload" ? -0.3 :
                                 level === "high" ? -0.1 :
                                 level === "very_low" ? 0.2 : 0,
           break_recommended: level === "overload",
         },
         reduction_suggestions: level === "overload" ? [
-          "🛑 立即休息5分钟",
-          "📝 简化当前问题",
-          "🎯 回顾前置概念",
+          "teach.tips.1",
+          "teach.tips.2",
+          "teach.tips.3",
         ] : [],
       });
       
@@ -111,14 +108,31 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
   };
 
   const getLoadStatus = (level: string) => {
-    const statuses: Record<string, { icon: React.ReactNode; text: string }> = {
-      very_low: { icon: <TrendingDown className="w-5 h-5" />, text: "负荷过低" },
-      low: { icon: <CheckCircle2 className="w-5 h-5" />, text: "负荷较低" },
-      optimal: { icon: <Zap className="w-5 h-5" />, text: "最佳学习区" },
-      high: { icon: <Activity className="w-5 h-5" />, text: "负荷较高" },
-      overload: { icon: <AlertTriangle className="w-5 h-5" />, text: "认知过载" },
+    const statuses: Record<string, { icon: ReactNode; text: string }> = {
+      very_low: { icon: <TrendingDown className="w-5 h-5" />, text: t("analytics.loadStatus.low") },
+      low: { icon: <CheckCircle2 className="w-5 h-5" />, text: t("analytics.loadStatus.manageable") },
+      optimal: { icon: <Zap className="w-5 h-5" />, text: t("analytics.loadStatus.optimal") },
+      high: { icon: <Activity className="w-5 h-5" />, text: t("analytics.loadStatus.manageable") },
+      overload: { icon: <AlertTriangle className="w-5 h-5" />, text: t("analytics.loadStatus.overload") },
     };
-    return statuses[level] || { icon: <Brain className="w-5 h-5" />, text: "监测中" };
+    return statuses[level] || { icon: <Brain className="w-5 h-5" />, text: t("common.loading") };
+  };
+
+  const getRecommendationAction = (level: string) => {
+    switch (level) {
+      case "overload":
+        return `${t("analytics.loadStatus.overload")} — ${t("analytics.recommendation")}`;
+      case "high":
+        return `${t("analytics.cognitiveLoad")} — ${t("dashboard.needsAttention")}`;
+      case "optimal":
+        return `${t("analytics.loadStatus.optimal")} — ${t("dashboard.allClear")}`;
+      case "low":
+        return `${t("analytics.loadStatus.manageable")} — ${t("dashboard.keepPracticing")}`;
+      case "very_low":
+        return `${t("analytics.loadStatus.low")} — ${t("mastery.exploreNew", { count: 0 })}`;
+      default:
+        return t("analytics.desc");
+    }
   };
 
   return (
@@ -142,10 +156,10 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
                 <Coffee className="w-8 h-8 text-red-500" />
               </div>
               <h3 className="text-xl font-semibold text-center text-stone-900 mb-2">
-                建议休息一下
+                {t("analytics.recommendation")}
               </h3>
               <p className="text-center text-stone-600 mb-6">
-                检测到认知负荷过高，建议休息 5 分钟后再继续学习。
+                {t("dashboard.needsAttention")} — {t("analytics.recommendation")}
               </p>
               <div className="flex gap-3">
                 <Button 
@@ -153,13 +167,13 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
                   className="flex-1"
                   onClick={() => setShowBreak(false)}
                 >
-                  稍后提醒
+                  {t("common.cancel")}
                 </Button>
                 <Button 
                   className="flex-1"
                   onClick={() => setShowBreak(false)}
                 >
-                  知道了
+                  {t("common.next")}
                 </Button>
               </div>
             </motion.div>
@@ -174,14 +188,14 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
               <Brain className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-stone-900">认知负荷监测</h3>
-              <p className="text-sm text-stone-500">实时追踪脑力消耗，防止过载</p>
+              <h3 className="font-semibold text-stone-900">{t("analytics.cognitiveLoad")}</h3>
+              <p className="text-sm text-stone-500">{t("analytics.desc")}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${isMonitoring ? "bg-green-500 animate-pulse" : "bg-stone-300"}`} />
             <span className="text-sm text-stone-500">
-              {isMonitoring ? "监测中" : "已暂停"}
+              {isMonitoring ? t("mastery.inProgress") : t("mastery.notStarted")}
             </span>
           </div>
         </div>
@@ -213,25 +227,25 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
 
             {/* Load Breakdown */}
             <div className="space-y-3">
-              <h4 className="text-sm font-medium text-stone-700">负荷分解</h4>
+              <h4 className="text-sm font-medium text-stone-700">{t("mastery.distribution")}</h4>
               <div className="space-y-2">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-stone-600">内在负荷 (内容复杂度)</span>
+                    <span className="text-stone-600">{t("analytics.intrinsicLoad")}</span>
                     <span className="font-medium">{loadData.load_breakdown.intrinsic.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.intrinsic} color="brand" />
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-stone-600">外在负荷 (干扰因素)</span>
+                    <span className="text-stone-600">{t("analytics.extrinsicLoad")}</span>
                     <span className="font-medium">{loadData.load_breakdown.extraneous.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.extraneous} color="warning" />
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-stone-600">关联负荷 (深度学习)</span>
+                    <span className="text-stone-600">{t("analytics.germaneLoad")}</span>
                     <span className="font-medium">{loadData.load_breakdown.germane.toFixed(1)}%</span>
                   </div>
                   <ProgressBar value={loadData.load_breakdown.germane} color="success" />
@@ -260,7 +274,7 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
                     loadData.cognitive_load_level === "optimal" ? "text-emerald-900" :
                     "text-blue-900"
                   }`}>
-                    {loadData.recommendations.action}
+                    {getRecommendationAction(loadData.cognitive_load_level)}
                   </p>
                 </div>
               </div>
@@ -269,12 +283,12 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
             {/* Reduction Suggestions */}
             {loadData.reduction_suggestions.length > 0 && (
               <div className="bg-stone-50 rounded-lg p-4">
-                <h4 className="font-medium text-stone-900 mb-2">降低负荷建议</h4>
+                <h4 className="font-medium text-stone-900 mb-2">{t("analytics.recommendation")}</h4>
                 <ul className="space-y-1">
-                  {loadData.reduction_suggestions.map((suggestion, i) => (
+                  {loadData.reduction_suggestions.map((suggestionKey, i) => (
                     <li key={i} className="text-sm text-stone-700 flex items-start gap-2">
                       <span className="text-stone-400">•</span>
-                      {suggestion}
+                      {t(suggestionKey)}
                     </li>
                   ))}
                 </ul>
@@ -284,12 +298,12 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
         ) : (
           <div className="text-center py-8">
             <Brain className="w-12 h-12 text-stone-300 mx-auto mb-3" />
-            <p className="text-stone-500">开始监测以查看认知负荷数据</p>
+            <p className="text-stone-500">{t("analytics.desc")}</p>
             <Button 
               className="mt-4" 
               onClick={() => setIsMonitoring(true)}
             >
-              开始监测
+              {t("common.getStarted")}
             </Button>
           </div>
         )}
@@ -305,12 +319,12 @@ export function CognitiveLoadPanel({ studentId, className }: CognitiveLoadPanelP
               {isMonitoring ? (
                 <>
                   <Minimize2 className="w-4 h-4 mr-2" />
-                  暂停监测
+                  {t("tutorial.skipGuide")}
                 </>
               ) : (
                 <>
                   <Maximize2 className="w-4 h-4 mr-2" />
-                  恢复监测
+                  {t("tutorial.restartGuide")}
                 </>
               )}
             </Button>

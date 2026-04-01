@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Code, Database, Brain, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DOMAINS = [
   {
@@ -54,6 +55,7 @@ interface DomainSelectorProps {
 }
 
 export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelectorProps) {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { setCurrentTaId } = useAppStore();
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
@@ -65,10 +67,16 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
       queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
       setCurrentTaId(created.id);
       setStep("success");
-      toast.success(`Your ${DOMAINS.find(d => d.id === created.domain_id)?.shortLabel} TA is ready!`);
+      const label = DOMAINS.find((d) => d.id === created.domain_id)?.shortLabel ?? "";
+      toast.success(
+        t("onboarding.toastTaReady", {
+          defaultValue: "Your {{label}} Teachable Agent is ready!",
+          label,
+        })
+      );
     },
     onError: (err: Error) => {
-      toast.error(err?.message ?? "Failed to create TA.");
+      toast.error(err?.message ?? t("onboarding.failedCreateTA"));
       setStep("select");
     },
   });
@@ -94,13 +102,13 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full text-brand-600 text-sm font-medium mb-4">
                   <Sparkles className="w-4 h-4" />
-                  Welcome to CS Teachable Agent
+                  {t("onboarding.welcomeToArtsCs")}
                 </div>
                 <Dialog.Title className="text-2xl font-bold text-stone-900">
-                  Choose Your Learning Domain
+                  {t("onboarding.chooseDomain")}
                 </Dialog.Title>
                 <Dialog.Description className="mt-2 text-stone-500 max-w-lg mx-auto">
-                  Select a domain to start teaching your AI assistant. You can create multiple TAs for different domains later.
+                  {t("onboarding.chooseDomainDesc")}
                 </Dialog.Description>
               </div>
 
@@ -149,7 +157,7 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
                   onClick={handleCreate}
                   icon={ArrowRight}
                 >
-                  Create My TA
+                  {t("onboarding.createMyTA")}
                 </Button>
               </div>
             </div>
@@ -161,9 +169,11 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
                 <div className="absolute inset-0 rounded-full border-4 border-stone-100" />
                 <div className="absolute inset-0 rounded-full border-4 border-brand-500 border-t-transparent animate-spin" />
               </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">Creating Your TA...</h3>
+              <h3 className="text-xl font-semibold text-stone-900 mb-2">{t("onboarding.creatingTA")}</h3>
               <p className="text-stone-500">
-                We're setting up your {DOMAINS.find(d => d.id === selectedDomain)?.label} learning environment
+                {t("onboarding.settingUp", {
+                  domain: DOMAINS.find((d) => d.id === selectedDomain)?.label ?? "",
+                })}
               </p>
             </div>
           )}
@@ -173,12 +183,14 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">Your TA is Ready!</h3>
+              <h3 className="text-xl font-semibold text-stone-900 mb-2">{t("onboarding.taReady")}</h3>
               <p className="text-stone-500 mb-6 max-w-md mx-auto">
-                Start teaching your {DOMAINS.find(d => d.id === selectedDomain)?.shortLabel} TA concepts, then run tests to see how well it learned.
+                {t("onboarding.taReadyDesc", {
+                  domain: DOMAINS.find((d) => d.id === selectedDomain)?.shortLabel ?? "",
+                })}
               </p>
               <Button variant="primary" size="lg" onClick={handleClose} icon={ArrowRight}>
-                Start Teaching
+                {t("onboarding.startTeaching")}
               </Button>
             </div>
           )}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
@@ -77,6 +78,7 @@ const tierBorders = {
 };
 
 export function AchievementShowcase({ className }: { className?: string }) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("badges");
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
   const [filter, setFilter] = useState<string>("all");
@@ -106,13 +108,13 @@ export function AchievementShowcase({ className }: { className?: string }) {
             <Trophy className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-stone-900">成就与徽章</h3>
-            <p className="text-sm text-stone-500">解锁成就，获得认可</p>
+            <h3 className="font-semibold text-stone-900">{t("analytics.achievementsTitle")}</h3>
+            <p className="text-sm text-stone-500">{t("analytics.desc")}</p>
           </div>
         </div>
         <Button variant="outline" size="sm">
           <Share2 className="w-4 h-4 mr-2" />
-          分享
+          {t("dashboard.viewAll")}
         </Button>
       </div>
 
@@ -120,19 +122,19 @@ export function AchievementShowcase({ className }: { className?: string }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-lg p-3 border border-yellow-200">
           <p className="text-2xl font-bold text-amber-700">{stats.totalPoints}</p>
-          <p className="text-xs text-amber-600">总积分</p>
+          <p className="text-xs text-amber-600">{t("dashboard.totalPoints")}</p>
         </div>
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-200">
           <p className="text-2xl font-bold text-blue-700">{stats.badgesUnlocked}/{stats.totalBadges}</p>
-          <p className="text-xs text-blue-600">徽章收集</p>
+          <p className="text-xs text-blue-600">{t("analytics.achievements")}</p>
         </div>
         <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-3 border border-purple-200">
           <p className="text-2xl font-bold text-purple-700">{stats.completion}%</p>
-          <p className="text-xs text-purple-600">完成度</p>
+          <p className="text-xs text-purple-600">{t("dashboard.overallProgress")}</p>
         </div>
         <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg p-3 border border-orange-200">
           <p className="text-2xl font-bold text-orange-700">{stats.currentStreak}</p>
-          <p className="text-xs text-orange-600">当前连击</p>
+          <p className="text-xs text-orange-600">{t("dashboard.streak")}</p>
         </div>
       </div>
 
@@ -140,15 +142,15 @@ export function AchievementShowcase({ className }: { className?: string }) {
         <TabsList className="bg-stone-100 p-1 rounded-lg">
           <TabsTrigger value="badges" className="rounded-md">
             <Medal className="w-4 h-4 mr-2" />
-            徽章
+            {t("analytics.achievements")}
           </TabsTrigger>
           <TabsTrigger value="titles" className="rounded-md">
             <Crown className="w-4 h-4 mr-2" />
-            头衔
+            {t("analytics.tier")}
           </TabsTrigger>
           <TabsTrigger value="progress" className="rounded-md">
             <TrendingUp className="w-4 h-4 mr-2" />
-            进度
+            {t("dashboard.overallProgress")}
           </TabsTrigger>
         </TabsList>
 
@@ -165,11 +167,11 @@ export function AchievementShowcase({ className }: { className?: string }) {
                     : "bg-stone-100 text-stone-600 hover:bg-stone-200"
                 }`}
               >
-                {cat === "all" ? "全部" : 
-                 cat === "learning" ? "学习" :
-                 cat === "practice" ? "实践" :
-                 cat === "social" ? "社交" :
-                 cat === "challenge" ? "挑战" : "特殊"}
+                {cat === "all" ? t("test.total") : 
+                 cat === "learning" ? t("analytics.learning") :
+                 cat === "practice" ? t("analytics.practicing") :
+                 cat === "social" ? t("analytics.social") :
+                 cat === "challenge" ? t("analytics.experiments") : t("analytics.special")}
               </button>
             ))}
           </div>
@@ -254,7 +256,7 @@ export function AchievementShowcase({ className }: { className?: string }) {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm text-stone-500">
-                      {title.prefix ? "前缀称号" : "后缀称号"}
+                      {title.prefix ? t("teach.chat") : t("test.desc")}
                     </p>
                     <p className="text-lg font-bold" style={{ color: title.unlocked ? title.color : "#94a3b8" }}>
                       {title.unlocked ? (
@@ -282,15 +284,15 @@ export function AchievementShowcase({ className }: { className?: string }) {
           <div className="space-y-4">
             {/* Category Progress */}
             {[
-              { name: "学习成就", total: 8, unlocked: 4, color: "bg-blue-500" },
-              { name: "实践成就", total: 6, unlocked: 2, color: "bg-emerald-500" },
-              { name: "社交成就", total: 5, unlocked: 2, color: "bg-purple-500" },
-              { name: "挑战成就", total: 4, unlocked: 1, color: "bg-orange-500" },
-              { name: "特殊成就", total: 3, unlocked: 0, color: "bg-pink-500" },
+              { nameKey: "analytics.learning", total: 8, unlocked: 4, color: "bg-blue-500" },
+              { nameKey: "analytics.practicing", total: 6, unlocked: 2, color: "bg-emerald-500" },
+              { nameKey: "analytics.social", total: 5, unlocked: 2, color: "bg-purple-500" },
+              { nameKey: "analytics.experiments", total: 4, unlocked: 1, color: "bg-orange-500" },
+              { nameKey: "analytics.special", total: 3, unlocked: 0, color: "bg-pink-500" },
             ].map((cat) => (
-              <div key={cat.name} className="bg-stone-50 rounded-lg p-4">
+              <div key={cat.nameKey} className="bg-stone-50 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium text-stone-700">{cat.name}</span>
+                  <span className="font-medium text-stone-700">{t(cat.nameKey)}</span>
                   <span className="text-sm text-stone-500">{cat.unlocked}/{cat.total}</span>
                 </div>
                 <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
@@ -334,18 +336,18 @@ export function AchievementShowcase({ className }: { className?: string }) {
               <div className="flex items-center justify-center gap-4 text-sm text-stone-500">
                 <span className="flex items-center gap-1">
                   <Sparkles className="w-4 h-4 text-yellow-500" />
-                  {selectedBadge.points} 积分
+                  {t("dashboard.totalPoints")}: {selectedBadge.points}
                 </span>
                 <span className="flex items-center gap-1 capitalize">
                   <Zap className="w-4 h-4" />
-                  {selectedBadge.tier} 等级
+                  {selectedBadge.tier} {t("analytics.tier")}
                 </span>
               </div>
               <Button 
                 className="w-full mt-6"
                 onClick={() => setSelectedBadge(null)}
               >
-                关闭
+                {t("common.close")}
               </Button>
             </motion.div>
           </motion.div>

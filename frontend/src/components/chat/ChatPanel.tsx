@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { Send, MessageCircle, AlertCircle, CheckCircle, BarChart3 } from "lucide-react";
 import { teach, teachStream, getMessages, analyzeTeaching } from "@/api/client";
@@ -58,6 +59,7 @@ function QualityIndicator({
   maxLength: number; 
   qualityResult: TeachingHelperResult | null;
 }) {
+  const { t } = useTranslation();
   const isNearLimit = length > maxLength * 0.9;
   const isOverLimit = length > maxLength;
   
@@ -75,7 +77,11 @@ function QualityIndicator({
     return (
       <div className={`flex items-center gap-1 text-xs ${isGood ? 'text-emerald-600' : 'text-amber-600'}`}>
         {isGood ? <CheckCircle className="w-3 h-3" /> : <AlertCircle className="w-3 h-3" />}
-        <span>{isGood ? 'Quality: Good' : 'Quality: Needs improvement'}</span>
+        <span>
+          {isGood
+            ? t("chat.qualityGood", { defaultValue: "Quality: Good" })
+            : t("chat.qualityNeedsImprovement", { defaultValue: "Quality: Needs improvement" })}
+        </span>
       </div>
     );
   }
@@ -89,6 +95,7 @@ function QualityIndicator({
 }
 
 export function ChatPanel({ taId }: ChatPanelProps) {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [input, setInput] = useState("");
   const [localMessages, setLocalMessages] = useState<ChatMessage[]>([]);
@@ -298,8 +305,8 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         {messages.length === 0 && !loading && (
           <EmptyState
             icon={MessageCircle}
-            title="Start teaching"
-            description="Start teaching your TA by explaining a concept (e.g. variables, print, or conditionals)."
+            title={t("dashboard.startTeaching")}
+            description={t("chat.startTeaching")}
           />
         )}
         {messages.map((msg, i) => (
@@ -331,7 +338,9 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         <div className="flex gap-2">
           <div className="flex-1 relative">
             <textarea
-              placeholder="Type to teach... (Shift+Enter for new line)"
+              placeholder={t("chat.inputPlaceholder", {
+                defaultValue: "Type to teach... (Shift+Enter for new line)",
+              })}
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
@@ -354,17 +363,17 @@ export function ChatPanel({ taId }: ChatPanelProps) {
             disabled={!taId || loading || !input.trim() || isCheckingQuality}
             loading={isCheckingQuality}
             className="shrink-0"
-            title="Check teaching quality"
+            title={t("chat.checkTeachingQualityTitle", { defaultValue: "Check teaching quality" })}
           >
-            Check
+            {t("chat.check", { defaultValue: "Check" })}
           </Button>
           <Button
             icon={Send}
             onClick={handleSend}
             disabled={!taId || !input.trim() || loading || input.length > MAX_INPUT_LENGTH}
-            title="Send message"
+            title={t("chat.sendMessageTitle", { defaultValue: "Send message" })}
           >
-            Send
+            {t("chat.send", { defaultValue: "Send" })}
           </Button>
         </div>
       </div>

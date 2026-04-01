@@ -5,10 +5,12 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChevronDown, User, LogOut, Menu, Plus, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/stores/authStore";
 import { useAppStore } from "@/stores/appStore";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { createTA } from "@/api/client";
 import { cn } from "@/lib/utils";
 import type { TAInstance } from "@/lib/types";
@@ -26,6 +28,7 @@ interface TopBarProps {
 }
 
 export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
+  const { t } = useTranslation();
   const { user, logout } = useAuthStore();
   const { currentTaId, setCurrentTaId } = useAppStore();
   const queryClient = useQueryClient();
@@ -68,7 +71,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
               className="flex h-8 items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-50"
             >
               <Plus className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">New TA</span>
+              <span className="hidden sm:inline">{t("topbar.newTA")}</span>
             </button>
           </Dialog.Trigger>
           <Dialog.Portal>
@@ -76,14 +79,14 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
             <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border border-stone-200 bg-white p-6 shadow-elevated animate-scale-in">
               <div className="flex items-center justify-between">
                 <Dialog.Title className="font-serif text-lg font-semibold text-stone-900">
-                  New Teachable Agent
+                  {t("topbar.createTA")}
                 </Dialog.Title>
                 <Dialog.Close className="rounded-lg p-1 text-stone-400 hover:bg-stone-100 hover:text-stone-600">
                   <X className="h-4 w-4" />
                 </Dialog.Close>
               </div>
               <Dialog.Description className="mt-1 text-sm text-stone-500">
-                Choose a domain for your new agent.
+                {t("onboarding.chooseDomainDesc")}
               </Dialog.Description>
               <div className="mt-5 flex flex-col gap-2">
                 {DOMAINS.map((d) => (
@@ -115,14 +118,14 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
               </div>
               <div className="mt-6 flex justify-end gap-2">
                 <Button variant="secondary" size="sm" onClick={() => setNewTADialogOpen(false)}>
-                  Cancel
+                  {t("common.cancel")}
                 </Button>
                 <Button
                   size="sm"
                   loading={createTAMutation.isPending}
                   onClick={() => createTAMutation.mutate(newTADomain)}
                 >
-                  Create
+                  {t("onboarding.createMyTA")}
                 </Button>
               </div>
             </Dialog.Content>
@@ -142,7 +145,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
               )}
             >
               <span>
-                TA #{currentTa?.id ?? currentTaId}
+                {t("topbar.taLabel", { id: currentTa?.id ?? currentTaId })}
                 <span className="ml-1 text-stone-400">
                   {currentTa?.domain_id ?? "python"}
                 </span>
@@ -161,7 +164,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                     value={String(ta.id)}
                     className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-50 data-[highlighted]:bg-stone-50"
                   >
-                    TA #{ta.id}
+                    {t("topbar.taLabel", { id: ta.id })}
                     <span className="ml-1.5 text-stone-400">{ta.domain_id}</span>
                   </Select.Item>
                 ))}
@@ -169,6 +172,9 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
             </Select.Portal>
           </Select.Root>
         )}
+
+        {/* Language switcher */}
+        <LanguageSwitcher />
 
         {/* User menu */}
         <DropdownMenu.Root>
@@ -203,7 +209,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                 onSelect={() => logout()}
               >
                 <LogOut className="h-4 w-4" />
-                Sign out
+                {t("common.signOut")}
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>

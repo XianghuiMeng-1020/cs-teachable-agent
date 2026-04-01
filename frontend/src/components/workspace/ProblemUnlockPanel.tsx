@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -26,6 +27,7 @@ export function ProblemUnlockPanel({
   requiredKus,
   currentTaId,
 }: ProblemUnlockPanelProps) {
+  const { t } = useTranslation();
   const unlockedCount = eligibleIds.length;
   const totalCount = problems.length;
   const lockedProblems = problems.filter(p => !eligibleIds.includes(p.problem_id));
@@ -57,19 +59,26 @@ export function ProblemUnlockPanel({
             <BookOpen className="w-6 h-6 text-amber-600" />
           </div>
           <div className="flex-1">
-            <h3 className="font-semibold text-amber-900 text-lg">📚 No Problems Available Yet</h3>
+            <h3 className="font-semibold text-amber-900 text-lg">
+              {t("misconception.noProblemsTitle", { defaultValue: "📚 No Problems Available Yet" })}
+            </h3>
             <p className="mt-2 text-sm text-amber-800">
-              Your TA needs to learn some basic concepts before it can attempt any problems.
-              Start by teaching fundamental concepts like variables or basic operations.
+              {t("misconception.needsLearn")}{" "}
+              {t("misconception.needsLearnFollowup", {
+                defaultValue:
+                  "Start by teaching fundamental concepts like variables or basic operations.",
+              })}
             </p>
             <div className="mt-4 flex items-center gap-3">
               <Link to={ROUTES.teach}>
                 <Button variant="primary" size="sm" icon={ArrowRight}>
-                  Start Teaching
+                  {t("onboarding.startTeaching")}
                 </Button>
               </Link>
               <span className="text-xs text-amber-600">
-                💡 Tip: Teaching 3-5 concepts will unlock your first problem!
+                {t("misconception.firstProblemTip", {
+                  defaultValue: "💡 Tip: Teaching 3-5 concepts will unlock your first problem!",
+                })}
               </span>
             </div>
           </div>
@@ -91,10 +100,14 @@ export function ProblemUnlockPanel({
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-stone-900 flex items-center gap-2">
               <Target className="w-5 h-5 text-brand-500" />
-              Problem Unlock Progress
+              {t("misconception.problemUnlockProgress", { defaultValue: "Problem Unlock Progress" })}
             </h3>
             <span className="text-sm font-medium text-stone-600">
-              {unlockedCount} / {totalCount} unlocked
+              {t("misconception.unlockedCount", {
+                defaultValue: "{{unlocked}} / {{total}} unlocked",
+                unlocked: unlockedCount,
+                total: totalCount,
+              })}
             </span>
           </div>
           <ProgressBar 
@@ -104,11 +117,22 @@ export function ProblemUnlockPanel({
           />
           <div className="mt-2 flex items-center justify-between">
             <p className="text-xs text-stone-500">
-              {learnedUnitIds.length} of {requiredKus.length} required concepts learned
+              {t("misconception.conceptsLearnedProgress", {
+                defaultValue: "{{learned}} of {{total}} required concepts learned",
+                learned: learnedUnitIds.length,
+                total: requiredKus.length,
+              })}
             </p>
             {conceptsNeeded > 0 && (
               <p className="text-xs font-medium text-brand-600">
-                🔓 Teach {conceptsNeeded} more concept{conceptsNeeded > 1 ? 's' : ''} to unlock next problem!
+                {conceptsNeeded === 1
+                  ? t("misconception.teachOneMoreConcept", {
+                      defaultValue: "🔓 Teach 1 more concept to unlock next problem!",
+                    })
+                  : t("misconception.teachMoreConcepts", {
+                      count: conceptsNeeded,
+                      defaultValue: "🔓 Teach {{count}} more concepts to unlock next problem!",
+                    })}
               </p>
             )}
           </div>
@@ -127,9 +151,14 @@ export function ProblemUnlockPanel({
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-semibold text-stone-900">🎯 Closest to Unlock</h4>
+                  <h4 className="font-semibold text-stone-900">
+                    {t("misconception.closestToUnlock", { defaultValue: "🎯 Closest to Unlock" })}
+                  </h4>
                   <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full font-medium">
-                    {Math.round(nearestUnlockable.progress * 100)}% Ready
+                    {t("misconception.percentReady", {
+                      defaultValue: "{{percent}}% Ready",
+                      percent: Math.round(nearestUnlockable.progress * 100),
+                    })}
                   </span>
                 </div>
                 <p className="text-sm text-stone-600 mt-1 line-clamp-2">
@@ -140,7 +169,11 @@ export function ProblemUnlockPanel({
                 <div className="mt-3 bg-white/60 rounded-lg p-3">
                   <div className="flex items-center justify-between text-sm mb-2">
                     <span className="text-stone-600 font-medium">
-                      {nearestUnlockable.learnedCount} / {nearestUnlockable.requiredCount} prerequisites learned
+                      {t("misconception.prerequisitesLearned", {
+                        defaultValue: "{{learned}} / {{total}} prerequisites learned",
+                        learned: nearestUnlockable.learnedCount,
+                        total: nearestUnlockable.requiredCount,
+                      })}
                     </span>
                     <TrendingUp className="w-4 h-4 text-brand-500" />
                   </div>
@@ -155,14 +188,19 @@ export function ProblemUnlockPanel({
                 {nearestUnlockable.missing.length > 0 && (
                   <div className="mt-3">
                     <p className="text-xs font-medium text-stone-700 mb-2">
-                      📖 Teach these concepts to unlock:
+                      {t("misconception.teachConceptsToUnlock", {
+                        defaultValue: "📖 Teach these concepts to unlock:",
+                      })}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {nearestUnlockable.missing.map(ku => (
                         <span 
                           key={ku} 
                           className="text-xs px-2.5 py-1 bg-white rounded-md border border-brand-200 text-brand-700 font-medium shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                          title={`Click to teach ${ku.replace(/_/g, ' ')}`}
+                          title={t("misconception.clickToTeachConcept", {
+                            defaultValue: "Click to teach {{concept}}",
+                            concept: ku.replace(/_/g, " "),
+                          })}
                         >
                           {ku.replace(/_/g, ' ')}
                         </span>
@@ -170,7 +208,9 @@ export function ProblemUnlockPanel({
                     </div>
                     <Link to={ROUTES.teach} className="block mt-3">
                       <Button variant="primary" size="sm" className="w-full" icon={ArrowRight}>
-                        Teach These Concepts Now
+                        {t("misconception.teachTheseConceptsNow", {
+                          defaultValue: "Teach These Concepts Now",
+                        })}
                       </Button>
                     </Link>
                   </div>
@@ -188,10 +228,10 @@ export function ProblemUnlockPanel({
                 <CheckCircle className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
-                <h4 className="font-medium text-emerald-900">All Problems Unlocked!</h4>
-                <p className="text-sm text-emerald-700 mt-1">
-                  Your TA has learned all the required concepts. You can now run comprehensive tests.
-                </p>
+                <h4 className="font-medium text-emerald-900">
+                  {t("misconception.allProblemsUnlocked", { defaultValue: "All Problems Unlocked!" })}
+                </h4>
+                <p className="text-sm text-emerald-700 mt-1">{t("misconception.learnedAll")}</p>
               </div>
             </div>
           </div>
@@ -202,7 +242,10 @@ export function ProblemUnlockPanel({
           <div>
             <h4 className="text-sm font-medium text-stone-700 mb-3 flex items-center gap-2">
               <Lock className="w-4 h-4" />
-              Locked Problems ({lockedProblems.length})
+              {t("misconception.lockedProblems", {
+                defaultValue: "Locked Problems ({{count}})",
+                count: lockedProblems.length,
+              })}
             </h4>
             <div className="space-y-2 max-h-[200px] overflow-y-auto pr-2">
               {lockedProblems.slice(0, 5).map(problem => {
@@ -237,7 +280,10 @@ export function ProblemUnlockPanel({
               })}
               {lockedProblems.length > 5 && (
                 <p className="text-xs text-stone-400 text-center py-2">
-                  +{lockedProblems.length - 5} more locked problems
+                  {t("misconception.moreLockedProblems", {
+                    defaultValue: "+{{count}} more locked problems",
+                    count: lockedProblems.length - 5,
+                  })}
                 </p>
               )}
             </div>
@@ -251,11 +297,14 @@ export function ProblemUnlockPanel({
           </div>
           <div>
             <p className="font-medium text-amber-900 mb-1">
-              💡 How to unlock more problems?
+              {t("misconception.howToUnlockTitle", { defaultValue: "💡 How to unlock more problems?" })}
             </p>
             <p className="text-amber-800 text-xs leading-relaxed">
-              Each problem requires specific knowledge units. Teach your TA the missing concepts shown above to unlock them. 
-              The more concepts you teach, the more problems become available!
+              {t("misconception.unlockTipIntro", {
+                defaultValue:
+                  "Each problem requires specific knowledge units. {{teachMissing}} The more concepts you teach, the more problems become available!",
+                teachMissing: t("misconception.teachMissing"),
+              })}
             </p>
           </div>
         </div>

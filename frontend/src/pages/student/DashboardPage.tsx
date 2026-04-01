@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
@@ -6,6 +7,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip as RTooltip, 
 import { useAppStore } from "@/stores/appStore";
 import { getState, getMastery, getMisconceptions, getHistory, getConfig, getGamification, getLearningPath, listTA } from "@/api/client";
 import { getRecommendedItems, getAssessmentStats } from "@/api/assessment";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import {
   BookOpen, BookOpenCheck, CheckCircle, AlertTriangle, MessageCircle,
   Sparkles, BrainCircuit, Bot, MessageSquare, Play, X, ChevronRight, ArrowRight,
@@ -69,6 +71,7 @@ function useActivityTrend(taId: number | null) {
 const ONBOARDING_KEY = "cs-ta-onboarding-completed";
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
   const user = useAuthStore((s) => s.user);
   const navigate = useNavigate();
@@ -160,17 +163,17 @@ export function DashboardPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-100 to-brand-50 mb-6">
             <Bot className="w-10 h-10 text-brand-600" />
           </div>
-          <h1 className="text-3xl font-bold text-stone-900 mb-2">Welcome to ARTS-CS</h1>
-          <p className="text-stone-500 mb-8">Welcome, {user?.username}</p>
+          <h1 className="text-3xl font-bold text-stone-900 mb-2">{t("dashboard.noTATitle")}</h1>
+          <p className="text-stone-500 mb-8">{t("dashboard.welcomeBack", { username: user?.username ?? "" })}</p>
         </div>
         <Card padding="lg" className="border-dashed border-2 border-stone-200">
           <EmptyState
             icon={Bot}
-            title="No Teachable Agent Selected"
-            description="Create your first AI teaching assistant to start your learning journey. Select a domain (Python, SQL, or AI Literacy) and begin teaching."
+            title={t("dashboard.noTASelected")}
+            description={t("dashboard.noTADesc")}
             action={
               <Button onClick={() => setShowDomainSelector(true)} icon={Sparkles}>
-                Create Your First TA
+                {t("dashboard.createFirstTA")}
               </Button>
             }
           />
@@ -205,10 +208,10 @@ export function DashboardPage() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-5 h-5 text-brand-200" />
-                <span className="text-sm font-medium text-brand-100">Learning Dashboard</span>
+                <span className="text-sm font-medium text-brand-100">{t("dashboard.title")}</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Welcome back, {user?.username}!</h1>
-              <p className="mt-1 text-brand-100">Continue teaching your AI agent and track your mastery progress.</p>
+              <h1 className="text-2xl sm:text-3xl font-bold">{t("dashboard.welcomeBack", { username: user?.username ?? "" })}</h1>
+              <p className="mt-1 text-brand-100">{t("dashboard.continueTeaching")}</p>
             </div>
             <div className="flex gap-2">
               <Link to={ROUTES.teach}>
@@ -216,7 +219,7 @@ export function DashboardPage() {
                   icon={MessageSquare} 
                   className="bg-white text-brand-700 hover:bg-brand-50 shadow-lg"
                 >
-                  Teach Now
+                  {t("dashboard.teachNow")}
                 </Button>
               </Link>
             </div>
@@ -226,7 +229,7 @@ export function DashboardPage() {
           <div className="mt-6 flex items-center gap-4">
             <div className="flex-1">
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-brand-100">Overall Progress</span>
+                <span className="text-brand-100">{t("dashboard.overallProgress")}</span>
                 <span className="font-semibold">{progressPercent}%</span>
               </div>
               <div className="h-2 bg-white/20 rounded-full overflow-hidden">
@@ -242,8 +245,8 @@ export function DashboardPage() {
               <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
                 <Flame className="w-5 h-5 text-amber-300" />
                 <div>
-                  <div className="text-xs text-brand-100">Streak</div>
-                  <div className="font-bold">{streakDays} days</div>
+                  <div className="text-xs text-brand-100">{t("dashboard.streak")}</div>
+                  <div className="font-bold">{streakDays} {t("dashboard.days")}</div>
                 </div>
               </div>
             )}
@@ -259,9 +262,9 @@ export function DashboardPage() {
               <BrainCircuit className="h-5 w-5 text-amber-600" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-amber-900">Demo Mode Active</p>
+              <p className="text-sm font-semibold text-amber-900">{t("dashboard.demoMode")}</p>
               <p className="mt-0.5 text-sm text-amber-700">
-                Running with pre-defined responses. Configure an LLM API key for intelligent conversations.
+                {t("dashboard.demoModeDesc")}
               </p>
             </div>
           </div>
@@ -275,9 +278,9 @@ export function DashboardPage() {
               <Sparkles className="h-5 w-5 text-brand-600" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-brand-900">Getting Started</p>
+              <p className="text-sm font-semibold text-brand-900">{t("dashboard.gettingStarted")}</p>
               <p className="mt-0.5 text-sm text-brand-700">
-                Teach your agent a concept (e.g. variables), then run a test to see how well it learned.
+                {t("dashboard.gettingStartedDesc")}
               </p>
             </div>
             <button
@@ -287,7 +290,7 @@ export function DashboardPage() {
                 try { localStorage.setItem(DASHBOARD_HINT_KEY, "1"); } catch {}
               }}
               className="rounded-lg p-1 text-brand-400 hover:text-brand-600 hover:bg-brand-100 transition-colors"
-              aria-label="Dismiss"
+              aria-label={t("common.close")}
             >
               <X className="h-4 w-4" />
             </button>
@@ -298,12 +301,12 @@ export function DashboardPage() {
       {/* Quick Actions */}
       <motion.div variants={fadeIn} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { to: ROUTES.teach, icon: MessageSquare, label: "Teach", color: "from-emerald-500 to-teal-600", desc: "Explain concepts" },
-          { to: ROUTES.test, icon: Play, label: "Test", color: "from-blue-500 to-indigo-600", desc: "Run assessments" },
-          { to: ROUTES.practice, icon: BookOpenCheck, label: "Practice", color: "from-violet-500 to-purple-600", desc: "Interactive exercises" },
-          { to: ROUTES.mastery, icon: Target, label: "Mastery", color: "from-amber-500 to-orange-600", desc: "Track progress" },
-        ].map((action, i) => (
-          <Link key={action.label} to={action.to}>
+          { to: ROUTES.teach, icon: MessageSquare, labelKey: "dashboard.teach", color: "from-emerald-500 to-teal-600", descKey: "dashboard.teachDesc" },
+          { to: ROUTES.test, icon: Play, labelKey: "dashboard.test", color: "from-blue-500 to-indigo-600", descKey: "dashboard.testDesc" },
+          { to: ROUTES.practice, icon: BookOpenCheck, labelKey: "dashboard.practice", color: "from-violet-500 to-purple-600", descKey: "dashboard.practiceDesc" },
+          { to: ROUTES.mastery, icon: Target, labelKey: "dashboard.masteryAction", color: "from-amber-500 to-orange-600", descKey: "dashboard.masteryActionDesc" },
+        ].map((action) => (
+          <Link key={action.to} to={action.to}>
             <motion.div
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -311,8 +314,8 @@ export function DashboardPage() {
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10" />
               <action.icon className="w-6 h-6 mb-3" />
-              <div className="font-semibold">{action.label}</div>
-              <div className="text-xs text-white/80">{action.desc}</div>
+              <div className="font-semibold">{t(action.labelKey)}</div>
+              <div className="text-xs text-white/80">{t(action.descKey)}</div>
             </motion.div>
           </Link>
         ))}
@@ -327,7 +330,7 @@ export function DashboardPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{learnedCount}<span className="text-stone-400 text-lg">/{totalKus}</span></div>
           </div>
-          <div className="text-sm text-stone-500">Concepts Learned</div>
+          <div className="text-sm text-stone-500">{t("dashboard.conceptsLearned")}</div>
           <div className="mt-2 h-1.5 bg-stone-100 rounded-full overflow-hidden">
             <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${progressPercent}%` }} />
           </div>
@@ -342,8 +345,8 @@ export function DashboardPage() {
               {mastery?.pass_rate != null ? `${Math.round(mastery.pass_rate * 100)}%` : "—"}
             </div>
           </div>
-          <div className="text-sm text-stone-500">Test Pass Rate</div>
-          <div className="mt-2 text-xs text-stone-400">{mastery?.test_count ?? 0} tests completed</div>
+          <div className="text-sm text-stone-500">{t("dashboard.testPassRate")}</div>
+          <div className="mt-2 text-xs text-stone-400">{mastery?.test_count ?? 0} {t("dashboard.testsCompleted")}</div>
         </div>
 
         <div className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
@@ -353,9 +356,9 @@ export function DashboardPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{misconceptions.length}</div>
           </div>
-          <div className="text-sm text-stone-500">Active Misconceptions</div>
+          <div className="text-sm text-stone-500">{t("dashboard.activeMisconceptions")}</div>
           <div className="mt-2 text-xs text-stone-400">
-            {misconceptions.length > 0 ? "Needs attention" : "All clear!"}
+            {misconceptions.length > 0 ? t("dashboard.needsAttention") : t("dashboard.allClear")}
           </div>
         </div>
 
@@ -368,9 +371,9 @@ export function DashboardPage() {
               {gamification?.points ?? 0}
             </div>
           </div>
-          <div className="text-sm text-stone-500">Total Points</div>
+          <div className="text-sm text-stone-500">{t("dashboard.totalPoints")}</div>
           <div className="mt-2 text-xs text-violet-600 font-medium">
-            Level {gamification?.level ?? 1}
+            {t("analytics.level")} {gamification?.level ?? 1}
           </div>
         </div>
       </motion.div>
@@ -386,13 +389,13 @@ export function DashboardPage() {
                 <div>
                   <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-brand-600" />
-                    Learning Activity
+                    {t("dashboard.learningActivity")}
                   </h2>
-                  <p className="text-sm text-stone-500">Your engagement over the last 7 days</p>
+                  <p className="text-sm text-stone-500">{t("dashboard.activityDesc")}</p>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-stone-500">
                   <Clock className="w-4 h-4" />
-                  Last 7 days
+                  {t("dashboard.last7Days")}
                 </div>
               </div>
               <div className="h-[180px] w-full">
@@ -436,15 +439,15 @@ export function DashboardPage() {
               <div>
                 <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
                   <Clock className="w-5 h-5 text-brand-600" />
-                  Recent Activity
+                  {t("dashboard.recentActivity")}
                 </h2>
-                <p className="text-sm text-stone-500">Your latest teaching and testing sessions</p>
+                <p className="text-sm text-stone-500">{t("dashboard.recentActivityDesc")}</p>
               </div>
               <Link
                 to={ROUTES.history}
                 className="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 transition-colors"
               >
-                View all <ArrowRight className="h-4 w-4" />
+                {t("dashboard.viewAll")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             {recentEvents.length === 0 ? (
@@ -452,10 +455,10 @@ export function DashboardPage() {
                 <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-4">
                   <Sparkles className="w-8 h-8 text-stone-400" />
                 </div>
-                <p className="text-stone-500 mb-2">No activity yet</p>
-                <p className="text-sm text-stone-400 mb-4">Start by teaching your agent a concept</p>
+                <p className="text-stone-500 mb-2">{t("dashboard.noActivity")}</p>
+                <p className="text-sm text-stone-400 mb-4">{t("dashboard.noActivityDesc")}</p>
                 <Link to={ROUTES.teach}>
-                  <Button size="sm" icon={MessageSquare}>Start Teaching</Button>
+                  <Button size="sm" icon={MessageSquare}>{t("dashboard.startTeaching")}</Button>
                 </Link>
               </div>
             ) : (
@@ -470,9 +473,9 @@ export function DashboardPage() {
                 <div>
                   <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5 text-amber-600" />
-                    Misconceptions Detected
+                    {t("dashboard.misconceptionsDetected")}
                   </h2>
-                  <p className="text-sm text-stone-500">Address these to improve your understanding</p>
+                  <p className="text-sm text-stone-500">{t("dashboard.misconceptionsDetectedDesc")}</p>
                 </div>
               </div>
               <div className="space-y-3">
@@ -507,7 +510,7 @@ export function DashboardPage() {
             <Card padding="md">
               <h3 className="font-semibold text-stone-900 mb-4 flex items-center gap-2">
                 <Target className="w-5 h-5 text-violet-600" />
-                Recommended Practice
+                {t("dashboard.recommendedPractice")}
               </h3>
               <div className="space-y-3">
                 {practiceRecs.slice(0, 3).map((rec: any) => (
@@ -528,7 +531,7 @@ export function DashboardPage() {
               </div>
               <Link to={ROUTES.practice}>
                 <Button variant="outline" size="sm" fullWidth className="mt-4">
-                  View All Exercises
+                  {t("dashboard.viewAllExercises")}
                 </Button>
               </Link>
             </Card>
@@ -539,39 +542,40 @@ export function DashboardPage() {
             <Card padding="md" className="bg-gradient-to-br from-brand-50 to-emerald-50 border-brand-100">
               <h3 className="font-semibold text-stone-900 mb-4 flex items-center gap-2">
                 <Award className="w-5 h-5 text-brand-600" />
-                Mastery Overview
+                {t("dashboard.masteryOverview")}
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-stone-600">Overall Level</span>
+                  <span className="text-sm text-stone-600">{t("dashboard.overallLevel")}</span>
                   <span className="font-semibold text-brand-700 capitalize">{mastery.level || "Beginner"}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-stone-600">Pass Rate</span>
+                  <span className="text-sm text-stone-600">{t("dashboard.passRate")}</span>
                   <span className="font-semibold text-emerald-600">
-                    {mastery.pass_rate != null ? `${Math.round(mastery.pass_rate * 100)}%` : "N/A"}
+                    {mastery.pass_rate != null ? `${Math.round(mastery.pass_rate * 100)}%` : "—"}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-stone-600">Tests Completed</span>
+                  <span className="text-sm text-stone-600">{t("test.total")}</span>
                   <span className="font-semibold text-stone-900">{mastery.test_count ?? 0}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-stone-600">Ready for Next Level</span>
+                  <span className="text-sm text-stone-600">{t("dashboard.readyForNext")}</span>
                   <span className={`font-semibold ${(mastery.pass_rate ?? 0) >= 0.8 ? "text-emerald-600" : "text-amber-600"}`}>
-                    {(mastery.pass_rate ?? 0) >= 0.8 ? "Yes" : "Keep Practicing"}
+                    {(mastery.pass_rate ?? 0) >= 0.8 ? t("dashboard.yes") : t("dashboard.keepPracticing")}
                   </span>
                 </div>
               </div>
               <Link to={ROUTES.mastery}>
                 <Button size="sm" variant="outline" fullWidth className="mt-4 bg-white">
-                  View Detailed Mastery
+                  {t("dashboard.viewDetailedMastery")}
                 </Button>
               </Link>
             </Card>
           )}
         </motion.div>
       </div>
+      <ContextualHelp pageKey="dashboard" />
     </motion.div>
   );
 }

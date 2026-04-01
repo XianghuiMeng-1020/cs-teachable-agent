@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
@@ -136,6 +137,7 @@ function useDevicePerformance() {
 }
 
 export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }: KnowledgeGraph3DProps) {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedNode, setSelectedNode] = useState<Node3D | null>(null);
@@ -352,12 +354,12 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             className="absolute top-0 left-0 right-0 z-20 bg-amber-500/90 backdrop-blur-sm p-2 text-center text-white text-sm"
           >
             <div className="flex items-center justify-center gap-2">
-              <span>⚡ 检测到设备性能较低，建议使用2D视图以获得更流畅体验</span>
+              <span>⚡ {t("analytics.performanceTips")} — {t("analytics.switchTo2d")}</span>
               <button 
                 onClick={dismissPerformanceWarning}
                 className="px-2 py-0.5 bg-white/20 hover:bg-white/30 rounded text-xs font-medium transition-colors"
               >
-                切换到2D
+                {t("analytics.switchTo2d")}
               </button>
               <button 
                 onClick={() => setShowPerformanceWarning(false)}
@@ -382,11 +384,11 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
           </div>
           <div>
             <h3 className="font-semibold text-white">
-              {viewMode === "3d" ? "3D知识图谱" : "2D知识图谱"}
+              {viewMode === "3d" ? t("analytics.graph3dTitle") : t("analytics.graph2dTitle")}
             </h3>
             <p className="text-sm text-stone-400">
-              {viewMode === "3d" ? "沉浸式概念探索" : "清晰的概念关系视图"}
-              {(isMobile || isLowEnd) && viewMode === "3d" && " (性能模式推荐2D)"}
+              {viewMode === "3d" ? t("analytics.conceptGraphDesc") : t("analytics.conceptGraph")}
+              {(isMobile || isLowEnd) && viewMode === "3d" && ` (${t("analytics.switchTo2d")})`}
             </p>
           </div>
         </div>
@@ -420,7 +422,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             size="sm"
             onClick={() => setViewMode(viewMode === "3d" ? "2d" : "3d")}
             className="text-stone-300 hover:text-white hover:bg-white/10 hidden sm:flex"
-            title={viewMode === "3d" ? "Switch to 2D View" : "Switch to 3D View"}
+            title={viewMode === "3d" ? t("analytics.switchTo2d") : t("analytics.switchTo3d")}
           >
             {viewMode === "3d" ? <Grid3X3 className="w-4 h-4" /> : <Box className="w-4 h-4" />}
           </Button>
@@ -461,19 +463,19 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
 
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-stone-900/80 backdrop-blur rounded-lg p-3">
-        <p className="text-xs text-stone-400 mb-2">关系类型</p>
+        <p className="text-xs text-stone-400 mb-2">{t("analytics.conceptRelations")}</p>
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-indigo-500 rounded" />
-            <span className="text-xs text-stone-300">前置知识</span>
+            <span className="text-xs text-stone-300">{t("nav.teach")}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-emerald-500 rounded" />
-            <span className="text-xs text-stone-300">依赖关系</span>
+            <span className="text-xs text-stone-300">{t("mastery.inProgress")}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-6 h-0.5 bg-amber-500 rounded" />
-            <span className="text-xs text-stone-300">相似概念</span>
+            <span className="text-xs text-stone-300">{t("analytics.crossDomainTitle")}</span>
           </div>
         </div>
       </div>
@@ -483,11 +485,11 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
         <div className="grid grid-cols-2 gap-4 text-center">
           <div>
             <p className="text-xl font-bold text-white">{mockNodes.length}</p>
-            <p className="text-xs text-stone-400">概念节点</p>
+            <p className="text-xs text-stone-400">{t("mastery.conceptMastery")}</p>
           </div>
           <div>
             <p className="text-xl font-bold text-white">{mockEdges.length}</p>
-            <p className="text-xs text-stone-400">知识连接</p>
+            <p className="text-xs text-stone-400">{t("analytics.connections")}</p>
           </div>
         </div>
       </div>
@@ -510,16 +512,16 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-stone-400">难度等级</span>
+                <span className="text-stone-400">{t("analytics.level")}</span>
                 <span className="text-white">L{selectedNode.level}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-stone-400">掌握程度</span>
+                <span className="text-stone-400">{t("mastery.conceptMastery")}</span>
                 <span className="text-emerald-400">{Math.round(selectedNode.mastery * 100)}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-stone-400">关联概念</span>
-                <span className="text-white">{selectedNode.connections.length}个</span>
+                <span className="text-stone-400">{t("analytics.conceptRelations")}</span>
+                <span className="text-white">{selectedNode.connections.length}</span>
               </div>
             </div>
             <Button
@@ -528,7 +530,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
               className="w-full mt-3"
               onClick={() => setSelectedNode(null)}
             >
-              关闭
+              {t("common.close")}
             </Button>
           </motion.div>
         )}
@@ -536,7 +538,7 @@ export function KnowledgeGraph3D({ className, units, knowledgeUnitDefinitions }:
 
       {/* Instructions */}
       <div className="absolute bottom-16 left-4 text-xs text-stone-500">
-        <p>拖拽旋转 • 滚轮缩放 • 点击查看详情</p>
+        <p>{t("help.mastery.content")}</p>
       </div>
     </Card>
   );

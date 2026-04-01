@@ -2,8 +2,10 @@ import { useState, useMemo } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import * as Tabs from "@radix-ui/react-tabs";
 import { Eye, EyeOff, BookOpen, GraduationCap, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { useAuthStore } from "@/stores/authStore";
 import { ROUTES } from "@/lib/constants";
 import { toast } from "sonner";
@@ -56,6 +58,7 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
 }
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -116,18 +119,17 @@ export function LoginPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-white">TeachAgent</span>
+            <span className="text-lg font-semibold text-white">ARTS-CS</span>
           </Link>
+          <LanguageSwitcher variant="landing" />
         </div>
 
         <div className="max-w-sm">
           <h2 className="font-serif text-3xl font-bold leading-tight text-white">
-            The best way to learn is to teach.
+            {t("landing.lbtTitle")} {t("landing.lbtDesc")}
           </h2>
           <p className="mt-4 text-base leading-relaxed text-stone-400">
-            Explain concepts to your virtual agent, test its understanding with
-            real code challenges, and watch your own mastery grow through the
-            act of teaching.
+            {t("landing.heroDesc")}
           </p>
           <div className="mt-10 space-y-4">
             {[
@@ -145,7 +147,7 @@ export function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-stone-600">AI Resistant Teaching System for CS</p>
+        <p className="text-xs text-stone-600">{t("login.brandLine")}</p>
       </div>
 
       {/* Right panel */}
@@ -165,20 +167,20 @@ export function LoginPage() {
                 value="login"
                 className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
               >
-                Sign in
+                {t("common.signIn")}
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="register"
                 className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
               >
-                Create account
+                {t("common.createAccount")}
               </Tabs.Trigger>
             </Tabs.List>
 
             <Tabs.Content value="login">
               <div className="mb-6">
-                <h2 className="font-serif text-2xl font-bold text-stone-900">Welcome back</h2>
-                <p className="mt-1 text-sm text-stone-500">Sign in to ARTS-CS — teach AI agents, track mastery.</p>
+                <h2 className="font-serif text-2xl font-bold text-stone-900">{t("common.welcomeBack")}</h2>
+                <p className="mt-1 text-sm text-stone-500">{t("login.signInDesc")}</p>
               </div>
               <form onSubmit={handleLogin} className="space-y-4">
                 <Input
@@ -208,20 +210,20 @@ export function LoginPage() {
                   }
                 />
                 <Button type="submit" fullWidth size="lg" loading={loading}>
-                  Sign in
+                  {t("common.signIn")}
                 </Button>
               </form>
             </Tabs.Content>
 
             <Tabs.Content value="register">
               <div className="mb-6">
-                <h2 className="font-serif text-2xl font-bold text-stone-900">Create your account</h2>
-                <p className="mt-1 text-sm text-stone-500">Create demo account: demo_student / demo123</p>
+                <h2 className="font-serif text-2xl font-bold text-stone-900">{t("common.createAccount")}</h2>
+                <p className="mt-1 text-sm text-stone-500">{t("login.registerDesc")}</p>
               </div>
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-stone-700">
-                    I am a...
+                    {t("login.iAmA")}
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
@@ -236,9 +238,9 @@ export function LoginPage() {
                       <User className={`h-5 w-5 ${role === "student" ? "text-brand-700" : "text-stone-400"}`} />
                       <div>
                         <div className={`text-sm font-semibold ${role === "student" ? "text-brand-900" : "text-stone-700"}`}>
-                          Student
+                          {t("login.student")}
                         </div>
-                        <div className="text-xs text-stone-500">Teach & Learn</div>
+                        <div className="text-xs text-stone-500">{t("login.studentDesc")}</div>
                       </div>
                     </button>
                     <button
@@ -253,9 +255,9 @@ export function LoginPage() {
                       <GraduationCap className={`h-5 w-5 ${role === "teacher" ? "text-brand-700" : "text-stone-400"}`} />
                       <div>
                         <div className={`text-sm font-semibold ${role === "teacher" ? "text-brand-900" : "text-stone-700"}`}>
-                          Teacher
+                          {t("login.teacher")}
                         </div>
-                        <div className="text-xs text-stone-500">Monitor & Analyze</div>
+                        <div className="text-xs text-stone-500">{t("login.teacherDesc")}</div>
                       </div>
                     </button>
                   </div>
@@ -308,7 +310,7 @@ export function LoginPage() {
                   }
                 />
                 <Button type="submit" fullWidth size="lg" loading={loading}>
-                  Create account
+                  {t("common.createAccount")}
                 </Button>
               </form>
             </Tabs.Content>

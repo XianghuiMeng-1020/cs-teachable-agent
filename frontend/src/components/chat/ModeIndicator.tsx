@@ -3,6 +3,7 @@
  * Every 3rd TA message is in Questioner mode (backend mode-shifting).
  */
 
+import { useTranslation } from "react-i18next";
 import { MessageCircle, HelpCircle } from "lucide-react";
 
 interface ModeIndicatorProps {
@@ -14,6 +15,7 @@ interface ModeIndicatorProps {
 }
 
 export function ModeIndicator({ taMessageCount, isQuestionerTurn, compact }: ModeIndicatorProps) {
+  const { t } = useTranslation();
   const questioner = isQuestionerTurn ?? (taMessageCount + 1) % 3 === 0;
   if (compact) {
     return (
@@ -23,16 +25,25 @@ export function ModeIndicator({ taMessageCount, isQuestionerTurn, compact }: Mod
             ? "bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200"
             : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
         }`}
-        title={questioner ? "Questioner mode: TA will ask a thought-provoking question" : "Help Receiver mode"}
+        title={
+          questioner
+            ? t("chat.questionerModeTooltip", {
+                defaultValue: "Questioner mode: {{agent}} will ask a thought-provoking question",
+                agent: t("common.teachableAgent"),
+              })
+            : t("chat.helpReceiverMode", { defaultValue: "Help Receiver mode" })
+        }
       >
         {questioner ? <HelpCircle className="h-3 w-3" /> : <MessageCircle className="h-3 w-3" />}
-        {questioner ? "Questioner" : "Help Receiver"}
+        {questioner
+          ? t("chat.questioner", { defaultValue: "Questioner" })
+          : t("chat.helpReceiver", { defaultValue: "Help Receiver" })}
       </span>
     );
   }
   return (
     <div className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400">
-      <span>TA mode:</span>
+      <span>{t("chat.taMode")}:</span>
       <span
         className={`inline-flex items-center gap-1 rounded px-2 py-0.5 font-medium ${
           questioner
@@ -41,7 +52,9 @@ export function ModeIndicator({ taMessageCount, isQuestionerTurn, compact }: Mod
         }`}
       >
         {questioner ? <HelpCircle className="h-3.5 w-3.5" /> : <MessageCircle className="h-3.5 w-3.5" />}
-        {questioner ? "Questioner" : "Help Receiver"}
+        {questioner
+          ? t("chat.questioner", { defaultValue: "Questioner" })
+          : t("chat.helpReceiver", { defaultValue: "Help Receiver" })}
       </span>
     </div>
   );

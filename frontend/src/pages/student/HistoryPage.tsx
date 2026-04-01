@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
 import { getHistory } from "@/api/client";
 import { Card } from "@/components/ui/Card";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import { TimelineView } from "@/components/state/TimelineView";
 import type { TimelineEvent } from "@/components/state/TimelineView";
 import { formatRelative } from "@/lib/utils";
@@ -84,6 +85,7 @@ export function HistoryPage() {
           </>
         )}
       </Card>
+      <ContextualHelp pageKey="history" />
     </div>
   );
 }

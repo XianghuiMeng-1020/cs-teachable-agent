@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
@@ -29,12 +30,22 @@ export function TestResultCard({
   passed,
   details,
   defaultExpanded = false,
-  outputLabel = "TA's code",
+  outputLabel,
   reflectionPrompt,
   resultRows,
   resultColumns,
 }: TestResultCardProps) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(defaultExpanded);
+
+  const resolvedOutputLabel =
+    outputLabel === "TA's SQL"
+      ? t("test.taSQL")
+      : outputLabel === "TA's answer"
+        ? t("test.taAnswer")
+        : outputLabel === "TA's code"
+          ? t("test.taCode")
+          : outputLabel ?? t("test.taCode");
 
   return (
     <Card padding="none" className="overflow-hidden">
@@ -46,7 +57,9 @@ export function TestResultCard({
         >
           <div className="flex min-w-0 flex-1 items-center gap-2">
             <Badge variant={passed ? "success" : "danger"} size="md">
-              {passed ? "PASS" : "FAIL"}
+              {passed
+                ? t("test.passBadge", { defaultValue: "PASS" })
+                : t("test.failBadge", { defaultValue: "FAIL" })}
             </Badge>
             <span className="truncate text-sm font-medium text-stone-800">
               {problemId}: {problemStatement.slice(0, 60)}
@@ -62,18 +75,22 @@ export function TestResultCard({
         <Collapsible.Content>
           <div className="space-y-4 border-t border-stone-100 px-5 pb-5 pt-2">
             <div>
-              <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-stone-500">{outputLabel}</h4>
+              <h4 className="mb-1 text-xs font-medium uppercase tracking-wider text-stone-500">
+                {resolvedOutputLabel}
+              </h4>
               <CodeEditor code={taCode} copyButton maxHeight="200px" />
             </div>
             {resultColumns && resultRows && (
               <div>
-                <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-500">Result set</h4>
+                <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-500">
+                  {t("test.resultSet", { defaultValue: "Result set" })}
+                </h4>
                 <SQLVisualizer columns={resultColumns} rows={resultRows} showChart />
               </div>
             )}
             <div>
               <h4 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-500">
-                Test cases
+                {t("test.testCases", { defaultValue: "Test cases" })}
               </h4>
               <ul className="space-y-2">
                 {details.map((d, i) => (
@@ -86,18 +103,30 @@ export function TestResultCard({
                         : "border-red-200 bg-red-50/50"
                     )}
                   >
-                    {d.input != null && <span className="font-mono text-xs text-stone-500">input: {d.input}</span>}
+                    {d.input != null && (
+                      <span className="font-mono text-xs text-stone-500">
+                        {t("test.caseInput", { defaultValue: "input" })}: {d.input}
+                      </span>
+                    )}
                     {d.input != null && <br />}
-                    {d.expected != null && <span>expected: {d.expected}</span>}
+                    {d.expected != null && (
+                      <span>
+                        {t("test.caseExpected", { defaultValue: "expected" })}: {d.expected}
+                      </span>
+                    )}
                     {d.expected != null && <br />}
-                    {d.got != null && <span>got: {d.got}</span>}
+                    {d.got != null && (
+                      <span>
+                        {t("test.caseGot", { defaultValue: "got" })}: {d.got}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
             </div>
             {reflectionPrompt && (
               <div className="rounded-lg border border-amber-200 bg-amber-50/50 px-3 py-2 text-sm text-amber-900">
-                <strong>Reflect:</strong> {reflectionPrompt}
+                <strong>{t("test.reflect", { defaultValue: "Reflect" })}:</strong> {reflectionPrompt}
               </div>
             )}
           </div>

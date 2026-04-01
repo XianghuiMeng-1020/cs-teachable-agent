@@ -6,6 +6,7 @@ import { listAssessmentItems, getAssessmentStats, type AssessmentItemSummary, ty
 import { AssessmentProgress } from "@/components/assessment";
 import { QuickStartGuide } from "@/components/assessment/QuickStartGuide";
 import { emitTelemetry, setupSessionTelemetry } from "@/lib/telemetry";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 
 const ITEM_TYPE_LABELS: Record<string, string> = {
   parsons: "Parsons Puzzle",
@@ -194,6 +195,7 @@ export function PracticePage() {
           })}
         </div>
       )}
+      <ContextualHelp pageKey="practice" />
     </div>
   );
 }

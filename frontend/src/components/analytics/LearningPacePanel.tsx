@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { 
@@ -41,6 +42,7 @@ interface LearningPacePanelProps {
 }
 
 export function LearningPacePanel({ studentId, className }: LearningPacePanelProps) {
+  const { t } = useTranslation();
   const [paceData, setPaceData] = useState<PaceData | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -65,9 +67,9 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
           best_learning_times: ["afternoon", "evening"],
         },
         personalized_tips: [
-          "Maintain current pace - student is comfortable",
-          "Schedule challenging content during afternoon hours",
-          "Consider accelerating through review material",
+          "mastery.insightsDesc",
+          "dashboard.continueTeaching",
+          "teach.tips.3",
         ],
       });
       setIsAnalyzing(false);
@@ -103,8 +105,8 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
             <Gauge className="w-5 h-5 text-brand-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-stone-900">自适应学习节奏</h3>
-            <p className="text-sm text-stone-500">基于你的学习行为动态调整</p>
+            <h3 className="font-semibold text-stone-900">{t("analytics.learningPace")}</h3>
+            <p className="text-sm text-stone-500">{t("analytics.desc")}</p>
           </div>
         </div>
         <Button
@@ -112,7 +114,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
           size="sm"
           onClick={() => setShowDetails(!showDetails)}
         >
-          {showDetails ? "收起" : "详情"}
+          {showDetails ? t("common.back") : t("nav.overview")}
         </Button>
       </div>
 
@@ -124,7 +126,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
           >
             <Brain className="w-8 h-8 text-brand-500" />
           </motion.div>
-          <span className="ml-3 text-stone-600">分析学习节奏中...</span>
+          <span className="ml-3 text-stone-600">{t("common.loading")}</span>
         </div>
       ) : paceData ? (
         <div className="space-y-6">
@@ -138,15 +140,15 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
               <div className={`flex items-center justify-center gap-2 ${getPaceColor(paceData.pace_category)}`}>
                 {getPaceIcon(paceData.pace_category)}
                 <span className="text-2xl font-bold capitalize">
-                  {paceData.pace_category === "very_slow" && "较慢节奏"}
-                  {paceData.pace_category === "slow" && "稍慢节奏"}
-                  {paceData.pace_category === "average" && "适中节奏"}
-                  {paceData.pace_category === "fast" && "较快节奏"}
-                  {paceData.pace_category === "very_fast" && "快速节奏"}
+                  {paceData.pace_category === "very_slow" && t("analytics.slow")}
+                  {paceData.pace_category === "slow" && t("analytics.slow")}
+                  {paceData.pace_category === "average" && t("analytics.medium")}
+                  {paceData.pace_category === "fast" && t("analytics.fast")}
+                  {paceData.pace_category === "very_fast" && t("analytics.fast")}
                 </span>
               </div>
               <p className="text-sm text-stone-500 mt-1">
-                参与度: <span className="capitalize">{paceData.engagement_level}</span>
+                {t("analytics.engagement")}: <span className="capitalize">{paceData.engagement_level}</span>
               </p>
             </motion.div>
           </div>
@@ -156,19 +158,19 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
             <div className="bg-stone-50 rounded-lg p-3">
               <div className="flex items-center gap-2 text-stone-600 mb-1">
                 <Clock className="w-4 h-4" />
-                <span className="text-sm">每概念时间</span>
+                <span className="text-sm">{t("analytics.timePerConcept")}</span>
               </div>
               <p className="text-lg font-semibold text-stone-900">
-                {paceData.metrics.time_per_concept} 分钟
+                {paceData.metrics.time_per_concept} {t("analytics.minutes")}
               </p>
             </div>
             <div className="bg-stone-50 rounded-lg p-3">
               <div className="flex items-center gap-2 text-stone-600 mb-1">
                 <Zap className="w-4 h-4" />
-                <span className="text-sm">平均响应</span>
+                <span className="text-sm">{t("analytics.avgSessionTime")}</span>
               </div>
               <p className="text-lg font-semibold text-stone-900">
-                {paceData.metrics.response_time_avg} 秒
+                {paceData.metrics.response_time_avg}
               </p>
             </div>
           </div>
@@ -177,10 +179,10 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
           <div className="bg-brand-50 rounded-lg p-4">
             <h4 className="font-medium text-brand-900 mb-3 flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4" />
-              个性化建议
+              {t("analytics.recommendation")}
             </h4>
             <ul className="space-y-2">
-              {paceData.personalized_tips.map((tip, i) => (
+              {paceData.personalized_tips.map((tipKey, i) => (
                 <motion.li
                   key={i}
                   initial={{ x: -10, opacity: 0 }}
@@ -189,7 +191,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                   className="flex items-start gap-2 text-sm text-brand-800"
                 >
                   <span className="text-brand-500 mt-0.5">•</span>
-                  {tip}
+                  {t(tipKey)}
                 </motion.li>
               ))}
             </ul>
@@ -205,36 +207,36 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                 className="overflow-hidden"
               >
                 <div className="border-t border-stone-200 pt-4 space-y-4">
-                  <h4 className="font-medium text-stone-900">详细配置</h4>
+                  <h4 className="font-medium text-stone-900">{t("analytics.paceHistory")}</h4>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm text-stone-500">最佳学习时长</label>
+                      <label className="text-sm text-stone-500">{t("analytics.avgSessionTime")}</label>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-brand-500" />
-                        <span className="font-medium">{paceData.recommendations.optimal_session_length} 分钟</span>
+                        <span className="font-medium">{paceData.recommendations.optimal_session_length} {t("analytics.minutes")}</span>
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-stone-500">建议休息间隔</label>
+                      <label className="text-sm text-stone-500">{t("analytics.recommendation")}</label>
                       <div className="flex items-center gap-2">
                         <Coffee className="w-4 h-4 text-brand-500" />
-                        <span className="font-medium">每 {paceData.recommendations.recommended_break_interval} 分钟</span>
+                        <span className="font-medium">{paceData.recommendations.recommended_break_interval} {t("analytics.minutes")}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm text-stone-500">最佳学习时段</label>
+                    <label className="text-sm text-stone-500">{t("analytics.bestLearningTime")}</label>
                     <div className="flex gap-2">
                       {paceData.recommendations.best_learning_times.map((time) => (
                         <span
                           key={time}
                           className="px-3 py-1 bg-brand-100 text-brand-700 rounded-full text-sm capitalize"
                         >
-                          {time === "morning" && "上午"}
-                          {time === "afternoon" && "下午"}
-                          {time === "evening" && "晚上"}
+                          {time === "morning" && t("analytics.morning")}
+                          {time === "afternoon" && t("analytics.afternoon")}
+                          {time === "evening" && t("analytics.evening")}
                         </span>
                       ))}
                     </div>
@@ -243,7 +245,7 @@ export function LearningPacePanel({ studentId, className }: LearningPacePanelPro
                   <div className="bg-amber-50 rounded-lg p-3 flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-amber-500 mt-0.5" />
                     <p className="text-sm text-amber-800">
-                      系统会根据你的实时表现动态调整这些建议
+                      {t("mastery.insightsDesc")}
                     </p>
                   </div>
                 </div>

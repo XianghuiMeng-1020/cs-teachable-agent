@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { 
@@ -45,6 +46,7 @@ interface ConceptRelationGraphProps {
 }
 
 export function ConceptRelationGraph({ data, className }: ConceptRelationGraphProps) {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -146,8 +148,8 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
             <Network className="w-5 h-5 text-indigo-600" />
           </div>
           <div>
-            <h3 className="font-semibold text-stone-900">概念关系图谱</h3>
-            <p className="text-sm text-stone-500">AI自动发现的概念联系</p>
+            <h3 className="font-semibold text-stone-900">{t("analytics.conceptGraph")}</h3>
+            <p className="text-sm text-stone-500">{t("analytics.conceptGraphDesc")}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -182,7 +184,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
             >
               <GitBranch className="w-8 h-8 text-indigo-500" />
             </motion.div>
-            <span className="ml-3 text-stone-600">构建概念图谱中...</span>
+            <span className="ml-3 text-stone-600">{t("common.loading")}</span>
           </div>
         ) : graphData ? (
           <svg
@@ -261,7 +263,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
                   fontSize="10"
                   className="pointer-events-none"
                 >
-                  L{node.level}
+                  {t("analytics.level")} {node.level}
                 </text>
               </g>
             ))}
@@ -270,20 +272,20 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
 
         {/* Legend */}
         <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur rounded-lg p-3 shadow-lg">
-          <p className="text-xs font-medium text-stone-700 mb-2">关系类型</p>
+          <p className="text-xs font-medium text-stone-700 mb-2">{t("analytics.conceptRelations")}</p>
           <div className="space-y-1">
             {[
-              { type: "prerequisite", label: "前置知识", color: "#0D9488" },
-              { type: "similar", label: "相似概念", color: "#10b981" },
-              { type: "part_of", label: "组成部分", color: "#f59e0b" },
-              { type: "extends", label: "扩展关系", color: "#3b82f6" },
-            ].map(({ type, label, color }) => (
+              { type: "prerequisite", labelKey: "nav.teach", color: "#0D9488" },
+              { type: "similar", labelKey: "analytics.crossDomainTitle", color: "#10b981" },
+              { type: "part_of", labelKey: "mastery.topicCoverage", color: "#f59e0b" },
+              { type: "extends", labelKey: "analytics.experiments", color: "#3b82f6" },
+            ].map(({ type, labelKey, color }) => (
               <div key={type} className="flex items-center gap-2">
                 <div 
                   className="w-4 h-0.5 rounded" 
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-xs text-stone-600">{label}</span>
+                <span className="text-xs text-stone-600">{t(labelKey)}</span>
               </div>
             ))}
           </div>
@@ -302,10 +304,10 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
               return (
                 <>
                   <h4 className="font-semibold text-stone-900">{node.name}</h4>
-                  <p className="text-sm text-stone-500 mb-2">层级: {node.level}</p>
+                  <p className="text-sm text-stone-500 mb-2">{t("analytics.level")}: {node.level}</p>
                   <div className="text-xs text-stone-600 space-y-1">
-                    <p>连接数: {node.centrality}</p>
-                    <p>关联概念:</p>
+                    <p>{t("analytics.connections")}: {node.centrality}</p>
+                    <p>{t("analytics.conceptRelations")}:</p>
                     <ul className="pl-4 space-y-0.5">
                       {graphData.edges
                         .filter((e) => e.source === selectedNode || e.target === selectedNode)
@@ -314,7 +316,7 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
                           const other = graphData.nodes.find((n) => n.id === otherId);
                           return (
                             <li key={i} className="text-stone-500">
-                              • {other?.name} ({e.type === "prerequisite" ? "前置" : "相关"})
+                              • {other?.name} ({e.type === "prerequisite" ? t("nav.teach") : t("analytics.conceptRelations")})
                             </li>
                           );
                         })}
@@ -332,19 +334,19 @@ export function ConceptRelationGraph({ data, className }: ConceptRelationGraphPr
         <div className="grid grid-cols-4 gap-4 p-4 border-t border-stone-200">
           <div className="text-center">
             <p className="text-2xl font-bold text-stone-900">{graphData.nodes.length}</p>
-            <p className="text-xs text-stone-500">概念节点</p>
+            <p className="text-xs text-stone-500">{t("mastery.conceptMastery")}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-stone-900">{graphData.edges.length}</p>
-            <p className="text-xs text-stone-500">关系连接</p>
+            <p className="text-xs text-stone-500">{t("analytics.connections")}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-stone-900">{data?.clusters.length || 2}</p>
-            <p className="text-xs text-stone-500">概念群组</p>
+            <p className="text-xs text-stone-500">{t("analytics.crossDomainTitle")}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-stone-900">{data?.critical_paths.length || 2}</p>
-            <p className="text-xs text-stone-500">关键路径</p>
+            <p className="text-xs text-stone-500">{t("analytics.recentTrend")}</p>
           </div>
         </div>
       )}

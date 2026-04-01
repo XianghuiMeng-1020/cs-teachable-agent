@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import { Card } from "@/components/ui/Card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
 import { Button } from "@/components/ui/Button";
@@ -27,13 +29,44 @@ import {
   FlaskConical,
   Gauge
 } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function LearningAnalyticsPage() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("overview");
 
   const mockUserId = 1;
   const mockTaId = 1;
+
+  const paceRows = useMemo(
+    () =>
+      [
+        {
+          date: t("analytics.paceMockToday", { defaultValue: "Today" }),
+          paceLabel: t("analytics.medium"),
+          changeLabel: t("analytics.stable"),
+          changeKind: "stable" as const,
+        },
+        {
+          date: t("analytics.paceMockYesterday", { defaultValue: "Yesterday" }),
+          paceLabel: t("analytics.fast"),
+          changeLabel: "+15%",
+          changeKind: "up" as const,
+        },
+        {
+          date: t("analytics.paceMockTwoDaysAgo", { defaultValue: "Two days ago" }),
+          paceLabel: t("analytics.slow"),
+          changeLabel: "-20%",
+          changeKind: "down" as const,
+        },
+        {
+          date: t("analytics.paceMockThreeDaysAgo", { defaultValue: "3 days ago" }),
+          paceLabel: t("analytics.medium"),
+          changeLabel: t("analytics.stable"),
+          changeKind: "stable" as const,
+        },
+      ] as const,
+    [t],
+  );
 
   return (
     <div className="min-h-screen bg-stone-50 pb-12">
@@ -46,18 +79,18 @@ export function LearningAnalyticsPage() {
                 <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-stone-900">学习分析中心</h1>
-                <p className="text-sm text-stone-500">AI驱动的学习洞察与个性化建议</p>
+                <h1 className="text-xl font-bold text-stone-900">{t("analytics.title")}</h1>
+                <p className="text-sm text-stone-500">{t("analytics.desc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" className="hidden sm:flex">
                 <Share2 className="w-4 h-4 mr-2" />
-                分享
+                {t("analytics.share", { defaultValue: "Share" })}
               </Button>
               <Button variant="outline" size="sm" className="hidden sm:flex">
                 <Download className="w-4 h-4 mr-2" />
-                导出报告
+                {t("analytics.exportReport", { defaultValue: "Export report" })}
               </Button>
             </div>
           </div>
@@ -70,43 +103,43 @@ export function LearningAnalyticsPage() {
           <TabsList className="bg-white p-1 border border-stone-200 rounded-xl flex-wrap">
             <TabsTrigger value="overview" className="rounded-lg">
               <Activity className="w-4 h-4 mr-2" />
-              总览
+              {t("analytics.overview")}
             </TabsTrigger>
             <TabsTrigger value="pace" className="rounded-lg">
               <Sparkles className="w-4 h-4 mr-2" />
-              学习节奏
+              {t("analytics.learningPace")}
             </TabsTrigger>
             <TabsTrigger value="cognitive" className="rounded-lg">
               <Brain className="w-4 h-4 mr-2" />
-              认知负荷
+              {t("analytics.cognitiveLoad")}
             </TabsTrigger>
             <TabsTrigger value="concepts" className="rounded-lg">
               <Network className="w-4 h-4 mr-2" />
-              概念图谱
+              {t("analytics.conceptRelations")}
             </TabsTrigger>
             <TabsTrigger value="behavior" className="rounded-lg">
               <BarChart3 className="w-4 h-4 mr-2" />
-              行为分析
+              {t("analytics.behaviorAnalysis", { defaultValue: "Behavior analysis" })}
             </TabsTrigger>
             <TabsTrigger value="3d-graph" className="rounded-lg">
               <Box className="w-4 h-4 mr-2" />
-              3D图谱
+              {t("analytics.graph3d")}
             </TabsTrigger>
             <TabsTrigger value="achievements" className="rounded-lg">
               <Trophy className="w-4 h-4 mr-2" />
-              成就
+              {t("analytics.achievements")}
             </TabsTrigger>
             <TabsTrigger value="transfer" className="rounded-lg">
               <ArrowRightLeft className="w-4 h-4 mr-2" />
-              迁移
+              {t("analytics.crossDomain")}
             </TabsTrigger>
             <TabsTrigger value="performance" className="rounded-lg">
               <Gauge className="w-4 h-4 mr-2" />
-              性能
+              {t("analytics.performance")}
             </TabsTrigger>
             <TabsTrigger value="experiments" className="rounded-lg hidden md:flex">
               <FlaskConical className="w-4 h-4 mr-2" />
-              实验
+              {t("analytics.experiments")}
             </TabsTrigger>
           </TabsList>
 
@@ -121,7 +154,7 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-stone-900">87%</p>
-                    <p className="text-sm text-stone-500">学习效率</p>
+                    <p className="text-sm text-stone-500">{t("analytics.learningEfficiency")}</p>
                   </div>
                 </div>
               </Card>
@@ -131,8 +164,8 @@ export function LearningAnalyticsPage() {
                     <Brain className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-stone-900">适中</p>
-                    <p className="text-sm text-stone-500">认知负荷</p>
+                    <p className="text-2xl font-bold text-stone-900">{t("analytics.medium")}</p>
+                    <p className="text-sm text-stone-500">{t("analytics.cognitiveLoad")}</p>
                   </div>
                 </div>
               </Card>
@@ -143,7 +176,7 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-stone-900">23</p>
-                    <p className="text-sm text-stone-500">概念掌握</p>
+                    <p className="text-sm text-stone-500">{t("mastery.conceptMastery")}</p>
                   </div>
                 </div>
               </Card>
@@ -154,7 +187,9 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-stone-900">12</p>
-                    <p className="text-sm text-stone-500">学习天数</p>
+                    <p className="text-sm text-stone-500">
+                      {t("analytics.studyDaysLabel", { defaultValue: "Study days" })}
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -183,24 +218,19 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <LearningPacePanel studentId={mockUserId} />
               <Card padding="lg">
-                <h3 className="font-semibold text-stone-900 mb-4">节奏历史</h3>
+                <h3 className="font-semibold text-stone-900 mb-4">{t("analytics.paceHistory")}</h3>
                 <div className="space-y-4">
-                  {[
-                    { date: "今天", pace: "适中", change: "稳定" },
-                    { date: "昨天", pace: "较快", change: "+15%" },
-                    { date: "前天", pace: "较慢", change: "-20%" },
-                    { date: "3天前", pace: "适中", change: "稳定" },
-                  ].map((item, i) => (
+                  {paceRows.map((item, i) => (
                     <div key={i} className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0">
                       <div>
                         <p className="font-medium text-stone-900">{item.date}</p>
-                        <p className="text-sm text-stone-500">{item.pace}</p>
+                        <p className="text-sm text-stone-500">{item.paceLabel}</p>
                       </div>
                       <span className={`text-sm font-medium ${
-                        item.change === "稳定" ? "text-stone-500" :
-                        item.change.startsWith("+") ? "text-emerald-600" : "text-amber-600"
+                        item.changeKind === "stable" ? "text-stone-500" :
+                        item.changeKind === "up" ? "text-emerald-600" : "text-amber-600"
                       }`}>
-                        {item.change}
+                        {item.changeLabel}
                       </span>
                     </div>
                   ))}
@@ -214,11 +244,13 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <CognitiveLoadPanel studentId={mockUserId} />
               <Card padding="lg">
-                <h3 className="font-semibold text-stone-900 mb-4">负荷分布</h3>
+                <h3 className="font-semibold text-stone-900 mb-4">
+                  {t("analytics.loadDistribution", { defaultValue: "Load distribution" })}
+                </h3>
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-stone-600">最佳学习区</span>
+                      <span className="text-stone-600">{t("analytics.loadStatus.optimal")}</span>
                       <span className="font-medium text-emerald-600">45%</span>
                     </div>
                     <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
@@ -227,7 +259,9 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-stone-600">高负荷区</span>
+                      <span className="text-stone-600">
+                        {t("analytics.loadZoneHigh", { defaultValue: "High load zone" })}
+                      </span>
                       <span className="font-medium text-orange-500">30%</span>
                     </div>
                     <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
@@ -236,7 +270,7 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-stone-600">认知过载</span>
+                      <span className="text-stone-600">{t("analytics.loadStatus.overload")}</span>
                       <span className="font-medium text-red-500">10%</span>
                     </div>
                     <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
@@ -245,7 +279,7 @@ export function LearningAnalyticsPage() {
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-stone-600">低负荷区</span>
+                      <span className="text-stone-600">{t("analytics.loadStatus.low")}</span>
                       <span className="font-medium text-blue-500">15%</span>
                     </div>
                     <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
@@ -262,27 +296,33 @@ export function LearningAnalyticsPage() {
             <ConceptRelationGraph className="h-[600px]" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card padding="md">
-                <h4 className="font-medium text-stone-900 mb-2">关键前置概念</h4>
+                <h4 className="font-medium text-stone-900 mb-2">
+                  {t("analytics.keyPrerequisites", { defaultValue: "Key prerequisites" })}
+                </h4>
                 <ul className="text-sm text-stone-600 space-y-1">
-                  <li>• 变量与数据类型</li>
-                  <li>• 控制流基础</li>
-                  <li>• 函数定义</li>
+                  <li>• {t("analytics.prereq1", { defaultValue: "Variables and data types" })}</li>
+                  <li>• {t("analytics.prereq2", { defaultValue: "Control flow basics" })}</li>
+                  <li>• {t("analytics.prereq3", { defaultValue: "Function definitions" })}</li>
                 </ul>
               </Card>
               <Card padding="md">
-                <h4 className="font-medium text-stone-900 mb-2">相似概念簇</h4>
+                <h4 className="font-medium text-stone-900 mb-2">
+                  {t("analytics.similarClusters", { defaultValue: "Similar concept clusters" })}
+                </h4>
                 <ul className="text-sm text-stone-600 space-y-1">
-                  <li>• 列表与字典</li>
-                  <li>• 循环与迭代</li>
-                  <li>• 类与对象</li>
+                  <li>• {t("analytics.cluster1", { defaultValue: "Lists and dictionaries" })}</li>
+                  <li>• {t("analytics.cluster2", { defaultValue: "Loops and iteration" })}</li>
+                  <li>• {t("analytics.cluster3", { defaultValue: "Classes and objects" })}</li>
                 </ul>
               </Card>
               <Card padding="md">
-                <h4 className="font-medium text-stone-900 mb-2">建议学习顺序</h4>
+                <h4 className="font-medium text-stone-900 mb-2">
+                  {t("analytics.suggestedOrder", { defaultValue: "Suggested learning order" })}
+                </h4>
                 <ol className="text-sm text-stone-600 space-y-1">
-                  <li>1. 变量 → 数据类型</li>
-                  <li>2. 运算符 → 表达式</li>
-                  <li>3. 条件 → 循环</li>
+                  <li>1. {t("analytics.orderStep1", { defaultValue: "Variables → Data types" })}</li>
+                  <li>2. {t("analytics.orderStep2", { defaultValue: "Operators → Expressions" })}</li>
+                  <li>3. {t("analytics.orderStep3", { defaultValue: "Conditionals → Loops" })}</li>
                 </ol>
               </Card>
             </div>
@@ -313,23 +353,23 @@ export function LearningAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <WebVitalsPanel />
               <Card padding="lg">
-                <h3 className="font-semibold text-stone-900 mb-4">Performance Tips</h3>
+                <h3 className="font-semibold text-stone-900 mb-4">{t("analytics.performanceTips")}</h3>
                 <ul className="space-y-3 text-sm text-stone-600">
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500">✓</span>
-                    Use 3D knowledge graph sparingly on mobile devices
+                    {t("analytics.perfTip3d", { defaultValue: "Use 3D knowledge graph sparingly on mobile devices" })}
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500">✓</span>
-                    Enable service worker for offline access
+                    {t("analytics.perfTipSw", { defaultValue: "Enable service worker for offline access" })}
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500">✓</span>
-                    Close unused tabs to free up memory
+                    {t("analytics.perfTipTabs", { defaultValue: "Close unused tabs to free up memory" })}
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-500">✓</span>
-                    Use latest Chrome or Firefox for best experience
+                    {t("analytics.perfTipBrowser", { defaultValue: "Use latest Chrome or Firefox for best experience" })}
                   </li>
                 </ul>
               </Card>
@@ -342,6 +382,7 @@ export function LearningAnalyticsPage() {
           </TabsContent>
         </Tabs>
       </div>
+      <ContextualHelp pageKey="analytics" />
     </div>
   );
 }

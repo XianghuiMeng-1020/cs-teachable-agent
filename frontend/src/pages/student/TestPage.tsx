@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppStore } from "@/stores/appStore";
 import { getProblems, getTA, runTest, runTestComprehensive } from "@/api/client";
@@ -36,6 +38,7 @@ const scaleIn = {
 };
 
 export function TestPage() {
+  const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
   const [selectedProblemId, setSelectedProblemId] = useState<string | null>(null);
   const [testMode, setTestMode] = useState<"single" | "comprehensive">("single");
@@ -70,7 +73,12 @@ export function TestPage() {
   });
 
   const problems = problemsData?.problems ?? [];
-  const outputLabel = domainId === "database" ? "TA's SQL" : domainId === "ai_literacy" ? "TA's answer" : "TA's code";
+  const outputLabel =
+    domainId === "database"
+      ? t("test.taSQL")
+      : domainId === "ai_literacy"
+        ? t("test.taAnswer")
+        : t("test.taCode");
   const selectedProblem = selectedProblemId
     ? problems.find((p: { problem_id: string }) => p.problem_id === selectedProblemId)
     : null;
@@ -91,11 +99,11 @@ export function TestPage() {
       setTestMode("single");
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "state"] });
       queryClient.invalidateQueries({ queryKey: ["ta", currentTaId, "mastery"] });
-      toast.success(data.passed ? "🎉 Test passed!" : "❌ Test failed - review the output", {
+      toast.success(data.passed ? t("test.testPassed") : t("test.testFailed"), {
         duration: 3000,
       });
     },
-    onError: (err) => toast.error(err instanceof Error ? err.message : "Test failed"),
+    onError: (err) => toast.error(err instanceof Error ? err.message : t("test.testFailed")),
   });
 
   const runComprehensiveMutation = useMutation({
@@ -109,13 +117,15 @@ export function TestPage() {
       const percentage = Math.round((data.total_passed / data.total_run) * 100);
       toast.success(
         <div>
-          <div className="font-semibold">Comprehensive Test Complete!</div>
-          <div className="text-sm">{data.total_passed}/{data.total_run} passed ({percentage}%)</div>
+          <div className="font-semibold">{t("test.comprehensiveReport")}</div>
+          <div className="text-sm">
+            {data.total_passed}/{data.total_run} {t("test.passed")} ({percentage}%)
+          </div>
         </div>,
         { duration: 4000 }
       );
     },
-    onError: (err) => toast.error(err instanceof Error ? err.message : "Comprehensive test failed"),
+    onError: (err) => toast.error(err instanceof Error ? err.message : t("test.testFailed")),
   });
 
   const eligibleIds = problemsData?.eligible_ids ?? [];
@@ -140,9 +150,9 @@ export function TestPage() {
             <Target className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-stone-900">Test Your Agent</h1>
+            <h1 className="text-2xl font-bold text-stone-900">{t("test.title")}</h1>
             <p className="text-sm text-stone-500">
-              Verify what your TA has learned through programming challenges
+              {t("test.desc")}
             </p>
           </div>
         </div>
@@ -164,8 +174,8 @@ export function TestPage() {
             }
             <span className="font-semibold">
               {comprehensiveResult 
-                ? `${passRate}% Pass Rate`
-                : singleResult?.passed ? "Test Passed" : "Test Failed"
+                ? t("test.passRateLabel", { rate: passRate })
+                : singleResult?.passed ? t("test.testPassed") : t("test.testFailed")
               }
             </span>
           </motion.div>
@@ -190,7 +200,7 @@ export function TestPage() {
           <div>
             <label className="mb-2 block text-sm font-semibold text-stone-700 flex items-center gap-2">
               <FileText className="w-4 h-4 text-brand-600" />
-              Select Problem
+              {t("test.selectProblem")}
             </label>
             <ProblemSelector
               problems={problems}
@@ -213,7 +223,7 @@ export function TestPage() {
           <div className="flex flex-col justify-end">
             <label className="mb-2 block text-sm font-semibold text-stone-700 flex items-center gap-2">
               <Play className="w-4 h-4 text-brand-600" />
-              Run Test
+              {t("test.runTest")}
             </label>
             <div className="flex gap-3">
               <Button
@@ -233,11 +243,11 @@ export function TestPage() {
                 disabled={!currentTaId}
                 className="flex-1"
               >
-                Run All
+                {t("test.runAll")}
               </Button>
             </div>
             <p className="mt-2 text-xs text-stone-500">
-              Single: Test one problem • All: Comprehensive evaluation across all unlocked problems
+              {t("test.singleDesc")} • {t("test.allDesc")}
             </p>
           </div>
         </div>
@@ -280,14 +290,14 @@ export function TestPage() {
               <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl p-4 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <CheckCircle className="w-5 h-5" />
-                  <span className="text-sm font-medium text-emerald-100">Passed</span>
+                  <span className="text-sm font-medium text-emerald-100">{t("test.passed")}</span>
                 </div>
                 <div className="text-3xl font-bold">{comprehensiveResult.total_passed}</div>
               </div>
               <div className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-xl p-4 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <XCircle className="w-5 h-5" />
-                  <span className="text-sm font-medium text-rose-100">Failed</span>
+                  <span className="text-sm font-medium text-rose-100">{t("test.failed")}</span>
                 </div>
                 <div className="text-3xl font-bold">
                   {comprehensiveResult.total_run - comprehensiveResult.total_passed}
@@ -296,7 +306,7 @@ export function TestPage() {
               <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-4 text-white">
                 <div className="flex items-center gap-2 mb-1">
                   <BarChart3 className="w-5 h-5" />
-                  <span className="text-sm font-medium text-blue-100">Total</span>
+                  <span className="text-sm font-medium text-blue-100">{t("test.total")}</span>
                 </div>
                 <div className="text-3xl font-bold">{comprehensiveResult.total_run}</div>
               </div>
@@ -309,7 +319,7 @@ export function TestPage() {
               }`}>
                 <div className="flex items-center gap-2 mb-1">
                   <Trophy className="w-5 h-5" />
-                  <span className="text-sm font-medium text-white/80">Pass Rate</span>
+                  <span className="text-sm font-medium text-white/80">{t("dashboard.passRate")}</span>
                 </div>
                 <div className="text-3xl font-bold">{passRate}%</div>
               </div>
@@ -322,8 +332,8 @@ export function TestPage() {
                   <FileText className="w-5 h-5 text-brand-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-stone-900">Comprehensive Test Report</h3>
-                  <p className="text-sm text-stone-500">Detailed breakdown of all test cases</p>
+                  <h3 className="text-lg font-bold text-stone-900">{t("test.comprehensiveReport")}</h3>
+                  <p className="text-sm text-stone-500">{t("test.comprehensiveReportDesc")}</p>
                 </div>
               </div>
               <ComprehensiveReport
@@ -348,21 +358,21 @@ export function TestPage() {
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-stone-100 to-stone-50 flex items-center justify-center mx-auto mb-6">
                   <Play className="w-10 h-10 text-stone-300" />
                 </div>
-                <h3 className="text-xl font-semibold text-stone-900 mb-2">Ready to Test?</h3>
+                <h3 className="text-xl font-semibold text-stone-900 mb-2">{t("test.readyTitle")}</h3>
                 <p className="text-stone-500 mb-2 max-w-md mx-auto">
-                  Select a problem from the dropdown above and run a test to see how well your TA has learned.
+                  {t("test.readyDesc")}
                 </p>
                 <p className="text-sm text-stone-400 mb-6">
-                  Or use "Run All" for a comprehensive evaluation across all unlocked problems
+                  {t("test.readyHint")}
                 </p>
                 <div className="flex items-center justify-center gap-4 text-sm text-stone-500">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
-                    <span>Tests run in real-time</span>
+                    <span>{t("test.testsRealtime")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4" />
-                    <span>Instant feedback</span>
+                    <span>{t("test.instantFeedback")}</span>
                   </div>
                 </div>
               </div>
@@ -370,6 +380,7 @@ export function TestPage() {
           </motion.div>
         )}
       </AnimatePresence>
+      <ContextualHelp pageKey="test" />
     </motion.div>
   );
 }

@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import { useAppStore } from "@/stores/appStore";
 import { getState, getMastery } from "@/api/client";
 import { Card } from "@/components/ui/Card";
@@ -33,6 +35,7 @@ const staggerContainer = {
 };
 
 export function MasteryPage() {
+  const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
 
   const { data: state } = useQuery({
@@ -92,15 +95,15 @@ export function MasteryPage() {
   }));
 
   if (radarData.length === 0) {
-    radarData.push({ subject: "Knowledge", value: 0, fullMark: 100 });
+    radarData.push({ subject: t("mastery.knowledgeGraph"), value: 0, fullMark: 100 });
   }
 
   // Pie chart data
   const pieData = [
-    { name: "Mastered", value: learnedCount, color: "#10B981" },
-    { name: "In Progress", value: partialCount, color: "#F59E0B" },
-    { name: "Misconceptions", value: misconceptionCount, color: "#EF4444" },
-    { name: "Not Started", value: unknownCount, color: "#E5E7EB" },
+    { name: t("mastery.mastered"), value: learnedCount, color: "#10B981" },
+    { name: t("mastery.inProgress"), value: partialCount, color: "#F59E0B" },
+    { name: t("mastery.misconceptions"), value: misconceptionCount, color: "#EF4444" },
+    { name: t("mastery.notStarted"), value: unknownCount, color: "#E5E7EB" },
   ].filter(d => d.value > 0);
 
   return (
@@ -117,9 +120,9 @@ export function MasteryPage() {
             <Award className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-stone-900">Mastery Overview</h1>
+            <h1 className="text-2xl font-bold text-stone-900">{t("mastery.title")}</h1>
             <p className="text-sm text-stone-500">
-              Track your learning progress and knowledge state visualization
+              {t("mastery.desc")}
             </p>
           </div>
         </div>
@@ -127,7 +130,7 @@ export function MasteryPage() {
         <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-50 to-emerald-50 rounded-full border border-brand-200">
           <GraduationCap className="w-5 h-5 text-brand-600" />
           <span className="text-sm font-semibold text-brand-800">
-            {learnedCount} of {units.length} concepts mastered ({progressPercent}%)
+            {t("mastery.ofConceptsMastered", { learned: learnedCount, total: units.length, percent: progressPercent })}
           </span>
         </div>
       </motion.div>
@@ -141,7 +144,7 @@ export function MasteryPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{learnedCount}</div>
           </div>
-          <div className="text-sm text-stone-500">Mastered</div>
+          <div className="text-sm text-stone-500">{t("mastery.mastered")}</div>
         </div>
 
         <div className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm">
@@ -151,7 +154,7 @@ export function MasteryPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{partialCount}</div>
           </div>
-          <div className="text-sm text-stone-500">In Progress</div>
+          <div className="text-sm text-stone-500">{t("mastery.inProgress")}</div>
         </div>
 
         <div className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm">
@@ -161,7 +164,7 @@ export function MasteryPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{misconceptionCount}</div>
           </div>
-          <div className="text-sm text-stone-500">Misconceptions</div>
+          <div className="text-sm text-stone-500">{t("mastery.misconceptions")}</div>
         </div>
 
         <div className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm">
@@ -171,7 +174,7 @@ export function MasteryPage() {
             </div>
             <div className="text-2xl font-bold text-stone-900">{passRate}%</div>
           </div>
-          <div className="text-sm text-stone-500">Test Pass Rate</div>
+          <div className="text-sm text-stone-500">{t("mastery.testPassRate")}</div>
         </div>
       </motion.div>
 
@@ -184,26 +187,26 @@ export function MasteryPage() {
                 <Brain className="w-5 h-5 text-violet-600" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-stone-900">Knowledge Graph</h2>
-                <p className="text-sm text-stone-500">Visual representation of your agent's knowledge state</p>
+                <h2 className="text-lg font-bold text-stone-900">{t("mastery.knowledgeGraph")}</h2>
+                <p className="text-sm text-stone-500">{t("mastery.knowledgeGraphDesc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                <span className="text-stone-600">Learned</span>
+                <span className="text-stone-600">{t("mastery.learned")}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-amber-500" />
-                <span className="text-stone-600">Partial</span>
+                <span className="text-stone-600">{t("mastery.partial")}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-rose-500" />
-                <span className="text-stone-600">Misconception</span>
+                <span className="text-stone-600">{t("mastery.misconception")}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-stone-300" />
-                <span className="text-stone-600">Unknown</span>
+                <span className="text-stone-600">{t("mastery.unknown")}</span>
               </div>
             </div>
           </div>
@@ -224,8 +227,8 @@ export function MasteryPage() {
               <TrendingUp className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-stone-900">Concept Mastery</h2>
-              <p className="text-sm text-stone-500">Mastery level for each knowledge unit</p>
+              <h2 className="text-lg font-bold text-stone-900">{t("mastery.conceptMastery")}</h2>
+              <p className="text-sm text-stone-500">{t("mastery.conceptMasteryDesc")}</p>
             </div>
           </div>
           <div className="h-80">
@@ -253,9 +256,16 @@ export function MasteryPage() {
                     fontSize: "12px",
                     boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)"
                   }}
-                  formatter={(value: any, name: any, props: any) => {
+                  formatter={(value: any, _name: any, props: any) => {
                     const status = props.payload.status;
-                    const label = status === "learned" ? "Mastered" : status === "partially_learned" ? "In Progress" : status === "misconception" ? "Misconception" : "Unknown";
+                    const label =
+                      status === "learned"
+                        ? t("mastery.mastered")
+                        : status === "partially_learned"
+                          ? t("mastery.inProgress")
+                          : status === "misconception"
+                            ? t("mastery.misconception")
+                            : t("mastery.unknown");
                     return [`${value}%`, label];
                   }}
                 />
@@ -276,8 +286,8 @@ export function MasteryPage() {
               <Zap className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-stone-900">Distribution</h2>
-              <p className="text-sm text-stone-500">Knowledge state breakdown</p>
+              <h2 className="text-lg font-bold text-stone-900">{t("mastery.distribution")}</h2>
+              <p className="text-sm text-stone-500">{t("mastery.distributionDesc")}</p>
             </div>
           </div>
           <div className="h-64">
@@ -328,8 +338,8 @@ export function MasteryPage() {
               <Target className="w-5 h-5 text-teal-600" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-stone-900">Topic Coverage</h2>
-              <p className="text-sm text-stone-500">Mastery distribution across topic groups</p>
+              <h2 className="text-lg font-bold text-stone-900">{t("mastery.topicCoverage")}</h2>
+              <p className="text-sm text-stone-500">{t("mastery.topicCoverageDesc")}</p>
             </div>
           </div>
           <div className="h-80">
@@ -346,7 +356,7 @@ export function MasteryPage() {
                   tick={{ fontSize: 10, fill: "#A8A29E" }} 
                 />
                 <Radar 
-                  name="Mastery" 
+                  name={t("nav.mastery")} 
                   dataKey="value" 
                   stroke="#8B5CF6" 
                   fill="#8B5CF6" 
@@ -359,7 +369,7 @@ export function MasteryPage() {
                     border: "1px solid #E7E5E4", 
                     fontSize: "12px" 
                   }}
-                  formatter={(value: number) => [`${value}%`, "Mastery"]}
+                  formatter={(value: number) => [`${value}%`, t("nav.mastery")]}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -375,18 +385,18 @@ export function MasteryPage() {
               <BookOpen className="w-6 h-6 text-brand-600" />
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-stone-900 mb-2">Learning Insights</h3>
+              <h3 className="text-lg font-bold text-stone-900 mb-2">{t("mastery.learningInsights")}</h3>
               <p className="text-stone-600 mb-4">
-                Based on your current progress, here are some recommendations:
+                {t("mastery.insightsDesc")}
               </p>
               <div className="grid md:grid-cols-2 gap-4">
                 {misconceptionCount > 0 && (
                   <div className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <AlertCircle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-medium text-stone-900">Address Misconceptions</div>
+                      <div className="font-medium text-stone-900">{t("mastery.addressMisconceptions")}</div>
                       <div className="text-sm text-stone-500">
-                        You have {misconceptionCount} active misconceptions. Focus on correcting these first.
+                        {t("mastery.addressMisconceptionsDesc", { count: misconceptionCount })}
                       </div>
                     </div>
                   </div>
@@ -395,9 +405,9 @@ export function MasteryPage() {
                   <div className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <Clock className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-medium text-stone-900">Continue In-Progress</div>
+                      <div className="font-medium text-stone-900">{t("mastery.continueInProgress")}</div>
                       <div className="text-sm text-stone-500">
-                        {partialCount} concepts are partially learned. Keep teaching to master them.
+                        {t("mastery.continueInProgressDesc", { count: partialCount })}
                       </div>
                     </div>
                   </div>
@@ -406,9 +416,9 @@ export function MasteryPage() {
                   <div className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <Zap className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-medium text-stone-900">Explore New Concepts</div>
+                      <div className="font-medium text-stone-900">{t("mastery.exploreNew")}</div>
                       <div className="text-sm text-stone-500">
-                        {unknownCount} concepts are waiting. Start teaching to expand your knowledge.
+                        {t("mastery.exploreNewDesc", { count: unknownCount })}
                       </div>
                     </div>
                   </div>
@@ -417,9 +427,9 @@ export function MasteryPage() {
                   <div className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
                     <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-medium text-stone-900">Excellent Progress!</div>
+                      <div className="font-medium text-stone-900">{t("mastery.excellentProgress")}</div>
                       <div className="text-sm text-stone-500">
-                        Your {passRate}% pass rate shows strong understanding. Keep it up!
+                        {t("mastery.excellentProgressDesc", { rate: passRate })}
                       </div>
                     </div>
                   </div>
@@ -429,6 +439,7 @@ export function MasteryPage() {
           </div>
         </Card>
       </motion.div>
+      <ContextualHelp pageKey="mastery" />
     </motion.div>
   );
 }
