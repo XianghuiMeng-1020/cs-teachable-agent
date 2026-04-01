@@ -15,12 +15,6 @@ import { createTA } from "@/api/client";
 import { cn } from "@/lib/utils";
 import type { TAInstance } from "@/lib/types";
 
-const DOMAINS = [
-  { id: "python", label: "Python", desc: "Introductory programming" },
-  { id: "database", label: "Database (SQL)", desc: "Relational databases" },
-  { id: "ai_literacy", label: "AI Literacy", desc: "Machine learning basics" },
-] as const;
-
 interface TopBarProps {
   pageName: string;
   taList?: TAInstance[];
@@ -29,6 +23,15 @@ interface TopBarProps {
 
 export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
   const { t } = useTranslation();
+  const domains = React.useMemo(
+    () =>
+      [
+        { id: "python" as const, label: t("onboarding.pythonLabel"), desc: t("onboarding.pythonDesc") },
+        { id: "database" as const, label: t("onboarding.sqlLabel"), desc: t("onboarding.sqlDesc") },
+        { id: "ai_literacy" as const, label: t("onboarding.aiLabel"), desc: t("onboarding.aiDesc") },
+      ] as const,
+    [t]
+  );
   const { user, logout } = useAuthStore();
   const { currentTaId, setCurrentTaId } = useAppStore();
   const queryClient = useQueryClient();
@@ -44,7 +47,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
       setNewTADialogOpen(false);
     },
     onError: (err: Error) => {
-      toast.error(err?.message ?? "Failed to create TA.");
+      toast.error(err?.message ?? t("topbar.failedCreateTA"));
     },
   });
 
@@ -89,7 +92,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                 {t("onboarding.chooseDomainDesc")}
               </Dialog.Description>
               <div className="mt-5 flex flex-col gap-2">
-                {DOMAINS.map((d) => (
+                {domains.map((d) => (
                   <label
                     key={d.id}
                     className={cn(
@@ -201,7 +204,7 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                 onSelect={(e) => e.preventDefault()}
               >
                 <User className="h-4 w-4" />
-                Profile
+                {t("common.profile")}
               </DropdownMenu.Item>
               <DropdownMenu.Separator className="my-1 h-px bg-stone-100" />
               <DropdownMenu.Item

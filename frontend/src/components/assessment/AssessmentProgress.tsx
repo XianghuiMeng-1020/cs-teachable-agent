@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Circle, Target } from "lucide-react";
 
@@ -18,6 +19,7 @@ export function AssessmentProgress({
   totalItemsAvailable,
   className,
 }: AssessmentProgressProps) {
+  const { t } = useTranslation();
   const progressPercent = totalItemsAvailable > 0
     ? Math.round((uniqueItemsSolved / totalItemsAvailable) * 100)
     : 0;
@@ -26,24 +28,24 @@ export function AssessmentProgress({
     <div className={cn("grid grid-cols-2 gap-3 sm:grid-cols-4", className)}>
       <StatCard
         icon={<Target className="h-4 w-4 text-brand-600" />}
-        label="Solved"
+        label={t("practice.solved")}
         value={`${uniqueItemsSolved}/${totalItemsAvailable}`}
         sub={`${progressPercent}%`}
       />
       <StatCard
         icon={<CheckCircle2 className="h-4 w-4 text-green-600" />}
-        label="Correct"
+        label={t("practice.correct")}
         value={String(correctAttempts)}
-        sub={`${Math.round(accuracy * 100)}% accuracy`}
+        sub={t("practice.accuracy", { rate: Math.round(accuracy * 100) })}
       />
       <StatCard
         icon={<Circle className="h-4 w-4 text-stone-400" />}
-        label="Attempts"
+        label={t("practice.attempts")}
         value={String(totalAttempts)}
-        sub="total"
+        sub={t("practice.totalLabel")}
       />
       <div className="rounded-lg border border-stone-200 bg-white p-3">
-        <div className="text-xs text-stone-500 mb-1">Progress</div>
+        <div className="text-xs text-stone-500 mb-1">{t("practice.progress")}</div>
         <div className="h-2 w-full rounded-full bg-stone-100 overflow-hidden">
           <div
             className="h-full rounded-full bg-brand-500 transition-all duration-500"

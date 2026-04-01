@@ -44,7 +44,7 @@ export function MisconceptionCard({
           variant={status === "active" ? "danger" : status === "resolved" ? "success" : "warning"}
           size="sm"
         >
-          {status}
+          {statusLabel}
         </Badge>
       </div>
       <p className="mt-2 text-sm text-stone-600">{description}</p>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { teacherTranscriptDetail } from "@/api/client";
 import { Badge } from "@/components/ui/Badge";
@@ -11,20 +12,21 @@ interface TranscriptDetailProps {
 }
 
 export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
+  const { t } = useTranslation();
   const { data, isLoading } = useQuery({
     queryKey: ["teacher", "transcripts", sessionId],
     queryFn: () => teacherTranscriptDetail(sessionId),
   });
 
   if (isLoading || !data) {
-    return <p className="text-sm text-stone-500">Loading...</p>;
+    return <p className="text-sm text-stone-500">{t("common.loading")}</p>;
   }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <button type="button" onClick={onBack} className="text-sm font-medium text-brand-600 hover:underline">
-          ← Back to list
+          {t("transcripts.backToList")}
         </button>
         <ExportCSVButton sessionId={sessionId} />
       </div>
@@ -38,11 +40,11 @@ export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
           <table className="w-full text-sm">
             <thead className="bg-stone-50 text-xs font-medium uppercase tracking-wider text-stone-500">
               <tr>
-                <th className="px-4 py-3 text-left w-12">#</th>
-                <th className="px-4 py-3 text-left w-28">Speaker</th>
-                <th className="px-4 py-3 text-left">Content</th>
-                <th className="px-4 py-3 text-left w-40">Interpreted KUs</th>
-                <th className="px-4 py-3 text-left w-20">Quality</th>
+                <th className="px-4 py-3 text-left w-12">{t("transcripts.number")}</th>
+                <th className="px-4 py-3 text-left w-28">{t("transcripts.speaker")}</th>
+                <th className="px-4 py-3 text-left">{t("transcripts.content")}</th>
+                <th className="px-4 py-3 text-left w-40">{t("transcripts.interpretedKUs")}</th>
+                <th className="px-4 py-3 text-left w-20">{t("transcripts.quality")}</th>
               </tr>
             </thead>
             <tbody>
@@ -63,10 +65,10 @@ export function TranscriptDetail({ sessionId, onBack }: TranscriptDetailProps) {
                         ))}
                       </div>
                     ) : (
-                      "N/A"
+                      t("transcripts.na")
                     )}
                   </td>
-                  <td className="px-4 py-3">{msg.quality_score != null ? msg.quality_score : "N/A"}</td>
+                  <td className="px-4 py-3">{msg.quality_score != null ? msg.quality_score : t("transcripts.na")}</td>
                 </tr>
               ))}
             </tbody>

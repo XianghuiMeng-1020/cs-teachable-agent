@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { MISCONCEPTION_DISPLAY } from "@/lib/constants";
 
@@ -6,13 +7,14 @@ interface MisconceptionRankingProps {
 }
 
 export function MisconceptionRanking({ counts }: MisconceptionRankingProps) {
+  const { t } = useTranslation();
   const data = Object.entries(counts)
     .map(([id, count]) => ({ name: MISCONCEPTION_DISPLAY[id] ?? id, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
 
   if (data.length === 0) {
-    return <p className="py-4 text-center text-sm text-stone-500">No misconceptions recorded.</p>;
+    return <p className="py-4 text-center text-sm text-stone-500">{t("teacher.noMisconceptions")}</p>;
   }
 
   return (

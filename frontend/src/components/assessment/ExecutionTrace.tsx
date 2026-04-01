@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { emitTelemetry } from "@/lib/telemetry";
 import type { ExecutionTraceCheckpoint } from "@/api/assessment";
@@ -23,24 +24,25 @@ export function ExecutionTrace({
   disabled = false,
   feedback,
 }: ExecutionTraceProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-4">
       <div className="rounded-lg border border-stone-200 bg-stone-900 p-4 text-stone-100">
         <div className="mb-2 text-xs text-stone-400 font-sans">
-          Function: <span className="text-brand-300 font-medium">{functionName}</span>
+          {t("assessment.function")}{" "}
+          <span className="text-brand-300 font-medium">{functionName}</span>
         </div>
         <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{functionSource}</pre>
       </div>
 
       <div className="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
-        <div className="text-xs text-stone-500 font-sans mb-1">Call expression:</div>
+        <div className="text-xs text-stone-500 font-sans mb-1">{t("assessment.callExpression")}</div>
         <code className="font-mono text-sm text-brand-800 font-medium">{callExpression}</code>
       </div>
 
       <div className="space-y-3">
-        <h4 className="text-sm font-medium text-stone-700">
-          Checkpoints — fill in each variable value after the line executes:
-        </h4>
+        <h4 className="text-sm font-medium text-stone-700">{t("assessment.checkpointsDesc")}</h4>
         {checkpoints.map((cp) => (
           <div
             key={cp.checkpoint_id}
@@ -66,7 +68,7 @@ export function ExecutionTrace({
                     });
                   }}
                   disabled={disabled}
-                  placeholder="value after execution"
+                  placeholder={t("assessment.valueAfterExec")}
                   className={cn(
                     "flex-1 rounded border border-stone-300 px-2 py-1 font-mono text-sm",
                     "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500",
@@ -80,8 +82,10 @@ export function ExecutionTrace({
       </div>
 
       <div className="text-xs text-stone-500">
-        {checkpoints.filter((cp) => (selectedAnswers[cp.checkpoint_id] || "").trim()).length} /{" "}
-        {checkpoints.length} checkpoints filled
+        {t("assessment.checkpointsFilled", {
+          filled: checkpoints.filter((cp) => (selectedAnswers[cp.checkpoint_id] || "").trim()).length,
+          total: checkpoints.length,
+        })}
       </div>
 
       {feedback && (

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -15,6 +16,7 @@ import { formatDate } from "@/lib/utils";
 import type { UnitNode } from "@/components/state/KnowledgeGraph";
 
 export function StudentDetailPage() {
+  const { t } = useTranslation();
   const { userId } = useParams<{ userId: string }>();
   const navigate = useNavigate();
   const id = userId ? parseInt(userId, 10) : NaN;
@@ -28,7 +30,7 @@ export function StudentDetailPage() {
   const [selectedTaIndex, setSelectedTaIndex] = useState(0);
 
   if (Number.isNaN(id) || isLoading || !data) {
-    return <p className="text-sm text-stone-500">Loading...</p>;
+    return <p className="text-sm text-stone-500">{t("common.loading")}</p>;
   }
 
   const taInstances = data.ta_instances ?? [];
@@ -50,13 +52,15 @@ export function StudentDetailPage() {
         <Avatar fallback={data.user.username} size="lg" />
         <div>
           <h1 className="text-2xl font-bold text-stone-900">{data.user.username}</h1>
-          <p className="text-sm text-stone-500">Joined {data.user.created_at ? formatDate(data.user.created_at) : "—"}</p>
+          <p className="text-sm text-stone-500">
+            {t("history.joined", { date: data.user.created_at ? formatDate(data.user.created_at) : "—" })}
+          </p>
         </div>
       </div>
 
       {taInstances.length > 1 && (
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-stone-600">TA:</span>
+          <span className="text-sm font-medium text-stone-600">{t("teacher.selectTA")}</span>
           <select
             value={selectedTaIndex}
             onChange={(e) => setSelectedTaIndex(Number(e.target.value))}
@@ -64,27 +68,38 @@ export function StudentDetailPage() {
           >
             {taInstances.map((ta, i) => (
               <option key={ta.id ?? i} value={i}>
-                {(ta as { name?: string; domain_id?: string }).name ?? (ta as { domain_id?: string }).domain_id ?? `TA ${i + 1}`}
+                {(ta as { name?: string; domain_id?: string }).name ??
+                  (ta as { domain_id?: string }).domain_id ??
+                  t("topbar.taLabel", { id: i + 1 })}
               </option>
             ))}
           </select>
         </div>
       )}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <StatCard label="Learned KUs" value={primary ? `${primary.learned_count}/${primary.total_kus}` : "—"} icon={BookOpen} iconColor="bg-brand-50 text-brand-700" />
-        <StatCard label="Mastery %" value={primary ? `${primary.mastery_percent}%` : "—"} icon={Target} iconColor="bg-emerald-50 text-success" />
-        <StatCard label="Sessions / Tests" value={primary ? `${primary.test_count} tests` : "—"} icon={MessageSquare} iconColor="bg-accent-50 text-accent-500" />
+        <StatCard label={t("teacher.learnedKUs")} value={primary ? `${primary.learned_count}/${primary.total_kus}` : "—"} icon={BookOpen} iconColor="bg-brand-50 text-brand-700" />
+        <StatCard label={t("teacher.masteryPercent")} value={primary ? `${primary.mastery_percent}%` : "—"} icon={Target} iconColor="bg-emerald-50 text-success" />
+        <StatCard
+          label={t("teacher.sessionTests")}
+          value={primary ? t("teacher.tests", { count: primary.test_count }) : "—"}
+          icon={MessageSquare}
+          iconColor="bg-accent-50 text-accent-500"
+        />
       </div>
 
       <Tabs.Root defaultValue="knowledge">
         <Tabs.List className="mb-4 flex gap-2 border-b border-stone-200">
-          <Tabs.Trigger value="knowledge" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">Knowledge State</Tabs.Trigger>
-          <Tabs.Trigger value="misconceptions" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">Misconceptions</Tabs.Trigger>
+          <Tabs.Trigger value="knowledge" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">
+            {t("teacher.knowledgeState")}
+          </Tabs.Trigger>
+          <Tabs.Trigger value="misconceptions" className="border-b-2 border-transparent px-4 py-2 text-sm font-medium data-[state=active]:border-brand-700 data-[state=active]:text-brand-600">
+            {t("teacher.misconceptionsTab")}
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="knowledge">
           <Card padding="md">
             <KnowledgeGraph units={units} className="min-h-[300px]" />
-            {units.length === 0 && <p className="py-4 text-center text-sm text-stone-500">No knowledge state data. Student may not have taught yet.</p>}
+            {units.length === 0 && <p className="py-4 text-center text-sm text-stone-500">{t("teacher.noKnowledgeData")}</p>}
           </Card>
         </Tabs.Content>
         <Tabs.Content value="misconceptions">
@@ -93,9 +108,9 @@ export function StudentDetailPage() {
               <MisconceptionCard
                 key={mid}
                 misconceptionId={mid}
-                description="Active for this TA instance."
+                description={t("teacher.activeForTA")}
                 affectedUnits={[]}
-                remediationHint="Have the student teach the correct concept."
+                remediationHint={t("teacher.teachCorrect")}
                 status="active"
               />
             ))

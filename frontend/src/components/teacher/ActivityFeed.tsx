@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Avatar } from "@/components/ui/Avatar";
 import { formatRelative } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ interface ActivityFeedProps {
 }
 
 export function ActivityFeed({ items }: ActivityFeedProps) {
+  const { t } = useTranslation();
   return (
     <ul className="space-y-3">
       {items.slice(0, 20).map((item, i) => (
@@ -31,7 +33,7 @@ export function ActivityFeed({ items }: ActivityFeedProps) {
         </li>
       ))}
       {items.length === 0 && (
-        <p className="py-4 text-center text-sm text-stone-500">No recent activity.</p>
+        <p className="py-4 text-center text-sm text-stone-500">{t("teacher.noActivity")}</p>
       )}
     </ul>
   );

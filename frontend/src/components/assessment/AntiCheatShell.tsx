@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Lock, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { emitTelemetry } from "@/lib/telemetry";
@@ -231,10 +232,12 @@ function PracticeLockOverlay({
   latestEvent: FocusLossEvent | null;
   onResume: () => void;
 }) {
+  const { t } = useTranslation();
+
   const reasonLabel = (r: FocusLossEvent["reason"]) => {
-    if (r === "tab-hidden") return "Tab hidden";
-    if (r === "devtools") return "DevTools detected";
-    return "Window blur";
+    if (r === "tab-hidden") return t("assessment.tabHidden");
+    if (r === "devtools") return t("assessment.devToolsDetected");
+    return t("assessment.windowBlur");
   };
 
   return (
@@ -242,16 +245,15 @@ function PracticeLockOverlay({
       <div className="w-full max-w-md rounded-2xl border border-stone-200 bg-white p-6 shadow-elevated">
         <div className="flex items-center gap-2 text-stone-900">
           <Lock className="h-5 w-5 text-brand-700" />
-          <h3 className="font-serif text-lg font-semibold">Practice Locked</h3>
+          <h3 className="font-serif text-lg font-semibold">{t("assessment.locked")}</h3>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-stone-500">
-          The assessment view was hidden after this browser tab lost focus.
-          Resume only when you are ready to continue.
+          {t("assessment.lockedDesc")}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800">
             <AlertTriangle className="h-3 w-3" />
-            {eventCount} focus event{eventCount === 1 ? "" : "s"}
+            {t("assessment.focusEvents", { count: eventCount })}
           </span>
           {latestEvent && (
             <span className="rounded-full border border-stone-200 bg-stone-50 px-2.5 py-1 text-xs text-stone-600">
@@ -260,7 +262,7 @@ function PracticeLockOverlay({
           )}
         </div>
         <div className="mt-5">
-          <Button onClick={onResume}>Resume Practice</Button>
+          <Button onClick={onResume}>{t("assessment.resumePractice")}</Button>
         </div>
       </div>
     </div>

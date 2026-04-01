@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Lightbulb, ChevronUp, Loader2, ThumbsUp, ThumbsDown, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getAssessmentHint, type HintResponse } from "@/api/assessment";
@@ -28,18 +29,6 @@ interface HintPanelProps {
   disabled?: boolean;
 }
 
-const HINT_TYPES: { value: HintType; label: string; desc: string }[] = [
-  { value: "understand", label: "Understand", desc: "Help me understand the task" },
-  { value: "next-step", label: "Next Step", desc: "What should I try next?" },
-  { value: "check-one-issue", label: "Check Issue", desc: "Check one specific issue" },
-];
-
-const LEVEL_SCOPE_LABELS: Record<number, { label: string; desc: string }> = {
-  1: { label: "Conceptual", desc: "Broad concept only — no specific elements" },
-  2: { label: "Regional", desc: "Points to a general area — no exact answers" },
-  3: { label: "Targeted", desc: "Names one element — still no answer revealed" },
-};
-
 export function HintPanel({
   itemDbId,
   taId,
@@ -49,6 +38,23 @@ export function HintPanel({
   attemptNumber,
   disabled = false,
 }: HintPanelProps) {
+  const { t } = useTranslation();
+
+  const HINT_TYPES: { value: HintType; labelKey: string }[] = [
+    { value: "understand", labelKey: "assessment.hintTypes.understand" },
+    { value: "next-step", labelKey: "assessment.hintTypes.nextStep" },
+    { value: "check-one-issue", labelKey: "assessment.hintTypes.checkOneIssue" },
+  ];
+
+  const LEVEL_SCOPE_BY_LEVEL: Record<
+    1 | 2 | 3,
+    { labelKey: string; descKey: string }
+  > = {
+    1: { labelKey: "assessment.levelScope.problem", descKey: "assessment.levelScope.problemDesc" },
+    2: { labelKey: "assessment.levelScope.block", descKey: "assessment.levelScope.blockDesc" },
+    3: { labelKey: "assessment.levelScope.line", descKey: "assessment.levelScope.lineDesc" },
+  };
+
   const [hints, setHints] = useState<HintRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -120,10 +126,10 @@ export function HintPanel({
       >
         <span className="flex items-center gap-2">
           <Lightbulb className="h-4 w-4" />
-          Hints
+          {t("assessment.hints")}
           {totalUsed > 0 && (
             <span className="text-xs text-amber-600">
-              {totalUsed}/{totalLimit} used
+              {totalUsed}/{totalLimit} {t("assessment.used")}
             </span>
           )}
         </span>
@@ -134,9 +140,10 @@ export function HintPanel({
         <div className="border-t border-amber-200 px-4 py-3 space-y-3">
           {/* Hint type buttons with remaining counts */}
           <div className="flex gap-2 flex-wrap">
-            {HINT_TYPES.map(({ value, label }) => {
+            {HINT_TYPES.map(({ value, labelKey }) => {
               const remaining = getRemainingForType(value);
               const exhausted = remaining <= 0;
+              const label = t(labelKey);
               return (
                 <button
                   key={value}
@@ -149,7 +156,11 @@ export function HintPanel({
                       : "border-amber-300 bg-white text-amber-800 hover:bg-amber-100",
                     loading && "opacity-50 cursor-wait"
                   )}
-                  title={exhausted ? `No ${label} hints remaining` : `${remaining} remaining`}
+                  title={
+                    exhausted
+                      ? t("assessment.noHintsRemaining", { type: label })
+                      : t("assessment.hintsRemaining", { count: remaining })
+                  }
                 >
                   {loading ? <Loader2 className="h-3 w-3 animate-spin inline mr-1" /> : null}
                   {label}
@@ -167,13 +178,13 @@ export function HintPanel({
               Math.max(...Object.values(usageCount.current).map(v => v + 1)),
               3
             ) as 1 | 2 | 3;
-            const scope = LEVEL_SCOPE_LABELS[nextLevel];
+            const scope = LEVEL_SCOPE_BY_LEVEL[nextLevel];
             return scope ? (
               <div className="flex items-center gap-2 rounded-md border border-amber-100 bg-amber-50/50 px-3 py-1.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600">
-                  Level {nextLevel}: {scope.label}
+                  {t("assessment.levelN", { n: nextLevel })} {t(scope.labelKey)}
                 </span>
-                <span className="text-[10px] text-amber-700/70">{scope.desc}</span>
+                <span className="text-[10px] text-amber-700/70">{t(scope.descKey)}</span>
               </div>
             ) : null;
           })()}
@@ -194,8 +205,8 @@ export function HintPanel({
                     {hint.escalation_available && (
                       <button
                         onClick={() => {
-                          const hintType = HINT_TYPES.find((t) =>
-                            hint.title?.toLowerCase().includes(t.value)
+                          const hintType = HINT_TYPES.find((entry) =>
+                            hint.title?.toLowerCase().includes(entry.value)
                           )?.value ?? "next-step";
                           requestHint(hintType);
                           emitTelemetry("hint_stronger_requested", { hintId: hint.hint_id });
@@ -203,19 +214,20 @@ export function HintPanel({
                         className="ml-auto flex items-center gap-1 rounded-md border border-amber-300 px-2 py-0.5 text-[10px] font-medium text-amber-700 hover:bg-amber-50"
                       >
                         <Zap className="h-3 w-3" />
-                        Stronger hint
+                        {t("assessment.strongerHint")}
                       </button>
                     )}
                   </div>
                   <p className="text-sm leading-relaxed text-stone-700">{hint.body}</p>
                   {hint.target && (
                     <p className="mt-1 text-xs text-stone-500">
-                      Focus: <span className="font-medium">{hint.target.label}</span>
+                      {t("assessment.focus")}{" "}
+                      <span className="font-medium">{hint.target.label}</span>
                     </p>
                   )}
                   {/* Rating */}
                   <div className="mt-2 flex items-center gap-2 border-t border-amber-100 pt-2">
-                    <span className="text-[10px] text-stone-400">Was this helpful?</span>
+                    <span className="text-[10px] text-stone-400">{t("assessment.wasHelpful")}</span>
                     <button
                       onClick={() => rateHint(hint.hint_id, "helpful")}
                       className={cn(
@@ -245,9 +257,7 @@ export function HintPanel({
           )}
 
           {hints.length === 0 && (
-            <p className="text-xs text-amber-600 py-1">
-              Choose a hint type above. Hints are limited to help you learn independently.
-            </p>
+            <p className="text-xs text-amber-600 py-1">{t("assessment.noHintsAvailable")}</p>
           )}
         </div>
       )}

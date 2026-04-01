@@ -67,8 +67,8 @@ export function Sidebar() {
         </div>
         {!sidebarCollapsed && (
           <div className="flex flex-col">
-            <span className="text-[15px] font-semibold text-stone-900">ARTS-CS</span>
-            <span className="text-[10px] text-stone-400">AI Resistant Teaching</span>
+            <span className="text-[15px] font-semibold text-stone-900">{t("common.artsCs")}</span>
+            <span className="text-[10px] text-stone-400">{t("common.artsCsFull")}</span>
           </div>
         )}
       </div>
@@ -119,7 +119,7 @@ export function Sidebar() {
           ) : (
             <>
               <ChevronLeft className="h-4 w-4" />
-              <span>Collapse</span>
+              <span>{t("common.collapse")}</span>
             </>
           )}
         </button>

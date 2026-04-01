@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface HeatmapCell {
   studentId: number;
@@ -23,13 +24,25 @@ interface MasteryHeatmapProps {
 }
 
 export function MasteryHeatmap({ rows, columns, getCell, className = "" }: MasteryHeatmapProps) {
+  const { t } = useTranslation();
+  const statusTitles = useMemo(
+    () => ({
+      not_learned: t("teacher.kuStatusNotLearned", { defaultValue: "Not learned" }),
+      partially: t("teacher.kuStatusPartial", { defaultValue: "Partial" }),
+      learned: t("teacher.kuStatusLearned", { defaultValue: "Learned" }),
+      proficient: t("teacher.kuStatusProficient", { defaultValue: "Proficient" }),
+      misconception: t("teacher.kuStatusMisconception", { defaultValue: "Misconception" }),
+    }),
+    [t]
+  );
+
   return (
     <div className={`overflow-auto rounded-xl border border-stone-200 bg-white p-4 ${className}`}>
       <div className="inline-block min-w-full">
         <table className="w-full text-xs">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 border-b border-r border-stone-200 bg-stone-50 px-2 py-2 text-left font-medium text-stone-600">Student</th>
+              <th className="sticky left-0 z-10 border-b border-r border-stone-200 bg-stone-50 px-2 py-2 text-left font-medium text-stone-600">{t("teacher.student")}</th>
               {columns.map((col) => (
                 <th key={col} className="border-b border-stone-200 px-1 py-2 font-medium text-stone-600" style={{ transform: "rotate(-45deg)", whiteSpace: "nowrap", width: 24 }}>
                   {col.length > 8 ? col.slice(0, 7) + "…" : col}
@@ -48,7 +61,7 @@ export function MasteryHeatmap({ rows, columns, getCell, className = "" }: Maste
                       <div
                         className="h-5 w-5 rounded-sm"
                         style={{ backgroundColor: statusColors[status] }}
-                        title={`${row.studentName} — ${unitId}: ${status}`}
+                        title={`${row.studentName} — ${unitId}: ${statusTitles[status]}`}
                       />
                     </td>
                   );

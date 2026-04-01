@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 import {
   Shield,
@@ -37,7 +38,7 @@ const SEVERITY_STYLE: Record<string, { bg: string; text: string; border: string;
   info: { bg: "bg-sky-50", text: "text-sky-700", border: "border-sky-200", icon: Eye },
 };
 
-const FLAG_TYPE_LABEL: Record<string, string> = {
+const FLAG_TYPE_DEFAULTS: Record<string, string> = {
   focus_loss_excess: "Excessive Focus Loss",
   rapid_solve: "Suspiciously Fast Solve",
   paste_attempt: "Paste Blocked",
@@ -58,6 +59,10 @@ function formatTs(ts: string | null): string {
   }
 }
 
+function flagTypeLabel(flagType: string, t: (key: string, opts?: { defaultValue?: string }) => string): string {
+  return t(`teacher.flagType.${flagType}`, { defaultValue: FLAG_TYPE_DEFAULTS[flagType] ?? flagType });
+}
+
 // ── Settings Panel ──────────────────────────────────────────────────
 
 function SettingsPanel({
@@ -69,7 +74,8 @@ function SettingsPanel({
   saving: boolean;
   onUpdate: (patch: Partial<AdminSettings>) => void;
 }) {
-  const toggleRow = (key: keyof AdminSettings, label: string, icon: React.ElementType, desc: string) => {
+  const { t } = useTranslation();
+  const toggleRow = (key: keyof AdminSettings, labelKey: string, labelDefault: string, icon: React.ElementType, descKey: string, descDefault: string) => {
     const Icon = icon;
     const val = !!settings[key];
     return (
@@ -79,8 +85,8 @@ function SettingsPanel({
             <Icon className="h-4 w-4 text-stone-600" />
           </div>
           <div>
-            <p className="text-sm font-medium text-stone-800">{label}</p>
-            <p className="text-xs text-stone-500">{desc}</p>
+            <p className="text-sm font-medium text-stone-800">{t(labelKey, { defaultValue: labelDefault })}</p>
+            <p className="text-xs text-stone-500">{t(descKey, { defaultValue: descDefault })}</p>
           </div>
         </div>
         <button
@@ -106,14 +112,14 @@ function SettingsPanel({
     <Card padding="lg">
       <div className="flex items-center gap-2 mb-4">
         <Settings2 className="h-5 w-5 text-brand-700" />
-        <h2 className="font-serif text-lg font-semibold text-stone-900">Security Settings</h2>
-        {saving && <span className="ml-auto text-xs text-brand-600 animate-pulse">Saving…</span>}
+        <h2 className="font-serif text-lg font-semibold text-stone-900">{t("teacher.configTitle")}</h2>
+        {saving && <span className="ml-auto text-xs text-brand-600 animate-pulse">{t("teacher.savingConfig", { defaultValue: "Saving…" })}</span>}
       </div>
 
       {/* Hz slider */}
       <div className="mb-5 rounded-lg border border-stone-200 bg-stone-50/50 p-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-stone-700">Anti-Capture Flicker Rate</span>
+          <span className="text-sm font-medium text-stone-700">{t("teacher.antiCaptureFlickerRate", { defaultValue: "Anti-Capture Flicker Rate" })}</span>
           <span className="text-sm font-bold text-brand-700">{settings.anti_capture_hz} Hz</span>
         </div>
         <input
@@ -126,15 +132,15 @@ function SettingsPanel({
           className="w-full h-1.5 rounded-full appearance-none bg-stone-200 accent-brand-700 cursor-pointer"
         />
         <div className="mt-1 flex justify-between text-[10px] text-stone-400">
-          <span>20 Hz (subtle)</span>
-          <span>60 Hz (strong)</span>
+          <span>{t("teacher.hzSubtle", { defaultValue: "20 Hz (subtle)" })}</span>
+          <span>{t("teacher.hzStrong", { defaultValue: "60 Hz (strong)" })}</span>
         </div>
       </div>
 
       {/* Thresholds */}
       <div className="mb-5 grid grid-cols-2 gap-3">
         <div className="rounded-lg border border-stone-200 bg-stone-50/50 p-3">
-          <label className="text-xs font-medium text-stone-600 block mb-1">Focus Loss Threshold</label>
+          <label className="text-xs font-medium text-stone-600 block mb-1">{t("teacher.focusLossThreshold", { defaultValue: "Focus Loss Threshold" })}</label>
           <input
             type="number"
             min={1}
@@ -143,10 +149,10 @@ function SettingsPanel({
             onChange={(e) => onUpdate({ focus_loss_threshold: Number(e.target.value) })}
             className="w-full rounded-md border border-stone-300 bg-white px-2.5 py-1.5 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 focus:outline-none"
           />
-          <p className="text-[10px] text-stone-400 mt-1">Auto-flag after N focus losses per session</p>
+          <p className="text-[10px] text-stone-400 mt-1">{t("teacher.focusLossThresholdHint", { defaultValue: "Auto-flag after N focus losses per session" })}</p>
         </div>
         <div className="rounded-lg border border-stone-200 bg-stone-50/50 p-3">
-          <label className="text-xs font-medium text-stone-600 block mb-1">Min Solve Time (ms)</label>
+          <label className="text-xs font-medium text-stone-600 block mb-1">{t("teacher.minSolveTimeMs", { defaultValue: "Min Solve Time (ms)" })}</label>
           <input
             type="number"
             min={1000}
@@ -156,18 +162,18 @@ function SettingsPanel({
             onChange={(e) => onUpdate({ min_solve_time_ms: Number(e.target.value) })}
             className="w-full rounded-md border border-stone-300 bg-white px-2.5 py-1.5 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500/20 focus:outline-none"
           />
-          <p className="text-[10px] text-stone-400 mt-1">Flag correct answers faster than this</p>
+          <p className="text-[10px] text-stone-400 mt-1">{t("teacher.minSolveTimeHint", { defaultValue: "Flag correct answers faster than this" })}</p>
         </div>
       </div>
 
       {/* Feature toggles */}
       <div>
-        {toggleRow("anti_capture_enabled", "Anti-Capture Overlay", Monitor, "Camera-interference flickering pattern")}
-        {toggleRow("devtools_detection_enabled", "DevTools Detection", Eye, "Lock screen when browser dev tools open")}
-        {toggleRow("typing_anomaly_enabled", "Typing Anomaly Detection", Keyboard, "Flag paste-like typing speed")}
-        {toggleRow("watermark_enabled", "Invisible Watermarks", Fingerprint, "Zero-width chars in code to corrupt AI prompts")}
-        {toggleRow("print_block_enabled", "Print Blocking", Printer, "Prevent print-to-PDF during assessment")}
-        {toggleRow("ocr_noise_enabled", "OCR Noise", Shield, "Subtle visual transforms to hinder OCR")}
+        {toggleRow("anti_capture_enabled", "teacher.toggleAntiCapture", "Anti-Capture Overlay", Monitor, "teacher.toggleAntiCaptureDesc", "Camera-interference flickering pattern")}
+        {toggleRow("devtools_detection_enabled", "teacher.toggleDevtools", "DevTools Detection", Eye, "teacher.toggleDevtoolsDesc", "Lock screen when browser dev tools open")}
+        {toggleRow("typing_anomaly_enabled", "teacher.toggleTypingAnomaly", "Typing Anomaly Detection", Keyboard, "teacher.toggleTypingAnomalyDesc", "Flag paste-like typing speed")}
+        {toggleRow("watermark_enabled", "teacher.toggleWatermark", "Invisible Watermarks", Fingerprint, "teacher.toggleWatermarkDesc", "Zero-width chars in code to corrupt AI prompts")}
+        {toggleRow("print_block_enabled", "teacher.togglePrintBlock", "Print Blocking", Printer, "teacher.togglePrintBlockDesc", "Prevent print-to-PDF during assessment")}
+        {toggleRow("ocr_noise_enabled", "teacher.toggleOcrNoise", "OCR Noise", Shield, "teacher.toggleOcrNoiseDesc", "Subtle visual transforms to hinder OCR")}
       </div>
     </Card>
   );
@@ -190,6 +196,7 @@ function FlagTable({
   filter: { resolved: boolean | null; severity: string | null };
   onFilterChange: (f: { resolved: boolean | null; severity: string | null }) => void;
 }) {
+  const { t } = useTranslation();
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
@@ -197,7 +204,7 @@ function FlagTable({
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-5 w-5 text-amber-600" />
-          <h2 className="font-serif text-lg font-semibold text-stone-900">Flagged Activity</h2>
+          <h2 className="font-serif text-lg font-semibold text-stone-900">{t("teacher.flaggedStudents")}</h2>
           <span className="ml-1 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600">
             {flags.length}
           </span>
@@ -214,9 +221,9 @@ function FlagTable({
             }}
             className="rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-xs focus:border-brand-500 focus:outline-none"
           >
-            <option value="all">All</option>
-            <option value="unresolved">Unresolved</option>
-            <option value="resolved">Resolved</option>
+            <option value="all">{t("history.all")}</option>
+            <option value="unresolved">{t("teacher.pending")}</option>
+            <option value="resolved">{t("teacher.resolved")}</option>
           </select>
           <select
             value={filter.severity ?? "all"}
@@ -228,14 +235,16 @@ function FlagTable({
             }
             className="rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-xs focus:border-brand-500 focus:outline-none"
           >
-            <option value="all">All Severity</option>
-            <option value="critical">Critical</option>
-            <option value="warning">Warning</option>
-            <option value="info">Info</option>
+            <option value="all">{t("teacher.allSeverity", { defaultValue: "All Severity" })}</option>
+            <option value="critical">{t("teacher.severityCritical", { defaultValue: "Critical" })}</option>
+            <option value="warning">{t("teacher.severityWarning", { defaultValue: "Warning" })}</option>
+            <option value="info">{t("teacher.severityInfo", { defaultValue: "Info" })}</option>
           </select>
           <button
             type="button"
             onClick={onRefresh}
+            title={t("teacher.refreshFlags")}
+            aria-label={t("teacher.refreshFlags")}
             className="flex h-8 w-8 items-center justify-center rounded-lg border border-stone-200 bg-white text-stone-500 hover:bg-stone-50 transition-colors"
           >
             <RefreshCw className={cn("h-3.5 w-3.5", loading && "animate-spin")} />
@@ -246,7 +255,7 @@ function FlagTable({
       {flags.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-stone-400">
           <CheckCircle2 className="h-10 w-10 mb-2" />
-          <p className="text-sm">No flags matching current filters</p>
+          <p className="text-sm">{t("teacher.noFlags")}</p>
         </div>
       ) : (
         <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
@@ -271,13 +280,13 @@ function FlagTable({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className={cn("text-sm font-medium", f.resolved ? "text-stone-500 line-through" : "text-stone-800")}>
-                        {f.username ?? `User #${f.user_id}`}
+                        {f.username ?? t("teacher.userNumber", { id: f.user_id, defaultValue: "User #{{id}}" })}
                       </span>
                       <span className={cn(
                         "rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
                         f.resolved ? "bg-stone-200 text-stone-500" : `${sev.bg} ${sev.text}`
                       )}>
-                        {FLAG_TYPE_LABEL[f.flag_type] ?? f.flag_type}
+                        {flagTypeLabel(f.flag_type, t)}
                       </span>
                     </div>
                     <p className="text-[11px] text-stone-500 mt-0.5">{formatTs(f.created_at)}</p>
@@ -293,10 +302,14 @@ function FlagTable({
                       </pre>
                     )}
                     {f.session_id && (
-                      <p className="text-[11px] text-stone-500 mb-1">Session: <code className="font-mono">{f.session_id}</code></p>
+                      <p className="text-[11px] text-stone-500 mb-1">
+                        {t("teacher.sessionLabel", { defaultValue: "Session" })}: <code className="font-mono">{f.session_id}</code>
+                      </p>
                     )}
                     {f.item_id && (
-                      <p className="text-[11px] text-stone-500 mb-2">Item ID: {f.item_id}</p>
+                      <p className="text-[11px] text-stone-500 mb-2">
+                        {t("teacher.itemIdLabel", { defaultValue: "Item ID" })}: {f.item_id}
+                      </p>
                     )}
                     {!f.resolved && (
                       <Button
@@ -308,13 +321,14 @@ function FlagTable({
                         }}
                       >
                         <CheckCircle2 className="h-3.5 w-3.5" />
-                        Resolve
+                        {t("teacher.resolve")}
                       </Button>
                     )}
                     {f.resolved && (
                       <p className="text-[11px] text-stone-400">
-                        Resolved {f.resolved_at ? `on ${formatTs(f.resolved_at)}` : ""}
-                        {f.resolved_by ? ` by user #${f.resolved_by}` : ""}
+                        {t("teacher.resolved")}
+                        {f.resolved_at ? ` ${t("teacher.resolvedOnDate", { date: formatTs(f.resolved_at), defaultValue: "on {{date}}" })}` : ""}
+                        {f.resolved_by != null ? ` ${t("teacher.resolvedByUser", { userId: f.resolved_by, defaultValue: "by user #{{userId}}" })}` : ""}
                       </p>
                     )}
                   </div>
@@ -331,14 +345,15 @@ function FlagTable({
 // ── Integrity Overview ──────────────────────────────────────────────
 
 function IntegrityOverview({ students }: { students: FlagSummaryStudent[] }) {
+  const { t } = useTranslation();
   if (students.length === 0) {
     return (
       <Card padding="lg">
         <div className="flex items-center gap-2 mb-4">
           <Users className="h-5 w-5 text-brand-700" />
-          <h2 className="font-serif text-lg font-semibold text-stone-900">Integrity Overview</h2>
+          <h2 className="font-serif text-lg font-semibold text-stone-900">{t("teacher.flagSummary")}</h2>
         </div>
-        <p className="text-sm text-stone-400 py-6 text-center">No flagged students yet.</p>
+        <p className="text-sm text-stone-400 py-6 text-center">{t("teacher.noFlags")}</p>
       </Card>
     );
   }
@@ -347,19 +362,19 @@ function IntegrityOverview({ students }: { students: FlagSummaryStudent[] }) {
     <Card padding="lg">
       <div className="flex items-center gap-2 mb-4">
         <Users className="h-5 w-5 text-brand-700" />
-        <h2 className="font-serif text-lg font-semibold text-stone-900">Integrity Overview</h2>
+        <h2 className="font-serif text-lg font-semibold text-stone-900">{t("teacher.flagSummary")}</h2>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b border-stone-200 text-[11px] font-semibold uppercase tracking-wider text-stone-400">
-              <th className="py-2 pr-4">Student</th>
-              <th className="py-2 px-3 text-center">Total</th>
-              <th className="py-2 px-3 text-center">Unresolved</th>
-              <th className="py-2 px-3 text-center">Critical</th>
-              <th className="py-2 px-3 text-center">Warning</th>
-              <th className="py-2 px-3 text-center">Info</th>
-              <th className="py-2 pl-3">Latest</th>
+              <th className="py-2 pr-4">{t("teacher.studentName")}</th>
+              <th className="py-2 px-3 text-center">{t("teacher.total")}</th>
+              <th className="py-2 px-3 text-center">{t("teacher.unresolvedCount", { defaultValue: "Unresolved" })}</th>
+              <th className="py-2 px-3 text-center">{t("teacher.severityCritical", { defaultValue: "Critical" })}</th>
+              <th className="py-2 px-3 text-center">{t("teacher.severityWarning", { defaultValue: "Warning" })}</th>
+              <th className="py-2 px-3 text-center">{t("teacher.severityInfo", { defaultValue: "Info" })}</th>
+              <th className="py-2 pl-3">{t("teacher.latestFlag", { defaultValue: "Latest" })}</th>
             </tr>
           </thead>
           <tbody>
@@ -395,6 +410,7 @@ function IntegrityOverview({ students }: { students: FlagSummaryStudent[] }) {
 // ── Main Page ───────────────────────────────────────────────────────
 
 export function ProctoringPage() {
+  const { t } = useTranslation();
   const [settings, setSettings] = useState<AdminSettings | null>(null);
   const [flags, setFlags] = useState<StudentFlagItem[]>([]);
   const [summary, setSummary] = useState<FlagSummaryStudent[]>([]);
@@ -469,6 +485,10 @@ export function ProctoringPage() {
 
   return (
     <div className="space-y-6">
+      <div>
+        <h1 className="font-serif text-display-sm text-stone-900">{t("teacher.proctoringTitle")}</h1>
+        <p className="mt-1 text-stone-500">{t("teacher.proctoringDesc")}</p>
+      </div>
       <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
         <SettingsPanel settings={settings} saving={saving} onUpdate={handleUpdateSettings} />
         <FlagTable

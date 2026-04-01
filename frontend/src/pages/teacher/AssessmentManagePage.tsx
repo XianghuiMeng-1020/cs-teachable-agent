@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { ResponsiveContainer, Tooltip, PieChart, Pie, Cell } from "recharts";
 import { ClipboardList, Users, Target, TrendingUp, Loader2 } from "lucide-react";
@@ -9,12 +10,6 @@ const TYPE_COLORS: Record<string, string> = {
   parsons: "#7C3AED",
   dropdown: "#0284C7",
   "execution-trace": "#059669",
-};
-
-const TYPE_LABELS: Record<string, string> = {
-  parsons: "Parsons",
-  dropdown: "Dropdown",
-  "execution-trace": "Exec Trace",
 };
 
 function StatBox({ icon, label, value }: { icon: React.ReactNode; label: string; value: string | number }) {
@@ -30,6 +25,13 @@ function StatBox({ icon, label, value }: { icon: React.ReactNode; label: string;
 }
 
 export function AssessmentManagePage() {
+  const { t } = useTranslation();
+  const typeLabel = (type: string) => {
+    if (type === "parsons") return t("practice.parsons");
+    if (type === "dropdown") return t("teacher.typeDropdown", { defaultValue: "Dropdown" });
+    if (type === "execution-trace") return t("practice.executionTrace");
+    return type;
+  };
   const { data: overview, isLoading } = useQuery({
     queryKey: ["teacher", "assessment", "overview"],
     queryFn: getTeacherAssessmentOverview,
@@ -57,7 +59,7 @@ export function AssessmentManagePage() {
   const hardestItems = (stats?.hardest_items as Array<Record<string, unknown>>) ?? [];
 
   const pieData = Object.entries(itemsByType).map(([type, count]) => ({
-    name: TYPE_LABELS[type] || type,
+    name: typeLabel(type),
     value: count,
     color: TYPE_COLORS[type] || "#A8A29E",
   }));
@@ -65,20 +67,20 @@ export function AssessmentManagePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-serif text-display-sm text-stone-900">Assessments</h1>
-        <p className="mt-1 text-stone-500">Item management and performance overview</p>
+        <h1 className="font-serif text-display-sm text-stone-900">{t("teacher.assessments")}</h1>
+        <p className="mt-1 text-stone-500">{t("teacher.assessmentDesc")}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <StatBox icon={<ClipboardList className="h-5 w-5 text-brand-600" />} label="Total Items" value={totalItems} />
-        <StatBox icon={<Users className="h-5 w-5 text-sky-600" />} label="Students" value={uniqueStudents} />
-        <StatBox icon={<Target className="h-5 w-5 text-emerald-600" />} label="Attempts" value={totalAttempts} />
-        <StatBox icon={<TrendingUp className="h-5 w-5 text-amber-600" />} label="Accuracy" value={`${Math.round(overallAccuracy * 100)}%`} />
+        <StatBox icon={<ClipboardList className="h-5 w-5 text-brand-600" />} label={t("teacher.totalItems")} value={totalItems} />
+        <StatBox icon={<Users className="h-5 w-5 text-sky-600" />} label={t("teacher.students")} value={uniqueStudents} />
+        <StatBox icon={<Target className="h-5 w-5 text-emerald-600" />} label={t("practice.attempts")} value={totalAttempts} />
+        <StatBox icon={<TrendingUp className="h-5 w-5 text-amber-600" />} label={t("teacher.accuracy")} value={`${Math.round(overallAccuracy * 100)}%`} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card padding="md">
-          <h3 className="font-serif text-heading text-stone-900 mb-4">Items by Type</h3>
+          <h3 className="font-serif text-heading text-stone-900 mb-4">{t("teacher.itemsByType")}</h3>
           {pieData.length > 0 ? (
             <div className="h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -103,14 +105,14 @@ export function AssessmentManagePage() {
               </ResponsiveContainer>
             </div>
           ) : (
-            <p className="text-sm text-stone-400 py-8 text-center">No items yet</p>
+            <p className="text-sm text-stone-400 py-8 text-center">{t("teacher.noItemsYet")}</p>
           )}
         </Card>
 
         <Card padding="md">
-          <h3 className="font-serif text-heading text-stone-900 mb-4">Hardest Items</h3>
+          <h3 className="font-serif text-heading text-stone-900 mb-4">{t("teacher.hardestItems")}</h3>
           {hardestItems.length === 0 ? (
-            <p className="text-sm text-stone-400 py-8 text-center">No attempt data yet</p>
+            <p className="text-sm text-stone-400 py-8 text-center">{t("teacher.noAttemptData")}</p>
           ) : (
             <div className="space-y-2 max-h-[240px] overflow-y-auto">
               {hardestItems.map((item, i) => (
@@ -124,16 +126,18 @@ export function AssessmentManagePage() {
                         String(item.item_type) === "dropdown" ? "bg-sky-50 text-sky-700" :
                         "bg-emerald-50 text-emerald-700"
                       )}>
-                        {TYPE_LABELS[String(item.item_type)] || String(item.item_type)}
+                        {typeLabel(String(item.item_type))}
                       </span>
-                      <span>{Number(item.attempts)} attempts</span>
+                      <span>
+                        {Number(item.attempts)} {t("practice.attempts")}
+                      </span>
                     </div>
                   </div>
                   <div className="text-right shrink-0 ml-3">
                     <div className="text-sm font-bold text-stone-900">
                       {Math.round(Number(item.pass_rate) * 100)}%
                     </div>
-                    <div className="text-[10px] text-stone-400">pass rate</div>
+                    <div className="text-[10px] text-stone-400">{t("teacher.passRate")}</div>
                   </div>
                 </div>
               ))}
@@ -145,18 +149,18 @@ export function AssessmentManagePage() {
       {/* Items table */}
       <Card padding="md">
         <h3 className="font-serif text-heading text-stone-900 mb-4">
-          All Items
+          {t("teacher.allItems")}
           <span className="ml-2 text-sm font-normal text-stone-400">({itemsData?.total ?? 0})</span>
         </h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-stone-100 text-left">
-                <th className="pb-3 text-xs font-semibold text-stone-500">Title</th>
-                <th className="pb-3 text-xs font-semibold text-stone-500">Type</th>
-                <th className="pb-3 text-xs font-semibold text-stone-500">Theme</th>
-                <th className="pb-3 text-xs font-semibold text-stone-500">Concepts</th>
-                <th className="pb-3 text-xs font-semibold text-stone-500 text-right">AI Pass Rate</th>
+                <th className="pb-3 text-xs font-semibold text-stone-500">{t("teacher.title")}</th>
+                <th className="pb-3 text-xs font-semibold text-stone-500">{t("teacher.type")}</th>
+                <th className="pb-3 text-xs font-semibold text-stone-500">{t("teacher.theme")}</th>
+                <th className="pb-3 text-xs font-semibold text-stone-500">{t("teacher.concepts")}</th>
+                <th className="pb-3 text-xs font-semibold text-stone-500 text-right">{t("teacher.aiPassRate")}</th>
               </tr>
             </thead>
             <tbody>
@@ -172,7 +176,7 @@ export function AssessmentManagePage() {
                       item.item_type === "dropdown" ? "bg-sky-50 text-sky-700" :
                       "bg-emerald-50 text-emerald-700"
                     )}>
-                      {TYPE_LABELS[item.item_type] || item.item_type}
+                      {typeLabel(item.item_type)}
                     </span>
                   </td>
                   <td className="py-3 pr-3 text-stone-500">{item.theme || "—"}</td>

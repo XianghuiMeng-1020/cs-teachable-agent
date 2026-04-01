@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { X, MousePointer2, Puzzle, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -9,6 +10,7 @@ interface QuickStartGuideProps {
 }
 
 export function QuickStartGuide({ onDismiss }: QuickStartGuideProps) {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -38,30 +40,33 @@ export function QuickStartGuide({ onDismiss }: QuickStartGuideProps) {
         <X className="h-4 w-4" />
       </button>
 
-      <h3 className="font-serif text-lg font-semibold text-stone-900 mb-1">Quick Start</h3>
-      <p className="text-sm text-stone-500 mb-4">Three steps to practice coding assessments</p>
+      <h3 className="font-serif text-lg font-semibold text-stone-900 mb-1">{t("practice.quickStart")}</h3>
+      <p className="text-sm text-stone-500 mb-4">{t("practice.quickStartDesc")}</p>
 
       <div className="grid gap-3 sm:grid-cols-3">
         <StepCard
           step="01"
-          title="Pick"
-          caption="Choose a task from the list. Use the AI resistance slider to find challenging items."
+          stepLabel={t("practice.step")}
+          title={t("practice.stepPick")}
+          caption={t("practice.stepPickDesc")}
           icon={MousePointer2}
           color="brand"
           delay="0s"
         />
         <StepCard
           step="02"
-          title="Solve"
-          caption="Drag blocks, fill blanks, or trace execution — depending on the task type."
+          stepLabel={t("practice.step")}
+          title={t("practice.stepSolve")}
+          caption={t("practice.stepSolveDesc")}
           icon={Puzzle}
           color="amber"
           delay="0.1s"
         />
         <StepCard
           step="03"
-          title="Check"
-          caption="Submit your answer for instant feedback. Use hints if you get stuck."
+          stepLabel={t("practice.step")}
+          title={t("practice.stepCheck")}
+          caption={t("practice.stepCheckDesc")}
           icon={Send}
           color="emerald"
           delay="0.2s"
@@ -69,8 +74,8 @@ export function QuickStartGuide({ onDismiss }: QuickStartGuideProps) {
       </div>
 
       <div className="mt-4 flex items-center gap-3">
-        <Button size="sm" onClick={dismiss}>Got it</Button>
-        <span className="text-xs text-stone-400">You can always re-open this from the sidebar</span>
+        <Button size="sm" onClick={dismiss}>{t("practice.gotIt")}</Button>
+        <span className="text-xs text-stone-400">{t("practice.reopenHint")}</span>
       </div>
     </div>
   );
@@ -78,6 +83,7 @@ export function QuickStartGuide({ onDismiss }: QuickStartGuideProps) {
 
 function StepCard({
   step,
+  stepLabel,
   title,
   caption,
   icon: Icon,
@@ -85,6 +91,7 @@ function StepCard({
   delay,
 }: {
   step: string;
+  stepLabel: string;
   title: string;
   caption: string;
   icon: React.ElementType;
@@ -103,7 +110,7 @@ function StepCard({
         <div className={`flex h-7 w-7 items-center justify-center rounded-md ${bgMap[color]}`}>
           <Icon className={`h-3.5 w-3.5 ${textMap[color]}`} />
         </div>
-        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">Step {step}</span>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">{stepLabel} {step}</span>
       </div>
       <h4 className="text-sm font-semibold text-stone-800">{title}</h4>
       <p className="mt-1 text-xs leading-relaxed text-stone-500">{caption}</p>
@@ -112,13 +119,14 @@ function StepCard({
 }
 
 export function QuickStartButton({ onClick }: { onClick: () => void }) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={onClick}
       className="flex items-center gap-1.5 rounded-md border border-stone-200 px-2.5 py-1 text-xs font-medium text-stone-500 hover:bg-stone-50 transition-colors"
     >
       <CheckCircle className="h-3 w-3" />
-      Quick Start
+      {t("practice.quickStart")}
     </button>
   );
 }

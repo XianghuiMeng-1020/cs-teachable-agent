@@ -1,4 +1,5 @@
 import { useMemo, useState, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { KU_DISPLAY_NAMES } from "@/lib/constants";
 
@@ -65,6 +66,7 @@ interface KnowledgeGraphProps {
 }
 
 export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: KnowledgeGraphProps) {
+  const { t } = useTranslation();
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
   const [selectedEdge, setSelectedEdge] = useState<{ from: string; to: string } | null>(null);
   const [transform, setTransform] = useState({ scale: 1, tx: 0, ty: 0 });
@@ -237,7 +239,9 @@ export function KnowledgeGraph({ units, knowledgeUnitDefinitions, className }: K
             <p className="mt-1 text-stone-600 dark:text-stone-400">{selectedDef.description}</p>
           )}
           {selectedDef.prerequisites?.length ? (
-            <p className="mt-1 text-xs text-stone-500">Prerequisites: {selectedDef.prerequisites.join(", ")}</p>
+            <p className="mt-1 text-xs text-stone-500">
+              {t("teacher.prerequisites")} {selectedDef.prerequisites.join(", ")}
+            </p>
           ) : null}
           {selectedDef.example_correct_code && (
             <pre className="mt-2 rounded bg-stone-100 dark:bg-stone-800 p-2 text-xs overflow-x-auto">

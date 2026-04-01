@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { teacherAnalytics, teacherStudents } from "@/api/client";
 import { Card } from "@/components/ui/Card";
@@ -9,6 +10,7 @@ import { KU_DISPLAY_NAMES } from "@/lib/constants";
 import { Download } from "lucide-react";
 
 export function AnalyticsPage() {
+  const { t } = useTranslation();
   const { data: analytics } = useQuery({ queryKey: ["teacher", "analytics"], queryFn: teacherAnalytics });
   const { data: students = [] } = useQuery({ queryKey: ["teacher", "students"], queryFn: teacherStudents });
 
@@ -64,31 +66,31 @@ export function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-stone-900">Analytics</h1>
+        <h1 className="text-2xl font-bold text-stone-900">{t("teacher.analyticsTitle")}</h1>
         <Button variant="secondary" icon={Download} onClick={handleExport}>
-          Export data (JSON)
+          {t("teacher.exportData")}
         </Button>
       </div>
 
       <Card padding="md">
-        <h2 className="mb-4 text-lg font-semibold text-stone-800">Mastery heatmap (KU × Student)</h2>
+        <h2 className="mb-4 text-lg font-semibold text-stone-800">{t("teacher.masteryHeatmap")}</h2>
         <MasteryHeatmap rows={rows} columns={kus} getCell={getCell} className="min-h-[300px]" />
       </Card>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-stone-800">Misconception ranking</h2>
+          <h2 className="mb-4 text-lg font-semibold text-stone-800">{t("teacher.misconceptionRanking")}</h2>
           <MisconceptionRanking counts={analytics?.active_misconception_counts ?? {}} />
         </Card>
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-stone-800">Teaching coverage</h2>
+          <h2 className="mb-4 text-lg font-semibold text-stone-800">{t("teacher.teachingCoverage")}</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10 }} />
                 <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar name="Coverage" dataKey="value" stroke="#0D9488" fill="#0D9488" fillOpacity={0.4} />
+                <Radar name={t("teacher.teachingCoverage")} dataKey="value" stroke="#0D9488" fill="#0D9488" fillOpacity={0.4} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
@@ -97,14 +99,14 @@ export function AnalyticsPage() {
 
       {trendData.length > 0 && (
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-stone-800">Mastery trend (last 7 days)</h2>
+          <h2 className="mb-4 text-lg font-semibold text-stone-800">{t("teacher.masteryTrendDays")}</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={trendData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" tick={{ fontSize: 10 }} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} />
-                <Tooltip formatter={(v: number) => [`${v}%`, "Avg mastery"]} />
+                <Tooltip formatter={(v: number) => [`${v}%`, t("teacher.avgMasteryLabel")]} />
                 <Line type="monotone" dataKey="mastery" stroke="#0D9488" strokeWidth={2} dot />
               </LineChart>
             </ResponsiveContainer>
@@ -114,7 +116,7 @@ export function AnalyticsPage() {
 
       {(analytics?.recent_activity?.length ?? 0) > 0 && (
         <Card padding="md">
-          <h2 className="mb-4 text-lg font-semibold text-stone-800">Recent activity</h2>
+          <h2 className="mb-4 text-lg font-semibold text-stone-800">{t("teacher.recentActivity")}</h2>
           <ul className="space-y-2">
             {(analytics?.recent_activity ?? []).slice(0, 10).map((a: { student?: string; action?: string; result?: string; timestamp?: string }, i: number) => (
               <li key={i} className="flex flex-wrap items-center gap-2 rounded-lg border border-stone-100 px-3 py-2 text-sm">

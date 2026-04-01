@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Shuffle, GripVertical, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { emitTelemetry } from "@/lib/telemetry";
@@ -31,6 +32,7 @@ export function ParsonsBlock({
   feedback,
   distractors = [],
 }: ParsonsBlockProps) {
+  const { t } = useTranslation();
   const allBlocks = useMemo(() => [...options, ...distractors], [options, distractors]);
   const [poolOrder, setPoolOrder] = useState<string[]>(() => fisherYatesShuffle(allBlocks));
   const [dragState, setDragState] = useState<{
@@ -133,7 +135,7 @@ export function ParsonsBlock({
       <div>
         <div className="mb-2 flex items-center justify-between">
           <h4 className="text-sm font-medium text-stone-500">
-            Available Blocks ({pool.length})
+            {t("assessment.availableBlocksCount", { count: pool.length })}
           </h4>
           <button
             type="button"
@@ -142,7 +144,7 @@ export function ParsonsBlock({
             className="flex items-center gap-1 rounded-md border border-stone-200 px-2 py-1 text-xs font-medium text-stone-500 hover:bg-stone-50 transition-colors disabled:opacity-40"
           >
             <Shuffle className="h-3 w-3" />
-            Shuffle
+            {t("assessment.shuffle")}
           </button>
         </div>
         <div
@@ -155,7 +157,7 @@ export function ParsonsBlock({
           onDrop={handlePoolDrop}
         >
           {pool.length === 0 && (
-            <p className="text-xs text-stone-400 italic">All blocks placed</p>
+            <p className="text-xs text-stone-400 italic">{t("assessment.allBlocksPlaced")}</p>
           )}
           {pool.map((block, i) => (
             <div
@@ -184,16 +186,17 @@ export function ParsonsBlock({
       {/* Answer area */}
       <div>
         <h4 className="mb-2 text-sm font-medium text-stone-500">
-          Your Solution ({selectedBlocks.length}/{requiredBlockCount})
+          {t("assessment.yourSolutionProgress", {
+            current: selectedBlocks.length,
+            required: requiredBlockCount,
+          })}
         </h4>
         <div className={cn(
           "rounded-lg border-2 p-3 min-h-[80px] transition-colors",
           dragState ? "border-brand-400 bg-brand-50/30" : "border-brand-200 bg-brand-50/20"
         )}>
           {selectedBlocks.length === 0 && !dragState && (
-            <p className="text-xs text-stone-400 italic py-2">
-              Click or drag blocks above to add them here. Drag to reorder.
-            </p>
+            <p className="text-xs text-stone-400 italic py-2">{t("assessment.dragBlocksHint")}</p>
           )}
 
           {/* Insertion marker at top */}
@@ -229,7 +232,7 @@ export function ParsonsBlock({
                   <button
                     onClick={() => removeBlock(i)}
                     className="mt-0.5 shrink-0 rounded p-0.5 text-stone-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-                    aria-label="Remove block"
+                    aria-label={t("assessment.removeBlock")}
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>

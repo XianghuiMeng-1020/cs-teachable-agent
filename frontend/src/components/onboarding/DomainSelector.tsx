@@ -6,45 +6,30 @@ import { createTA } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Code, Database, Brain, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const DOMAINS = [
+const DOMAIN_BASE = [
   {
-    id: "python",
-    label: "Python Programming",
-    shortLabel: "Python",
-    description: "Learn Python basics: variables, loops, functions, and more",
+    id: "python" as const,
     icon: Code,
     color: "bg-blue-500",
     lightColor: "bg-blue-50",
     textColor: "text-blue-600",
-    features: ["Variables & Data Types", "Control Flow", "Functions", "OOP Basics"],
-    estimatedTime: "4-6 hours",
   },
   {
-    id: "database",
-    label: "Database & SQL",
-    shortLabel: "Database",
-    description: "Master SQL queries, database design, and data management",
+    id: "database" as const,
     icon: Database,
     color: "bg-emerald-500",
     lightColor: "bg-emerald-50",
     textColor: "text-emerald-600",
-    features: ["SELECT & JOIN", "Aggregation", "Schema Design", "Indexes"],
-    estimatedTime: "3-5 hours",
   },
   {
-    id: "ai_literacy",
-    label: "AI Literacy",
-    shortLabel: "AI",
-    description: "Understand AI concepts, prompt engineering, and responsible AI use",
+    id: "ai_literacy" as const,
     icon: Brain,
     color: "bg-violet-500",
     lightColor: "bg-violet-50",
     textColor: "text-violet-600",
-    features: ["LLM Basics", "Prompt Engineering", "AI Safety", "Hallucination"],
-    estimatedTime: "2-4 hours",
   },
 ] as const;
 
@@ -56,6 +41,40 @@ interface DomainSelectorProps {
 
 export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelectorProps) {
   const { t } = useTranslation();
+  const domains = useMemo(
+    () =>
+      DOMAIN_BASE.map((d) => {
+        if (d.id === "python") {
+          return {
+            ...d,
+            label: t("onboarding.pythonLabel"),
+            shortLabel: t("onboarding.pythonShort"),
+            description: t("onboarding.pythonDesc"),
+            features: t("onboarding.pythonFeatures", { returnObjects: true }) as string[],
+            estimatedTime: t("onboarding.pythonTime"),
+          };
+        }
+        if (d.id === "database") {
+          return {
+            ...d,
+            label: t("onboarding.sqlLabel"),
+            shortLabel: t("onboarding.sqlShort"),
+            description: t("onboarding.sqlDesc"),
+            features: t("onboarding.sqlFeatures", { returnObjects: true }) as string[],
+            estimatedTime: t("onboarding.sqlTime"),
+          };
+        }
+        return {
+          ...d,
+          label: t("onboarding.aiLabel"),
+          shortLabel: t("onboarding.aiShort"),
+          description: t("onboarding.aiDesc"),
+          features: t("onboarding.aiFeatures", { returnObjects: true }) as string[],
+          estimatedTime: t("onboarding.aiTime"),
+        };
+      }),
+    [t]
+  );
   const queryClient = useQueryClient();
   const { setCurrentTaId } = useAppStore();
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
@@ -67,7 +86,7 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
       queryClient.invalidateQueries({ queryKey: ["ta", "list"] });
       setCurrentTaId(created.id);
       setStep("success");
-      const label = DOMAINS.find((d) => d.id === created.domain_id)?.shortLabel ?? "";
+      const label = domains.find((d) => d.id === created.domain_id)?.shortLabel ?? "";
       toast.success(
         t("onboarding.toastTaReady", {
           defaultValue: "Your {{label}} Teachable Agent is ready!",
@@ -113,7 +132,7 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {DOMAINS.map((domain) => {
+                {domains.map((domain) => {
                   const Icon = domain.icon;
                   const isSelected = selectedDomain === domain.id;
                   return (
@@ -141,7 +160,9 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
                           ))}
                         </div>
                         <div className="mt-4 pt-4 border-t border-stone-100">
-                          <span className="text-xs text-stone-400">Est. time: {domain.estimatedTime}</span>
+                          <span className="text-xs text-stone-400">
+                            {t("onboarding.estTime", { time: domain.estimatedTime })}
+                          </span>
                         </div>
                       </div>
                     </Card>
@@ -172,7 +193,7 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
               <h3 className="text-xl font-semibold text-stone-900 mb-2">{t("onboarding.creatingTA")}</h3>
               <p className="text-stone-500">
                 {t("onboarding.settingUp", {
-                  domain: DOMAINS.find((d) => d.id === selectedDomain)?.label ?? "",
+                  domain: domains.find((d) => d.id === selectedDomain)?.label ?? "",
                 })}
               </p>
             </div>
@@ -186,7 +207,7 @@ export function DomainSelector({ open, onOpenChange, onComplete }: DomainSelecto
               <h3 className="text-xl font-semibold text-stone-900 mb-2">{t("onboarding.taReady")}</h3>
               <p className="text-stone-500 mb-6 max-w-md mx-auto">
                 {t("onboarding.taReadyDesc", {
-                  domain: DOMAINS.find((d) => d.id === selectedDomain)?.shortLabel ?? "",
+                  domain: domains.find((d) => d.id === selectedDomain)?.shortLabel ?? "",
                 })}
               </p>
               <Button variant="primary" size="lg" onClick={handleClose} icon={ArrowRight}>

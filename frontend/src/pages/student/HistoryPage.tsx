@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
 import { getHistory } from "@/api/client";
@@ -9,6 +10,7 @@ import type { TimelineEvent } from "@/components/state/TimelineView";
 import { formatRelative } from "@/lib/utils";
 
 export function HistoryPage() {
+  const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
   const [typeFilter, setTypeFilter] = useState<string>("all");
   const [page, setPage] = useState(1);
@@ -32,20 +34,26 @@ export function HistoryPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-stone-900">History</h1>
+        <h1 className="text-2xl font-bold text-stone-900">{t("history.title")}</h1>
         <div className="flex gap-2">
-          {["all", "teach", "test_pass", "test_fail"].map((t) => (
+          {["all", "teach", "test_pass", "test_fail"].map((filterKey) => (
             <button
-              key={t}
+              key={filterKey}
               type="button"
-              onClick={() => { setTypeFilter(t); setPage(1); }}
+              onClick={() => { setTypeFilter(filterKey); setPage(1); }}
               className={`rounded-lg border px-3 py-1.5 text-sm font-medium ${
-                typeFilter === t
+                typeFilter === filterKey
                   ? "border-brand-700 bg-brand-50 text-brand-700"
                   : "border-stone-200 text-stone-600 hover:bg-stone-50"
               }`}
             >
-              {t === "all" ? "All" : t === "teach" ? "Teaching" : t === "test_pass" ? "Passed" : "Failed"}
+              {filterKey === "all"
+                ? t("history.all")
+                : filterKey === "teach"
+                  ? t("history.teaching")
+                  : filterKey === "test_pass"
+                    ? t("history.passed")
+                    : t("history.failed")}
             </button>
           ))}
         </div>
@@ -53,9 +61,9 @@ export function HistoryPage() {
 
       <Card padding="md">
         {isLoading ? (
-          <p className="text-sm text-stone-500">Loading...</p>
+          <p className="text-sm text-stone-500">{t("common.loading")}</p>
         ) : events.length === 0 ? (
-          <p className="text-sm text-stone-500">No events yet. Teach or run tests to see history.</p>
+          <p className="text-sm text-stone-500">{t("history.noEvents")}</p>
         ) : (
           <>
             <TimelineView events={events} />
@@ -67,10 +75,13 @@ export function HistoryPage() {
                   disabled={page <= 1}
                   onClick={() => setPage((p) => p - 1)}
                 >
-                  Previous
+                  {t("history.previous")}
                 </button>
                 <span className="py-1.5 text-sm text-stone-600">
-                  Page {data.page} of {Math.ceil(data.total / data.per_page)}
+                  {t("history.pageOf", {
+                    current: data.page,
+                    total: Math.ceil(data.total / data.per_page),
+                  })}
                 </span>
                 <button
                   type="button"
@@ -78,7 +89,7 @@ export function HistoryPage() {
                   disabled={page >= Math.ceil(data.total / data.per_page)}
                   onClick={() => setPage((p) => p + 1)}
                 >
-                  Next
+                  {t("common.next")}
                 </button>
               </div>
             )}

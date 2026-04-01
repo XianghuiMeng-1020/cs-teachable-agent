@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { emitTelemetry } from "@/lib/telemetry";
 import type { DropdownBlank } from "@/api/assessment";
@@ -29,6 +30,7 @@ export function DropdownBlanks({
   disabled = false,
   feedback,
 }: DropdownBlanksProps) {
+  const { t } = useTranslation();
   const blankMap = new Map(blanks.map((b) => [b.placeholder, b]));
   const parts = promptTemplate.split(/(__BLANK_\d+__)/g);
 
@@ -52,7 +54,7 @@ export function DropdownBlanks({
       {/* Code template preview with inline selected values */}
       <div>
         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-stone-400">
-          Code Preview
+          {t("assessment.codePreview")}
         </h4>
         <div className="rounded-lg border border-stone-200 bg-stone-900 p-4 overflow-x-auto">
           <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-stone-100">
@@ -83,7 +85,7 @@ export function DropdownBlanks({
       {/* Interactive blanks with button groups */}
       <div>
         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-stone-400">
-          Fill in the Blanks ({filledCount}/{blanks.length})
+          {t("assessment.fillBlanksN", { count: `${filledCount}/${blanks.length}` })}
         </h4>
         <div className="space-y-3">
           {blanks.map((blank) => {

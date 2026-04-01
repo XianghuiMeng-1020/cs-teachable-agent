@@ -1,18 +1,27 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { BookOpenCheck, Loader2, ChevronRight, Puzzle, ListChecks, ScanEye, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { listAssessmentItems, getAssessmentStats, type AssessmentItemSummary, type AssessmentStats } from "@/api/assessment";
 import { AssessmentProgress } from "@/components/assessment";
 import { QuickStartGuide } from "@/components/assessment/QuickStartGuide";
-import { emitTelemetry, setupSessionTelemetry } from "@/lib/telemetry";
+import { setupSessionTelemetry } from "@/lib/telemetry";
 import { ContextualHelp } from "@/components/ui/ContextualHelp";
+import type { TFunction } from "i18next";
 
-const ITEM_TYPE_LABELS: Record<string, string> = {
-  parsons: "Parsons Puzzle",
-  dropdown: "Fill Blanks",
-  "execution-trace": "Execution Trace",
-};
+function getItemTypeLabel(t: TFunction, itemType: string): string {
+  switch (itemType) {
+    case "parsons":
+      return t("practice.parsonsPuzzle");
+    case "dropdown":
+      return t("practice.fillBlanks");
+    case "execution-trace":
+      return t("practice.executionTrace");
+    default:
+      return itemType;
+  }
+}
 
 const ITEM_TYPE_META: Record<string, { icon: typeof Puzzle; color: string; bg: string }> = {
   parsons: { icon: Puzzle, color: "text-violet-700", bg: "bg-violet-50 border-violet-200" },
@@ -21,6 +30,7 @@ const ITEM_TYPE_META: Record<string, { icon: typeof Puzzle; color: string; bg: s
 };
 
 export function PracticePage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [items, setItems] = useState<AssessmentItemSummary[]>([]);
   const [stats, setStats] = useState<AssessmentStats | null>(null);
@@ -59,9 +69,9 @@ export function PracticePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-serif text-display-sm text-stone-900">Practice</h1>
+        <h1 className="font-serif text-display-sm text-stone-900">{t("practice.title")}</h1>
         <p className="mt-1 text-stone-500">
-          Strengthen your understanding with structured exercises
+          {t("practice.desc")}
         </p>
       </div>
 
@@ -82,9 +92,9 @@ export function PracticePage() {
       <div className="rounded-xl border border-stone-200/80 bg-white p-4 shadow-card">
         <div className="flex items-center gap-2 mb-3">
           <ShieldAlert className="h-4 w-4 text-brand-700" />
-          <span className="text-sm font-semibold text-stone-800">AI Resistance Filter</span>
+          <span className="text-sm font-semibold text-stone-800">{t("practice.aiResistanceFilter")}</span>
           <span className="ml-auto text-xs font-medium text-brand-700">
-            Max AI pass rate: {maxAiPassRate}%
+            {t("practice.maxAiPassRate", { rate: maxAiPassRate })}
           </span>
         </div>
         <input
@@ -97,18 +107,18 @@ export function PracticePage() {
           className="w-full h-1.5 rounded-full appearance-none bg-stone-200 accent-brand-700 cursor-pointer"
         />
         <div className="mt-1.5 flex justify-between text-[10px] text-stone-400">
-          <span>Harder (low AI pass)</span>
-          <span>Easier (high AI pass)</span>
+          <span>{t("practice.harder")}</span>
+          <span>{t("practice.easier")}</span>
         </div>
       </div>
 
       {/* Type Filters */}
       <div className="flex items-center gap-2 flex-wrap">
         {[
-          { value: "", label: "All Types" },
-          { value: "parsons", label: "Parsons" },
-          { value: "dropdown", label: "Fill Blanks" },
-          { value: "execution-trace", label: "Trace" },
+          { value: "", labelKey: "practice.allTypes" as const },
+          { value: "parsons", labelKey: "practice.parsons" as const },
+          { value: "dropdown", labelKey: "practice.fillBlanks" as const },
+          { value: "execution-trace", labelKey: "practice.trace" as const },
         ].map((f) => (
           <button
             key={f.value}
@@ -120,10 +130,10 @@ export function PracticePage() {
                 : "border-stone-200 bg-white text-stone-600 hover:border-stone-300"
             )}
           >
-            {f.label}
+            {t(f.labelKey)}
           </button>
         ))}
-        <span className="text-xs text-stone-400 ml-auto">{total} items</span>
+        <span className="text-xs text-stone-400 ml-auto">{t("practice.itemCount", { count: total })}</span>
       </div>
 
       {loading ? (
@@ -133,8 +143,8 @@ export function PracticePage() {
       ) : items.length === 0 ? (
         <div className="rounded-xl border-2 border-dashed border-stone-200 py-16 text-center">
           <BookOpenCheck className="mx-auto h-10 w-10 text-stone-300" />
-          <p className="mt-3 text-sm font-medium text-stone-500">No items available</p>
-          <p className="mt-1 text-xs text-stone-400">Try changing your filter</p>
+          <p className="mt-3 text-sm font-medium text-stone-500">{t("practice.noItems")}</p>
+          <p className="mt-1 text-xs text-stone-400">{t("practice.tryChangingFilter")}</p>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -158,7 +168,7 @@ export function PracticePage() {
                 </h3>
                 <div className="mt-2 flex items-center gap-2 flex-wrap">
                   <span className={cn("rounded-md px-2 py-0.5 text-[11px] font-medium border", meta.bg, meta.color)}>
-                    {ITEM_TYPE_LABELS[item.item_type] || item.item_type}
+                    {getItemTypeLabel(t, item.item_type)}
                   </span>
                   {item.theme && (
                     <span className="text-[11px] text-stone-400">{item.theme}</span>
@@ -179,7 +189,7 @@ export function PracticePage() {
                 {item.ai_pass_rate != null && (
                   <div className="mt-3">
                     <div className="flex items-center justify-between text-[10px] text-stone-400">
-                      <span>Difficulty</span>
+                      <span>{t("practice.difficulty")}</span>
                       <span>{Math.round((1 - item.ai_pass_rate / 100) * 100)}%</span>
                     </div>
                     <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-stone-100">

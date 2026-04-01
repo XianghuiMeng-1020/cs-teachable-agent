@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { EmptyState } from "./EmptyState";
 import { Skeleton } from "./Skeleton";
@@ -30,11 +31,14 @@ export function DataTable<T extends Record<string, unknown>>({
   columns,
   data,
   loading = false,
-  emptyMessage = "No data",
+  emptyMessage,
   pagination,
   onRowClick,
   rowClassName,
 }: DataTableProps<T>) {
+  const { t } = useTranslation();
+  const resolvedEmptyMessage = emptyMessage ?? t("common.noData");
+
   if (loading) {
     return (
       <div className="w-full overflow-x-auto rounded-xl border border-stone-200/60 bg-white">
@@ -68,8 +72,8 @@ export function DataTable<T extends Record<string, unknown>>({
     return (
       <EmptyState
         icon={Inbox}
-        title="No data"
-        description={emptyMessage}
+        title={t("common.noData")}
+        description={resolvedEmptyMessage}
       />
     );
   }
