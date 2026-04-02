@@ -555,6 +555,36 @@ def _auto_flag(db: Session, body: TelemetryEventBody, user_id: int | None) -> No
             ))
             db.commit()
 
+        # Screenshot attempt
+        if etype == "screenshot_attempt":
+            db.add(StudentFlag(
+                user_id=user_id, flag_type="screenshot_attempt",
+                severity="warning",
+                detail={"key": (body.payload or {}).get("key", "unknown")},
+                session_id=session_id, item_id=body.itemId,
+            ))
+            db.commit()
+
+        # Content copied
+        if etype == "content_copied":
+            db.add(StudentFlag(
+                user_id=user_id, flag_type="content_copied",
+                severity="info",
+                detail={},
+                session_id=session_id, item_id=body.itemId,
+            ))
+            db.commit()
+
+        # Page unload during active session
+        if etype == "page_unload":
+            db.add(StudentFlag(
+                user_id=user_id, flag_type="suspicious_exit",
+                severity="info",
+                detail={"timestamp": body.eventTime},
+                session_id=session_id, item_id=body.itemId,
+            ))
+            db.commit()
+
     except Exception:
         logger.exception("Auto-flag detection error")
 

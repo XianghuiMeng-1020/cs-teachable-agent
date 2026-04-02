@@ -223,22 +223,32 @@ export async function teach(taId: number, student_input: string) {
 
 export interface TeachStreamCallbacks {
   onChunk?: (text: string) => void;
+  problemId?: string;
 }
 
-/** Stream TA response via SSE. Calls onChunk for each chunk; resolves with final { ta_response, interpreted_units, topic_taught }. */
+export interface CodeModificationPayload {
+  line_number: number;
+  old_code: string;
+  new_code: string;
+  explanation?: string;
+}
+
+/** Stream TA response via SSE. Calls onChunk for each chunk; resolves with final { ta_response, interpreted_units, topic_taught, code_modification }. */
 export async function teachStream(
   taId: number,
   student_input: string,
   callbacks: TeachStreamCallbacks = {}
-): Promise<{ ta_response: string; interpreted_units: string[]; topic_taught: string }> {
-  const { onChunk } = callbacks;
+): Promise<{ ta_response: string; interpreted_units: string[]; topic_taught: string; code_modification?: CodeModificationPayload | null }> {
+  const { onChunk, problemId } = callbacks;
   const baseUrl = import.meta.env.VITE_API_URL
     || (import.meta.env.DEV ? "/api" : "/api");
   const url = `${baseUrl}/ta/${taId}/teach/stream`;
+  const body: Record<string, unknown> = { student_input };
+  if (problemId) body.problem_id = problemId;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
-    body: JSON.stringify({ student_input }),
+    body: JSON.stringify(body),
   });
   if (!res.ok) {
     const text = await res.text();
@@ -248,7 +258,7 @@ export async function teachStream(
   if (!reader) throw new Error("No response body");
   const dec = new TextDecoder();
   let buffer = "";
-  let donePayload: { ta_response?: string; interpreted_units?: string[]; topic_taught?: string } = {};
+  let donePayload: { ta_response?: string; interpreted_units?: string[]; topic_taught?: string; code_modification?: CodeModificationPayload | null } = {};
   while (true) {
     const { value, done } = await reader.read();
     if (done) break;
@@ -258,9 +268,9 @@ export async function teachStream(
     for (const line of lines) {
       if (line.startsWith("data: ")) {
         try {
-          const data = JSON.parse(line.slice(6)) as { type: string; text?: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string };
+          const data = JSON.parse(line.slice(6)) as { type: string; text?: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string; code_modification?: CodeModificationPayload | null };
           if (data.type === "chunk" && data.text != null && onChunk) onChunk(data.text);
-          if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught };
+          if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught, code_modification: data.code_modification };
         } catch {
           // skip malformed
         }
@@ -269,8 +279,8 @@ export async function teachStream(
   }
   if (buffer.startsWith("data: ")) {
     try {
-      const data = JSON.parse(buffer.slice(6)) as { type: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string };
-      if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught };
+      const data = JSON.parse(buffer.slice(6)) as { type: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string; code_modification?: CodeModificationPayload | null };
+      if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught, code_modification: data.code_modification };
     } catch {
       // skip
     }
@@ -279,6 +289,7 @@ export async function teachStream(
     ta_response: donePayload.ta_response ?? "",
     interpreted_units: donePayload.interpreted_units ?? [],
     topic_taught: donePayload.topic_taught ?? "",
+    code_modification: donePayload.code_modification ?? null,
   };
 }
 
@@ -350,6 +361,28 @@ export interface ProblemsResponse {
 
 export async function getProblems(taId: number): Promise<ProblemsResponse> {
   const r = await apiFetch(`/ta/${taId}/problems`, { headers: headers() });
+  return r.json();
+}
+
+export interface CurrentProblemResponse {
+  problem: Record<string, unknown> | null;
+  topic_group: string;
+  topic_mastery: number;
+  mastery_threshold: number;
+  is_mastered: boolean;
+}
+
+export async function getCurrentProblem(taId: number): Promise<CurrentProblemResponse> {
+  const r = await apiFetch(`/ta/${taId}/current-problem`, { headers: headers() });
+  return r.json();
+}
+
+export async function nextProblem(taId: number): Promise<{ problem: Record<string, unknown> | null }> {
+  const r = await apiFetch(`/ta/${taId}/next-problem`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({}),
+  });
   return r.json();
 }
 

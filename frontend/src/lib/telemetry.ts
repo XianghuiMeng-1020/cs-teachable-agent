@@ -28,6 +28,8 @@ export type TelemetryEventType =
   | "paste_blocked"
   | "typing_anomaly"
   | "content_copied"
+  | "screenshot_attempt"
+  | "page_unload"
   | "devtools_opened";
 
 export interface TelemetryEvent {

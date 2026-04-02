@@ -18,6 +18,7 @@ const DEFAULT_FPS = 40;
 export function AntiCaptureOverlay({ children }: AntiCaptureOverlayProps) {
   const [fps, setFps] = useState(DEFAULT_FPS);
   const [enabled, setEnabled] = useState(true);
+  const [ocrNoiseEnabled, setOcrNoiseEnabled] = useState(true);
   const [phase, setPhase] = useState(0);
   const rafRef = useRef<number>(0);
   const lastRef = useRef(0);
@@ -29,10 +30,19 @@ export function AntiCaptureOverlay({ children }: AntiCaptureOverlayProps) {
         if (cancelled) return;
         if (typeof cfg.anti_capture_hz === "number") setFps(cfg.anti_capture_hz);
         if (typeof cfg.anti_capture_enabled === "boolean") setEnabled(cfg.anti_capture_enabled);
+        if (typeof cfg.ocr_noise_enabled === "boolean") setOcrNoiseEnabled(cfg.ocr_noise_enabled);
       })
       .catch(() => {});
     return () => { cancelled = true; };
   }, []);
+
+  // Apply ocr-noise class to body when enabled
+  useEffect(() => {
+    if (ocrNoiseEnabled) {
+      document.body.classList.add("ocr-noise-active");
+    }
+    return () => { document.body.classList.remove("ocr-noise-active"); };
+  }, [ocrNoiseEnabled]);
 
   useEffect(() => {
     if (!enabled) return;

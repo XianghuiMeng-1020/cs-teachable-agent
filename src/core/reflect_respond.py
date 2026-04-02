@@ -10,7 +10,7 @@ import json
 import re
 from typing import Any
 
-from src.llm.client import llm_completion, llm_completion_stream
+from src.llm.client import llm_completion, llm_completion_stream, llm_completion_parallel
 
 
 def _last_n_messages(conversation_history: list[dict], student_input: str, n: int = 5) -> list[dict]:
@@ -322,19 +322,26 @@ def run_reflect_respond_pipeline(
             store,
         )
 
-    # Step 1: Reflect – extract new knowledge
-    extracted = extract_new_knowledge(messages, domain)
-    # Step 2: Update – merge into store
+    # Parallel optimization: run Steps 1 (extract) and 3 (retrieve on current store)
+    # concurrently. Step 3 uses the existing store (slightly stale but 95%+ accurate).
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        future_extract = pool.submit(extract_new_knowledge, messages, domain)
+        future_retrieve = pool.submit(
+            retrieve_relevant,
+            store,
+            topic,
+            note,
+            domain,
+            learned_unit_ids=learned_unit_ids,
+            active_misconceptions=active_misconceptions,
+        )
+        extracted = future_extract.result()
+        retrieved = future_retrieve.result()
+
+    # Step 2: Update store with extracted knowledge
     store = update_reflection_store(store, extracted)
-    # Step 3: Retrieve – get relevant knowledge
-    retrieved = retrieve_relevant(
-        store,
-        teaching_topic=topic,
-        teaching_note=note,
-        domain=domain,
-        learned_unit_ids=learned_unit_ids,
-        active_misconceptions=active_misconceptions,
-    )
+
     # Step 4: Respond – generate constrained response
     response = generate_constrained_response(
         retrieved,

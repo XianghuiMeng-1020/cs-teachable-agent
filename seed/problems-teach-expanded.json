@@ -1,0 +1,629 @@
+{
+  "version": "teach-expanded-v1",
+  "scope_note": "Expanded problem bank covering 8 question types for the redesigned Teach interface. Progressive difficulty per topic_group.",
+  "problems": [
+    {
+      "problem_id": "buggy_var_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "Find and explain the bug in this code. Teach the TA what's wrong and why.",
+      "code": "name = \"Alice\"\nage = 25\nprint(\"My name is \" + name + \" and I am \" + age + \" years old.\")",
+      "bug_lines": [3],
+      "bug_explanation": "Cannot concatenate string and integer without converting age to string",
+      "correct_code": "name = \"Alice\"\nage = 25\nprint(\"My name is \" + name + \" and I am \" + str(age) + \" years old.\")",
+      "knowledge_units_tested": ["variable_assignment", "data_types_string", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "buggy_var_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should swap the values of two variables, but it doesn't work correctly. Explain the bug.",
+      "code": "a = 10\nb = 20\na = b\nb = a\nprint(a, b)",
+      "bug_lines": [3, 4],
+      "bug_explanation": "After a = b, both a and b are 20; need a temporary variable or simultaneous swap",
+      "correct_code": "a = 10\nb = 20\na, b = b, a\nprint(a, b)",
+      "knowledge_units_tested": ["variable_assignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "output_var_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print? Type the exact output.",
+      "code": "x = 5\ny = 3\nx = x + y\ny = x - y\nx = x - y\nprint(x, y)",
+      "expected_output": "3 5",
+      "knowledge_units_tested": ["variable_assignment", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "mcq_var_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "Which of the following are valid Python variable names?",
+      "choices": [
+        {"id": "a", "text": "my_variable"},
+        {"id": "b", "text": "2nd_value"},
+        {"id": "c", "text": "_private"},
+        {"id": "d", "text": "class"},
+        {"id": "e", "text": "myVar123"}
+      ],
+      "correct_choice_ids": ["a", "c", "e"],
+      "knowledge_units_tested": ["variable_assignment"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "buggy_cond_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should check if a number is between 1 and 100, but it has a logic error. Find and explain it.",
+      "code": "num = 50\nif num > 1 or num < 100:\n    print(\"In range\")\nelse:\n    print(\"Out of range\")",
+      "bug_lines": [2],
+      "bug_explanation": "Using 'or' instead of 'and' — every number satisfies at least one condition",
+      "correct_code": "num = 50\nif num > 1 and num < 100:\n    print(\"In range\")\nelse:\n    print(\"Out of range\")",
+      "knowledge_units_tested": ["if_statement", "boolean_expression", "comparison_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "buggy_cond_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This grading code has an error in the condition order. Explain the problem.",
+      "code": "score = 85\nif score >= 60:\n    grade = \"D\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 90:\n    grade = \"A\"\nelse:\n    grade = \"F\"\nprint(grade)",
+      "bug_lines": [2, 4, 6, 8],
+      "bug_explanation": "Conditions are checked top-down; score=85 matches >=60 first, giving 'D' instead of 'B'. Conditions should be ordered from highest to lowest.",
+      "correct_code": "score = 85\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\nprint(grade)",
+      "knowledge_units_tested": ["if_statement", "if_elif_else", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "output_cond_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "x = 15\nif x > 10:\n    print(\"A\")\nif x > 5:\n    print(\"B\")\nif x > 20:\n    print(\"C\")",
+      "expected_output": "A\nB",
+      "knowledge_units_tested": ["if_statement", "comparison_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "buggy_loop_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should print numbers 1 to 5, but it has an off-by-one error. Find and fix it.",
+      "code": "for i in range(5):\n    print(i)",
+      "bug_lines": [1],
+      "bug_explanation": "range(5) generates 0-4, not 1-5. Should be range(1, 6)",
+      "correct_code": "for i in range(1, 6):\n    print(i)",
+      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "buggy_loop_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should calculate the sum of numbers 1 to 10, but produces the wrong result. Explain why.",
+      "code": "total = 0\nfor i in range(10):\n    total = i\nprint(total)",
+      "bug_lines": [3],
+      "bug_explanation": "Uses assignment (=) instead of addition (+=), so total just gets the last value of i",
+      "correct_code": "total = 0\nfor i in range(1, 11):\n    total += i\nprint(total)",
+      "knowledge_units_tested": ["for_loop_range", "arithmetic_operators", "variable_assignment"],
+      "difficulty": "easy",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "buggy_loop_003",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code has an infinite loop. Explain why it never terminates.",
+      "code": "count = 0\nwhile count < 10:\n    print(count)\n    count = count",
+      "bug_lines": [4],
+      "bug_explanation": "count = count doesn't increment; should be count = count + 1 or count += 1",
+      "correct_code": "count = 0\nwhile count < 10:\n    print(count)\n    count += 1",
+      "knowledge_units_tested": ["while_loop", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "completion_loop_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this function that returns the factorial of n. Teach the TA what goes in the blank lines.",
+      "code_template": "def factorial(n):\n    result = 1\n    # ??? complete the loop\n    # ??? update result\n    return result",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# write the for loop"},
+        {"line": 4, "placeholder": "# multiply result by i"}
+      ],
+      "knowledge_units_tested": ["for_loop_range", "function_definition", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "output_loop_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "for i in range(3):\n    for j in range(2):\n        print(i * j, end=\" \")\n    print()",
+      "expected_output": "0 0 \n0 1 \n0 2 ",
+      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "difficulty": "hard",
+      "difficulty_order": 4,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "buggy_func_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This function should return the maximum of two numbers but always returns the second argument. Explain why.",
+      "code": "def get_max(a, b):\n    if a > b:\n        max_val = a\n    else:\n        max_val = b\n    return max_val\n\nresult = get_max(10, 5)\nprint(result)",
+      "bug_lines": [],
+      "bug_explanation": "This code is actually correct! It returns 10 as expected. This is a trick question to test understanding.",
+      "correct_code": "def get_max(a, b):\n    if a > b:\n        max_val = a\n    else:\n        max_val = b\n    return max_val\n\nresult = get_max(10, 5)\nprint(result)",
+      "knowledge_units_tested": ["function_definition", "parameters", "return_statement", "if_statement"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "buggy_func_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This function should return the sum of a list, but it returns 0. Find the bug.",
+      "code": "def sum_list(numbers):\n    total = 0\n    for n in numbers:\n        total + n\n    return total\n\nprint(sum_list([1, 2, 3, 4, 5]))",
+      "bug_lines": [4],
+      "bug_explanation": "total + n computes but doesn't store the result; should be total += n",
+      "correct_code": "def sum_list(numbers):\n    total = 0\n    for n in numbers:\n        total += n\n    return total\n\nprint(sum_list([1, 2, 3, 4, 5]))",
+      "knowledge_units_tested": ["function_definition", "for_loop_iterable", "arithmetic_operators", "return_statement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "completion_func_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this function that checks if a string is a palindrome.",
+      "code_template": "def is_palindrome(text):\n    # ??? convert to lowercase\n    # ??? check if reversed equals original\n    pass",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# convert text to lowercase"},
+        {"line": 3, "placeholder": "# return True if text equals its reverse"}
+      ],
+      "knowledge_units_tested": ["function_definition", "return_statement", "data_types_string"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "short_func_001",
+      "problem_type": "short-answer",
+      "problem_statement": "Write a function called 'is_even' that takes a number and returns True if it's even, False otherwise. Then teach the TA why your solution works.",
+      "starter_code": "def is_even(n):\n    # write your code here\n    pass",
+      "knowledge_units_tested": ["function_definition", "return_statement", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "mcq_func_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What is the output of this code?\n\ndef greet(name=\"World\"):\n    return f\"Hello, {name}!\"\n\nprint(greet())\nprint(greet(\"Python\"))",
+      "choices": [
+        {"id": "a", "text": "Hello, World!\\nHello, Python!"},
+        {"id": "b", "text": "Hello, !\\nHello, Python!"},
+        {"id": "c", "text": "Error: missing argument"},
+        {"id": "d", "text": "Hello, name!\\nHello, Python!"}
+      ],
+      "correct_choice_ids": ["a"],
+      "knowledge_units_tested": ["function_definition", "parameters"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "buggy_list_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should remove all even numbers from a list, but it skips some. Explain why.",
+      "code": "numbers = [1, 2, 3, 4, 5, 6]\nfor i in range(len(numbers)):\n    if numbers[i] % 2 == 0:\n        numbers.remove(numbers[i])\nprint(numbers)",
+      "bug_lines": [2, 4],
+      "bug_explanation": "Modifying a list while iterating over it by index causes items to be skipped. When an element is removed, indices shift.",
+      "correct_code": "numbers = [1, 2, 3, 4, 5, 6]\nnumbers = [n for n in numbers if n % 2 != 0]\nprint(numbers)",
+      "knowledge_units_tested": ["list_operations", "for_loop_range", "list_comprehension"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "buggy_list_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to access the last element of a list but crashes. Explain why.",
+      "code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nlast = fruits[3]\nprint(last)",
+      "bug_lines": [2],
+      "bug_explanation": "List indices are 0-based. fruits[3] is out of range; should be fruits[2] or fruits[-1]",
+      "correct_code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nlast = fruits[-1]\nprint(last)",
+      "knowledge_units_tested": ["list_operations", "list_indexing"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "buggy_div_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code crashes with a ZeroDivisionError. Find the bug and explain how to fix it.",
+      "code": "numbers = [10, 20, 0, 30]\nfor n in numbers:\n    result = 100 / n\n    print(result)",
+      "bug_lines": [3],
+      "bug_explanation": "When n is 0, division by zero occurs. Need to check if n != 0 before dividing.",
+      "correct_code": "numbers = [10, 20, 0, 30]\nfor n in numbers:\n    if n != 0:\n        result = 100 / n\n        print(result)\n    else:\n        print(\"Cannot divide by zero\")",
+      "knowledge_units_tested": ["arithmetic_operators", "for_loop_iterable", "if_statement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "buggy_io_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should ask the user for their age and print it, but crashes. Explain the bug.",
+      "code": "age = input(\"Enter your age: \")\nnext_year = age + 1\nprint(\"Next year you'll be\", next_year)",
+      "bug_lines": [2],
+      "bug_explanation": "input() returns a string, so age + 1 tries to add int to string. Need int(age) first.",
+      "correct_code": "age = int(input(\"Enter your age: \"))\nnext_year = age + 1\nprint(\"Next year you'll be\", next_year)",
+      "knowledge_units_tested": ["user_input", "type_conversion", "data_types_int_float"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "output_io_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "x = \"3\"\ny = \"5\"\nprint(x + y)",
+      "expected_output": "35",
+      "knowledge_units_tested": ["data_types_string", "string_concatenation", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "mcq_io_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What does the input() function return in Python?",
+      "choices": [
+        {"id": "a", "text": "An integer"},
+        {"id": "b", "text": "A string"},
+        {"id": "c", "text": "A float"},
+        {"id": "d", "text": "Depends on what user types"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["user_input", "data_types_string"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "buggy_op_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should calculate the average of three numbers but gives the wrong answer. Explain why.",
+      "code": "a = 10\nb = 20\nc = 30\naverage = a + b + c / 3\nprint(average)",
+      "bug_lines": [4],
+      "bug_explanation": "Operator precedence: c/3 is computed first, then added to a+b. Need parentheses: (a+b+c)/3",
+      "correct_code": "a = 10\nb = 20\nc = 30\naverage = (a + b + c) / 3\nprint(average)",
+      "knowledge_units_tested": ["arithmetic_operators", "variable_assignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "output_op_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "print(17 // 5)\nprint(17 % 5)\nprint(2 ** 3)",
+      "expected_output": "3\n2\n8",
+      "knowledge_units_tested": ["arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "mcq_op_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What is the result of 7 // 2 in Python?",
+      "choices": [
+        {"id": "a", "text": "3.5"},
+        {"id": "b", "text": "3"},
+        {"id": "c", "text": "4"},
+        {"id": "d", "text": "3.0"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "buggy_op_002",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to check if x is between 10 and 20 (inclusive), but the logic is wrong.",
+      "code": "x = 15\nif 10 < x < 20:\n    print(\"In range\")\nelse:\n    print(\"Out of range\")",
+      "bug_lines": [2],
+      "bug_explanation": "The chained comparison uses < (exclusive), not <= (inclusive). x=10 or x=20 would fail. Need 10 <= x <= 20.",
+      "correct_code": "x = 15\nif 10 <= x <= 20:\n    print(\"In range\")\nelse:\n    print(\"Out of range\")",
+      "knowledge_units_tested": ["comparison_operators", "if_statement"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "short_op_001",
+      "problem_type": "short-answer",
+      "problem_statement": "Write a single expression that checks if a number n is both positive AND even. Teach the TA about logical operators.",
+      "starter_code": "n = 8\n# Write the boolean expression:\nresult = ",
+      "knowledge_units_tested": ["logical_operators", "comparison_operators", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "buggy_while_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should count down from 5 to 1, but it prints the wrong sequence. Find the bug.",
+      "code": "count = 5\nwhile count >= 0:\n    print(count)\n    count -= 1",
+      "bug_lines": [2],
+      "bug_explanation": "Condition count >= 0 includes 0, so it prints 5,4,3,2,1,0 instead of 5,4,3,2,1. Should be count >= 1 or count > 0.",
+      "correct_code": "count = 5\nwhile count >= 1:\n    print(count)\n    count -= 1",
+      "knowledge_units_tested": ["while_loop", "comparison_operators", "assignment_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "output_while_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "x = 1\nwhile x < 8:\n    print(x, end=\" \")\n    x *= 2",
+      "expected_output": "1 2 4 ",
+      "knowledge_units_tested": ["while_loop", "assignment_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "completion_while_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to find the first power of 2 greater than 1000.",
+      "code_template": "power = 1\n# ??? write a while loop\n# ??? multiply power by 2\nprint(power)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# while condition"},
+        {"line": 3, "placeholder": "# update power"}
+      ],
+      "knowledge_units_tested": ["while_loop", "comparison_operators", "assignment_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "output_list_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "items = [10, 20, 30, 40, 50]\nprint(items[1:4])\nprint(items[-2:])",
+      "expected_output": "[20, 30, 40]\n[40, 50]",
+      "knowledge_units_tested": ["list_indexing", "list_slicing"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "completion_list_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to double each number in the list using a list comprehension.",
+      "code_template": "numbers = [1, 2, 3, 4, 5]\n# ??? write a list comprehension\nprint(doubled)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# doubled = [... for ... in ...]"}
+      ],
+      "knowledge_units_tested": ["list_comprehension_basic", "for_loop_iterable", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "mcq_list_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "Which of the following correctly adds an element to the end of a list?",
+      "choices": [
+        {"id": "a", "text": "my_list.add(5)"},
+        {"id": "b", "text": "my_list.append(5)"},
+        {"id": "c", "text": "my_list.insert(5)"},
+        {"id": "d", "text": "my_list + 5"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["list_basics"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "buggy_str_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to reverse a string but doesn't work. Find the bug.",
+      "code": "word = \"hello\"\nreversed_word = \"\"\nfor i in range(len(word)):\n    reversed_word = reversed_word + word[i]\nprint(reversed_word)",
+      "bug_lines": [4],
+      "bug_explanation": "This builds the string in the same order. Need word[i] + reversed_word (prepend) or use word[::-1].",
+      "correct_code": "word = \"hello\"\nreversed_word = \"\"\nfor i in range(len(word)):\n    reversed_word = word[i] + reversed_word\nprint(reversed_word)",
+      "knowledge_units_tested": ["data_types_string", "string_concatenation", "for_loop_range", "string_indexing"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "output_str_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "s = \"Python Programming\"\nprint(s[0:6])\nprint(s.lower())\nprint(s.split())",
+      "expected_output": "Python\npython programming\n['Python', 'Programming']",
+      "knowledge_units_tested": ["data_types_string", "string_methods", "string_indexing"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "mcq_str_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What does f\"Value: {x * 2}\" produce when x = 5?",
+      "choices": [
+        {"id": "a", "text": "Value: x * 2"},
+        {"id": "b", "text": "Value: {10}"},
+        {"id": "c", "text": "Value: 10"},
+        {"id": "d", "text": "Error"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["string_formatting", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "buggy_dict_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to count letter frequency but crashes. Find the bug.",
+      "code": "word = \"hello\"\ncounts = {}\nfor letter in word:\n    counts[letter] = counts[letter] + 1\nprint(counts)",
+      "bug_lines": [4],
+      "bug_explanation": "KeyError: first time a letter is seen, counts[letter] doesn't exist. Need counts.get(letter, 0) + 1.",
+      "correct_code": "word = \"hello\"\ncounts = {}\nfor letter in word:\n    counts[letter] = counts.get(letter, 0) + 1\nprint(counts)",
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "for_loop_iterable"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "output_dict_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "d = {\"a\": 1, \"b\": 2}\nd[\"c\"] = 3\nd[\"a\"] = 10\nprint(len(d))\nprint(d[\"a\"])",
+      "expected_output": "3\n10",
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_access"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "buggy_scope_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code has a scoping issue. The function doesn't modify the global counter. Explain why.",
+      "code": "counter = 0\n\ndef increment():\n    counter = counter + 1\n\nincrement()\nprint(counter)",
+      "bug_lines": [4],
+      "bug_explanation": "UnboundLocalError: assigning to counter inside the function creates a local variable. Need 'global counter' or return the value.",
+      "correct_code": "counter = 0\n\ndef increment():\n    global counter\n    counter = counter + 1\n\nincrement()\nprint(counter)",
+      "knowledge_units_tested": ["scope_basics", "function_definition", "variable_assignment"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "buggy_err_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should safely convert a string to int, but the except clause is wrong. Explain the issue.",
+      "code": "user_input = \"abc\"\ntry:\n    number = int(user_input)\nexcept:\n    print(\"Invalid\")\n    number = user_input",
+      "bug_lines": [4, 6],
+      "bug_explanation": "Bare except catches everything (including KeyboardInterrupt). Also, number is still set to the string, which could cause issues later. Should catch ValueError specifically.",
+      "correct_code": "user_input = \"abc\"\ntry:\n    number = int(user_input)\nexcept ValueError:\n    print(\"Invalid\")\n    number = 0",
+      "knowledge_units_tested": ["try_except_basics", "error_types", "type_conversion"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "mcq_err_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "Which error does Python raise when you try to access a variable that hasn't been defined?",
+      "choices": [
+        {"id": "a", "text": "TypeError"},
+        {"id": "b", "text": "ValueError"},
+        {"id": "c", "text": "NameError"},
+        {"id": "d", "text": "SyntaxError"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["error_types"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "buggy_tuple_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to modify a tuple but crashes. Explain why.",
+      "code": "coords = (10, 20)\ncoords[0] = 15\nprint(coords)",
+      "bug_lines": [2],
+      "bug_explanation": "Tuples are immutable — you cannot assign to an index. Need to create a new tuple instead.",
+      "correct_code": "coords = (10, 20)\ncoords = (15, coords[1])\nprint(coords)",
+      "knowledge_units_tested": ["tuple_basics"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "buggy_none_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This function should return a list, but sometimes returns None. Explain the issue.",
+      "code": "def get_positives(numbers):\n    result = []\n    for n in numbers:\n        if n > 0:\n            result.append(n)\n\nprint(get_positives([1, -2, 3]))",
+      "bug_lines": [6],
+      "bug_explanation": "Missing return statement. Without an explicit return, Python returns None.",
+      "correct_code": "def get_positives(numbers):\n    result = []\n    for n in numbers:\n        if n > 0:\n            result.append(n)\n    return result\n\nprint(get_positives([1, -2, 3]))",
+      "knowledge_units_tested": ["function_definition", "return_statement", "none_type"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "short_loop_001",
+      "problem_type": "short-answer",
+      "problem_statement": "Write a for loop that calculates the sum of all numbers from 1 to 100 (inclusive). Teach the TA how range() works.",
+      "starter_code": "total = 0\n# Write your for loop here\n\nprint(total)",
+      "knowledge_units_tested": ["for_loop_range", "assignment_operators", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "output_cond_002",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "x = 5\ny = 10\nif x > 3 and y < 8:\n    print(\"A\")\nelif x > 3 or y < 8:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "expected_output": "B",
+      "knowledge_units_tested": ["if_elif_else", "logical_operators", "comparison_operators"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "mcq_cond_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What is the difference between 'if' and 'elif' in Python?",
+      "choices": [
+        {"id": "a", "text": "'elif' is just an abbreviation for 'else if', they work identically"},
+        {"id": "b", "text": "'elif' is only checked if the previous 'if' or 'elif' was False"},
+        {"id": "c", "text": "'elif' can only be used once per block"},
+        {"id": "d", "text": "'elif' does not need a condition"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["if_elif_else"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "buggy_comment_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code has a subtle bug related to commenting. Find it.",
+      "code": "x = 10\n# y = 20\nresult = x + y\nprint(result)",
+      "bug_lines": [2],
+      "bug_explanation": "y = 20 is commented out, so y is not defined when used in line 3, causing NameError.",
+      "correct_code": "x = 10\ny = 20\nresult = x + y\nprint(result)",
+      "knowledge_units_tested": ["comments", "variable_assignment", "error_types"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "fundamentals"
+    }
+  ]
+}

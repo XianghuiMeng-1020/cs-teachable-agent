@@ -10,6 +10,8 @@ import { TypingIndicator } from "./TypingIndicator";
 import { TeachingHelper, type TeachingHelperResult } from "./TeachingHelper";
 import { ModeIndicator } from "./ModeIndicator";
 import { formatRelative } from "@/lib/utils";
+import { useTypingCadence } from "@/components/assessment/AntiCheatShell";
+import { emitTelemetry } from "@/lib/telemetry";
 
 export interface ChatMessage {
   role: "student" | "ta";
@@ -26,6 +28,9 @@ export interface ChatMessage {
 
 interface ChatPanelProps {
   taId: number | null;
+  problemContext?: { problem_id: string; problem_type: string } | undefined;
+  lineRef?: string | null;
+  onLineRefUsed?: () => void;
 }
 
 const MAX_INPUT_LENGTH = 2000;
@@ -94,7 +99,7 @@ function QualityIndicator({
   );
 }
 
-export function ChatPanel({ taId }: ChatPanelProps) {
+export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: ChatPanelProps) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [input, setInput] = useState("");
@@ -105,6 +110,29 @@ export function ChatPanel({ taId }: ChatPanelProps) {
   const [isCheckingQuality, setIsCheckingQuality] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastCheckRef = useRef<string>("");
+  const sendTimestampRef = useRef<number>(0);
+
+  // Anti-cheat: detect rapid paste-like typing
+  const onTypingInput = useTypingCadence(25, 400);
+
+  // Anti-cheat: track response time for abnormally fast answers
+  const trackResponseTime = useCallback((startMs: number) => {
+    const elapsed = Date.now() - startMs;
+    if (elapsed < 3000 && input.length > 50) {
+      emitTelemetry("typing_anomaly", { responseTimeMs: elapsed, inputLength: input.length, type: "rapid_response" });
+    }
+  }, [input.length]);
+
+  // Auto-insert line reference from problem panel
+  useEffect(() => {
+    if (lineRef && !loading) {
+      setInput((prev) => {
+        const prefix = prev.trim() ? prev.trim() + "\n" : "";
+        return prefix + lineRef + " ";
+      });
+      onLineRefUsed?.();
+    }
+  }, [lineRef, loading, onLineRefUsed]);
 
   const { data: messagesData } = useQuery({
     queryKey: ["ta", taId, "messages"],
@@ -185,6 +213,8 @@ export function ChatPanel({ taId }: ChatPanelProps) {
   const handleSend = async () => {
     if (!taId || !input.trim()) return;
     const text = input.trim();
+    trackResponseTime(sendTimestampRef.current);
+    sendTimestampRef.current = Date.now();
     setInput("");
     setTeachingHelperResult(null);
     setPendingInput(null);
@@ -206,6 +236,7 @@ export function ChatPanel({ taId }: ChatPanelProps) {
     ]);
     try {
       const res = await teachStream(taId, text, {
+        problemId: problemContext?.problem_id,
         onChunk: (chunk) => {
           streamedContent.current += chunk;
           setLocalMessages((prev) => {
@@ -230,11 +261,18 @@ export function ChatPanel({ taId }: ChatPanelProps) {
         }
         return next;
       });
+      // Dispatch code modification if returned
+      if (res.code_modification) {
+        window.dispatchEvent(new CustomEvent("ta-code-modification", {
+          detail: { modification: res.code_modification },
+        }));
+      }
       if (taId != null) {
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "state"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "misconceptions"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "history"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "messages"] });
+        queryClient.invalidateQueries({ queryKey: ["ta", taId, "problems"] });
       }
     } catch (err) {
       const errMsg = "Error: " + (err instanceof Error ? err.message : "Failed");
@@ -343,7 +381,9 @@ export function ChatPanel({ taId }: ChatPanelProps) {
               })}
               value={input}
               onChange={handleInputChange}
+              onInput={onTypingInput}
               onKeyDown={handleKeyDown}
+              data-allow-clipboard="true"
               className="w-full min-h-[40px] max-h-32 resize-y rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm placeholder:text-stone-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-stone-50 disabled:text-stone-500"
               disabled={!taId || loading}
               rows={2}

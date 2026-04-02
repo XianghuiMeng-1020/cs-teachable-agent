@@ -109,6 +109,56 @@ def _score_uncertainty(problem: dict, p_know: dict[str, float]) -> float:
     return 1.0 - min_dist
 
 
+MASTERY_THRESHOLD = 0.80
+STRATEGY_PROGRESSIVE = "progressive"
+
+
+def _get_topic_group_mastery(topic_group: str, problems: list[dict], p_know: dict[str, float]) -> float:
+    """Calculate average p_know for all KUs tested by problems in a topic_group."""
+    kus: set[str] = set()
+    for p in problems:
+        if p.get("topic_group") == topic_group:
+            kus.update(p.get("knowledge_units_tested", []))
+    if not kus:
+        return 0.0
+    return sum(p_know.get(ku, 0.0) for ku in kus) / len(kus)
+
+
+def select_progressive_problem(
+    problems: list[dict],
+    learned_unit_ids: set[str],
+    p_know: dict[str, float],
+) -> dict | None:
+    """
+    Progressive difficulty selection:
+    1. Group problems by topic_group
+    2. For each topic_group, check if mastery >= MASTERY_THRESHOLD; if so, skip (mastered)
+    3. Within unmastered topic_groups, sort by difficulty_order
+    4. Return the first unmastered problem at the lowest difficulty_order
+    """
+    eligible = get_eligible_problems(problems, learned_unit_ids)
+    if not eligible:
+        return None
+
+    groups: dict[str, list[dict]] = {}
+    for p in eligible:
+        tg = p.get("topic_group", "default")
+        groups.setdefault(tg, []).append(p)
+
+    for tg in sorted(groups.keys()):
+        mastery = _get_topic_group_mastery(tg, problems, p_know)
+        if mastery >= MASTERY_THRESHOLD:
+            continue
+        candidates = sorted(groups[tg], key=lambda x: (x.get("difficulty_order", 999), x.get("problem_id", "")))
+        if candidates:
+            return candidates[0]
+
+    # All groups mastered — fall back to lowest-mastery coverage
+    scored = [(p, _score_coverage(p, p_know)) for p in eligible]
+    scored.sort(key=lambda x: -x[1])
+    return scored[0][0] if scored else eligible[0]
+
+
 def select_problem(
     problems: list[dict],
     learned_unit_ids: set[str],
@@ -139,6 +189,17 @@ def select_problem(
     active_mis = []
     if hasattr(tracker, "get_active_misconception_ids"):
         active_mis = tracker.get_active_misconception_ids(learned_unit_ids) or []
+
+    # Progressive strategy: topic_group -> difficulty_order -> mastery check
+    if strategy == STRATEGY_PROGRESSIVE:
+        return select_progressive_problem(problems, learned_unit_ids, p_know) or eligible[0]
+
+    # For teach page — prefer progressive by default when problems have topic_group/difficulty_order
+    has_progressive_fields = any(p.get("topic_group") and p.get("difficulty_order") is not None for p in eligible)
+    if has_progressive_fields:
+        progressive = select_progressive_problem(problems, learned_unit_ids, p_know)
+        if progressive:
+            return progressive
 
     # Misconception-targeted: prefer problems that exercise active misconceptions
     if strategy == STRATEGY_MISCONCEPTION and active_mis:

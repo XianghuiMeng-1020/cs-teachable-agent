@@ -96,6 +96,7 @@ class TAResponse(BaseModel):
 # ----- Teaching -----
 class TeachRequest(BaseModel):
     student_input: str = Field(..., description="Student's teaching message (natural language or structured)")
+    problem_id: str | None = Field(None, description="Current problem ID the student is working on (for context-aware teaching)")
 
 
 class TeachResponse(BaseModel):

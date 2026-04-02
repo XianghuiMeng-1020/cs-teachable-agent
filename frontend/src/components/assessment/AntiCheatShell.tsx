@@ -86,11 +86,25 @@ export function AntiCheatShell({
     function handleWindowBlur() {
       recordFocusLoss("window-blur");
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "PrintScreen" || (e.key === "F12" && e.ctrlKey)) {
+        e.preventDefault();
+        emitTelemetry("screenshot_attempt", { key: e.key });
+        recordFocusLoss("devtools");
+      }
+    }
+    function handleBeforeUnload() {
+      emitTelemetry("page_unload");
+    }
 
     window.addEventListener("blur", handleWindowBlur);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("beforeunload", handleBeforeUnload);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
       window.removeEventListener("blur", handleWindowBlur);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [enabled, recordFocusLoss]);

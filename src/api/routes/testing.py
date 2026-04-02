@@ -43,21 +43,82 @@ def list_problems(ta_id: int, current_user: CurrentUser, db: DbSession):
     problems = adapter.load_problems()
     learned = tracker.get_learned_units()
     eligible_ids = get_eligible_problem_ids(problems, learned)
-    eligible = [p for p in problems if p.get("problem_id") in eligible_ids]
-    # Calculate which KUs are required for next unlock
+
+    # Return ALL problems (front-end handles filtering/ordering);
+    # Sort by difficulty_order then problem_id for progressive display
+    def _sort_key(p):
+        return (p.get("difficulty_order", 999), p.get("topic_group", ""), p.get("problem_id", ""))
+
+    sorted_problems = sorted(problems, key=_sort_key)
+
+    # Generate per-student variants for anti-cheating
+    from src.core.problem_variants import generate_variants_for_problems
+
+    sorted_problems = generate_variants_for_problems(sorted_problems, current_user.id)
+
     required_kus = set()
     for p in problems:
         if p.get("problem_id") not in eligible_ids:
-            ku_reqs = p.get("knowledge_units_required", [])
+            ku_reqs = p.get("knowledge_units_required", p.get("knowledge_units_tested", []))
             for ku in ku_reqs:
                 if ku not in learned:
                     required_kus.add(ku)
     return {
-        "problems": eligible,
+        "problems": sorted_problems,
         "eligible_ids": eligible_ids,
         "learned_unit_ids": list(learned),
-        "required_kus": list(required_kus)[:5],  # Show first 5 required KUs
+        "required_kus": list(required_kus)[:5],
     }
+
+
+@router.get("/api/ta/{ta_id}/current-problem")
+def get_current_problem(ta_id: int, current_user: CurrentUser, db: DbSession):
+    """Get the current recommended problem based on progressive difficulty and mastery."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
+    problems = adapter.load_problems()
+    learned = tracker.get_learned_units()
+    p_know = tracker.get_bkt_state() if hasattr(tracker, "get_bkt_state") else {}
+
+    from src.core.task_engine import select_progressive_problem, MASTERY_THRESHOLD
+    selected = select_progressive_problem(problems, learned, p_know)
+    if not selected:
+        selected = select_problem(problems, learned, tracker=tracker)
+
+    # Compute topic group mastery
+    topic_group = selected.get("topic_group", "") if selected else ""
+    topic_mastery = 0.0
+    if topic_group and selected:
+        kus = set()
+        for p in problems:
+            if p.get("topic_group") == topic_group:
+                kus.update(p.get("knowledge_units_tested", []))
+        if kus:
+            topic_mastery = sum(p_know.get(ku, 0.0) for ku in kus) / len(kus)
+
+    return {
+        "problem": selected,
+        "topic_group": topic_group,
+        "topic_mastery": round(topic_mastery * 100, 1),
+        "mastery_threshold": int(MASTERY_THRESHOLD * 100),
+        "is_mastered": topic_mastery >= MASTERY_THRESHOLD,
+    }
+
+
+@router.post("/api/ta/{ta_id}/next-problem")
+def advance_to_next_problem(ta_id: int, current_user: CurrentUser, db: DbSession):
+    """Manually advance to the next problem (skipping current)."""
+    ta = _get_ta(ta_id, current_user.id, db)
+    tracker = get_tracker_for_ta(ta)
+    adapter = get_domain_adapter(ta.domain_id)
+    problems = adapter.load_problems()
+    learned = tracker.get_learned_units()
+    p_know = tracker.get_bkt_state() if hasattr(tracker, "get_bkt_state") else {}
+
+    from src.core.task_engine import select_progressive_problem
+    selected = select_progressive_problem(problems, learned, p_know)
+    return {"problem": selected}
 
 
 def _run_single_test(

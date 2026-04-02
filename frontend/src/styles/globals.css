@@ -127,8 +127,20 @@
   -webkit-font-smoothing: none;
   letter-spacing: 0.02em;
 }
-.anti-cheat-shell .ocr-noise {
+.anti-cheat-shell .ocr-noise,
+.ocr-noise-active .ocr-noise {
   transform: rotate(0.3deg);
   letter-spacing: 0.03em;
   word-spacing: 0.06em;
+}
+
+/* Dynamic OCR noise: subtle random transforms on code when active */
+.ocr-noise-active pre,
+.ocr-noise-active code {
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  letter-spacing: 0.015em;
+}
+.ocr-noise-active .font-mono {
+  text-shadow: 0 0 0 transparent, 0.3px 0 0 rgba(0,0,0,0.01);
 }

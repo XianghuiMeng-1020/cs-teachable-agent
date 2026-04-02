@@ -1,0 +1,11 @@
+export { CanvasWatermark } from "./CanvasWatermark";
+export { MasteryThermometer } from "./MasteryThermometer";
+export { ProblemPanel } from "./ProblemPanel";
+export { ProblemRenderer } from "./ProblemRenderer";
+export type { TeachProblem, CodeModification } from "./ProblemRenderer";
+export { BuggyCodeBlock } from "./BuggyCodeBlock";
+export { OutputPrediction } from "./OutputPrediction";
+export { CodeCompletion } from "./CodeCompletion";
+export { ConceptMCQ } from "./ConceptMCQ";
+export { ShortCodeAnswer } from "./ShortCodeAnswer";
+export { CodeRunPreview } from "./CodeRunPreview";

@@ -1,296 +1,256 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
-import { ContextualHelp } from "@/components/ui/ContextualHelp";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  Code, 
-  MessageSquare, 
-  Brain, 
-  Target,
-  Sparkles,
-  BookOpen,
-  Lightbulb,
-  Zap,
-  GraduationCap,
-} from "lucide-react";
+import { GripVertical, Trophy, ArrowRight } from "lucide-react";
 import { useAppStore } from "@/stores/appStore";
-import { getState, getMisconceptions, getTA } from "@/api/client";
+import { getState, getProblems, getTA, me } from "@/api/client";
 import { ChatPanel } from "@/components/chat/ChatPanel";
-import { KnowledgeGraph } from "@/components/state/KnowledgeGraph";
-import { MasteryRadial } from "@/components/state/MasteryRadial";
-import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
-import { LiveCodeEditor } from "@/components/workspace/LiveCodeEditor";
-import { LearningObjectives } from "@/components/workspace/LearningObjectives";
-import { PromptLab } from "@/components/ai-experiments/PromptLab";
-import { ModelComparison } from "@/components/ai-experiments/ModelComparison";
-import type { UnitNode } from "@/components/state/KnowledgeGraph";
+import { ProblemPanel } from "@/components/teach/ProblemPanel";
+import { AntiCheatShell } from "@/components/assessment/AntiCheatShell";
+import { AntiCaptureOverlay } from "@/components/assessment/AntiCaptureOverlay";
+import { ContextualHelp } from "@/components/ui/ContextualHelp";
+import { Button } from "@/components/ui/Button";
+import type { TeachProblem, CodeModification } from "@/components/teach/ProblemRenderer";
 
-// Animation variants
-const slideIn = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-};
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-};
-
-const TEACH_TIP_KEYS = ["teach.tips.1", "teach.tips.2", "teach.tips.3", "teach.tips.4"] as const;
+const MASTERY_THRESHOLD = 80;
+const MIN_LEFT_WIDTH = 30;
+const MAX_LEFT_WIDTH = 70;
 
 export function TeachPage() {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const currentTaId = useAppStore((s) => s.currentTaId);
-  const [playgroundOpen, setPlaygroundOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chat" | "playground" | "promptlab">("chat");
 
+  // Resizable split
+  const [leftPercent, setLeftPercent] = useState(50);
+  const dragging = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Problem state
+  const [problemIndex, setProblemIndex] = useState(0);
+  const [codeModifications, setCodeModifications] = useState<CodeModification[]>([]);
+  const [showMasteredBanner, setShowMasteredBanner] = useState(false);
+
+  // Queries
   const { data: state } = useQuery({
     queryKey: ["ta", currentTaId, "state"],
     queryFn: () => getState(currentTaId!),
     enabled: currentTaId != null,
+    refetchInterval: 5000,
   });
 
-  const { data: misconceptionsData } = useQuery({
-    queryKey: ["ta", currentTaId, "misconceptions"],
-    queryFn: () => getMisconceptions(currentTaId!),
-    enabled: currentTaId != null,
-  });
   const { data: taData } = useQuery({
     queryKey: ["ta", currentTaId],
     queryFn: () => getTA(currentTaId!),
     enabled: currentTaId != null,
   });
+
+  const { data: problemsData, isLoading: problemsLoading } = useQuery({
+    queryKey: ["ta", currentTaId, "problems"],
+    queryFn: () => getProblems(currentTaId!),
+    enabled: currentTaId != null,
+  });
+
+  const { data: userData } = useQuery({ queryKey: ["me"], queryFn: me });
+
   const domainId = (taData?.domain_id as string) ?? "python";
 
-  const defs = (state as { knowledge_unit_definitions?: { id: string; topic_group?: string }[] })?.knowledge_unit_definitions;
-  const units: UnitNode[] = state?.units
-    ? Object.entries(state.units).map(([unit_id, rec]) => ({
-        unit_id,
-        status: (rec as { status?: string }).status as UnitNode["status"] ?? "unknown",
-        topic_group: (rec as { topic_group?: string }).topic_group ?? defs?.find((d) => d.id === unit_id)?.topic_group,
-      }))
-    : [];
+  // Build problem list from API or fallback
+  const problems: TeachProblem[] = (problemsData?.problems ?? []).map((p: Record<string, unknown>) => ({
+    problem_id: p.problem_id as string,
+    problem_type: (p as { problem_type?: string }).problem_type ?? "buggy-code",
+    problem_statement: p.problem_statement as string,
+    difficulty: (p.difficulty as string) ?? "easy",
+    difficulty_order: (p as { difficulty_order?: number }).difficulty_order ?? 0,
+    topic_group: (p as { topic_group?: string }).topic_group,
+    knowledge_units_tested: (p.knowledge_units_required ?? p.knowledge_units_tested ?? []) as string[],
+    code: (p as { code?: string }).code,
+    bug_lines: (p as { bug_lines?: number[] }).bug_lines,
+    correct_code: (p as { correct_code?: string }).correct_code,
+    bug_explanation: (p as { bug_explanation?: string }).bug_explanation,
+    code_template: (p as { code_template?: string }).code_template,
+    completion_slots: (p as { completion_slots?: { line: number; placeholder: string }[] }).completion_slots,
+    choices: (p as { choices?: { id: string; text: string }[] }).choices,
+    correct_choice_ids: (p as { correct_choice_ids?: string[] }).correct_choice_ids,
+    starter_code: (p as { starter_code?: string }).starter_code,
+    expected_output: (p as { expected_output?: string }).expected_output,
+    options: (p as { options?: string[] }).options,
+    required_block_count: (p as { required_block_count?: number }).required_block_count,
+    blanks: (p as { blanks?: TeachProblem["blanks"] }).blanks,
+    prompt_template: (p as { prompt_template?: string }).prompt_template,
+    function_name: (p as { function_name?: string }).function_name,
+    function_source: (p as { function_source?: string }).function_source,
+    call_expression: (p as { call_expression?: string }).call_expression,
+    checkpoints: (p as { checkpoints?: TeachProblem["checkpoints"] }).checkpoints,
+  }));
 
-  const learnedCount = state?.learned_unit_ids?.length ?? 0;
-  const totalKus = units.length || 20;
-  const misconceptions = misconceptionsData?.misconceptions ?? [];
-  
-  const progressPercent = totalKus > 0 ? Math.round((learnedCount / totalKus) * 100) : 0;
+  const currentProblem = problems[problemIndex] ?? null;
+
+  // Compute mastery for current problem's knowledge units
+  const computeMastery = useCallback(() => {
+    if (!state?.units || !currentProblem?.knowledge_units_tested?.length) return 0;
+    const kus = currentProblem.knowledge_units_tested;
+    let sum = 0;
+    for (const ku of kus) {
+      const unit = (state.units as Record<string, { bkt_p_know?: number }>)[ku];
+      sum += (unit?.bkt_p_know ?? 0);
+    }
+    return Math.round((sum / kus.length) * 100);
+  }, [state, currentProblem]);
+
+  const masteryPercent = computeMastery();
+
+  // Check mastery threshold
+  useEffect(() => {
+    if (masteryPercent >= MASTERY_THRESHOLD && !showMasteredBanner) {
+      setShowMasteredBanner(true);
+    }
+  }, [masteryPercent, showMasteredBanner]);
+
+  // Line click -> pre-fill chat reference
+  const [lineRef, setLineRef] = useState<string | null>(null);
+  const handleLineClick = useCallback((lineNum: number, lineContent: string) => {
+    setLineRef(`[Line ${lineNum}] ${lineContent.trim()}`);
+  }, []);
+
+  // Reset modifications when problem changes
+  useEffect(() => {
+    setCodeModifications([]);
+    setShowMasteredBanner(false);
+    setLineRef(null);
+  }, [problemIndex]);
+
+  // Listen for code_modification events from ChatPanel
+  useEffect(() => {
+    const handler = (e: CustomEvent<{ modification: CodeModification }>) => {
+      setCodeModifications((prev) => [...prev, e.detail.modification]);
+    };
+    window.addEventListener("ta-code-modification" as string, handler as EventListener);
+    return () => window.removeEventListener("ta-code-modification" as string, handler as EventListener);
+  }, []);
+
+  // Drag-to-resize
+  const handleMouseDown = useCallback(() => { dragging.current = true; }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!dragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = ((e.clientX - rect.left) / rect.width) * 100;
+      setLeftPercent(Math.min(MAX_LEFT_WIDTH, Math.max(MIN_LEFT_WIDTH, pct)));
+    };
+    const handleMouseUp = () => { dragging.current = false; };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const goNext = () => {
+    setShowMasteredBanner(false);
+    setProblemIndex((i) => Math.min(i + 1, problems.length - 1));
+  };
+  const goPrev = () => setProblemIndex((i) => Math.max(i - 1, 0));
+  const goSkip = () => goNext();
 
   return (
-    <div className="h-[calc(100vh-var(--topbar-height)-24px)] flex flex-col lg:flex-row gap-4">
-      {/* Main Content Area */}
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex-1 flex flex-col min-h-0"
-      >
-        {/* Header */}
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
-              <MessageSquare className="w-5 h-5 text-white" />
+    <AntiCaptureOverlay>
+      <AntiCheatShell enabled>
+        <div
+          ref={containerRef}
+          className="h-[calc(100vh-var(--topbar-height)-24px)] flex relative select-none"
+        >
+          {/* LEFT: Problem Panel */}
+          <div
+            className="flex flex-col min-h-0 border-r border-stone-200 bg-white overflow-hidden rounded-l-2xl shadow-lg"
+            style={{ width: `${leftPercent}%` }}
+          >
+            {/* Domain badge */}
+            <div className="flex items-center gap-2 px-4 py-2 border-b border-stone-100 bg-stone-50/50">
+              <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">{domainId}</span>
+              <span className="text-xs text-stone-400">{t("teach.title", { defaultValue: "Teach" })}</span>
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-                {t("teach.title")}
-                <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">
-                  {domainId}
-                </span>
-              </h1>
-              <p className="text-sm text-stone-500">
-                {t("teach.desc")}
-              </p>
-            </div>
+            <ProblemPanel
+              problem={currentProblem}
+              masteryPercent={masteryPercent}
+              codeModifications={codeModifications}
+              problemIndex={problemIndex}
+              totalProblems={problems.length || 1}
+              onPrev={goPrev}
+              onNext={goNext}
+              onSkip={goSkip}
+              loading={problemsLoading}
+              userId={userData?.id}
+              username={userData?.username}
+              onLineClick={handleLineClick}
+            />
           </div>
-          
-          {/* Tab Switcher */}
-          <div className="hidden sm:flex items-center gap-1 bg-stone-100 rounded-lg p-1">
-            {[
-              { id: "chat", icon: MessageSquare, labelKey: "teach.chat" },
-              { id: "playground", icon: Code, labelKey: "teach.code" },
-              { id: "promptlab", icon: Sparkles, labelKey: "teach.aiLab" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                  activeTab === tab.id
-                    ? "bg-white text-brand-700 shadow-sm"
-                    : "text-stone-600 hover:text-stone-900"
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                {t(tab.labelKey)}
-              </button>
-            ))}
-          </div>
-        </div>
 
-        {/* Content Area */}
-        <div className="flex-1 min-h-0 rounded-2xl border border-stone-200 bg-white shadow-lg overflow-hidden">
-          <AnimatePresence mode="wait">
-            {activeTab === "chat" && (
+          {/* DRAG HANDLE */}
+          <div
+            onMouseDown={handleMouseDown}
+            className="w-2 flex-shrink-0 cursor-col-resize bg-stone-100 hover:bg-brand-200 transition-colors flex items-center justify-center z-10"
+          >
+            <GripVertical className="w-3 h-3 text-stone-400" />
+          </div>
+
+          {/* RIGHT: Chat Panel */}
+          <div
+            className="flex flex-col min-h-0 bg-white overflow-hidden rounded-r-2xl shadow-lg"
+            style={{ width: `${100 - leftPercent}%` }}
+          >
+            <ChatPanel
+              taId={currentTaId}
+              problemContext={currentProblem ? { problem_id: currentProblem.problem_id, problem_type: currentProblem.problem_type } : undefined}
+              lineRef={lineRef}
+              onLineRefUsed={() => setLineRef(null)}
+            />
+          </div>
+
+          {/* MASTERED BANNER */}
+          <AnimatePresence>
+            {showMasteredBanner && (
               <motion.div
-                key="chat"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="h-full"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 30 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50"
               >
-                <ChatPanel taId={currentTaId} />
-              </motion.div>
-            )}
-            {activeTab === "playground" && (
-              <motion.div
-                key="playground"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="h-full p-4"
-              >
-                <LiveCodeEditor domainId={domainId} />
-              </motion.div>
-            )}
-            {activeTab === "promptlab" && (
-              <motion.div
-                key="promptlab"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="h-full overflow-auto"
-              >
-                <div className="p-4 space-y-4">
-                  <PromptLab />
-                  <ModelComparison />
+                <div className="flex items-center gap-3 bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-xl">
+                  <Trophy className="w-6 h-6 text-yellow-300" />
+                  <div>
+                    <p className="font-semibold">
+                      {t("teach.masteredBanner", { defaultValue: "Topic Mastered!" })}
+                    </p>
+                    <p className="text-sm text-emerald-100">
+                      {t("teach.masteredDesc", { defaultValue: "You've reached 80% mastery. Ready for the next challenge?" })}
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    icon={ArrowRight}
+                    onClick={goNext}
+                    className="ml-2 border-white/30 text-white hover:bg-white/20"
+                  >
+                    {t("teach.nextTopic", { defaultValue: "Next" })}
+                  </Button>
+                  <button
+                    onClick={() => setShowMasteredBanner(false)}
+                    className="ml-1 text-emerald-200 hover:text-white text-sm"
+                  >
+                    ✕
+                  </button>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
 
-        {/* Teaching Tips */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-4 flex items-start gap-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-3 border border-amber-200"
-        >
-          <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
-            <Lightbulb className="w-4 h-4 text-amber-600" />
-          </div>
-          <div className="flex-1">
-            <div className="text-sm font-medium text-amber-900">{t("teach.teachingTip")}</div>
-            <div className="text-sm text-amber-700">
-              {t(TEACH_TIP_KEYS[Math.floor(Math.random() * TEACH_TIP_KEYS.length)])}
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Right Sidebar */}
-      <motion.div 
-        variants={slideIn}
-        initial="hidden"
-        animate="visible"
-        className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-4 overflow-y-auto"
-      >
-        {/* Progress Card */}
-        <div className="rounded-xl bg-gradient-to-br from-brand-600 to-brand-700 p-4 text-white shadow-lg">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-              <GraduationCap className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <div className="text-sm text-brand-100">{t("teach.learningProgress")}</div>
-              <div className="text-2xl font-bold">{progressPercent}%</div>
-            </div>
-          </div>
-          <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${progressPercent}%` }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-full bg-white rounded-full"
-            />
-          </div>
-          <div className="mt-3 flex justify-between text-sm text-brand-100">
-            <span>{learnedCount} {t("teach.conceptsLearned")}</span>
-            <span>{totalKus - learnedCount} {t("teach.remaining")}</span>
-          </div>
+          <ContextualHelp pageKey="teach" />
         </div>
-
-        {/* Knowledge Graph */}
-        <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-4">
-            <Brain className="w-5 h-5 text-violet-600" />
-            <h3 className="font-semibold text-stone-900">{t("teach.knowledgeState")}</h3>
-          </div>
-          <KnowledgeGraph
-            units={units}
-            knowledgeUnitDefinitions={(state as { knowledge_unit_definitions?: unknown })?.knowledge_unit_definitions ?? undefined}
-            className="min-h-[200px]"
-          />
-        </div>
-
-        {/* Mastery Status */}
-        <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-4">
-            <Target className="w-5 h-5 text-emerald-600" />
-            <h3 className="font-semibold text-stone-900">{t("teach.masteryStatus")}</h3>
-          </div>
-          <MasteryRadial learnedCount={learnedCount} totalCount={totalKus} />
-        </div>
-
-        {/* Learning Objectives */}
-        <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="w-5 h-5 text-blue-600" />
-            <h3 className="font-semibold text-stone-900">Next Objectives</h3>
-          </div>
-          <LearningObjectives learnedUnitIds={state?.learned_unit_ids ?? []} compact />
-        </div>
-
-        {/* Misconceptions */}
-        <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-4">
-            <Zap className="w-5 h-5 text-amber-600" />
-            <h3 className="font-semibold text-stone-900">
-              {t("teach.misconceptions")}
-              {misconceptions.length > 0 && (
-                <span className="ml-2 px-2 py-0.5 text-xs bg-amber-100 text-amber-700 rounded-full">
-                  {misconceptions.length}
-                </span>
-              )}
-            </h3>
-          </div>
-          {misconceptions.length > 0 ? (
-            <div className="space-y-3">
-              {misconceptions.slice(0, 2).map((m) => (
-                <MisconceptionCard
-                  key={m.id}
-                  misconceptionId={m.id}
-                  description={m.description}
-                  affectedUnits={m.affected_units}
-                  remediationHint={m.remediation_hint}
-                  status={m.status as "active" | "correcting" | "resolved"}
-                />
-              ))}
-              {misconceptions.length > 2 && (
-                <div className="text-center text-sm text-stone-500">
-                  {t("teach.moreMisconceptions", { count: misconceptions.length - 2 })}
-                </div>
-              )}
-            </div>
-          ) : (
-            <MisconceptionCardEmpty />
-          )}
-        </div>
-      </motion.div>
-      <ContextualHelp pageKey="teach" />
-    </div>
+      </AntiCheatShell>
+    </AntiCaptureOverlay>
   );
 }

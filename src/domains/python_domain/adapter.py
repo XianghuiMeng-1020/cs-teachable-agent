@@ -43,12 +43,31 @@ class PythonDomainAdapter(DomainAdapter):
     def load_problems(self) -> list[dict]:
         if self._problems is not None:
             return self._problems
+        all_problems: list[dict] = []
+        seen_ids: set[str] = set()
+        # Load main problems
         path = self._seed_dir / "problems.json"
         if not path.exists():
             path = self._seed_dir / "sample-problems-stage1.json"
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
-        self._problems = data.get("problems", [])
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+            for p in data.get("problems", []):
+                pid = p.get("problem_id")
+                if pid and pid not in seen_ids:
+                    all_problems.append(p)
+                    seen_ids.add(pid)
+        # Load expanded teach problems
+        expanded_path = self._seed_dir / "problems-teach-expanded.json"
+        if expanded_path.exists():
+            with open(expanded_path, encoding="utf-8") as f:
+                data = json.load(f)
+            for p in data.get("problems", []):
+                pid = p.get("problem_id")
+                if pid and pid not in seen_ids:
+                    all_problems.append(p)
+                    seen_ids.add(pid)
+        self._problems = all_problems
         return self._problems
 
     def load_misconceptions(self) -> list[dict]:
