@@ -85,10 +85,31 @@ def startup():
         logger.info("Database initialized successfully")
     except Exception as e:
         logger.error("Database init failed: %s", e)
+    _seed_demo_accounts()
     sk = os.getenv("SECRET_KEY", "")
     if os.getenv("ENVIRONMENT") == "production" and (not sk or sk == "dev-secret-change-in-production"):
         logger.error("SECRET_KEY not configured properly for production")
     logger.info("Startup complete. PORT=%s, ENV=%s", os.getenv("PORT"), os.getenv("ENVIRONMENT"))
+
+
+def _seed_demo_accounts():
+    """Create demo_student and demo_teacher if they don't exist yet."""
+    try:
+        from src.db.database import SessionLocal
+        from src.db.models import User
+        from src.api.deps import get_password_hash
+
+        db = SessionLocal()
+        try:
+            for uname, role in [("demo_student", "student"), ("demo_teacher", "teacher")]:
+                if not db.query(User).filter(User.username == uname).first():
+                    db.add(User(username=uname, password_hash=get_password_hash("demo123"), role=role))
+                    logger.info("Seeded demo account: %s", uname)
+            db.commit()
+        finally:
+            db.close()
+    except Exception as e:
+        logger.warning("Demo account seeding skipped: %s", e)
 
 
 app.include_router(auth.router)
