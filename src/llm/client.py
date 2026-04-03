@@ -1,5 +1,6 @@
 """
-Unified LLM call interface. Supports OpenAI and DeepSeek (via env OPENAI_API_KEY or DEEPSEEK_API_KEY).
+Unified LLM call interface with fallback chain: DeepSeek → OpenAI → Qwen.
+Tries each configured provider in order; falls back to the next on failure.
 """
 
 import hashlib
@@ -50,6 +51,23 @@ def _cache_set(prompt_hash: str, response: str) -> None:
         del _cache[oldest]
 
 
+# ---------------------------------------------------------------------------
+# Provider registry: each entry is (env_var, call_fn, stream_fn, label)
+# Order determines fallback priority.
+# ---------------------------------------------------------------------------
+
+def _providers():
+    """Return list of available providers in fallback order."""
+    providers = []
+    if os.environ.get("DEEPSEEK_API_KEY", "").strip():
+        providers.append(("deepseek", _call_deepseek, _call_deepseek_stream))
+    if os.environ.get("OPENAI_API_KEY", "").strip():
+        providers.append(("openai", _call_openai, _call_openai_stream))
+    if os.environ.get("QWEN_API_KEY", "").strip():
+        providers.append(("qwen", _call_qwen, _call_qwen_stream))
+    return providers
+
+
 def llm_completion(
     prompt: str,
     *,
@@ -58,8 +76,8 @@ def llm_completion(
     model: str | None = None,
 ) -> str | None:
     """
-    Call LLM for completion. Tries OpenAI first if OPENAI_API_KEY is set,
-    then DeepSeek if DEEPSEEK_API_KEY is set. Returns None on failure or missing key.
+    Call LLM for completion with automatic fallback.
+    Tries providers in order: DeepSeek → OpenAI → Qwen.
     """
     if temperature <= 0.2:
         h = _cache_prompt_hash(prompt)
@@ -67,86 +85,41 @@ def llm_completion(
         if hit is not None:
             return hit
 
-    openai_key = os.environ.get("OPENAI_API_KEY", "").strip()
-    deepseek_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+    for label, call_fn, _ in _providers():
+        try:
+            out = call_fn(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
+            if out:
+                if temperature <= 0.2:
+                    _cache_set(_cache_prompt_hash(prompt), out)
+                return out
+        except Exception as e:
+            logger.warning("LLM provider %s failed, trying next: %s", label, e)
+            continue
 
-    if openai_key:
-        out = _call_openai(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
-    elif deepseek_key:
-        out = _call_deepseek(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
-    else:
-        out = None
-
-    if out is not None and temperature <= 0.2:
-        _cache_set(_cache_prompt_hash(prompt), out)
-    return out
+    return None
 
 
-def _call_openai(
+def llm_completion_stream(
     prompt: str,
     *,
     max_tokens: int = 256,
     temperature: float = 0.4,
     model: str | None = None,
-) -> str | None:
-    try:
-        import openai
-        from openai import APITimeoutError
+) -> Iterator[str]:
+    """Stream LLM completion with automatic fallback."""
+    for label, _, stream_fn in _providers():
+        try:
+            tokens = list(stream_fn(prompt, max_tokens=max_tokens, temperature=temperature, model=model))
+            if tokens:
+                yield from tokens
+                return
+        except Exception as e:
+            logger.warning("LLM stream provider %s failed, trying next: %s", label, e)
+            continue
 
-        client = openai.OpenAI(
-            api_key=os.environ.get("OPENAI_API_KEY"),
-            timeout=_llm_http_timeout(),
-        )
-        response = client.chat.completions.create(
-            model=model or "gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=max_tokens,
-            temperature=temperature,
-        )
-        text = (response.choices[0].message.content or "").strip()
-        return text or None
-    except APITimeoutError as e:
-        logger.warning("OpenAI LLM request timed out: %s", e)
-        return None
-    except httpx.TimeoutException as e:
-        logger.warning("OpenAI LLM HTTP timeout: %s", e)
-        return None
-    except Exception:
-        return None
-
-
-def _call_deepseek(
-    prompt: str,
-    *,
-    max_tokens: int = 256,
-    temperature: float = 0.4,
-    model: str | None = None,
-) -> str | None:
-    try:
-        import openai
-        from openai import APITimeoutError
-
-        client = openai.OpenAI(
-            api_key=os.environ.get("DEEPSEEK_API_KEY"),
-            base_url="https://api.deepseek.com/v1",
-            timeout=_llm_http_timeout(),
-        )
-        response = client.chat.completions.create(
-            model=model or "deepseek-chat",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=max_tokens,
-            temperature=temperature,
-        )
-        text = (response.choices[0].message.content or "").strip()
-        return text or None
-    except APITimeoutError as e:
-        logger.warning("DeepSeek LLM request timed out: %s", e)
-        return None
-    except httpx.TimeoutException as e:
-        logger.warning("DeepSeek LLM HTTP timeout: %s", e)
-        return None
-    except Exception:
-        return None
+    out = llm_completion(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
+    if out:
+        yield out
 
 
 def llm_completion_parallel(
@@ -159,91 +132,118 @@ def llm_completion_parallel(
         return list(ex.map(lambda t: llm_completion(t[0], **t[1]), prompts))
 
 
-def llm_completion_stream(
-    prompt: str,
-    *,
-    max_tokens: int = 256,
-    temperature: float = 0.4,
-    model: str | None = None,
-) -> Iterator[str]:
-    """Stream LLM completion token-by-token. Yields text deltas."""
-    openai_key = os.environ.get("OPENAI_API_KEY", "").strip()
-    deepseek_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
-    if openai_key:
-        yield from _call_openai_stream(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
-        return
-    if deepseek_key:
-        yield from _call_deepseek_stream(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
-        return
-    out = llm_completion(prompt, max_tokens=max_tokens, temperature=temperature, model=model)
-    if out:
-        yield out
+# ---------------------------------------------------------------------------
+# Provider implementations
+# ---------------------------------------------------------------------------
+
+def _call_openai(prompt, *, max_tokens=256, temperature=0.4, model=None):
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+        timeout=_llm_http_timeout(),
+    )
+    response = client.chat.completions.create(
+        model=model or "gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+    text = (response.choices[0].message.content or "").strip()
+    return text or None
 
 
-def _call_openai_stream(
-    prompt: str,
-    *,
-    max_tokens: int = 256,
-    temperature: float = 0.4,
-    model: str | None = None,
-) -> Iterator[str]:
-    try:
-        import openai
-        from openai import APITimeoutError
-
-        client = openai.OpenAI(
-            api_key=os.environ.get("OPENAI_API_KEY"),
-            timeout=_llm_http_timeout(),
-        )
-        stream = client.chat.completions.create(
-            model=model or "gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=max_tokens,
-            temperature=temperature,
-            stream=True,
-        )
-        for chunk in stream:
-            delta = (chunk.choices[0].delta.content or "") if chunk.choices else ""
-            if delta:
-                yield delta
-    except APITimeoutError as e:
-        logger.warning("OpenAI LLM stream timed out: %s", e)
-    except httpx.TimeoutException as e:
-        logger.warning("OpenAI LLM stream HTTP timeout: %s", e)
-    except Exception:
-        pass
+def _call_deepseek(prompt, *, max_tokens=256, temperature=0.4, model=None):
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("DEEPSEEK_API_KEY"),
+        base_url="https://api.deepseek.com/v1",
+        timeout=_llm_http_timeout(),
+    )
+    response = client.chat.completions.create(
+        model=model or "deepseek-chat",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+    text = (response.choices[0].message.content or "").strip()
+    return text or None
 
 
-def _call_deepseek_stream(
-    prompt: str,
-    *,
-    max_tokens: int = 256,
-    temperature: float = 0.4,
-    model: str | None = None,
-) -> Iterator[str]:
-    try:
-        import openai
-        from openai import APITimeoutError
+def _call_qwen(prompt, *, max_tokens=256, temperature=0.4, model=None):
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("QWEN_API_KEY"),
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        timeout=_llm_http_timeout(),
+    )
+    response = client.chat.completions.create(
+        model=model or "qwen-plus",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+    text = (response.choices[0].message.content or "").strip()
+    return text or None
 
-        client = openai.OpenAI(
-            api_key=os.environ.get("DEEPSEEK_API_KEY"),
-            base_url="https://api.deepseek.com/v1",
-            timeout=_llm_http_timeout(),
-        )
-        stream = client.chat.completions.create(
-            model=model or "deepseek-chat",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=max_tokens,
-            temperature=temperature,
-            stream=True,
-        )
-        for chunk in stream:
-            delta = (chunk.choices[0].delta.content or "") if chunk.choices else ""
-            if delta:
-                yield delta
-    except APITimeoutError as e:
-        logger.warning("DeepSeek LLM stream timed out: %s", e)
-    except httpx.TimeoutException as e:
-        logger.warning("DeepSeek LLM stream HTTP timeout: %s", e)
-    except Exception:
-        pass
+
+# ---------------------------------------------------------------------------
+# Stream implementations
+# ---------------------------------------------------------------------------
+
+def _call_openai_stream(prompt, *, max_tokens=256, temperature=0.4, model=None) -> Iterator[str]:
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+        timeout=_llm_http_timeout(),
+    )
+    stream = client.chat.completions.create(
+        model=model or "gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+        stream=True,
+    )
+    for chunk in stream:
+        delta = (chunk.choices[0].delta.content or "") if chunk.choices else ""
+        if delta:
+            yield delta
+
+
+def _call_deepseek_stream(prompt, *, max_tokens=256, temperature=0.4, model=None) -> Iterator[str]:
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("DEEPSEEK_API_KEY"),
+        base_url="https://api.deepseek.com/v1",
+        timeout=_llm_http_timeout(),
+    )
+    stream = client.chat.completions.create(
+        model=model or "deepseek-chat",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+        stream=True,
+    )
+    for chunk in stream:
+        delta = (chunk.choices[0].delta.content or "") if chunk.choices else ""
+        if delta:
+            yield delta
+
+
+def _call_qwen_stream(prompt, *, max_tokens=256, temperature=0.4, model=None) -> Iterator[str]:
+    import openai
+    client = openai.OpenAI(
+        api_key=os.environ.get("QWEN_API_KEY"),
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        timeout=_llm_http_timeout(),
+    )
+    stream = client.chat.completions.create(
+        model=model or "qwen-plus",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        temperature=temperature,
+        stream=True,
+    )
+    for chunk in stream:
+        delta = (chunk.choices[0].delta.content or "") if chunk.choices else ""
+        if delta:
+            yield delta

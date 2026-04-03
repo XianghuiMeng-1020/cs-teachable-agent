@@ -115,8 +115,16 @@ def health():
 @app.get("/api/config")
 def get_config():
     """Return public configuration (non-sensitive)."""
+    providers = []
+    if os.getenv("DEEPSEEK_API_KEY"):
+        providers.append("deepseek")
+    if os.getenv("OPENAI_API_KEY"):
+        providers.append("openai")
+    if os.getenv("QWEN_API_KEY"):
+        providers.append("qwen")
     return {
-        "llm_configured": bool(os.getenv("OPENAI_API_KEY") or os.getenv("DEEPSEEK_API_KEY")),
-        "llm_provider": "openai" if os.getenv("OPENAI_API_KEY") else ("deepseek" if os.getenv("DEEPSEEK_API_KEY") else None),
+        "llm_configured": len(providers) > 0,
+        "llm_providers": providers,
+        "llm_primary": providers[0] if providers else None,
         "environment": os.getenv("ENVIRONMENT", "development"),
     }
