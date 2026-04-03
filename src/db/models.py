@@ -156,6 +156,63 @@ class AdminConfig(Base):
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
 
+class GamificationProfile(Base):
+    __tablename__ = "gamification_profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
+    xp = Column(Integer, nullable=False, default=0)
+    level = Column(Integer, nullable=False, default=1)
+    streak_days = Column(Integer, nullable=False, default=0)
+    badges = Column(JSON, nullable=True)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    user = relationship("User", backref="gamification_profile")
+
+
+class CollaborationRoom(Base):
+    __tablename__ = "collaboration_rooms"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(255), nullable=False)
+    domain_id = Column(String(64), nullable=False, index=True)
+    is_private = Column(Boolean, nullable=False, default=False)
+    is_active = Column(Boolean, nullable=False, default=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    participants = relationship("CollaborationParticipant", back_populates="room")
+    messages = relationship("CollaborationMessage", back_populates="room")
+
+
+class CollaborationParticipant(Base):
+    __tablename__ = "collaboration_participants"
+
+    id = Column(Integer, primary_key=True, index=True)
+    room_id = Column(Integer, ForeignKey("collaboration_rooms.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    ta_id = Column(Integer, ForeignKey("ta_instances.id"), nullable=True)
+    contribution_score = Column(Integer, nullable=False, default=0)
+    joined_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    room = relationship("CollaborationRoom", back_populates="participants")
+    user = relationship("User")
+    ta = relationship("TAInstance")
+
+
+class CollaborationMessage(Base):
+    __tablename__ = "collaboration_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    room_id = Column(Integer, ForeignKey("collaboration_rooms.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    content = Column(String(2000), nullable=False)
+    message_type = Column(String(32), nullable=False, default="chat")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    room = relationship("CollaborationRoom", back_populates="messages")
+    user = relationship("User")
+
+
 class StudentFlag(Base):
     """Records of abnormal student behaviour detected automatically or flagged manually."""
     __tablename__ = "student_flags"
