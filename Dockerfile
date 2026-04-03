@@ -16,4 +16,4 @@ ENV PORT=10000
 RUN mkdir -p /app/data
 
 EXPOSE 10000
-CMD ["sh", "-c", "uvicorn src.api.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["python", "start.py"]
