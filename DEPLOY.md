@@ -2,7 +2,7 @@
 
 This document covers (1) Streamlit Community Cloud for the teacher demo and (2) production-style deployment of the full React + FastAPI stack.
 
-> 🚀 **推荐部署方案**: [DEPLOY_CF_RAILWAY.md](DEPLOY_CF_RAILWAY.md) — Cloudflare Pages (前端) + Railway (后端)，免费且易于维护。
+> 🚀 **推荐部署方案**: [DEPLOY_RENDER_CF.md](DEPLOY_RENDER_CF.md) — Cloudflare Pages (前端) + Render (后端)，免费且易于维护。
 
 ---
 

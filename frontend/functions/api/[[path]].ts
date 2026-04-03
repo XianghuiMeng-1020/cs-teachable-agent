@@ -1,12 +1,12 @@
-// Cloudflare Pages Function: 代理所有 /api/* 请求到 Railway 后端
+// Cloudflare Pages Function: 代理所有 /api/* 请求到 Render 后端
 
 export const onRequest: PagesFunction = async (context) => {
   const { request, params } = context;
   const path = params.path || [];
   const pathString = Array.isArray(path) ? path.join('/') : path;
   
-  // Railway 后端地址
-  const backendUrl = `https://cs-teachable-agent-production.up.railway.app/api/${pathString}`;
+  // Render 后端地址
+  const backendUrl = `https://cs-teachable-agent-api.onrender.com/api/${pathString}`;
   
   // 复制原始请求的 header
   const headers = new Headers(request.headers);

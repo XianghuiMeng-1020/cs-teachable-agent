@@ -45,9 +45,9 @@ Open the URL shown in the terminal (e.g. http://localhost:8501). The demo runs *
 ## Deployment and shareable links
 
 ### 推荐方案（免费托管）
-**[DEPLOY_CF_RAILWAY.md](DEPLOY_CF_RAILWAY.md)** — Cloudflare Pages (前端) + Railway (后端)
+**[DEPLOY_RENDER_CF.md](DEPLOY_RENDER_CF.md)** — Cloudflare Pages (前端) + Render (后端)
 - 前端：全球 CDN，自动 HTTPS
-- 后端：Python/FastAPI 原生支持
+- 后端：Render Docker 托管，免费 tier
 - 成本：免费额度内完全够用
 
 ### 其他方案

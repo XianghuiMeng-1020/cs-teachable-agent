@@ -1,16 +1,16 @@
-// Cloudflare Pages Worker: 代理 API 请求到 Railway 后端
+// Cloudflare Pages Worker: 代理 API 请求到 Render 后端
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // 如果是 API 请求，代理到 Railway 后端
+    // 如果是 API 请求，代理到 Render 后端
     if (url.pathname.startsWith('/api/')) {
-      const backendUrl = `https://cs-teachable-agent-production.up.railway.app${url.pathname}${url.search}`;
+      const backendUrl = `https://cs-teachable-agent-api.onrender.com${url.pathname}${url.search}`;
       
       // 创建新的请求头
       const headers = new Headers(request.headers);
-      headers.set('Host', 'cs-teachable-agent-production.up.railway.app');
+      headers.set('Host', 'cs-teachable-agent-api.onrender.com');
       
       // 创建代理请求
       const modifiedRequest = new Request(backendUrl, {

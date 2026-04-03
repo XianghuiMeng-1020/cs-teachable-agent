@@ -4,7 +4,7 @@
 - **前端** → Cloudflare Pages（全球 CDN，免费）
 - **后端** → Render（Python/FastAPI 托管，免费额度充足）
 
-> ⚠️ **为什么从 Railway 迁移到 Render？**
+> **部署架构**: Render (后端) + Cloudflare Pages (前端)
 > - Render 提供免费且稳定的 Python/FastAPI 托管
 > - Render 的免费 tier 包含 750 小时/月的运行时间
 > - 自动部署 + 健康检查 + 持久化存储支持

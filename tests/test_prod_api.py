@@ -1,7 +1,7 @@
 """测试生产环境后端 API 的完整学生流程"""
 import requests, sys, json
 
-BASE = "https://cs-teachable-agent-production.up.railway.app/api"
+BASE = "https://cs-teachable-agent-api.onrender.com/api"
 USER = "prod_test_student_2026"
 PASS = "testpass123"
 
