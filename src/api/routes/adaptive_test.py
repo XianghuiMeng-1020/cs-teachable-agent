@@ -11,9 +11,9 @@ router = APIRouter(prefix="/api/adaptive-test", tags=["adaptive-test"])
 @router.post("/generate/{ta_id}")
 def generate_adaptive_test(
     ta_id: int,
-    num_questions: int = 5,
     current_user: CurrentUser,
     db: DbSession,
+    num_questions: int = 5,
 ):
     """Generate a personalized adaptive test for the TA."""
     ta = db.query(TAInstance).filter(

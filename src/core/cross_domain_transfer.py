@@ -104,7 +104,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.STRONG,
             explanation="Variables in Python store data, similar to how columns store data in database tables",
             prerequisites=["data_types"],
-            examples=["x = 5" → "column INT", "name = 'John'" → "column VARCHAR"],
+            examples=["x = 5 -> column INT", "name = 'John' -> column VARCHAR"],
         ),
         ConceptMapping(
             source_concept="lists",
@@ -115,7 +115,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Lists are collections of items, tables are collections of rows",
             prerequisites=["data_structures"],
-            examples=["[1, 2, 3]" → "table with rows 1, 2, 3"],
+            examples=["[1, 2, 3] -> table with rows 1, 2, 3"],
         ),
         ConceptMapping(
             source_concept="conditionals",
@@ -126,7 +126,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.VERY_STRONG,
             explanation="If statements filter code execution, WHERE filters data",
             prerequisites=["operators", "booleans"],
-            examples=["if x > 5:" → "WHERE x > 5"],
+            examples=["if x > 5: -> WHERE x > 5"],
         ),
         ConceptMapping(
             source_concept="loops",
@@ -137,7 +137,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Loops iterate over collections, JOINs combine collections",
             prerequisites=["iteration", "collections"],
-            examples=["for item in list:" → "JOIN combines tables"],
+            examples=["for item in list: -> JOIN combines tables"],
         ),
         ConceptMapping(
             source_concept="functions",
@@ -148,7 +148,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Functions encapsulate reusable logic, stored procedures do the same in SQL",
             prerequisites=["parameters", "return_values"],
-            examples=["def calculate(x):" → "CREATE PROCEDURE calculate"],
+            examples=["def calculate(x): -> CREATE PROCEDURE calculate"],
         ),
         
         # Python -> AI Literacy
@@ -161,7 +161,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Functions transform inputs to outputs, ML models learn this transformation",
             prerequisites=["inputs_outputs"],
-            examples=["def predict(x): return x * 2" → "model learns f(x) = wx + b"],
+            examples=["def predict(x): return x * 2 -> model learns f(x) = wx + b"],
         ),
         ConceptMapping(
             source_concept="data_types",
@@ -172,7 +172,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.STRONG,
             explanation="Understanding data types helps identify feature types for ML",
             prerequisites=["type_system"],
-            examples=["int, float" → "numerical features", "string" → "categorical features"],
+            examples=["int, float -> numerical features", "string -> categorical features"],
         ),
         ConceptMapping(
             source_concept="dictionaries",
@@ -183,7 +183,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Dictionaries map keys to values, feature vectors map features to values",
             prerequisites=["key_value_pairs"],
-            examples=["{'age': 25, 'income': 50000}" → "feature vector [25, 50000]"],
+            examples=["{'age': 25, 'income': 50000} -> feature vector [25, 50000]"],
         ),
         ConceptMapping(
             source_concept="conditionals",
@@ -194,7 +194,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.VERY_STRONG,
             explanation="Decision trees are essentially nested if-else statements learned from data",
             prerequisites=["nested_conditionals"],
-            examples=["if age > 18: if income > 50000:" → "decision tree splits"],
+            examples=["if age > 18: if income > 50000: -> decision tree splits"],
         ),
         
         # Database -> AI Literacy
@@ -207,7 +207,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Data aggregation summarizes information, similar to how AI extracts insights",
             prerequisites=["GROUP_BY", "aggregate_functions"],
-            examples=["SELECT AVG(salary)" → "statistical summary for ML"],
+            examples=["SELECT AVG(salary) -> statistical summary for ML"],
         ),
         ConceptMapping(
             source_concept="query_optimization",
@@ -218,7 +218,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.WEAK,
             explanation="Both involve finding the most efficient way to process information",
             prerequisites=["performance_tuning"],
-            examples=["query plan optimization" → "hyperparameter tuning"],
+            examples=["query plan optimization -> hyperparameter tuning"],
         ),
         ConceptMapping(
             source_concept="data_cleaning",
@@ -229,7 +229,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.STRONG,
             explanation="Data cleaning in SQL directly applies to ML preprocessing",
             prerequisites=["NULL_handling", "data_validation"],
-            examples=["DELETE NULL" → "imputation or removal"],
+            examples=["DELETE NULL -> imputation or removal"],
         ),
         
         # AI Literacy -> Python
@@ -242,7 +242,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Crafting prompts is like designing clear, effective function interfaces",
             prerequisites=["clear_instructions"],
-            examples=["well-structured prompt" → "clear function signature"],
+            examples=["well-structured prompt -> clear function signature"],
         ),
         ConceptMapping(
             source_concept="tokenization",
@@ -253,7 +253,7 @@ class CrossDomainTransferAnalyzer:
             strength=TransferStrength.MODERATE,
             explanation="Tokenization is advanced string splitting and processing",
             prerequisites=["string_methods", "split_join"],
-            examples=["text.split()" → "tokenization"],
+            examples=["text.split() -> tokenization"],
         ),
     ]
     
@@ -490,7 +490,7 @@ class CrossDomainTransferAnalyzer:
         avg_acceleration = sum(p.acceleration_factor for p in history) / len(history)
         
         domain_pairs = [
-            f"{p.source_domain.value} → {p.target_domain.value}"
+            f"{p.source_domain.value} -> {p.target_domain.value}"
             for p in history
         ]
         

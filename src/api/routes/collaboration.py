@@ -199,9 +199,9 @@ def get_room_participants(
 def post_collaboration_message(
     room_id: int,
     message: str,
-    message_type: str = "chat",  # chat, teaching_tip, question, celebration
     current_user: CurrentUser,
     db: DbSession,
+    message_type: str = "chat",
 ):
     """Post a message to the collaboration room."""
     # Verify participant
