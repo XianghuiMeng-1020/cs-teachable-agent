@@ -7,7 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  # 可选：运行测试
   test:
     runs-on: ubuntu-latest
     steps:
@@ -20,10 +19,24 @@ jobs:
       - name: Run tests
         run: pytest prototype/ -v || echo "No tests yet"
 
-  # 部署前端到 Cloudflare Pages（可选，如果你使用 Git 集成可以跳过）
+  deploy-backend-render:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    steps:
+      - name: Trigger Render Deploy
+        run: |
+          if [ -n "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" ]; then
+            curl -s "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+            echo "Render deploy triggered"
+          else
+            echo "RENDER_DEPLOY_HOOK_URL not set, skipping"
+          fi
+
   deploy-frontend:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    needs: test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -13,5 +13,9 @@ venv/
 docs/
 AI-assisted-Assessment-studio-main/
 *.docx
-*.md
-!requirements.txt
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+docs/*.md
+patent_figure/
+patent_application*.py
