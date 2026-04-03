@@ -32,7 +32,7 @@ jobs:
             curl -sf "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
             echo "Render deploy triggered"
           else
-            echo "RENDER_DEPLOY_HOOK_URL not set — Render auto-deploy via Git should handle it"
+            echo "RENDER_DEPLOY_HOOK_URL not set - Render auto-deploy via Git should handle it"
           fi
 
   deploy-frontend-cloudflare:
@@ -53,7 +53,6 @@ jobs:
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
       - name: Deploy to Cloudflare Pages
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
