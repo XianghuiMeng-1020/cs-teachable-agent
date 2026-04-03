@@ -178,6 +178,7 @@ class CollaborationRoom(Base):
     domain_id = Column(String(64), nullable=False, index=True)
     is_private = Column(Boolean, nullable=False, default=False)
     is_active = Column(Boolean, nullable=False, default=True)
+    max_participants = Column(Integer, nullable=False, default=10)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     participants = relationship("CollaborationParticipant", back_populates="room")
@@ -190,13 +191,14 @@ class CollaborationParticipant(Base):
     id = Column(Integer, primary_key=True, index=True)
     room_id = Column(Integer, ForeignKey("collaboration_rooms.id"), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    ta_id = Column(Integer, ForeignKey("ta_instances.id"), nullable=True)
+    ta_instance_id = Column(Integer, ForeignKey("ta_instances.id"), nullable=True)
     contribution_score = Column(Integer, nullable=False, default=0)
     joined_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_active_at = Column(DateTime(timezone=True), nullable=True)
 
     room = relationship("CollaborationRoom", back_populates="participants")
     user = relationship("User")
-    ta = relationship("TAInstance")
+    ta_instance = relationship("TAInstance")
 
 
 class CollaborationMessage(Base):

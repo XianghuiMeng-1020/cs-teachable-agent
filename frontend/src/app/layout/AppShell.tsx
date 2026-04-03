@@ -23,6 +23,9 @@ export function AppShell() {
     "/mastery": t("nav.mastery"),
     "/history": t("nav.history"),
     "/learning-analytics": t("nav.analytics"),
+    "/review": t("nav.review", { defaultValue: "间隔重复复习" }),
+    "/report": t("nav.report", { defaultValue: "学习报告" }),
+    "/collaborate": t("nav.collaborate", { defaultValue: "协作学习" }),
     "/teacher": t("nav.overview"),
     "/teacher/students": t("nav.students"),
     "/teacher/transcripts": t("nav.transcripts"),
@@ -70,7 +73,7 @@ export function AppShell() {
   }, [taListLoaded, taList.length, createTAMutation.isPending]);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-surface">
+    <div className="flex h-screen overflow-hidden bg-surface dark:bg-surfaceDark">
       <NetworkStatus />
       <UserGuide />
       {mobileMenuOpen && (

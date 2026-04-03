@@ -119,6 +119,58 @@ class AdaptiveTestGenerator:
                     "time": 12,
                 },
             ],
+            QuestionDifficulty.EXPERT: [
+                {
+                    "template": "Design a database schema for {complex_schema_design}. Include tables, relationships, indexes, and explain your design decisions.",
+                    "type": "analysis",
+                    "time": 15,
+                },
+            ],
+        },
+        "ai_literacy": {
+            QuestionDifficulty.EASY: [
+                {
+                    "template": "What is {concept}? Explain in your own words.",
+                    "type": "conceptual",
+                    "time": 3,
+                },
+                {
+                    "template": "List {number} common applications of {concept} in everyday life.",
+                    "type": "conceptual",
+                    "time": 5,
+                },
+            ],
+            QuestionDifficulty.MEDIUM: [
+                {
+                    "template": "Compare {concept_a} and {concept_b}. What are the key differences and when would you use each?",
+                    "type": "analysis",
+                    "time": 8,
+                },
+                {
+                    "template": "Given the scenario: {scenario}\nHow would you apply {concept} to solve this problem?",
+                    "type": "application",
+                    "time": 8,
+                },
+            ],
+            QuestionDifficulty.HARD: [
+                {
+                    "template": "Analyze the following AI system description:\n{system_description}\nWhat are the potential ethical concerns? How would you address them?",
+                    "type": "analysis",
+                    "time": 12,
+                },
+                {
+                    "template": "Design a prompt for {task} that accounts for {constraint}. Explain your prompt engineering choices.",
+                    "type": "application",
+                    "time": 10,
+                },
+            ],
+            QuestionDifficulty.EXPERT: [
+                {
+                    "template": "Critically evaluate the following AI use case:\n{use_case}\nConsider: technical feasibility, ethical implications, societal impact, and mitigation strategies for risks.",
+                    "type": "analysis",
+                    "time": 15,
+                },
+            ],
         },
     }
 

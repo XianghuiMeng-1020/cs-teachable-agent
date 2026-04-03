@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -32,11 +33,23 @@ export default {
           hover: "#F5F5F4",
           muted: "#F0EFED",
         },
+        surfaceDark: {
+          DEFAULT: "#0F0F10",
+          card: "#1A1A1B",
+          hover: "#252527",
+          muted: "#2A2A2C",
+        },
         ink: {
           DEFAULT: "#1C1917",
           secondary: "#57534E",
           tertiary: "#A8A29E",
           faint: "#D6D3D1",
+        },
+        inkDark: {
+          DEFAULT: "#FAFAF9",
+          secondary: "#A8A29E",
+          tertiary: "#78716C",
+          faint: "#57534E",
         },
         success: "#059669",
         warning: "#D97706",
@@ -46,6 +59,8 @@ export default {
         sans: ['"Source Sans 3"', "Inter", "system-ui", "sans-serif"],
         serif: ['"Source Serif 4"', "Georgia", "serif"],
         mono: ['"JetBrains Mono"', '"Fira Code"', "monospace"],
+        "mono-fira": ['"Fira Code"', "monospace"],
+        "mono-sf": ['"SF Mono"', "Menlo", "monospace"],
       },
       fontSize: {
         "display-lg": ["3.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
@@ -60,6 +75,9 @@ export default {
         "elevated": "0 8px 30px 0 rgba(28,25,23,0.08), 0 2px 8px -2px rgba(28,25,23,0.04)",
         "sidebar": "1px 0 0 0 rgba(28,25,23,0.06)",
         "inner-ring": "inset 0 0 0 1px rgba(28,25,23,0.06)",
+        "card-dark": "0 1px 2px 0 rgba(0,0,0,0.2), 0 1px 3px 0 rgba(0,0,0,0.3)",
+        "card-hover-dark": "0 4px 16px 0 rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.2)",
+        "elevated-dark": "0 8px 30px 0 rgba(0,0,0,0.5), 0 2px 8px -2px rgba(0,0,0,0.3)",
       },
       borderRadius: {
         xl: "0.875rem",
@@ -79,6 +97,7 @@ export default {
         "pulse-dot": "pulseDot 1.4s infinite ease-in-out both",
         "shimmer": "shimmer 2s infinite",
         "fade-in-up": "fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "theme-transition": "themeTransition 0.3s ease-out",
       },
       keyframes: {
         fadeIn: { "0%": { opacity: 0 }, "100%": { opacity: 1 } },
@@ -88,6 +107,10 @@ export default {
         scaleIn: { "0%": { opacity: 0, transform: "scale(0.96)" }, "100%": { opacity: 1, transform: "scale(1)" } },
         pulseDot: { "0%, 80%, 100%": { transform: "scale(0)" }, "40%": { transform: "scale(1)" } },
         shimmer: { "100%": { transform: "translateX(100%)" } },
+        themeTransition: { "0%": { opacity: 0.8 }, "100%": { opacity: 1 } },
+      },
+      transitionTimingFunction: {
+        "theme": "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },

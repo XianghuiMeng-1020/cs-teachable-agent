@@ -216,7 +216,6 @@ def post_collaboration_message(
     # Create message
     msg = CollaborationMessage(
         room_id=room_id,
-        participant_id=participant.id,
         user_id=current_user.id,
         message_type=message_type,
         content=message,

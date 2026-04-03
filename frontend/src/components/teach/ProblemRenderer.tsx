@@ -6,7 +6,7 @@ import { ShortCodeAnswer } from "./ShortCodeAnswer";
 import { ParsonsBlock } from "@/components/assessment/ParsonsBlock";
 import { DropdownBlanks } from "@/components/assessment/DropdownBlanks";
 import { ExecutionTrace } from "@/components/assessment/ExecutionTrace";
-import { Bug, Eye, Code, ListChecks, FileText, Puzzle, Terminal, Brain } from "lucide-react";
+import { Bug, Eye, Code, ListChecks, FileText, Puzzle, Terminal, Brain, RefreshCw, GitCompare, Database } from "lucide-react";
 
 export interface TeachProblem {
   problem_id: string;
@@ -42,6 +42,16 @@ export interface TeachProblem {
   function_source?: string;
   call_expression?: string;
   checkpoints?: { id: string; label: string; options: string[]; correct: string }[];
+  // refactoring
+  original_code?: string;
+  refactoring_goals?: string[];
+  quality_criteria?: string[];
+  // matching
+  pairs?: { concept: string; description: string }[];
+  // schema-design
+  schema_requirements?: string[];
+  expected_tables?: string[];
+  relationships?: { from: string; to: string; type: string }[];
 }
 
 export interface CodeModification {
@@ -115,6 +125,30 @@ const TYPE_CONFIG: Record<string, { label: string; icon: typeof Bug; color: stri
     bg: "bg-indigo-50", 
     border: "border-indigo-200",
     desc: "Follow the execution flow"
+  },
+  refactoring: { 
+    label: "Refactor Code", 
+    icon: RefreshCw, 
+    color: "text-cyan-700", 
+    bg: "bg-cyan-50", 
+    border: "border-cyan-200",
+    desc: "Improve code quality and readability"
+  },
+  matching: { 
+    label: "Match Concepts", 
+    icon: GitCompare, 
+    color: "text-pink-700", 
+    bg: "bg-pink-50", 
+    border: "border-pink-200",
+    desc: "Connect concepts with definitions"
+  },
+  "schema-design": { 
+    label: "Design Schema", 
+    icon: Database, 
+    color: "text-sky-700", 
+    bg: "bg-sky-50", 
+    border: "border-sky-200",
+    desc: "Create database structure"
   },
 };
 
@@ -294,15 +328,98 @@ export function ProblemRenderer({ problem, codeModifications, onStudentAnswer, d
     );
   }
 
+  // New problem types - basic implementations
+  if (t === "refactoring" && problem.original_code) {
+    return (
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4 space-y-4">
+          <div className="bg-stone-50 dark:bg-stone-800 rounded-lg p-4">
+            <p className="text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Original Code:</p>
+            <pre className="text-sm text-stone-600 dark:text-stone-400 font-mono">{problem.original_code}</pre>
+          </div>
+          {problem.refactoring_goals && (
+            <div>
+              <p className="text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Goals:</p>
+              <ul className="list-disc list-inside text-sm text-stone-600 dark:text-stone-400">
+                {problem.refactoring_goals.map((goal, i) => <li key={i}>{goal}</li>)}
+              </ul>
+            </div>
+          )}
+          <ShortCodeAnswer
+            problemStatement="Write your refactored code:"
+            starterCode={problem.original_code}
+            onAnswer={(code) => onStudentAnswer?.({ refactored_code: code })}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (t === "matching" && problem.pairs) {
+    return (
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4">
+          <div className="space-y-2">
+            {problem.pairs.map((pair, i) => (
+              <div key={i} className="flex items-center gap-4 p-3 bg-stone-50 dark:bg-stone-800 rounded-lg">
+                <div className="flex-1 font-medium text-stone-800 dark:text-stone-200">{pair.concept}</div>
+                <div className="text-stone-400">↔</div>
+                <div className="flex-1 text-stone-600 dark:text-stone-400">{pair.description}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-stone-500 dark:text-stone-500 mt-4 italic">
+            Matching exercises are evaluated automatically.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (t === "schema-design") {
+    return (
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4 space-y-4">
+          {problem.schema_requirements && (
+            <div>
+              <p className="text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2">Requirements:</p>
+              <ul className="list-disc list-inside text-sm text-stone-600 dark:text-stone-400">
+                {problem.schema_requirements.map((req, i) => <li key={i}>{req}</li>)}
+              </ul>
+            </div>
+          )}
+          <ShortCodeAnswer
+            problemStatement="Write your SQL schema (CREATE TABLE statements):"
+            starterCode="-- Define your tables here\n"
+            onAnswer={(code) => onStudentAnswer?.({ schema_code: code })}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+    );
+  }
+
   // Fallback: simple code display with header
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white dark:bg-surfaceDark-card">
       <ProblemTypeHeader problem={problem} />
       {problem.code && (
-        <div className="flex-1 overflow-auto bg-[#1a1a2e] p-4">
+        <div className="flex-1 overflow-auto bg-[#1a1a2e] dark:bg-[#0d0d1a] p-4">
           <pre className="text-sm font-mono text-stone-200 whitespace-pre-wrap select-none ocr-noise">
             {problem.code}
           </pre>
+        </div>
+      )}
+      {!problem.code && (
+        <div className="flex-1 flex items-center justify-center p-8">
+          <div className="text-center">
+            <p className="text-stone-400 dark:text-stone-500 text-sm">Problem type &quot;{problem.problem_type}&quot; rendering not yet implemented.</p>
+            <p className="text-stone-500 dark:text-stone-400 mt-2">{problem.problem_statement}</p>
+          </div>
         </div>
       )}
     </div>

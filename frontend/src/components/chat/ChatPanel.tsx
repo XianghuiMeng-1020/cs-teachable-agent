@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, MessageCircle, AlertCircle, CheckCircle, BarChart3, BookOpen, Lightbulb, Sparkles, Bot, ChevronDown } from "lucide-react";
+import { Send, MessageCircle, AlertCircle, CheckCircle, BarChart3, BookOpen, Lightbulb, Sparkles, Bot, ChevronDown, Command } from "lucide-react";
 import { teach, teachStream, getMessages, analyzeTeaching } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { MessageBubble } from "./MessageBubble";
@@ -34,8 +34,10 @@ interface ChatPanelProps {
 }
 
 const MAX_INPUT_LENGTH = 2000;
-const MIN_QUALITY_INPUT_LENGTH = 20;
-const QUALITY_CHECK_DEBOUNCE_MS = 800;
+const MIN_QUALITY_INPUT_LENGTH = 15;
+const QUALITY_CHECK_DEBOUNCE_MS = 400;
+const MIN_INPUT_ROWS = 2;
+const MAX_INPUT_ROWS = 8;
 
 // Simple debounce hook
 function useDebouncedCallback<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -43,7 +45,7 @@ function useDebouncedCallback<T extends (...args: Parameters<T>) => ReturnType<T
   delay: number
 ) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  
+
   return useCallback((...args: Parameters<T>) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -54,117 +56,174 @@ function useDebouncedCallback<T extends (...args: Parameters<T>) => ReturnType<T
   }, [callback, delay]);
 }
 
-// Enhanced Quality indicator component
-function QualityIndicator({ 
-  length, 
-  maxLength, 
-  qualityResult 
-}: { 
-  length: number; 
-  maxLength: number; 
+// Auto-resize textarea hook
+function useAutoResizeTextarea(minRows: number, maxRows: number) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [rows, setRows] = useState(minRows);
+
+  const adjustHeight = useCallback((value: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    // Reset to measure
+    textarea.rows = minRows;
+
+    // Calculate new rows based on scroll height
+    const lineHeight = parseInt(getComputedStyle(textarea).lineHeight, 10) || 20;
+    const padding = parseInt(getComputedStyle(textarea).paddingTop, 10) +
+                   parseInt(getComputedStyle(textarea).paddingBottom, 10);
+    const contentHeight = textarea.scrollHeight - padding;
+    const newRows = Math.min(
+      maxRows,
+      Math.max(minRows, Math.ceil(contentHeight / lineHeight))
+    );
+
+    setRows(newRows);
+  }, [minRows, maxRows]);
+
+  return { textareaRef, rows, adjustHeight };
+}
+
+// Enhanced Quality indicator component with dark mode support
+function QualityIndicator({
+  length,
+  maxLength,
+  qualityResult
+}: {
+  length: number;
+  maxLength: number;
   qualityResult: TeachingHelperResult | null;
 }) {
   const { t } = useTranslation();
   const isNearLimit = length > maxLength * 0.9;
   const isOverLimit = length > maxLength;
-  
+
   if (isOverLimit) {
     return (
-      <div className="flex items-center gap-1.5 text-xs text-rose-600 font-medium">
+      <div className="flex items-center gap-1.5 text-xs text-rose-600 dark:text-rose-400 font-medium">
         <AlertCircle className="w-3.5 h-3.5" />
         <span>{length}/{maxLength}</span>
       </div>
     );
   }
-  
+
   if (qualityResult) {
     const isGood = qualityResult.pattern === "good";
     return (
-      <div className={`flex items-center gap-1.5 text-xs font-medium ${isGood ? 'text-emerald-600' : 'text-amber-600'}`}>
+      <div className={`flex items-center gap-1.5 text-xs font-medium ${isGood ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
         {isGood ? <CheckCircle className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
         <span>
           {isGood
-            ? t("chat.qualityGood", { defaultValue: "Quality: Good" })
-            : t("chat.qualityNeedsImprovement", { defaultValue: "Quality: Needs improvement" })}
+            ? t("chat.qualityGood", { defaultValue: "质量: 良好" })
+            : t("chat.qualityNeedsImprovement", { defaultValue: "质量: 需改进" })}
         </span>
       </div>
     );
   }
-  
+
   return (
-    <div className={`flex items-center gap-1.5 text-xs font-medium ${isNearLimit ? 'text-amber-600' : 'text-stone-400'}`}>
+    <div className={`flex items-center gap-1.5 text-xs font-medium ${isNearLimit ? 'text-amber-600 dark:text-amber-400' : 'text-stone-400 dark:text-stone-500'}`}>
       <BarChart3 className="w-3.5 h-3.5" />
       <span>{length}/{maxLength}</span>
     </div>
   );
 }
 
-// Empty state with guided steps
+// Enhanced keyboard shortcut hint with icons
+function KeyboardHint() {
+  const isMac = typeof navigator !== "undefined" && navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+
+  return (
+    <div className="flex items-center gap-2 text-[10px] text-stone-400 dark:text-stone-500 mt-1.5">
+      <span className="flex items-center gap-1">
+        <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
+          {isMac ? "⌘" : "Ctrl"}
+        </kbd>
+        <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
+          Enter
+        </kbd>
+        <span>发送</span>
+      </span>
+      <span className="text-stone-300 dark:text-stone-600">|</span>
+      <span className="flex items-center gap-1">
+        <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
+          Shift
+        </kbd>
+        <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
+          Enter
+        </kbd>
+        <span>换行</span>
+      </span>
+    </div>
+  );
+}
+
+// Empty state with guided steps - enhanced with dark mode
 function EmptyStateGuide({ onStart }: { onStart: () => void }) {
   const { t } = useTranslation();
   const steps = [
-    { 
-      icon: BookOpen, 
-      title: "Read the Problem", 
-      desc: "Understand what the code should do",
-      color: "bg-blue-50 text-blue-600 border-blue-200"
+    {
+      icon: BookOpen,
+      title: t("chat.step1", { defaultValue: "阅读问题" }),
+      desc: t("chat.step1Desc", { defaultValue: "理解代码应该做什么" }),
+      color: "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800"
     },
-    { 
-      icon: Lightbulb, 
-      title: "Explain the Concept", 
-      desc: "Teach the AI agent the logic step by step",
-      color: "bg-amber-50 text-amber-600 border-amber-200"
+    {
+      icon: Lightbulb,
+      title: t("chat.step2", { defaultValue: "解释概念" }),
+      desc: t("chat.step2Desc", { defaultValue: "一步步教AI代理逻辑" }),
+      color: "bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800"
     },
-    { 
-      icon: Sparkles, 
-      title: "Watch it Learn", 
-      desc: "See the agent apply your teaching to solve it",
-      color: "bg-emerald-50 text-emerald-600 border-emerald-200"
+    {
+      icon: Sparkles,
+      title: t("chat.step3", { defaultValue: "观察学习" }),
+      desc: t("chat.step3Desc", { defaultValue: "看代理如何应用你的教学" }),
+      color: "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
     },
   ];
 
   return (
     <div className="flex flex-col items-center justify-center h-full px-6 py-8 text-center">
-      <motion.div 
+      <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="w-16 h-16 bg-gradient-to-br from-brand-100 to-brand-200 rounded-2xl flex items-center justify-center mb-4 shadow-lg"
+        className="w-16 h-16 bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/50 dark:to-brand-800/30 rounded-2xl flex items-center justify-center mb-4 shadow-lg"
       >
-        <Bot className="w-8 h-8 text-brand-600" />
+        <Bot className="w-8 h-8 text-brand-600 dark:text-brand-400" />
       </motion.div>
-      
-      <motion.h3 
+
+      <motion.h3
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.1 }}
-        className="text-lg font-bold text-stone-800 mb-1"
+        className="text-lg font-bold text-stone-800 dark:text-stone-200 mb-1"
       >
-        Teach Your AI Agent
+        {t("chat.emptyTitle", { defaultValue: "教你的AI代理" })}
       </motion.h3>
-      
-      <motion.p 
+
+      <motion.p
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.15 }}
-        className="text-sm text-stone-500 mb-6 max-w-[240px]"
+        className="text-sm text-stone-500 dark:text-stone-400 mb-6 max-w-[240px]"
       >
-        Guide your agent to understand programming by explaining concepts clearly
+        {t("chat.emptyDesc", { defaultValue: "通过清晰地解释概念来引导你的代理理解编程" })}
       </motion.p>
-      
+
       {/* Step cards */}
-      <motion.div 
+      <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
         className="w-full max-w-[280px] space-y-2"
       >
         {steps.map((step, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className={`flex items-center gap-3 p-2.5 rounded-xl border ${step.color} transition-transform hover:scale-[1.02] cursor-default`}
           >
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-white/60`}>
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-white/60 dark:bg-black/20`}>
               <step.icon className="w-4 h-4" />
             </div>
             <div className="text-left">
@@ -174,15 +233,15 @@ function EmptyStateGuide({ onStart }: { onStart: () => void }) {
           </div>
         ))}
       </motion.div>
-      
+
       <motion.button
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.35 }}
         onClick={onStart}
-        className="mt-6 flex items-center gap-2 text-xs font-medium text-brand-600 hover:text-brand-700 transition-colors"
+        className="mt-6 flex items-center gap-2 text-xs font-medium text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 transition-colors tap-target"
       >
-        Start by typing below
+        {t("chat.startTyping", { defaultValue: "在下方开始输入" })}
         <motion.div
           animate={{ y: [0, 4, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -205,7 +264,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastCheckRef = useRef<string>("");
   const sendTimestampRef = useRef<number>(0);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const { textareaRef: inputRef, rows, adjustHeight } = useAutoResizeTextarea(MIN_INPUT_ROWS, MAX_INPUT_ROWS);
 
   // Anti-cheat: detect rapid paste-like typing
   const onTypingInput = useTypingCadence(25, 400);
@@ -227,8 +286,10 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
       });
       onLineRefUsed?.();
       inputRef.current?.focus();
+      // Adjust height after auto-insert
+      setTimeout(() => adjustHeight(inputRef.current?.value || ""), 0);
     }
-  }, [lineRef, loading, onLineRefUsed]);
+  }, [lineRef, loading, onLineRefUsed, inputRef, adjustHeight]);
 
   const { data: messagesData } = useQuery({
     queryKey: ["ta", taId, "messages"],
@@ -236,15 +297,15 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     enabled: !!taId,
   });
 
-  // Auto quality check with debounce
+  // Auto quality check with optimized debounce (400ms)
   const performQualityCheck = useCallback(async (text: string) => {
     if (!taId || text.length < MIN_QUALITY_INPUT_LENGTH) {
       setTeachingHelperResult(null);
       return;
     }
-    
+
     if (text === lastCheckRef.current && teachingHelperResult) return;
-    
+
     setIsCheckingQuality(true);
     try {
       const result = await analyzeTeaching(taId, text.trim());
@@ -298,6 +359,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     const newValue = e.target.value;
     if (newValue.length <= MAX_INPUT_LENGTH) {
       setInput(newValue);
+      adjustHeight(newValue);
       if (Math.abs(newValue.length - (lastCheckRef.current?.length ?? 0)) > 10) {
         debouncedQualityCheck(newValue);
       }
@@ -311,6 +373,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     sendTimestampRef.current = Date.now();
     setInput("");
     setTeachingHelperResult(null);
+    adjustHeight(""); // Reset height
     const now = new Date().toISOString();
     setLocalMessages((m) => [
       ...m,
@@ -383,7 +446,9 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    // Support both Ctrl+Enter and plain Enter for sending
+    if ((e.key === "Enter" && !e.shiftKey && !e.isComposing) ||
+        (e.key === "Enter" && (e.metaKey || e.ctrlKey))) {
       e.preventDefault();
       handleSend();
     }
@@ -428,28 +493,28 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
   const hasMessages = messages.length > 0 || loading;
 
   return (
-    <div className="flex h-full flex-col bg-white">
-      {/* Enhanced Header */}
-      <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3">
+    <div className="flex h-full flex-col bg-white dark:bg-surfaceDark-card transition-colors duration-300">
+      {/* Enhanced Header with dark mode */}
+      <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-700 px-4 py-3">
         <div className="flex items-center gap-3">
           {/* AI Agent avatar */}
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center shadow-sm">
-            <Bot className="w-5 h-5 text-brand-600" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/50 dark:to-brand-800/30 flex items-center justify-center shadow-sm">
+            <Bot className="w-5 h-5 text-brand-600 dark:text-brand-400" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-stone-800">AI Agent</p>
-            <div className="flex items-center gap-1.5 text-xs text-stone-500">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Ready to learn
+            <p className="text-sm font-semibold text-stone-800 dark:text-stone-200">AI Agent</p>
+            <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-stone-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              {t("chat.readyToLearn", { defaultValue: "准备好学习" })}
             </div>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <ModeIndicator taMessageCount={taMessageCount} compact />
           {taMessageCount > 0 && (
-            <span className="text-xs text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">
-              {taMessageCount} messages
+            <span className="text-xs text-stone-400 dark:text-stone-500 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded-full">
+              {taMessageCount} {t("chat.messages", { defaultValue: "条消息" })}
             </span>
           )}
         </div>
@@ -496,11 +561,11 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
         </AnimatePresence>
       </div>
 
-      {/* Enhanced Input area */}
-      <div className="border-t border-stone-200 p-4 bg-stone-50/50">
+      {/* Enhanced Input area with auto-resize and dark mode */}
+      <div className="border-t border-stone-200 dark:border-stone-700 p-4 bg-stone-50/50 dark:bg-stone-900/50">
         <AnimatePresence>
           {teachingHelperResult && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -513,56 +578,60 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
             </motion.div>
           )}
         </AnimatePresence>
-        
-        <div className="flex gap-3">
+
+        <div className="flex gap-3 items-end">
           <div className="flex-1 relative">
             <textarea
               ref={inputRef}
               placeholder={t("chat.inputPlaceholder", {
-                defaultValue: "Explain the concept to teach your AI agent...",
+                defaultValue: "解释概念来教你的AI代理...",
               })}
               value={input}
               onChange={handleInputChange}
               onInput={onTypingInput}
               onKeyDown={handleKeyDown}
               data-allow-clipboard="true"
-              className="w-full min-h-[52px] max-h-40 resize-y rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm placeholder:text-stone-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:bg-stone-100 disabled:text-stone-500 transition-all shadow-sm"
+              className="w-full resize-none rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-surfaceDark-card px-4 py-3 text-sm text-ink dark:text-inkDark placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:border-brand-500 dark:focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20 dark:focus:ring-brand-400/20 focus:outline-none disabled:bg-stone-100 dark:disabled:bg-stone-800 disabled:text-stone-500 dark:disabled:text-stone-600 transition-all shadow-sm dark:shadow-none"
               disabled={!taId || loading}
-              rows={2}
+              rows={rows}
               maxLength={MAX_INPUT_LENGTH}
+              aria-label={t("chat.inputAriaLabel", { defaultValue: "输入教学说明" })}
+              aria-describedby="input-hint"
             />
             <div className="absolute bottom-2 right-3">
-              <QualityIndicator 
-                length={input.length} 
-                maxLength={MAX_INPUT_LENGTH} 
+              <QualityIndicator
+                length={input.length}
+                maxLength={MAX_INPUT_LENGTH}
                 qualityResult={teachingHelperResult}
               />
             </div>
-            {/* Shift+Enter hint */}
-            <div className="absolute -bottom-5 right-0 text-[10px] text-stone-400">
-              Shift+Enter for new line
+            {/* Enhanced keyboard hint */}
+            <div id="input-hint">
+              <KeyboardHint />
             </div>
           </div>
-          
+
           <Button
             variant="outline"
             onClick={handleCheckQuality}
             disabled={!taId || loading || !input.trim() || isCheckingQuality}
             loading={isCheckingQuality}
-            className="shrink-0 h-[52px] px-4"
-            title={t("chat.checkTeachingQualityTitle", { defaultValue: "Check teaching quality" })}
+            className="shrink-0 h-[52px] px-4 tap-target"
+            title={t("chat.checkTeachingQualityTitle", { defaultValue: "检查教学质量" })}
+            aria-label={t("chat.checkTeachingQualityTitle", { defaultValue: "检查教学质量" })}
           >
-            {t("chat.check", { defaultValue: "Check" })}
+            {t("chat.check", { defaultValue: "检查" })}
           </Button>
-          
+
           <Button
             icon={Send}
             onClick={handleSend}
             disabled={!taId || !input.trim() || loading || input.length > MAX_INPUT_LENGTH}
-            title={t("chat.sendMessageTitle", { defaultValue: "Send message" })}
-            className="shrink-0 h-[52px] px-5 bg-brand-600 hover:bg-brand-700 text-white"
+            title={t("chat.sendMessageTitle", { defaultValue: "发送消息" })}
+            className="shrink-0 h-[52px] px-5 bg-brand-600 hover:bg-brand-700 text-white tap-target"
+            aria-label={t("chat.sendMessageTitle", { defaultValue: "发送消息" })}
           >
-            {t("chat.send", { defaultValue: "Send" })}
+            {t("chat.send", { defaultValue: "发送" })}
           </Button>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { GripVertical, Trophy, ArrowRight, PanelLeftClose, PanelLeft } from "lucide-react";
+import { GripVertical, Trophy, ArrowRight, PanelLeftClose, PanelLeft, Maximize2, Minimize2 } from "lucide-react";
 import { useAppStore } from "@/stores/appStore";
 import { getState, getProblems, getTA, me } from "@/api/client";
 import { ChatPanel } from "@/components/chat/ChatPanel";
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/Button";
 import type { TeachProblem, CodeModification } from "@/components/teach/ProblemRenderer";
 
 const MASTERY_THRESHOLD = 80;
+const MOBILE_BREAKPOINT = 768;
 
 interface TopicGroupInfo {
   name: string;
@@ -25,10 +26,18 @@ interface TopicGroupInfo {
   problem_types: string[];
 }
 
+type ViewMode = "split" | "problem" | "chat";
+
 export function TeachPage() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const currentTaId = useAppStore((s) => s.currentTaId);
+
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < MOBILE_BREAKPOINT : false
+  );
+  const [mobileView, setMobileView] = useState<ViewMode>("split");
 
   // Sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -42,6 +51,27 @@ export function TeachPage() {
   const [splitPercent, setSplitPercent] = useState(50);
   const dragging = useRef(false);
   const rightRef = useRef<HTMLDivElement>(null);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarOpen(false);
+        if (mobileView === "split") {
+          setMobileView("problem");
+        }
+      } else {
+        setSidebarOpen(true);
+        setMobileView("split");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, [mobileView]);
 
   // Queries
   const { data: state } = useQuery({
@@ -143,7 +173,10 @@ export function TeachPage() {
   const [lineRef, setLineRef] = useState<string | null>(null);
   const handleLineClick = useCallback((lineNum: number, lineContent: string) => {
     setLineRef(`[Line ${lineNum}] ${lineContent.trim()}`);
-  }, []);
+    if (isMobile) {
+      setMobileView("chat");
+    }
+  }, [isMobile]);
 
   // Reset when problem changes
   useEffect(() => {
@@ -174,9 +207,16 @@ export function TeachPage() {
   };
   const goSkip = () => goNextInTopic();
 
-  // Drag resize
-  const handleMouseDown = useCallback(() => { dragging.current = true; }, []);
+  // Drag resize - disabled on mobile
+  const handleMouseDown = useCallback(() => {
+    if (!isMobile) {
+      dragging.current = true;
+    }
+  }, [isMobile]);
+
   useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!dragging.current || !rightRef.current) return;
       const rect = rightRef.current.getBoundingClientRect();
@@ -190,7 +230,7 @@ export function TeachPage() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  }, [isMobile]);
 
   const goNextTopic = () => {
     setShowMasteredBanner(false);
@@ -202,19 +242,49 @@ export function TeachPage() {
     }
   };
 
+  // Mobile view toggle button
+  const MobileViewToggle = () => (
+    <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-800 rounded-lg p-1">
+      <button
+        onClick={() => setMobileView("problem")}
+        className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors tap-target ${
+          mobileView === "problem"
+            ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-sm"
+            : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+        }`}
+        aria-label="查看问题"
+        aria-pressed={mobileView === "problem"}
+      >
+        问题
+      </button>
+      <button
+        onClick={() => setMobileView("chat")}
+        className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors tap-target ${
+          mobileView === "chat"
+            ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-sm"
+            : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+        }`}
+        aria-label="查看对话"
+        aria-pressed={mobileView === "chat"}
+      >
+        对话
+      </button>
+    </div>
+  );
+
   return (
     <AntiCaptureOverlay>
       <AntiCheatShell enabled>
         <div className="h-[calc(100vh-var(--topbar-height)-24px)] flex relative select-none">
-          {/* LEFT SIDEBAR: Topic Browser */}
+          {/* LEFT SIDEBAR: Topic Browser - Hidden on mobile */}
           <AnimatePresence>
-            {sidebarOpen && (
+            {sidebarOpen && !isMobile && (
               <motion.div
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: 256, opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="shrink-0 border-r border-stone-200 bg-white overflow-hidden flex flex-col rounded-l-2xl shadow-lg"
+                className="shrink-0 border-r border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card overflow-hidden flex flex-col rounded-l-2xl shadow-lg"
               >
                 <TopicBrowser
                   problems={problems}
@@ -226,28 +296,77 @@ export function TeachPage() {
             )}
           </AnimatePresence>
 
+          {/* Mobile sidebar overlay */}
+          <AnimatePresence>
+            {sidebarOpen && isMobile && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setSidebarOpen(false)}
+                />
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "-100%" }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="fixed left-0 top-0 bottom-0 z-50 w-[280px] bg-white dark:bg-surfaceDark-card shadow-elevated dark:shadow-elevated-dark"
+                >
+                  <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700">
+                    <h2 className="font-semibold text-stone-900 dark:text-stone-100">选择主题</h2>
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 tap-target"
+                      aria-label="关闭侧边栏"
+                    >
+                      <Minimize2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <TopicBrowser
+                    problems={problems}
+                    topicGroups={topicGroups}
+                    selectedProblemId={selectedProblemId}
+                    onSelectProblem={(id) => {
+                      setSelectedProblemId(id);
+                      setSidebarOpen(false);
+                    }}
+                  />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+
           {/* MAIN AREA: Problem + Chat */}
           <div ref={rightRef} className="flex-1 flex min-w-0 relative">
             {/* Problem Panel */}
             <div
-              className="flex flex-col min-h-0 border-r border-stone-200 bg-white overflow-hidden"
-              style={{ width: `${splitPercent}%` }}
+              className={`flex flex-col min-h-0 border-r border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card overflow-hidden transition-all duration-300 ${
+                isMobile ? (mobileView === "problem" ? "w-full" : "hidden") : ""
+              }`}
+              style={isMobile ? undefined : { width: `${splitPercent}%` }}
             >
               {/* Header bar - Enhanced */}
-              <div className="flex items-center gap-3 px-4 py-2 border-b border-stone-200 bg-white shrink-0 shadow-sm">
+              <div className="flex items-center gap-3 px-4 py-2 border-b border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card shrink-0 shadow-sm">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="p-1.5 rounded-lg hover:bg-stone-100 text-stone-500 hover:text-stone-700 transition-all btn-press"
-                  title={sidebarOpen ? "Collapse sidebar" : "Show sidebar"}
+                  className="p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300 transition-all tap-target"
+                  title={sidebarOpen ? "收起侧边栏" : "展开侧边栏"}
+                  aria-label={sidebarOpen ? "收起侧边栏" : "展开侧边栏"}
                 >
                   {sidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
                 </button>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 text-xs font-semibold bg-brand-100 text-brand-700 rounded-lg border border-brand-200">
+                  <span className="px-2.5 py-1 text-xs font-semibold bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 rounded-lg border border-brand-200 dark:border-brand-800">
                     {domainId.toUpperCase()}
                   </span>
-                  <span className="text-xs text-stone-400 font-medium">{t("teach.title", { defaultValue: "Teach" })}</span>
+                  <span className="text-xs text-stone-400 dark:text-stone-500 font-medium">{t("teach.title", { defaultValue: "教学" })}</span>
                 </div>
+
+                {/* Mobile view toggle */}
+                {isMobile && <MobileViewToggle />}
+
                 <div className="flex-1" />
                 <ProctorBadge />
               </div>
@@ -269,19 +388,33 @@ export function TeachPage() {
               />
             </div>
 
-            {/* DRAG HANDLE - Enhanced with hover expansion */}
-            <div
-              onMouseDown={handleMouseDown}
-              className="w-1.5 shrink-0 cursor-col-resize bg-stone-100 hover:bg-brand-400 hover:w-2 transition-all duration-150 flex items-center justify-center z-10 group"
-            >
-              <GripVertical className="w-3 h-3 text-stone-400 group-hover:text-brand-600 transition-colors" />
-            </div>
+            {/* DRAG HANDLE - Hidden on mobile */}
+            {!isMobile && (
+              <div
+                onMouseDown={handleMouseDown}
+                className="w-1.5 shrink-0 cursor-col-resize bg-stone-100 dark:bg-stone-800 hover:bg-brand-400 dark:hover:bg-brand-600 hover:w-2 transition-all duration-150 flex items-center justify-center z-10 group"
+                role="separator"
+                aria-orientation="vertical"
+                aria-label="调整面板大小"
+              >
+                <GripVertical className="w-3 h-3 text-stone-400 dark:text-stone-600 group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors" />
+              </div>
+            )}
 
             {/* Chat Panel */}
             <div
-              className="flex flex-col min-h-0 bg-white overflow-hidden rounded-r-2xl shadow-lg"
-              style={{ width: `${100 - splitPercent}%` }}
+              className={`flex flex-col min-h-0 bg-white dark:bg-surfaceDark-card overflow-hidden rounded-r-2xl shadow-lg transition-all duration-300 ${
+                isMobile ? (mobileView === "chat" ? "w-full" : "hidden") : ""
+              }`}
+              style={isMobile ? undefined : { width: `${100 - splitPercent}%` }}
             >
+              {/* Mobile header for chat */}
+              {isMobile && mobileView === "chat" && (
+                <div className="flex items-center gap-3 px-4 py-2 border-b border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card shrink-0">
+                  <MobileViewToggle />
+                  <div className="flex-1" />
+                </div>
+              )}
               <ChatPanel
                 taId={currentTaId}
                 problemContext={currentProblem ? { problem_id: currentProblem.problem_id, problem_type: currentProblem.problem_type } : undefined}
@@ -298,32 +431,33 @@ export function TeachPage() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 30, scale: 0.95 }}
                   transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                  className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50"
+                  className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 px-4"
                 >
-                  <div className="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-4 rounded-2xl shadow-2xl ring-1 ring-emerald-400/30">
+                  <div className="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-4 rounded-2xl shadow-2xl ring-1 ring-emerald-400/30 max-w-[90vw] sm:max-w-md">
                     <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
                       <Trophy className="w-6 h-6 text-yellow-300" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-bold text-base">
-                        {t("teach.masteredBanner", { defaultValue: "Topic Mastered!" })}
+                        {t("teach.masteredBanner", { defaultValue: "主题已掌握!" })}
                       </p>
-                      <p className="text-sm text-emerald-100/90">
-                        {t("teach.masteredDesc", { defaultValue: "You've reached 80% mastery. Ready for the next challenge?" })}
+                      <p className="text-sm text-emerald-100/90 hidden sm:block">
+                        {t("teach.masteredDesc", { defaultValue: "已达到 80% 掌握度。准备好迎接下一个挑战了吗?" })}
                       </p>
                     </div>
                     <Button
                       variant="outline"
                       icon={ArrowRight}
                       onClick={goNextTopic}
-                      className="ml-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60"
+                      className="ml-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 shrink-0"
                     >
-                      {t("teach.nextTopic", { defaultValue: "Next Topic" })}
+                      <span className="hidden sm:inline">{t("teach.nextTopic", { defaultValue: "下一主题" })}</span>
+                      <span className="sm:hidden">下一</span>
                     </Button>
                     <button
                       onClick={() => setShowMasteredBanner(false)}
-                      className="ml-1 p-1 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                      aria-label="Dismiss"
+                      className="ml-1 p-1 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors tap-target shrink-0"
+                      aria-label="关闭"
                     >
                       ✕
                     </button>

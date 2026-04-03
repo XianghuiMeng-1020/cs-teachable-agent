@@ -43,7 +43,7 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
 
   return (
     <div className="mt-2.5 space-y-1.5">
-      <div className="h-1 w-full overflow-hidden rounded-full bg-stone-200">
+      <div className="h-1 w-full overflow-hidden rounded-full bg-stone-200 dark:bg-stone-700">
         <div
           className={`h-full ${level.color} transition-all duration-300`}
           style={{ width: `${width}%` }}
@@ -51,7 +51,7 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
       </div>
       <div className="flex items-center justify-between">
         <span className={`text-xs font-medium ${level.textColor}`}>{level.label}</span>
-        <span className="text-xs text-stone-400">{password.length} chars</span>
+        <span className="text-xs text-stone-400 dark:text-stone-500">{password.length} chars</span>
       </div>
     </div>
   );
@@ -113,7 +113,7 @@ export function LoginPage() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* Left panel */}
-      <div className="hidden lg:flex flex-col justify-between bg-stone-900 p-12">
+      <div className="hidden lg:flex flex-col justify-between bg-stone-900 dark:bg-black p-12">
         <div>
           <Link to="/" className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
@@ -147,31 +147,31 @@ export function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-stone-600">{t("login.brandLine")}</p>
+        <p className="text-xs text-stone-600 dark:text-stone-700">{t("login.brandLine")}</p>
       </div>
 
       {/* Right panel */}
-      <div className="flex items-center justify-center bg-surface p-6 sm:p-12">
+      <div className="flex items-center justify-center bg-surface dark:bg-surfaceDark p-6 sm:p-12">
         <div className="w-full max-w-[400px]">
           {/* Mobile logo */}
           <Link to="/" className="mb-8 flex items-center gap-2.5 lg:hidden">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-stone-900">ARTS-CS</span>
+            <span className="text-lg font-semibold text-stone-900 dark:text-stone-100">ARTS-CS</span>
           </Link>
 
           <Tabs.Root value={activeTab} onValueChange={(v) => setActiveTab(v as "login" | "register")}>
-            <Tabs.List className="mb-8 flex rounded-lg bg-stone-100 p-1">
+            <Tabs.List className="mb-8 flex rounded-lg bg-stone-100 dark:bg-stone-800 p-1">
               <Tabs.Trigger
                 value="login"
-                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
+                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 dark:text-stone-400 transition-all data-[state=active]:bg-white data-[state=active]:dark:bg-surfaceDark-card data-[state=active]:text-stone-900 data-[state=active]:dark:text-stone-100 data-[state=active]:shadow-sm"
               >
                 {t("common.signIn")}
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="register"
-                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 transition-all data-[state=active]:bg-white data-[state=active]:text-stone-900 data-[state=active]:shadow-sm"
+                className="flex-1 rounded-md px-4 py-2 text-sm font-medium text-stone-500 dark:text-stone-400 transition-all data-[state=active]:bg-white data-[state=active]:dark:bg-surfaceDark-card data-[state=active]:text-stone-900 data-[state=active]:dark:text-stone-100 data-[state=active]:shadow-sm"
               >
                 {t("common.createAccount")}
               </Tabs.Trigger>
@@ -179,8 +179,8 @@ export function LoginPage() {
 
             <Tabs.Content value="login">
               <div className="mb-6">
-                <h2 className="font-serif text-2xl font-bold text-stone-900">{t("common.welcomeBack")}</h2>
-                <p className="mt-1 text-sm text-stone-500">{t("login.signInDesc")}</p>
+                <h2 className="font-serif text-2xl font-bold text-stone-900 dark:text-stone-100">{t("common.welcomeBack")}</h2>
+                <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">{t("login.signInDesc")}</p>
               </div>
               <form onSubmit={handleLogin} className="space-y-4">
                 <Input
@@ -217,8 +217,8 @@ export function LoginPage() {
 
             <Tabs.Content value="register">
               <div className="mb-6">
-                <h2 className="font-serif text-2xl font-bold text-stone-900">{t("common.createAccount")}</h2>
-                <p className="mt-1 text-sm text-stone-500">{t("login.registerDesc")}</p>
+                <h2 className="font-serif text-2xl font-bold text-stone-900 dark:text-stone-100">{t("common.createAccount")}</h2>
+                <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">{t("login.registerDesc")}</p>
               </div>
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>

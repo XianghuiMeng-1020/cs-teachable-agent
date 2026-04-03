@@ -73,6 +73,13 @@ pre ::selection {
   scroll-behavior: smooth;
 }
 
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .smooth-scroll {
+    scroll-behavior: auto;
+  }
+}
+
 /* OCR noise animation - optimized */
 @keyframes noise {
   0%, 100% { transform: translate(0, 0); }
@@ -107,9 +114,23 @@ pre ::selection {
   opacity: 0.5;
 }
 
+/* Reduced motion: disable noise animation */
+@media (prefers-reduced-motion: reduce) {
+  .ocr-noise::after {
+    animation: none;
+  }
+}
+
 /* Focus ring animation */
 .focus-ring-animate:focus {
   animation: focusPulse 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-ring-animate:focus {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+  }
 }
 
 @keyframes focusPulse {
@@ -124,9 +145,17 @@ pre ::selection {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Card hover lift animation */
+/* Card hover lift animation - with reduced motion support */
 .card-hover-lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover-lift {
+    transition: none;
+    will-change: auto;
+  }
 }
 
 .card-hover-lift:hover {
@@ -134,9 +163,23 @@ pre ::selection {
   box-shadow: 0 8px 30px 0 rgba(28, 25, 23, 0.08), 0 2px 8px -2px rgba(28, 25, 23, 0.04);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .card-hover-lift:hover {
+    transform: none;
+  }
+}
+
 /* Teach page specific - sidebar animations */
 .sidebar-enter {
   animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-enter {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 @keyframes slideIn {
@@ -153,12 +196,21 @@ pre ::selection {
 /* Mastery bar glow effect */
 .mastery-glow {
   box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+  will-change: box-shadow;
 }
 
 /* Drag handle enhancement */
 .drag-handle {
   cursor: col-resize;
   transition: background-color 0.15s ease, width 0.15s ease;
+  will-change: width, background-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drag-handle {
+    transition: none;
+    will-change: auto;
+  }
 }
 
 .drag-handle:hover {
@@ -174,11 +226,30 @@ pre ::selection {
 
 .attention-pulse {
   animation: attentionPulse 2s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attention-pulse {
+    animation: none;
+    will-change: auto;
+    opacity: 1;
+  }
 }
 
 /* Fade transition for content switching */
 .fade-enter {
   animation: fadeEnter 0.3s ease-out;
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-enter {
+    animation: none;
+    will-change: auto;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes fadeEnter {
@@ -189,6 +260,14 @@ pre ::selection {
 /* Button press effect */
 .btn-press:active {
   transform: scale(0.96);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-press:active {
+    transform: none;
+    will-change: auto;
+  }
 }
 
 /* Line highlight animation for code */
@@ -201,9 +280,16 @@ pre ::selection {
   animation: lineHighlight 0.5s ease-out forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .line-highlight {
+    animation: none;
+    background-color: rgba(59, 130, 246, 0.08);
+  }
+}
+
 /* Bug fix celebration animation */
 @keyframes fixCelebration {
-  0% { 
+  0% {
     background-color: rgba(52, 211, 153, 0.4);
     transform: scaleX(0);
   }
@@ -211,13 +297,22 @@ pre ::selection {
     background-color: rgba(52, 211, 153, 0.2);
     transform: scaleX(1);
   }
-  100% { 
+  100% {
     background-color: rgba(52, 211, 153, 0.08);
   }
 }
 
 .fix-celebration {
   animation: fixCelebration 0.8s ease-out forwards;
+  will-change: transform, background-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fix-celebration {
+    animation: none;
+    will-change: auto;
+    background-color: rgba(52, 211, 153, 0.08);
+  }
 }
 
 /* Prevent text selection on anti-cheat elements */
@@ -232,4 +327,30 @@ pre ::selection {
     min-height: 44px;
     min-width: 44px;
   }
+}
+
+/* GPU acceleration hints for animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Content visibility for off-screen elements */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Reduce paint areas */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-strict {
+  contain: strict;
 }

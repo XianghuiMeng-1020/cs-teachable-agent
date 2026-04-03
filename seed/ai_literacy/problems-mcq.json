@@ -1,0 +1,185 @@
+{
+  "version": "1.0",
+  "description": "Multiple choice and scenario-based problems for AI Literacy domain",
+  "problems": [
+    {
+      "problem_id": "ai_mcq_001",
+      "problem_statement": "What is the primary difference between traditional programming and machine learning?",
+      "problem_type": "multiple-choice",
+      "difficulty": "easy",
+      "topic_group": "basics",
+      "knowledge_units_tested": ["ai_vs_traditional_programming"],
+      "choices": [
+        { "id": "a", "text": "Machine learning requires more memory than traditional programming" },
+        { "id": "b", "text": "Traditional programming uses explicit rules, while machine learning learns patterns from data" },
+        { "id": "c", "text": "Machine learning is faster than traditional programming" },
+        { "id": "d", "text": "Traditional programming cannot process large datasets" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_002",
+      "problem_statement": "Which of the following is an example of supervised learning?",
+      "problem_type": "multiple-choice",
+      "difficulty": "easy",
+      "topic_group": "basics",
+      "knowledge_units_tested": ["supervised_learning"],
+      "choices": [
+        { "id": "a", "text": "A system that clusters customers based on purchasing behavior without labels" },
+        { "id": "b", "text": "A spam filter trained on emails labeled as 'spam' or 'not spam'" },
+        { "id": "c", "text": "A robot learning to walk through trial and error" },
+        { "id": "d", "text": "A game AI that discovers new strategies by playing itself" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_003",
+      "problem_statement": "What is 'overfitting' in machine learning?",
+      "problem_type": "multiple-choice",
+      "difficulty": "medium",
+      "topic_group": "ml",
+      "knowledge_units_tested": ["overfitting_underfitting"],
+      "choices": [
+        { "id": "a", "text": "When a model performs well on training data but poorly on new data" },
+        { "id": "b", "text": "When a model requires too much computational power" },
+        { "id": "c", "text": "When training takes too long to complete" },
+        { "id": "d", "text": "When the dataset is too large for the model" }
+      ],
+      "correct_choice_ids": ["a"]
+    },
+    {
+      "problem_id": "ai_mcq_004",
+      "problem_statement": "Which AI ethics concern is most relevant when a hiring algorithm systematically rejects candidates from certain demographics?",
+      "problem_type": "multiple-choice",
+      "difficulty": "medium",
+      "topic_group": "ethics",
+      "knowledge_units_tested": ["bias_fairness", "ethical_ai"],
+      "choices": [
+        { "id": "a", "text": "Privacy violation" },
+        { "id": "b", "text": "Algorithmic bias and discrimination" },
+        { "id": "c", "text": "Job displacement" },
+        { "id": "d", "text": "Environmental impact" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_005",
+      "problem_statement": "What does 'prompt engineering' involve?",
+      "problem_type": "multiple-choice",
+      "difficulty": "easy",
+      "topic_group": "applications",
+      "knowledge_units_tested": ["prompt_engineering"],
+      "choices": [
+        { "id": "a", "text": "Designing better computer hardware for AI systems" },
+        { "id": "b", "text": "Crafting effective inputs to get desired outputs from language models" },
+        { "id": "c", "text": "Writing code to train neural networks" },
+        { "id": "d", "text": "Debugging AI algorithms" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_006",
+      "problem_statement": "Which scenario represents a potential misuse of facial recognition technology?",
+      "problem_type": "multiple-choice",
+      "difficulty": "medium",
+      "topic_group": "ethics",
+      "knowledge_units_tested": [ "privacy", "surveillance", "ethical_ai"],
+      "choices": [
+        { "id": "a", "text": "Using it to unlock your personal smartphone" },
+        { "id": "b", "text": "Mass surveillance of public spaces without consent" },
+        { "id": "c", "text": "Identifying your own photos on your device" },
+        { "id": "d", "text": "Tagging friends in social media photos with their permission" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_007",
+      "problem_statement": "What is the 'training data' in machine learning?",
+      "problem_type": "multiple-choice",
+      "difficulty": "easy",
+      "topic_group": "basics",
+      "knowledge_units_tested": ["training_data", "datasets"],
+      "choices": [
+        { "id": "a", "text": "The hardware used to train the model" },
+        { "id": "b", "text": "The data used to teach the model patterns and relationships" },
+        { "id": "c", "text": "The final test given to developers" },
+        { "id": "d", "text": "Documentation for the AI system" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_008",
+      "problem_statement": "Why is data privacy important when training AI systems?",
+      "problem_type": "multiple-choice",
+      "difficulty": "medium",
+      "topic_group": "ethics",
+      "knowledge_units_tested": ["privacy", "data_protection"],
+      "choices": [
+        { "id": "a", "text": "Personal data could be exposed or used inappropriately" },
+        { "id": "b", "text": "It makes the AI run faster" },
+        { "id": "c", "text": "Privacy is not important for AI systems" },
+        { "id": "d", "text": "Only to comply with legal requirements" }
+      ],
+      "correct_choice_ids": ["a"]
+    },
+    {
+      "problem_id": "ai_mcq_009",
+      "problem_statement": "What is 'transfer learning' in AI?",
+      "problem_type": "multiple-choice",
+      "difficulty": "hard",
+      "topic_group": "ml",
+      "knowledge_units_tested": ["transfer_learning", "pretrained_models"],
+      "choices": [
+        { "id": "a", "text": "Moving training data from one server to another" },
+        { "id": "b", "text": "Using knowledge from one task to improve learning on a related task" },
+        { "id": "c", "text": "Training multiple models simultaneously" },
+        { "id": "d", "text": "Converting a model from one programming language to another" }
+      ],
+      "correct_choice_ids": ["b"]
+    },
+    {
+      "problem_id": "ai_mcq_010",
+      "problem_statement": "In the context of Large Language Models (LLMs), what is a 'hallucination'?",
+      "problem_type": "multiple-choice",
+      "difficulty": "medium",
+      "topic_group": "applications",
+      "knowledge_units_tested": ["llm_limitations", "hallucinations"],
+      "choices": [
+        { "id": "a", "text": "When the model generates plausible-sounding but false information" },
+        { "id": "b", "text": "When the model produces too much output" },
+        { "id": "c", "text": "When the model refuses to answer a question" },
+        { "id": "d", "text": "When the training process fails" }
+      ],
+      "correct_choice_ids": ["a"]
+    },
+    {
+      "problem_id": "ai_matching_001",
+      "problem_statement": "Match each AI concept with its correct description.",
+      "problem_type": "matching",
+      "difficulty": "medium",
+      "topic_group": "basics",
+      "knowledge_units_tested": ["ai_basics", "ml_concepts"],
+      "pairs": [
+        { "concept": "Neural Network", "description": "Computing system inspired by biological neurons" },
+        { "concept": "Training Data", "description": "Examples used to teach a model" },
+        { "concept": "Inference", "description": "Using a trained model to make predictions" },
+        { "concept": "Feature", "description": "A measurable property or characteristic" }
+      ]
+    },
+    {
+      "problem_id": "ai_order_001",
+      "problem_statement": "Put the following steps of the machine learning workflow in the correct order:",
+      "problem_type": "ordering",
+      "difficulty": "medium",
+      "topic_group": "ml",
+      "knowledge_units_tested": ["ml_workflow"],
+      "items": [
+        { "id": "1", "text": "Collect and prepare data" },
+        { "id": "2", "text": "Train the model" },
+        { "id": "3", "text": "Evaluate on test data" },
+        { "id": "4", "text": "Deploy the model" }
+      ],
+      "correct_order": ["1", "2", "3", "4"]
+    }
+  ]
+}

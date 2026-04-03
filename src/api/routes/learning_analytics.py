@@ -18,7 +18,7 @@ def analyze_learning_pace(
     user: CurrentUser,
 ):
     """Analyze student's learning pace and provide recommendations."""
-    if user.id != student_id and not user.is_teacher:
+    if user.id != student_id and not user.role == "teacher":
         raise HTTPException(403, "Not authorized")
     
     return detect_learning_pace(student_id, session_history)
@@ -33,7 +33,7 @@ def assess_cognitive_load(
     user: CurrentUser = None,
 ):
     """Assess current cognitive load and provide recommendations."""
-    if user.id != student_id and not user.is_teacher:
+    if user.id != student_id and not user.role == "teacher":
         raise HTTPException(403, "Not authorized")
     
     return monitor_student_cognitive_load(

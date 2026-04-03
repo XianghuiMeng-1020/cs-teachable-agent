@@ -11,6 +11,7 @@ import { useAppStore } from "@/stores/appStore";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { createTA } from "@/api/client";
 import { cn } from "@/lib/utils";
 import type { TAInstance } from "@/lib/types";
@@ -52,26 +53,30 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
   });
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b border-stone-200/80 bg-white px-4 sm:px-6">
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-stone-200/80 dark:border-stone-700/80 bg-white dark:bg-surfaceDark px-4 sm:px-6 transition-colors duration-300">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onMenuClick}
-          className="rounded-lg p-2 text-stone-500 hover:bg-stone-100 lg:hidden"
-          aria-label="Open menu"
+          className="rounded-lg p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 lg:hidden tap-target"
+          aria-label="打开菜单"
         >
           <Menu className="h-5 w-5" />
         </button>
-        <h1 className="text-sm font-semibold text-stone-800">{pageName}</h1>
+        <h1 className="text-sm font-semibold text-stone-800 dark:text-stone-200">{pageName}</h1>
       </div>
 
       <div className="flex items-center gap-2">
+        {/* Theme Toggle */}
+        <ThemeToggle variant="button" />
+
         {/* New TA Dialog */}
         <Dialog.Root open={newTADialogOpen} onOpenChange={setNewTADialogOpen}>
           <Dialog.Trigger asChild>
             <button
               type="button"
-              className="flex h-8 items-center gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-50"
+              className="flex h-8 items-center gap-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card px-2.5 text-xs font-medium text-stone-600 dark:text-stone-400 transition-colors hover:bg-stone-50 dark:hover:bg-stone-800 tap-target"
+              aria-label="创建新的教学代理"
             >
               <Plus className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{t("topbar.newTA")}</span>
@@ -79,16 +84,16 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm" />
-            <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border border-stone-200 bg-white p-6 shadow-elevated animate-scale-in">
+            <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card p-6 shadow-elevated dark:shadow-elevated-dark animate-scale-in">
               <div className="flex items-center justify-between">
-                <Dialog.Title className="font-serif text-lg font-semibold text-stone-900">
+                <Dialog.Title className="font-serif text-lg font-semibold text-stone-900 dark:text-stone-100">
                   {t("topbar.createTA")}
                 </Dialog.Title>
-                <Dialog.Close className="rounded-lg p-1 text-stone-400 hover:bg-stone-100 hover:text-stone-600">
+                <Dialog.Close className="rounded-lg p-1 text-stone-400 dark:text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-600 dark:hover:text-stone-300 tap-target">
                   <X className="h-4 w-4" />
                 </Dialog.Close>
               </div>
-              <Dialog.Description className="mt-1 text-sm text-stone-500">
+              <Dialog.Description className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                 {t("onboarding.chooseDomainDesc")}
               </Dialog.Description>
               <div className="mt-5 flex flex-col gap-2">
@@ -98,8 +103,8 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                     className={cn(
                       "flex cursor-pointer items-center gap-3 rounded-lg border-2 p-3 transition-all",
                       newTADomain === d.id
-                        ? "border-brand-600 bg-brand-50"
-                        : "border-stone-200 hover:border-stone-300"
+                        ? "border-brand-600 bg-brand-50 dark:bg-brand-900/30"
+                        : "border-stone-200 dark:border-stone-700 hover:border-stone-300 dark:hover:border-stone-600"
                     )}
                   >
                     <input
@@ -109,12 +114,13 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                       checked={newTADomain === d.id}
                       onChange={() => setNewTADomain(d.id)}
                       className="sr-only"
+                      aria-label={`选择 ${d.label}`}
                     />
                     <div>
-                      <div className={cn("text-sm font-semibold", newTADomain === d.id ? "text-brand-900" : "text-stone-700")}>
+                      <div className={cn("text-sm font-semibold", newTADomain === d.id ? "text-brand-900 dark:text-brand-300" : "text-stone-700 dark:text-stone-300")}>
                         {d.label}
                       </div>
-                      <div className="text-xs text-stone-500">{d.desc}</div>
+                      <div className="text-xs text-stone-500 dark:text-stone-500">{d.desc}</div>
                     </div>
                   </label>
                 ))}
@@ -143,21 +149,22 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
           >
             <Select.Trigger
               className={cn(
-                "flex h-8 min-w-[120px] items-center justify-between gap-1.5 rounded-lg border border-stone-200 bg-white px-2.5 text-xs font-medium text-stone-700",
-                "hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-600/20"
+                "flex h-8 min-w-[120px] items-center justify-between gap-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card px-2.5 text-xs font-medium text-stone-700 dark:text-stone-300",
+                "hover:bg-stone-50 dark:hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-brand-600/20 tap-target"
               )}
+              aria-label="选择教学代理"
             >
               <span>
                 {t("topbar.taLabel", { id: currentTa?.id ?? currentTaId })}
-                <span className="ml-1 text-stone-400">
+                <span className="ml-1 text-stone-400 dark:text-stone-500">
                   {currentTa?.domain_id ?? "python"}
                 </span>
               </span>
-              <ChevronDown className="h-3.5 w-3.5 text-stone-400" />
+              <ChevronDown className="h-3.5 w-3.5 text-stone-400 dark:text-stone-500" />
             </Select.Trigger>
             <Select.Portal>
               <Select.Content
-                className="z-50 max-h-[280px] overflow-auto rounded-lg border border-stone-200 bg-white py-1 shadow-elevated"
+                className="z-50 max-h-[280px] overflow-auto rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card py-1 shadow-elevated dark:shadow-elevated-dark"
                 position="popper"
                 sideOffset={4}
               >
@@ -165,10 +172,10 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
                   <Select.Item
                     key={ta.id}
                     value={String(ta.id)}
-                    className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-50 data-[highlighted]:bg-stone-50"
+                    className="cursor-pointer px-3 py-2 text-sm outline-none hover:bg-stone-50 dark:hover:bg-stone-800 data-[highlighted]:bg-stone-50 dark:data-[highlighted]:bg-stone-800 text-stone-700 dark:text-stone-300"
                   >
                     {t("topbar.taLabel", { id: ta.id })}
-                    <span className="ml-1.5 text-stone-400">{ta.domain_id}</span>
+                    <span className="ml-1.5 text-stone-400 dark:text-stone-500">{ta.domain_id}</span>
                   </Select.Item>
                 ))}
               </Select.Content>
@@ -184,31 +191,32 @@ export function TopBar({ pageName, taList = [], onMenuClick }: TopBarProps) {
           <DropdownMenu.Trigger asChild>
             <button
               type="button"
-              className="rounded-full outline-none ring-2 ring-transparent transition-all focus:ring-brand-600/30"
+              className="rounded-full outline-none ring-2 ring-transparent transition-all focus:ring-brand-600/30 tap-target"
+              aria-label="用户菜单"
             >
               <Avatar fallback={user?.username} size="sm" />
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content
-              className="z-50 min-w-[180px] rounded-xl border border-stone-200 bg-white py-1.5 shadow-elevated"
+              className="z-50 min-w-[180px] rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-surfaceDark-card py-1.5 shadow-elevated dark:shadow-elevated-dark"
               sideOffset={8}
               align="end"
             >
-              <div className="border-b border-stone-100 px-3 pb-2 pt-1">
-                <p className="text-sm font-semibold text-stone-900">{user?.username}</p>
-                <p className="text-xs text-stone-400 capitalize">{user?.role}</p>
+              <div className="border-b border-stone-100 dark:border-stone-700 px-3 pb-2 pt-1">
+                <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">{user?.username}</p>
+                <p className="text-xs text-stone-400 dark:text-stone-500 capitalize">{user?.role}</p>
               </div>
               <DropdownMenu.Item
-                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 outline-none hover:bg-stone-50"
+                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 dark:text-stone-400 outline-none hover:bg-stone-50 dark:hover:bg-stone-800 tap-target"
                 onSelect={(e) => e.preventDefault()}
               >
                 <User className="h-4 w-4" />
                 {t("common.profile")}
               </DropdownMenu.Item>
-              <DropdownMenu.Separator className="my-1 h-px bg-stone-100" />
+              <DropdownMenu.Separator className="my-1 h-px bg-stone-100 dark:bg-stone-700" />
               <DropdownMenu.Item
-                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 outline-none hover:bg-stone-50"
+                className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-stone-600 dark:text-stone-400 outline-none hover:bg-stone-50 dark:hover:bg-stone-800 tap-target"
                 onSelect={() => logout()}
               >
                 <LogOut className="h-4 w-4" />

@@ -1,0 +1,167 @@
+{
+  "version": "1.0",
+  "description": "DDL and schema design problems for Database domain",
+  "problems": [
+    {
+      "problem_id": "db_ddl_001",
+      "problem_statement": "Create a table named 'students' with columns: id (INTEGER PRIMARY KEY), name (TEXT NOT NULL), email (TEXT UNIQUE), age (INTEGER).",
+      "knowledge_units_tested": ["create_table", "primary_key", "data_types", "constraints"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl",
+      "expected_result": "CREATE TABLE students"
+    },
+    {
+      "problem_id": "db_ddl_002",
+      "problem_statement": "Create a table 'courses' with: course_id (INTEGER PRIMARY KEY), course_name (TEXT NOT NULL), credits (INTEGER DEFAULT 3).",
+      "knowledge_units_tested": ["create_table", "primary_key", "default_values"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_003",
+      "problem_statement": "Create an 'enrollments' table linking students and courses: enrollment_id (PRIMARY KEY), student_id (INTEGER), course_id (INTEGER), enrollment_date (DATE). Add foreign keys referencing students(id) and courses(course_id).",
+      "knowledge_units_tested": ["create_table", "primary_key", "foreign_key", "referential_integrity"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_004",
+      "problem_statement": "Add a 'phone' column (TEXT) to the 'students' table.",
+      "knowledge_units_tested": ["alter_table", "add_column"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_005",
+      "problem_statement": "Create an index on the 'email' column of the 'students' table named 'idx_email'.",
+      "knowledge_units_tested": ["index_basics", "create_index"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_006",
+      "problem_statement": "Create a composite index on 'student_id' and 'course_id' in the 'enrollments' table named 'idx_enrollment'.",
+      "knowledge_units_tested": ["index_basics", "composite_index"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_007",
+      "problem_statement": "Create a view named 'student_course_view' that shows student names alongside their enrolled course names by joining students, enrollments, and courses.",
+      "knowledge_units_tested": ["view_basics", "create_view", "joins_in_views"],
+      "problem_type": "short-answer",
+      "difficulty": "hard",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_008",
+      "problem_statement": "Create a view 'high_credits' that lists all courses with credits > 3.",
+      "knowledge_units_tested": ["view_basics", "create_view", "where_in_view"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_009",
+      "problem_statement": "Drop the index 'idx_email' from the students table.",
+      "knowledge_units_tested": ["index_basics", "drop_index"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_010",
+      "problem_statement": "Drop the view 'high_credits' if it exists.",
+      "knowledge_units_tested": ["view_basics", "drop_view"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_011",
+      "problem_statement": "Rename the 'students' table to 'learners'.",
+      "knowledge_units_tested": ["alter_table", "rename_table"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_012",
+      "problem_statement": "Drop the 'enrollments' table entirely.",
+      "knowledge_units_tested": ["drop_table"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_transaction_001",
+      "problem_statement": "Write a transaction that inserts a new student, then inserts their enrollment in a course, and commits. If either fails, rollback.",
+      "knowledge_units_tested": ["transaction_basics", "commit", "rollback"],
+      "problem_type": "short-answer",
+      "difficulty": "hard",
+      "topic_group": "transactions"
+    },
+    {
+      "problem_id": "db_transaction_002",
+      "problem_statement": "Start a transaction, update a student's age, then rollback to undo the change.",
+      "knowledge_units_tested": ["transaction_basics", "rollback"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "transactions"
+    },
+    {
+      "problem_id": "db_ddl_013",
+      "problem_statement": "Create a 'departments' table with: dept_id (INTEGER PRIMARY KEY AUTOINCREMENT), dept_name (TEXT NOT NULL).",
+      "knowledge_units_tested": ["create_table", "primary_key", "auto_increment"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_014",
+      "problem_statement": "Add a CHECK constraint to ensure 'age' in students is between 0 and 120.",
+      "knowledge_units_tested": ["alter_table", "check_constraint", "constraints"],
+      "problem_type": "short-answer",
+      "difficulty": "medium",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_015",
+      "problem_statement": "Create a table 'grades' with: grade_id (PRIMARY KEY), enrollment_id (INTEGER, FOREIGN KEY to enrollments), grade (TEXT, CHECK grade IN ('A', 'B', 'C', 'D', 'F')).",
+      "knowledge_units_tested": ["create_table", "foreign_key", "check_constraint", "enum_constraint"],
+      "problem_type": "short-answer",
+      "difficulty": "hard",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_016",
+      "problem_statement": "Drop the foreign key constraint from 'enrollments' table (assume constraint name is fk_enroll_student).",
+      "knowledge_units_tested": ["alter_table", "drop_foreign_key"],
+      "problem_type": "short-answer",
+      "difficulty": "hard",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_ddl_017",
+      "problem_statement": "Truncate the 'enrollments' table (remove all rows but keep the table structure).",
+      "knowledge_units_tested": ["truncate_table"],
+      "problem_type": "short-answer",
+      "difficulty": "easy",
+      "topic_group": "ddl"
+    },
+    {
+      "problem_id": "db_subquery_004",
+      "problem_statement": "Write a subquery in the SELECT clause: list student names and the count of their enrollments using a correlated subquery.",
+      "knowledge_units_tested": ["subquery_select", "correlated_subquery"],
+      "problem_type": "short-answer",
+      "difficulty": "hard",
+      "topic_group": "advanced_queries"
+    }
+  ]
+}

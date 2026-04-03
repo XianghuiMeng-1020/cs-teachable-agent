@@ -52,7 +52,7 @@ function FloatingCard({ children, className, delay = 0 }: { children: React.Reac
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.6 }}
-      className={`absolute bg-white rounded-xl shadow-2xl border border-stone-100 ${className}`}
+      className={`absolute bg-white dark:bg-surfaceDark-card rounded-xl shadow-2xl border border-stone-100 dark:border-stone-700 ${className}`}
     >
       {children}
     </motion.div>
@@ -120,13 +120,13 @@ export function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-surfaceDark font-sans overflow-x-hidden">
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/60 bg-white/90 backdrop-blur-xl"
+        className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/60 dark:border-stone-700/60 bg-white/90 dark:bg-surfaceDark/90 backdrop-blur-xl"
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -134,15 +134,15 @@ export function LandingPage() {
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-stone-900 leading-tight">ARTS-CS</span>
-              <span className="text-[10px] text-stone-500 font-medium">{t("common.artsCsFull")}</span>
+              <span className="text-lg font-bold text-stone-900 dark:text-stone-100 leading-tight">ARTS-CS</span>
+              <span className="text-[10px] text-stone-500 dark:text-stone-400 font-medium">{t("common.artsCsFull")}</span>
             </div>
           </Link>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <Link
               to={ROUTES.login}
-              className="hidden sm:block rounded-lg px-4 py-2 text-sm font-medium text-stone-600 transition-colors hover:text-stone-900"
+              className="hidden sm:block rounded-lg px-4 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 transition-colors hover:text-stone-900 dark:hover:text-stone-200"
             >
               {t("common.signIn")}
             </Link>
@@ -175,14 +175,14 @@ export function LandingPage() {
                   <span className="text-sm font-semibold text-brand-800">{t("landing.badge")}</span>
                 </motion.div>
 
-                <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-bold text-stone-900 tracking-tight">
+                <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-bold text-stone-900 dark:text-stone-100 tracking-tight">
                   {t("landing.heroTitle")}{" "}
                   <span className="bg-gradient-to-r from-brand-600 to-emerald-600 bg-clip-text text-transparent">
                     {t("landing.heroHighlight")}
                   </span>
                 </motion.h1>
 
-                <motion.p variants={fadeUp} className="mt-6 text-xl text-stone-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <motion.p variants={fadeUp} className="mt-6 text-xl text-stone-600 dark:text-stone-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
                   {t("landing.heroDesc")}
                 </motion.p>
 
@@ -194,7 +194,7 @@ export function LandingPage() {
                     <Play className="h-5 w-5" />
                     {t("landing.startTeaching")}
                   </Link>
-                  <div className="flex items-center gap-3 text-sm text-stone-500">
+                  <div className="flex items-center gap-3 text-sm text-stone-500 dark:text-stone-400">
                     <span className="flex items-center gap-1">
                       <span className="w-2 h-2 rounded-full bg-emerald-500" />
                       {t("common.free")}
@@ -210,26 +210,26 @@ export function LandingPage() {
               {/* Right: Visual Demo */}
               <div className="relative h-[500px] hidden lg:block">
                 <FloatingCard className="top-0 right-0 w-80 p-4" delay={0.2}>
-                  <div className="flex items-center gap-2 mb-3 pb-3 border-b border-stone-100">
+                  <div className="flex items-center gap-2 mb-3 pb-3 border-b border-stone-100 dark:border-stone-700">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
                       <Bot className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-stone-900">Python {t("common.teachableAgent")}</div>
-                      <div className="text-xs text-stone-500">Learning: Variables</div>
+                      <div className="text-sm font-semibold text-stone-900 dark:text-stone-100">Python {t("common.teachableAgent")}</div>
+                      <div className="text-xs text-stone-500 dark:text-stone-400">Learning: Variables</div>
                     </div>
                     <div className="ml-auto flex gap-1">
                       <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <div className="bg-stone-50 rounded-lg p-3 text-sm text-stone-600">
+                    <div className="bg-stone-50 dark:bg-stone-800 rounded-lg p-3 text-sm text-stone-600 dark:text-stone-300">
                       "A variable stores data. Use = to assign, like x = 5."
                     </div>
-                    <div className="bg-brand-50 rounded-lg p-3 text-sm text-brand-800 border border-brand-100">
+                    <div className="bg-brand-50 dark:bg-brand-900/30 rounded-lg p-3 text-sm text-brand-800 dark:text-brand-300 border border-brand-100 dark:border-brand-800">
                       Can you show me an example with a different value?
                     </div>
-                    <div className="bg-stone-50 rounded-lg p-3 text-sm text-stone-600">
+                    <div className="bg-stone-50 dark:bg-stone-800 rounded-lg p-3 text-sm text-stone-600 dark:text-stone-300">
                       "Sure! name = 'Alice' stores text in the variable."
                     </div>
                   </div>
@@ -238,35 +238,35 @@ export function LandingPage() {
                 <FloatingCard className="bottom-20 left-0 w-64 p-4" delay={0.4}>
                   <div className="flex items-center gap-2 mb-3">
                     <Brain className="w-5 h-5 text-violet-600" />
-                    <span className="text-sm font-semibold text-stone-900">{t("teach.knowledgeState")}</span>
+                    <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">{t("teach.knowledgeState")}</span>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-stone-600">Variables</span>
+                      <span className="text-stone-600 dark:text-stone-400">Variables</span>
                       <div className="flex gap-1">
                         {[1,2,3,4].map(i => <div key={i} className="w-4 h-2 rounded-sm bg-emerald-500" />)}
                       </div>
                     </div>
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-stone-600">Loops</span>
+                      <span className="text-stone-600 dark:text-stone-400">Loops</span>
                       <div className="flex gap-1">
                         {[1,2].map(i => <div key={i} className="w-4 h-2 rounded-sm bg-amber-500" />)}
-                        {[1,2].map(i => <div key={`e${i}`} className="w-4 h-2 rounded-sm bg-stone-200" />)}
+                        {[1,2].map(i => <div key={`e${i}`} className="w-4 h-2 rounded-sm bg-stone-200 dark:bg-stone-700" />)}
                       </div>
                     </div>
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-stone-600">Functions</span>
+                      <span className="text-stone-600 dark:text-stone-400">Functions</span>
                       <div className="flex gap-1">
-                        {[1,2,3,4].map(i => <div key={i} className="w-4 h-2 rounded-sm bg-stone-200" />)}
+                        {[1,2,3,4].map(i => <div key={i} className="w-4 h-2 rounded-sm bg-stone-200 dark:bg-stone-700" />)}
                       </div>
                     </div>
                   </div>
                 </FloatingCard>
 
                 <FloatingCard className="top-40 left-10 w-48 p-3" delay={0.6}>
-                  <div className="text-xs text-stone-500 mb-1">{t("dashboard.overallProgress")}</div>
-                  <div className="text-2xl font-bold text-stone-900">68%</div>
-                  <div className="w-full bg-stone-100 rounded-full h-2 mt-2">
+                  <div className="text-xs text-stone-500 dark:text-stone-400 mb-1">{t("dashboard.overallProgress")}</div>
+                  <div className="text-2xl font-bold text-stone-900 dark:text-stone-100">68%</div>
+                  <div className="w-full bg-stone-100 dark:bg-stone-700 rounded-full h-2 mt-2">
                     <div className="bg-gradient-to-r from-brand-500 to-emerald-500 h-2 rounded-full" style={{ width: '68%' }} />
                   </div>
                 </FloatingCard>
@@ -282,9 +282,9 @@ export function LandingPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-2xl bg-white shadow-2xl shadow-stone-200/50 border border-stone-100 overflow-hidden"
+          className="rounded-2xl bg-white dark:bg-surfaceDark-card shadow-2xl shadow-stone-200/50 dark:shadow-stone-900/50 border border-stone-100 dark:border-stone-700 overflow-hidden"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-stone-100">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-stone-100 dark:divide-stone-700">
             {stats.map((s, i) => (
               <motion.div
                 key={s.labelKey}
@@ -292,15 +292,15 @@ export function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 text-center group hover:bg-stone-50 transition-colors"
+                className="p-6 text-center group hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors"
               >
                 <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-100 to-brand-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <s.icon className="w-5 h-5 text-brand-600" />
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-100 to-brand-50 dark:from-brand-900/30 dark:to-brand-800/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <s.icon className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                   </div>
                 </div>
-                <p className="text-3xl font-bold text-stone-900">{s.value}</p>
-                <p className="text-sm text-stone-500 font-medium">{t(s.labelKey)}</p>
+                <p className="text-3xl font-bold text-stone-900 dark:text-stone-100">{s.value}</p>
+                <p className="text-sm text-stone-500 dark:text-stone-400 font-medium">{t(s.labelKey)}</p>
               </motion.div>
             ))}
           </div>
@@ -308,7 +308,7 @@ export function LandingPage() {
       </section>
 
       {/* Domains Section */}
-      <section className="py-24 bg-gradient-to-b from-white to-stone-50/50">
+      <section className="py-24 bg-gradient-to-b from-white dark:from-surfaceDark to-stone-50/50 dark:to-stone-900/50">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -316,11 +316,11 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-4">
               {t("landing.multiDomain")}
             </span>
-            <h2 className="text-4xl font-bold text-stone-900 mb-4">{t("landing.threeDomains")}</h2>
-            <p className="text-lg text-stone-600 max-w-2xl mx-auto">{t("landing.threeDomainsDesc")}</p>
+            <h2 className="text-4xl font-bold text-stone-900 dark:text-stone-100 mb-4">{t("landing.threeDomains")}</h2>
+            <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">{t("landing.threeDomainsDesc")}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -331,15 +331,15 @@ export function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
-                className="group relative rounded-2xl bg-white p-8 shadow-lg shadow-stone-200/50 border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="group relative rounded-2xl bg-white dark:bg-surfaceDark-card p-8 shadow-lg shadow-stone-200/50 dark:shadow-stone-900/50 border border-stone-100 dark:border-stone-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${domain.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${domain.color} flex items-center justify-center mb-6 shadow-lg`}>
                   <domain.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-stone-900 mb-2">{t(domain.nameKey)}</h3>
-                <p className="text-stone-600 leading-relaxed">{t(domain.descKey)}</p>
-                <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-brand-600">
+                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">{t(domain.nameKey)}</h3>
+                <p className="text-stone-600 dark:text-stone-400 leading-relaxed">{t(domain.descKey)}</p>
+                <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400">
                   <span>{t("landing.exploreDomain")}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -351,7 +351,7 @@ export function LandingPage() {
 
       {/* Features Grid */}
       {featureCategories.map((category, categoryIndex) => (
-        <section key={category.titleKey} className={`py-24 ${categoryIndex % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}`}>
+        <section key={category.titleKey} className={`py-24 ${categoryIndex % 2 === 0 ? 'bg-white dark:bg-surfaceDark' : 'bg-stone-50/50 dark:bg-stone-900/50'}`}>
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -359,10 +359,10 @@ export function LandingPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-sm font-semibold mb-4">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-sm font-semibold mb-4">
                 {t(category.titleKey)}
               </span>
-              <p className="text-lg text-stone-600 max-w-2xl mx-auto">{t(category.descKey)}</p>
+              <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">{t(category.descKey)}</p>
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -373,13 +373,13 @@ export function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`group rounded-2xl border ${f.border} bg-white p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
+                  className={`group rounded-2xl border ${f.border} dark:border-opacity-30 bg-white dark:bg-surfaceDark-card p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
                 >
-                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl ${f.bg} shadow-sm group-hover:scale-110 transition-transform`}>
+                  <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl ${f.bg} dark:bg-opacity-20 shadow-sm group-hover:scale-110 transition-transform`}>
                     <f.icon className={`h-7 w-7 ${f.color}`} />
                   </div>
-                  <h3 className="text-xl font-bold text-stone-900 mb-3">{t(f.titleKey)}</h3>
-                  <p className="text-stone-600 leading-relaxed">{t(f.descKey)}</p>
+                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-3">{t(f.titleKey)}</h3>
+                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed">{t(f.descKey)}</p>
                 </motion.div>
               ))}
             </div>
@@ -388,7 +388,7 @@ export function LandingPage() {
       ))}
 
       {/* Instructor Dashboard Preview */}
-      <section className="py-24 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white overflow-hidden relative">
+      <section className="py-24 bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 text-white dark:text-stone-100 overflow-hidden relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-900/20 via-transparent to-transparent" />
         <div className="mx-auto max-w-7xl px-6 relative">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -478,7 +478,7 @@ export function LandingPage() {
       </section>
 
       {/* Demo Account Section */}
-      <section className="py-24 bg-gradient-to-b from-brand-50/50 to-white">
+      <section className="py-24 bg-gradient-to-b from-brand-50/50 dark:from-brand-900/20 to-white dark:to-surfaceDark">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -486,7 +486,7 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="rounded-3xl bg-gradient-to-br from-brand-600 to-brand-700 p-1 shadow-2xl shadow-brand-500/25"
           >
-            <div className="rounded-[22px] bg-white p-8 md:p-12">
+            <div className="rounded-[22px] bg-white dark:bg-surfaceDark-card p-8 md:p-12">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-100 mb-4">
                   <Sparkles className="w-8 h-8 text-brand-600" />
@@ -556,11 +556,11 @@ export function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-stone-900">
+      <section className="py-24 bg-stone-900 dark:bg-black">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t("landing.readyTitle")}</h2>
-            <p className="text-xl text-stone-400 mb-10 max-w-2xl mx-auto">{t("landing.readyDesc")}</p>
+            <p className="text-xl text-stone-400 dark:text-stone-500 mb-10 max-w-2xl mx-auto">{t("landing.readyDesc")}</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to={ROUTES.login}
@@ -583,7 +583,7 @@ export function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-stone-950 border-t border-stone-800">
+      <footer className="bg-stone-950 dark:bg-black border-t border-stone-800 dark:border-stone-900">
         <div className="mx-auto max-w-7xl px-6 py-12">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
@@ -593,7 +593,7 @@ export function LandingPage() {
                 </div>
                 <span className="text-lg font-bold text-white">ARTS-CS</span>
               </div>
-              <p className="text-stone-400 max-w-sm">{t("common.artsCsFull")}</p>
+              <p className="text-stone-400 dark:text-stone-500 max-w-sm">{t("common.artsCsFull")}</p>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">{t("landing.platform")}</h4>
@@ -614,9 +614,9 @@ export function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-stone-500">{t("landing.copyright")}</p>
-            <div className="flex items-center gap-6 text-sm text-stone-500">
+          <div className="pt-8 border-t border-stone-800 dark:border-stone-900 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-stone-500 dark:text-stone-600">{t("landing.copyright")}</p>
+            <div className="flex items-center gap-6 text-sm text-stone-500 dark:text-stone-600">
               <span>{t("landing.builtWith")}</span>
               <span>•</span>
               <span>{t("landing.deployedOn")}</span>

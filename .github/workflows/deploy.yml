@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Render + Cloudflare Pages
 
 on:
   push:
@@ -16,6 +16,8 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Verify app imports
+        run: python -c "from src.api.main import app; print('Import OK')"
       - name: Run tests
         run: pytest prototype/ -v || echo "No tests yet"
 
@@ -27,13 +29,13 @@ jobs:
       - name: Trigger Render Deploy
         run: |
           if [ -n "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" ]; then
-            curl -s "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+            curl -sf "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
             echo "Render deploy triggered"
           else
-            echo "RENDER_DEPLOY_HOOK_URL not set, skipping"
+            echo "RENDER_DEPLOY_HOOK_URL not set — Render auto-deploy via Git should handle it"
           fi
 
-  deploy-frontend:
+  deploy-frontend-cloudflare:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs: test
@@ -51,6 +53,7 @@ jobs:
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
       - name: Deploy to Cloudflare Pages
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

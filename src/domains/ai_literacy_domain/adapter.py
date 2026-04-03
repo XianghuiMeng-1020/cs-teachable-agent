@@ -45,13 +45,24 @@ class AILiteracyDomainAdapter(DomainAdapter):
     def load_problems(self) -> list[dict]:
         if self._problems is not None:
             return self._problems
-        path = self._seed_dir / "problems.json"
-        if not path.exists():
-            self._problems = []
-            return self._problems
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
-        self._problems = data.get("problems", [])
+
+        all_problems = []
+
+        # Load main problems.json
+        main_path = self._seed_dir / "problems.json"
+        if main_path.exists():
+            with open(main_path, encoding="utf-8") as f:
+                data = json.load(f)
+                all_problems.extend(data.get("problems", []))
+
+        # Load MCQ and matching problems
+        mcq_path = self._seed_dir / "problems-mcq.json"
+        if mcq_path.exists():
+            with open(mcq_path, encoding="utf-8") as f:
+                data = json.load(f)
+                all_problems.extend(data.get("problems", []))
+
+        self._problems = all_problems
         return self._problems
 
     def load_misconceptions(self) -> list[dict]:

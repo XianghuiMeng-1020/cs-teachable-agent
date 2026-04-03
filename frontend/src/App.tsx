@@ -16,6 +16,9 @@ const MasteryPage = lazy(() => import("./pages/student/MasteryPage").then((m) =>
 const LearningAnalyticsPage = lazy(() => import("./pages/student/LearningAnalyticsPage").then((m) => ({ default: m.LearningAnalyticsPage })));
 const PracticePage = lazy(() => import("./pages/student/PracticePage").then((m) => ({ default: m.PracticePage })));
 const AssessmentPage = lazy(() => import("./pages/student/AssessmentPage").then((m) => ({ default: m.AssessmentPage })));
+const ReviewPage = lazy(() => import("./pages/student/ReviewPage").then((m) => ({ default: m.ReviewPage })));
+const ReportPage = lazy(() => import("./pages/student/ReportPage").then((m) => ({ default: m.ReportPage })));
+const CollaboratePage = lazy(() => import("./pages/student/CollaboratePage").then((m) => ({ default: m.CollaboratePage })));
 const OverviewPage = lazy(() => import("./pages/teacher/OverviewPage").then((m) => ({ default: m.OverviewPage })));
 const TranscriptsPage = lazy(() => import("./pages/teacher/TranscriptsPage").then((m) => ({ default: m.TranscriptsPage })));
 const StudentsPage = lazy(() => import("./pages/teacher/StudentsPage").then((m) => ({ default: m.StudentsPage })));
@@ -75,6 +78,9 @@ function App() {
           <Route path={ROUTES.mastery} element={<MasteryPage />} />
           <Route path={ROUTES.history} element={<HistoryPage />} />
           <Route path="/learning-analytics" element={<LearningAnalyticsPage />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/report" element={<ReportPage />} />
+          <Route path="/collaborate" element={<CollaboratePage />} />
         </Route>
 
         <Route path="teacher" element={<TeacherLayout />}>
