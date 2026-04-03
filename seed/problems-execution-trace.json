@@ -1,0 +1,638 @@
+{
+  "version": "execution-trace-v1",
+  "problems": [
+    {
+      "problem_id": "trace_vars_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "simple_assign",
+      "function_source": "def simple_assign(a):\n    x = a\n    y = x + 10\n    z = y * 2\n    return z",
+      "call_expression": "simple_assign(5)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: x = a", "variable_name": "x", "correct": "5" },
+        { "id": "cp_2", "line_number": 3, "label": "After: y = x + 10", "variable_name": "y", "correct": "15" },
+        { "id": "cp_3", "line_number": 4, "label": "After: z = y * 2", "variable_name": "z", "correct": "30" }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "trace_vars_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "type_basics",
+      "function_source": "def type_basics(n):\n    s = str(n)\n    length = len(s)\n    back = int(s)\n    return back",
+      "call_expression": "type_basics(42)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: s = str(n)", "variable_name": "s", "correct": "'42'" },
+        { "id": "cp_2", "line_number": 3, "label": "After: length = len(s)", "variable_name": "length", "correct": "2" },
+        { "id": "cp_3", "line_number": 4, "label": "After: back = int(s)", "variable_name": "back", "correct": "42" }
+      ],
+      "knowledge_units_tested": ["type_conversion", "str_function", "int_function", "len_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "trace_vars_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "swap_values",
+      "function_source": "def swap_values(a, b):\n    temp = a\n    a = b\n    b = temp\n    result = a + b\n    return result",
+      "call_expression": "swap_values(3, 7)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: temp = a", "variable_name": "temp", "correct": "3" },
+        { "id": "cp_2", "line_number": 3, "label": "After: a = b", "variable_name": "a", "correct": "7" },
+        { "id": "cp_3", "line_number": 4, "label": "After: b = temp", "variable_name": "b", "correct": "3" },
+        { "id": "cp_4", "line_number": 5, "label": "After: result = a + b", "variable_name": "result", "correct": "10" }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "variable_reassignment", "swap_pattern"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "trace_vars_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "type_chain",
+      "function_source": "def type_chain(x):\n    a = x ** 2\n    b = str(a)\n    c = len(b)\n    d = float(c)\n    e = int(d + x)\n    return e",
+      "call_expression": "type_chain(12)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: a = x ** 2", "variable_name": "a", "correct": "144" },
+        { "id": "cp_2", "line_number": 3, "label": "After: b = str(a)", "variable_name": "b", "correct": "'144'" },
+        { "id": "cp_3", "line_number": 4, "label": "After: c = len(b)", "variable_name": "c", "correct": "3" },
+        { "id": "cp_4", "line_number": 5, "label": "After: d = float(c)", "variable_name": "d", "correct": "3.0" },
+        { "id": "cp_5", "line_number": 6, "label": "After: e = int(d + x)", "variable_name": "e", "correct": "15" }
+      ],
+      "knowledge_units_tested": ["type_conversion", "exponentiation", "str_function", "int_function", "float_function", "len_function"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "trace_cond_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "check_even",
+      "function_source": "def check_even(n):\n    remainder = n % 2\n    if remainder == 0:\n        result = \"even\"\n    else:\n        result = \"odd\"\n    return result",
+      "call_expression": "check_even(7)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: remainder = n % 2", "variable_name": "remainder", "correct": "1" },
+        { "id": "cp_2", "line_number": 6, "label": "After: result = \"odd\" (else branch)", "variable_name": "result", "correct": "'odd'" }
+      ],
+      "knowledge_units_tested": ["modulo_operator", "if_else", "comparison_operator"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "trace_cond_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "classify_temp",
+      "function_source": "def classify_temp(temp):\n    status = \"unknown\"\n    if temp > 30:\n        status = \"hot\"\n    elif temp > 20:\n        status = \"warm\"\n    else:\n        status = \"cold\"\n    return status",
+      "call_expression": "classify_temp(25)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: status = \"unknown\"", "variable_name": "status", "correct": "'unknown'" },
+        { "id": "cp_2", "line_number": 6, "label": "After: status = \"warm\" (elif branch)", "variable_name": "status", "correct": "'warm'" }
+      ],
+      "knowledge_units_tested": ["if_elif_else", "comparison_operator", "variable_reassignment"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "trace_cond_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "grade_score",
+      "function_source": "def grade_score(score):\n    grade = \"F\"\n    passed = False\n    if score >= 90:\n        grade = \"A\"\n        passed = True\n    elif score >= 70:\n        grade = \"C\"\n        passed = True\n    else:\n        grade = \"F\"\n    return grade",
+      "call_expression": "grade_score(75)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: grade = \"F\"", "variable_name": "grade", "correct": "'F'" },
+        { "id": "cp_2", "line_number": 3, "label": "After: passed = False", "variable_name": "passed", "correct": "False" },
+        { "id": "cp_3", "line_number": 8, "label": "After: grade = \"C\" (elif branch)", "variable_name": "grade", "correct": "'C'" },
+        { "id": "cp_4", "line_number": 9, "label": "After: passed = True (elif branch)", "variable_name": "passed", "correct": "True" }
+      ],
+      "knowledge_units_tested": ["if_elif_else", "comparison_operator", "boolean_values", "variable_reassignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "trace_cond_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "nested_check",
+      "function_source": "def nested_check(x, y):\n    result = 0\n    if x > 0:\n        if y > 0:\n            result = x + y\n        else:\n            result = x - y\n    else:\n        if y > 0:\n            result = y - x\n        else:\n            result = -(x + y)\n    flag = result > 10\n    category = \"big\" if flag else \"small\"\n    return category",
+      "call_expression": "nested_check(-3, 8)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = 0", "variable_name": "result", "correct": "0" },
+        { "id": "cp_2", "line_number": 10, "label": "After: result = y - x (else→if branch)", "variable_name": "result", "correct": "11" },
+        { "id": "cp_3", "line_number": 13, "label": "After: flag = result > 10", "variable_name": "flag", "correct": "True" },
+        { "id": "cp_4", "line_number": 14, "label": "After: category = \"big\" if flag else \"small\"", "variable_name": "category", "correct": "'big'" }
+      ],
+      "knowledge_units_tested": ["nested_if", "comparison_operator", "conditional_expression", "boolean_values"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "trace_for_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "sum_range",
+      "function_source": "def sum_range(n):\n    total = 0\n    for i in range(1, n + 1):\n        total = total + i\n    return total",
+      "call_expression": "sum_range(4)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: total = 0", "variable_name": "total", "correct": "0" },
+        { "id": "cp_2", "line_number": 4, "label": "After 1st iteration (i=1): total = total + i", "variable_name": "total", "correct": "1" },
+        { "id": "cp_3", "line_number": 4, "label": "After last iteration (i=4): total = total + i", "variable_name": "total", "correct": "10" }
+      ],
+      "knowledge_units_tested": ["for_loop", "range_function", "accumulator_pattern"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "trace_for_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "build_string",
+      "function_source": "def build_string(chars):\n    result = \"\"\n    for c in chars:\n        result = result + c\n    return result",
+      "call_expression": "build_string(['h', 'i', '!'])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = \"\"", "variable_name": "result", "correct": "''" },
+        { "id": "cp_2", "line_number": 4, "label": "After 1st iteration (c='h'): result = result + c", "variable_name": "result", "correct": "'h'" },
+        { "id": "cp_3", "line_number": 4, "label": "After last iteration (c='!'): result = result + c", "variable_name": "result", "correct": "'hi!'" }
+      ],
+      "knowledge_units_tested": ["for_loop", "string_concatenation", "iterating_over_list"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "trace_for_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "find_max",
+      "function_source": "def find_max(nums):\n    best = nums[0]\n    pos = 0\n    for i in range(1, len(nums)):\n        if nums[i] > best:\n            best = nums[i]\n            pos = i\n    return pos",
+      "call_expression": "find_max([3, 7, 2, 9, 1])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: best = nums[0]", "variable_name": "best", "correct": "3" },
+        { "id": "cp_2", "line_number": 3, "label": "After: pos = 0", "variable_name": "pos", "correct": "0" },
+        { "id": "cp_3", "line_number": 7, "label": "After iteration i=1: pos = i", "variable_name": "pos", "correct": "1" },
+        { "id": "cp_4", "line_number": 6, "label": "After iteration i=3: best = nums[i]", "variable_name": "best", "correct": "9" }
+      ],
+      "knowledge_units_tested": ["for_loop", "range_function", "list_indexing", "find_max_pattern", "conditional_update"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "trace_for_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "matrix_sum",
+      "function_source": "def matrix_sum(grid):\n    row_sums = []\n    total = 0\n    for i in range(len(grid)):\n        row_total = 0\n        for j in range(len(grid[i])):\n            row_total = row_total + grid[i][j]\n        row_sums.append(row_total)\n        total = total + row_total\n    return total",
+      "call_expression": "matrix_sum([[1, 2], [3, 4], [5, 6]])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 3, "label": "After: total = 0", "variable_name": "total", "correct": "0" },
+        { "id": "cp_2", "line_number": 7, "label": "After i=0, j=1: row_total = row_total + grid[i][j]", "variable_name": "row_total", "correct": "3" },
+        { "id": "cp_3", "line_number": 8, "label": "After i=0: row_sums.append(row_total)", "variable_name": "row_sums", "correct": "[3]" },
+        { "id": "cp_4", "line_number": 9, "label": "After i=1: total = total + row_total", "variable_name": "total", "correct": "10" },
+        { "id": "cp_5", "line_number": 9, "label": "After i=2 (loop ends): total = total + row_total", "variable_name": "total", "correct": "21" }
+      ],
+      "knowledge_units_tested": ["nested_for_loop", "range_function", "list_append", "accumulator_pattern", "2d_list"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "trace_while_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "countdown",
+      "function_source": "def countdown(n):\n    count = n\n    steps = 0\n    while count > 0:\n        count = count - 1\n        steps = steps + 1\n    return steps",
+      "call_expression": "countdown(3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: count = n", "variable_name": "count", "correct": "3" },
+        { "id": "cp_2", "line_number": 5, "label": "After 1st iteration: count = count - 1", "variable_name": "count", "correct": "2" },
+        { "id": "cp_3", "line_number": 6, "label": "After loop ends: steps", "variable_name": "steps", "correct": "3" }
+      ],
+      "knowledge_units_tested": ["while_loop", "counter_pattern", "decrement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "trace_while_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "double_until",
+      "function_source": "def double_until(start, limit):\n    value = start\n    times = 0\n    while value < limit:\n        value = value * 2\n        times = times + 1\n    return times",
+      "call_expression": "double_until(3, 20)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: value = start", "variable_name": "value", "correct": "3" },
+        { "id": "cp_2", "line_number": 5, "label": "After 1st iteration: value = value * 2", "variable_name": "value", "correct": "6" },
+        { "id": "cp_3", "line_number": 5, "label": "After loop ends: value", "variable_name": "value", "correct": "24" }
+      ],
+      "knowledge_units_tested": ["while_loop", "doubling_pattern", "loop_termination"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "trace_while_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "digit_sum",
+      "function_source": "def digit_sum(n):\n    total = 0\n    remaining = n\n    while remaining > 0:\n        digit = remaining % 10\n        total = total + digit\n        remaining = remaining // 10\n    return total",
+      "call_expression": "digit_sum(385)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 3, "label": "After: remaining = n", "variable_name": "remaining", "correct": "385" },
+        { "id": "cp_2", "line_number": 5, "label": "After 1st iteration: digit = remaining % 10", "variable_name": "digit", "correct": "5" },
+        { "id": "cp_3", "line_number": 7, "label": "After 1st iteration: remaining = remaining // 10", "variable_name": "remaining", "correct": "38" },
+        { "id": "cp_4", "line_number": 6, "label": "After loop ends: total", "variable_name": "total", "correct": "16" }
+      ],
+      "knowledge_units_tested": ["while_loop", "modulo_operator", "integer_division", "digit_extraction"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "trace_while_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "collatz_steps",
+      "function_source": "def collatz_steps(n):\n    current = n\n    steps = 0\n    path = [current]\n    while current != 1:\n        if current % 2 == 0:\n            current = current // 2\n        else:\n            current = current * 3 + 1\n        steps = steps + 1\n        path.append(current)\n    return steps",
+      "call_expression": "collatz_steps(3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 4, "label": "After: path = [current]", "variable_name": "path", "correct": "[3]" },
+        { "id": "cp_2", "line_number": 9, "label": "After 1st iteration (3 is odd): current = current * 3 + 1", "variable_name": "current", "correct": "10" },
+        { "id": "cp_3", "line_number": 7, "label": "After 2nd iteration (10 is even): current = current // 2", "variable_name": "current", "correct": "5" },
+        { "id": "cp_4", "line_number": 10, "label": "After loop ends: steps", "variable_name": "steps", "correct": "7" },
+        { "id": "cp_5", "line_number": 11, "label": "After loop ends: path", "variable_name": "path", "correct": "[3, 10, 5, 16, 8, 4, 2, 1]" }
+      ],
+      "knowledge_units_tested": ["while_loop", "if_else", "modulo_operator", "integer_division", "list_append", "collatz_conjecture"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "trace_func_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "calculate",
+      "function_source": "def calculate(x, y):\n    total = x + y\n    average = total / 2\n    return average",
+      "call_expression": "calculate(7, 3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: total = x + y", "variable_name": "total", "correct": "10" },
+        { "id": "cp_2", "line_number": 3, "label": "After: average = total / 2", "variable_name": "average", "correct": "5.0" }
+      ],
+      "knowledge_units_tested": ["function_parameters", "arithmetic_operators", "true_division"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "trace_func_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "power_sum",
+      "function_source": "def power_sum(base, exp):\n    result = base ** exp\n    digits = len(str(result))\n    is_big = digits > 3\n    return is_big",
+      "call_expression": "power_sum(5, 4)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = base ** exp", "variable_name": "result", "correct": "625" },
+        { "id": "cp_2", "line_number": 3, "label": "After: digits = len(str(result))", "variable_name": "digits", "correct": "3" },
+        { "id": "cp_3", "line_number": 4, "label": "After: is_big = digits > 3", "variable_name": "is_big", "correct": "False" }
+      ],
+      "knowledge_units_tested": ["function_parameters", "exponentiation", "type_conversion", "comparison_operator"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "trace_func_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "process",
+      "function_source": "def process(x):\n    y = x + 1\n    def double(n):\n        return n * 2\n    a = double(y)\n    b = double(a)\n    total = a + b\n    return total",
+      "call_expression": "process(3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: y = x + 1", "variable_name": "y", "correct": "4" },
+        { "id": "cp_2", "line_number": 5, "label": "After: a = double(y)", "variable_name": "a", "correct": "8" },
+        { "id": "cp_3", "line_number": 6, "label": "After: b = double(a)", "variable_name": "b", "correct": "16" },
+        { "id": "cp_4", "line_number": 7, "label": "After: total = a + b", "variable_name": "total", "correct": "24" }
+      ],
+      "knowledge_units_tested": ["nested_function", "function_call", "local_scope", "return_value"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "trace_func_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "transform",
+      "function_source": "def transform(data, factor=2, offset=0):\n    scaled = data * factor\n    shifted = scaled + offset\n    flag = shifted > 100\n    label = \"high\" if flag else \"low\"\n    return label",
+      "call_expression": "transform(15, factor=3, offset=55)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: scaled = data * factor", "variable_name": "scaled", "correct": "45" },
+        { "id": "cp_2", "line_number": 3, "label": "After: shifted = scaled + offset", "variable_name": "shifted", "correct": "100" },
+        { "id": "cp_3", "line_number": 4, "label": "After: flag = shifted > 100", "variable_name": "flag", "correct": "False" },
+        { "id": "cp_4", "line_number": 5, "label": "After: label = \"high\" if flag else \"low\"", "variable_name": "label", "correct": "'low'" }
+      ],
+      "knowledge_units_tested": ["default_parameters", "keyword_arguments", "conditional_expression", "comparison_operator"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "trace_list_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "build_list",
+      "function_source": "def build_list(n):\n    result = []\n    result.append(n)\n    result.append(n * 2)\n    result.append(n * 3)\n    return result",
+      "call_expression": "build_list(5)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = []", "variable_name": "result", "correct": "[]" },
+        { "id": "cp_2", "line_number": 3, "label": "After: result.append(n)", "variable_name": "result", "correct": "[5]" },
+        { "id": "cp_3", "line_number": 5, "label": "After: result.append(n * 3)", "variable_name": "result", "correct": "[5, 10, 15]" }
+      ],
+      "knowledge_units_tested": ["list_creation", "list_append", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "trace_list_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "modify_list",
+      "function_source": "def modify_list(items):\n    items.append(99)\n    first = items[0]\n    items[0] = first + 1\n    return items",
+      "call_expression": "modify_list([10, 20, 30])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: items.append(99)", "variable_name": "items", "correct": "[10, 20, 30, 99]" },
+        { "id": "cp_2", "line_number": 3, "label": "After: first = items[0]", "variable_name": "first", "correct": "10" },
+        { "id": "cp_3", "line_number": 4, "label": "After: items[0] = first + 1", "variable_name": "items", "correct": "[11, 20, 30, 99]" }
+      ],
+      "knowledge_units_tested": ["list_append", "list_indexing", "list_mutation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "trace_list_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "filter_evens",
+      "function_source": "def filter_evens(nums):\n    evens = []\n    for n in nums:\n        if n % 2 == 0:\n            evens.append(n)\n    count = len(evens)\n    return evens",
+      "call_expression": "filter_evens([3, 8, 1, 4, 7, 2])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: evens = []", "variable_name": "evens", "correct": "[]" },
+        { "id": "cp_2", "line_number": 5, "label": "After n=8: evens.append(n)", "variable_name": "evens", "correct": "[8]" },
+        { "id": "cp_3", "line_number": 5, "label": "After n=2 (loop ends): evens.append(n)", "variable_name": "evens", "correct": "[8, 4, 2]" },
+        { "id": "cp_4", "line_number": 6, "label": "After: count = len(evens)", "variable_name": "count", "correct": "3" }
+      ],
+      "knowledge_units_tested": ["for_loop", "if_statement", "modulo_operator", "list_append", "len_function", "filter_pattern"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "trace_list_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "list_ops",
+      "function_source": "def list_ops(data):\n    data.append(0)\n    data.insert(1, 99)\n    removed = data.pop(3)\n    data[0] = data[0] + removed\n    length = len(data)\n    return data",
+      "call_expression": "list_ops([10, 20, 30])",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: data.append(0)", "variable_name": "data", "correct": "[10, 20, 30, 0]" },
+        { "id": "cp_2", "line_number": 3, "label": "After: data.insert(1, 99)", "variable_name": "data", "correct": "[10, 99, 20, 30, 0]" },
+        { "id": "cp_3", "line_number": 4, "label": "After: removed = data.pop(3)", "variable_name": "removed", "correct": "30" },
+        { "id": "cp_4", "line_number": 5, "label": "After: data[0] = data[0] + removed", "variable_name": "data", "correct": "[40, 99, 20, 0]" },
+        { "id": "cp_5", "line_number": 6, "label": "After: length = len(data)", "variable_name": "length", "correct": "4" }
+      ],
+      "knowledge_units_tested": ["list_append", "list_insert", "list_pop", "list_indexing", "list_mutation", "len_function"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "trace_str_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "greet",
+      "function_source": "def greet(name):\n    greeting = \"Hello, \" + name\n    upper = greeting.upper()\n    length = len(upper)\n    return upper",
+      "call_expression": "greet(\"Alice\")",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: greeting = \"Hello, \" + name", "variable_name": "greeting", "correct": "'Hello, Alice'" },
+        { "id": "cp_2", "line_number": 3, "label": "After: upper = greeting.upper()", "variable_name": "upper", "correct": "'HELLO, ALICE'" },
+        { "id": "cp_3", "line_number": 4, "label": "After: length = len(upper)", "variable_name": "length", "correct": "12" }
+      ],
+      "knowledge_units_tested": ["string_concatenation", "string_upper", "len_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "trace_str_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "repeat_join",
+      "function_source": "def repeat_join(char, times):\n    result = char * times\n    with_end = result + \"!\"\n    return with_end",
+      "call_expression": "repeat_join(\"ab\", 3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = char * times", "variable_name": "result", "correct": "'ababab'" },
+        { "id": "cp_2", "line_number": 3, "label": "After: with_end = result + \"!\"", "variable_name": "with_end", "correct": "'ababab!'" }
+      ],
+      "knowledge_units_tested": ["string_repetition", "string_concatenation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "trace_str_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "process_word",
+      "function_source": "def process_word(word):\n    first = word[0]\n    last = word[-1]\n    middle = word[1:-1]\n    swapped = last + middle + first\n    return swapped",
+      "call_expression": "process_word(\"hello\")",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: first = word[0]", "variable_name": "first", "correct": "'h'" },
+        { "id": "cp_2", "line_number": 3, "label": "After: last = word[-1]", "variable_name": "last", "correct": "'o'" },
+        { "id": "cp_3", "line_number": 4, "label": "After: middle = word[1:-1]", "variable_name": "middle", "correct": "'ell'" },
+        { "id": "cp_4", "line_number": 5, "label": "After: swapped = last + middle + first", "variable_name": "swapped", "correct": "'oellh'" }
+      ],
+      "knowledge_units_tested": ["string_indexing", "string_slicing", "negative_indexing", "string_concatenation"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "trace_str_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "run_length_encode",
+      "function_source": "def run_length_encode(text):\n    result = \"\"\n    i = 0\n    while i < len(text):\n        char = text[i]\n        count = 1\n        while i + count < len(text) and text[i + count] == char:\n            count = count + 1\n        result = result + char + str(count)\n        i = i + count\n    return result",
+      "call_expression": "run_length_encode(\"aaabbc\")",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = \"\"", "variable_name": "result", "correct": "''" },
+        { "id": "cp_2", "line_number": 9, "label": "After processing 'a' group: result = result + char + str(count)", "variable_name": "result", "correct": "'a3'" },
+        { "id": "cp_3", "line_number": 9, "label": "After processing 'b' group: result = result + char + str(count)", "variable_name": "result", "correct": "'a3b2'" },
+        { "id": "cp_4", "line_number": 9, "label": "After processing 'c' group: result = result + char + str(count)", "variable_name": "result", "correct": "'a3b2c1'" },
+        { "id": "cp_5", "line_number": 10, "label": "After loop ends: i", "variable_name": "i", "correct": "6" }
+      ],
+      "knowledge_units_tested": ["while_loop", "nested_while_loop", "string_indexing", "string_concatenation", "run_length_encoding"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "trace_dict_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "make_profile",
+      "function_source": "def make_profile(name, age):\n    profile = {}\n    profile[\"name\"] = name\n    profile[\"age\"] = age\n    profile[\"adult\"] = age >= 18\n    return profile",
+      "call_expression": "make_profile(\"Bob\", 20)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: profile = {}", "variable_name": "profile", "correct": "{}" },
+        { "id": "cp_2", "line_number": 3, "label": "After: profile[\"name\"] = name", "variable_name": "profile", "correct": "{'name': 'Bob'}" },
+        { "id": "cp_3", "line_number": 5, "label": "After: profile[\"adult\"] = age >= 18", "variable_name": "profile", "correct": "{'name': 'Bob', 'age': 20, 'adult': True}" }
+      ],
+      "knowledge_units_tested": ["dict_creation", "dict_assignment", "comparison_operator"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "trace_dict_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "update_score",
+      "function_source": "def update_score(scores, name, points):\n    old = scores[name]\n    scores[name] = old + points\n    new_val = scores[name]\n    return new_val",
+      "call_expression": "update_score({\"Alice\": 85, \"Bob\": 72}, \"Bob\", 10)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: old = scores[name]", "variable_name": "old", "correct": "72" },
+        { "id": "cp_2", "line_number": 3, "label": "After: scores[name] = old + points", "variable_name": "scores", "correct": "{'Alice': 85, 'Bob': 82}" },
+        { "id": "cp_3", "line_number": 4, "label": "After: new_val = scores[name]", "variable_name": "new_val", "correct": "82" }
+      ],
+      "knowledge_units_tested": ["dict_access", "dict_update", "dict_mutation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "trace_dict_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "count_chars",
+      "function_source": "def count_chars(text):\n    counts = {}\n    for ch in text:\n        if ch in counts:\n            counts[ch] = counts[ch] + 1\n        else:\n            counts[ch] = 1\n    return counts",
+      "call_expression": "count_chars(\"abba\")",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: counts = {}", "variable_name": "counts", "correct": "{}" },
+        { "id": "cp_2", "line_number": 7, "label": "After ch='a' (1st): counts[ch] = 1", "variable_name": "counts", "correct": "{'a': 1}" },
+        { "id": "cp_3", "line_number": 5, "label": "After ch='b' (2nd time): counts[ch] = counts[ch] + 1", "variable_name": "counts", "correct": "{'a': 1, 'b': 2}" },
+        { "id": "cp_4", "line_number": 5, "label": "After loop ends: counts", "variable_name": "counts", "correct": "{'a': 2, 'b': 2}" }
+      ],
+      "knowledge_units_tested": ["dict_creation", "dict_in_operator", "dict_update", "for_loop", "counting_pattern"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "trace_dict_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "merge_dicts",
+      "function_source": "def merge_dicts(d1, d2):\n    result = {}\n    for key in d1:\n        result[key] = d1[key]\n    for key in d2:\n        if key in result:\n            result[key] = result[key] + d2[key]\n        else:\n            result[key] = d2[key]\n    total = sum(result.values())\n    return total",
+      "call_expression": "merge_dicts({\"a\": 1, \"b\": 2}, {\"b\": 3, \"c\": 4})",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: result = {}", "variable_name": "result", "correct": "{}" },
+        { "id": "cp_2", "line_number": 4, "label": "After 1st loop ends: result", "variable_name": "result", "correct": "{'a': 1, 'b': 2}" },
+        { "id": "cp_3", "line_number": 7, "label": "After key='b': result[key] = result[key] + d2[key]", "variable_name": "result", "correct": "{'a': 1, 'b': 5}" },
+        { "id": "cp_4", "line_number": 9, "label": "After key='c': result[key] = d2[key]", "variable_name": "result", "correct": "{'a': 1, 'b': 5, 'c': 4}" },
+        { "id": "cp_5", "line_number": 10, "label": "After: total = sum(result.values())", "variable_name": "total", "correct": "10" }
+      ],
+      "knowledge_units_tested": ["dict_creation", "dict_iteration", "dict_in_operator", "dict_update", "sum_function", "dict_values"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "trace_ops_001",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "arithmetic",
+      "function_source": "def arithmetic(a, b):\n    add = a + b\n    sub = a - b\n    mul = a * b\n    return mul",
+      "call_expression": "arithmetic(7, 3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: add = a + b", "variable_name": "add", "correct": "10" },
+        { "id": "cp_2", "line_number": 3, "label": "After: sub = a - b", "variable_name": "sub", "correct": "4" },
+        { "id": "cp_3", "line_number": 4, "label": "After: mul = a * b", "variable_name": "mul", "correct": "21" }
+      ],
+      "knowledge_units_tested": ["addition", "subtraction", "multiplication"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "trace_ops_002",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "floor_and_mod",
+      "function_source": "def floor_and_mod(a, b):\n    quotient = a // b\n    remainder = a % b\n    product = quotient * b + remainder\n    return product",
+      "call_expression": "floor_and_mod(17, 5)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: quotient = a // b", "variable_name": "quotient", "correct": "3" },
+        { "id": "cp_2", "line_number": 3, "label": "After: remainder = a % b", "variable_name": "remainder", "correct": "2" },
+        { "id": "cp_3", "line_number": 4, "label": "After: product = quotient * b + remainder", "variable_name": "product", "correct": "17" }
+      ],
+      "knowledge_units_tested": ["integer_division", "modulo_operator", "operator_precedence"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "trace_ops_003",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "logic_ops",
+      "function_source": "def logic_ops(x, y, z):\n    a = x > 0 and y > 0\n    b = x > 0 or z > 0\n    c = not a\n    d = a and b or c\n    return d",
+      "call_expression": "logic_ops(-1, 5, 3)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: a = x > 0 and y > 0", "variable_name": "a", "correct": "False" },
+        { "id": "cp_2", "line_number": 3, "label": "After: b = x > 0 or z > 0", "variable_name": "b", "correct": "True" },
+        { "id": "cp_3", "line_number": 4, "label": "After: c = not a", "variable_name": "c", "correct": "True" },
+        { "id": "cp_4", "line_number": 5, "label": "After: d = a and b or c", "variable_name": "d", "correct": "True" }
+      ],
+      "knowledge_units_tested": ["logical_and", "logical_or", "logical_not", "comparison_operator", "operator_precedence"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "trace_ops_004",
+      "problem_type": "execution-trace",
+      "problem_statement": "Trace the execution of this code. For each checkpoint, determine the value of the specified variable.",
+      "function_name": "mixed_ops",
+      "function_source": "def mixed_ops(a, b):\n    x = a ** 2 + b\n    y = x % 7\n    z = x // b - a\n    flag1 = y == 0\n    flag2 = z > a\n    result = flag1 or (not flag2 and y < 3)\n    return result",
+      "call_expression": "mixed_ops(3, 5)",
+      "checkpoints": [
+        { "id": "cp_1", "line_number": 2, "label": "After: x = a ** 2 + b", "variable_name": "x", "correct": "14" },
+        { "id": "cp_2", "line_number": 3, "label": "After: y = x % 7", "variable_name": "y", "correct": "0" },
+        { "id": "cp_3", "line_number": 4, "label": "After: z = x // b - a", "variable_name": "z", "correct": "-1" },
+        { "id": "cp_4", "line_number": 5, "label": "After: flag1 = y == 0", "variable_name": "flag1", "correct": "True" },
+        { "id": "cp_5", "line_number": 7, "label": "After: result = flag1 or (not flag2 and y < 3)", "variable_name": "result", "correct": "True" }
+      ],
+      "knowledge_units_tested": ["exponentiation", "modulo_operator", "integer_division", "comparison_operator", "logical_operators", "operator_precedence"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "operators"
+    }
+  ]
+}

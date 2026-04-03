@@ -57,16 +57,24 @@ class PythonDomainAdapter(DomainAdapter):
                 if pid and pid not in seen_ids:
                     all_problems.append(p)
                     seen_ids.add(pid)
-        # Load expanded teach problems
-        expanded_path = self._seed_dir / "problems-teach-expanded.json"
-        if expanded_path.exists():
-            with open(expanded_path, encoding="utf-8") as f:
-                data = json.load(f)
-            for p in data.get("problems", []):
-                pid = p.get("problem_id")
-                if pid and pid not in seen_ids:
-                    all_problems.append(p)
-                    seen_ids.add(pid)
+        # Load all supplementary problem files
+        supplementary_files = [
+            "problems-teach-expanded.json",
+            "problems-expanded-v2.json",
+            "problems-parsons.json",
+            "problems-dropdown.json",
+            "problems-execution-trace.json",
+        ]
+        for fname in supplementary_files:
+            fpath = self._seed_dir / fname
+            if fpath.exists():
+                with open(fpath, encoding="utf-8") as f:
+                    data = json.load(f)
+                for p in data.get("problems", []):
+                    pid = p.get("problem_id")
+                    if pid and pid not in seen_ids:
+                        all_problems.append(p)
+                        seen_ids.add(pid)
         self._problems = all_problems
         return self._problems
 

@@ -1,0 +1,1127 @@
+{
+  "version": "dropdown-v1",
+  "problems": [
+    {
+      "problem_id": "dropdown_variables_and_types_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to assign the integer 10 to a variable called x and print its type.",
+      "prompt_template": "x __BLANK_1__ 10\nprint(__BLANK_2__(x))",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["=", "==", ":", "=>"],
+          "correct": "="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["type", "typeof", "class", "dtype"],
+          "correct": "type"
+        }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "data_types_int", "type_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "dropdown_variables_and_types_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to convert the string \"42\" to an integer and store it in num.",
+      "prompt_template": "text = \"42\"\nnum = __BLANK_1__(text)\nprint(num + __BLANK_2__)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["int", "str", "float", "number"],
+          "correct": "int"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["8", "\"8\"", "eight", "None"],
+          "correct": "8"
+        }
+      ],
+      "knowledge_units_tested": ["type_conversion", "data_types_int", "data_types_string"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "dropdown_variables_and_types_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to create a boolean variable and a float variable.",
+      "prompt_template": "is_active = __BLANK_1__\ntemperature = __BLANK_2__",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["True", "true", "TRUE", "1"],
+          "correct": "True"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["36.6", "36,6", "float 36.6", "36.6f"],
+          "correct": "36.6"
+        }
+      ],
+      "knowledge_units_tested": ["data_types_bool", "data_types_float", "variable_assignment"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "dropdown_variables_and_types_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to swap the values of two variables using a temporary variable.",
+      "prompt_template": "a = 5\nb = 3\ntemp = __BLANK_1__\na = __BLANK_2__\nb = __BLANK_3__",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["a", "b", "a + b", "0"],
+          "correct": "a"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["b", "a", "temp", "a + b"],
+          "correct": "b"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["temp", "a", "b", "a - b"],
+          "correct": "temp"
+        }
+      ],
+      "knowledge_units_tested": ["variable_assignment", "variable_swap"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "dropdown_conditionals_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to check if a number is positive.",
+      "prompt_template": "__BLANK_1__ x > 0:\n    print(\"positive\")\n__BLANK_2__:\n    print(\"not positive\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["if", "If", "when", "check"],
+          "correct": "if"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["else", "elif", "otherwise", "default"],
+          "correct": "else"
+        }
+      ],
+      "knowledge_units_tested": ["if_statement", "else_clause", "comparison_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "dropdown_conditionals_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to check if a score earns an A (>=90), B (>=80), or other grade.",
+      "prompt_template": "if score __BLANK_1__ 90:\n    grade = \"A\"\n__BLANK_2__ score >= 80:\n    grade = \"B\"\nelse:\n    grade = __BLANK_3__",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": [">=", "=>", "> =", "greater"],
+          "correct": ">="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["elif", "else if", "elseif", "if"],
+          "correct": "elif"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["\"C\"", "C", "'C", "grade(C)"],
+          "correct": "\"C\""
+        }
+      ],
+      "knowledge_units_tested": ["if_statement", "elif_clause", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "dropdown_conditionals_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to check if a number is both positive AND even.",
+      "prompt_template": "if x > 0 __BLANK_1__ x __BLANK_2__ 2 == 0:\n    print(\"positive and even\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["and", "&&", "AND", "&"],
+          "correct": "and"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["%", "/", "//", "mod"],
+          "correct": "%"
+        }
+      ],
+      "knowledge_units_tested": ["logical_operators", "modulo_operator", "if_statement"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "dropdown_conditionals_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to check if a value is NOT in a list of forbidden words.",
+      "prompt_template": "forbidden = [\"spam\", \"ads\"]\nif word __BLANK_1__ forbidden:\n    print(__BLANK_2__)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["not in", "!= in", "not", "notin"],
+          "correct": "not in"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["\"allowed\"", "allowed", "True", "word"],
+          "correct": "\"allowed\""
+        }
+      ],
+      "knowledge_units_tested": ["membership_operator", "not_in", "if_statement"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "dropdown_for_loops_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to print numbers 0 through 4 using a for loop.",
+      "prompt_template": "__BLANK_1__ i in __BLANK_2__(5):\n    print(i)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["for", "For", "foreach", "loop"],
+          "correct": "for"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["range", "Range", "seq", "list"],
+          "correct": "range"
+        }
+      ],
+      "knowledge_units_tested": ["for_loop", "range_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "dropdown_for_loops_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to compute the sum of numbers from 1 to 10 using a for loop.",
+      "prompt_template": "total = __BLANK_1__\nfor i in range(__BLANK_2__, __BLANK_3__):\n    total = total + i\nprint(total)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["0", "1", "10", "None"],
+          "correct": "0"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["1", "0", "2", "10"],
+          "correct": "1"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["11", "10", "9", "12"],
+          "correct": "11"
+        }
+      ],
+      "knowledge_units_tested": ["for_loop", "range_function", "accumulator_pattern"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "dropdown_for_loops_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to iterate over a list and print each item with its index.",
+      "prompt_template": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor __BLANK_1__, fruit in __BLANK_2__(fruits):\n    print(idx, fruit)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["idx", "i, fruit", "fruit", "(idx)"],
+          "correct": "idx"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["enumerate", "range", "iter", "list"],
+          "correct": "enumerate"
+        }
+      ],
+      "knowledge_units_tested": ["for_loop", "enumerate_function", "tuple_unpacking"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "dropdown_for_loops_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to print even numbers from 2 to 10 (inclusive) using range with a step.",
+      "prompt_template": "for num in range(__BLANK_1__, __BLANK_2__, __BLANK_3__):\n    print(num)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["2", "0", "1", "3"],
+          "correct": "2"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["11", "10", "12", "9"],
+          "correct": "11"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["2", "1", "3", "-2"],
+          "correct": "2"
+        }
+      ],
+      "knowledge_units_tested": ["for_loop", "range_with_step"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "dropdown_while_loops_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to count down from 5 to 1 using a while loop.",
+      "prompt_template": "n = 5\n__BLANK_1__ n __BLANK_2__ 0:\n    print(n)\n    n = n - 1",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["while", "While", "for", "loop"],
+          "correct": "while"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": [">", ">=", "!=", "<"],
+          "correct": ">"
+        }
+      ],
+      "knowledge_units_tested": ["while_loop", "comparison_operators", "decrement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "dropdown_while_loops_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to keep asking for input until the user types 'quit'.",
+      "prompt_template": "command = \"\"\nwhile command __BLANK_1__ \"quit\":\n    command = __BLANK_2__(\"Enter command: \")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["!=", "==", "is not", "<>"],
+          "correct": "!="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["input", "print", "read", "scan"],
+          "correct": "input"
+        }
+      ],
+      "knowledge_units_tested": ["while_loop", "user_input", "sentinel_loop"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "dropdown_while_loops_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to double a number until it exceeds 100.",
+      "prompt_template": "x = 1\nwhile x __BLANK_1__ 100:\n    x __BLANK_2__ 2\nprint(x)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["<=", "<", ">", "=="],
+          "correct": "<="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["*=", "+=", "**=", "=*"],
+          "correct": "*="
+        }
+      ],
+      "knowledge_units_tested": ["while_loop", "augmented_assignment", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "dropdown_while_loops_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to find the first power of 2 greater than 1000.",
+      "prompt_template": "power = 1\ncount = 0\nwhile power __BLANK_1__ 1000:\n    power = power __BLANK_2__ 2\n    count __BLANK_3__ 1\nprint(count, power)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["<=", "<", ">=", "!="],
+          "correct": "<="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["*", "+", "**", "//"],
+          "correct": "*"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["+=", "=+", "++", "= +"],
+          "correct": "+="
+        }
+      ],
+      "knowledge_units_tested": ["while_loop", "augmented_assignment", "accumulator_pattern"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "dropdown_functions_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to define a function that adds two numbers and returns the result.",
+      "prompt_template": "__BLANK_1__ add(a, b):\n    __BLANK_2__ a + b",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["def", "function", "func", "define"],
+          "correct": "def"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["return", "print", "yield", "output"],
+          "correct": "return"
+        }
+      ],
+      "knowledge_units_tested": ["function_definition", "return_statement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "dropdown_functions_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to define a function with a default parameter value.",
+      "prompt_template": "def greet(name__BLANK_1__\"World\"):\n    return \"Hello, \" + __BLANK_2__",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["=", ":", " == ", " => "],
+          "correct": "="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["name", "\"name\"", "Name", "self.name"],
+          "correct": "name"
+        }
+      ],
+      "knowledge_units_tested": ["function_definition", "default_parameters", "string_concatenation"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "dropdown_functions_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to call a function and store its return value.",
+      "prompt_template": "def square(n):\n    return n __BLANK_1__ n\n\nresult = __BLANK_2__\nprint(result)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["*", "**", "+", "x"],
+          "correct": "*"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["square(4)", "square 4", "square[4]", "call square(4)"],
+          "correct": "square(4)"
+        }
+      ],
+      "knowledge_units_tested": ["function_call", "return_value", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "dropdown_functions_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to define a function that checks if a number is even and returns a boolean.",
+      "prompt_template": "def is_even(num):\n    __BLANK_1__ num % 2 __BLANK_2__ 0",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["return", "print", "yield", "pass"],
+          "correct": "return"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["==", "=", "!=", "is"],
+          "correct": "=="
+        }
+      ],
+      "knowledge_units_tested": ["function_definition", "return_statement", "comparison_operators", "modulo_operator"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "dropdown_lists_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to create a list and add an element to the end.",
+      "prompt_template": "fruits = [\"apple\", \"banana\"]\nfruits.__BLANK_1__(\"cherry\")\nprint(__BLANK_2__(fruits))",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["append", "add", "push", "insert"],
+          "correct": "append"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["len", "size", "length", "count"],
+          "correct": "len"
+        }
+      ],
+      "knowledge_units_tested": ["list_creation", "list_append", "len_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "dropdown_lists_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to access the last element and a slice of a list.",
+      "prompt_template": "nums = [10, 20, 30, 40, 50]\nlast = nums[__BLANK_1__]\nmiddle = nums[__BLANK_2__]",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["-1", "4", "5", "last"],
+          "correct": "-1"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["1:4", "1:3", "2:4", "1..4"],
+          "correct": "1:4"
+        }
+      ],
+      "knowledge_units_tested": ["list_indexing", "negative_indexing", "list_slicing"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "dropdown_lists_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to sort a list in place and then remove the first element.",
+      "prompt_template": "nums = [3, 1, 4, 1, 5]\nnums.__BLANK_1__()\nnums.__BLANK_2__(0)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["sort", "sorted", "order", "arrange"],
+          "correct": "sort"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["pop", "remove", "delete", "del"],
+          "correct": "pop"
+        }
+      ],
+      "knowledge_units_tested": ["list_sort", "list_pop", "in_place_methods"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "dropdown_lists_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to create a list of squares using a list comprehension.",
+      "prompt_template": "squares = [x __BLANK_1__ 2 __BLANK_2__ x __BLANK_3__ range(6)]",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["**", "*", "^", "pow"],
+          "correct": "**"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["for", "in", "each", "with"],
+          "correct": "for"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["in", "of", "from", ":"],
+          "correct": "in"
+        }
+      ],
+      "knowledge_units_tested": ["list_comprehension", "exponent_operator", "range_function"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "dropdown_strings_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to convert a string to uppercase and check if it starts with 'HELLO'.",
+      "prompt_template": "text = \"hello world\"\nupper_text = text.__BLANK_1__()\nresult = upper_text.__BLANK_2__(\"HELLO\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["upper", "toUpperCase", "capitalize", "UPPER"],
+          "correct": "upper"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["startswith", "beginsWith", "starts", "hasPrefix"],
+          "correct": "startswith"
+        }
+      ],
+      "knowledge_units_tested": ["string_methods", "upper_method", "startswith_method"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "dropdown_strings_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to split a sentence into words and join them with hyphens.",
+      "prompt_template": "sentence = \"hello world python\"\nwords = sentence.__BLANK_1__()\nresult = __BLANK_2__.join(words)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["split", "divide", "tokenize", "separate"],
+          "correct": "split"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["\"-\"", "'-'", "hyphen", "-"],
+          "correct": "\"-\""
+        }
+      ],
+      "knowledge_units_tested": ["string_split", "string_join"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "dropdown_strings_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to extract the first 5 characters and find the position of a substring.",
+      "prompt_template": "text = \"Hello, World!\"\nfirst_five = text[__BLANK_1__]\npos = text.__BLANK_2__(\"World\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": [":5", "0:5", "1:5", "5"],
+          "correct": ":5"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["find", "search", "index", "indexOf"],
+          "correct": "find"
+        }
+      ],
+      "knowledge_units_tested": ["string_slicing", "string_find"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "dropdown_strings_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to use an f-string to format a name and age into a message.",
+      "prompt_template": "name = \"Alice\"\nage = 25\nmessage = __BLANK_1__\"My name is __BLANK_2__ and I am {age} years old.\"",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["f", "format", "$", ""],
+          "correct": "f"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["{name}", "${name}", "name", "%name"],
+          "correct": "{name}"
+        }
+      ],
+      "knowledge_units_tested": ["f_strings", "string_formatting"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "dropdown_dictionaries_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to create a dictionary and access a value by key.",
+      "prompt_template": "student = __BLANK_1__\"name\": \"Alice\", \"age\": 20__BLANK_2__\nprint(student[__BLANK_3__])",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["{", "[", "(", "<"],
+          "correct": "{"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["}", "]", ")", ">"],
+          "correct": "}"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["\"name\"", "name", "0", "'name"],
+          "correct": "\"name\""
+        }
+      ],
+      "knowledge_units_tested": ["dict_creation", "dict_access"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "dropdown_dictionaries_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to safely get a value with a default and add a new key-value pair.",
+      "prompt_template": "d = {\"a\": 1, \"b\": 2}\nval = d.__BLANK_1__(\"c\", __BLANK_2__)\nd[__BLANK_3__] = 3",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["get", "find", "fetch", "retrieve"],
+          "correct": "get"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["0", "None", "\"\"", "False"],
+          "correct": "0"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["\"c\"", "c", "3", "2"],
+          "correct": "\"c\""
+        }
+      ],
+      "knowledge_units_tested": ["dict_get", "dict_default", "dict_assignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "dropdown_dictionaries_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to iterate over dictionary keys and values.",
+      "prompt_template": "scores = {\"math\": 90, \"english\": 85}\nfor subject, score in scores.__BLANK_1__():\n    print(__BLANK_2__(subject, score))",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["items", "values", "keys", "entries"],
+          "correct": "items"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["f\"{subject}: {score}\"", "subject + score", "print", "format"],
+          "correct": "f\"{subject}: {score}\""
+        }
+      ],
+      "knowledge_units_tested": ["dict_iteration", "dict_items", "f_strings"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "dropdown_dictionaries_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to check if a key exists and get all keys as a list.",
+      "prompt_template": "d = {\"x\": 1, \"y\": 2, \"z\": 3}\nif \"x\" __BLANK_1__ d:\n    print(\"found\")\nall_keys = __BLANK_2__(d.__BLANK_3__())",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["in", "==", "is", "has"],
+          "correct": "in"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["list", "array", "tuple", "set"],
+          "correct": "list"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["keys", "items", "values", "all"],
+          "correct": "keys"
+        }
+      ],
+      "knowledge_units_tested": ["dict_membership", "dict_keys", "type_conversion"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "dropdown_input_output_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to read a name from input and print a greeting.",
+      "prompt_template": "name = __BLANK_1__(\"What is your name? \")\n__BLANK_2__(\"Hello, \" + name)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["input", "read", "scanf", "get"],
+          "correct": "input"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["print", "echo", "write", "output"],
+          "correct": "print"
+        }
+      ],
+      "knowledge_units_tested": ["user_input", "print_function", "string_concatenation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "dropdown_input_output_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to read a number from input and print its double.",
+      "prompt_template": "text = input(\"Enter a number: \")\nnum = __BLANK_1__(text)\nprint(num __BLANK_2__ 2)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["int", "str", "num", "number"],
+          "correct": "int"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["*", "+", "x", "**"],
+          "correct": "*"
+        }
+      ],
+      "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "dropdown_input_output_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to print multiple values with a custom separator and end character.",
+      "prompt_template": "print(\"a\", \"b\", \"c\", __BLANK_1__=\"-\", __BLANK_2__=\"!\\n\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["sep", "separator", "delim", "join"],
+          "correct": "sep"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["end", "ending", "suffix", "newline"],
+          "correct": "end"
+        }
+      ],
+      "knowledge_units_tested": ["print_function", "print_sep", "print_end"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "dropdown_input_output_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to read two numbers and print their sum on one line.",
+      "prompt_template": "a = __BLANK_1__(input())\nb = __BLANK_2__(input())\nprint(a __BLANK_3__ b)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["int", "float", "str", "eval"],
+          "correct": "int"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["int", "float", "str", "eval"],
+          "correct": "int"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["+", "++", "add", ","],
+          "correct": "+"
+        }
+      ],
+      "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "dropdown_operators_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to compute integer division and remainder.",
+      "prompt_template": "a = 17\nb = 5\nquotient = a __BLANK_1__ b\nremainder = a __BLANK_2__ b",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["//", "/", "%", "div"],
+          "correct": "//"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["%", "//", "/", "mod"],
+          "correct": "%"
+        }
+      ],
+      "knowledge_units_tested": ["floor_division", "modulo_operator"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "dropdown_operators_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to use exponentiation and comparison operators.",
+      "prompt_template": "result = 2 __BLANK_1__ 10\nis_large = result __BLANK_2__ 500",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["**", "^", "pow", "^^"],
+          "correct": "**"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": [">", ">>", "gt", "greater"],
+          "correct": ">"
+        }
+      ],
+      "knowledge_units_tested": ["exponent_operator", "comparison_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "dropdown_operators_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to use augmented assignment operators to update a variable.",
+      "prompt_template": "x = 10\nx __BLANK_1__ 3\nprint(x)\nx __BLANK_2__ 2\nprint(x)",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["+=", "=+", "+", "++"],
+          "correct": "+="
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["*=", "=*", "**=", "x="],
+          "correct": "*="
+        }
+      ],
+      "knowledge_units_tested": ["augmented_assignment", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "dropdown_operators_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to use logical operators to combine conditions.",
+      "prompt_template": "age = 25\nhas_id = True\ncan_enter = age >= 18 __BLANK_1__ has_id\nis_child = __BLANK_2__ can_enter\nis_teen_or_adult = age >= 13 __BLANK_3__ age >= 18",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["and", "&&", "&", "AND"],
+          "correct": "and"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["not", "!", "~", "NOT"],
+          "correct": "not"
+        },
+        {
+          "id": "blank_3",
+          "placeholder": "__BLANK_3__",
+          "options": ["or", "||", "|", "OR"],
+          "correct": "or"
+        }
+      ],
+      "knowledge_units_tested": ["logical_and", "logical_or", "logical_not"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "dropdown_error_handling_001",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to handle a potential division by zero error.",
+      "prompt_template": "__BLANK_1__:\n    result = 10 / 0\n__BLANK_2__ ZeroDivisionError:\n    print(\"Cannot divide by zero\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["try", "Try", "catch", "begin"],
+          "correct": "try"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["except", "catch", "rescue", "handle"],
+          "correct": "except"
+        }
+      ],
+      "knowledge_units_tested": ["try_except", "exception_types"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "dropdown_error_handling_002",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to handle a ValueError when converting user input to an integer.",
+      "prompt_template": "try:\n    num = __BLANK_1__(input(\"Enter number: \"))\nexcept __BLANK_2__:\n    print(\"That's not a valid number\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["int", "str", "float", "number"],
+          "correct": "int"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["ValueError", "TypeError", "Error", "NumberError"],
+          "correct": "ValueError"
+        }
+      ],
+      "knowledge_units_tested": ["try_except", "value_error", "type_conversion"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "dropdown_error_handling_003",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to handle multiple exception types and use a finally block.",
+      "prompt_template": "try:\n    data = [1, 2, 3]\n    print(data[5])\nexcept __BLANK_1__:\n    print(\"Index out of range\")\n__BLANK_2__:\n    print(\"This always runs\")",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["IndexError", "KeyError", "RangeError", "OutOfBounds"],
+          "correct": "IndexError"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["finally", "always", "ensure", "cleanup"],
+          "correct": "finally"
+        }
+      ],
+      "knowledge_units_tested": ["try_except", "index_error", "finally_block"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "dropdown_error_handling_004",
+      "problem_type": "dropdown",
+      "problem_statement": "Fill in the blanks to raise a custom exception when a value is invalid.",
+      "prompt_template": "def set_age(age):\n    if age < 0:\n        __BLANK_1__ __BLANK_2__(\"Age cannot be negative\")\n    return age",
+      "blanks": [
+        {
+          "id": "blank_1",
+          "placeholder": "__BLANK_1__",
+          "options": ["raise", "throw", "error", "assert"],
+          "correct": "raise"
+        },
+        {
+          "id": "blank_2",
+          "placeholder": "__BLANK_2__",
+          "options": ["ValueError", "Exception", "Error", "InvalidError"],
+          "correct": "ValueError"
+        }
+      ],
+      "knowledge_units_tested": ["raise_exception", "value_error", "function_definition"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "error_handling"
+    }
+  ]
+}

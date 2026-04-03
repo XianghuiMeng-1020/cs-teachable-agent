@@ -7,548 +7,2546 @@
       "problem_statement": "Write a program that creates a variable named age, assigns it the value 20, and prints that value.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "20\n" }
+        {
+          "input": "",
+          "expected_output": "20\n"
+        }
       ],
-      "knowledge_units_tested": ["variable_assignment", "print_function"],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_var_002",
       "problem_statement": "Write a program that assigns the string \"Hello\" to a variable called greeting and then prints it.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "Hello\n" }
+        {
+          "input": "",
+          "expected_output": "Hello\n"
+        }
       ],
-      "knowledge_units_tested": ["variable_assignment", "print_function", "data_types_string"],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "print_function",
+        "data_types_string"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_io_001",
       "problem_statement": "Write a program that reads one line of input and then prints that line exactly.",
       "input_spec": "One line of text.",
       "test_cases": [
-        { "input": "Alice\n", "expected_output": "Alice\n" },
-        { "input": "42\n", "expected_output": "42\n" }
+        {
+          "input": "Alice\n",
+          "expected_output": "Alice\n"
+        },
+        {
+          "input": "42\n",
+          "expected_output": "42\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_io_002",
       "problem_statement": "Write a program that reads one line of input, stores it in a variable, and prints that same line.",
       "input_spec": "One line of text.",
       "test_cases": [
-        { "input": "7\n", "expected_output": "7\n" },
-        { "input": "0\n", "expected_output": "0\n" }
+        {
+          "input": "7\n",
+          "expected_output": "7\n"
+        },
+        {
+          "input": "0\n",
+          "expected_output": "0\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "variable_assignment", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "variable_assignment",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_arith_001",
       "problem_statement": "Write a program that computes 10 + 20 and prints the result.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "30\n" }
+        {
+          "input": "",
+          "expected_output": "30\n"
+        }
       ],
-      "knowledge_units_tested": ["arithmetic_operators", "print_function"],
+      "knowledge_units_tested": [
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "operators",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_arith_002",
       "problem_statement": "Write a program that reads two integers (one per line), adds them, and prints the sum.",
       "input_spec": "Two lines, each containing an integer.",
       "test_cases": [
-        { "input": "3\n5\n", "expected_output": "8\n" },
-        { "input": "0\n0\n", "expected_output": "0\n" }
+        {
+          "input": "3\n5\n",
+          "expected_output": "8\n"
+        },
+        {
+          "input": "0\n0\n",
+          "expected_output": "0\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "arithmetic_operators", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_cond_001",
       "problem_statement": "Write a program that reads one integer. If it is positive, print \"positive\". If it is zero or negative, print \"not positive\".",
       "input_spec": "One line containing an integer.",
       "test_cases": [
-        { "input": "5\n", "expected_output": "positive\n" },
-        { "input": "0\n", "expected_output": "not positive\n" },
-        { "input": "-1\n", "expected_output": "not positive\n" }
+        {
+          "input": "5\n",
+          "expected_output": "positive\n"
+        },
+        {
+          "input": "0\n",
+          "expected_output": "not positive\n"
+        },
+        {
+          "input": "-1\n",
+          "expected_output": "not positive\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_cond_002",
       "problem_statement": "Write a program that reads one integer. If it is even, print \"even\". If it is odd, print \"odd\". (Hint: use remainder % 2.)",
       "input_spec": "One line containing an integer.",
       "test_cases": [
-        { "input": "4\n", "expected_output": "even\n" },
-        { "input": "7\n", "expected_output": "odd\n" },
-        { "input": "0\n", "expected_output": "even\n" }
+        {
+          "input": "4\n",
+          "expected_output": "even\n"
+        },
+        {
+          "input": "7\n",
+          "expected_output": "odd\n"
+        },
+        {
+          "input": "0\n",
+          "expected_output": "even\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "arithmetic_operators", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "arithmetic_operators",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_loop_001",
       "problem_statement": "Write a program that prints the numbers 0, 1, 2, 3, 4, each on its own line, using a for loop and range(5).",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "0\n1\n2\n3\n4\n" }
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n3\n4\n"
+        }
       ],
-      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_loop_002",
       "problem_statement": "Write a program that uses a for loop and range(3) to print the numbers 0, 1, 2, each on its own line.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "0\n1\n2\n" }
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n"
+        }
       ],
-      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_loop_003",
       "problem_statement": "Write a program that uses a while loop to print the numbers 1, 2, 3, 4, 5, each on its own line.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "1\n2\n3\n4\n5\n" }
+        {
+          "input": "",
+          "expected_output": "1\n2\n3\n4\n5\n"
+        }
       ],
-      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "comparison_operators", "print_function"],
+      "knowledge_units_tested": [
+        "while_loop",
+        "arithmetic_operators",
+        "comparison_operators",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "while_loops",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_list_001",
       "problem_statement": "Write a program that creates a list containing the numbers 1, 2, 3, then prints the first element (index 0).",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "1\n" }
+        {
+          "input": "",
+          "expected_output": "1\n"
+        }
       ],
-      "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_list_002",
       "problem_statement": "Write a program that creates a list [10, 20, 30], then prints the length of the list.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "3\n" }
+        {
+          "input": "",
+          "expected_output": "3\n"
+        }
       ],
-      "knowledge_units_tested": ["list_creation", "list_basics", "print_function"],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_basics",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_list_003",
       "problem_statement": "Write a program that creates a list with the three strings \"a\", \"b\", \"c\", then prints each element on its own line using a for loop.",
       "input_spec": null,
       "test_cases": [
-        { "input": "", "expected_output": "a\nb\nc\n" }
+        {
+          "input": "",
+          "expected_output": "a\nb\nc\n"
+        }
       ],
-      "knowledge_units_tested": ["list_creation", "list_iteration", "print_function"],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_iteration",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_001",
       "problem_statement": "Write a program that reads one integer. If it is greater than or equal to 10, print \"big\". Otherwise print \"small\".",
       "input_spec": "One line containing an integer.",
       "test_cases": [
-        { "input": "10\n", "expected_output": "big\n" },
-        { "input": "9\n", "expected_output": "small\n" }
+        {
+          "input": "10\n",
+          "expected_output": "big\n"
+        },
+        {
+          "input": "9\n",
+          "expected_output": "small\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_002",
       "problem_statement": "Write a program that reads two integers (one per line). Print \"same\" if they are equal, otherwise print \"different\".",
       "input_spec": "Two lines, each containing an integer.",
       "test_cases": [
-        { "input": "5\n5\n", "expected_output": "same\n" },
-        { "input": "3\n7\n", "expected_output": "different\n" }
+        {
+          "input": "5\n5\n",
+          "expected_output": "same\n"
+        },
+        {
+          "input": "3\n7\n",
+          "expected_output": "different\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_var_003",
       "problem_statement": "Write a program that creates variables a and b with values 7 and 3, then prints the value of a.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "7\n" }],
-      "knowledge_units_tested": ["variable_assignment", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "7\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_var_004",
       "problem_statement": "Create a variable score with value 100 and print it.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "100\n" }],
-      "knowledge_units_tested": ["variable_assignment", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "100\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_io_003",
       "problem_statement": "Read a line of input into a variable line and print it twice, each on its own line.",
       "input_spec": "One line of text.",
       "test_cases": [
-        { "input": "Hi\n", "expected_output": "Hi\nHi\n" }
+        {
+          "input": "Hi\n",
+          "expected_output": "Hi\nHi\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "variable_assignment", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "variable_assignment",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_arith_003",
       "problem_statement": "Compute 15 - 6 and print the result.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "9\n" }],
-      "knowledge_units_tested": ["arithmetic_operators", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "9\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "operators",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_arith_004",
       "problem_statement": "Compute 4 * 5 and print the result.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "20\n" }],
-      "knowledge_units_tested": ["arithmetic_operators", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "20\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "operators",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_arith_005",
       "problem_statement": "Read one integer, multiply it by 2, and print the result.",
       "input_spec": "One integer per line.",
       "test_cases": [
-        { "input": "11\n", "expected_output": "22\n" },
-        { "input": "0\n", "expected_output": "0\n" }
+        {
+          "input": "11\n",
+          "expected_output": "22\n"
+        },
+        {
+          "input": "0\n",
+          "expected_output": "0\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "arithmetic_operators", "print_function", "data_types_int_float"],
+      "knowledge_units_tested": [
+        "user_input",
+        "arithmetic_operators",
+        "print_function",
+        "data_types_int_float"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_cond_003",
       "problem_statement": "Read one integer. If it is negative, print \"negative\". Otherwise print \"non-negative\".",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "-5\n", "expected_output": "negative\n" },
-        { "input": "0\n", "expected_output": "non-negative\n" }
+        {
+          "input": "-5\n",
+          "expected_output": "negative\n"
+        },
+        {
+          "input": "0\n",
+          "expected_output": "non-negative\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_cond_004",
       "problem_statement": "Read one integer. Print \"zero\" if it is 0, \"positive\" if greater than 0, and \"negative\" if less than 0.",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "0\n", "expected_output": "zero\n" },
-        { "input": "3\n", "expected_output": "positive\n" },
-        { "input": "-2\n", "expected_output": "negative\n" }
+        {
+          "input": "0\n",
+          "expected_output": "zero\n"
+        },
+        {
+          "input": "3\n",
+          "expected_output": "positive\n"
+        },
+        {
+          "input": "-2\n",
+          "expected_output": "negative\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_elif_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_loop_004",
       "problem_statement": "Use a for loop with range(4) to print 0, 1, 2, 3, each on its own line.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "0\n1\n2\n3\n" }],
-      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_loop_005",
       "problem_statement": "Using a for loop and range(6), print the numbers 0 through 5, each on its own line.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "0\n1\n2\n3\n4\n5\n" }],
-      "knowledge_units_tested": ["for_loop_range", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n3\n4\n5\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_loop_006",
       "problem_statement": "Use a while loop to print the numbers 0, 1, 2, 3, 4, each on its own line.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "0\n1\n2\n3\n4\n" }],
-      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "comparison_operators", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n3\n4\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "while_loop",
+        "arithmetic_operators",
+        "comparison_operators",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "while_loops",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_list_004",
       "problem_statement": "Create a list [5, 10, 15, 20] and print the second element (index 1).",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "10\n" }],
-      "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "10\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_list_005",
       "problem_statement": "Create a list with elements \"x\", \"y\", \"z\" and print the last element using a negative index.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "z\n" }],
-      "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "z\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_list_006",
       "problem_statement": "Create a list [1, 2, 3], then use a for loop to print each number on its own line.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "1\n2\n3\n" }],
-      "knowledge_units_tested": ["list_creation", "list_iteration", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "1\n2\n3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_iteration",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_003",
       "problem_statement": "Read one integer. Print \"even\" if it is even, otherwise print \"odd\".",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "6\n", "expected_output": "even\n" },
-        { "input": "3\n", "expected_output": "odd\n" }
+        {
+          "input": "6\n",
+          "expected_output": "even\n"
+        },
+        {
+          "input": "3\n",
+          "expected_output": "odd\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "arithmetic_operators", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "arithmetic_operators",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_004",
       "problem_statement": "Read two integers (one per line). Print the larger of the two (or the first if equal).",
       "input_spec": "Two integers.",
       "test_cases": [
-        { "input": "8\n3\n", "expected_output": "8\n" },
-        { "input": "2\n9\n", "expected_output": "9\n" }
+        {
+          "input": "8\n3\n",
+          "expected_output": "8\n"
+        },
+        {
+          "input": "2\n9\n",
+          "expected_output": "9\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_005",
       "problem_statement": "Read one integer n. Using a for loop and range(n), print the numbers 0 through n-1, each on its own line.",
       "input_spec": "One integer n.",
       "test_cases": [
-        { "input": "3\n", "expected_output": "0\n1\n2\n" }
+        {
+          "input": "3\n",
+          "expected_output": "0\n1\n2\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "for_loop_range", "print_function", "data_types_int_float"],
+      "knowledge_units_tested": [
+        "user_input",
+        "for_loop_range",
+        "print_function",
+        "data_types_int_float"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_str_001",
       "problem_statement": "Create a variable msg with the string \"Python\" and print it.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "Python\n" }],
-      "knowledge_units_tested": ["variable_assignment", "data_types_string", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "Python\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "data_types_string",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_str_002",
       "problem_statement": "Print the concatenation of \"Hello \" and \"World\" (no newline between, then newline).",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "Hello World\n" }],
-      "knowledge_units_tested": ["string_concatenation", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "Hello World\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "string_concatenation",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_log_001",
       "problem_statement": "Read one integer. If it is greater than 0 and less than 10, print \"digit\". Otherwise print \"other\".",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "5\n", "expected_output": "digit\n" },
-        { "input": "10\n", "expected_output": "other\n" }
+        {
+          "input": "5\n",
+          "expected_output": "digit\n"
+        },
+        {
+          "input": "10\n",
+          "expected_output": "other\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "logical_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "logical_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_cond_005",
       "problem_statement": "Read one integer. If it is exactly 42, print \"answer\". Otherwise print \"no\".",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "42\n", "expected_output": "answer\n" },
-        { "input": "41\n", "expected_output": "no\n" }
+        {
+          "input": "42\n",
+          "expected_output": "answer\n"
+        },
+        {
+          "input": "41\n",
+          "expected_output": "no\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_loop_007",
       "problem_statement": "Using a for loop, iterate over the string \"abc\" and print each character on its own line.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "a\nb\nc\n" }],
-      "knowledge_units_tested": ["for_loop_iterable", "data_types_string", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "a\nb\nc\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "for_loop_iterable",
+        "data_types_string",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_list_007",
       "problem_statement": "Create a list [2, 4, 6, 8]. Print its length.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "4\n" }],
-      "knowledge_units_tested": ["list_creation", "list_basics", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "4\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_basics",
+        "print_function"
+      ],
       "difficulty": "remember",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
     },
     {
       "problem_id": "prob_list_008",
       "problem_statement": "Create a list [1, 2]. Use append to add 3, then print the list (e.g. [1, 2, 3]).",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "[1, 2, 3]\n" }],
-      "knowledge_units_tested": ["list_creation", "list_basics", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[1, 2, 3]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_basics",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_006",
       "problem_statement": "Read three integers (one per line). Print the smallest of the three.",
       "input_spec": "Three integers.",
       "test_cases": [
-        { "input": "7\n2\n9\n", "expected_output": "2\n" }
+        {
+          "input": "7\n2\n9\n",
+          "expected_output": "2\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "if_elif_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_007",
       "problem_statement": "Read one integer. If it is between 1 and 5 inclusive, print \"in range\". Otherwise print \"out\".",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "3\n", "expected_output": "in range\n" },
-        { "input": "6\n", "expected_output": "out\n" }
+        {
+          "input": "3\n",
+          "expected_output": "in range\n"
+        },
+        {
+          "input": "6\n",
+          "expected_output": "out\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "comparison_operators", "logical_operators", "if_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "logical_operators",
+        "if_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_008",
       "problem_statement": "Read one integer n. Print the numbers 1 through n (inclusive), each on its own line, using a for loop.",
       "input_spec": "One integer n.",
       "test_cases": [
-        { "input": "4\n", "expected_output": "1\n2\n3\n4\n" }
+        {
+          "input": "4\n",
+          "expected_output": "1\n2\n3\n4\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "for_loop_range", "arithmetic_operators", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "for_loop_range",
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["off_by_one_range"]
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_009",
       "problem_statement": "Create a list [10, 20, 30, 40]. Print the sum of the first and last elements.",
       "input_spec": null,
-      "test_cases": [{ "input": "", "expected_output": "50\n" }],
-      "knowledge_units_tested": ["list_creation", "list_indexing", "arithmetic_operators", "print_function"],
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "50\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "arithmetic_operators",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": []
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
     },
     {
       "problem_id": "prob_apply_010",
       "problem_statement": "Read one integer. If it is divisible by 3, print \"fizz\". If it is divisible by 5, print \"buzz\". If both, print \"fizzbuzz\". Otherwise print the number.",
       "input_spec": "One integer.",
       "test_cases": [
-        { "input": "9\n", "expected_output": "fizz\n" },
-        { "input": "10\n", "expected_output": "buzz\n" },
-        { "input": "15\n", "expected_output": "fizzbuzz\n" },
-        { "input": "7\n", "expected_output": "7\n" }
+        {
+          "input": "9\n",
+          "expected_output": "fizz\n"
+        },
+        {
+          "input": "10\n",
+          "expected_output": "buzz\n"
+        },
+        {
+          "input": "15\n",
+          "expected_output": "fizzbuzz\n"
+        },
+        {
+          "input": "7\n",
+          "expected_output": "7\n"
+        }
       ],
-      "knowledge_units_tested": ["user_input", "arithmetic_operators", "comparison_operators", "if_elif_else", "print_function"],
+      "knowledge_units_tested": [
+        "user_input",
+        "arithmetic_operators",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
       "difficulty": "apply",
-      "targeted_misconceptions": ["assign_vs_equal"]
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
     },
-    { "problem_id": "prob_type_001", "problem_statement": "Read a string that represents an integer, convert it to int, add 1, and print the result.", "input_spec": "One line with a number string.", "test_cases": [{ "input": "41\n", "expected_output": "42\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["input_returns_string"] },
-    { "problem_id": "prob_type_002", "problem_statement": "Read two lines (two integers as strings). Convert both to int, add them, print the sum.", "input_spec": "Two lines.", "test_cases": [{ "input": "10\n20\n", "expected_output": "30\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_assign_op_001", "problem_statement": "Start with x = 0. Use a loop to add 1 to x five times with +=, then print x.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "5\n" }], "knowledge_units_tested": ["variable_assignment", "assignment_operators", "for_loop_range", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_str_meth_001", "problem_statement": "Read one line of input and print it in uppercase.", "input_spec": "One line.", "test_cases": [{ "input": "hello\n", "expected_output": "HELLO\n" }], "knowledge_units_tested": ["user_input", "string_methods", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_str_meth_002", "problem_statement": "Read one line, strip leading/trailing spaces, and print it.", "input_spec": "One line.", "test_cases": [{ "input": "  hi  \n", "expected_output": "hi\n" }], "knowledge_units_tested": ["user_input", "string_methods", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_func_001", "problem_statement": "Define a function greet() that prints \"Hello\". Then call it.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "Hello\n" }], "knowledge_units_tested": ["function_definition", "function_calls", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_func_002", "problem_statement": "Define a function double(n) that returns n * 2. Call it with 5 and print the result.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "10\n" }], "knowledge_units_tested": ["function_definition", "function_parameters", "return_statement", "function_calls", "print_function"], "difficulty": "remember", "targeted_misconceptions": ["print_vs_return"] },
-    { "problem_id": "prob_func_003", "problem_statement": "Define add(a, b) that returns a + b. Read two integers, call add, print result.", "input_spec": "Two integers.", "test_cases": [{ "input": "3\n7\n", "expected_output": "10\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "function_definition", "function_parameters", "return_statement", "function_calls", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["print_vs_return"] },
-    { "problem_id": "prob_func_004", "problem_statement": "Define is_even(n) that returns True if n is even else False. Read one int, call is_even, print the result.", "input_spec": "One integer.", "test_cases": [{ "input": "4\n", "expected_output": "True\n" }, { "input": "3\n", "expected_output": "False\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "function_definition", "return_statement", "arithmetic_operators", "comparison_operators", "function_calls", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["print_vs_return"] },
-    { "problem_id": "prob_dict_001", "problem_statement": "Create a dict {\"a\": 1, \"b\": 2}. Print the value for \"a\".", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "1\n" }], "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_dict_002", "problem_statement": "Create a dict with key \"name\" and value \"Alice\". Print the value.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "Alice\n" }], "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_tuple_001", "problem_statement": "Create a tuple (10, 20). Print the first element.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "10\n" }], "knowledge_units_tested": ["tuple_basics", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_fmt_001", "problem_statement": "Read a name. Print the string \"Hello, <name>!\" using f-string or format.", "input_spec": "One line (name).", "test_cases": [{ "input": "Bob\n", "expected_output": "Hello, Bob!\n" }], "knowledge_units_tested": ["user_input", "string_formatting", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_transfer_001", "problem_statement": "Read an integer n. Print the numbers 0 to n-1, each on its own line, using a for loop.", "input_spec": "One integer.", "test_cases": [{ "input": "4\n", "expected_output": "0\n1\n2\n3\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "for_loop_range", "print_function"], "difficulty": "transfer", "targeted_misconceptions": ["off_by_one_range"] },
-    { "problem_id": "prob_transfer_002", "problem_statement": "Read a line and print the number of characters in it (use len()).", "input_spec": "One line.", "test_cases": [{ "input": "abc\n", "expected_output": "3\n" }], "knowledge_units_tested": ["user_input", "data_types_string", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_transfer_003", "problem_statement": "Create a list [1, 2, 3, 4, 5]. Print the sum of all elements using a loop.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "15\n" }], "knowledge_units_tested": ["list_creation", "list_iteration", "variable_assignment", "arithmetic_operators", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_011", "problem_statement": "Read one integer. Print \"positive\" if > 0, \"zero\" if == 0, \"negative\" if < 0.", "input_spec": "One integer.", "test_cases": [{ "input": "-1\n", "expected_output": "negative\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["assign_vs_equal"] },
-    { "problem_id": "prob_apply_012", "problem_statement": "Read two integers. Print the larger one (or first if equal).", "input_spec": "Two integers.", "test_cases": [{ "input": "8\n3\n", "expected_output": "8\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_013", "problem_statement": "Read one integer. If it is 0 or 1, print \"small\". If 2 to 9, print \"digit\". Otherwise print \"large\".", "input_spec": "One integer.", "test_cases": [{ "input": "5\n", "expected_output": "digit\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "logical_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_014", "problem_statement": "Read a line. If it equals \"yes\", print \"ok\". Otherwise print \"no\".", "input_spec": "One line.", "test_cases": [{ "input": "yes\n", "expected_output": "ok\n" }], "knowledge_units_tested": ["user_input", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_015", "problem_statement": "Read one integer n. Print the sum 1+2+...+n using a loop.", "input_spec": "One integer.", "test_cases": [{ "input": "5\n", "expected_output": "15\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "for_loop_range", "assignment_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_list_009", "problem_statement": "Create list [1,2,3]. Append 4. Print the list.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "[1, 2, 3, 4]\n" }], "knowledge_units_tested": ["list_creation", "list_basics", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_list_010", "problem_statement": "Create [10, 20, 30]. Print the third element (index 2).", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "30\n" }], "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"], "difficulty": "remember", "targeted_misconceptions": ["list_index_one_based"] },
-    { "problem_id": "prob_loop_008", "problem_statement": "Use while loop: start at 0, print and add 1 until you reach 3 (print 0,1,2,3).", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "0\n1\n2\n3\n" }], "knowledge_units_tested": ["while_loop", "comparison_operators", "assignment_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["loop_infinite"] },
-    { "problem_id": "prob_arith_006", "problem_statement": "Read two integers. Print integer division (first // second).", "input_spec": "Two integers.", "test_cases": [{ "input": "7\n2\n", "expected_output": "3\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["integer_division_float"] },
-    { "problem_id": "prob_arith_007", "problem_statement": "Read two integers. Print remainder (first % second).", "input_spec": "Two integers.", "test_cases": [{ "input": "7\n2\n", "expected_output": "1\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_cond_006", "problem_statement": "Read integer. If < 0 print \"neg\"; if 0 print \"zero\"; if > 0 print \"pos\".", "input_spec": "One integer.", "test_cases": [{ "input": "0\n", "expected_output": "zero\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["elif_else_if"] },
-    { "problem_id": "prob_loop_009", "problem_statement": "Print numbers 1 through 10 (inclusive), one per line, using for and range.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n" }], "knowledge_units_tested": ["for_loop_range", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["off_by_one_range", "range_two_args"] },
-    { "problem_id": "prob_loop_010", "problem_statement": "Given list [\"a\", \"b\", \"c\"], print each element on its own line.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "a\nb\nc\n" }], "knowledge_units_tested": ["list_creation", "list_iteration", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_var_005", "problem_statement": "Create variables a=1, b=2. Swap them (a,b = b,a or temp). Print a then b.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "2\n1\n" }], "knowledge_units_tested": ["variable_assignment", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_str_003", "problem_statement": "Read a line. Print it in lowercase.", "input_spec": "One line.", "test_cases": [{ "input": "HELLO\n", "expected_output": "hello\n" }], "knowledge_units_tested": ["user_input", "string_methods", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_func_005", "problem_statement": "Define max2(a,b) that returns the larger of a and b. Call with 3 and 7, print result.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "7\n" }], "knowledge_units_tested": ["function_definition", "function_parameters", "return_statement", "comparison_operators", "if_else", "function_calls", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["print_vs_return"] },
-    { "problem_id": "prob_func_006", "problem_statement": "Define square(x) that returns x**2. Read one int, call square, print.", "input_spec": "One integer.", "test_cases": [{ "input": "6\n", "expected_output": "36\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "function_definition", "return_statement", "arithmetic_operators", "function_calls", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_list_011", "problem_statement": "Create list [5, 3, 8, 1]. Print the smallest element (assume at least one; use loop).", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "1\n" }], "knowledge_units_tested": ["list_creation", "list_iteration", "comparison_operators", "variable_assignment", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_list_012", "problem_statement": "Create list [2, 4, 6]. Print the number of elements.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "3\n" }], "knowledge_units_tested": ["list_creation", "list_basics", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_016", "problem_statement": "Read one integer. Print \"even\" or \"odd\" using % 2.", "input_spec": "One integer.", "test_cases": [{ "input": "4\n", "expected_output": "even\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["assign_vs_equal"] },
-    { "problem_id": "prob_apply_017", "problem_statement": "Read three integers. Print the middle one (median of three).", "input_spec": "Three integers.", "test_cases": [{ "input": "1\n2\n3\n", "expected_output": "2\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_018", "problem_statement": "Read one integer n. Print n lines of \"*\", first line 1 star, second 2, ... nth line n stars.", "input_spec": "One integer.", "test_cases": [{ "input": "3\n", "expected_output": "*\n**\n***\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "for_loop_range", "string_concatenation", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_019", "problem_statement": "Read a line. If it is empty (length 0), print \"empty\". Otherwise print \"ok\".", "input_spec": "One line (maybe empty).", "test_cases": [{ "input": "\n", "expected_output": "empty\n" }], "knowledge_units_tested": ["user_input", "list_basics", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_020", "problem_statement": "Read two integers. Print their sum, product, and difference (in that order, one per line).", "input_spec": "Two integers.", "test_cases": [{ "input": "5\n3\n", "expected_output": "8\n15\n2\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_021", "problem_statement": "Read one integer. Print its square if it is positive, otherwise print 0.", "input_spec": "One integer.", "test_cases": [{ "input": "4\n", "expected_output": "16\n" }, { "input": "-2\n", "expected_output": "0\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_022", "problem_statement": "Read two integers. Print \"same\" if equal, \"first\" if first is larger, else \"second\".", "input_spec": "Two integers.", "test_cases": [{ "input": "3\n5\n", "expected_output": "second\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_023", "problem_statement": "Read one integer n. Print the product 1*2*3*...*n (factorial) using a loop.", "input_spec": "One positive integer.", "test_cases": [{ "input": "5\n", "expected_output": "120\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "for_loop_range", "variable_assignment", "assignment_operators", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_024", "problem_statement": "Create list [1,2,3,4,5]. Print every other element (indices 0, 2, 4).", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "1\n3\n5\n" }], "knowledge_units_tested": ["list_creation", "list_indexing", "for_loop_range", "print_function"], "difficulty": "transfer", "targeted_misconceptions": ["list_index_one_based"] },
-    { "problem_id": "prob_apply_025", "problem_statement": "Read a line. Print \"palindrome\" if it equals its reverse (e.g. \"aba\"), else \"no\". (Use slicing or loop.)", "input_spec": "One line.", "test_cases": [{ "input": "aba\n", "expected_output": "palindrome\n" }], "knowledge_units_tested": ["user_input", "data_types_string", "comparison_operators", "if_else", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_io_004", "problem_statement": "Read two lines (name and age). Print \"Name: <name>, Age: <age>\" using one print.", "input_spec": "Two lines.", "test_cases": [{ "input": "Alice\n20\n", "expected_output": "Name: Alice, Age: 20\n" }], "knowledge_units_tested": ["user_input", "string_formatting", "print_function"], "difficulty": "apply", "targeted_misconceptions": ["string_int_concat"] },
-    { "problem_id": "prob_cond_007", "problem_statement": "Read one integer. If it is in range 1-10 inclusive print \"in\", else print \"out\".", "input_spec": "One integer.", "test_cases": [{ "input": "5\n", "expected_output": "in\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "logical_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_loop_011", "problem_statement": "Use for and range(3, 8) to print 3, 4, 5, 6, 7, one per line.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "3\n4\n5\n6\n7\n" }], "knowledge_units_tested": ["for_loop_range", "print_function"], "difficulty": "remember", "targeted_misconceptions": ["range_two_args"] },
-    { "problem_id": "prob_dict_003", "problem_statement": "Create dict {\"x\": 10, \"y\": 20}. Add key \"z\" with value 30. Print the dict.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "{'x': 10, 'y': 20, 'z': 30}\n" }], "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_func_007", "problem_statement": "Define min2(a,b) that returns the smaller of a and b. Call with 4 and 9, print.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "4\n" }], "knowledge_units_tested": ["function_definition", "function_parameters", "return_statement", "comparison_operators", "if_else", "function_calls", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_transfer_004", "problem_statement": "Read n, then n integers (one per line). Print their sum.", "input_spec": "First line: n. Next n lines: integers.", "test_cases": [{ "input": "3\n1\n2\n3\n", "expected_output": "6\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "for_loop_range", "assignment_operators", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_transfer_005", "problem_statement": "Read a line. Print the first character, then the last character, on one line separated by space.", "input_spec": "One non-empty line.", "test_cases": [{ "input": "hello\n", "expected_output": "h o\n" }], "knowledge_units_tested": ["user_input", "data_types_string", "print_function"], "difficulty": "transfer", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_026", "problem_statement": "Read one integer. If divisible by both 2 and 3 print \"yes\", else \"no\".", "input_spec": "One integer.", "test_cases": [{ "input": "6\n", "expected_output": "yes\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "arithmetic_operators", "logical_operators", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_027", "problem_statement": "Create [1,2,3,4,5]. Print the last element using negative index.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "5\n" }], "knowledge_units_tested": ["list_creation", "list_indexing", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_028", "problem_statement": "Read one integer. Print 1 if positive, -1 if negative, 0 if zero.", "input_spec": "One integer.", "test_cases": [{ "input": "-3\n", "expected_output": "-1\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_elif_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_slice_001", "problem_statement": "Create list [10, 20, 30, 40, 50]. Print the middle three elements (indices 1,2,3) using slicing.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "[20, 30, 40]\n" }], "knowledge_units_tested": ["list_creation", "list_slicing", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_slice_002", "problem_statement": "Read a string. Print the first three characters.", "input_spec": "One line.", "test_cases": [{ "input": "hello\n", "expected_output": "hel\n" }], "knowledge_units_tested": ["user_input", "string_indexing", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_slice_003", "problem_statement": "Read a string. Print the last character.", "input_spec": "One line.", "test_cases": [{ "input": "world\n", "expected_output": "d\n" }], "knowledge_units_tested": ["user_input", "string_indexing", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_comp_001", "problem_statement": "Create list [1, 2, 3, 4, 5]. Create a new list with each element doubled using list comprehension. Print it.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "[2, 4, 6, 8, 10]\n" }], "knowledge_units_tested": ["list_creation", "list_comprehension_basic", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_try_001", "problem_statement": "Read a line. Try to convert it to int; if it fails, print \"not a number\". If it succeeds, print the number plus 1.", "input_spec": "One line.", "test_cases": [{ "input": "42\n", "expected_output": "43\n" }, { "input": "abc\n", "expected_output": "not a number\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "try_except_basics", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_029", "problem_statement": "Create [1, 2, 3, 4, 5]. Print the slice that gives [3, 4, 5].", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "[3, 4, 5]\n" }], "knowledge_units_tested": ["list_creation", "list_slicing", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_030", "problem_statement": "Read a string. Print its length.", "input_spec": "One line.", "test_cases": [{ "input": "five\n", "expected_output": "4\n" }], "knowledge_units_tested": ["user_input", "data_types_string", "print_function"], "difficulty": "remember", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_031", "problem_statement": "Read two integers. Print the first if it is positive, else print the second.", "input_spec": "Two integers.", "test_cases": [{ "input": "5\n-1\n", "expected_output": "5\n" }], "knowledge_units_tested": ["user_input", "type_conversion", "comparison_operators", "if_else", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] },
-    { "problem_id": "prob_apply_032", "problem_statement": "Create list [3, 1, 4, 1, 5]. Using list comprehension, create a list of each element plus 10. Print it.", "input_spec": null, "test_cases": [{ "input": "", "expected_output": "[13, 11, 14, 11, 15]\n" }], "knowledge_units_tested": ["list_creation", "list_comprehension_basic", "print_function"], "difficulty": "apply", "targeted_misconceptions": [] }
+    {
+      "problem_id": "prob_type_001",
+      "problem_statement": "Read a string that represents an integer, convert it to int, add 1, and print the result.",
+      "input_spec": "One line with a number string.",
+      "test_cases": [
+        {
+          "input": "41\n",
+          "expected_output": "42\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "input_returns_string"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_type_002",
+      "problem_statement": "Read two lines (two integers as strings). Convert both to int, add them, print the sum.",
+      "input_spec": "Two lines.",
+      "test_cases": [
+        {
+          "input": "10\n20\n",
+          "expected_output": "30\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_assign_op_001",
+      "problem_statement": "Start with x = 0. Use a loop to add 1 to x five times with +=, then print x.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "5\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "assignment_operators",
+        "for_loop_range",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_str_meth_001",
+      "problem_statement": "Read one line of input and print it in uppercase.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "hello\n",
+          "expected_output": "HELLO\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_methods",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_str_meth_002",
+      "problem_statement": "Read one line, strip leading/trailing spaces, and print it.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "  hi  \n",
+          "expected_output": "hi\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_methods",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_func_001",
+      "problem_statement": "Define a function greet() that prints \"Hello\". Then call it.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "Hello\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "function_definition",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "functions",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_func_002",
+      "problem_statement": "Define a function double(n) that returns n * 2. Call it with 5 and print the result.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "10\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "function_definition",
+        "function_parameters",
+        "return_statement",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [
+        "print_vs_return"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "functions",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_func_003",
+      "problem_statement": "Define add(a, b) that returns a + b. Read two integers, call add, print result.",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "3\n7\n",
+          "expected_output": "10\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "function_definition",
+        "function_parameters",
+        "return_statement",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "print_vs_return"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "functions",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_func_004",
+      "problem_statement": "Define is_even(n) that returns True if n is even else False. Read one int, call is_even, print the result.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "4\n",
+          "expected_output": "True\n"
+        },
+        {
+          "input": "3\n",
+          "expected_output": "False\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "function_definition",
+        "return_statement",
+        "arithmetic_operators",
+        "comparison_operators",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "print_vs_return"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "functions",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_dict_001",
+      "problem_statement": "Create a dict {\"a\": 1, \"b\": 2}. Print the value for \"a\".",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "1\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "dictionary_creation",
+        "dictionary_access",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "dictionaries",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_dict_002",
+      "problem_statement": "Create a dict with key \"name\" and value \"Alice\". Print the value.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "Alice\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "dictionary_creation",
+        "dictionary_access",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "dictionaries",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_tuple_001",
+      "problem_statement": "Create a tuple (10, 20). Print the first element.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "10\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "tuple_basics",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "data_structures",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_fmt_001",
+      "problem_statement": "Read a name. Print the string \"Hello, <name>!\" using f-string or format.",
+      "input_spec": "One line (name).",
+      "test_cases": [
+        {
+          "input": "Bob\n",
+          "expected_output": "Hello, Bob!\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_formatting",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_transfer_001",
+      "problem_statement": "Read an integer n. Print the numbers 0 to n-1, each on its own line, using a for loop.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "4\n",
+          "expected_output": "0\n1\n2\n3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "for_loop_range",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [
+        "off_by_one_range"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_transfer_002",
+      "problem_statement": "Read a line and print the number of characters in it (use len()).",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "abc\n",
+          "expected_output": "3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "data_types_string",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_transfer_003",
+      "problem_statement": "Create a list [1, 2, 3, 4, 5]. Print the sum of all elements using a loop.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "15\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_iteration",
+        "variable_assignment",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_apply_011",
+      "problem_statement": "Read one integer. Print \"positive\" if > 0, \"zero\" if == 0, \"negative\" if < 0.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "-1\n",
+          "expected_output": "negative\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_012",
+      "problem_statement": "Read two integers. Print the larger one (or first if equal).",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "8\n3\n",
+          "expected_output": "8\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_013",
+      "problem_statement": "Read one integer. If it is 0 or 1, print \"small\". If 2 to 9, print \"digit\". Otherwise print \"large\".",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "5\n",
+          "expected_output": "digit\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "logical_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_014",
+      "problem_statement": "Read a line. If it equals \"yes\", print \"ok\". Otherwise print \"no\".",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "yes\n",
+          "expected_output": "ok\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_015",
+      "problem_statement": "Read one integer n. Print the sum 1+2+...+n using a loop.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "5\n",
+          "expected_output": "15\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "for_loop_range",
+        "assignment_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_list_009",
+      "problem_statement": "Create list [1,2,3]. Append 4. Print the list.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[1, 2, 3, 4]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_basics",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_list_010",
+      "problem_statement": "Create [10, 20, 30]. Print the third element (index 2).",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "30\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [
+        "list_index_one_based"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_loop_008",
+      "problem_statement": "Use while loop: start at 0, print and add 1 until you reach 3 (print 0,1,2,3).",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "0\n1\n2\n3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "while_loop",
+        "comparison_operators",
+        "assignment_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "loop_infinite"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "while_loops",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_arith_006",
+      "problem_statement": "Read two integers. Print integer division (first // second).",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "7\n2\n",
+          "expected_output": "3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "integer_division_float"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_arith_007",
+      "problem_statement": "Read two integers. Print remainder (first % second).",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "7\n2\n",
+          "expected_output": "1\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_cond_006",
+      "problem_statement": "Read integer. If < 0 print \"neg\"; if 0 print \"zero\"; if > 0 print \"pos\".",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "0\n",
+          "expected_output": "zero\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "elif_else_if"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_loop_009",
+      "problem_statement": "Print numbers 1 through 10 (inclusive), one per line, using for and range.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "off_by_one_range",
+        "range_two_args"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_loop_010",
+      "problem_statement": "Given list [\"a\", \"b\", \"c\"], print each element on its own line.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "a\nb\nc\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_iteration",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_var_005",
+      "problem_statement": "Create variables a=1, b=2. Swap them (a,b = b,a or temp). Print a then b.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "2\n1\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "variable_assignment",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "variables_and_types",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_str_003",
+      "problem_statement": "Read a line. Print it in lowercase.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "HELLO\n",
+          "expected_output": "hello\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_methods",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_func_005",
+      "problem_statement": "Define max2(a,b) that returns the larger of a and b. Call with 3 and 7, print result.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "7\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "function_definition",
+        "function_parameters",
+        "return_statement",
+        "comparison_operators",
+        "if_else",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "print_vs_return"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_func_006",
+      "problem_statement": "Define square(x) that returns x**2. Read one int, call square, print.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "6\n",
+          "expected_output": "36\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "function_definition",
+        "return_statement",
+        "arithmetic_operators",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "functions",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_list_011",
+      "problem_statement": "Create list [5, 3, 8, 1]. Print the smallest element (assume at least one; use loop).",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "1\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_iteration",
+        "comparison_operators",
+        "variable_assignment",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_list_012",
+      "problem_statement": "Create list [2, 4, 6]. Print the number of elements.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "3\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_basics",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_apply_016",
+      "problem_statement": "Read one integer. Print \"even\" or \"odd\" using % 2.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "4\n",
+          "expected_output": "even\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "assign_vs_equal"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_017",
+      "problem_statement": "Read three integers. Print the middle one (median of three).",
+      "input_spec": "Three integers.",
+      "test_cases": [
+        {
+          "input": "1\n2\n3\n",
+          "expected_output": "2\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_018",
+      "problem_statement": "Read one integer n. Print n lines of \"*\", first line 1 star, second 2, ... nth line n stars.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "3\n",
+          "expected_output": "*\n**\n***\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "for_loop_range",
+        "string_concatenation",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_apply_019",
+      "problem_statement": "Read a line. If it is empty (length 0), print \"empty\". Otherwise print \"ok\".",
+      "input_spec": "One line (maybe empty).",
+      "test_cases": [
+        {
+          "input": "\n",
+          "expected_output": "empty\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "list_basics",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_020",
+      "problem_statement": "Read two integers. Print their sum, product, and difference (in that order, one per line).",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "5\n3\n",
+          "expected_output": "8\n15\n2\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_021",
+      "problem_statement": "Read one integer. Print its square if it is positive, otherwise print 0.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "4\n",
+          "expected_output": "16\n"
+        },
+        {
+          "input": "-2\n",
+          "expected_output": "0\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_022",
+      "problem_statement": "Read two integers. Print \"same\" if equal, \"first\" if first is larger, else \"second\".",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "3\n5\n",
+          "expected_output": "second\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_023",
+      "problem_statement": "Read one integer n. Print the product 1*2*3*...*n (factorial) using a loop.",
+      "input_spec": "One positive integer.",
+      "test_cases": [
+        {
+          "input": "5\n",
+          "expected_output": "120\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "for_loop_range",
+        "variable_assignment",
+        "assignment_operators",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_apply_024",
+      "problem_statement": "Create list [1,2,3,4,5]. Print every other element (indices 0, 2, 4).",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "1\n3\n5\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "for_loop_range",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [
+        "list_index_one_based"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_apply_025",
+      "problem_statement": "Read a line. Print \"palindrome\" if it equals its reverse (e.g. \"aba\"), else \"no\". (Use slicing or loop.)",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "aba\n",
+          "expected_output": "palindrome\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "data_types_string",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_io_004",
+      "problem_statement": "Read two lines (name and age). Print \"Name: <name>, Age: <age>\" using one print.",
+      "input_spec": "Two lines.",
+      "test_cases": [
+        {
+          "input": "Alice\n20\n",
+          "expected_output": "Name: Alice, Age: 20\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_formatting",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [
+        "string_int_concat"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "strings",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_cond_007",
+      "problem_statement": "Read one integer. If it is in range 1-10 inclusive print \"in\", else print \"out\".",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "5\n",
+          "expected_output": "in\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "logical_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_loop_011",
+      "problem_statement": "Use for and range(3, 8) to print 3, 4, 5, 6, 7, one per line.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "3\n4\n5\n6\n7\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "for_loop_range",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [
+        "range_two_args"
+      ],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_dict_003",
+      "problem_statement": "Create dict {\"x\": 10, \"y\": 20}. Add key \"z\" with value 30. Print the dict.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "{'x': 10, 'y': 20, 'z': 30}\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "dictionary_creation",
+        "dictionary_access",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "dictionaries",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_func_007",
+      "problem_statement": "Define min2(a,b) that returns the smaller of a and b. Call with 4 and 9, print.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "4\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "function_definition",
+        "function_parameters",
+        "return_statement",
+        "comparison_operators",
+        "if_else",
+        "function_calls",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_transfer_004",
+      "problem_statement": "Read n, then n integers (one per line). Print their sum.",
+      "input_spec": "First line: n. Next n lines: integers.",
+      "test_cases": [
+        {
+          "input": "3\n1\n2\n3\n",
+          "expected_output": "6\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "for_loop_range",
+        "assignment_operators",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "for_loops",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_transfer_005",
+      "problem_statement": "Read a line. Print the first character, then the last character, on one line separated by space.",
+      "input_spec": "One non-empty line.",
+      "test_cases": [
+        {
+          "input": "hello\n",
+          "expected_output": "h o\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "data_types_string",
+        "print_function"
+      ],
+      "difficulty": "transfer",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 3
+    },
+    {
+      "problem_id": "prob_apply_026",
+      "problem_statement": "Read one integer. If divisible by both 2 and 3 print \"yes\", else \"no\".",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "6\n",
+          "expected_output": "yes\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "arithmetic_operators",
+        "logical_operators",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_027",
+      "problem_statement": "Create [1,2,3,4,5]. Print the last element using negative index.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "5\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_indexing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_apply_028",
+      "problem_statement": "Read one integer. Print 1 if positive, -1 if negative, 0 if zero.",
+      "input_spec": "One integer.",
+      "test_cases": [
+        {
+          "input": "-3\n",
+          "expected_output": "-1\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_elif_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_slice_001",
+      "problem_statement": "Create list [10, 20, 30, 40, 50]. Print the middle three elements (indices 1,2,3) using slicing.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[20, 30, 40]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_slicing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_slice_002",
+      "problem_statement": "Read a string. Print the first three characters.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "hello\n",
+          "expected_output": "hel\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_indexing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_slice_003",
+      "problem_statement": "Read a string. Print the last character.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "world\n",
+          "expected_output": "d\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "string_indexing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_comp_001",
+      "problem_statement": "Create list [1, 2, 3, 4, 5]. Create a new list with each element doubled using list comprehension. Print it.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[2, 4, 6, 8, 10]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_comprehension_basic",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_try_001",
+      "problem_statement": "Read a line. Try to convert it to int; if it fails, print \"not a number\". If it succeeds, print the number plus 1.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "42\n",
+          "expected_output": "43\n"
+        },
+        {
+          "input": "abc\n",
+          "expected_output": "not a number\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "try_except_basics",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_029",
+      "problem_statement": "Create [1, 2, 3, 4, 5]. Print the slice that gives [3, 4, 5].",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[3, 4, 5]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_slicing",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_apply_030",
+      "problem_statement": "Read a string. Print its length.",
+      "input_spec": "One line.",
+      "test_cases": [
+        {
+          "input": "five\n",
+          "expected_output": "4\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "data_types_string",
+        "print_function"
+      ],
+      "difficulty": "remember",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "input_output",
+      "difficulty_order": 1
+    },
+    {
+      "problem_id": "prob_apply_031",
+      "problem_statement": "Read two integers. Print the first if it is positive, else print the second.",
+      "input_spec": "Two integers.",
+      "test_cases": [
+        {
+          "input": "5\n-1\n",
+          "expected_output": "5\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "user_input",
+        "type_conversion",
+        "comparison_operators",
+        "if_else",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "conditionals",
+      "difficulty_order": 2
+    },
+    {
+      "problem_id": "prob_apply_032",
+      "problem_statement": "Create list [3, 1, 4, 1, 5]. Using list comprehension, create a list of each element plus 10. Print it.",
+      "input_spec": null,
+      "test_cases": [
+        {
+          "input": "",
+          "expected_output": "[13, 11, 14, 11, 15]\n"
+        }
+      ],
+      "knowledge_units_tested": [
+        "list_creation",
+        "list_comprehension_basic",
+        "print_function"
+      ],
+      "difficulty": "apply",
+      "targeted_misconceptions": [],
+      "problem_type": "short-answer",
+      "topic_group": "lists",
+      "difficulty_order": 2
+    }
   ]
 }

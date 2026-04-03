@@ -1,0 +1,665 @@
+{
+  "version": "expanded-v2",
+  "scope_note": "Gap-filling problems ensuring every topic_group has 2-3 problems of each type: buggy-code, output-prediction, code-completion, multiple-choice.",
+  "problems": [
+    {
+      "problem_id": "comp2_var_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete the code to convert the temperature from Celsius to Fahrenheit using the formula F = C * 9/5 + 32.",
+      "code_template": "celsius = 25\n# ___ calculate fahrenheit\nprint(f\"{celsius}°C is {fahrenheit}°F\")",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# fahrenheit = celsius * 9/5 + 32"}
+      ],
+      "knowledge_units_tested": ["variable_assignment", "arithmetic_operators", "data_types_int_float"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "comp2_var_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete the code to extract the integer and decimal parts from a float number. For example, 7.85 should give integer_part=7 and decimal_part=0.85.",
+      "code_template": "number = 7.85\n# ___ get the integer part using int()\n# ___ get the decimal part by subtracting\nprint(f\"Integer: {integer_part}, Decimal: {decimal_part:.2f}\")",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# integer_part = int(number)"},
+        {"line": 3, "placeholder": "# decimal_part = number - integer_part"}
+      ],
+      "knowledge_units_tested": ["variable_assignment", "type_conversion", "data_types_int_float"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "comp2_var_003",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete the code to unpack a tuple into separate variables and build a formatted string.",
+      "code_template": "person = (\"Alice\", 30, \"Engineer\")\n# ___ unpack the tuple into name, age, job\nprint(f\"{name} is {age} years old and works as an {job}.\")",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# name, age, job = person"}
+      ],
+      "knowledge_units_tested": ["variable_assignment", "tuple_basics", "string_formatting"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "output2_var_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "a = \"10\"\nb = 5\nprint(type(a).__name__)\nprint(int(a) + b)",
+      "expected_output": "str\n15",
+      "knowledge_units_tested": ["data_types_string", "type_conversion", "data_types_int_float"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "comp2_cond_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to classify a BMI value: under 18.5 is 'Underweight', 18.5-24.9 is 'Normal', 25-29.9 is 'Overweight', 30+ is 'Obese'.",
+      "code_template": "bmi = 22.5\n# ___ first condition for Underweight\n# ___ elif for Normal\n# ___ elif for Overweight\n# ___ else for Obese\nprint(category)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# if bmi < 18.5: category = 'Underweight'"},
+        {"line": 3, "placeholder": "# elif bmi < 25: category = 'Normal'"},
+        {"line": 4, "placeholder": "# elif bmi < 30: category = 'Overweight'"},
+        {"line": 5, "placeholder": "# else: category = 'Obese'"}
+      ],
+      "knowledge_units_tested": ["if_elif_else", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "comp2_cond_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete the code to determine if a year is a leap year. A year is a leap year if divisible by 4, except centuries must also be divisible by 400.",
+      "code_template": "year = 2024\n# ___ check if divisible by 400 OR (divisible by 4 AND not by 100)\nprint(f\"{year} is a leap year: {is_leap}\")",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# is_leap = (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0)"}
+      ],
+      "knowledge_units_tested": ["boolean_expression", "arithmetic_operators", "logical_operators"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "output2_cond_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "score = 72\npassed = score >= 60\nwith_merit = score >= 80\n\nif passed and with_merit:\n    print(\"Pass with merit\")\nelif passed:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+      "expected_output": "Pass",
+      "knowledge_units_tested": ["if_elif_else", "boolean_expression", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "comp2_loop_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to print each item with its index using enumerate(). Expected output: '0: apple', '1: banana', '2: cherry'.",
+      "code_template": "fruits = [\"apple\", \"banana\", \"cherry\"]\n# ___ for loop with enumerate\n    # ___ print index and fruit\n",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# for i, fruit in enumerate(fruits):"},
+        {"line": 3, "placeholder": "# print(f\"{i}: {fruit}\")"}
+      ],
+      "knowledge_units_tested": ["for_loop_iterable", "enumerate_function", "string_formatting"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "output2_loop_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "result = \"\"\nfor char in \"abc\":\n    result += char * 2\nprint(result)",
+      "expected_output": "aabbcc",
+      "knowledge_units_tested": ["for_loop_iterable", "string_concatenation", "data_types_string"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "mcq2_loop_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What does range(2, 10, 3) produce?",
+      "choices": [
+        {"id": "a", "text": "2, 5, 8"},
+        {"id": "b", "text": "2, 5, 8, 11"},
+        {"id": "c", "text": "3, 6, 9"},
+        {"id": "d", "text": "2, 4, 6, 8"}
+      ],
+      "correct_choice_ids": ["a"],
+      "knowledge_units_tested": ["for_loop_range"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "comp2_while_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to calculate the sum of digits of a number. For 1234, the result should be 10.",
+      "code_template": "number = 1234\ntotal = 0\n# ___ while loop condition\n    # ___ add last digit to total\n    # ___ remove last digit\nprint(total)",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# while number > 0:"},
+        {"line": 4, "placeholder": "# total += number % 10"},
+        {"line": 5, "placeholder": "# number //= 10"}
+      ],
+      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "assignment_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "comp2_while_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to keep asking the user for input until they type 'quit'. Collect all inputs in a list.",
+      "code_template": "responses = []\n# ___ start an infinite while loop\n    user_input = input(\"Enter text (quit to stop): \")\n    # ___ check if user typed 'quit' and break\n    # ___ otherwise append to responses\nprint(responses)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# while True:"},
+        {"line": 4, "placeholder": "# if user_input == 'quit': break"},
+        {"line": 5, "placeholder": "# responses.append(user_input)"}
+      ],
+      "knowledge_units_tested": ["while_loop", "break_statement", "list_operations", "user_input"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "comp2_while_003",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to find the greatest common divisor (GCD) of two numbers using the Euclidean algorithm.",
+      "code_template": "a = 48\nb = 18\n# ___ while b is not zero\n    # ___ set a, b = b, a % b\nprint(f\"GCD: {a}\")",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# while b != 0:"},
+        {"line": 4, "placeholder": "# a, b = b, a % b"}
+      ],
+      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "variable_assignment"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "mcq2_while_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What keyword immediately exits a while loop in Python?",
+      "choices": [
+        {"id": "a", "text": "exit"},
+        {"id": "b", "text": "stop"},
+        {"id": "c", "text": "break"},
+        {"id": "d", "text": "return"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["while_loop", "break_statement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "output2_while_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "n = 64\ncount = 0\nwhile n > 1:\n    n //= 2\n    count += 1\nprint(count)",
+      "expected_output": "6",
+      "knowledge_units_tested": ["while_loop", "arithmetic_operators", "assignment_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "buggy2_while_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should print the Fibonacci sequence up to 50, but it has a bug. Find and explain it.",
+      "code": "a, b = 0, 1\nwhile a < 50:\n    print(a, end=\" \")\n    a = b\n    b = a + b",
+      "bug_lines": [4, 5],
+      "bug_explanation": "After a = b, both a and b have the same value, so a + b doubles instead of adding the old a. Need simultaneous assignment: a, b = b, a + b.",
+      "correct_code": "a, b = 0, 1\nwhile a < 50:\n    print(a, end=\" \")\n    a, b = b, a + b",
+      "knowledge_units_tested": ["while_loop", "variable_assignment"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "comp2_str_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to count the number of vowels in a string.",
+      "code_template": "text = \"Hello World\"\ncount = 0\n# ___ loop through each character\n    # ___ check if it's a vowel (case-insensitive)\n        # ___ increment count\nprint(f\"Vowels: {count}\")",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# for char in text:"},
+        {"line": 4, "placeholder": "# if char.lower() in 'aeiou':"},
+        {"line": 5, "placeholder": "# count += 1"}
+      ],
+      "knowledge_units_tested": ["data_types_string", "string_methods", "for_loop_iterable", "if_statement"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "comp2_str_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to clean up a messy email address by stripping whitespace and converting to lowercase.",
+      "code_template": "raw_email = \"  Alice.Smith@Example.COM  \"\n# ___ strip whitespace and convert to lowercase\nprint(clean_email)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# clean_email = raw_email.strip().lower()"}
+      ],
+      "knowledge_units_tested": ["string_methods", "data_types_string"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "comp2_str_003",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to replace all spaces in a sentence with hyphens and make it all lowercase, creating a URL-friendly slug.",
+      "code_template": "title = \"My First Blog Post\"\n# ___ convert to lowercase\n# ___ replace spaces with hyphens\nprint(slug)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# slug = title.lower()"},
+        {"line": 3, "placeholder": "# slug = slug.replace(' ', '-')"}
+      ],
+      "knowledge_units_tested": ["string_methods", "data_types_string"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "buggy2_str_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code tries to capitalize the first letter of each word, but the result is wrong. Find the bug.",
+      "code": "sentence = \"hello world python\"\nwords = sentence.split()\nfor word in words:\n    word = word.capitalize()\nprint(\" \".join(words))",
+      "bug_lines": [4],
+      "bug_explanation": "Reassigning the loop variable 'word' does not modify the original list. Strings are immutable and the list 'words' is unchanged. Use a list comprehension or indexed loop instead.",
+      "correct_code": "sentence = \"hello world python\"\nwords = sentence.split()\nwords = [word.capitalize() for word in words]\nprint(\" \".join(words))",
+      "knowledge_units_tested": ["data_types_string", "string_methods", "for_loop_iterable", "list_comprehension"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "output2_str_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "s = \"abcdef\"\nprint(s[::2])\nprint(s[::-1])\nprint(s[1:5:2])",
+      "expected_output": "ace\nfedcba\nbd",
+      "knowledge_units_tested": ["string_indexing", "data_types_string"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "mcq2_str_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What does 'hello'.replace('l', 'r') return?",
+      "choices": [
+        {"id": "a", "text": "herlo"},
+        {"id": "b", "text": "herro"},
+        {"id": "c", "text": "hello"},
+        {"id": "d", "text": "hero"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["string_methods"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "comp2_dict_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to create a dictionary that maps each student name to their score, then print the highest scorer.",
+      "code_template": "names = [\"Alice\", \"Bob\", \"Charlie\"]\nscores = [88, 95, 72]\n# ___ create dictionary using zip\n# ___ find the key with the max value\nprint(f\"Top student: {top_student}\")",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# grades = dict(zip(names, scores))"},
+        {"line": 4, "placeholder": "# top_student = max(grades, key=grades.get)"}
+      ],
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "built_in_functions"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "comp2_dict_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to iterate over a dictionary and print each key-value pair formatted as 'key: value'.",
+      "code_template": "inventory = {\"apples\": 5, \"bananas\": 3, \"oranges\": 8}\n# ___ loop over key-value pairs\n    # ___ print formatted output\n",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# for item, count in inventory.items():"},
+        {"line": 3, "placeholder": "# print(f\"{item}: {count}\")"}
+      ],
+      "knowledge_units_tested": ["dictionary_access", "dictionary_iteration", "for_loop_iterable"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "comp2_dict_003",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to safely access a dictionary key with a default value if the key doesn't exist.",
+      "code_template": "settings = {\"theme\": \"dark\", \"font_size\": 14}\n# ___ get 'language' with default 'English'\n# ___ get 'theme' with default 'light'\nprint(language)\nprint(theme)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# language = settings.get('language', 'English')"},
+        {"line": 3, "placeholder": "# theme = settings.get('theme', 'light')"}
+      ],
+      "knowledge_units_tested": ["dictionary_access", "dictionary_creation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "mcq2_dict_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What happens when you access a key that doesn't exist using d[key] on a dictionary?",
+      "choices": [
+        {"id": "a", "text": "Returns None"},
+        {"id": "b", "text": "Returns 0"},
+        {"id": "c", "text": "Raises a KeyError"},
+        {"id": "d", "text": "Creates the key with a default value"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["dictionary_access", "error_types"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "mcq2_dict_002",
+      "problem_type": "multiple-choice",
+      "problem_statement": "Which method returns all key-value pairs of a dictionary as tuples?",
+      "choices": [
+        {"id": "a", "text": "d.keys()"},
+        {"id": "b", "text": "d.values()"},
+        {"id": "c", "text": "d.items()"},
+        {"id": "d", "text": "d.pairs()"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["dictionary_iteration"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "mcq2_dict_003",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What will d.get('x', 42) return if the key 'x' is NOT in dictionary d?",
+      "choices": [
+        {"id": "a", "text": "None"},
+        {"id": "b", "text": "42"},
+        {"id": "c", "text": "KeyError"},
+        {"id": "d", "text": "0"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["dictionary_access"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "output2_dict_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "d = {\"x\": 1, \"y\": 2, \"z\": 3}\nd.pop(\"y\")\nd[\"w\"] = 4\nprint(list(d.keys()))\nprint(sum(d.values()))",
+      "expected_output": "['x', 'z', 'w']\n8",
+      "knowledge_units_tested": ["dictionary_access", "dictionary_creation"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "buggy2_dict_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should merge two dictionaries, but it loses data from the first one. Explain the bug.",
+      "code": "defaults = {\"color\": \"blue\", \"size\": 10, \"visible\": True}\nuser_prefs = {\"color\": \"red\", \"opacity\": 0.8}\nmerged = user_prefs\nmerged.update(defaults)\nprint(merged)",
+      "bug_lines": [3, 4],
+      "bug_explanation": "merged = user_prefs doesn't copy; it's a reference. Also, updating merged with defaults overwrites user_prefs['color'] back to 'blue'. Should copy defaults first, then update with user_prefs so user preferences take priority.",
+      "correct_code": "defaults = {\"color\": \"blue\", \"size\": 10, \"visible\": True}\nuser_prefs = {\"color\": \"red\", \"opacity\": 0.8}\nmerged = defaults.copy()\nmerged.update(user_prefs)\nprint(merged)",
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_access"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "mcq2_err_001",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What type of error does Python raise when you try to divide by zero?",
+      "choices": [
+        {"id": "a", "text": "ValueError"},
+        {"id": "b", "text": "TypeError"},
+        {"id": "c", "text": "ZeroDivisionError"},
+        {"id": "d", "text": "ArithmeticError"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["error_types"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "mcq2_err_002",
+      "problem_type": "multiple-choice",
+      "problem_statement": "What does the 'finally' block do in a try/except/finally statement?",
+      "choices": [
+        {"id": "a", "text": "Runs only if an exception occurred"},
+        {"id": "b", "text": "Runs only if no exception occurred"},
+        {"id": "c", "text": "Runs regardless of whether an exception occurred"},
+        {"id": "d", "text": "Replaces the except block when no error type is specified"}
+      ],
+      "correct_choice_ids": ["c"],
+      "knowledge_units_tested": ["try_except_basics"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "mcq2_err_003",
+      "problem_type": "multiple-choice",
+      "problem_statement": "Which of the following would raise a TypeError?",
+      "choices": [
+        {"id": "a", "text": "int('hello')"},
+        {"id": "b", "text": "'hello' + 5"},
+        {"id": "c", "text": "x = undefined_var"},
+        {"id": "d", "text": "my_list[100]"}
+      ],
+      "correct_choice_ids": ["b"],
+      "knowledge_units_tested": ["error_types", "data_types_string"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "comp2_err_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to safely convert a list of strings to integers, skipping any that can't be converted.",
+      "code_template": "values = [\"10\", \"abc\", \"25\", \"xyz\", \"30\"]\nresults = []\nfor v in values:\n    # ___ try to convert\n        # ___ append int\n    # ___ handle the error\n        # ___ skip with a message\nprint(results)",
+      "completion_slots": [
+        {"line": 4, "placeholder": "# try:"},
+        {"line": 5, "placeholder": "# results.append(int(v))"},
+        {"line": 6, "placeholder": "# except ValueError:"},
+        {"line": 7, "placeholder": "# print(f'Skipping invalid: {v}')"}
+      ],
+      "knowledge_units_tested": ["try_except_basics", "error_types", "type_conversion", "list_operations"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "output2_err_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "try:\n    x = int(\"42\")\n    print(\"A\")\n    y = 10 / 0\n    print(\"B\")\nexcept ZeroDivisionError:\n    print(\"C\")\nexcept ValueError:\n    print(\"D\")\nfinally:\n    print(\"E\")",
+      "expected_output": "A\nC\nE",
+      "knowledge_units_tested": ["try_except_basics", "error_types"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "buggy2_err_001",
+      "problem_type": "buggy-code",
+      "problem_statement": "This code should catch only file-not-found errors, but it also silently catches other bugs. Explain the problem.",
+      "code": "filename = \"data.txt\"\ntry:\n    with open(filename) as f:\n        data = f.read()\n    result = int(data)\nexcept:\n    print(\"File not found\")\n    result = 0",
+      "bug_lines": [6],
+      "bug_explanation": "A bare 'except' catches ALL exceptions, including the ValueError from int(data) and any other unexpected error. Should use 'except FileNotFoundError' to be specific.",
+      "correct_code": "filename = \"data.txt\"\ntry:\n    with open(filename) as f:\n        data = f.read()\n    result = int(data)\nexcept FileNotFoundError:\n    print(\"File not found\")\n    result = 0\nexcept ValueError:\n    print(\"Invalid data in file\")\n    result = 0",
+      "knowledge_units_tested": ["try_except_basics", "error_types"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "comp2_io_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to read two numbers from the user and print their sum. Remember that input() returns a string.",
+      "code_template": "# ___ read first number and convert to int\n# ___ read second number and convert to int\n# ___ print the sum\n",
+      "completion_slots": [
+        {"line": 1, "placeholder": "# a = int(input('Enter first number: '))"},
+        {"line": 2, "placeholder": "# b = int(input('Enter second number: '))"},
+        {"line": 3, "placeholder": "# print(f'Sum: {a + b}')"}
+      ],
+      "knowledge_units_tested": ["user_input", "type_conversion", "print_function", "data_types_int_float"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "comp2_io_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to print a formatted receipt. Each item should be left-aligned in 20 characters and the price should be right-aligned in 8 characters with 2 decimal places.",
+      "code_template": "items = [(\"Coffee\", 4.5), (\"Sandwich\", 8.99), (\"Cookie\", 2.0)]\nprint(f\"{'Item':<20}{'Price':>8}\")\nprint(\"-\" * 28)\nfor name, price in items:\n    # ___ print with formatting\n",
+      "completion_slots": [
+        {"line": 5, "placeholder": "# print(f'{name:<20}{price:>8.2f}')"}
+      ],
+      "knowledge_units_tested": ["string_formatting", "print_function", "for_loop_iterable"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "comp2_io_003",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to read a comma-separated list of numbers from the user and print the average.",
+      "code_template": "user_input = input(\"Enter numbers separated by commas: \")\n# ___ split the string by commas\n# ___ convert each piece to a float\n# ___ calculate and print the average\n",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# parts = user_input.split(',')"},
+        {"line": 3, "placeholder": "# numbers = [float(x.strip()) for x in parts]"},
+        {"line": 4, "placeholder": "# print(f'Average: {sum(numbers) / len(numbers):.2f}')"}
+      ],
+      "knowledge_units_tested": ["user_input", "string_methods", "type_conversion", "list_comprehension", "arithmetic_operators"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "output2_io_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "a = 42\nb = 3.14159\nprint(f\"{a:05d}\")\nprint(f\"{b:.2f}\")\nprint(f\"{'hi':>10}\")",
+      "expected_output": "00042\n3.14\n        hi",
+      "knowledge_units_tested": ["string_formatting", "print_function"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "comp2_op_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to check if a password meets all requirements: at least 8 characters, contains a digit, and contains an uppercase letter.",
+      "code_template": "password = \"Hello123\"\n# ___ check length >= 8\n# ___ check if any character is a digit\n# ___ check if any character is uppercase\nvalid = long_enough and has_digit and has_upper\nprint(f\"Password valid: {valid}\")",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# long_enough = len(password) >= 8"},
+        {"line": 3, "placeholder": "# has_digit = any(c.isdigit() for c in password)"},
+        {"line": 4, "placeholder": "# has_upper = any(c.isupper() for c in password)"}
+      ],
+      "knowledge_units_tested": ["comparison_operators", "logical_operators", "string_methods", "boolean_expression"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "comp2_op_002",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to use augmented assignment operators to update a running score.",
+      "code_template": "score = 100\nbonus = 15\npenalty = 20\nmultiplier = 2\n# ___ add bonus to score\n# ___ subtract penalty from score\n# ___ multiply score by multiplier\n# ___ integer divide score by 3\nprint(score)",
+      "completion_slots": [
+        {"line": 5, "placeholder": "# score += bonus"},
+        {"line": 6, "placeholder": "# score -= penalty"},
+        {"line": 7, "placeholder": "# score *= multiplier"},
+        {"line": 8, "placeholder": "# score //= 3"}
+      ],
+      "knowledge_units_tested": ["assignment_operators", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "output2_op_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "a = True\nb = False\nprint(a and b)\nprint(a or b)\nprint(not a)\nprint(a and not b)",
+      "expected_output": "False\nTrue\nFalse\nTrue",
+      "knowledge_units_tested": ["logical_operators", "boolean_expression"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "comp2_func_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this function that takes a list of numbers and returns a tuple of (minimum, maximum, average).",
+      "code_template": "def stats(numbers):\n    # ___ find minimum\n    # ___ find maximum\n    # ___ calculate average\n    # ___ return as tuple\n\nresult = stats([4, 8, 15, 16, 23, 42])\nprint(result)",
+      "completion_slots": [
+        {"line": 2, "placeholder": "# minimum = min(numbers)"},
+        {"line": 3, "placeholder": "# maximum = max(numbers)"},
+        {"line": 4, "placeholder": "# average = sum(numbers) / len(numbers)"},
+        {"line": 5, "placeholder": "# return (minimum, maximum, average)"}
+      ],
+      "knowledge_units_tested": ["function_definition", "return_statement", "built_in_functions", "tuple_basics"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "output2_func_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "def apply_twice(func, x):\n    return func(func(x))\n\ndef add_three(n):\n    return n + 3\n\nprint(apply_twice(add_three, 7))",
+      "expected_output": "13",
+      "knowledge_units_tested": ["function_definition", "parameters", "return_statement"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "comp2_list_001",
+      "problem_type": "code-completion",
+      "problem_statement": "Complete this code to flatten a list of lists into a single list. For example, [[1,2],[3,4],[5]] becomes [1,2,3,4,5].",
+      "code_template": "nested = [[1, 2], [3, 4], [5]]\nflat = []\n# ___ outer loop over sublists\n    # ___ inner loop over items\n        # ___ append each item\nprint(flat)",
+      "completion_slots": [
+        {"line": 3, "placeholder": "# for sublist in nested:"},
+        {"line": 4, "placeholder": "# for item in sublist:"},
+        {"line": 5, "placeholder": "# flat.append(item)"}
+      ],
+      "knowledge_units_tested": ["list_operations", "for_loop_iterable"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "output2_list_001",
+      "problem_type": "output-prediction",
+      "problem_statement": "What will this code print?",
+      "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)\nprint(a is b)",
+      "expected_output": "[1, 2, 3, 4]\nTrue",
+      "knowledge_units_tested": ["list_operations", "variable_assignment"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "short_list_001",
+      "problem_type": "short-answer",
+      "problem_statement": "Write code that uses a list comprehension to create a list of squares of even numbers from 1 to 20. Teach the TA how list comprehensions with conditions work.",
+      "starter_code": "# Write your list comprehension here\nsquares = \n\nprint(squares)",
+      "knowledge_units_tested": ["list_comprehension", "arithmetic_operators", "for_loop_range"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    }
+  ]
+}

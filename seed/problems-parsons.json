@@ -1,0 +1,794 @@
+{
+  "version": "parsons-v1",
+  "problems": [
+    {
+      "problem_id": "parsons_var_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create two variables, add them together, and print the result.",
+      "options": [
+        "total = x + y",
+        "x = 5",
+        "total = x * y",
+        "print(total)",
+        "y = 10"
+      ],
+      "solution_order": [1, 4, 0, 3],
+      "distractors": ["total = x * y"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["variable_assignment", "arithmetic_operators", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "parsons_var_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to swap the values of two variables using a temporary variable.",
+      "options": [
+        "a = b",
+        "b = a",
+        "a = 3",
+        "b = temp",
+        "temp = a",
+        "b = 7"
+      ],
+      "solution_order": [2, 5, 4, 0, 3],
+      "distractors": ["b = a"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["variable_assignment", "variable_swap", "temporary_variable"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "parsons_var_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to convert a string containing a number to an integer, add 1 to it, and print the result.",
+      "options": [
+        "next_year = age + 1",
+        "age = str(age_str)",
+        "print(\"Next year you will be\", next_year)",
+        "age_str = \"25\"",
+        "age = int(age_str)"
+      ],
+      "solution_order": [3, 4, 0, 2],
+      "distractors": ["age = str(age_str)"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["type_conversion", "int_function", "string_to_int"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "parsons_var_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to store a first name, last name, and age, then concatenate the names with a space and print a formatted message.",
+      "options": [
+        "full_name = first_name + last_name",
+        "age = 20",
+        "print(f\"{full_name} is {age} years old\")",
+        "first_name = \"Alice\"",
+        "full_name = first_name + \" \" + last_name",
+        "last_name = \"Smith\""
+      ],
+      "solution_order": [3, 5, 1, 4, 2],
+      "distractors": ["full_name = first_name + last_name"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["string_concatenation", "f_string", "variable_assignment"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "variables_and_types"
+    },
+    {
+      "problem_id": "parsons_cond_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to check if a boolean variable is True and print a message accordingly.",
+      "options": [
+        "if is_raining == \"True\":",
+        "    print(\"Take an umbrella\")",
+        "is_raining = True",
+        "if is_raining:"
+      ],
+      "solution_order": [2, 3, 1],
+      "distractors": ["if is_raining == \"True\":"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["boolean_variables", "if_statement", "boolean_comparison"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "parsons_cond_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to check if x is greater than 5, printing \"big\" if true and \"small\" otherwise.",
+      "options": [
+        "else:",
+        "elif x > 5:",
+        "    print(\"big\")",
+        "if x > 5:",
+        "x = 10",
+        "    print(\"small\")"
+      ],
+      "solution_order": [4, 3, 2, 0, 5],
+      "distractors": ["elif x > 5:"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["if_else", "comparison_operators", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "parsons_cond_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to assign a letter grade based on a numeric score: A for 90+, B for 80+, C otherwise. Then print the grade.",
+      "options": [
+        "elif score >= 80:\n    grade = \"B\"",
+        "else:\n    grade = \"C\"",
+        "score = 85",
+        "elif score >= 70:\n    grade = \"D\"",
+        "if score >= 90:\n    grade = \"A\"",
+        "print(grade)"
+      ],
+      "solution_order": [2, 4, 0, 1, 5],
+      "distractors": ["elif score >= 70:\n    grade = \"D\""],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["if_elif_else", "comparison_operators", "variable_assignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "parsons_cond_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to classify a person by age: 18+ prints \"Adult\", 13-17 checks for ID (prints \"Teen with ID\" or \"Teen without ID\"), under 13 prints \"Child\".",
+      "options": [
+        "elif age >= 13:\n    if has_id:\n        print(\"Teen with ID\")\n    else:\n        print(\"Teen without ID\")",
+        "else:\n    print(\"Child\")",
+        "age = 15",
+        "elif age > 13:\n    print(\"Teenager\")",
+        "if age >= 18:\n    print(\"Adult\")",
+        "has_id = True"
+      ],
+      "solution_order": [2, 5, 4, 0, 1],
+      "distractors": ["elif age > 13:\n    print(\"Teenager\")"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["nested_conditionals", "if_elif_else", "boolean_variables"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "conditionals"
+    },
+    {
+      "problem_id": "parsons_for_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to iterate over a list of fruits and print each one.",
+      "options": [
+        "    print(fruit)",
+        "for fruit in range(fruits):",
+        "for fruit in fruits:",
+        "fruits = [\"apple\", \"banana\", \"cherry\"]"
+      ],
+      "solution_order": [3, 2, 0],
+      "distractors": ["for fruit in range(fruits):"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["for_loop", "list_iteration", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "parsons_for_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to compute the sum of integers from 0 to 4 using a range loop, then print the total.",
+      "options": [
+        "for i in range(1, 5):",
+        "print(total)",
+        "for i in range(5):",
+        "total = 0",
+        "    total += i"
+      ],
+      "solution_order": [3, 2, 4, 1],
+      "distractors": ["for i in range(1, 5):"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["for_loop", "range_function", "accumulator_pattern"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "parsons_for_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to find the maximum value in a list by iterating through it, then print the result.",
+      "options": [
+        "    if num > max_val:\n        max_val = num",
+        "max_val = numbers[0]",
+        "    if num < max_val:\n        max_val = num",
+        "print(max_val)",
+        "for num in numbers:",
+        "numbers = [3, 7, 2, 9, 4]"
+      ],
+      "solution_order": [5, 1, 4, 0, 3],
+      "distractors": ["    if num < max_val:\n        max_val = num"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["for_loop", "accumulator_pattern", "comparison_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "parsons_for_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to use nested loops that print coordinate pairs where i equals j, for i and j from 0 to 2.",
+      "options": [
+        "    print()",
+        "    for j in range(i):",
+        "for i in range(3):",
+        "    for j in range(3):",
+        "        if i == j:\n            print(f\"({i},{j})\", end=\" \")"
+      ],
+      "solution_order": [2, 3, 4, 0],
+      "distractors": ["    for j in range(i):"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["nested_loops", "range_function", "f_string"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "for_loops"
+    },
+    {
+      "problem_id": "parsons_while_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create a countdown from 5 to 1, then print \"Go!\".",
+      "options": [
+        "    count -= 1",
+        "    count += 1",
+        "while count > 0:",
+        "print(\"Go!\")",
+        "    print(count)",
+        "count = 5"
+      ],
+      "solution_order": [5, 2, 4, 0, 3],
+      "distractors": ["    count += 1"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["while_loop", "decrement", "loop_condition"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "parsons_while_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to validate user input: keep asking for age until the user enters a value between 0 and 150 inclusive.",
+      "options": [
+        "while age < 0 and age > 150:",
+        "print(\"Your age is:\", age)",
+        "    print(\"Invalid age!\")\n    age = int(input(\"Enter your age: \"))",
+        "while age < 0 or age > 150:",
+        "age = int(input(\"Enter your age: \"))"
+      ],
+      "solution_order": [4, 3, 2, 1],
+      "distractors": ["while age < 0 and age > 150:"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["while_loop", "input_validation", "logical_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "parsons_while_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create an infinite loop that reads commands and breaks when the user types \"quit\".",
+      "options": [
+        "    if text == \"quit\":\n        break",
+        "while True:",
+        "    if text == \"quit\":\n        return",
+        "    print(\"You entered:\", text)",
+        "    text = input(\"Enter command: \")",
+        "print(\"Goodbye!\")"
+      ],
+      "solution_order": [1, 4, 0, 3, 5],
+      "distractors": ["    if text == \"quit\":\n        return"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["while_true", "break_statement", "input_function"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "parsons_while_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create a number guessing game: generate a random secret, loop until the guess matches, giving \"Too low!\" or \"Too high!\" hints.",
+      "options": [
+        "while guess != secret:",
+        "    if guess < secret:\n        print(\"Too low!\")\n    elif guess > secret:\n        print(\"Too high!\")",
+        "import random",
+        "while guess < secret:",
+        "secret = random.randint(1, 100)",
+        "guess = 0",
+        "    guess = int(input(\"Guess: \"))",
+        "print(\"Correct!\")"
+      ],
+      "solution_order": [2, 4, 5, 0, 6, 1, 7],
+      "distractors": ["while guess < secret:"],
+      "required_block_count": 7,
+      "knowledge_units_tested": ["while_loop", "random_module", "if_elif", "input_function"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "while_loops"
+    },
+    {
+      "problem_id": "parsons_func_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to define a function that greets a person by name, then call it with \"Alice\".",
+      "options": [
+        "greet(\"Alice\")",
+        "def greet(name)",
+        "def greet(name):",
+        "    print(\"Hello, \" + name + \"!\")"
+      ],
+      "solution_order": [2, 3, 0],
+      "distractors": ["def greet(name)"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["function_definition", "function_call", "parameters"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "parsons_func_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to define a function that returns the square of a number, call it with 5, and print the result.",
+      "options": [
+        "result = square(5)",
+        "def square(n):",
+        "    print(n * n)",
+        "print(result)",
+        "    return n * n"
+      ],
+      "solution_order": [1, 4, 0, 3],
+      "distractors": ["    print(n * n)"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["function_definition", "return_statement", "function_call"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "parsons_func_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to define a function that calculates the area of a rectangle from length and width, returns it, then call and print the result.",
+      "options": [
+        "def calculate_area(length, width):",
+        "    return area",
+        "result = calculate_area(5, 3)",
+        "    return length + width",
+        "print(\"Area:\", result)",
+        "    area = length * width"
+      ],
+      "solution_order": [0, 5, 1, 2, 4],
+      "distractors": ["    return length + width"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["function_definition", "multiple_parameters", "return_statement"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "parsons_func_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to define a function with a default exponent parameter of 2, then demonstrate calling it with one and two arguments.",
+      "options": [
+        "print(power(3))",
+        "def power(base, exponent):",
+        "    return base ** exponent",
+        "print(power(3, 3))",
+        "def power(base, exponent=2):"
+      ],
+      "solution_order": [4, 2, 0, 3],
+      "distractors": ["def power(base, exponent):"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["default_parameters", "function_definition", "function_call"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "functions"
+    },
+    {
+      "problem_id": "parsons_list_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create an empty list, append two fruits to it, and print the list.",
+      "options": [
+        "fruits.add(\"apple\")",
+        "fruits.append(\"banana\")",
+        "fruits = []",
+        "print(fruits)",
+        "fruits.append(\"apple\")"
+      ],
+      "solution_order": [2, 4, 1, 3],
+      "distractors": ["fruits.add(\"apple\")"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["list_creation", "list_append", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "parsons_list_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to double each number in a list and store the results in a new list, then print it.",
+      "options": [
+        "print(doubled)",
+        "    doubled.append(n + 2)",
+        "for n in numbers:",
+        "    doubled.append(n * 2)",
+        "numbers = [1, 2, 3, 4, 5]",
+        "doubled = []"
+      ],
+      "solution_order": [4, 5, 2, 3, 0],
+      "distractors": ["    doubled.append(n + 2)"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["list_append", "for_loop", "arithmetic_operators"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "parsons_list_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to filter even numbers from a list using a list comprehension, then print the result.",
+      "options": [
+        "evens = [n for n in numbers if n % 2 != 0]",
+        "print(evens)",
+        "evens = [n for n in numbers if n % 2 == 0]",
+        "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+      ],
+      "solution_order": [3, 2, 1],
+      "distractors": ["evens = [n for n in numbers if n % 2 != 0]"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["list_comprehension", "modulo_operator", "filtering"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "parsons_list_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to sort a list of scores, take the top 3 (highest), compute their average, and print it.",
+      "options": [
+        "top_three = scores[:3]",
+        "scores.sort()",
+        "average = sum(top_three) / len(top_three)",
+        "print(\"Top 3 average:\", average)",
+        "top_three = scores[-3:]",
+        "scores = [85, 92, 78, 95, 88, 76, 90]"
+      ],
+      "solution_order": [5, 1, 4, 2, 3],
+      "distractors": ["top_three = scores[:3]"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["list_sort", "list_slicing", "built_in_functions"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "lists"
+    },
+    {
+      "problem_id": "parsons_str_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to convert a string to uppercase and print the result.",
+      "options": [
+        "upper_text = text.capitalize()",
+        "text = \"Hello, World!\"",
+        "print(upper_text)",
+        "upper_text = text.upper()"
+      ],
+      "solution_order": [1, 3, 2],
+      "distractors": ["upper_text = text.capitalize()"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["string_methods", "upper_method", "print_function"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "parsons_str_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to extract the first word (\"Python\", 6 chars) and the second word (\"Programming\") from the string \"Python Programming\" using slicing, then print both.",
+      "options": [
+        "print(first_word)\nprint(second_word)",
+        "first_word = message[:7]",
+        "first_word = message[:6]",
+        "message = \"Python Programming\"",
+        "second_word = message[7:]"
+      ],
+      "solution_order": [3, 2, 4, 0],
+      "distractors": ["first_word = message[:7]"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["string_slicing", "indexing", "print_function"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "parsons_str_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create variables for name and age, build a formatted f-string message, and print it.",
+      "options": [
+        "name = \"Alice\"",
+        "message = \"My name is {name} and I am {age} years old.\"",
+        "print(message)",
+        "age = 25",
+        "message = f\"My name is {name} and I am {age} years old.\""
+      ],
+      "solution_order": [0, 3, 4, 2],
+      "distractors": ["message = \"My name is {name} and I am {age} years old.\""],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["f_string", "string_formatting", "variable_interpolation"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "parsons_str_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to split a sentence into words, capitalize each word, join them back with spaces, and print the result.",
+      "options": [
+        "result = \" \".join(capitalized)",
+        "words = sentence.split()",
+        "result = \",\".join(capitalized)",
+        "print(result)",
+        "capitalized = [w.capitalize() for w in words]",
+        "sentence = \"the quick brown fox\""
+      ],
+      "solution_order": [5, 1, 4, 0, 3],
+      "distractors": ["result = \",\".join(capitalized)"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["string_split", "string_join", "list_comprehension", "capitalize"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "strings"
+    },
+    {
+      "problem_id": "parsons_dict_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create a dictionary for a student and print the student's name and age.",
+      "options": [
+        "print(student[\"age\"])",
+        "student = {\"name\": \"Alice\", \"age\": 20}",
+        "print(student.name)",
+        "print(student[\"name\"])"
+      ],
+      "solution_order": [1, 3, 0],
+      "distractors": ["print(student.name)"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_access", "key_value_pairs"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "parsons_dict_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create an empty inventory dictionary, add items with quantities, update one quantity, and print the result.",
+      "options": [
+        "inventory[\"apples\"] += 2",
+        "inventory.add(\"apples\", 5)",
+        "inventory = {}",
+        "print(inventory)",
+        "inventory[\"bananas\"] = 3",
+        "inventory[\"apples\"] = 5"
+      ],
+      "solution_order": [2, 5, 4, 0, 3],
+      "distractors": ["inventory.add(\"apples\", 5)"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["dictionary_creation", "dictionary_update", "augmented_assignment"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "parsons_dict_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to iterate over a dictionary of grades and print each subject with its score.",
+      "options": [
+        "    print(f\"{subject}: {score}\")",
+        "for subject, score in grades:",
+        "for subject, score in grades.items():",
+        "grades = {\"math\": 90, \"science\": 85, \"english\": 92}"
+      ],
+      "solution_order": [3, 2, 0],
+      "distractors": ["for subject, score in grades:"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["dictionary_iteration", "items_method", "tuple_unpacking"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "parsons_dict_004",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to iterate over a nested dictionary of students and their scores, computing and printing the average score for each student.",
+      "options": [
+        "for name, scores in students.items():",
+        "students = {\n    \"Alice\": {\"math\": 90, \"science\": 85},\n    \"Bob\": {\"math\": 78, \"science\": 92}\n}",
+        "    avg = sum(scores) / len(scores)",
+        "    avg = sum(scores.values()) / len(scores)",
+        "    print(f\"{name}: {avg:.1f}\")"
+      ],
+      "solution_order": [1, 0, 3, 4],
+      "distractors": ["    avg = sum(scores) / len(scores)"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["nested_dictionary", "dictionary_values", "built_in_functions"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "dictionaries"
+    },
+    {
+      "problem_id": "parsons_io_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to ask the user for their name and then greet them.",
+      "options": [
+        "name = print(\"What is your name? \")",
+        "print(\"Hello, \" + name + \"!\")",
+        "name = input(\"What is your name? \")"
+      ],
+      "solution_order": [2, 1],
+      "distractors": ["name = print(\"What is your name? \")"],
+      "required_block_count": 2,
+      "knowledge_units_tested": ["input_function", "print_function", "string_concatenation"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "parsons_io_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to read length and width as floats from user input, compute the area, and print it formatted to 2 decimal places.",
+      "options": [
+        "length = input(\"Enter length: \")",
+        "area = length * width",
+        "print(f\"The area is {area:.2f}\")",
+        "length = float(input(\"Enter length: \"))",
+        "width = float(input(\"Enter width: \"))"
+      ],
+      "solution_order": [3, 4, 1, 2],
+      "distractors": ["length = input(\"Enter length: \")"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["input_function", "type_conversion", "f_string_formatting"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "parsons_io_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to create a dictionary, print a report header, iterate and print each key-value pair with formatting, then print a footer line.",
+      "options": [
+        "print(\"=\" * 21)",
+        "for key in data:\n    print(f\"  {key}: {data}\")",
+        "for key, value in data.items():\n    print(f\"  {key.capitalize()}: {value}\")",
+        "data = {\"name\": \"Alice\", \"age\": 25, \"grade\": \"A\"}",
+        "print(\"=== Student Report ===\")"
+      ],
+      "solution_order": [3, 4, 2, 0],
+      "distractors": ["for key in data:\n    print(f\"  {key}: {data}\")"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["dictionary_iteration", "f_string", "formatted_output"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "input_output"
+    },
+    {
+      "problem_id": "parsons_op_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to perform integer division and modulo on 17 divided by 5, then print the result in the form \"17 = 5 * quotient + remainder\".",
+      "options": [
+        "b = 5",
+        "quotient = a / b",
+        "print(f\"{a} = {b} * {quotient} + {remainder}\")",
+        "a = 17",
+        "remainder = a % b",
+        "quotient = a // b"
+      ],
+      "solution_order": [3, 0, 5, 4, 2],
+      "distractors": ["quotient = a / b"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["integer_division", "modulo_operator", "arithmetic_operators"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "parsons_op_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to compare two numbers for equality and greater-than, storing results in variables, then print them.",
+      "options": [
+        "is_equal = x is y",
+        "x = 10",
+        "is_greater = x > y",
+        "print(f\"Equal: {is_equal}\")\nprint(f\"x > y: {is_greater}\")",
+        "y = 20",
+        "is_equal = x == y"
+      ],
+      "solution_order": [1, 4, 5, 2, 3],
+      "distractors": ["is_equal = x is y"],
+      "required_block_count": 5,
+      "knowledge_units_tested": ["comparison_operators", "equality_operator", "identity_vs_equality"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "parsons_op_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to determine driving and car rental eligibility using logical operators: can drive if licensed AND insured, can rent if can drive AND age >= 21.",
+      "options": [
+        "can_drive = has_license or has_insurance",
+        "age = 25",
+        "can_drive = has_license and has_insurance",
+        "can_rent = can_drive and age >= 21",
+        "has_license = True",
+        "print(f\"Can drive: {can_drive}\")\nprint(f\"Can rent: {can_rent}\")",
+        "has_insurance = True"
+      ],
+      "solution_order": [1, 4, 6, 2, 3, 5],
+      "distractors": ["can_drive = has_license or has_insurance"],
+      "required_block_count": 6,
+      "knowledge_units_tested": ["logical_operators", "and_operator", "boolean_expressions"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "operators"
+    },
+    {
+      "problem_id": "parsons_err_001",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to wrap integer input in a try/except that catches ValueError and prints an error message.",
+      "options": [
+        "except ValueError:",
+        "try:",
+        "except Error:",
+        "    number = int(input(\"Enter a number: \"))\n    print(\"You entered:\", number)",
+        "    print(\"That's not a valid number!\")"
+      ],
+      "solution_order": [1, 3, 0, 4],
+      "distractors": ["except Error:"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["try_except", "ValueError", "error_handling"],
+      "difficulty": "easy",
+      "difficulty_order": 1,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "parsons_err_002",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to open and read a file inside a try block, handle FileNotFoundError, and always print a completion message using finally.",
+      "options": [
+        "finally:\n    print(\"Operation complete.\")",
+        "try:\n    f = open(\"data.txt\", \"r\")\n    content = f.read()\n    print(content)",
+        "except FileError:\n    print(\"File not found!\")",
+        "except FileNotFoundError:\n    print(\"File not found!\")"
+      ],
+      "solution_order": [1, 3, 0],
+      "distractors": ["except FileError:\n    print(\"File not found!\")"],
+      "required_block_count": 3,
+      "knowledge_units_tested": ["try_except_finally", "FileNotFoundError", "file_handling"],
+      "difficulty": "medium",
+      "difficulty_order": 2,
+      "topic_group": "error_handling"
+    },
+    {
+      "problem_id": "parsons_err_003",
+      "problem_type": "parsons",
+      "problem_statement": "Rearrange the code blocks to perform division with multiple except clauses: handle ValueError for bad input, ZeroDivisionError for zero denominator, and a general Exception for anything else.",
+      "options": [
+        "except ZeroDivisionError:\n    print(\"Cannot divide by zero!\")",
+        "try:\n    x = int(input(\"Enter numerator: \"))\n    y = int(input(\"Enter denominator: \"))\n    result = x / y\n    print(f\"Result: {result}\")",
+        "except ZeroDivisionError and ValueError:\n    print(\"Invalid input!\")",
+        "except Exception as e:\n    print(f\"Unexpected error: {e}\")",
+        "except ValueError:\n    print(\"Please enter valid integers!\")"
+      ],
+      "solution_order": [1, 4, 0, 3],
+      "distractors": ["except ZeroDivisionError and ValueError:\n    print(\"Invalid input!\")"],
+      "required_block_count": 4,
+      "knowledge_units_tested": ["multiple_except", "exception_hierarchy", "exception_as"],
+      "difficulty": "hard",
+      "difficulty_order": 3,
+      "topic_group": "error_handling"
+    }
+  ]
+}
