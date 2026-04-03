@@ -5,7 +5,7 @@
 
 ## 测试环境
 - **前端**: https://cs-teachable-agent.pages.dev/
-- **后端**: Railway自动部署
+- **后端**: Render 自动部署
 - **测试账号**: test_student_comprehensive_2026
 
 ---

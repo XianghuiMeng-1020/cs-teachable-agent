@@ -721,7 +721,7 @@ app.add_middleware(
 
 **建议排查**:
 1. 检查Cloudflare Workers部署日志
-2. 验证Railway后端服务状态
+2. 验证Render后端服务状态
 3. 测试后端API健康检查端点: `/api/health`
 4. 检查环境变量配置(`VITE_API_URL`, `FRONTEND_URL`)
 
@@ -732,10 +732,10 @@ app.add_middleware(
 - 输出目录: `frontend/dist`
 - 环境变量: `VITE_API_URL`
 
-**后端**: Railway
-- Docker镜像: `Dockerfile.backend`
-- 配置文件: `railway.toml`
-- 环境变量: `SECRET_KEY`, `OPENAI_API_KEY`, `FRONTEND_URL`
+**后端**: Render
+- Docker镜像: `Dockerfile`
+- 配置文件: `render.yaml`
+- 环境变量: `SECRET_KEY`, `OPENAI_API_KEY`, `DEEPSEEK_API_KEY`, `QWEN_API_KEY`, `FRONTEND_URL`
 
 **评估**: ✅ **配置完整**,但实际部署状态未知
 

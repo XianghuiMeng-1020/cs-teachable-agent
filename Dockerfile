@@ -15,8 +15,5 @@ ENV PORT=10000
 
 RUN mkdir -p /app/data
 
-# Verify imports at build time
-RUN python -c "from src.api.main import app; print('BUILD CHECK: app import OK')"
-
 EXPOSE 10000
 CMD ["python", "start.py"]

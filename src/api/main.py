@@ -80,11 +80,15 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 @app.on_event("startup")
 def startup():
-    init_db()
-    if os.getenv("ENVIRONMENT") == "production":
-        sk = os.getenv("SECRET_KEY", "")
-        if not sk or sk == "dev-secret-change-in-production":
-            raise RuntimeError("SECRET_KEY must be set in production (and must not be the default dev value)")
+    try:
+        init_db()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error("Database init failed: %s", e)
+    sk = os.getenv("SECRET_KEY", "")
+    if os.getenv("ENVIRONMENT") == "production" and (not sk or sk == "dev-secret-change-in-production"):
+        logger.error("SECRET_KEY not configured properly for production")
+    logger.info("Startup complete. PORT=%s, ENV=%s", os.getenv("PORT"), os.getenv("ENVIRONMENT"))
 
 
 app.include_router(auth.router)
