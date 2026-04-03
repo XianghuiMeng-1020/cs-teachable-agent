@@ -9,3 +9,5 @@ export { CodeCompletion } from "./CodeCompletion";
 export { ConceptMCQ } from "./ConceptMCQ";
 export { ShortCodeAnswer } from "./ShortCodeAnswer";
 export { CodeRunPreview } from "./CodeRunPreview";
+export { TopicBrowser } from "./TopicBrowser";
+export { ProctorBadge } from "./ProctorBadge";

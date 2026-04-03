@@ -63,11 +63,50 @@ def list_problems(ta_id: int, current_user: CurrentUser, db: DbSession):
             for ku in ku_reqs:
                 if ku not in learned:
                     required_kus.add(ku)
+
+    # Build topic_groups summary for the frontend topic browser
+    p_know = tracker.get_bkt_state() if hasattr(tracker, "get_bkt_state") else {}
+    topic_map: dict[str, dict] = {}
+    for p in sorted_problems:
+        tg = p.get("topic_group", "general")
+        if tg not in topic_map:
+            topic_map[tg] = {"name": tg, "count": 0, "types": set(), "kus": set(), "min_order": p.get("difficulty_order", 999)}
+        topic_map[tg]["count"] += 1
+        topic_map[tg]["types"].add(p.get("problem_type", "unknown"))
+        for ku in p.get("knowledge_units_tested", []):
+            topic_map[tg]["kus"].add(ku)
+        order = p.get("difficulty_order", 999)
+        if order < topic_map[tg]["min_order"]:
+            topic_map[tg]["min_order"] = order
+
+    topic_groups = []
+    for tg_name, info in sorted(topic_map.items(), key=lambda x: x[1]["min_order"]):
+        kus = info["kus"]
+        mastery = 0.0
+        if kus:
+            mastery = sum(p_know.get(ku, 0.0) for ku in kus) / len(kus)
+        topic_groups.append({
+            "name": tg_name,
+            "label": tg_name.replace("_", " ").title(),
+            "count": info["count"],
+            "mastery_percent": round(mastery * 100, 1),
+            "problem_types": sorted(info["types"]),
+        })
+
+    # Count problems by type
+    type_counts: dict[str, int] = {}
+    for p in sorted_problems:
+        pt = p.get("problem_type", "unknown")
+        type_counts[pt] = type_counts.get(pt, 0) + 1
+
     return {
         "problems": sorted_problems,
         "eligible_ids": eligible_ids,
         "learned_unit_ids": list(learned),
         "required_kus": list(required_kus)[:5],
+        "topic_groups": topic_groups,
+        "total_count": len(sorted_problems),
+        "problem_type_counts": type_counts,
     }
 
 
