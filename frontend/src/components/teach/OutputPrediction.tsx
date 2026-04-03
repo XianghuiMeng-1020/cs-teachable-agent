@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Terminal } from "lucide-react";
+import { Eye, Terminal, ArrowRight } from "lucide-react";
 
 interface OutputPredictionProps {
   code: string;
@@ -13,24 +13,37 @@ export function OutputPrediction({ code, problemStatement, onAnswer, disabled }:
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-stone-200 bg-stone-50">
-        <div className="flex items-center gap-2 mb-1">
-          <Terminal className="w-4 h-4 text-blue-500" />
-          <span className="text-xs font-semibold text-blue-700 uppercase tracking-wide">
-            Output Prediction
+      {/* Header */}
+      <div className="px-4 py-3 border-b border-blue-200 bg-blue-50">
+        <div className="flex items-center gap-2 mb-2">
+          <div className="w-7 h-7 rounded-lg bg-blue-100 border border-blue-200 flex items-center justify-center">
+            <Eye className="w-4 h-4 text-blue-600" />
+          </div>
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-700">
+            Predict Output
           </span>
         </div>
-        <p className="text-sm text-stone-700">{problemStatement}</p>
+        <p className="text-base text-stone-700 font-medium leading-relaxed">{problemStatement}</p>
+        <p className="text-xs text-blue-600 mt-1">Read the code carefully before predicting</p>
       </div>
 
-      <div className="flex-1 overflow-auto bg-[#1e1e2e] select-none p-4" style={{ userSelect: "none", WebkitUserSelect: "none" }}>
-        <pre className="text-sm font-mono text-stone-200 whitespace-pre-wrap">{code}</pre>
+      {/* Code display */}
+      <div className="flex-1 overflow-auto bg-[#1a1a2e] select-none p-4" style={{ userSelect: "none", WebkitUserSelect: "none" }}>
+        <div className="flex items-center gap-2 mb-2 text-xs text-stone-500">
+          <Terminal className="w-3.5 h-3.5" />
+          <span>Python Code</span>
+        </div>
+        <pre className="text-sm font-mono text-stone-200 whitespace-pre-wrap leading-relaxed">{code}</pre>
       </div>
 
+      {/* Answer input */}
       <div className="px-4 py-3 border-t border-stone-200 bg-white">
-        <label className="block text-xs font-medium text-stone-600 mb-1">
-          What will this code output?
-        </label>
+        <div className="flex items-center gap-2 mb-2">
+          <ArrowRight className="w-4 h-4 text-blue-500" />
+          <label className="text-sm font-medium text-stone-700">
+            What will this code output?
+          </label>
+        </div>
         <textarea
           value={value}
           onChange={(e) => {
@@ -38,10 +51,11 @@ export function OutputPrediction({ code, problemStatement, onAnswer, disabled }:
             onAnswer?.(e.target.value);
           }}
           disabled={disabled}
-          placeholder="Type the expected output..."
-          className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm font-mono placeholder:text-stone-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:opacity-50"
+          placeholder="Type the expected output... (e.g., 'Hello World', 42, etc.)"
+          className="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm font-mono placeholder:text-stone-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:opacity-50 transition-all"
           rows={3}
         />
+        <p className="text-xs text-stone-400 mt-1.5">Be precise - match spaces, newlines, and formatting</p>
       </div>
     </div>
   );

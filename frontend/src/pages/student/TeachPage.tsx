@@ -207,16 +207,24 @@ export function TeachPage() {
       <AntiCheatShell enabled>
         <div className="h-[calc(100vh-var(--topbar-height)-24px)] flex relative select-none">
           {/* LEFT SIDEBAR: Topic Browser */}
-          {sidebarOpen && (
-            <div className="w-56 shrink-0 border-r border-stone-200 bg-white overflow-hidden flex flex-col rounded-l-2xl shadow-lg">
-              <TopicBrowser
-                problems={problems}
-                topicGroups={topicGroups}
-                selectedProblemId={selectedProblemId}
-                onSelectProblem={setSelectedProblemId}
-              />
-            </div>
-          )}
+          <AnimatePresence>
+            {sidebarOpen && (
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 256, opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="shrink-0 border-r border-stone-200 bg-white overflow-hidden flex flex-col rounded-l-2xl shadow-lg"
+              >
+                <TopicBrowser
+                  problems={problems}
+                  topicGroups={topicGroups}
+                  selectedProblemId={selectedProblemId}
+                  onSelectProblem={setSelectedProblemId}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* MAIN AREA: Problem + Chat */}
           <div ref={rightRef} className="flex-1 flex min-w-0 relative">
@@ -225,17 +233,22 @@ export function TeachPage() {
               className="flex flex-col min-h-0 border-r border-stone-200 bg-white overflow-hidden"
               style={{ width: `${splitPercent}%` }}
             >
-              {/* Header bar */}
-              <div className="flex items-center gap-2 px-3 py-1.5 border-b border-stone-100 bg-stone-50/50 shrink-0">
+              {/* Header bar - Enhanced */}
+              <div className="flex items-center gap-3 px-4 py-2 border-b border-stone-200 bg-white shrink-0 shadow-sm">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="p-1 rounded hover:bg-stone-200 text-stone-400 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-stone-100 text-stone-500 hover:text-stone-700 transition-all btn-press"
                   title={sidebarOpen ? "Collapse sidebar" : "Show sidebar"}
                 >
                   {sidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
                 </button>
-                <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">{domainId}</span>
-                <span className="text-xs text-stone-400 flex-1">{t("teach.title", { defaultValue: "Teach" })}</span>
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-1 text-xs font-semibold bg-brand-100 text-brand-700 rounded-lg border border-brand-200">
+                    {domainId.toUpperCase()}
+                  </span>
+                  <span className="text-xs text-stone-400 font-medium">{t("teach.title", { defaultValue: "Teach" })}</span>
+                </div>
+                <div className="flex-1" />
                 <ProctorBadge />
               </div>
 
@@ -256,12 +269,12 @@ export function TeachPage() {
               />
             </div>
 
-            {/* DRAG HANDLE */}
+            {/* DRAG HANDLE - Enhanced with hover expansion */}
             <div
               onMouseDown={handleMouseDown}
-              className="w-2 shrink-0 cursor-col-resize bg-stone-100 hover:bg-brand-200 transition-colors flex items-center justify-center z-10"
+              className="w-1.5 shrink-0 cursor-col-resize bg-stone-100 hover:bg-brand-400 hover:w-2 transition-all duration-150 flex items-center justify-center z-10 group"
             >
-              <GripVertical className="w-3 h-3 text-stone-400" />
+              <GripVertical className="w-3 h-3 text-stone-400 group-hover:text-brand-600 transition-colors" />
             </div>
 
             {/* Chat Panel */}
@@ -277,22 +290,25 @@ export function TeachPage() {
               />
             </div>
 
-            {/* MASTERED BANNER */}
+            {/* MASTERED BANNER - Enhanced */}
             <AnimatePresence>
               {showMasteredBanner && (
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 30, scale: 0.95 }}
+                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
                   className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50"
                 >
-                  <div className="flex items-center gap-3 bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-xl">
-                    <Trophy className="w-6 h-6 text-yellow-300" />
+                  <div className="flex items-center gap-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-4 rounded-2xl shadow-2xl ring-1 ring-emerald-400/30">
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
+                      <Trophy className="w-6 h-6 text-yellow-300" />
+                    </div>
                     <div>
-                      <p className="font-semibold">
+                      <p className="font-bold text-base">
                         {t("teach.masteredBanner", { defaultValue: "Topic Mastered!" })}
                       </p>
-                      <p className="text-sm text-emerald-100">
+                      <p className="text-sm text-emerald-100/90">
                         {t("teach.masteredDesc", { defaultValue: "You've reached 80% mastery. Ready for the next challenge?" })}
                       </p>
                     </div>
@@ -300,13 +316,14 @@ export function TeachPage() {
                       variant="outline"
                       icon={ArrowRight}
                       onClick={goNextTopic}
-                      className="ml-2 border-white/30 text-white hover:bg-white/20"
+                      className="ml-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60"
                     >
                       {t("teach.nextTopic", { defaultValue: "Next Topic" })}
                     </Button>
                     <button
                       onClick={() => setShowMasteredBanner(false)}
-                      className="ml-1 text-emerald-200 hover:text-white text-sm"
+                      className="ml-1 p-1 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                      aria-label="Dismiss"
                     >
                       ✕
                     </button>

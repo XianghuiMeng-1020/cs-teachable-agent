@@ -1,5 +1,5 @@
 export { CanvasWatermark } from "./CanvasWatermark";
-export { MasteryThermometer } from "./MasteryThermometer";
+export { MasteryBar, MasteryThermometer } from "./MasteryBar";
 export { ProblemPanel } from "./ProblemPanel";
 export { ProblemRenderer } from "./ProblemRenderer";
 export type { TeachProblem, CodeModification } from "./ProblemRenderer";

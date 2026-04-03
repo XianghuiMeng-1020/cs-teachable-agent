@@ -6,6 +6,7 @@ import { ShortCodeAnswer } from "./ShortCodeAnswer";
 import { ParsonsBlock } from "@/components/assessment/ParsonsBlock";
 import { DropdownBlanks } from "@/components/assessment/DropdownBlanks";
 import { ExecutionTrace } from "@/components/assessment/ExecutionTrace";
+import { Bug, Eye, Code, ListChecks, FileText, Puzzle, Terminal, Brain } from "lucide-react";
 
 export interface TeachProblem {
   problem_id: string;
@@ -48,6 +49,103 @@ export interface CodeModification {
   old_code: string;
   new_code: string;
   explanation?: string;
+}
+
+const TYPE_CONFIG: Record<string, { label: string; icon: typeof Bug; color: string; bg: string; border: string; desc: string }> = {
+  "buggy-code": { 
+    label: "Find the Bug", 
+    icon: Bug, 
+    color: "text-red-700", 
+    bg: "bg-red-50", 
+    border: "border-red-200",
+    desc: "Identify and explain the error"
+  },
+  "output-prediction": { 
+    label: "Predict Output", 
+    icon: Eye, 
+    color: "text-blue-700", 
+    bg: "bg-blue-50", 
+    border: "border-blue-200",
+    desc: "What will this code print?"
+  },
+  "code-completion": { 
+    label: "Complete Code", 
+    icon: Code, 
+    color: "text-purple-700", 
+    bg: "bg-purple-50", 
+    border: "border-purple-200",
+    desc: "Fill in the missing parts"
+  },
+  "multiple-choice": { 
+    label: "Concept Check", 
+    icon: ListChecks, 
+    color: "text-emerald-700", 
+    bg: "bg-emerald-50", 
+    border: "border-emerald-200",
+    desc: "Test your understanding"
+  },
+  "short-answer": { 
+    label: "Write Code", 
+    icon: FileText, 
+    color: "text-amber-700", 
+    bg: "bg-amber-50", 
+    border: "border-amber-200",
+    desc: "Solve by writing code"
+  },
+  parsons: { 
+    label: "Parsons Puzzle", 
+    icon: Puzzle, 
+    color: "text-orange-700", 
+    bg: "bg-orange-50", 
+    border: "border-orange-200",
+    desc: "Reorder the code blocks"
+  },
+  dropdown: { 
+    label: "Fill Blanks", 
+    icon: Terminal, 
+    color: "text-teal-700", 
+    bg: "bg-teal-50", 
+    border: "border-teal-200",
+    desc: "Select the correct options"
+  },
+  "execution-trace": { 
+    label: "Trace Code", 
+    icon: Brain, 
+    color: "text-indigo-700", 
+    bg: "bg-indigo-50", 
+    border: "border-indigo-200",
+    desc: "Follow the execution flow"
+  },
+};
+
+// Header component for problem types that don't have their own header
+function ProblemTypeHeader({ problem }: { problem: TeachProblem }) {
+  const config = TYPE_CONFIG[problem.problem_type] || { 
+    label: problem.problem_type, 
+    icon: FileText, 
+    color: "text-stone-700", 
+    bg: "bg-stone-50", 
+    border: "border-stone-200",
+    desc: ""
+  };
+  const Icon = config.icon;
+
+  return (
+    <div className={`px-4 py-3 border-b ${config.border} ${config.bg}`}>
+      <div className="flex items-center gap-2 mb-1">
+        <div className={`w-7 h-7 rounded-lg ${config.bg} ${config.border} border flex items-center justify-center`}>
+          <Icon className={`w-4 h-4 ${config.color}`} />
+        </div>
+        <span className={`text-xs font-bold uppercase tracking-wider ${config.color}`}>
+          {config.label}
+        </span>
+      </div>
+      <p className="text-base text-stone-700 font-medium leading-relaxed">{problem.problem_statement}</p>
+      {config.desc && (
+        <p className="text-xs text-stone-500 mt-1">{config.desc}</p>
+      )}
+    </div>
+  );
 }
 
 interface ProblemRendererProps {
@@ -101,37 +199,49 @@ export function ProblemRenderer({ problem, codeModifications, onStudentAnswer, d
 
   if (t === "multiple-choice" && problem.choices) {
     return (
-      <ConceptMCQ
-        problemStatement={problem.problem_statement}
-        choices={problem.choices}
-        onAnswer={(ids) => onStudentAnswer?.({ selected_ids: ids })}
-        disabled={disabled}
-      />
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4">
+          <ConceptMCQ
+            problemStatement="" // Empty because header shows it
+            choices={problem.choices}
+            onAnswer={(ids) => onStudentAnswer?.({ selected_ids: ids })}
+            disabled={disabled}
+          />
+        </div>
+      </div>
     );
   }
 
   if (t === "short-answer") {
     return (
-      <ShortCodeAnswer
-        problemStatement={problem.problem_statement}
-        starterCode={problem.starter_code ?? ""}
-        onAnswer={(code) => onStudentAnswer?.({ code })}
-        disabled={disabled}
-      />
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 p-4">
+          <ShortCodeAnswer
+            problemStatement="" // Empty because header shows it
+            starterCode={problem.starter_code ?? ""}
+            onAnswer={(code) => onStudentAnswer?.({ code })}
+            disabled={disabled}
+          />
+        </div>
+      </div>
     );
   }
 
   if (t === "parsons" && problem.options) {
     return (
-      <div className="space-y-3">
-        <p className="text-sm text-stone-700 whitespace-pre-wrap">{problem.problem_statement}</p>
-        <ParsonsBlock
-          options={problem.options}
-          requiredBlockCount={problem.required_block_count ?? 0}
-          selectedBlocks={[]}
-          onSelectedChange={(blocks) => onStudentAnswer?.({ selected_blocks: blocks })}
-          disabled={disabled}
-        />
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4">
+          <ParsonsBlock
+            options={problem.options}
+            requiredBlockCount={problem.required_block_count ?? 0}
+            selectedBlocks={[]}
+            onSelectedChange={(blocks) => onStudentAnswer?.({ selected_blocks: blocks })}
+            disabled={disabled}
+          />
+        </div>
       </div>
     );
   }
@@ -143,15 +253,17 @@ export function ProblemRenderer({ problem, codeModifications, onStudentAnswer, d
       options: b.options,
     }));
     return (
-      <div className="space-y-3">
-        <p className="text-sm text-stone-700 whitespace-pre-wrap">{problem.problem_statement}</p>
-        <DropdownBlanks
-          promptTemplate={problem.prompt_template ?? ""}
-          blanks={mappedBlanks}
-          selectedAnswers={{}}
-          onAnswerChange={(id, val) => onStudentAnswer?.({ [`blank_${id}`]: val })}
-          disabled={disabled}
-        />
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4">
+          <DropdownBlanks
+            promptTemplate={problem.prompt_template ?? ""}
+            blanks={mappedBlanks}
+            selectedAnswers={{}}
+            onAnswerChange={(id, val) => onStudentAnswer?.({ [`blank_${id}`]: val })}
+            disabled={disabled}
+          />
+        </div>
       </div>
     );
   }
@@ -165,29 +277,33 @@ export function ProblemRenderer({ problem, codeModifications, onStudentAnswer, d
       options: c.options,
     }));
     return (
-      <div className="space-y-3">
-        <p className="text-sm text-stone-700 whitespace-pre-wrap">{problem.problem_statement}</p>
-        <ExecutionTrace
-          functionName={problem.function_name ?? ""}
-          functionSource={problem.function_source ?? ""}
-          callExpression={problem.call_expression ?? ""}
-          checkpoints={mappedCheckpoints}
-          selectedAnswers={{}}
-          onAnswerChange={(id, val) => onStudentAnswer?.({ [`checkpoint_${id}`]: val })}
-          disabled={disabled}
-        />
+      <div className="flex flex-col h-full">
+        <ProblemTypeHeader problem={problem} />
+        <div className="flex-1 overflow-auto p-4">
+          <ExecutionTrace
+            functionName={problem.function_name ?? ""}
+            functionSource={problem.function_source ?? ""}
+            callExpression={problem.call_expression ?? ""}
+            checkpoints={mappedCheckpoints}
+            selectedAnswers={{}}
+            onAnswerChange={(id, val) => onStudentAnswer?.({ [`checkpoint_${id}`]: val })}
+            disabled={disabled}
+          />
+        </div>
       </div>
     );
   }
 
-  // Fallback: simple code display
+  // Fallback: simple code display with header
   return (
-    <div className="space-y-3">
-      <p className="text-sm text-stone-700 whitespace-pre-wrap">{problem.problem_statement}</p>
+    <div className="flex flex-col h-full">
+      <ProblemTypeHeader problem={problem} />
       {problem.code && (
-        <pre className="bg-stone-900 text-stone-100 p-4 rounded-lg text-sm overflow-x-auto font-mono select-none ocr-noise">
-          {problem.code}
-        </pre>
+        <div className="flex-1 overflow-auto bg-[#1a1a2e] p-4">
+          <pre className="text-sm font-mono text-stone-200 whitespace-pre-wrap select-none ocr-noise">
+            {problem.code}
+          </pre>
+        </div>
       )}
     </div>
   );

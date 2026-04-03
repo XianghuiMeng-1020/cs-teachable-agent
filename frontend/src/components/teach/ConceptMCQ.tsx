@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { HelpCircle, CheckSquare, Square } from "lucide-react";
+import { motion } from "framer-motion";
+import { CheckSquare, Square } from "lucide-react";
 
 interface ConceptMCQProps {
   problemStatement: string;
@@ -23,41 +24,55 @@ export function ConceptMCQ({ problemStatement, choices, onAnswer, disabled }: Co
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-stone-200 bg-stone-50">
-        <div className="flex items-center gap-2 mb-1">
-          <HelpCircle className="w-4 h-4 text-indigo-500" />
-          <span className="text-xs font-semibold text-indigo-700 uppercase tracking-wide">
-            Concept Question
-          </span>
-        </div>
-        <p className="text-sm text-stone-700 whitespace-pre-wrap">{problemStatement}</p>
-      </div>
-
-      <div className="flex-1 overflow-auto p-4 space-y-2">
-        {choices.map((c) => {
+    <div className="space-y-3">
+      {/* Problem statement (if provided directly) */}
+      {problemStatement && (
+        <p className="text-base text-stone-700 font-medium leading-relaxed mb-4">{problemStatement}</p>
+      )}
+      
+      {/* Choices as cards */}
+      <div className="space-y-2">
+        {choices.map((c, i) => {
           const isSelected = selected.has(c.id);
           return (
-            <button
+            <motion.button
               key={c.id}
               onClick={() => toggle(c.id)}
               disabled={disabled}
-              className={`w-full flex items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all ${
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{ scale: disabled ? 1 : 1.01 }}
+              whileTap={{ scale: disabled ? 1 : 0.99 }}
+              className={`w-full flex items-start gap-3 rounded-xl border-2 p-4 text-left transition-all ${
                 isSelected
-                  ? "border-indigo-300 bg-indigo-50 text-indigo-900"
-                  : "border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50"
+                  ? "border-emerald-400 bg-emerald-50/50 shadow-sm"
+                  : "border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50/50"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              {isSelected ? (
-                <CheckSquare className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
-              ) : (
-                <Square className="w-4 h-4 text-stone-400 shrink-0 mt-0.5" />
-              )}
-              <span>{c.text}</span>
-            </button>
+              <div className={`shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-colors ${
+                isSelected ? "bg-emerald-500" : "bg-stone-200"
+              }`}>
+                {isSelected ? (
+                  <CheckSquare className="w-4 h-4 text-white" />
+                ) : (
+                  <Square className="w-4 h-4 text-stone-400" />
+                )}
+              </div>
+              <span className={`text-sm leading-relaxed pt-0.5 ${isSelected ? "text-emerald-900 font-medium" : "text-stone-700"}`}>
+                {c.text}
+              </span>
+            </motion.button>
           );
         })}
       </div>
+
+      {/* Selection hint */}
+      <p className="text-xs text-stone-400 text-center pt-2">
+        {selected.size === 0 
+          ? "Select one or more answers" 
+          : `${selected.size} option${selected.size > 1 ? 's' : ''} selected`}
+      </p>
     </div>
   );
 }
