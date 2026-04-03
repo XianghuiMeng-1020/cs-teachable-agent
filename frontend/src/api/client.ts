@@ -90,7 +90,7 @@ async function fetchWithTimeout(
   }
 }
 
-async function apiFetch(
+export async function apiFetch(
   url: string,
   init: RequestInit & { timeout?: number; skipRetry?: boolean } = {}
 ): Promise<Response> {
