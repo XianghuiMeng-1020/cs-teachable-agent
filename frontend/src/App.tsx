@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./app/providers/ProtectedRoute";
 import { AppShell } from "./app/layout/AppShell";
 import { Skeleton } from "./components/ui/Skeleton";
 import { ROUTES } from "./lib/constants";
+import { AsyncErrorBoundary, ErrorBoundary } from "./components/ErrorBoundary";
 
 const LandingPage = lazy(() => import("./pages/LandingPage").then((m) => ({ default: m.LandingPage })));
 const LoginPage = lazy(() => import("./pages/LoginPage").then((m) => ({ default: m.LoginPage })));
@@ -27,6 +28,7 @@ const AnalyticsPage = lazy(() => import("./pages/teacher/AnalyticsPage").then((m
 const AssessmentManagePage = lazy(() => import("./pages/teacher/AssessmentManagePage").then((m) => ({ default: m.AssessmentManagePage })));
 const MetricsPage = lazy(() => import("./pages/teacher/MetricsPage").then((m) => ({ default: m.MetricsPage })));
 const ProctoringPage = lazy(() => import("./pages/teacher/ProctoringPage").then((m) => ({ default: m.ProctoringPage })));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 function PageFallback() {
   return (
@@ -94,7 +96,7 @@ function App() {
           <Route path="proctoring" element={<ProctoringPage />} />
         </Route>
 
-        <Route path="*" element={<Navigate to={ROUTES.home} replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );

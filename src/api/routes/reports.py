@@ -110,9 +110,9 @@ def _get_learning_analytics(ta_id: int, user_id: int, db: DbSession) -> dict:
             "average_quality_trend": _calculate_quality_trend(teach_events),
         },
         "gamification": {
-            "points": gamification.points if gamification else 0,
+            "points": gamification.xp if gamification else 0,
             "level": gamification.level if gamification else 1,
-            "achievements_unlocked": len([a for a in (gamification.achievements or []) if a.get("unlocked")]),
+            "achievements_unlocked": len([a for a in (gamification.badges or []) if a.get("unlocked")]),
         } if gamification else None,
     }
 

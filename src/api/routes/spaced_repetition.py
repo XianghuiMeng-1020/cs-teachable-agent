@@ -1,6 +1,6 @@
 """Spaced Repetition API routes."""
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from datetime import datetime
 from typing import Optional
 
@@ -21,8 +21,8 @@ router = APIRouter(prefix="/api/spaced-repetition", tags=["spaced-repetition"])
 def create_review_schedule(
     ta_id: int,
     data: dict,
-    current_user = Depends(),
-    db = Depends(),
+    current_user: CurrentUser,
+    db: DbSession,
 ):
     """Schedule a review for a knowledge unit."""
     ta = db.query(TAInstance).filter(
@@ -49,8 +49,8 @@ def create_review_schedule(
 @router.get("/due-reviews/{ta_id}")
 def get_due_reviews_for_ta(
     ta_id: int,
-    current_user = Depends(),
-    db = Depends(),
+    current_user: CurrentUser,
+    db: DbSession,
 ):
     """Get all knowledge units due for review."""
     ta = db.query(TAInstance).filter(
@@ -95,9 +95,9 @@ def get_due_reviews_for_ta(
 @router.get("/daily-plan/{ta_id}")
 def get_daily_review_plan(
     ta_id: int,
+    current_user: CurrentUser,
+    db: DbSession,
     max_reviews: int = 20,
-    current_user = Depends(),
-    db = Depends(),
 ):
     """Get optimized daily review plan."""
     ta = db.query(TAInstance).filter(
@@ -135,8 +135,8 @@ def get_daily_review_plan(
 @router.get("/retention-stats/{ta_id}")
 def get_retention_statistics(
     ta_id: int,
-    current_user = Depends(),
-    db = Depends(),
+    current_user: CurrentUser,
+    db: DbSession,
 ):
     """Get memory retention statistics."""
     ta = db.query(TAInstance).filter(
@@ -194,8 +194,8 @@ def get_retention_statistics(
 def rate_review(
     ta_id: int,
     data: dict,
-    current_user = Depends(),
-    db = Depends(),
+    current_user: CurrentUser,
+    db: DbSession,
 ):
     """Rate a review and update schedule."""
     ta = db.query(TAInstance).filter(

@@ -19,7 +19,8 @@
     "demoHint": "Demo: demo_student / demo123",
     "noData": "No data",
     "collapse": "Collapse",
-    "profile": "Profile"
+    "profile": "Profile",
+    "more": "More"
   },
   "lang": {
     "en": "English",
@@ -361,17 +362,32 @@
     "pythonLabel": "Python",
     "pythonShort": "PY",
     "pythonDesc": "Learn Python fundamentals through teaching — variables, loops, functions, and data structures.",
-    "pythonFeatures": ["Variables & Types", "Control Flow", "Functions", "Data Structures"],
+    "pythonFeatures": [
+      "Variables & Types",
+      "Control Flow",
+      "Functions",
+      "Data Structures"
+    ],
     "pythonTime": "~2 hours",
     "sqlLabel": "Database (SQL)",
     "sqlShort": "SQL",
     "sqlDesc": "Master SQL queries by teaching — SELECT, JOINs, aggregation, and schema design.",
-    "sqlFeatures": ["SELECT Queries", "JOINs", "Aggregation", "Schema Design"],
+    "sqlFeatures": [
+      "SELECT Queries",
+      "JOINs",
+      "Aggregation",
+      "Schema Design"
+    ],
     "sqlTime": "~1.5 hours",
     "aiLabel": "AI Literacy",
     "aiShort": "AI",
     "aiDesc": "Understand AI concepts by teaching — prompt engineering, capabilities, and ethics.",
-    "aiFeatures": ["Prompt Engineering", "AI Capabilities", "Ethics & Bias", "Applications"],
+    "aiFeatures": [
+      "Prompt Engineering",
+      "AI Capabilities",
+      "Ethics & Bias",
+      "Applications"
+    ],
     "aiTime": "~1 hour"
   },
   "tutorial": {
@@ -400,37 +416,65 @@
     "dashboard": {
       "title": "Dashboard Help",
       "content": "This is your learning overview. Check progress stats, view recent activity, and quickly jump to Teach, Test, or Practice pages.",
-      "steps": ["Review your mastery progress at the top", "Use quick-action buttons to navigate", "Check recommended practice on the right"]
+      "steps": [
+        "Review your mastery progress at the top",
+        "Use quick-action buttons to navigate",
+        "Check recommended practice on the right"
+      ]
     },
     "teach": {
       "title": "Teach Page Help",
       "content": "Type your explanations in the chat on the left. The right panel shows the Teachable Agent's knowledge state in real time.",
-      "steps": ["Explain a concept clearly in the chat box", "Watch the knowledge graph update", "Check misconceptions in the sidebar"]
+      "steps": [
+        "Explain a concept clearly in the chat box",
+        "Watch the knowledge graph update",
+        "Check misconceptions in the sidebar"
+      ]
     },
     "test": {
       "title": "Test Page Help",
       "content": "Select a problem or click 'Run All'. The Teachable Agent will attempt to write code based on what you've taught.",
-      "steps": ["Choose a problem from the dropdown", "Click 'Run Single Test' or 'Run All'", "Review the Teachable Agent's code and test results"]
+      "steps": [
+        "Choose a problem from the dropdown",
+        "Click 'Run Single Test' or 'Run All'",
+        "Review the Teachable Agent's code and test results"
+      ]
     },
     "practice": {
       "title": "Practice Page Help",
       "content": "Choose an exercise type (Parsons Puzzle, Fill-in-the-Blank, Execution Trace) and complete interactive exercises to reinforce understanding.",
-      "steps": ["Browse available exercises", "Select one to start", "Submit your answer and review feedback"]
+      "steps": [
+        "Browse available exercises",
+        "Select one to start",
+        "Submit your answer and review feedback"
+      ]
     },
     "mastery": {
       "title": "Mastery Page Help",
       "content": "The knowledge graph shows all concepts. Green = mastered, Yellow = in progress, Red = misconception detected.",
-      "steps": ["Review the knowledge graph overview", "Check per-concept mastery bars", "Read the learning insights at the bottom"]
+      "steps": [
+        "Review the knowledge graph overview",
+        "Check per-concept mastery bars",
+        "Read the learning insights at the bottom"
+      ]
     },
     "history": {
       "title": "History Page Help",
       "content": "View all your teaching and testing sessions chronologically.",
-      "steps": ["Browse events in the timeline", "Click an event for details", "Filter by event type if needed"]
+      "steps": [
+        "Browse events in the timeline",
+        "Click an event for details",
+        "Filter by event type if needed"
+      ]
     },
     "analytics": {
       "title": "Analytics Page Help",
       "content": "Deep learning analytics: pace, cognitive load, concept relations, achievements. Helps you find learning bottlenecks.",
-      "steps": ["Switch between tabs for different insights", "Check your learning pace trends", "Explore the 3D knowledge graph"]
+      "steps": [
+        "Switch between tabs for different insights",
+        "Check your learning pace trends",
+        "Explore the 3D knowledge graph"
+      ]
     }
   },
   "chat": {

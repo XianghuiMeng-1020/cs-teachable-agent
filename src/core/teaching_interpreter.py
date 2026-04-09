@@ -23,7 +23,19 @@ def _default_quality() -> dict[str, Any]:
         "quality_clarity": 0.6,
         "misconception_correction": False,
         "interpretation_class": INTERPRETATION_AMBIGUOUS,
+        "needs_clarification": False,
+        "confidence": 0.5,
     }
+
+
+def _assess_confidence(quality_score: float, completeness: float, clarity: float) -> tuple[bool, float]:
+    """
+    M-83: Determine if TA needs clarification based on quality metrics.
+    Returns (needs_clarification, confidence_level).
+    """
+    confidence = (quality_score + completeness + clarity) / 3
+    needs_clarification = confidence < 0.4 or (quality_score < 0.3 and completeness < 0.4)
+    return needs_clarification, round(confidence, 2)
 
 
 def interpret_teaching(
@@ -88,6 +100,12 @@ def _parse_llm_interpretation(raw: str, valid_ids: set[str]) -> dict | None:
             interp = data.get("interpretation_class", INTERPRETATION_CORRECT if units else INTERPRETATION_AMBIGUOUS)
             if interp not in (INTERPRETATION_CORRECT, INTERPRETATION_INCORRECT, INTERPRETATION_AMBIGUOUS):
                 interp = INTERPRETATION_AMBIGUOUS
+            # M-83: Assess confidence and determine if clarification is needed
+            needs_clar, confidence = _assess_confidence(
+                float(quality),
+                float(comp) if isinstance(comp, (int, float)) else 0.5,
+                float(clarity) if isinstance(clarity, (int, float)) else 0.6,
+            )
             return {
                 "topic_taught": topic or "Teaching",
                 "knowledge_units_taught": units[:20],
@@ -97,6 +115,8 @@ def _parse_llm_interpretation(raw: str, valid_ids: set[str]) -> dict | None:
                 "quality_clarity": float(clarity) if isinstance(clarity, (int, float)) else 0.6,
                 "misconception_correction": bool(mis_corr),
                 "interpretation_class": interp,
+                "needs_clarification": needs_clar,
+                "confidence": confidence,
             }
         except json.JSONDecodeError:
             pass
@@ -122,6 +142,8 @@ def _parse_llm_interpretation(raw: str, valid_ids: set[str]) -> dict | None:
             "quality_clarity": 0.7,
             "misconception_correction": False,
             "interpretation_class": INTERPRETATION_CORRECT if units else INTERPRETATION_AMBIGUOUS,
+            "needs_clarification": False,
+            "confidence": 0.7,
         }
     return None
 
@@ -170,6 +192,9 @@ def _heuristic_interpret(student_input: str, valid_ids: set[str]) -> dict:
     if not units and valid_ids:
         units = [next(iter(valid_ids))]
     score = 0.6 if units else 0.3
+    comp = 0.5 if units else 0.3
+    clarity = 0.6
+    needs_clar, confidence = _assess_confidence(score, comp, clarity)
     return {
         "topic_taught": (student_input or "Teaching")[:200],
         "knowledge_units_taught": units[:20],
@@ -179,4 +204,6 @@ def _heuristic_interpret(student_input: str, valid_ids: set[str]) -> dict:
         "quality_clarity": 0.6,
         "misconception_correction": mis_corr,
         "interpretation_class": INTERPRETATION_CORRECT if units else INTERPRETATION_AMBIGUOUS,
+        "needs_clarification": needs_clar,
+        "confidence": confidence,
     }

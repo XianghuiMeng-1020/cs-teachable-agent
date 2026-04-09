@@ -5,8 +5,14 @@ export const ROUTES = {
   teach: "/teach",
   test: "/test",
   practice: "/practice",
+  practiceItem: (itemId: number | string) => `/practice/${itemId}`,
   mastery: "/mastery",
   history: "/history",
+  // M-40: Additional student routes
+  learningAnalytics: "/learning-analytics",
+  review: "/review",
+  report: "/report",
+  collaborate: "/collaborate",
   teacher: {
     overview: "/teacher",
     students: "/teacher/students",

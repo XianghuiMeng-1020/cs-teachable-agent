@@ -8,11 +8,39 @@ from __future__ import annotations
 
 from src.llm.client import llm_completion
 
-# Every QUESTIONER_INTERVAL-th message (1-based), TA is in questioner mode
+# Base interval; dynamically adjusted per-turn by context quality.
 QUESTIONER_INTERVAL = 3
 
 
-def should_ask_question(conversation_message_count: int) -> bool:
+def _dynamic_interval(
+    teaching_note: str = "",
+    learned_unit_ids: list[str] | None = None,
+    active_misconceptions: list[str] | None = None,
+) -> int:
+    """
+    Compute dynamic question interval:
+    - Ask more frequently when there are active misconceptions.
+    - Ask less frequently when teaching notes are detailed and stable.
+    """
+    learned_unit_ids = learned_unit_ids or []
+    active_misconceptions = active_misconceptions or []
+    note_len = len((teaching_note or "").strip())
+    if active_misconceptions:
+        return 2
+    if note_len >= 180 and len(learned_unit_ids) >= 4:
+        return 4
+    if note_len >= 80:
+        return 3
+    return 2
+
+
+def should_ask_question(
+    conversation_message_count: int,
+    *,
+    teaching_note: str = "",
+    learned_unit_ids: list[str] | None = None,
+    active_misconceptions: list[str] | None = None,
+) -> bool:
     """
     True if this turn should be in Questioner mode (every QUESTIONER_INTERVAL turns).
     conversation_message_count = number of messages so far (student + TA) before this response.
@@ -20,7 +48,12 @@ def should_ask_question(conversation_message_count: int) -> bool:
     """
     if conversation_message_count < 0:
         return False
-    return (conversation_message_count + 1) % QUESTIONER_INTERVAL == 0
+    interval = _dynamic_interval(
+        teaching_note=teaching_note,
+        learned_unit_ids=learned_unit_ids,
+        active_misconceptions=active_misconceptions,
+    )
+    return (conversation_message_count + 1) % max(1, interval) == 0
 
 
 def generate_thought_provoking_question(
@@ -69,6 +102,7 @@ def maybe_append_questioner_response(
     teaching_note: str,
     domain: str,
     learned_unit_ids: list[str],
+    active_misconceptions: list[str] | None,
     conversation_history: list[dict] | None,
     *,
     phase: str = "teach",
@@ -77,7 +111,12 @@ def maybe_append_questioner_response(
     If this turn is a Questioner turn, append a thought-provoking question to base_response.
     Returns the final TA response string.
     """
-    if not should_ask_question(conversation_message_count):
+    if not should_ask_question(
+        conversation_message_count,
+        teaching_note=teaching_note,
+        learned_unit_ids=list(learned_unit_ids),
+        active_misconceptions=active_misconceptions or [],
+    ):
         return base_response
     count = len(conversation_history) if conversation_history else 0
     question = generate_thought_provoking_question(

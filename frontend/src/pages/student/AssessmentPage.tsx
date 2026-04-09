@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Send, RotateCcw, Loader2, CheckCircle, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getAssessmentItem, gradeAssessmentItem, type AssessmentItemDetail, type GradeResponse } from "@/api/assessment";
 import { ParsonsBlock, DropdownBlanks, ExecutionTrace, HintPanel } from "@/components/assessment";
 import { AntiCheatShell } from "@/components/assessment/AntiCheatShell";
 import { AntiCaptureOverlay } from "@/components/assessment/AntiCaptureOverlay";
+import { QuickStartGuide } from "@/components/assessment/QuickStartGuide";
 import { Button } from "@/components/ui/Button";
 import { emitTelemetry, generateAttemptId, getSessionId } from "@/lib/telemetry";
 import type { FocusLossEvent } from "@/components/assessment/AntiCheatShell";
@@ -19,6 +20,7 @@ const ITEM_TYPE_LABELS: Record<string, string> = {
 export function AssessmentPage() {
   const { itemId } = useParams<{ itemId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [item, setItem] = useState<AssessmentItemDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -26,6 +28,10 @@ export function AssessmentPage() {
   const [attemptNumber, setAttemptNumber] = useState(1);
   const [startTime] = useState(Date.now());
   const [hintsUsed, setHintsUsed] = useState(0);
+  const sessionState = (location.state as { itemIds?: number[]; currentIndex?: number } | null) ?? null;
+  const itemIds = sessionState?.itemIds ?? [];
+  const currentIndex = sessionState?.currentIndex ?? -1;
+  const nextItemId = currentIndex >= 0 && currentIndex < itemIds.length - 1 ? itemIds[currentIndex + 1] : null;
 
   const [selectedBlocks, setSelectedBlocks] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
@@ -65,11 +71,11 @@ export function AssessmentPage() {
       });
       setFeedback(result);
       setAttemptNumber((n) => n + 1);
-      const isCorrectResult = result.correct || result.score === result.expected_count;
+      const isCorrectResult = result.correct;
       emitTelemetry(
         isCorrectResult ? "graded_correct" : "graded_incorrect",
         {
-          score: result.score ?? result.correct_count,
+          score: result.score,
           expected: result.expected_count,
           durationMs: Date.now() - startTime,
           focusLossCount: focusLossCountRef.current,
@@ -154,9 +160,16 @@ export function AssessmentPage() {
             )}
           </div>
         </div>
+        {currentIndex >= 0 && itemIds.length > 0 && (
+          <span className="ml-auto rounded-md border border-stone-200 bg-white px-2 py-1 text-xs font-medium text-stone-600">
+            Session {currentIndex + 1}/{itemIds.length}
+          </span>
+        )}
       </div>
 
       {/* Prompt */}
+      <QuickStartGuide />
+
       <div className="rounded-xl border border-stone-200/80 bg-stone-50 px-5 py-4">
         <p className="text-sm leading-relaxed text-stone-700 whitespace-pre-wrap">{item.prompt}</p>
       </div>
@@ -177,6 +190,7 @@ export function AssessmentPage() {
         {item.item_type === "parsons" && item.options && (
           <ParsonsBlock
             options={item.options}
+            distractors={item.distractors}
             requiredBlockCount={item.required_block_count || 0}
             selectedBlocks={selectedBlocks}
             onSelectedChange={(blocks) => { setSelectedBlocks(blocks); setFeedback(null); }}
@@ -215,6 +229,7 @@ export function AssessmentPage() {
         selectedAnswers={item.item_type !== "parsons" ? selectedAnswers : undefined}
         lastFeedback={feedback as unknown as Record<string, unknown>}
         attemptNumber={attemptNumber}
+        onHintUsed={() => setHintsUsed((prev) => prev + 1)}
       />
 
       {/* Feedback banner */}
@@ -236,9 +251,14 @@ export function AssessmentPage() {
             </p>
             <p className={cn("mt-0.5 text-sm", isCorrect ? "text-emerald-700" : "text-amber-700")}>
               {isCorrect
-                ? `Great work! You got ${feedback.score ?? "all"} correct.`
+                ? `Great work! You got ${feedback.correct_count} of ${feedback.expected_count} correct.`
                 : `${feedback.correct_count ?? 0} of ${feedback.expected_count ?? "?"} correct. Try again or use a hint.`}
             </p>
+            {!!feedback.next_action && (
+              <p className="mt-1 text-xs text-stone-600">
+                Next action: {feedback.next_action}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -256,10 +276,21 @@ export function AssessmentPage() {
         {isCorrect ? (
           <Button
             icon={ChevronRight}
-            onClick={() => navigate("/practice")}
+            onClick={() => {
+              if (nextItemId != null) {
+                navigate(`/practice/${nextItemId}`, {
+                  state: {
+                    itemIds,
+                    currentIndex: currentIndex + 1,
+                  },
+                });
+              } else {
+                navigate("/practice");
+              }
+            }}
             className="bg-emerald-600 hover:bg-emerald-700"
           >
-            Next Exercise
+            {nextItemId != null ? "Next Exercise" : "Back to Practice"}
           </Button>
         ) : (
           <Button

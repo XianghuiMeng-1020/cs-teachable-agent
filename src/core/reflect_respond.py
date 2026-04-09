@@ -10,7 +10,7 @@ import json
 import re
 from typing import Any
 
-from src.llm.client import llm_completion, llm_completion_stream, llm_completion_parallel
+from src.llm.client import llm_completion, llm_completion_stream
 
 
 def _last_n_messages(conversation_history: list[dict], student_input: str, n: int = 5) -> list[dict]:
@@ -115,9 +115,15 @@ def retrieve_relevant(
     code_impl = store.get("code_implementations", [])
     if not facts and not code_impl:
         return {"facts": [], "code_implementations": []}
+    learned_unit_ids = learned_unit_ids or []
+    active_misconceptions = active_misconceptions or []
     context = f"Topic: {teaching_topic}. Student said: {(teaching_note or '')[:200]}"
     prompt = f"""Given this teaching context in {domain}:
 {context}
+
+Learner constraints:
+- Learned unit IDs (do not go beyond these): {", ".join(sorted(learned_unit_ids)[:20]) or "None"}
+- Active misconceptions to focus/clarify: {", ".join(active_misconceptions[:20]) or "None"}
 
 From the following stored knowledge, list only the items that are relevant to responding as a learner (restating or asking about this topic).
 Reply with JSON: {{"relevant_facts": [indices or sublist], "relevant_code": [indices or sublist]}}
@@ -160,8 +166,22 @@ JSON:"""
             if any(w in f.lower() for w in topic_lower.split()[:5]):
                 relevant_facts.append(f)
                 break
+    if active_misconceptions and facts:
+        mis_matches = [f for f in facts if any(mid.lower() in f.lower() for mid in active_misconceptions)]
+        for f in mis_matches:
+            if f not in relevant_facts:
+                relevant_facts.append(f)
     if not relevant_code and code_impl and (teaching_topic or teaching_note):
         relevant_code = code_impl[-2:]
+    if learned_unit_ids:
+        allowed_tokens = {u.lower() for u in learned_unit_ids}
+        filtered = []
+        for fact in relevant_facts:
+            lowered = fact.lower()
+            if any(tok in lowered for tok in allowed_tokens) or len(allowed_tokens) == 0:
+                filtered.append(fact)
+        if filtered:
+            relevant_facts = filtered
     return {"facts": relevant_facts[:10], "code_implementations": relevant_code[:5]}
 
 
@@ -175,6 +195,7 @@ def generate_constrained_response(
     conversation_history: list[dict] | None = None,
     *,
     ask_why_or_how: bool = True,
+    prompt_rules: str | None = None,
 ) -> str:
     """
     Step 4 (Respond): Generate TA response using ONLY retrieved knowledge.
@@ -203,6 +224,10 @@ def generate_constrained_response(
             for t in turns
         )
 
+    extra_rules = ""
+    if prompt_rules:
+        extra_rules = f"\nAdditional behavior rules (must follow):\n{prompt_rules[:1800]}\n"
+
     prompt = f"""You are a novice learner in {domain}. The student just taught you something.
 Strict: You may ONLY use the following knowledge in your response. Do not add external knowledge.
 
@@ -214,6 +239,7 @@ Topic the student just taught: {teaching_topic}
 What they said: {(teaching_note or '')[:300]}
 
 {history_block}
+{extra_rules}
 
 Write 1-2 short sentences as the learner. Restate what you think you learned or ask a short "why" or "how" question.
 Output only the TA reply, nothing else."""
@@ -232,6 +258,44 @@ Output only the TA reply, nothing else."""
     return "I think I'm starting to get it. Can you give me an example?"
 
 
+def _emotional_tone_context(
+    teaching_note: str,
+    quality_score: float | None,
+    has_misconceptions: bool,
+    learned_count: int,
+) -> str:
+    """Generate emotional tone guidance based on teaching context."""
+    tone_rules = []
+    # M-82: Emotional response based on context
+    if quality_score is not None:
+        if quality_score >= 0.8:
+            tone_rules.append("Show genuine enthusiasm and gratitude: 'Ah, I see! Thank you for explaining so clearly.'")
+        elif quality_score >= 0.5:
+            tone_rules.append("Show cautious optimism: 'I think I'm getting it... let me see if I understand.'")
+        else:
+            tone_rules.append("Express genuine confusion and ask for help: 'I'm a bit confused about this. Could you explain it differently?'")
+    if has_misconceptions:
+        tone_rules.append("When confused by a misconception, express uncertainty honestly: 'I tried what you said but it doesn't seem right...'")
+    if learned_count == 0:
+        tone_rules.append("Show curiosity as a complete beginner: 'I'm new to this, so please bear with me!'")
+    return "\n".join(tone_rules) if tone_rules else "Be friendly and show genuine curiosity about learning."
+
+
+def _dynamic_max_tokens(teaching_note: str, has_code: bool, quality_score: float | None) -> int:
+    """M-84: Dynamic reply length based on context."""
+    note_len = len(teaching_note or "")
+    # Simple confirmation should be short
+    if note_len < 20 and not has_code:
+        return 60
+    # Detailed explanation with code can be longer
+    if has_code and note_len > 100:
+        return 200
+    # Good quality teaching can have medium response
+    if quality_score and quality_score >= 0.7:
+        return 100
+    return 120
+
+
 def generate_constrained_response_stream(
     retrieved: dict,
     teaching_topic: str,
@@ -242,8 +306,10 @@ def generate_constrained_response_stream(
     conversation_history: list[dict] | None = None,
     *,
     ask_why_or_how: bool = True,
+    prompt_rules: str | None = None,
+    quality_score: float | None = None,
 ):
-    """Step 4 (Respond) as a generator yielding text chunks."""
+    """Step 4 (Respond) as a generator yielding text chunks with thinking steps (M-81)."""
     facts = retrieved.get("facts", [])
     code_impl = retrieved.get("code_implementations", [])
     learned_str = ", ".join(sorted(learned_unit_ids)[:20])
@@ -265,6 +331,36 @@ def generate_constrained_response_stream(
             f"{t.get('role', '')}: {(t.get('content') or '')[:150]}"
             for t in turns
         )
+    extra_rules = ""
+    if prompt_rules:
+        extra_rules = f"\nAdditional behavior rules (must follow):\n{prompt_rules[:1800]}\n"
+
+    # M-82: Emotional tone context
+    has_misconceptions = bool(active_misconceptions)
+    emotional_context = _emotional_tone_context(teaching_note, quality_score, has_misconceptions, len(learned_unit_ids))
+
+    # M-84: Dynamic length control
+    has_code = bool(code_impl) or "```" in (teaching_note or "") or "code" in (teaching_topic or "").lower()
+    max_tokens = _dynamic_max_tokens(teaching_note, has_code, quality_score)
+
+    # M-81: Add thinking process as a separate initial chunk
+    thinking_messages = [
+        "🤔 Let me think about what you just taught me...",
+        "💭 I'm trying to understand this concept...",
+        "📚 Let me recall what I've learned before...",
+    ]
+    # Select thinking message based on context
+    if not facts and not code_impl:
+        thinking_msg = "🤔 I'm not sure I have enough knowledge about this yet..."
+    elif has_misconceptions:
+        thinking_msg = "🤔 Hmm, this seems a bit confusing based on what I understood before..."
+    elif quality_score and quality_score >= 0.8:
+        thinking_msg = "💡 Oh! This is starting to make sense to me!"
+    else:
+        thinking_msg = thinking_messages[len(teaching_note or "") % len(thinking_messages)]
+
+    yield f"[THINKING]{thinking_msg}[/THINKING]"
+
     prompt = f"""You are a novice learner in {domain}. The student just taught you something.
 Strict: You may ONLY use the following knowledge in your response. Do not add external knowledge.
 
@@ -276,6 +372,10 @@ Topic the student just taught: {teaching_topic}
 What they said: {(teaching_note or '')[:300]}
 
 {history_block}
+{extra_rules}
+
+Emotional tone guidance:
+{emotional_context}
 
 Write 1-2 short sentences as the learner. Restate what you think you learned or ask a short "why" or "how" question.
 Output only the TA reply, nothing else."""
@@ -283,7 +383,7 @@ Output only the TA reply, nothing else."""
         prompt += "\nEnd with a short 'why' or 'how' question if natural."
 
     full: list[str] = []
-    for delta in llm_completion_stream(prompt, max_tokens=120, temperature=0.4):
+    for delta in llm_completion_stream(prompt, max_tokens=max_tokens, temperature=0.4):
         full.append(delta)
         yield delta
     out = "".join(full).strip() if full else ""
@@ -291,8 +391,9 @@ Output only the TA reply, nothing else."""
         out = "I'm not sure how to do that. Could you explain it to me?"
     elif not out:
         out = "I think I'm starting to get it. Can you give me an example?"
-    if len(out) > 400:
-        out = out[:397].rsplit(".", 1)[0] + "."
+    # Dynamic length limit based on complexity
+    if len(out) > max_tokens:
+        out = out[:max_tokens-3].rsplit(".", 1)[0] + "."
 
 
 def run_reflect_respond_pipeline(
@@ -322,25 +423,19 @@ def run_reflect_respond_pipeline(
             store,
         )
 
-    # Parallel optimization: run Steps 1 (extract) and 3 (retrieve on current store)
-    # concurrently. Step 3 uses the existing store (slightly stale but 95%+ accurate).
-    from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        future_extract = pool.submit(extract_new_knowledge, messages, domain)
-        future_retrieve = pool.submit(
-            retrieve_relevant,
-            store,
-            topic,
-            note,
-            domain,
-            learned_unit_ids=learned_unit_ids,
-            active_misconceptions=active_misconceptions,
-        )
-        extracted = future_extract.result()
-        retrieved = future_retrieve.result()
-
+    # Step 1: Extract
+    extracted = extract_new_knowledge(messages, domain)
     # Step 2: Update store with extracted knowledge
     store = update_reflection_store(store, extracted)
+    # Step 3: Retrieve from the updated store (avoids stale retrieval)
+    retrieved = retrieve_relevant(
+        store,
+        topic,
+        note,
+        domain,
+        learned_unit_ids=learned_unit_ids,
+        active_misconceptions=active_misconceptions,
+    )
 
     # Step 4: Respond – generate constrained response
     response = generate_constrained_response(

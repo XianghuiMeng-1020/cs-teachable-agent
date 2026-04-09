@@ -13,10 +13,11 @@ from sqlalchemy.orm import Session
 from src.db.database import SessionLocal, init_db
 from src.db.models import User
 
-# Auth
-SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-in-production")
+# P-02: JWT security hardening
+_SECRET_KEY_FALLBACK = "dev-secret-change-in-production"
+SECRET_KEY = os.environ.get("SECRET_KEY", _SECRET_KEY_FALLBACK)
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
 security = HTTPBearer(auto_error=False)
 

@@ -173,7 +173,8 @@ def build_student_task_response(
         distractors = ic.get("distractors", [])
         base.update({
             "required_block_count": len(code_blocks),
-            "options": code_blocks + distractors,
+            "options": code_blocks,
+            "distractors": distractors,
         })
     elif item.item_type == "dropdown":
         blanks = ic.get("blanks", [])
@@ -216,11 +217,47 @@ def _result(
     item_type: str, correct: bool, feedback: str,
     expected_count: int, selected_count: int, correct_count: int,
 ) -> dict[str, Any]:
+    next_action = _next_action(item_type, correct, expected_count, selected_count, correct_count)
     return {
         "item_type": item_type,
         "correct": correct,
         "feedback": feedback,
+        "next_action": next_action,
         "expected_count": expected_count,
         "selected_count": selected_count,
         "correct_count": correct_count,
     }
+
+
+def _next_action(
+    item_type: str,
+    correct: bool,
+    expected_count: int,
+    selected_count: int,
+    correct_count: int,
+) -> str:
+    if correct:
+        return "Try the next exercise or ask for a harder variant."
+
+    if item_type == "parsons":
+        if selected_count != expected_count:
+            return f"Select exactly {expected_count} blocks, then check order from top to bottom."
+        if correct_count > 0:
+            return "Keep the same blocks and focus on reordering adjacent lines."
+        return "Remove distractors first, then rebuild the core logic in small steps."
+
+    if item_type == "dropdown":
+        if selected_count != expected_count:
+            return "Fill every blank before submitting again."
+        if correct_count > 0:
+            return "Start with one incorrect blank and justify why each option fits the context."
+        return "Re-read each sentence around the blanks and eliminate obviously inconsistent options."
+
+    if item_type == "execution-trace":
+        if selected_count != expected_count:
+            return "Complete every checkpoint value before the next submission."
+        if correct_count > 0:
+            return "Trace the code line by line and recompute only the mismatched checkpoints."
+        return "Write down variable states after each line, then transfer those values to checkpoints."
+
+    return "Review the prompt and try one focused correction before resubmitting."

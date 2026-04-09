@@ -153,7 +153,8 @@ def get_room_participants(
             if ta:
                 tracker = get_tracker_for_ta(ta)
                 learned_count = len(tracker.get_learned_units())
-                total_kus = len(ta.domain_adapter.load_knowledge_units())
+                adapter = get_domain_adapter(ta.domain_id)
+                total_kus = len(adapter.load_knowledge_units())
             else:
                 learned_count = 0
                 total_kus = 0
@@ -179,7 +180,7 @@ def get_room_participants(
                 "percentage": round((learned_count / max(1, total_kus)) * 100, 1),
             },
             "gamification": {
-                "points": gamification.points if gamification else 0,
+                "points": gamification.xp if gamification else 0,
                 "level": gamification.level if gamification else 1,
             } if gamification else None,
         })
@@ -325,7 +326,7 @@ def get_collaboration_leaderboard(
             "contribution_score": total_score or 0,
             "rooms_joined": rooms_joined or 0,
             "level": gamification.level if gamification else 1,
-            "points": gamification.points if gamification else 0,
+            "points": gamification.xp if gamification else 0,
         })
     
     return {

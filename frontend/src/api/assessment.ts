@@ -63,6 +63,7 @@ export interface AssessmentItemDetail {
   // parsons
   required_block_count?: number;
   options?: string[];
+  distractors?: string[];
   // dropdown
   required_blank_count?: number;
   prompt_template?: string;
@@ -79,6 +80,8 @@ export interface GradeResponse {
   item_type: string;
   correct: boolean;
   feedback: string;
+  next_action: string;
+  score: number;
   expected_count: number;
   selected_count: number;
   correct_count: number;
@@ -266,11 +269,45 @@ export interface MetricsDashboardData {
     low_ai_items: number;
     avg_ai_pass_rate: number | null;
   }[];
+  query_overview: {
+    query_id: string;
+    total_items: number;
+    typed_items: number;
+    low_ai_items: number;
+    avg_ai_pass_rate: number | null;
+    student_attempts: number;
+    student_pass_rate: number | null;
+  }[];
+  pipeline_gates: {
+    generated_total: number;
+    gen_consistency_passed: number;
+    q_testsuite_passed: number;
+    q_context_passed: number;
+    low_ai_50_items: number;
+    student_eval_items: number;
+    student_pass_50_items: number;
+  };
+  hardest_items: {
+    item_id: string;
+    title: string;
+    item_type: string;
+    attempts: number;
+    pass_rate: number;
+  }[];
+  easiest_items: {
+    item_id: string;
+    title: string;
+    item_type: string;
+    attempts: number;
+    pass_rate: number;
+  }[];
   telemetry: {
     available: boolean;
     total_events: number;
     focus_loss_count: number;
     resume_count: number;
+    avg_attempt_duration_ms: number | null;
+    avg_attempt_score: number | null;
     event_breakdown: { event_type: string; count: number }[];
   };
 }

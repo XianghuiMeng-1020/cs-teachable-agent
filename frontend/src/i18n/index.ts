@@ -8,6 +8,20 @@ import zhTW from "./locales/zh-TW.json";
 
 const STORAGE_KEY = "arts-cs-language";
 
+// M-48: Map i18n language codes to HTML lang attribute values
+const languageCodeMap: Record<string, string> = {
+  en: "en",
+  "zh-CN": "zh-CN",
+  "zh-TW": "zh-TW",
+};
+
+// M-48: Update HTML lang attribute when language changes
+function updateHtmlLang(lng: string) {
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = languageCodeMap[lng] || lng;
+  }
+}
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -25,6 +39,10 @@ i18n
       caches: ["localStorage"],
     },
   });
+
+// M-48: Set initial language and listen for changes
+updateHtmlLang(i18n.language);
+i18n.on("languageChanged", updateHtmlLang);
 
 export default i18n;
 export { STORAGE_KEY };

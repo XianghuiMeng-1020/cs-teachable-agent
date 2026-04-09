@@ -2,8 +2,8 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, MessageCircle, AlertCircle, CheckCircle, BarChart3, BookOpen, Lightbulb, Sparkles, Bot, ChevronDown, Command } from "lucide-react";
-import { teach, teachStream, getMessages, analyzeTeaching } from "@/api/client";
+import { Send, AlertCircle, CheckCircle, BarChart3, BookOpen, Lightbulb, Sparkles, Bot, ChevronDown } from "lucide-react";
+import { teachStream, getMessages, analyzeTeaching, getProactiveCheckin } from "@/api/client";
 import { Button } from "@/components/ui/Button";
 import { MessageBubble } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
@@ -14,7 +14,7 @@ import { useTypingCadence } from "@/components/assessment/AntiCheatShell";
 import { emitTelemetry } from "@/lib/telemetry";
 
 export interface ChatMessage {
-  role: "student" | "ta";
+  role: "student" | "ta" | "thinking";
   content: string;
   timestamp?: string;
   metadata?: {
@@ -23,6 +23,7 @@ export interface ChatMessage {
     failed?: boolean;
     lastInput?: string;
     streaming?: boolean;
+    proactive?: boolean;
   };
 }
 
@@ -131,14 +132,9 @@ function QualityIndicator({
 
 // Enhanced keyboard shortcut hint with icons
 function KeyboardHint() {
-  const isMac = typeof navigator !== "undefined" && navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-
   return (
     <div className="flex items-center gap-2 text-[10px] text-stone-400 dark:text-stone-500 mt-1.5">
       <span className="flex items-center gap-1">
-        <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
-          {isMac ? "⌘" : "Ctrl"}
-        </kbd>
         <kbd className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 font-mono text-[9px]">
           Enter
         </kbd>
@@ -264,6 +260,8 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastCheckRef = useRef<string>("");
   const sendTimestampRef = useRef<number>(0);
+  const lastActivityRef = useRef<number>(Date.now());
+  const lastProactiveAtRef = useRef<number>(0);
   const { textareaRef: inputRef, rows, adjustHeight } = useAutoResizeTextarea(MIN_INPUT_ROWS, MAX_INPUT_ROWS);
 
   // Anti-cheat: detect rapid paste-like typing
@@ -341,6 +339,35 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
+  useEffect(() => {
+    if (!taId) return;
+    const timer = setInterval(async () => {
+      if (loading) return;
+      if (input.trim()) return;
+      if (messages.length === 0) return;
+      const now = Date.now();
+      if (now - lastActivityRef.current < 60000) return;
+      if (now - lastProactiveAtRef.current < 120000) return;
+      try {
+        const res = await getProactiveCheckin(taId);
+        if (!res.message) return;
+        setLocalMessages((m) => [
+          ...m,
+          {
+            role: "ta",
+            content: res.message,
+            timestamp: formatRelative(new Date().toISOString()),
+            metadata: { proactive: true },
+          },
+        ]);
+        lastProactiveAtRef.current = Date.now();
+      } catch {
+        // ignore proactive checkin errors
+      }
+    }, 15000);
+    return () => clearInterval(timer);
+  }, [taId, loading, input, messages.length]);
+
   const handleCheckQuality = async () => {
     if (!taId || !input.trim()) return;
     setIsCheckingQuality(true);
@@ -359,6 +386,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     const newValue = e.target.value;
     if (newValue.length <= MAX_INPUT_LENGTH) {
       setInput(newValue);
+      lastActivityRef.current = Date.now();
       adjustHeight(newValue);
       if (Math.abs(newValue.length - (lastCheckRef.current?.length ?? 0)) > 10) {
         debouncedQualityCheck(newValue);
@@ -369,6 +397,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
   const handleSend = async () => {
     if (!taId || !input.trim()) return;
     const text = input.trim();
+    lastActivityRef.current = Date.now();
     trackResponseTime(sendTimestampRef.current);
     sendTimestampRef.current = Date.now();
     setInput("");
@@ -381,8 +410,14 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     ]);
     setLoading(true);
     const streamedContent = { current: "" };
+    const thinkingRef = { current: "" };
     setLocalMessages((m) => [
       ...m,
+      {
+        role: "thinking",
+        content: "🤔 TA is thinking...",
+        timestamp: formatRelative(new Date().toISOString()),
+      },
       {
         role: "ta",
         content: "",
@@ -397,25 +432,40 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
           streamedContent.current += chunk;
           setLocalMessages((prev) => {
             const next = [...prev];
-            const last = next[next.length - 1];
-            if (last?.role === "ta" && last.metadata?.streaming) {
-              next[next.length - 1] = { ...last, content: streamedContent.current };
+            // Find the TA streaming message (skip thinking message)
+            const taIdx = next.findIndex((m, i) => i > 0 && m.role === "ta" && m.metadata?.streaming);
+            if (taIdx !== -1) {
+              next[taIdx] = { ...next[taIdx], content: streamedContent.current };
+            }
+            return next;
+          });
+        },
+        onThinking: (thinkingText) => {
+          thinkingRef.current = thinkingText;
+          setLocalMessages((prev) => {
+            const next = [...prev];
+            const thinkingIdx = next.findIndex((m) => m.role === "thinking");
+            if (thinkingIdx !== -1) {
+              next[thinkingIdx] = { ...next[thinkingIdx], content: thinkingText };
             }
             return next;
           });
         },
       });
+      lastActivityRef.current = Date.now();
       setLocalMessages((m) => {
         const next = [...m];
-        const last = next[next.length - 1];
-        if (last?.role === "ta" && last.metadata?.streaming) {
-          next[next.length - 1] = {
-            ...last,
-            content: res.ta_response ?? last.content,
+        // Remove thinking message and update TA message
+        const filtered = next.filter((msg) => msg.role !== "thinking");
+        const taIdx = filtered.findIndex((m) => m.role === "ta" && m.metadata?.streaming);
+        if (taIdx !== -1) {
+          filtered[taIdx] = {
+            ...filtered[taIdx],
+            content: res.ta_response ?? filtered[taIdx].content,
             metadata: { interpreted_units: res.interpreted_units },
           };
         }
-        return next;
+        return filtered;
       });
       if (res.code_modification) {
         window.dispatchEvent(new CustomEvent("ta-code-modification", {
@@ -433,12 +483,14 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
       const errMsg = "Error: " + (err instanceof Error ? err.message : "Failed");
       setLocalMessages((m) => {
         const next = [...m];
-        const last = next[next.length - 1];
-        if (last?.role === "ta" && last.metadata?.streaming) {
-          next[next.length - 1] = { ...last, content: errMsg, metadata: { failed: true, lastInput: text } };
-          return next;
+        // Remove thinking message and update TA message
+        const filtered = next.filter((msg) => msg.role !== "thinking");
+        const taIdx = filtered.findIndex((m) => m.role === "ta" && m.metadata?.streaming);
+        if (taIdx !== -1) {
+          filtered[taIdx] = { ...filtered[taIdx], content: errMsg, metadata: { failed: true, lastInput: text } };
+          return filtered;
         }
-        return [...next, { role: "ta" as const, content: errMsg, timestamp: formatRelative(new Date().toISOString()), metadata: { failed: true, lastInput: text } }];
+        return [...filtered, { role: "ta" as const, content: errMsg, timestamp: formatRelative(new Date().toISOString()), metadata: { failed: true, lastInput: text } }];
       });
     } finally {
       setLoading(false);
@@ -458,20 +510,50 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
     if (!taId || !lastInput.trim()) return;
     setLocalMessages((m) => m.slice(0, -2));
     setLoading(true);
+    lastActivityRef.current = Date.now();
     const studentMsg: ChatMessage = {
       role: "student",
       content: lastInput,
       timestamp: formatRelative(new Date().toISOString()),
     };
-    teach(taId, lastInput)
+    const streamedContent = { current: "" };
+    setLocalMessages((m) => [
+      ...m,
+      studentMsg,
+      {
+        role: "ta",
+        content: "",
+        timestamp: formatRelative(new Date().toISOString()),
+        metadata: { streaming: true },
+      },
+    ]);
+    teachStream(taId, lastInput, {
+      problemId: problemContext?.problem_id,
+      onChunk: (chunk) => {
+        streamedContent.current += chunk;
+        setLocalMessages((prev) => {
+          const next = [...prev];
+          const last = next[next.length - 1];
+          if (last?.role === "ta" && last.metadata?.streaming) {
+            next[next.length - 1] = { ...last, content: streamedContent.current };
+          }
+          return next;
+        });
+      },
+    })
       .then((res) => {
-        const taMsg: ChatMessage = {
-          role: "ta",
-          content: res.ta_response ?? "OK.",
-          timestamp: formatRelative(new Date().toISOString()),
-          metadata: { interpreted_units: res.interpreted_units, quality_score: res.quality_score },
-        };
-        setLocalMessages((m) => [...m, studentMsg, taMsg]);
+        setLocalMessages((m) => {
+          const next = [...m];
+          const last = next[next.length - 1];
+          if (last?.role === "ta" && last.metadata?.streaming) {
+            next[next.length - 1] = {
+              ...last,
+              content: res.ta_response ?? last.content,
+              metadata: { interpreted_units: res.interpreted_units },
+            };
+          }
+          return next;
+        });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "state"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "misconceptions"] });
         queryClient.invalidateQueries({ queryKey: ["ta", taId, "history"] });
@@ -484,7 +566,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
           timestamp: formatRelative(new Date().toISOString()),
           metadata: { failed: true, lastInput },
         };
-        setLocalMessages((m) => [...m, studentMsg, taMsg]);
+        setLocalMessages((m) => [...m, taMsg]);
       })
       .finally(() => setLoading(false));
   };
@@ -542,7 +624,7 @@ export function ChatPanel({ taId, problemContext, lineRef, onLineRefUsed }: Chat
             >
               {messages.map((msg, i) => (
                 <MessageBubble
-                  key={i}
+                  key={`${msg.role}-${msg.timestamp ?? "no-ts"}-${msg.content.slice(0, 24)}-${i}`}
                   role={msg.role}
                   content={msg.content}
                   timestamp={msg.timestamp}

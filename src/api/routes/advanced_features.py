@@ -1,7 +1,7 @@
 """Advanced features API routes."""
 
-from fastapi import APIRouter, Depends, HTTPException
-from typing import List, Dict, Optional
+from fastapi import APIRouter, HTTPException
+from typing import List, Dict
 from src.api.deps import DbSession, CurrentUser
 from src.core.peer_help_matcher import match_peer_help
 from src.core.emotion_aware_teaching import analyze_student_emotion
@@ -27,11 +27,11 @@ def find_peer_help(
 def analyze_emotion(
     message: str,
     student_id: int,
+    db: DbSession,
+    user: CurrentUser,
     recent_performance: float = 0.5,
     consecutive_errors: int = 0,
     session_minutes: int = 0,
-    db: DbSession = None,
-    user: CurrentUser = None,
 ):
     """Analyze student emotion from message."""
     return analyze_student_emotion(
@@ -42,9 +42,9 @@ def analyze_emotion(
 @router.post("/code-review")
 def review_code(
     code: str,
+    db: DbSession,
+    user: CurrentUser,
     student_level: str = "beginner",
-    db: DbSession = None,
-    user: CurrentUser = None,
 ):
     """Review student code with AI."""
     return review_student_code(code, student_level)
@@ -57,7 +57,7 @@ def get_achievements(
     user: CurrentUser,
 ):
     """Get student achievements."""
-    if user.id != student_id and not user.is_teacher:
+    if user.id != student_id and user.role != "teacher":
         raise HTTPException(403, "Not authorized")
     
     # Mock progress data
@@ -80,8 +80,8 @@ def analyze_transfer(
     source_domain: str,
     target_domain: str,
     source_mastery: Dict[str, float],
-    db: DbSession = None,
-    user: CurrentUser = None,
+    db: DbSession,
+    user: CurrentUser,
 ):
     """Analyze cross-domain knowledge transfer."""
     return analyze_cross_domain_transfer(

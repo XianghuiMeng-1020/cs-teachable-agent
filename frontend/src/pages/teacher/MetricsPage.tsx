@@ -86,6 +86,17 @@ export function MetricsPage() {
   const maxEventCount = telemetry.available
     ? Math.max(...telemetry.event_breakdown.map((e) => e.count), 1)
     : 1;
+  const maxQueryItems = Math.max(...data.query_overview.map((q) => q.total_items), 1);
+
+  const pipelineRows = [
+    { key: "Generated", value: data.pipeline_gates.generated_total },
+    { key: "GenConsistency", value: data.pipeline_gates.gen_consistency_passed },
+    { key: "Q-Testsuite", value: data.pipeline_gates.q_testsuite_passed },
+    { key: "Q-Context", value: data.pipeline_gates.q_context_passed },
+    { key: "LowAI<=50", value: data.pipeline_gates.low_ai_50_items },
+    { key: "StudentEval", value: data.pipeline_gates.student_eval_items },
+    { key: "StudentPass>=50", value: data.pipeline_gates.student_pass_50_items },
+  ];
 
   return (
     <div className="space-y-8">
@@ -234,6 +245,88 @@ export function MetricsPage() {
         </div>
       </Card>
 
+      {/* Pipeline + Query heatmap */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card padding="md">
+          <div className="flex items-center gap-2 mb-4">
+            <Layers className="h-4 w-4 text-brand-700" />
+            <h2 className="font-serif text-heading text-stone-900">Pipeline Gates</h2>
+          </div>
+          <div className="space-y-2">
+            {pipelineRows.map((row, idx) => (
+              <div key={row.key} className="flex items-center gap-3">
+                <span className="w-28 text-xs font-medium text-stone-600">{row.key}</span>
+                <div className="flex-1 h-2.5 rounded-full bg-stone-100 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-brand-500"
+                    style={{ width: barW(row.value, data.pipeline_gates.generated_total || 1) }}
+                  />
+                </div>
+                <span className={cn("w-10 text-right text-xs font-semibold", idx === 0 ? "text-stone-900" : "text-brand-700")}>
+                  {row.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card padding="md">
+          <div className="flex items-center gap-2 mb-4">
+            <BarChart3 className="h-4 w-4 text-brand-700" />
+            <h2 className="font-serif text-heading text-stone-900">Query Heatmap</h2>
+          </div>
+          <div className="space-y-2 max-h-[280px] overflow-y-auto">
+            {data.query_overview.map((q) => (
+              <div key={q.query_id} className="rounded-md border border-stone-100 p-2.5">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs font-semibold text-stone-700">{q.query_id}</span>
+                  <span className="text-[10px] text-stone-500">AI {formatPercent(q.avg_ai_pass_rate)}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-2 rounded-full bg-stone-100 overflow-hidden">
+                    <div className="h-full rounded-full bg-brand-500" style={{ width: barW(q.total_items, maxQueryItems) }} />
+                  </div>
+                  <span className="text-[10px] text-stone-500">{q.total_items}</span>
+                </div>
+                <div className="mt-1 text-[10px] text-stone-500">
+                  lowAI={q.low_ai_items} · attempts={q.student_attempts} · pass={formatPercent(q.student_pass_rate)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      {/* Hardest / easiest */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card padding="md">
+          <h2 className="font-serif text-heading text-stone-900 mb-3">Hardest Items</h2>
+          <div className="space-y-2">
+            {data.hardest_items.map((it) => (
+              <div key={`${it.item_id}-hard`} className="rounded-md border border-stone-100 p-2.5">
+                <div className="text-xs font-semibold text-stone-800 truncate">{it.title}</div>
+                <div className="mt-1 text-[10px] text-stone-500">
+                  {it.item_type} · attempts={it.attempts} · pass={it.pass_rate.toFixed(1)}%
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card padding="md">
+          <h2 className="font-serif text-heading text-stone-900 mb-3">Easiest Items</h2>
+          <div className="space-y-2">
+            {data.easiest_items.map((it) => (
+              <div key={`${it.item_id}-easy`} className="rounded-md border border-stone-100 p-2.5">
+                <div className="text-xs font-semibold text-stone-800 truncate">{it.title}</div>
+                <div className="mt-1 text-[10px] text-stone-500">
+                  {it.item_type} · attempts={it.attempts} · pass={it.pass_rate.toFixed(1)}%
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
       {/* Telemetry panel */}
       <Card padding="md">
         <div className="flex items-center gap-2 mb-4">
@@ -271,6 +364,22 @@ export function MetricsPage() {
                   <div className="rounded-md bg-white border border-amber-100 p-2.5">
                     <p className="text-[10px] text-stone-400">{t("teacher.resumes")}</p>
                     <p className="text-lg font-bold text-brand-700">{telemetry.resume_count}</p>
+                  </div>
+                  <div className="rounded-lg border border-stone-200 p-3">
+                    <p className="text-[10px] font-semibold uppercase text-stone-400">Avg Duration</p>
+                    <p className="mt-1 text-lg font-bold text-stone-900">
+                      {telemetry.avg_attempt_duration_ms != null
+                        ? `${Math.round(telemetry.avg_attempt_duration_ms)}ms`
+                        : "—"}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-stone-200 p-3">
+                    <p className="text-[10px] font-semibold uppercase text-stone-400">Avg Score</p>
+                    <p className="mt-1 text-lg font-bold text-stone-900">
+                      {telemetry.avg_attempt_score != null
+                        ? telemetry.avg_attempt_score.toFixed(3)
+                        : "—"}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -11,6 +11,7 @@ type HintRating = "helpful" | "unhelpful" | null;
 interface HintRecord extends HintResponse {
   rating: HintRating;
   requestedAt: string;
+  requestedType: HintType;
 }
 
 const HINT_LIMITS: Record<HintType, number> = {
@@ -27,6 +28,7 @@ interface HintPanelProps {
   lastFeedback?: Record<string, unknown> | null;
   attemptNumber?: number;
   disabled?: boolean;
+  onHintUsed?: () => void;
 }
 
 export function HintPanel({
@@ -37,6 +39,7 @@ export function HintPanel({
   lastFeedback,
   attemptNumber,
   disabled = false,
+  onHintUsed,
 }: HintPanelProps) {
   const { t } = useTranslation();
 
@@ -58,6 +61,7 @@ export function HintPanel({
   const [hints, setHints] = useState<HintRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [reflection, setReflection] = useState("");
   const usageCount = useRef<Record<HintType, number>>({
     understand: 0,
     "next-step": 0,
@@ -69,11 +73,17 @@ export function HintPanel({
   };
 
   const requestHint = useCallback(
-    async (hintType: HintType) => {
+    async (
+      hintType: HintType,
+      options?: {
+        forcedLevel?: 1 | 2 | 3;
+      }
+    ) => {
       if (loading || disabled) return;
       if (getRemainingForType(hintType) <= 0) return;
 
-      const level = Math.min(usageCount.current[hintType] + 1, 3) as 1 | 2 | 3;
+      const level = options?.forcedLevel ?? (Math.min(usageCount.current[hintType] + 1, 3) as 1 | 2 | 3);
+      const progressSummary = `attempt=${attemptNumber ?? 1}; hints_used=${hints.length}; remaining=${getRemainingForType(hintType)}`;
 
       setLoading(true);
       emitTelemetry("hint_requested", { hintType, level, itemDbId });
@@ -86,15 +96,19 @@ export function HintPanel({
           selected_blocks: selectedBlocks,
           selected_answers: selectedAnswers,
           last_feedback: lastFeedback ?? undefined,
+          reflection: reflection.trim() || undefined,
+          progress_summary: progressSummary,
           attempt_number: attemptNumber,
         });
 
         usageCount.current[hintType] += 1;
+        onHintUsed?.();
 
         const record: HintRecord = {
           ...hint,
           rating: null,
           requestedAt: new Date().toISOString(),
+          requestedType: hintType,
         };
         setHints((prev) => [record, ...prev]);
         setExpanded(true);
@@ -105,14 +119,19 @@ export function HintPanel({
         setLoading(false);
       }
     },
-    [itemDbId, taId, selectedBlocks, selectedAnswers, lastFeedback, attemptNumber, loading, disabled]
+    [itemDbId, taId, selectedBlocks, selectedAnswers, lastFeedback, reflection, attemptNumber, hints.length, loading, disabled, onHintUsed]
   );
 
   const rateHint = (hintId: string, rating: HintRating) => {
     setHints((prev) =>
       prev.map((h) => (h.hint_id === hintId ? { ...h, rating } : h))
     );
-    emitTelemetry(rating === "helpful" ? "hint_helpful" : "hint_unhelpful", { hintId });
+    emitTelemetry(rating === "helpful" ? "hint_helpful" : "hint_unhelpful", {
+      hintId,
+      itemDbId,
+      attemptNumber,
+      rating,
+    });
   };
 
   const totalUsed = hints.length;
@@ -172,6 +191,19 @@ export function HintPanel({
             })}
           </div>
 
+          <div className="space-y-1">
+            <label className="text-[11px] font-medium text-amber-700">Reflection (optional)</label>
+            <textarea
+              value={reflection}
+              onChange={(e) => setReflection(e.target.value)}
+              placeholder="What have you already tried?"
+              className="w-full rounded-md border border-amber-200 bg-white px-3 py-2 text-xs text-stone-700 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-300"
+              rows={2}
+              maxLength={300}
+              disabled={loading || disabled}
+            />
+          </div>
+
           {/* Level scope indicator */}
           {(() => {
             const nextLevel = Math.min(
@@ -205,11 +237,14 @@ export function HintPanel({
                     {hint.escalation_available && (
                       <button
                         onClick={() => {
-                          const hintType = HINT_TYPES.find((entry) =>
-                            hint.title?.toLowerCase().includes(entry.value)
-                          )?.value ?? "next-step";
-                          requestHint(hintType);
-                          emitTelemetry("hint_stronger_requested", { hintId: hint.hint_id });
+                          const nextLevel = Math.min((hint.level || 1) + 1, 3) as 1 | 2 | 3;
+                          requestHint(hint.requestedType, { forcedLevel: nextLevel });
+                          emitTelemetry("hint_stronger_requested", {
+                            hintId: hint.hint_id,
+                            hintType: hint.requestedType,
+                            fromLevel: hint.level,
+                            toLevel: nextLevel,
+                          });
                         }}
                         className="ml-auto flex items-center gap-1 rounded-md border border-amber-300 px-2 py-0.5 text-[10px] font-medium text-amber-700 hover:bg-amber-50"
                       >

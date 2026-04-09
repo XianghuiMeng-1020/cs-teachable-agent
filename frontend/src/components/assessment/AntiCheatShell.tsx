@@ -44,6 +44,7 @@ export function AntiCheatShell({
 }: AntiCheatShellProps) {
   const [practiceLocked, setPracticeLocked] = useState(false);
   const [focusEvents, setFocusEvents] = useState<FocusLossEvent[]>([]);
+  const lockStartedAtRef = useRef<number | null>(null);
   const lastFocusEventRef = useRef(0);
   const devtoolsDetected = useRef(false);
   const [devtoolsEnabled, setDevtoolsEnabled] = useState(true);
@@ -65,6 +66,7 @@ export function AntiCheatShell({
       lastFocusEventRef.current = now;
 
       setPracticeLocked(true);
+      lockStartedAtRef.current = now;
       const event: FocusLossEvent = {
         timestamp: new Date().toISOString(),
         reason,
@@ -132,6 +134,14 @@ export function AntiCheatShell({
   }, [enabled, devtoolsEnabled, recordFocusLoss]);
 
   const handleResume = () => {
+    const now = Date.now();
+    const lockedDurationMs =
+      lockStartedAtRef.current != null ? Math.max(0, now - lockStartedAtRef.current) : 0;
+    emitTelemetry("focus_lock_resolved", {
+      lockedDurationMs,
+      focusLossEventsInAttempt: focusEvents.length,
+    });
+    lockStartedAtRef.current = null;
     setPracticeLocked(false);
     onResume?.();
   };

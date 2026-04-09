@@ -24,6 +24,43 @@ THRESHOLD_PARTIALLY_LEARNED = 0.5
 # Prerequisite: if any prereq has p_know below this, cap p_transit for this unit
 PREREQ_MIN_P_KNOW = 0.5
 
+# P-01: Assessment-type specific BKT parameters
+ASSESSMENT_TYPE_PARAMS: dict[str, dict[str, float]] = {
+    "parsons": {"p_guess": 0.15, "p_slip": 0.08},
+    "dropdown": {"p_guess": 0.30, "p_slip": 0.12},
+    "execution_trace": {"p_guess": 0.20, "p_slip": 0.10},
+    "fill_in_blank": {"p_guess": 0.25, "p_slip": 0.10},
+    "open_response": {"p_guess": 0.20, "p_slip": 0.15},
+    "code": {"p_guess": 0.15, "p_slip": 0.08},
+    "default": {"p_guess": DEFAULT_P_GUESS, "p_slip": DEFAULT_P_SLIP},
+}
+
+DIFFICULTY_MULTIPLIERS: dict[str, dict[str, float]] = {
+    "easy": {"guess_mult": 1.3, "slip_mult": 0.7},
+    "medium": {"guess_mult": 1.0, "slip_mult": 1.0},
+    "hard": {"guess_mult": 0.7, "slip_mult": 1.3},
+    "very_hard": {"guess_mult": 0.5, "slip_mult": 1.5},
+}
+
+
+def get_assessment_params(assessment_type: str | None) -> dict[str, float]:
+    """Get BKT parameters based on assessment type."""
+    if assessment_type is None:
+        return ASSESSMENT_TYPE_PARAMS["default"]
+    return ASSESSMENT_TYPE_PARAMS.get(assessment_type, ASSESSMENT_TYPE_PARAMS["default"])
+
+
+def apply_difficulty_adjustment(
+    base_p_guess: float, base_p_slip: float, difficulty: str | None
+) -> tuple[float, float]:
+    """Apply difficulty-based adjustments to p_guess and p_slip."""
+    if difficulty is None or difficulty not in DIFFICULTY_MULTIPLIERS:
+        return base_p_guess, base_p_slip
+    mult = DIFFICULTY_MULTIPLIERS[difficulty]
+    p_guess = max(0.01, min(0.99, base_p_guess * mult["guess_mult"]))
+    p_slip = max(0.01, min(0.99, base_p_slip * mult["slip_mult"]))
+    return p_guess, p_slip
+
 
 def load_knowledge_units_from_path(path: Path) -> list[dict]:
     """Load knowledge unit definitions from JSON file."""
@@ -215,19 +252,39 @@ class StateTracker:
         unit_ids: list[str],
         correct: bool,
         timestamp: str | None = None,
+        *,
+        assessment_type: str | None = None,
+        difficulty: str | None = None,
     ) -> None:
         """
         Update BKT parameters after a test observation (correct/incorrect).
         For each unit in unit_ids: apply Bayes update on p_know, then if correct apply transit.
+
+        Args:
+            unit_ids: List of knowledge unit IDs to update
+            correct: Whether the observation was correct
+            timestamp: Optional timestamp for the observation
+            assessment_type: Optional assessment type for M-10 (e.g., 'parsons', 'dropdown')
+            difficulty: Optional difficulty level for M-13 (e.g., 'easy', 'medium', 'hard')
         """
         now = timestamp or _timestamp()
+
+        # M-10: Get assessment-type-specific base parameters
+        base_params = get_assessment_params(assessment_type)
+
         for uid in unit_ids:
             if uid not in self._state:
                 continue
             rec = self._state[uid]
             p_know = float(rec.get("bkt_p_know", DEFAULT_P_KNOW_INIT))
-            p_slip = float(rec.get("bkt_p_slip", DEFAULT_P_SLIP))
-            p_guess = float(rec.get("bkt_p_guess", DEFAULT_P_GUESS))
+
+            # M-10 & M-13: Apply assessment type and difficulty adjustments
+            base_p_guess = float(rec.get("bkt_p_guess", base_params["p_guess"]))
+            base_p_slip = float(rec.get("bkt_p_slip", base_params["p_slip"]))
+            p_guess, p_slip = apply_difficulty_adjustment(
+                base_p_guess, base_p_slip, difficulty
+            )
+
             p_transit = self._effective_p_transit(uid)
 
             if correct:
@@ -247,6 +304,13 @@ class StateTracker:
             rec["last_practiced_at"] = now
             rec["last_updated"] = now
             rec["confidence"] = round(p_know, 4)
+
+            # Store the effective parameters used for this observation
+            rec["last_p_guess_used"] = p_guess
+            rec["last_p_slip_used"] = p_slip
+            rec["last_assessment_type"] = assessment_type
+            rec["last_difficulty"] = difficulty
+
             self._sync_status_from_bkt(uid)
         self._last_updated = now
 

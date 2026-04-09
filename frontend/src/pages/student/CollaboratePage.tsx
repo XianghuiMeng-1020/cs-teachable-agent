@@ -1,17 +1,19 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/stores/appStore";
 import { CollaborationPanel } from "@/components/collaboration/CollaborationPanel";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { Button } from "@/components/ui/Button";
-import { Users, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
-import { ROUTES } from "@/lib/constants";
+import { getTA } from "@/api/client";
 
 export function CollaboratePage() {
   const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
-  const domainId = useAppStore((s) => s.domainId) || "python";
+  const { data: taData } = useQuery({
+    queryKey: ["ta", currentTaId, "detail"],
+    queryFn: () => getTA(currentTaId!),
+    enabled: currentTaId != null,
+  });
+  const domainId = taData?.domain_id || "python";
 
   return (
     <motion.div

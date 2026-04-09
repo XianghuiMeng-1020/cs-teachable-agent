@@ -1,6 +1,7 @@
 """Teaching: POST /teach, POST /correct, POST /analyze-teaching, POST /teach/stream (SSE)."""
 
 import json
+from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -46,6 +47,24 @@ def _teach_stream_generator(
     store = tracker.get_reflection_store()
     topic = teaching_event.get("topic_taught", "")
     note = teaching_event.get("note", "")
+    prompt_rules = adapter.get_conversation_prompt(
+        tracker.get_full_state(),
+        teaching_event,
+        learned,
+    )
+
+    current_problem = None
+    if problem_id:
+        problems = adapter.load_problems()
+        current_problem = next((p for p in problems if p.get("problem_id") == problem_id), None)
+        if current_problem and current_problem.get("problem_type") == "buggy-code":
+            guided = adapter.get_guided_teaching_prompt(
+                current_problem.get("problem_type", ""),
+                current_problem.get("problem_statement", ""),
+            )
+            if guided:
+                prompt_rules = f"{prompt_rules}\n\n{guided}" if prompt_rules else guided
+
     messages = _last_n_messages(conversation_history or [], note, n=5)
     extracted = extract_new_knowledge(messages, tracker.get_domain())
     updated_store = update_reflection_store(store, extracted)
@@ -57,46 +76,80 @@ def _teach_stream_generator(
     code_modification = None
     bug_eval_result = None
 
+    # M-83: Check if clarification is needed (low confidence teaching)
+    needs_clarification = teaching_event.get("needs_clarification", False)
+    confidence = teaching_event.get("confidence", 0.5)
+
+    # M-81: Thinking process visualization
+    thinking_text = "🤔 TA is thinking..."
+    if needs_clarification:
+        thinking_text = "🤔 TA is confused and needs clarification..."
+    yield f"data: {json.dumps({'type': 'thinking', 'text': thinking_text})}\n\n"
+
+    # M-83: If confidence is too low, request clarification instead of normal response
+    if needs_clarification and confidence < 0.35:
+        clarifying_questions = [
+            "I'm not quite sure I understood that. Could you explain it in a different way?",
+            "I'm a bit confused about what you just taught. Can you give me a concrete example?",
+            "I want to make sure I understand correctly. Could you break that down into smaller steps?",
+        ]
+        import random
+        clarification = random.choice(clarifying_questions)
+        yield f"data: {json.dumps({'type': 'chunk', 'text': clarification})}\n\n"
+        yield f"data: {json.dumps({'type': 'done', 'ta_response': clarification, 'interpreted_units': [], 'topic_taught': topic, 'code_modification': None, 'needs_clarification': True})}\n\n"
+        return  # Skip normal Reflect-Respond pipeline
+
     full_parts: list[str] = []
+    thinking_parts: list[str] = []
+    is_thinking = False
+
+    quality_score = teaching_event.get("quality_score")
+
     for chunk in generate_constrained_response_stream(
         retrieved, topic, note, learned, active_mis_ids, tracker.get_domain(),
-        conversation_history=conversation_history, ask_why_or_how=True,
+        conversation_history=conversation_history, ask_why_or_how=True, prompt_rules=prompt_rules,
+        quality_score=quality_score,
     ):
+        # Handle thinking markers
+        if chunk.startswith("[THINKING]"):
+            is_thinking = True
+            thinking_content = chunk.replace("[THINKING]", "").replace("[/THINKING]", "")
+            thinking_parts.append(thinking_content)
+            yield f"data: {json.dumps({'type': 'thinking', 'text': thinking_content})}\n\n"
+            continue
+        if "[/THINKING]" in chunk:
+            is_thinking = False
+            continue
+
         full_parts.append(chunk)
         yield f"data: {json.dumps({'type': 'chunk', 'text': chunk})}\n\n"
+
     ta_response = "".join(full_parts).strip()
-    if len(ta_response) > 400:
-        ta_response = ta_response[:397].rsplit(".", 1)[0] + "."
+    # Dynamic length handling - no longer hard-coding 400
     msg_count = (len(conversation_history) + 1) if conversation_history else 1
     ta_response = maybe_append_questioner_response(
         ta_response, msg_count, topic, note, tracker.get_domain(),
-        list(learned), conversation_history, phase="teach",
+        list(learned), active_mis_ids, conversation_history, phase="teach",
     )
 
     # Evaluate bug identification after streaming (does not block first chunk)
-    if problem_id:
-        problems = adapter.load_problems()
-        current_problem = next((p for p in problems if p.get("problem_id") == problem_id), None)
-        if current_problem and current_problem.get("problem_type") == "buggy-code":
-            try:
-                bug_eval_result = evaluate_bug_identification(
-                    note, current_problem, conversation_history,
-                )
-                code_modification = bug_eval_result.get("code_modification")
-            except Exception:
-                pass
+    if current_problem and current_problem.get("problem_type") == "buggy-code":
+        try:
+            bug_eval_result = evaluate_bug_identification(
+                note, current_problem, conversation_history,
+            )
+            code_modification = bug_eval_result.get("code_modification")
+        except Exception:
+            pass
 
     # Append hint if bug evaluation failed and student needs help
-    if bug_eval_result and not bug_eval_result.get("correct") and problem_id:
-        incorrect_count = _count_incorrect_attempts(conversation_history, problem_id)
+    if bug_eval_result and not bug_eval_result.get("correct") and current_problem:
+        incorrect_count = _count_incorrect_attempts(conversation_history, problem_id or "")
         hint_level = compute_hint_level(incorrect_count)
         if hint_level > 0:
-            problems = adapter.load_problems()
-            current_problem = next((p for p in problems if p.get("problem_id") == problem_id), None)
-            if current_problem:
-                hint = get_progressive_hint(current_problem, hint_level, conversation_history)
-                if hint:
-                    ta_response += f"\n\n💡 Hint: {hint}"
+            hint = get_progressive_hint(current_problem, hint_level, conversation_history)
+            if hint:
+                ta_response += f"\n\n💡 Hint: {hint}"
 
     tracker.set_reflection_store(updated_store)
     yield f"data: {json.dumps({'type': 'done', 'ta_response': ta_response, 'interpreted_units': teaching_event.get('knowledge_units_taught', []), 'topic_taught': topic, 'code_modification': code_modification})}\n\n"
@@ -333,3 +386,49 @@ def analyze_teaching_endpoint(
         domain=ta.domain_id or "python",
     )
     return result
+
+
+@router.get("/api/ta/{ta_id}/proactive-checkin")
+def proactive_checkin(
+    ta_id: int,
+    current_user: CurrentUser,
+    db: DbSession,
+):
+    """
+    Generate a lightweight proactive TA check-in message when the conversation is idle.
+    This enables TA to ask for clarification/examples without waiting for a new student message.
+    """
+    ta = _get_ta(ta_id, current_user.id, db)
+    session = get_or_create_teaching_session(db, ta.id)
+    tracker = get_tracker_for_ta(ta)
+
+    latest_event = (
+        db.query(TeachingEvent)
+        .filter(TeachingEvent.session_id == session.id)
+        .order_by(TeachingEvent.created_at.desc())
+        .first()
+    )
+    if latest_event and latest_event.created_at:
+        created_at = latest_event.created_at
+        if created_at.tzinfo is None:
+            created_at = created_at.replace(tzinfo=timezone.utc)
+        idle_seconds = (datetime.now(timezone.utc) - created_at).total_seconds()
+        if idle_seconds < 45:
+            return {"message": None, "reason": "not_idle_enough"}
+
+    learned = sorted(tracker.get_learned_units())
+    active_mis_ids = list(tracker.get_active_misconception_ids(learned))
+
+    if active_mis_ids:
+        message = f"I'm still confused about {active_mis_ids[0]}. Could you explain it with one concrete example?"
+        return {"message": message, "reason": "active_misconception"}
+
+    if learned:
+        latest_unit = learned[-1]
+        message = f"Can we do one more quick example for {latest_unit} so I can check if I really understand it?"
+        return {"message": message, "reason": "reinforce_latest_learning"}
+
+    return {
+        "message": "Could you teach me one small foundational concept first, then test me with a tiny exercise?",
+        "reason": "bootstrap_learning",
+    }

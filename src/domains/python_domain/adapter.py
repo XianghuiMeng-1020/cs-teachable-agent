@@ -162,3 +162,13 @@ class PythonDomainAdapter(DomainAdapter):
         return template.replace("{{STUDENT_INPUT}}", student_input).replace(
             "{{KNOWN_UNIT_IDS}}", units_list
         )
+
+    def get_guided_teaching_prompt(self, problem_type: str, problem_statement: str) -> str:
+        template = self._load_template("guided_teaching")
+        if not template:
+            return ""
+        return (
+            template
+            .replace("{{PROBLEM_TYPE}}", problem_type or "")
+            .replace("{{PROBLEM_STATEMENT}}", problem_statement or "")
+        )

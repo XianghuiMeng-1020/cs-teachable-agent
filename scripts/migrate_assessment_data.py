@@ -96,6 +96,13 @@ def parse_item(info: dict) -> dict | None:
     passed_stu = _to_float(quality.get("num_passed_stu"))
     student_pass_rate = (passed_stu / total_stu * 100) if total_stu and passed_stu is not None else None
 
+    interaction_content = raw.get("interaction_content", {})
+    answer_key = _normalize_answer_key(
+        info["item_type"],
+        interaction_content,
+        raw.get("answer_key", {}),
+    )
+
     return {
         "item_id": raw.get("item_id", f"{info['task_id']}-{info['item_type']}"),
         "item_type": info["item_type"],
@@ -104,8 +111,8 @@ def parse_item(info: dict) -> dict | None:
         "source_task_id": info["task_id"],
         "title": raw.get("title", info["task_id"]),
         "prompt": raw.get("prompt", ""),
-        "interaction_content": raw.get("interaction_content", {}),
-        "answer_key": raw.get("answer_key", {}),
+        "interaction_content": interaction_content,
+        "answer_key": answer_key,
         "grading_rule": raw.get("grading_rule"),
         "metadata_theme": metadata.get("theme"),
         "metadata_concepts": metadata.get("concepts", []),
@@ -113,6 +120,48 @@ def parse_item(info: dict) -> dict | None:
         "difficulty": _compute_difficulty(ai_pass_rate, student_pass_rate),
         "validation_passed": validation.get("passed"),
     }
+
+
+def _normalize_answer_key(item_type: str, interaction_content: dict, answer_key: dict) -> dict:
+    """
+    Ensure answer key fields are present and aligned with interaction_content.
+
+    Studio exports sometimes place correct answers on blanks/checkpoints directly.
+    Our grading pipeline expects answer_key.correct_answers consistently.
+    """
+    normalized = dict(answer_key or {})
+
+    if item_type == "dropdown":
+        blanks = interaction_content.get("blanks", []) or []
+        inferred = {
+            b.get("blank_id"): b.get("correct_answer")
+            for b in blanks
+            if b.get("blank_id") and b.get("correct_answer") is not None
+        }
+        existing = normalized.get("correct_answers", {}) or {}
+        if inferred:
+            merged = dict(inferred)
+            merged.update(existing)
+            normalized["correct_answers"] = merged
+        elif "correct_answers" not in normalized:
+            normalized["correct_answers"] = {}
+
+    if item_type == "execution-trace":
+        checkpoints = interaction_content.get("checkpoints", []) or []
+        inferred = {
+            cp.get("checkpoint_id"): cp.get("correct")
+            for cp in checkpoints
+            if cp.get("checkpoint_id") and cp.get("correct") is not None
+        }
+        existing = normalized.get("correct_answers", {}) or {}
+        if inferred:
+            merged = dict(inferred)
+            merged.update(existing)
+            normalized["correct_answers"] = merged
+        elif "correct_answers" not in normalized:
+            normalized["correct_answers"] = {}
+
+    return normalized
 
 
 def _to_float(val) -> float | None:

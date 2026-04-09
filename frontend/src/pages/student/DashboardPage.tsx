@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip as RTooltip, Cell } from "recharts";
 import { useAppStore } from "@/stores/appStore";
 import { getState, getMastery, getMisconceptions, getHistory, getConfig, getGamification, getLearningPath, listTA } from "@/api/client";
-import { getRecommendedItems, getAssessmentStats } from "@/api/assessment";
+import { getRecommendedItems } from "@/api/assessment";
 import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import {
   BookOpen, BookOpenCheck, CheckCircle, AlertTriangle, MessageCircle,
-  Sparkles, BrainCircuit, Bot, MessageSquare, Play, X, ChevronRight, ArrowRight,
-  TrendingUp, Target, Zap, Award, Clock, GraduationCap, Flame,
+  Sparkles, BrainCircuit, Bot, MessageSquare, Play, X, ChevronRight,
+  TrendingUp, Target, Zap, Award, Clock, Flame, BarChart3, BookX,
 } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { Card } from "@/components/ui/Card";
-import { MasteryRadial } from "@/components/state/MasteryRadial";
 import { MisconceptionCard, MisconceptionCardEmpty } from "@/components/state/MisconceptionCard";
 import { TimelineView } from "@/components/state/TimelineView";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -23,7 +22,6 @@ import { Button } from "@/components/ui/Button";
 import { PointsSystem } from "@/components/gamification/PointsSystem";
 import { AchievementSystem } from "@/components/gamification/AchievementSystem";
 import { SmartLearningPath } from "@/components/learning/SmartLearningPath";
-import { MisconceptionAI } from "@/components/diagnosis/MisconceptionAI";
 import { DomainSelector } from "@/components/onboarding/DomainSelector";
 import { useAuthStore } from "@/stores/authStore";
 import { ROUTES } from "@/lib/constants";
@@ -47,25 +45,61 @@ const staggerContainer = {
   },
 };
 
-function useActivityTrend(taId: number | null) {
+// M-21: Calculate true consecutive streak from today backward
+type TimeRange = 7 | 14 | 30;
+
+function calculateStreak(items: { timestamp?: string }[]): number {
+  if (items.length === 0) return 0;
+  
+  const activityDates = new Set(
+    items.map((evt) => (evt.timestamp || "").slice(0, 10))
+  );
+  
+  const today = new Date().toISOString().slice(0, 10);
+  let streak = 0;
+  let currentDate = new Date();
+  
+  // Check consecutive days from today backward
+  while (true) {
+    const dateStr = currentDate.toISOString().slice(0, 10);
+    if (activityDates.has(dateStr)) {
+      streak++;
+      currentDate.setDate(currentDate.getDate() - 1);
+    } else if (dateStr === today) {
+      // No activity today yet, check yesterday
+      currentDate.setDate(currentDate.getDate() - 1);
+    } else {
+      // Gap found, stop counting
+      break;
+    }
+  }
+  
+  return streak;
+}
+
+function useActivityTrend(taId: number | null, days: TimeRange = 7) {
   const { data: historyData } = useQuery({
-    queryKey: ["ta", taId, "history-trend", 1, 50],
-    queryFn: () => getHistory(taId!, { page: 1, per_page: 50 }),
+    queryKey: ["ta", taId, "history-trend", 1, 100],
+    queryFn: () => getHistory(taId!, { page: 1, per_page: 100 }),
     enabled: taId != null && taId > 0,
   });
   const items = historyData?.items ?? [];
-  const last7Days = Array.from({ length: 7 }, (_, i) => {
+  const dateRange = Array.from({ length: days }, (_, i) => {
     const d = new Date();
-    d.setDate(d.getDate() - (6 - i));
+    d.setDate(d.getDate() - (days - 1 - i));
     return d.toISOString().slice(0, 10);
   });
   const byDay: Record<string, number> = {};
-  last7Days.forEach((day) => (byDay[day] = 0));
+  dateRange.forEach((day) => (byDay[day] = 0));
   items.forEach((evt) => {
     const day = (evt.timestamp || "").slice(0, 10);
     if (day in byDay) byDay[day]++;
   });
-  return last7Days.map((date) => ({ date: date.slice(5), count: byDay[date] ?? 0 }));
+  return {
+    trendData: dateRange.map((date) => ({ date: date.slice(5), count: byDay[date] ?? 0 })),
+    streakDays: calculateStreak(items),
+    hasActivity: items.length > 0,
+  };
 }
 
 const ONBOARDING_KEY = "cs-ta-onboarding-completed";
@@ -74,12 +108,10 @@ export function DashboardPage() {
   const { t } = useTranslation();
   const currentTaId = useAppStore((s) => s.currentTaId);
   const user = useAuthStore((s) => s.user);
-  const navigate = useNavigate();
   const [hintDismissed, setHintDismissed] = useState(() =>
     typeof localStorage !== "undefined" && localStorage.getItem(DASHBOARD_HINT_KEY) === "1"
   );
   const [showDomainSelector, setShowDomainSelector] = useState(false);
-  const activityTrend = useActivityTrend(currentTaId);
 
   const { data: taList, isLoading: isLoadingTAs } = useQuery({
     queryKey: ["ta", "list"],
@@ -130,14 +162,15 @@ export function DashboardPage() {
     queryKey: ["assessment", "recommend", currentTaId],
     queryFn: () => getRecommendedItems({ ta_id: currentTaId ?? undefined, count: 3 }),
   });
-  const { data: assessStats } = useQuery({
-    queryKey: ["assessment", "stats"],
-    queryFn: getAssessmentStats,
-  });
 
   const learnedCount = state?.learned_unit_ids?.length ?? 0;
-  const totalKus = state?.units ? Object.keys(state.units).length : 20;
+  // M-23: Get total KUs from domain config instead of hardcoded default
+  const totalKus = state?.units ? Object.keys(state.units).length : (config?.domain?.knowledge_units?.length ?? 0);
   const misconceptions = misconceptionsData?.misconceptions ?? [];
+  
+  // M-24: Time range selection state
+  const [activityDays, setActivityDays] = useState<TimeRange>(7);
+  const { trendData: activityTrend, streakDays, hasActivity } = useActivityTrend(currentTaId, activityDays);
   const recentEvents: TimelineEvent[] = (historyData?.items ?? []).map((i) => ({
     id: i.id,
     type: (i.type as TimelineEvent["type"]) ?? "teach",
@@ -148,8 +181,7 @@ export function DashboardPage() {
   }));
   const isStubMode = !config?.llm_configured;
 
-  // Calculate streak and progress
-  const streakDays = activityTrend.filter(d => d.count > 0).length;
+  // Progress calculation
   const progressPercent = totalKus > 0 ? Math.round((learnedCount / totalKus) * 100) : 0;
 
   if (currentTaId == null) {
@@ -382,42 +414,71 @@ export function DashboardPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Left column - Activity & Timeline */}
         <motion.div variants={fadeIn} className="space-y-6 lg:col-span-2">
-          {/* Activity Chart */}
-          {activityTrend.some((d) => d.count > 0) && (
-            <Card padding="lg" className="overflow-hidden">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-brand-600" />
-                    {t("dashboard.learningActivity")}
-                  </h2>
-                  <p className="text-sm text-stone-500">{t("dashboard.activityDesc")}</p>
+          {/* Activity Chart - M-24: Time range selector + empty state */}
+          <Card padding="lg" className="overflow-hidden">
+            <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+              <div>
+                <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-brand-600" />
+                  {t("dashboard.learningActivity", { defaultValue: "学习活动" })}
+                </h2>
+                <p className="text-sm text-stone-500">
+                  {hasActivity
+                    ? t("dashboard.activityDesc", { defaultValue: "你的学习趋势概览" })
+                    : t("dashboard.noActivityDesc", { defaultValue: "开始学习以查看活动统计" })}
+                </p>
+              </div>
+              {/* Time range selector */}
+              <div className="flex items-center gap-2">
+                <div className="flex bg-stone-100 rounded-lg p-1">
+                  {[7, 14, 30].map((days) => (
+                    <button
+                      key={days}
+                      onClick={() => setActivityDays(days as TimeRange)}
+                      className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                        activityDays === days
+                          ? "bg-white text-stone-900 shadow-sm"
+                          : "text-stone-500 hover:text-stone-700"
+                      }`}
+                    >
+                      {days === 7 && t("dashboard.days7", { defaultValue: "7天" })}
+                      {days === 14 && t("dashboard.days14", { defaultValue: "14天" })}
+                      {days === 30 && t("dashboard.days30", { defaultValue: "30天" })}
+                    </button>
+                  ))}
                 </div>
                 <div className="flex items-center gap-2 text-sm text-stone-500">
                   <Clock className="w-4 h-4" />
-                  {t("dashboard.last7Days")}
+                  <span>
+                    {activityDays === 7 && t("dashboard.last7Days", { defaultValue: "最近7天" })}
+                    {activityDays === 14 && t("dashboard.last14Days", { defaultValue: "最近14天" })}
+                    {activityDays === 30 && t("dashboard.last30Days", { defaultValue: "最近30天" })}
+                  </span>
                 </div>
               </div>
+            </div>
+
+            {hasActivity ? (
               <div className="h-[180px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={activityTrend} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
-                    <XAxis 
-                      dataKey="date" 
-                      tick={{ fontSize: 11, fill: "#78716C" }} 
-                      axisLine={false} 
-                      tickLine={false} 
+                    <XAxis
+                      dataKey="date"
+                      tick={{ fontSize: 11, fill: "#78716C" }}
+                      axisLine={false}
+                      tickLine={false}
                     />
-                    <YAxis 
-                      allowDecimals={false} 
-                      tick={{ fontSize: 11, fill: "#78716C" }} 
-                      width={28} 
-                      axisLine={false} 
-                      tickLine={false} 
+                    <YAxis
+                      allowDecimals={false}
+                      tick={{ fontSize: 11, fill: "#78716C" }}
+                      width={28}
+                      axisLine={false}
+                      tickLine={false}
                     />
                     <RTooltip
-                      contentStyle={{ 
-                        borderRadius: "8px", 
-                        border: "1px solid #E7E5E4", 
+                      contentStyle={{
+                        borderRadius: "8px",
+                        border: "1px solid #E7E5E4",
                         fontSize: "12px",
                         boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)"
                       }}
@@ -430,8 +491,26 @@ export function DashboardPage() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </Card>
-          )}
+            ) : (
+              /* M-24: Empty state for no activity */
+              <div className="py-12 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mb-4">
+                  <BarChart3 className="w-8 h-8 text-stone-400" />
+                </div>
+                <h3 className="text-stone-700 font-medium mb-1">
+                  {t("dashboard.noActivityTitle", { defaultValue: "暂无活动数据" })}
+                </h3>
+                <p className="text-stone-500 text-sm max-w-xs mb-4">
+                  {t("dashboard.noActivityDesc", { defaultValue: "开始与AI代理互动或进行练习，你的学习活动将在这里显示" })}
+                </p>
+                <Link to={ROUTES.teach}>
+                  <Button variant="outline" size="sm" icon={BookOpen}>
+                    {t("dashboard.startTeaching", { defaultValue: "开始教学" })}
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </Card>
 
           {/* Recent Activity */}
           <Card padding="lg">

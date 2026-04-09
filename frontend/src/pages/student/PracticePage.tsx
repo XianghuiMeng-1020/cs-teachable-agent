@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { listAssessmentItems, getAssessmentStats, type AssessmentItemSummary, type AssessmentStats } from "@/api/assessment";
 import { AssessmentProgress } from "@/components/assessment";
 import { QuickStartGuide } from "@/components/assessment/QuickStartGuide";
-import { setupSessionTelemetry } from "@/lib/telemetry";
+import { getSessionId, setupSessionTelemetry } from "@/lib/telemetry";
 import { ContextualHelp } from "@/components/ui/ContextualHelp";
 import type { TFunction } from "i18next";
 
@@ -39,6 +39,16 @@ export function PracticePage() {
   const [maxAiPassRate, setMaxAiPassRate] = useState(75);
   const [total, setTotal] = useState(0);
 
+  const buildSessionState = useCallback((currentId: number) => {
+    const itemIds = items.map((it) => it.id);
+    const currentIndex = itemIds.indexOf(currentId);
+    return {
+      itemIds,
+      currentIndex: currentIndex >= 0 ? currentIndex : 0,
+      sessionId: getSessionId(),
+    };
+  }, [items]);
+
   useEffect(() => {
     return setupSessionTelemetry();
   }, []);
@@ -47,15 +57,15 @@ export function PracticePage() {
     setLoading(true);
     try {
       const [itemsRes, statsRes] = await Promise.all([
-        listAssessmentItems({ item_type: filterType || undefined, limit: 100 }),
+        listAssessmentItems({
+          item_type: filterType || undefined,
+          max_ai_pass_rate: maxAiPassRate,
+          limit: 100,
+        }),
         getAssessmentStats(),
       ]);
-      const filtered = itemsRes.items.filter((item) => {
-        if (item.ai_pass_rate == null) return true;
-        return item.ai_pass_rate <= maxAiPassRate;
-      });
-      setItems(filtered);
-      setTotal(filtered.length);
+      setItems(itemsRes.items);
+      setTotal(itemsRes.items.length);
       setStats(statsRes);
     } catch {
       // silent
@@ -154,7 +164,7 @@ export function PracticePage() {
             return (
               <button
                 key={item.id}
-                onClick={() => navigate(`/practice/${item.id}`)}
+                onClick={() => navigate(`/practice/${item.id}`, { state: buildSessionState(item.id) })}
                 className="group relative rounded-xl border border-stone-200/80 bg-white p-5 text-left shadow-card transition-all hover:shadow-card-hover hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between gap-2">

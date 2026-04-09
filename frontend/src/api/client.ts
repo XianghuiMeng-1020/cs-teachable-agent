@@ -223,6 +223,7 @@ export async function teach(taId: number, student_input: string) {
 
 export interface TeachStreamCallbacks {
   onChunk?: (text: string) => void;
+  onThinking?: (text: string) => void;
   problemId?: string;
 }
 
@@ -239,7 +240,7 @@ export async function teachStream(
   student_input: string,
   callbacks: TeachStreamCallbacks = {}
 ): Promise<{ ta_response: string; interpreted_units: string[]; topic_taught: string; code_modification?: CodeModificationPayload | null }> {
-  const { onChunk, problemId } = callbacks;
+  const { onChunk, onThinking, problemId } = callbacks;
   const baseUrl = import.meta.env.VITE_API_URL
     || (import.meta.env.DEV ? "/api" : "/api");
   const url = `${baseUrl}/ta/${taId}/teach/stream`;
@@ -270,6 +271,7 @@ export async function teachStream(
         try {
           const data = JSON.parse(line.slice(6)) as { type: string; text?: string; ta_response?: string; interpreted_units?: string[]; topic_taught?: string; code_modification?: CodeModificationPayload | null };
           if (data.type === "chunk" && data.text != null && onChunk) onChunk(data.text);
+          if (data.type === "thinking" && data.text != null && onThinking) onThinking(data.text);
           if (data.type === "done") donePayload = { ta_response: data.ta_response, interpreted_units: data.interpreted_units, topic_taught: data.topic_taught, code_modification: data.code_modification };
         } catch {
           // skip malformed
@@ -451,6 +453,16 @@ export interface GetMessagesResponse {
 
 export async function getMessages(taId: number): Promise<GetMessagesResponse> {
   const r = await apiFetch(`/ta/${taId}/messages`, { headers: headers() });
+  return r.json();
+}
+
+export interface ProactiveCheckinResponse {
+  message: string | null;
+  reason: string;
+}
+
+export async function getProactiveCheckin(taId: number): Promise<ProactiveCheckinResponse> {
+  const r = await apiFetch(`/ta/${taId}/proactive-checkin`, { headers: headers() });
   return r.json();
 }
 

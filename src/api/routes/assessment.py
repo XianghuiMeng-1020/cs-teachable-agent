@@ -55,6 +55,8 @@ class GradeResponse(BaseModel):
     item_type: str
     correct: bool
     feedback: str
+    next_action: str
+    score: float
     expected_count: int
     selected_count: int
     correct_count: int
@@ -220,6 +222,8 @@ def grade_item(
         item_type=result["item_type"],
         correct=result["correct"],
         feedback=result["feedback"],
+        next_action=result.get("next_action", ""),
+        score=result["correct_count"] / max(result["expected_count"], 1),
         expected_count=result["expected_count"],
         selected_count=result["selected_count"],
         correct_count=result["correct_count"],
@@ -627,9 +631,13 @@ async def receive_telemetry(
 
 @router.get("/metrics")
 async def get_metrics_dashboard(
+    current_user: CurrentUser,
     db: Session = Depends(get_db),
 ):
     """Return comprehensive metrics for the analytics dashboard."""
+    if current_user.role != "teacher":
+        raise HTTPException(status_code=403, detail="Teacher role required")
+
     import json, os, datetime
     from collections import Counter, defaultdict
 
@@ -655,7 +663,7 @@ async def get_metrics_dashboard(
             bucket_key = "0-25" if rate <= 25 else "26-50" if rate <= 50 else "51-75" if rate <= 75 else "76-100"
             if itype in ai_buckets[bucket_key]:
                 ai_buckets[bucket_key][itype] += 1
-        theme = item.theme or "Other"
+        theme = item.metadata_theme or "Other"
         theme_data[theme]["total"] += 1
         if rate is not None:
             theme_data[theme]["rates"].append(rate)
@@ -691,6 +699,87 @@ async def get_metrics_dashboard(
             "execution_trace": by_type.get("execution_trace", 0),
         })
 
+    # Query heatmap overview (Assessment Studio aligned: query/task source quality)
+    query_data: dict[str, dict[str, Any]] = defaultdict(
+        lambda: {"total_items": 0, "typed_items": 0, "low_ai_items": 0, "rates": [], "attempts": 0, "correct": 0}
+    )
+    item_by_id = {it.id: it for it in items}
+    for item in items:
+        qid = item.source_query_id or "unknown"
+        row = query_data[qid]
+        row["total_items"] += 1
+        row["typed_items"] += 1
+        if item.ai_pass_rate is not None:
+            row["rates"].append(item.ai_pass_rate)
+            if item.ai_pass_rate <= 50:
+                row["low_ai_items"] += 1
+    for attempt in attempts:
+        src_item = item_by_id.get(attempt.item_id)
+        if not src_item:
+            continue
+        qid = src_item.source_query_id or "unknown"
+        row = query_data[qid]
+        row["attempts"] += 1
+        row["correct"] += 1 if attempt.is_correct else 0
+    query_overview = []
+    for qid, row in sorted(query_data.items(), key=lambda kv: kv[0]):
+        query_overview.append({
+            "query_id": qid,
+            "total_items": row["total_items"],
+            "typed_items": row["typed_items"],
+            "low_ai_items": row["low_ai_items"],
+            "avg_ai_pass_rate": round(sum(row["rates"]) / len(row["rates"]), 1) if row["rates"] else None,
+            "student_attempts": row["attempts"],
+            "student_pass_rate": round((row["correct"] / row["attempts"]) * 100, 1) if row["attempts"] else None,
+        })
+
+    # Pipeline gates (lightweight in-app approximation mirroring studio dimensions)
+    total_items_count = len(items)
+    validation_passed_count = sum(1 for item in items if item.validation_passed is True)
+    low_ai_50_count = sum(1 for item in items if item.ai_pass_rate is not None and item.ai_pass_rate <= 50)
+    attempted_item_ids = {a.item_id for a in attempts}
+    attempted_items_count = len(attempted_item_ids)
+    student_pass_50_count = 0
+    for iid in attempted_item_ids:
+        item_attempts = [a for a in attempts if a.item_id == iid]
+        if not item_attempts:
+            continue
+        pass_rate = sum(1 for a in item_attempts if a.is_correct) / len(item_attempts)
+        if pass_rate >= 0.5:
+            student_pass_50_count += 1
+    pipeline_gates = {
+        "generated_total": total_items_count,
+        "gen_consistency_passed": validation_passed_count,
+        "q_testsuite_passed": validation_passed_count,
+        "q_context_passed": validation_passed_count,
+        "low_ai_50_items": low_ai_50_count,
+        "student_eval_items": attempted_items_count,
+        "student_pass_50_items": student_pass_50_count,
+    }
+
+    # Hardest / easiest items by student pass rate
+    item_attempts_map: dict[int, list[Any]] = defaultdict(list)
+    for a in attempts:
+        item_attempts_map[a.item_id].append(a)
+    ranked_items = []
+    for item_id, arr in item_attempts_map.items():
+        if not arr:
+            continue
+        item = item_by_id.get(item_id)
+        if not item:
+            continue
+        pass_rate = sum(1 for a in arr if a.is_correct) / len(arr)
+        ranked_items.append({
+            "item_id": item.item_id,
+            "title": item.title,
+            "item_type": item.item_type,
+            "attempts": len(arr),
+            "pass_rate": round(pass_rate * 100, 1),
+        })
+    ranked_items.sort(key=lambda x: (x["pass_rate"], -x["attempts"]))
+    hardest_items = ranked_items[:5]
+    easiest_items = sorted(ranked_items, key=lambda x: (-x["pass_rate"], -x["attempts"]))[:5]
+
     # Telemetry from JSONL
     telemetry_events: list[dict] = []
     telem_path = os.path.join(_telemetry_dir(), "telemetry_events.jsonl")
@@ -715,6 +804,8 @@ async def get_metrics_dashboard(
 
     total_attempts_db = len(attempts)
     correct_attempts = sum(1 for a in attempts if a.is_correct)
+    duration_values = [a.duration_ms for a in attempts if a.duration_ms is not None]
+    score_values = [a.score for a in attempts if a.score is not None]
 
     all_ai_rates = [item.ai_pass_rate for item in items if item.ai_pass_rate is not None]
 
@@ -732,11 +823,17 @@ async def get_metrics_dashboard(
         "type_overview": type_overview,
         "ai_pass_distribution": ai_pass_distribution,
         "theme_overview": theme_overview,
+        "query_overview": query_overview,
+        "pipeline_gates": pipeline_gates,
+        "hardest_items": hardest_items,
+        "easiest_items": easiest_items,
         "telemetry": {
             "available": len(telemetry_events) > 0,
             "total_events": len(telemetry_events),
             "focus_loss_count": focus_loss_count,
             "resume_count": resume_count,
+            "avg_attempt_duration_ms": round(sum(duration_values) / len(duration_values), 1) if duration_values else None,
+            "avg_attempt_score": round(sum(score_values) / len(score_values), 3) if score_values else None,
             "event_breakdown": event_breakdown,
         },
     }

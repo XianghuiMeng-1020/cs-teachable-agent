@@ -5,8 +5,11 @@ Implements multi-level caching:
 - In-memory LRU cache for hot data
 - Persistent cache for session data
 - Cache invalidation strategies
+
+N-08: Thread-safe LRU Cache with explicit locking
 """
 
+import threading
 import time
 import hashlib
 from functools import wraps
@@ -26,7 +29,10 @@ class CacheEntry:
 
 
 class LRUCache:
-    """Thread-safe LRU Cache implementation."""
+    """Thread-safe LRU Cache implementation with explicit locking.
+    
+    N-08: Added threading.Lock for thread-safety in async/multi-worker environments.
+    """
     
     def __init__(self, capacity: int = 1000, default_ttl: int = 300):
         self.capacity = capacity
@@ -34,6 +40,8 @@ class LRUCache:
         self._cache: OrderedDict[str, CacheEntry] = OrderedDict()
         self._hits = 0
         self._misses = 0
+        # N-08: Add thread lock for all cache operations
+        self._lock = threading.Lock()
     
     def get(self, key: str) -> Optional[Any]:
         """Get value from cache."""

@@ -32,11 +32,13 @@ def _allowed_origin(request_origin: str | None) -> str:
         return request_origin
     return allowed[0] if allowed else "*"
 
+# P-03: CORS headers use environment whitelist
 CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": _frontend_url if _frontend_url != "*" else "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD",
-    "Access-Control-Allow-Headers": "*",
-    "Access-Control-Max-Age": "86400",
+    "Access-Control-Allow-Headers": "Authorization, Content-Type, X-Request-ID",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Max-Age": "600",
 }
 
 app = FastAPI(
@@ -93,7 +95,11 @@ def startup():
 
 
 def _seed_demo_accounts():
-    """Create demo_student and demo_teacher if they don't exist yet."""
+    """P-04: Create demo accounts only in development environment."""
+    env = os.getenv("ENVIRONMENT", "development").lower()
+    if env not in ("development", "dev", "test"):
+        logger.info("Skipping demo account seeding in %s environment", env)
+        return
     try:
         from src.db.database import SessionLocal
         from src.db.models import User
@@ -104,7 +110,7 @@ def _seed_demo_accounts():
             for uname, role in [("demo_student", "student"), ("demo_teacher", "teacher")]:
                 if not db.query(User).filter(User.username == uname).first():
                     db.add(User(username=uname, password_hash=get_password_hash("demo123"), role=role))
-                    logger.info("Seeded demo account: %s", uname)
+                    logger.info("Seeded demo account: %s (dev only)", uname)
             db.commit()
         finally:
             db.close()
@@ -139,17 +145,16 @@ def health():
 
 @app.get("/api/config")
 def get_config():
-    """Return public configuration (non-sensitive)."""
-    providers = []
-    if os.getenv("DEEPSEEK_API_KEY"):
-        providers.append("deepseek")
-    if os.getenv("OPENAI_API_KEY"):
-        providers.append("openai")
-    if os.getenv("QWEN_API_KEY"):
-        providers.append("qwen")
+    """P-05: Return safe configuration without leaking provider details."""
+    has_llm = bool(
+        os.getenv("DEEPSEEK_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("QWEN_API_KEY")
+    )
     return {
-        "llm_configured": len(providers) > 0,
-        "llm_providers": providers,
-        "llm_primary": providers[0] if providers else None,
+        "llm_configured": has_llm,
         "environment": os.getenv("ENVIRONMENT", "development"),
+        "features": {
+            "collaboration": True,
+            "gamification": True,
+            "analytics": True,
+        },
     }

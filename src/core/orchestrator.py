@@ -149,6 +149,7 @@ def run_teaching_and_test(
             teaching_event.get("note", ""),
             tracker.get_domain(),
             list(learned),
+            active_mis_ids,
             conversation_history,
             phase="teach",
         )
@@ -175,6 +176,7 @@ def run_teaching_and_test(
                 teaching_event.get("note", ""),
                 tracker.get_domain(),
                 list(learned),
+                active_mis_ids,
                 conversation_history,
                 phase="teach",
             )
